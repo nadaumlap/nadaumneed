@@ -8,8 +8,8 @@
 <meta property="og:title" content="집중이 안 되는 진짜 이유 — 나의 잡음 오염도는?">
 <meta property="og:description" content="여러분의 욕구가 흐려지는 건 의지가 약해서가 아닙니다. 5분 진단.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://commlovekim70.github.io/nadaumneed/newnoise/">
-<meta property="og:image" content="https://commlovekim70.github.io/nadaumneed/newnoise/og-image.png">
+<meta property="og:url" content="https://nadaumlap.github.io/nadaumneed/newnoise/">
+<meta property="og:image" content="https://nadaumlap.github.io/nadaumneed/newnoise/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <style>
@@ -376,12 +376,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Ne
     <div class="badge"><span class="badge-dot"></span><span>ELIMINATE NOISE · 잡음 제거</span></div>
     <h1 class="intro-h">나의 잡음 오염도는?</h1>
     <p class="intro-desc">여러분의 욕구를 흐리게 만드는 잡음이 어디서 오는지 살펴봅니다.<br/><span style="font-size:11px;color:#9CA3AF">사회구조 잡음 노출 지수</span></p>
+    
+
+    <!-- 신규: 진단 범위 안내 카드 (영상 정합 + 기대 관리) -->
+    
+
+    
+    <button class="btn-start" id="startBtn">진단 시작하기</button>
+    <div class="detail-toggle" onclick="toggleDetail()" id="detailToggle" style="text-align:center;padding:12px;color:#718096;font-size:13px;cursor:pointer;margin-top:8px">진단 구성이 궁금하신가요? ▾</div>
+    <div id="detailSection" style="display:none;margin-top:8px;padding-top:8px;border-top:1px solid #E2E8F0">
     <div class="meta-row">
       <div class="meta-card"><div class="meta-lbl">문항 수</div><div class="meta-val">18문항</div></div>
       <div class="meta-card"><div class="meta-lbl">소요 시간</div><div class="meta-val">약 5분</div></div>
     </div>
-
-    <!-- 신규: 진단 범위 안내 카드 (영상 정합 + 기대 관리) -->
     <div class="scope-card">
       <span class="scope-tag">📍 이번 진단의 범위</span>
       <div>여러분의 욕구를 흐리게 만드는 잡음에는 <strong>두 층위</strong>가 있습니다. 이번 진단은 그중 <strong>① 사회구조적 잡음</strong>에 집중합니다.</div>
@@ -392,11 +399,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Ne
       </ul>
       <div class="scope-note"><strong style="color:#1E2761">② 심리적 잡음</strong>(성장과정에서 형성된 내면 잡음 — 완벽주의·자존심 의존·감정 회피 패턴 등)은 <strong style="color:#1E2761">별도 진단</strong>으로 곧 출시됩니다.</div>
     </div>
-
     <div class="intro-box">
       이 진단은 <strong>Heo &amp; Park (2013)</strong> 눈치 척도, <strong>Festinger (1954)</strong> 사회비교 이론, <strong>Charry &amp; Tessitore (2021)</strong> SNS 동조 효과 연구를 바탕으로 설계되었습니다.
     </div>
-    <button class="btn-start" id="startBtn">진단 시작하기</button>
+    </div>
   </div>
 
   <div class="screen" id="screen-branch">
@@ -632,7 +638,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Ne
     </div>
 
     <!-- 5러 진단 연결 카드 -->
-    <a class="next-diagnosis-card" href="https://commlovekim70.github.io/nadaumneed/5characters/" target="_blank" rel="noopener noreferrer">
+    <a class="next-diagnosis-card" href="https://nadaumlap.github.io/nadaumneed/5characters/" target="_blank" rel="noopener noreferrer">
       <span class="next-diagnosis-tag">NEED SCAN · 다음 단계</span>
       <h3 class="next-diagnosis-h">잡음이 걷히면, 무엇이 남을까요?</h3>
       <p class="next-diagnosis-d">
@@ -714,6 +720,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Ne
 </div>
 <script>
 'use strict';
+
+function toggleDetail(){
+  var sec=document.getElementById('detailSection');
+  var btn=document.getElementById('detailToggle');
+  if(sec.style.display==='block'){
+    sec.style.display='none';
+    btn.textContent='진단 구성이 궁금하신가요? ▾';
+  } else {
+    sec.style.display='block';
+    btn.textContent='접기 ▴';
+  }
+}
+
 
 const YT_PLAYLIST = 'https://youtube.com/playlist?list=PLwcKc-MRqyaXck4nny4-oqBt-jax5DQ6-&si=5dm-VXr0mAqKnum8';
 const YT_PLAYLIST_ROUTINE = 'https://youtube.com/playlist?list=PLwcKc-MRqyaUNxl7pW7l3FAIUASGxz6sP&si=EzzZ4xZRrFWj7P92';
@@ -1753,7 +1772,7 @@ function isIOS(){ return /iPad|iPhone|iPod/.test(navigator.userAgent); }
 function isAndroid(){ return /Android/i.test(navigator.userAgent); }
 function isMobile(){ return isIOS() || isAndroid(); }
 
-const DIAGNOSIS_URL = 'https://commlovekim70.github.io/nadaumneed/newnoise/';
+const DIAGNOSIS_URL = 'https://nadaumlap.github.io/nadaumneed/newnoise/';
 
 function buildResultShareText(){
   const r = window._resultData;
