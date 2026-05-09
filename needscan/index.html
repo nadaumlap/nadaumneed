@@ -8,8 +8,8 @@
 <meta property="og:title" content="지금 나의 욕구는 어디서 시작되고 있을까?">
 <meta property="og:description" content="SDT 기반 16문항 욕구 출발점 진단 · 약 7분 · 무료 — 나다움설계연구소">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://commlovekim70.github.io/need-project/needscan/">
-<meta property="og:image" content="https://commlovekim70.github.io/need-project/needscan/og-image.png">
+<meta property="og:url" content="https://nadaumlap.github.io/nadaumneed/needscan/">
+<meta property="og:image" content="https://nadaumlap.github.io/nadaumneed/needscan/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <style>
@@ -288,14 +288,14 @@ h+=`<div class="reflect-section"><h3>자기 성찰 질문</h3>${reflectQs.map(q=
 h+=`<div class="practice-card"><h3>오늘의 작은 실천 — ${pr.title}</h3><p>${pr.text}</p></div>`;
 h+=`<div class="slogan-card"><div class="main">나다움은 발견이 아니라 설계다</div><div class="sub">잡음을 걷어내고, 진짜 에너지가 어디로 흐르는지 설계해 보세요.</div></div>`;
 h+=`<div class="share-section"><button class="share-btn share-card-btn" onclick="shareResult()">🎴 결과 공유</button><button class="share-btn share-link-btn" onclick="shareLink()">🔗 링크 공유</button></div>`;
-if(s.seg==='high'||s.seg==='mid') h+=`<a class="next-diag" href="https://commlovekim70.github.io/need-project/5characters/">나의 에너지는 어디로 흐를까? →</a>`;
-if(s.seg==='low'||s.seg==='mid') h+=`<a class="next-diag" style="background:#C9983A" href="https://commlovekim70.github.io/need-project/newnoise/">잡음 오염도 점검하기 →</a>`;
+if(s.seg==='high'||s.seg==='mid') h+=`<a class="next-diag" href="https://nadaumlap.github.io/nadaumneed/5characters/">나의 에너지는 어디로 흐를까? →</a>`;
+if(s.seg==='low'||s.seg==='mid') h+=`<a class="next-diag" style="background:#C9983A" href="https://nadaumlap.github.io/nadaumneed/newnoise/">잡음 오염도 점검하기 →</a>`;
 h+=`<button class="restart-btn" onclick="restartQuiz()">다시 진단하기</button>`;
 rp.innerHTML=h;window.scrollTo(0,0);
 }
 function restartQuiz(){showModal('처음부터 다시 시작할까요?',()=>{answers.fill(null);currentQ=0;document.getElementById('resultPage').classList.remove('active');document.getElementById('resultPage').innerHTML='';document.getElementById('introPage').style.display='block';window.scrollTo(0,0);},true);}
-function shareResult(){const s=calcScores();const sl={high:'양호',mid:'혼재',low:'심각'}[s.seg];const t=`욕구 출발점 진단 결과: NCI ${s.NCI}점 (${sl})\n\n지금 나의 욕구는 어디서 시작되고 있을까?\n\nhttps://commlovekim70.github.io/need-project/needscan/`;if(navigator.share)navigator.share({title:'욕구 출발점 진단',text:t}).catch(()=>{});else navigator.clipboard.writeText(t).then(()=>showModal('결과가 클립보드에 복사되었습니다.')).catch(()=>{});}
-function shareLink(){const t=`"지금 나의 욕구는 어디서 시작되고 있을까?"\n약 5분 진단입니다.\n\nhttps://commlovekim70.github.io/need-project/needscan/`;if(navigator.share)navigator.share({title:'욕구 출발점 진단',text:t}).catch(()=>{});else navigator.clipboard.writeText(t).then(()=>showModal('링크가 클립보드에 복사되었습니다.')).catch(()=>{});}
+function shareResult(){const s=calcScores();const sl={high:'양호',mid:'혼재',low:'심각'}[s.seg];const t=`욕구 출발점 진단 결과: NCI ${s.NCI}점 (${sl})\n\n지금 나의 욕구는 어디서 시작되고 있을까?\n\nhttps://nadaumlap.github.io/nadaumneed/needscan/`;if(navigator.share)navigator.share({title:'욕구 출발점 진단',text:t}).catch(()=>{});else navigator.clipboard.writeText(t).then(()=>showModal('결과가 클립보드에 복사되었습니다.')).catch(()=>{});}
+function shareLink(){const t=`"지금 나의 욕구는 어디서 시작되고 있을까?"\n약 5분 진단입니다.\n\nhttps://nadaumlap.github.io/nadaumneed/needscan/`;if(navigator.share)navigator.share({title:'욕구 출발점 진단',text:t}).catch(()=>{});else navigator.clipboard.writeText(t).then(()=>showModal('링크가 클립보드에 복사되었습니다.')).catch(()=>{});}
 function showModal(msg,onOk,sc){const ov=document.getElementById('modalOverlay');document.getElementById('modalMsg').textContent=msg;document.getElementById('modalCancel').style.display=sc?'inline-block':'none';ov.classList.add('active');document.getElementById('modalOk').onclick=()=>{ov.classList.remove('active');if(onOk)onOk();};document.getElementById('modalCancel').onclick=()=>ov.classList.remove('active');}
 </script>
 </body>
