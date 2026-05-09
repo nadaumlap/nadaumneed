@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="color-scheme" content="light only">
+<title>지금 나의 욕구는 어디서 시작되고 있을까? — 욕구 출발점 진단 | 나다움설계연구소</title>
+<meta property="og:title" content="지금 나의 욕구는 어디서 시작되고 있을까?">
+<meta property="og:description" content="SDT 기반 16문항 욕구 출발점 진단 · 약 7분 · 무료 — 나다움설계연구소">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://commlovekim70.github.io/need-project/needscan/">
+<meta property="og:image" content="https://commlovekim70.github.io/need-project/needscan/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#F8F9FB !important;color:#1E2761 !important;color-scheme:light only}
+body{font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;letter-spacing:-0.01em}
+.container{max-width:540px;margin:0 auto;padding:0 20px}
+.logo-bar{padding:20px 0 12px;display:flex;align-items:center;gap:12px}
+.logo-need{font-size:20px;font-weight:800;letter-spacing:2px;display:flex;gap:2px}
+.logo-need .n{color:#2979C8}.logo-need .e1{color:#3DAA6B}.logo-need .e2{color:#C9983A}.logo-need .d{color:#8B5CF6}
+.logo-sep{width:1px;height:22px;background:#E8E8F0;margin:0 2px}
+.logo-right{display:flex;flex-direction:column;gap:1px}
+.logo-right .top{font-size:10px;font-weight:600;letter-spacing:1px;color:#6B7393}
+.logo-right .bot{font-size:12px;font-weight:500;color:#1E2761}
+.intro{padding:10px 0 30px}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;background:#E8F4FD;font-size:12px;font-weight:700;color:#2979C8;margin-bottom:12px}
+.badge::before{content:'';width:7px;height:7px;border-radius:50%;background:#2979C8}
+.intro h1{font-size:24px;font-weight:800;color:#1E2761;line-height:1.3;margin-bottom:12px}
+.intro .desc{font-size:15px;color:#4A5568;line-height:1.5;margin-bottom:20px;word-break:keep-all}
+.info-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px}
+.info-box{padding:12px;border:1px solid #E8E8F0;border-radius:10px;background:#FFF;text-align:center}
+.info-box .label{font-size:11px;color:#6B7393;margin-bottom:2px}
+.info-box .value{font-size:16px;font-weight:700;color:#1E2761}
+.axes-box{padding:16px;border:1px solid #E8E8F0;border-radius:12px;background:#FFF;margin-bottom:20px}
+.axes-box h3{font-size:14px;font-weight:700;color:#1E2761;margin-bottom:12px}
+.axis-item{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px}
+.axis-num{width:20px;height:20px;border-radius:50%;color:#FFF;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.axis-item:nth-child(2) .axis-num{background:#2979C8}
+.axis-item:nth-child(3) .axis-num{background:#3DAA6B}
+.axis-item:nth-child(4) .axis-num{background:#C9983A}
+.axis-item:nth-child(5) .axis-num{background:#E53935}
+.axis-text{font-size:13px;color:#333;line-height:1.4}.axis-text b{color:#1E2761}
+.notice{padding:12px 16px;border-left:4px solid #2979C8;background:#F1F8FE;border-radius:0 8px 8px 0;margin-bottom:24px}
+.notice b{font-size:13px;color:#1E2761;display:block;margin-bottom:4px}
+.notice span{color:#6B7393;font-size:13px;line-height:1.4}
+.btn-start{display:block;width:100%;padding:16px;background:#1E2761;color:#FFF;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;text-align:center}
+.btn-start:active{transform:scale(0.98)}
+.quiz-page{display:none;padding:10px 0 40px}
+.quiz-page.active{display:block}
+.progress-bar{height:4px;background:#E8E8F0;border-radius:2px;margin:10px 0 16px}
+.progress-fill{height:100%;background:#2979C8;border-radius:2px;transition:width 0.4s ease}
+.q-counter{font-size:12px;color:#6B7393;margin-bottom:6px}
+.q-dim{font-size:11px;color:#2979C8;font-weight:700;margin-bottom:10px;padding:3px 10px;background:#E8F4FD;border-radius:6px;display:inline-block}
+.q-text{font-size:18px;font-weight:700;color:#1E2761 !important;line-height:1.45;margin-bottom:24px;min-height:60px;word-break:keep-all}
+.options{display:flex;flex-direction:column;gap:8px}
+.opt-btn{padding:14px 16px;border:2px solid #E8E8F0;border-radius:12px;background:#FFF;font-size:15px;color:#333 !important;cursor:pointer;text-align:left;transition:all 0.2s;font-weight:500}
+.opt-btn:hover{border-color:#2979C8;background:#E8F4FD}
+.opt-btn.selected{border-color:#2979C8;background:#2979C8;color:#FFF !important;font-weight:600}
+.q-nav{display:flex;gap:12px;margin-top:24px}
+.q-nav button{flex:1;padding:14px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;border:none}
+.btn-prev{background:#E8E8F0;color:#1E2761}
+.btn-next{background:#2979C8;color:#FFF}
+.btn-next:disabled{opacity:0.4;cursor:not-allowed}
+.result-page{display:none;padding-bottom:60px}
+.result-page.active{display:block}
+.score-circle{width:160px;height:160px;margin:20px auto;position:relative}
+.score-circle svg{width:100%;height:100%}
+.score-circle .score-num{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.score-num .num{font-size:42px;font-weight:800;color:#1E2761}
+.score-num .label{font-size:11px;color:#6B7393;display:block}
+.seg-badge{display:block;text-align:center;margin:8px 0 20px;font-size:14px;font-weight:600}
+.seg-badge span{padding:5px 14px;border-radius:20px}
+.seg-high span{background:#E8F5E9;color:#3DAA6B}
+.seg-mid span{background:#FFF8E1;color:#C9983A}
+.seg-low span{background:#FFEBEE;color:#E53935}
+.gauge-section{margin:20px 0}
+.gauge-section h3{font-size:14px;font-weight:700;color:#1E2761;margin-bottom:14px}
+.gauge-item{margin-bottom:14px}
+.gauge-label{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px}
+.gauge-label .name{font-weight:600;color:#1E2761}
+.gauge-label .val{color:#2979C8;font-weight:700}
+.gauge-track{height:8px;background:#E8E8F0;border-radius:4px;overflow:hidden}
+.gauge-fill{height:100%;border-radius:4px;transition:width 1s ease}
+.gauge-fill.d1{background:#2979C8}.gauge-fill.d2{background:#3DAA6B}.gauge-fill.d3{background:#C9983A}.gauge-fill.d4{background:#E53935}
+.gauge-note{font-size:10px;color:#6B7393;margin-top:3px;font-style:italic}
+.result-card{padding:20px;border-radius:16px;margin-bottom:16px;border:1px solid #E8E8F0}
+.result-card.high-card{background:#F0FFF4;border-color:#3DAA6B}
+.result-card.mid-card{background:#FFFBEB;border-color:#C9983A}
+.result-card.low-card{background:#FFF5F5;border-color:#E53935}
+.result-card h3{font-size:16px;font-weight:700;margin-bottom:8px;color:#1E2761;line-height:1.4}
+.result-card p{font-size:14px;line-height:1.6;color:#4A5568}
+.structural-card{padding:20px;border-radius:16px;margin-bottom:16px;border:1px solid #E8E8F0;border-left:5px solid #8B5CF6;background:#F8F7FF}
+.structural-card h4{font-size:12px;color:#8B5CF6;text-transform:uppercase;margin-bottom:8px;letter-spacing:1px;font-weight:700}
+.structural-card .s-title{font-size:15px;font-weight:700;color:#1E2761;margin-bottom:8px;line-height:1.4}
+.structural-card .s-body{font-size:14px;color:#4A5568;line-height:1.6}
+.scene-card{padding:16px 20px;border-radius:16px;margin-bottom:16px;background:#FFF;border:1px solid #E8E8F0}
+.scene-card .scene-q{font-size:14px;color:#1E2761;font-weight:600;margin-bottom:10px;line-height:1.5}
+.scene-card .scene-accept{background:#FFF9F0;padding:12px;border-radius:10px;font-size:13px;color:#6B7393;line-height:1.6}
+.dist-card{padding:14px 20px;border-radius:12px;margin-bottom:16px;background:#FAFAFD;border:1px solid #E8E8F0;text-align:center}
+.dist-card p{font-size:13px;color:#6B7393;line-height:1.5}
+.dist-card b{color:#1E2761}
+.reflect-section{margin-bottom:16px}
+.reflect-section h3{font-size:14px;font-weight:700;color:#1E2761;margin-bottom:12px}
+.reflect-q{padding:12px 14px;background:#FFF;border:1px solid #E8E8F0;border-radius:10px;margin-bottom:8px;font-size:13px;color:#333;line-height:1.5}
+.practice-card{padding:20px;background:#F1F8FE;border-radius:16px;margin-bottom:16px;border-left:4px solid #2979C8}
+.practice-card h3{font-size:14px;font-weight:700;color:#1E2761;margin-bottom:6px}
+.practice-card p{font-size:14px;color:#4A5568;line-height:1.6}
+.slogan-card{background:#1E2761;color:#FFF;padding:28px 20px;border-radius:20px;text-align:center;margin-bottom:16px}
+.slogan-card .main{font-size:18px;font-weight:800;color:#C9983A;margin-bottom:8px}
+.slogan-card .sub{font-size:14px;color:#FFF;line-height:1.5}
+.share-section{display:flex;gap:10px;margin-bottom:16px}
+.share-btn{flex:1;padding:13px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;border:none;text-align:center}
+.share-card-btn{background:#C9983A;color:#FFF}
+.share-link-btn{background:#2979C8;color:#FFF}
+.next-diag{display:block;padding:16px;background:#1E2761;color:#FFF;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;text-align:center;width:100%;margin-bottom:10px;text-decoration:none}
+.restart-btn{display:block;width:100%;padding:13px;background:#E8E8F0;color:#1E2761;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;margin-bottom:16px}
+.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center}
+.modal-overlay.active{display:flex}
+.modal-box{background:#FFF;border-radius:16px;padding:24px;max-width:300px;width:90%;text-align:center}
+.modal-box p{font-size:15px;color:#333;margin-bottom:16px;line-height:1.5}
+.modal-box button{padding:11px 22px;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;margin:0 4px}
+.modal-ok{background:#2979C8;color:#FFF}
+.modal-cancel{background:#E8E8F0;color:#1E2761}
+@media(max-width:480px){.intro h1{font-size:22px}.q-text{font-size:17px}}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="logo-bar">
+  <div class="logo-need"><span class="n">N</span><span class="e1">E</span><span class="e2">E</span><span class="d">D</span></div>
+  <div class="logo-sep"></div>
+  <div class="logo-right"><span class="top">NEED SCAN · 나다움설계연구소</span><span class="bot">나다움을 설계하다</span></div>
+</div>
+<div id="introPage" class="intro">
+  <div class="badge">욕구 출발점 진단</div>
+  <h1>지금 내가 원하는 것은<br>어디에서 온 것일까요?</h1>
+  <p class="desc">나를 움직이는 욕구가 내 안에서 자연스럽게 올라온 것인지, 아니면 사회적 눈치와 알고리즘이 만든 가짜 신호인지를 네 가지 지표로 점검합니다.</p>
+  <div class="info-grid">
+    <div class="info-box"><div class="label">소요 시간</div><div class="value">약 5분</div></div>
+    <div class="info-box"><div class="label">총 문항</div><div class="value">16 문항</div></div>
+    <div class="info-box"><div class="label">진단 축</div><div class="value">4 축</div></div>
+  </div>
+  <div class="axes-box">
+    <h3>네 가지 점검 축</h3>
+    <div class="axis-item"><div class="axis-num">1</div><div class="axis-text"><b>욕구의 출발점</b> · 내가 원해서인가, 해야 해서인가</div></div>
+    <div class="axis-item"><div class="axis-num">2</div><div class="axis-text"><b>에너지 방향</b> · 나를 충전시키는가, 소모시키는가</div></div>
+    <div class="axis-item"><div class="axis-num">3</div><div class="axis-text"><b>몸의 반응</b> · 가슴이 열리는가, 긴장되는가</div></div>
+    <div class="axis-item"><div class="axis-num">4</div><div class="axis-text"><b>사회적 영향</b> · 눈치와 알고리즘의 간섭 정도</div></div>
+  </div>
+  <div class="notice"><b>여러분을 평가하지 않습니다.</b><span> 솔직하게 답할수록 현재 상태를 선명하게 마주할 수 있습니다.</span></div>
+  <button class="btn-start" onclick="startQuiz()">진단 시작하기 →</button>
+</div>
+<div id="quizPage" class="quiz-page">
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="q-counter" id="qCounter"></div>
+  <div class="q-dim" id="qDim"></div>
+  <div class="q-text" id="qText"></div>
+  <div class="options" id="optionsArea"></div>
+  <div class="q-nav">
+    <button class="btn-prev" id="btnPrev" onclick="prevQ()">이전</button>
+    <button class="btn-next" id="btnNext" onclick="nextQ()" disabled>다음 →</button>
+  </div>
+</div>
+<div id="resultPage" class="result-page"></div>
+</div>
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box"><p id="modalMsg"></p>
+    <button class="modal-ok" id="modalOk">확인</button>
+    <button class="modal-cancel" id="modalCancel" style="display:none">취소</button>
+  </div>
+</div>
+<script>
+const questions=[
+{id:1,dim:'D1',dimLabel:'욕구의 출발점',text:'결정을 내릴 때, 내 생각보다 주변 사람들의 반응이 먼저 떠올라 망설인 경험이 있다.',reverse:true},
+{id:2,dim:'D1',dimLabel:'욕구의 출발점',text:'나의 중요한 선택들은 대부분 다른 사람의 기대보다 나의 가치에서 출발한다.',reverse:false},
+{id:3,dim:'D1',dimLabel:'욕구의 출발점',text:'최근 한 달간 내린 결정 중 "이건 정말 내가 원해서 한 거야"라고 말할 수 있는 것이 있다.',reverse:false},
+{id:4,dim:'D1',dimLabel:'욕구의 출발점',text:'내가 무언가를 하고 싶다고 느낄 때, 그 마음이 나에게서 온 건지 주변에서 온 건지 잠시 멈춰 생각한다.',reverse:false},
+{id:5,dim:'D1',dimLabel:'욕구의 출발점',text:'"하고 싶다"는 마음과 "해야 한다"는 의무감이 뒤섞여서 구별하기 어려울 때가 많다.',reverse:true},
+{id:6,dim:'D2',dimLabel:'에너지 방향',text:'어떤 일을 마친 후, 그 활동이 나에게 에너지를 주었는지 빼앗아 갔는지 분명히 느낀다.',reverse:false},
+{id:7,dim:'D2',dimLabel:'에너지 방향',text:'최근 일주일 동안 활동 후 "마음이 가볍고 충전된다"고 느낀 순간이 있었다.',reverse:false},
+{id:8,dim:'D2',dimLabel:'에너지 방향',text:'하루 일과가 끝나면 "피곤하고 비어 있다"는 느낌이 드는 날이 더 많다.',reverse:true},
+{id:9,dim:'D3',dimLabel:'몸의 반응',text:'중요한 결정을 할 때 머리보다 몸의 반응(편안함 혹은 긴장감)이 더 명확하게 느껴진다.',reverse:false},
+{id:10,dim:'D3',dimLabel:'몸의 반응',text:'"머리로는 좋다고 생각하는데 몸이 거부하는" 그 미묘한 신호를 감지하는 편이다.',reverse:false},
+{id:11,dim:'D3',dimLabel:'몸의 반응',text:'나는 몸의 신호보다는 머릿속의 논리적 판단에만 의존해서 결정을 내리는 편이다.',reverse:true},
+{id:12,dim:'D4',dimLabel:'사회적 영향',text:'모임이나 회의에서 하고 싶은 말이 있어도 분위기를 살피다가 입을 닫게 된다.',reverse:false},
+{id:13,dim:'D4',dimLabel:'사회적 영향',text:'무언가를 성취하고도 "남들도 다 이 정도는 하니까"라며 기쁨을 억누른 적이 있다.',reverse:false},
+{id:14,dim:'D4',dimLabel:'사회적 영향',text:'SNS를 보고 난 후, 원하지 않던 물건이나 라이프스타일이 갑자기 갖고 싶어진 적이 많다.',reverse:false},
+{id:15,dim:'D4',dimLabel:'사회적 영향',text:'결정이 어려울 때 내 생각을 정리하기보다 알고리즘이나 인터넷 추천을 먼저 믿는 편이다.',reverse:false},
+{id:16,dim:'D4',dimLabel:'사회적 영향',text:'내가 원한다고 느끼는 것 중 많은 부분이 사실은 사회나 미디어가 주입한 것일 수 있다는 생각이 든다.',reverse:true},
+];
+const optionLabels=['매우 그렇지 않다','그렇지 않다','보통이다','그렇다','매우 그렇다'];
+const resultMessages={
+'high_D1':{title:'출발점이 선명합니다',msg:'자신의 가치 판단이 분명한 상태입니다. 다만 가끔씩 "이것이 진정한 나의 갈망인가"를 한 번 더 묻는다면 더 단단해질 것입니다.'},
+'high_D2':{title:'에너지 흐름 자각이 필요해요',msg:'출발점은 분명한데, 활동 후 에너지가 어떻게 흐르는지 자각하는 연습이 필요해요. 일주일만 "충전 vs 소모"를 기록해 보세요.'},
+'high_D3':{title:'몸의 신호를 듣는 연결고리',msg:'머리로는 분명한데, 몸의 신호를 듣는 연결고리가 약해요. 결정 직전 30초만 호흡과 가슴의 감각을 살펴보세요.'},
+'high_D4':{title:'잡음을 잘 걸러내고 계시네요',msg:'사회적 압박 속에서도 중심을 잘 잡고 계십니다. 드문 균형 감각을 유지하고 계신 점을 스스로 칭찬해 주세요.'},
+'mid_D1':{title:'안과 밖이 섞여 있어요',msg:'"하고 싶다"와 "해야 한다" 사이에서 에너지가 분산되고 있습니다. 작은 선택부터 내 마음의 소리에 집중하는 연습이 필요합니다.'},
+'mid_D2':{title:'에너지 자각이 흐려진 상태',msg:'에너지가 어디서 충전되고 어디서 소모되는지의 자각이 흐려진 상태예요. 7일 에너지 일지를 추천합니다.'},
+'mid_D3':{title:'몸의 신호가 흐려진 상태',msg:'몸의 신호를 듣는 능력이 흐려진 상태예요. 의사결정 직전 30초 신체 스캔이 회복의 시작입니다.'},
+'mid_D4':{title:'잡음이 신호를 가리고 있어요',msg:'눈치와 비교가 나의 진짜 욕구를 방해하고 있습니다. 잡음을 식별하고 거리두기를 시작할 시점입니다.'},
+'low_D1':{title:'출발점이 외부에 있습니다',msg:'현재 많은 결정이 타인의 기대에서 시작되고 있습니다. 비난이 아니라 발견입니다. 오늘 딱 한 가지만이라도 내가 정말 원하는 것을 선택해 보세요.'},
+'low_D2':{title:'에너지 자각이 끊어진 상태',msg:'활동 후 에너지 흐름의 자각이 거의 끊어진 상태예요. 하루 한 활동만 "충전 vs 소모"로 기록하는 것부터 시작해 보세요.'},
+'low_D3':{title:'몸의 신호가 닿지 않는 상태',msg:'머리만 너무 많이 일하고 있고 몸의 신호가 닿지 않는 상태예요. 신체 자각 명상부터 시작해 보세요.'},
+'low_D4':{title:'잡음에 압도된 상태입니다',msg:'사회적 기준과 알고리즘이 욕구의 주도권을 가져갔습니다. 환경 설계를 통해 나만의 공간과 시간을 확보하는 것이 시급합니다.'},
+};
+const structuralCards={
+high:{title:'사려 깊은 조화와 단단한 기준 사이의 균형',body:'한국 사회는 분위기를 읽지 못하면 무례하다고 평가받는 \'눈치 문화\'가 강합니다. 그럼에도 자기 진심을 지켜내고 있다는 것은, 여러분이 고도로 건강한 심리적 방어막을 설계해왔다는 증거입니다. 이 단단함은 의식적으로 설계해온 소중한 자산입니다.'},
+mid:{title:'뒤섞인 목소리, 의지의 문제가 아닙니다',body:'한국은 사회비교 빈도가 세계적으로 높은 나라입니다. 주관이 없어서 흔들리는 게 아니라, 사회 시스템과 알고리즘이 개인의 주의력을 빼앗도록 설계되어 있기 때문입니다. 필요한 건 자책이 아니라 잡음을 골라내는 기술입니다.'},
+low:{title:'잠시 외부 시스템에 외주를 준 상태',body:'우리는 어릴 때부터 타인의 신호를 읽도록 학습되었습니다. 지금 내 목소리가 들리지 않는 것은 여러분의 잘못이 아니라, 조밀한 사회 구조와 고도의 디지털 설계가 여러분의 주의력을 장악한 결과입니다. 환경부터 바꿔야 진짜 신호가 다시 들리기 시작합니다.'},
+};
+const sceneCards={
+D1:{q:'결정을 내릴 때, 내 생각보다 주변 반응이 먼저 떠올라 망설인 적이 있나요?',accept:'그건 소심함이 아니라, 우리 사회에서 살아남기 위해 발달한 고도의 생존 기술이었습니다. 이제 그 에너지를 나를 위해 쓸 때입니다.'},
+D2:{q:'무언가를 끝내고도 충전된 느낌보다 허무함이 먼저 찾아오나요?',accept:'에너지가 어디로 흐르는지 자각하는 감각은 연습으로 충분히 회복될 수 있습니다.'},
+D3:{q:'머리로는 좋다고 생각했는데, 정작 하고 나면 몸이 무거웠던 적이 있나요?',accept:'몸은 정답을 알고 있었습니다. 다만 그 채널이 잠시 꺼져 있었을 뿐입니다.'},
+D4:{q:'무심코 쇼츠를 열었다가 1시간이 지나 허무함을 느끼시나요?',accept:'알고리즘은 인간의 뇌과학을 역이용하도록 설계되어 있습니다. 작은 환경 설계만으로 되찾을 수 있습니다.'},
+};
+const practices={
+D1:{title:'출발점 점검 30초',text:'결정 전 "이건 정말 내가 원해서인가, 해야 할 것 같아서인가" 한 줄로 적어보세요.'},
+D2:{title:'에너지 기록 한 줄',text:'오늘 끝낸 활동 한 가지 옆에 "+" 또는 "−"를 써보세요. 일주일 모이면 패턴이 보입니다.'},
+D3:{title:'30초 신체 스캔',text:'다음 결정을 앞두고 30초만 호흡하고, 가슴·어깨·목의 감각을 살펴보세요.'},
+D4:{title:'잡음 차단 1시간',text:'오늘 SNS와 AI 추천을 한 시간만 멀리하고 떠오르는 생각을 기록해 보세요.'},
+};
+const reflectQs=[
+'오늘 한 선택 중에서, "이건 확실히 내가 원해서 한 거야"라고 말할 수 있는 것은?',
+'그 선택을 하기 전에, 나의 몸은 어떤 신호를 보냈었나요?',
+'최근 "하고 싶다"가 "해야 한다"로 바뀐 순간이 있었나요? 그 전환은 어디서 왔나요?',
+'SNS와 AI 추천이 모두 사라진다면, 지금 가장 절실한 욕구는 무엇일까요?',
+];
+
+let currentQ=0;const answers=new Array(16).fill(null);
+function startQuiz(){document.getElementById('introPage').style.display='none';document.getElementById('quizPage').classList.add('active');renderQ();}
+function renderQ(){
+const q=questions[currentQ];
+document.getElementById('progressFill').style.width=((currentQ+1)/16*100)+'%';
+document.getElementById('qCounter').textContent=`${currentQ+1} / 16`;
+document.getElementById('qDim').textContent=q.dimLabel;
+document.getElementById('qText').textContent=q.text;
+const a=document.getElementById('optionsArea');a.innerHTML='';
+optionLabels.forEach((l,i)=>{const b=document.createElement('button');b.className='opt-btn'+(answers[currentQ]===i+1?' selected':'');b.textContent=l;b.onclick=()=>selectOpt(i+1);a.appendChild(b);});
+document.getElementById('btnPrev').style.display=currentQ===0?'none':'block';
+document.getElementById('btnNext').textContent=currentQ===15?'결과 보기 →':'다음 →';
+document.getElementById('btnNext').disabled=answers[currentQ]===null;
+}
+function selectOpt(v){answers[currentQ]=v;document.querySelectorAll('.opt-btn').forEach((b,i)=>b.classList.toggle('selected',i+1===v));document.getElementById('btnNext').disabled=false;}
+function prevQ(){if(currentQ>0){currentQ--;renderQ();}}
+function nextQ(){if(answers[currentQ]===null)return;if(currentQ<15){currentQ++;renderQ();window.scrollTo(0,0);}else showResult();}
+
+function calcScores(){
+const sc=(i,r)=>r?6-answers[i]:answers[i];
+const D1=(sc(0,1)+sc(1,0)+sc(2,0)+sc(3,0)+sc(4,1))/5;
+const D2=(sc(5,0)+sc(6,0)+sc(7,1))/3;
+const D3=(sc(8,0)+sc(9,0)+sc(10,1))/3;
+const D4=(sc(11,0)+sc(12,0)+sc(13,0)+sc(14,0)+sc(15,1))/5;
+let NCI=(((D1+D2+D3)/3)*0.7+(6-D4)*0.3-1)*25;
+NCI=Math.max(0,Math.min(100,Math.round(NCI)));
+const seg=NCI<=33?'low':NCI<=66?'mid':'high';
+const adj={D1,D2,D3,D4:6-D4};
+const weakest=Object.entries(adj).sort((a,b)=>a[1]-b[1])[0][0];
+return{D1,D2,D3,D4,NCI,seg,weakest};
+}
+
+function showResult(){
+document.getElementById('quizPage').classList.remove('active');
+const rp=document.getElementById('resultPage');rp.classList.add('active');
+const s=calcScores();const mk=`${s.seg}_${s.weakest}`;
+const rm=resultMessages[mk]||resultMessages[`${s.seg}_D1`];
+const pr=practices[s.weakest]||practices.D1;
+const sc2=sceneCards[s.weakest]||sceneCards.D1;
+const stc=structuralCards[s.seg];
+const segLabel={high:'양호',mid:'혼재',low:'심각'}[s.seg];
+const circ=2*Math.PI*70;const off=circ-(s.NCI/100)*circ;
+const arcC={high:'#3DAA6B',mid:'#C9983A',low:'#E53935'}[s.seg];
+const dn={D1:'욕구의 출발점',D2:'에너지 방향',D3:'몸의 반응',D4:'사회적 영향'};
+const dc={D1:'d1',D2:'d2',D3:'d3',D4:'d4'};
+let h=`<div class="score-circle"><svg viewBox="0 0 160 160"><circle cx="80" cy="80" r="70" fill="none" stroke="#E8E8F0" stroke-width="10"/><circle cx="80" cy="80" r="70" fill="none" stroke="${arcC}" stroke-width="10" stroke-dasharray="${circ}" stroke-dashoffset="${off}" stroke-linecap="round" transform="rotate(-90 80 80)" style="transition:stroke-dashoffset 1.5s ease"/></svg><div class="score-num"><span class="num">${s.NCI}</span><span class="label">NCI · 욕구 명료도</span></div></div>
+<div class="seg-badge seg-${s.seg}"><span>${segLabel} 단계</span></div>`;
+h+=`<div class="gauge-section"><h3>4축 점검 결과</h3>`;
+for(const d of['D1','D2','D3','D4']){const v=s[d],p=(v/5*100).toFixed(0);const note=d==='D4'?'※ 높을수록 사회적 영향이 큰 상태':'';
+h+=`<div class="gauge-item"><div class="gauge-label"><span class="name">${dn[d]}</span><span class="val">${v.toFixed(1)}</span></div><div class="gauge-track"><div class="gauge-fill ${dc[d]}" style="width:${p}%"></div></div>${note?`<div class="gauge-note">${note}</div>`:''}</div>`;}
+h+=`</div>`;
+h+=`<div class="result-card ${s.seg}-card"><h3>${rm.title}</h3><p>${rm.msg}</p></div>`;
+h+=`<div class="structural-card"><h4>사회구조적 해석</h4><p class="s-title">${stc.title}</p><p class="s-body">${stc.body}</p></div>`;
+h+=`<div class="scene-card"><div class="scene-q">${sc2.q}</div><div class="scene-accept">✨ ${sc2.accept}</div></div>`;
+h+=`<div class="dist-card"><p>여러분의 점수는 한국 사회를 살아가는 사람이라면<br><b>지극히 자연스러운 분포</b> 안에 있습니다.</p></div>`;
+h+=`<div class="reflect-section"><h3>자기 성찰 질문</h3>${reflectQs.map(q=>`<div class="reflect-q">${q}</div>`).join('')}</div>`;
+h+=`<div class="practice-card"><h3>오늘의 작은 실천 — ${pr.title}</h3><p>${pr.text}</p></div>`;
+h+=`<div class="slogan-card"><div class="main">나다움은 발견이 아니라 설계다</div><div class="sub">잡음을 걷어내고, 진짜 에너지가 어디로 흐르는지 설계해 보세요.</div></div>`;
+h+=`<div class="share-section"><button class="share-btn share-card-btn" onclick="shareResult()">🎴 결과 공유</button><button class="share-btn share-link-btn" onclick="shareLink()">🔗 링크 공유</button></div>`;
+if(s.seg==='high'||s.seg==='mid') h+=`<a class="next-diag" href="https://commlovekim70.github.io/need-project/5characters/">나의 에너지는 어디로 흐를까? →</a>`;
+if(s.seg==='low'||s.seg==='mid') h+=`<a class="next-diag" style="background:#C9983A" href="https://commlovekim70.github.io/need-project/newnoise/">잡음 오염도 점검하기 →</a>`;
+h+=`<button class="restart-btn" onclick="restartQuiz()">다시 진단하기</button>`;
+rp.innerHTML=h;window.scrollTo(0,0);
+}
+function restartQuiz(){showModal('처음부터 다시 시작할까요?',()=>{answers.fill(null);currentQ=0;document.getElementById('resultPage').classList.remove('active');document.getElementById('resultPage').innerHTML='';document.getElementById('introPage').style.display='block';window.scrollTo(0,0);},true);}
+function shareResult(){const s=calcScores();const sl={high:'양호',mid:'혼재',low:'심각'}[s.seg];const t=`욕구 출발점 진단 결과: NCI ${s.NCI}점 (${sl})\n\n지금 나의 욕구는 어디서 시작되고 있을까?\n\nhttps://commlovekim70.github.io/need-project/needscan/`;if(navigator.share)navigator.share({title:'욕구 출발점 진단',text:t}).catch(()=>{});else navigator.clipboard.writeText(t).then(()=>showModal('결과가 클립보드에 복사되었습니다.')).catch(()=>{});}
+function shareLink(){const t=`"지금 나의 욕구는 어디서 시작되고 있을까?"\n약 5분 진단입니다.\n\nhttps://commlovekim70.github.io/need-project/needscan/`;if(navigator.share)navigator.share({title:'욕구 출발점 진단',text:t}).catch(()=>{});else navigator.clipboard.writeText(t).then(()=>showModal('링크가 클립보드에 복사되었습니다.')).catch(()=>{});}
+function showModal(msg,onOk,sc){const ov=document.getElementById('modalOverlay');document.getElementById('modalMsg').textContent=msg;document.getElementById('modalCancel').style.display=sc?'inline-block':'none';ov.classList.add('active');document.getElementById('modalOk').onclick=()=>{ov.classList.remove('active');if(onOk)onOk();};document.getElementById('modalCancel').onclick=()=>ov.classList.remove('active');}
+</script>
+</body>
+</html>
