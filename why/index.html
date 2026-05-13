@@ -8,8 +8,8 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="왜 어떤 일은 나를 살리고, 어떤 일은 나를 지치게 할까?">
 <meta property="og:description" content="열심히 사는데 왜 지치는지, 이제 구조로 읽어봅니다 · 기질 × 동기 × 잡음 통합 진단 · 26문항 · 약 8분 · 나다움설계연구소 김수정 교수">
-<meta property="og:url" content="https://nadaumlap.github.io/nadaumneed/integrated/">
-<meta property="og:image" content="https://nadaumlap.github.io/nadaumneed/integrated/og-image.png">
+<meta property="og:url" content="https://nadaumlap.github.io/nadaumneed/why/">
+<meta property="og:image" content="https://nadaumlap.github.io/nadaumneed/why/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="왜 어떤 일은 나를 살리고, 어떤 일은 나를 지치게 할까?">
 <meta name="twitter:description" content="열심히 사는데 왜 지치는지, 이제 구조로 읽어봅니다 · 기질 × 동기 × 잡음 통합 진단 · 26문항 · 약 8분">
@@ -1333,7 +1333,7 @@ function getDailyPractice(topDim, topLv, sdtId, noisePct) {
 // 공유 / 모달
 // ═══════════════════════════════════════════
 function shareLink() {
-  const url = 'https://nadaumlap.github.io/nadaumneed/integrated/';
+  const url = 'https://nadaumlap.github.io/nadaumneed/why/';
   const text = `"나는 왜 이 일을 하는가?"\n기질 × 동기 × 잡음 통합 진단\n— 나다움설계연구소\n${url}`;
   if (navigator.share) navigator.share({text}).catch(()=>fallbackCopy(url));
   else fallbackCopy(text);
@@ -1347,7 +1347,7 @@ function shareCard() {
   const stage = SDT_STAGES.find(s=>sdtScore>=s.range[0]&&sdtScore<s.range[1])||SDT_STAGES[3];
   const eStateLabel = {cruise:'일치·순항', overheat:'과열·불일치', suppress:'억제·잠식', explore:'탐색·예비'};
   const eState = (sdtScore>=70&&noisePct<50)?'cruise':(sdtScore<50&&noisePct>=50)?'suppress':(sdtScore<70&&noisePct>=50)?'overheat':'explore';
-  const url = 'https://nadaumlap.github.io/nadaumneed/integrated/';
+  const url = 'https://nadaumlap.github.io/nadaumneed/why/';
   const text = `[나의 N.E.E.D 통합 진단 결과]\n주된 기질 토대: ${dimName[strongest]}\n동기 단계: ${stage.name}\n에너지 상태: ${eStateLabel[eState]}\n잡음 수준: ${noisePct}%\n\n기질은 근본이고, 동기는 출발점입니다.\n— 나다움설계연구소\n${url}`;
   if (navigator.share) navigator.share({text}).catch(()=>fallbackCopy(text));
   else fallbackCopy(text);
