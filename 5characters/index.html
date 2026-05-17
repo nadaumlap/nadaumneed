@@ -18,7 +18,9 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;800&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 
 <style>
 * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -36,10 +38,13 @@
   --bg: #FAFBFC;
   --card: #FFFFFF;
   --border: #E5E7EB;
+  --font-body: 'Pretendard Variable','Pretendard','Noto Sans KR',sans-serif;
+  --font-title: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Apple SD Gothic Neo', 'Pretendard Variable', 'Pretendard', sans-serif;
 }
-body { font-family:'Pretendard','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;
+body { font-family:var(--font-body);
   background:var(--bg) !important; color:var(--text) !important; line-height:1.55; letter-spacing:-0.01em;
   -webkit-font-smoothing:antialiased; }
+h1, h2, h3, h4 { font-family:var(--font-title); }
 .container { max-width:540px; margin:0 auto; padding:24px 20px 80px; min-height:100vh; }
 
 /* 로고 헤더 */
@@ -58,7 +63,7 @@ body { font-family:'Pretendard','Apple SD Gothic Neo','Noto Sans KR','Malgun Got
 .cover { text-align:center; padding:24px 0 36px; }
 .cover-tag { display:inline-block; padding:6px 14px; background:var(--primary-light);
   color:var(--primary); border-radius:20px; font-size:13px; font-weight:600; margin-bottom:20px; }
-.cover-title { font-size:24px; font-weight:800; color:var(--navy); line-height:1.3;
+.cover-title { font-family:var(--font-title); font-size:24px; font-weight:800; color:var(--navy); line-height:1.3;
   margin-bottom:12px; word-break:keep-all; }
 .cover-subtitle { font-size:15px; color:var(--text-soft); margin-bottom:28px; word-break:keep-all; }
 .cover-meta { display:flex; justify-content:center; gap:20px; flex-wrap:wrap;
@@ -75,7 +80,7 @@ body { font-family:'Pretendard','Apple SD Gothic Neo','Noto Sans KR','Malgun Got
 /* 인트로 카드 */
 .intro-card { background:var(--card); border:1px solid var(--border); border-radius:16px;
   padding:28px 24px; margin-bottom:28px; }
-.intro-card p { font-size:15.5px; color:var(--text); margin-bottom:14px; word-break:keep-all; }
+.intro-card p { font-size:15.5px; color:var(--text); margin:0 0 10px; line-height:1.7; word-break:keep-all; }
 .intro-card p:last-child { margin-bottom:0; }
 .intro-card .quote { padding:16px 18px; background:var(--primary-light);
   border-left:4px solid var(--primary); border-radius:8px;
@@ -102,20 +107,20 @@ body { font-family:'Pretendard','Apple SD Gothic Neo','Noto Sans KR','Malgun Got
   overflow:hidden; margin-bottom:8px; }
 .progress-bar { height:100%; background:var(--primary); width:0%;
   transition:width .3s ease; }
-.progress-text { font-size:13px; color:var(--text-mute); margin-bottom:24px; text-align:right; }
+.progress-text { font-size:13px; color:var(--text-mute); margin-bottom:12px; text-align:right; }
 
 .section-divider { text-align:center; padding:12px 0; margin-bottom:8px; }
 .section-divider .section-label { display:inline-block; padding:5px 14px;
   background:var(--primary-light); color:var(--primary); border-radius:16px;
   font-size:12.5px; font-weight:700; letter-spacing:.5px; }
 
-.question-card { background:var(--card); border-radius:16px; padding:28px 24px; margin-bottom:20px; }
+.question-card { background:var(--card); border-radius:16px; padding:20px 24px; margin-bottom:16px; }
 .question-num { display:inline-block; font-family:'Montserrat',sans-serif; font-size:13px;
   font-weight:700; color:var(--primary); letter-spacing:1.5px; margin-bottom:12px; }
 .question-char { display:inline-block; font-size:13px; font-weight:600;
   color:var(--text-mute); margin-left:8px; }
-.question-text { font-size:17px; font-weight:700; color:var(--text) !important; line-height:1.45;
-  margin-bottom:24px; word-break:keep-all; }
+.question-text { font-family:var(--font-title); font-size:17px; font-weight:700; color:var(--text) !important; line-height:1.45;
+  margin-bottom:18px; word-break:keep-all; }
 
 .likert-options { display:flex; flex-direction:column; gap:10px; }
 .likert-option { display:flex; align-items:center; gap:14px; padding:14px 16px;
@@ -150,7 +155,7 @@ body { font-family:'Pretendard','Apple SD Gothic Neo','Noto Sans KR','Malgun Got
 .tendency-hero .label { font-size:13px; font-weight:600; color:var(--primary-dark);
   letter-spacing:.5px; margin-bottom:10px; }
 .tendency-hero .main-char { font-size:52px; margin-bottom:8px; }
-.tendency-hero .main-name { font-size:26px; font-weight:800; color:var(--navy);
+.tendency-hero .main-name { font-family:var(--font-title); font-size:26px; font-weight:800; color:var(--navy);
   margin-bottom:6px; }
 .tendency-hero .main-sub { font-size:14px; color:var(--text-soft); margin-bottom:20px; }
 .tendency-hero .divider-line { width:40px; height:2px; background:var(--border);
@@ -183,7 +188,7 @@ body { font-family:'Pretendard','Apple SD Gothic Neo','Noto Sans KR','Malgun Got
 .detail-card .tag.sub-tag { background:#F3F4F6; color:var(--text-soft); }
 .detail-card .char-row { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
 .detail-card .char-icon { font-size:36px; }
-.detail-card .char-info h3 { font-size:20px; font-weight:800; color:var(--navy); }
+.detail-card .char-info h3 { font-family:var(--font-title); font-size:20px; font-weight:800; color:var(--navy); }
 .detail-card .char-info .en { font-size:13px; color:var(--text-mute); }
 .detail-card .desc { font-size:15.5px; color:var(--text); margin-bottom:14px;
   word-break:keep-all; line-height:1.7; }
@@ -199,7 +204,7 @@ body { font-family:'Pretendard','Apple SD Gothic Neo','Noto Sans KR','Malgun Got
 .message-card .tag { display:inline-block; padding:4px 12px; background:white;
   color:var(--primary); border-radius:12px; font-size:12px; font-weight:700;
   margin-bottom:12px; letter-spacing:.5px; }
-.message-card h3 { font-size:19px; font-weight:700; color:var(--navy); margin-bottom:12px;
+.message-card h3 { font-family:var(--font-title); font-size:19px; font-weight:700; color:var(--navy); margin-bottom:12px;
   word-break:keep-all; line-height:1.4; }
 .message-card p { font-size:15.5px; color:var(--text); word-break:keep-all;
   line-height:1.7; }
@@ -242,7 +247,7 @@ body { font-family:'Pretendard','Apple SD Gothic Neo','Noto Sans KR','Malgun Got
   border-radius:12px; font-size:11.5px; font-weight:700; margin-bottom:10px; letter-spacing:.5px; }
 .next-card.blue .step-tag { color:var(--blue); }
 .next-card.gold .step-tag { color:var(--gold); }
-.next-card h3 { font-size:18px; font-weight:700; color:var(--navy); margin-bottom:6px; word-break:keep-all; }
+.next-card h3 { font-family:var(--font-title); font-size:18px; font-weight:700; color:var(--navy); margin-bottom:6px; word-break:keep-all; }
 .next-card p { font-size:14px; color:var(--text-soft); margin-bottom:10px; word-break:keep-all; }
 .next-card .arrow { font-size:14px; font-weight:600; }
 .next-card.blue .arrow { color:var(--blue); }
@@ -660,7 +665,17 @@ function renderQuestion() {
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-function selectOption(value) { answers[currentQ]=value; renderQuestion(); }
+function selectOption(value) {
+  answers[currentQ]=value;
+  renderQuestion();
+  // 마지막 문항이 아니면 0.25초 후 자동으로 다음 문항으로 이동
+  if (currentQ < 14) {
+    setTimeout(() => {
+      currentQ++;
+      renderQuestion();
+    }, 250);
+  }
+}
 function prevQuestion() { if(currentQ>0){currentQ--;renderQuestion();} }
 function nextQuestion() {
   if(answers[currentQ]===null) return;
@@ -806,7 +821,7 @@ function renderResult(r) {
 
   // 8. 다음 진단 연결
   const nextHTML = r.caseType === 'low' ?
-    `<a href="../noise/" class="next-card gold">
+    `<a href="https://commlovekim70.github.io/nadaumneed/newnoise/" class="next-card gold">
       <span class="step-tag">강력 추천 — 잡음 점검 먼저</span>
       <h3>지금 무엇이 잡음으로 들어와 있는지 살펴볼까요?</h3>
       <p>잡음 오염도 진단 · 약 5분 · 회복의 첫걸음</p>
@@ -818,7 +833,7 @@ function renderResult(r) {
       <p>욕구 출발점 진단 · 약 7분 · 에너지 흐름과 함께 보는 진단</p>
       <span class="arrow">바로 가기 →</span>
     </a>
-    <a href="../noise/" class="next-card gold" style="margin-top:12px">
+    <a href="https://commlovekim70.github.io/nadaumneed/newnoise/" class="next-card gold" style="margin-top:12px">
       <span class="step-tag">다음 단계 — Eliminate Noise</span>
       <h3>지금 무엇이 잡음으로 들어와 있는지 살펴볼까요?</h3>
       <p>잡음 오염도 진단 · 약 5분</p>
