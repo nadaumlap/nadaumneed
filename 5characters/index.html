@@ -460,7 +460,7 @@ h1, h2, h3, h4 { font-family:var(--font-title); }
   <button class="btn-secondary" onclick="restart()">다시 진단하기</button>
   <div class="footer">
     <p class="signature">우선가치가 선명하면, 모든 선택이 명료해진다</p>
-    <p>나다움설계연구소 · 김수정 박사</p>
+    <p>나다움설계연구소 · 김수정 교수</p>
     <p>나다움은 발견이 아니라 설계다</p>
   </div>
 </div>
@@ -848,8 +848,8 @@ function renderResult(r) {
 
 // ===== 레이더 차트 =====
 function renderRadar(avgs) {
-  const size = 260;
-  const cx = size/2, cy = size/2, r_max = 100;
+  const size = 340;
+  const cx = size/2, cy = size/2, r_max = 95;
   const labels = [
     {key:"A",label:"열정러",icon:"🔥"},
     {key:"C",label:"협력러",icon:"🤝"},
@@ -879,21 +879,36 @@ function renderRadar(avgs) {
     return `${cx+rr*Math.cos(angles[i])},${cy+rr*Math.sin(angles[i])}`;
   }).join(' ');
 
+  // 라벨(아이콘+이름)
   let labelSVG = labels.map(({label,icon},i) => {
-    const rr = r_max + 26;
+    const rr = r_max + 30;
     const lx = cx + rr*Math.cos(angles[i]);
     const ly = cy + rr*Math.sin(angles[i]);
-    // foreignObject로 HTML 이모지 렌더링 (컬러 이모지 보장)
-    const foW = 80, foH = 52;
+    const foW = 70, foH = 44;
     const fox = lx - foW/2;
-    const foy = ly - 14;
+    const foy = ly - foH/2;
     return `<foreignObject x="${fox}" y="${foy}" width="${foW}" height="${foH}">
-        <div xmlns="http://www.w3.org/1999/xhtml" style="text-align:center;font-family:Noto Sans KR,sans-serif;">
-          <div style="font-size:20px;line-height:1.2;">${icon}</div>
-          <div style="font-size:11px;color:#555;margin-top:1px;">${label}</div>
-          <div style="font-size:11px;font-weight:700;color:#2D8252;font-family:Montserrat,sans-serif;">${avgs[labels[i].key].toFixed(1)}</div>
+        <div xmlns="http://www.w3.org/1999/xhtml" style="text-align:center;font-family:'Noto Sans KR',sans-serif;">
+          <div style="font-size:22px;line-height:1.1;">${icon}</div>
+          <div style="font-size:12px;color:#555;margin-top:2px;font-weight:500;">${label}</div>
         </div>
       </foreignObject>`;
+  }).join('');
+
+  // 점수 라벨: 데이터 포인트 옆에 흰색 배경 + 굵은 녹색으로 별도 표시
+  let scoreSVG = labels.map(({key},i) => {
+    const val = avgs[key];
+    const rr = (val/5)*r_max;
+    // 데이터 포인트 위치에서 바깥 방향으로 약간 밀어서 배치
+    const px = cx + rr*Math.cos(angles[i]);
+    const py = cy + rr*Math.sin(angles[i]);
+    // 안쪽으로 16px 밀어서 데이터 폴리곤 안쪽에 표시 (겹침 방지)
+    const offset = 15;
+    const sx = px - offset*Math.cos(angles[i]);
+    const sy = py - offset*Math.sin(angles[i]);
+    return `
+      <rect x="${sx-13}" y="${sy-9}" width="26" height="17" rx="9" ry="9" fill="#FFFFFF" stroke="#3DAA6B" stroke-width="1.5"/>
+      <text x="${sx}" y="${sy+4}" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="11" font-weight="800" fill="#2D8252">${val.toFixed(1)}</text>`;
   }).join('');
 
   return `<div class="radar-card">
@@ -905,9 +920,10 @@ function renderRadar(avgs) {
         <polygon points="${dataPts}" fill="rgba(61,170,107,.18)" stroke="#3DAA6B" stroke-width="2.5"/>
         ${labels.map(({key},i)=>{
           const val=avgs[key]; const rr=(val/5)*r_max;
-          return `<circle cx="${cx+rr*Math.cos(angles[i])}" cy="${cy+rr*Math.sin(angles[i])}" r="5" fill="#3DAA6B"/>`;
+          return `<circle cx="${cx+rr*Math.cos(angles[i])}" cy="${cy+rr*Math.sin(angles[i])}" r="4" fill="#3DAA6B"/>`;
         }).join('')}
         ${labelSVG}
+        ${scoreSVG}
       </svg>
     </div>
   </div>`;
