@@ -36,7 +36,6 @@ body.mode-q .logo-right .bot{font-size:10.5px}
 body.mode-q .quiz-page{padding-top:4px}
 body.mode-q .progress-bar{margin:6px 0 12px}
 body.mode-q .q-counter{margin-bottom:4px}
-body.mode-q .q-dim{margin-bottom:8px}
 body.mode-q .q-text{margin-bottom:16px;min-height:48px}
 body.mode-q .q-nav{margin-top:16px}
 .intro{padding:10px 0 30px}
@@ -67,7 +66,6 @@ body.mode-q .q-nav{margin-top:16px}
 .progress-bar{height:4px;background:#E8E8F0;border-radius:2px;margin:10px 0 16px}
 .progress-fill{height:100%;background:#2979C8;border-radius:2px;transition:width 0.4s ease}
 .q-counter{font-size:12px;color:#6B7393;margin-bottom:6px}
-.q-dim{font-size:11px;color:#2979C8;font-weight:700;margin-bottom:10px;padding:3px 10px;background:#E8F4FD;border-radius:6px;display:inline-block}
 .q-text{font-size:18px;font-weight:700;color:#1E2761 !important;line-height:1.45;margin-bottom:24px;min-height:60px;word-break:keep-all}
 .options{display:flex;flex-direction:column;gap:8px}
 .opt-btn{padding:14px 16px;border:2px solid #E8E8F0;border-radius:12px;background:#FFF;font-size:15px;color:#333 !important;cursor:pointer;text-align:left;transition:all 0.2s;font-weight:500}
@@ -93,9 +91,9 @@ body.mode-q .q-nav{margin-top:16px}
 .gauge-section{margin:20px 0}
 .gauge-section h3{font-size:14px;font-weight:700;color:#1E2761;margin-bottom:14px}
 .gauge-item{margin-bottom:14px}
-.gauge-label{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px}
-.gauge-label .name{font-weight:600;color:#1E2761}
-.gauge-label .val{color:#2979C8;font-weight:700}
+.gauge-label{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;font-size:12px;margin-bottom:5px}
+.gauge-label .name{font-weight:600;color:#1E2761;line-height:1.45;flex:1;min-width:0}
+.gauge-label .val{color:#2979C8;font-weight:700;flex-shrink:0;white-space:nowrap}
 .gauge-track{height:8px;background:#E8E8F0;border-radius:4px;overflow:hidden}
 .gauge-fill{height:100%;border-radius:4px;transition:width 1s ease}
 .gauge-fill.d1{background:#2979C8}.gauge-fill.d2{background:#3DAA6B}.gauge-fill.d3{background:#C9983A}.gauge-fill.d4{background:#E53935}
@@ -159,7 +157,7 @@ body.mode-q .q-nav{margin-top:16px}
 .video-card .vc-desc{display:block;margin-top:4px;font-size:12.5px;color:#6B7393;font-weight:500}
 /* === 혼재(Mid) 전용 가이드 카드 — 양가 상태의 건강한 면 + 조심 신호 (Phase 2 v1.1 E.4) === */
 .mid-guide-card{padding:18px 20px;border-radius:16px;margin-bottom:16px;background:#FFFBEB;border:1px solid #FDE68A}
-.mid-guide-card h4{font-size:12px;color:#92400E;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;font-weight:700}
+.mid-guide-card h4{font-size:12px;color:#92400E;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px;font-weight:700;line-height:1.5}
 .mid-guide-block{padding:12px 14px;border-radius:10px;background:#FFF;margin-bottom:8px;border-left:3px solid}
 .mid-guide-block:last-child{margin-bottom:0}
 .mid-guide-block.healthy{border-color:#3DAA6B}
@@ -219,17 +217,16 @@ body.mode-q .q-nav{margin-top:16px}
   </div>
     <div class="axes-box">
     <h3>네 가지 점검 축</h3>
-    <div class="axis-item"><div class="axis-num">1</div><div class="axis-text"><b>욕구의 출발점</b> · 내가 원해서인가, 해야 해서인가</div></div>
-    <div class="axis-item"><div class="axis-num">2</div><div class="axis-text"><b>에너지 방향</b> · 나를 충전시키는가, 소모시키는가</div></div>
-    <div class="axis-item"><div class="axis-num">3</div><div class="axis-text"><b>몸의 반응</b> · 가슴이 열리는가, 긴장되는가</div></div>
-    <div class="axis-item"><div class="axis-num">4</div><div class="axis-text"><b>사회적 영향</b> · 눈치와 알고리즘의 간섭 정도</div></div>
+    <div class="axis-item"><div class="axis-num">1</div><div class="axis-text"><b>욕구가 어디서 비롯됐는지 인지하는 정도</b> · 내가 원해서인가, 해야 해서인가</div></div>
+    <div class="axis-item"><div class="axis-num">2</div><div class="axis-text"><b>무엇이 충전·소모를 일으키는지 자각하는 정도</b> · 나를 충전시키는가, 소모시키는가</div></div>
+    <div class="axis-item"><div class="axis-num">3</div><div class="axis-text"><b>결정을 내릴 때 몸의 신호를 읽는 정도</b> · 가슴이 열리는가, 긴장되는가</div></div>
+    <div class="axis-item"><div class="axis-num">4</div><div class="axis-text"><b>SNS·미디어·타인 시선에서 거리를 두는 정도</b> · 눈치와 알고리즘의 간섭에서 얼마나 떨어져 있는가</div></div>
   </div>
   </div>
 </div>
 <div id="quizPage" class="quiz-page">
   <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
   <div class="q-counter" id="qCounter"></div>
-  <div class="q-dim" id="qDim"></div>
   <div class="q-text" id="qText"></div>
   <div class="options" id="optionsArea"></div>
   <div class="q-nav">
@@ -247,22 +244,22 @@ body.mode-q .q-nav{margin-top:16px}
 </div>
 <script>
 const questions=[
-{id:1,dim:'D1',dimLabel:'욕구의 출발점',text:'결정을 내릴 때, 내 생각보다 주변 사람들의 반응이 먼저 떠올라 망설인 경험이 있다.',reverse:true},
-{id:2,dim:'D1',dimLabel:'욕구의 출발점',text:'나의 중요한 선택들은 대부분 다른 사람의 기대보다 나의 가치에서 출발한다.',reverse:false},
-{id:3,dim:'D1',dimLabel:'욕구의 출발점',text:'최근 한 달간 내린 결정 중 "이건 정말 내가 원해서 한 거야"라고 말할 수 있는 것이 있다.',reverse:false},
-{id:4,dim:'D1',dimLabel:'욕구의 출발점',text:'내가 무언가를 하고 싶다고 느낄 때, 그 마음이 나에게서 온 건지 주변에 영향을 받은 건지 잠시 멈춰 생각해보는 편이다.',reverse:false},
-{id:5,dim:'D1',dimLabel:'욕구의 출발점',text:'"하고 싶다"는 마음과 "해야 한다"는 의무감이 뒤섞여서 구별하기 어려울 때가 많다.',reverse:true},
-{id:6,dim:'D2',dimLabel:'에너지 방향',text:'어떤 일을 마친 후, 그 활동이 나에게 에너지를 주었는지 빼앗아 갔는지 분명히 느낀다.',reverse:false},
-{id:7,dim:'D2',dimLabel:'에너지 방향',text:'최근 일주일 동안 활동 후 "마음이 가볍고 충전된다"고 느낀 순간이 있었다.',reverse:false},
-{id:8,dim:'D2',dimLabel:'에너지 방향',text:'하루 일과가 끝나면 "피곤하고 비어 있다"는 느낌이 드는 날이 더 많다.',reverse:true},
-{id:9,dim:'D3',dimLabel:'몸의 반응',text:'중요한 결정을 할 때 머리보다 몸의 반응(편안함 혹은 긴장감)이 더 명확하게 느껴진다.',reverse:false},
-{id:10,dim:'D3',dimLabel:'몸의 반응',text:'"머리로는 좋다고 생각하는데 몸이 거부하는" 그 미묘한 신호를 감지하는 편이다.',reverse:false},
-{id:11,dim:'D3',dimLabel:'몸의 반응',text:'나는 몸의 신호보다는 머릿속의 논리적 판단에만 의존해서 결정을 내리는 편이다.',reverse:true},
-{id:12,dim:'D4',dimLabel:'사회적 영향',text:'모임이나 회의에서 하고 싶은 말이 있어도 분위기를 살피다가 입을 닫게 된다.',reverse:false},
-{id:13,dim:'D4',dimLabel:'사회적 영향',text:'무언가를 성취하고도 "남들도 다 이 정도는 하니까"라며 기쁨을 억누른 적이 있다.',reverse:false},
-{id:14,dim:'D4',dimLabel:'사회적 영향',text:'SNS를 보고 난 후, 원하지 않던 물건이나 라이프스타일이 갑자기 갖고 싶어진 적이 많다.',reverse:false},
-{id:15,dim:'D4',dimLabel:'사회적 영향',text:'결정이 어려울 때 내 생각을 정리하기보다 알고리즘이나 인터넷 추천을 먼저 믿는 편이다.',reverse:false},
-{id:16,dim:'D4',dimLabel:'사회적 영향',text:'내가 원한다고 느끼는 것 중 많은 부분이 사실은 사회나 미디어가 주입한 것일 수 있다는 생각이 든다.',reverse:true},
+{id:1,dim:'D1',dimLabel:'욕구가 어디서 비롯됐는지 인지하는 정도',text:'결정을 내릴 때, 내 생각보다 주변 사람들의 반응이 먼저 떠올라 망설인 경험이 있다.',reverse:true},
+{id:2,dim:'D1',dimLabel:'욕구가 어디서 비롯됐는지 인지하는 정도',text:'나의 중요한 선택들은 대부분 다른 사람의 기대보다 나의 가치에서 출발한다.',reverse:false},
+{id:3,dim:'D1',dimLabel:'욕구가 어디서 비롯됐는지 인지하는 정도',text:'최근 한 달간 내린 결정 중 "이건 정말 내가 원해서 한 거야"라고 말할 수 있는 것이 있다.',reverse:false},
+{id:4,dim:'D1',dimLabel:'욕구가 어디서 비롯됐는지 인지하는 정도',text:'내가 무언가를 하고 싶다고 느낄 때, 그 마음이 나에게서 온 건지 주변에 영향을 받은 건지 잠시 멈춰 생각해보는 편이다.',reverse:false},
+{id:5,dim:'D1',dimLabel:'욕구가 어디서 비롯됐는지 인지하는 정도',text:'"하고 싶다"는 마음과 "해야 한다"는 의무감이 뒤섞여서 구별하기 어려울 때가 많다.',reverse:true},
+{id:6,dim:'D2',dimLabel:'무엇이 충전·소모를 일으키는지 자각하는 정도',text:'어떤 일을 마친 후, 그 활동이 나에게 에너지를 주었는지 빼앗아 갔는지 분명히 느낀다.',reverse:false},
+{id:7,dim:'D2',dimLabel:'무엇이 충전·소모를 일으키는지 자각하는 정도',text:'최근 일주일 동안 활동 후 "마음이 가볍고 충전된다"고 느낀 순간이 있었다.',reverse:false},
+{id:8,dim:'D2',dimLabel:'무엇이 충전·소모를 일으키는지 자각하는 정도',text:'하루 일과가 끝나면 "피곤하고 비어 있다"는 느낌이 드는 날이 더 많다.',reverse:true},
+{id:9,dim:'D3',dimLabel:'결정을 내릴 때 몸의 신호를 읽는 정도',text:'중요한 결정을 할 때 머리보다 몸의 반응(편안함 혹은 긴장감)이 더 명확하게 느껴진다.',reverse:false},
+{id:10,dim:'D3',dimLabel:'결정을 내릴 때 몸의 신호를 읽는 정도',text:'"머리로는 좋다고 생각하는데 몸이 거부하는" 그 미묘한 신호를 감지하는 편이다.',reverse:false},
+{id:11,dim:'D3',dimLabel:'결정을 내릴 때 몸의 신호를 읽는 정도',text:'나는 몸의 신호보다는 머릿속의 논리적 판단에만 의존해서 결정을 내리는 편이다.',reverse:true},
+{id:12,dim:'D4',dimLabel:'SNS·미디어·타인 시선에서 거리를 두는 정도',text:'모임이나 회의에서 하고 싶은 말이 있어도 분위기를 살피다가 입을 닫게 된다.',reverse:false},
+{id:13,dim:'D4',dimLabel:'SNS·미디어·타인 시선에서 거리를 두는 정도',text:'무언가를 성취하고도 "남들도 다 이 정도는 하니까"라며 기쁨을 억누른 적이 있다.',reverse:false},
+{id:14,dim:'D4',dimLabel:'SNS·미디어·타인 시선에서 거리를 두는 정도',text:'SNS를 보고 난 후, 원하지 않던 물건이나 라이프스타일이 갑자기 갖고 싶어진 적이 많다.',reverse:false},
+{id:15,dim:'D4',dimLabel:'SNS·미디어·타인 시선에서 거리를 두는 정도',text:'결정이 어려울 때 내 생각을 정리하기보다 알고리즘이나 인터넷 추천을 먼저 믿는 편이다.',reverse:false},
+{id:16,dim:'D4',dimLabel:'SNS·미디어·타인 시선에서 거리를 두는 정도',text:'내가 원한다고 느끼는 것 중 많은 부분이 사실은 사회나 미디어가 주입한 것일 수 있다는 생각이 든다.',reverse:true},
 ];
 const optionLabels=['매우 그렇지 않다','그렇지 않다','보통이다','그렇다','매우 그렇다'];
 const resultMessages={
@@ -341,7 +338,6 @@ function renderQ(){
 const q=questions[currentQ];
 document.getElementById('progressFill').style.width=((currentQ+1)/16*100)+'%';
 document.getElementById('qCounter').textContent=`${currentQ+1} / 16`;
-document.getElementById('qDim').textContent=q.dimLabel;
 document.getElementById('qText').textContent=q.text;
 const a=document.getElementById('optionsArea');a.innerHTML='';
 optionLabels.forEach((l,i)=>{const b=document.createElement('button');b.className='opt-btn'+(answers[currentQ]===i+1?' selected':'');b.textContent=l;b.onclick=()=>selectOpt(i+1);a.appendChild(b);});
@@ -379,7 +375,7 @@ const stc=structuralCards[s.seg];
 const segLabel={high:'양호',mid:'혼재',low:'심각'}[s.seg];
 const circ=2*Math.PI*70;const off=circ-(s.NCI/100)*circ;
 const arcC={high:'#3DAA6B',mid:'#C9983A',low:'#E53935'}[s.seg];
-const dn={D1:'욕구의 출발점',D2:'에너지 방향',D3:'몸의 반응',D4:'사회적 영향'};
+const dn={D1:'욕구가 어디서 비롯됐는지 인지하는 정도',D2:'무엇이 충전·소모를 일으키는지 자각하는 정도',D3:'결정을 내릴 때 몸의 신호를 읽는 정도',D4:'SNS·미디어·타인 시선에서 거리를 두는 정도'};
 const dc={D1:'d1',D2:'d2',D3:'d3',D4:'d4'};
 let h=`<div class="archie-stage"><div class="archie-stage-img"><img src="archie_n_needscan.png" alt="아키 — N · 욕구 탐색"></div><div class="archie-stage-body"><div class="archie-stage-tag">N · Need Scan</div><div class="archie-stage-title">욕구 탐색 진단</div><div class="archie-stage-desc">아키와 함께, 지금 나의 욕구가 어디서 시작되고 있는지 살펴봅니다.</div></div></div>
 <div class="score-circle"><svg viewBox="0 0 160 160"><circle cx="80" cy="80" r="70" fill="none" stroke="#E8E8F0" stroke-width="10"/><circle cx="80" cy="80" r="70" fill="none" stroke="${arcC}" stroke-width="10" stroke-dasharray="${circ}" stroke-dashoffset="${off}" stroke-linecap="round" transform="rotate(-90 80 80)" style="transition:stroke-dashoffset 1.5s ease"/></svg><div class="score-num"><span class="num">${s.NCI}</span><span class="label">NCI · 욕구 명료도</span></div></div>
