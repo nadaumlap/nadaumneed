@@ -7,14 +7,18 @@
 <title>나의 에너지는 어디로 흐를까? — 5러 경향성 진단 v2 | 나다움설계연구소</title>
 
 <meta property="og:title" content="나의 에너지는 어디로 흐를까?">
-<meta property="og:description" content="5러 경향성 진단 · 빅파이브 단축형 기반 · 약 5분 · 무료 — 나다움설계연구소 김수정 박사">
+<meta property="og:description" content="5러 경향성 진단 · 빅파이브 단축형 기반 · 약 5분 · 무료 — 나다움설계연구소 김수정 교수">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nadaumlap.github.io/nadaumneed/5characters/">
+<meta property="og:image" content="https://nadaumlap.github.io/nadaumneed/5characters/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="나다움설계연구소">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="나의 에너지는 어디로 흐를까?">
 <meta name="twitter:description" content="5러 경향성 진단 · 약 5분 · 무료">
+<meta name="twitter:image" content="https://nadaumlap.github.io/nadaumneed/5characters/og-image.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -117,8 +121,6 @@ h1, h2, h3, h4 { font-family:var(--font-title); }
 .question-card { background:var(--card); border-radius:16px; padding:20px 24px; margin-bottom:16px; }
 .question-num { display:inline-block; font-family:'Montserrat',sans-serif; font-size:13px;
   font-weight:700; color:var(--primary); letter-spacing:1.5px; margin-bottom:12px; }
-.question-char { display:inline-block; font-size:13px; font-weight:600;
-  color:var(--text-mute); margin-left:8px; }
 .question-text { font-family:var(--font-title); font-size:17px; font-weight:700; color:var(--text) !important; line-height:1.45;
   margin-bottom:18px; word-break:keep-all; }
 
@@ -416,7 +418,6 @@ h1, h2, h3, h4 { font-family:var(--font-title); }
   <div class="progress-text" id="progress-text">1 / 15</div>
   <div class="question-card">
     <span class="question-num" id="q-num">Q01</span>
-    <span class="question-char" id="q-char"></span>
     <p class="question-text" id="q-text"></p>
     <div class="likert-options" id="likert-options"></div>
   </div>
@@ -501,6 +502,7 @@ const CHARS = {
   A: {
     key:"A", name:"열정러", en:"Achiever", icon:"🔥",
     source:"목표 · 도전 · 결과",
+    flowKey:"성취 중심",
     identity:"목표를 보면 가슴이 뛰는 패턴",
     flow:"\"결과를 만들어 내는 과정\" 자체에서 에너지를 얻는 시기",
     drain:"목표가 보이지 않아 동력이 없는 시기",
@@ -510,6 +512,7 @@ const CHARS = {
   C: {
     key:"C", name:"협력러", en:"Harmonious Connector", icon:"🤝",
     source:"연결 · 협업 · 관계",
+    flowKey:"연결 중심",
     identity:"함께할 때 더 빛나는 패턴",
     flow:"\"우리\"라는 감각이 있을 때 동력이 생기는 시기",
     drain:"혼자 하는 작업이 많아 에너지가 빠지는 시기",
@@ -519,6 +522,7 @@ const CHARS = {
   S: {
     key:"S", name:"안정러", en:"Solid Anchor", icon:"⚓",
     source:"리듬 · 안정 · 깊이",
+    flowKey:"안정 중심",
     identity:"일정한 리듬 속에서 깊게 집중하는 패턴",
     flow:"탄탄한 기본기 위에서 평온함을 느끼는 시기",
     drain:"루틴이 깨져 리듬을 못 찾는 시기",
@@ -528,6 +532,7 @@ const CHARS = {
   D: {
     key:"D", name:"장인러", en:"Deep Specialist", icon:"🛠",
     source:"탐구 · 완성 · 의미",
+    flowKey:"탐구 중심",
     identity:"한 가지를 깊이 파는 패턴",
     flow:"\"왜 하는지의 본질적 의미\"가 분명한 시기",
     drain:"기준에 안 맞아 넘어가지 못하는 시기",
@@ -537,6 +542,7 @@ const CHARS = {
   E: {
     key:"E", name:"모험러", en:"Bold Explorer", icon:"🚀",
     source:"새로움 · 자극 · 자율",
+    flowKey:"모험 중심",
     identity:"새로운 자극과 모험에서 에너지를 얻는 패턴",
     flow:"시간의 핸들을 직접 쥘 때 자유로운 시기",
     drain:"맨날 같은 것만 해서 질리는 시기",
@@ -637,9 +643,7 @@ function startQuiz() {
 // ===== 문항 렌더링 =====
 function renderQuestion() {
   const q = QUESTIONS[currentQ];
-  const char = CHARS[q.char];
   document.getElementById('q-num').textContent = `Q${String(q.id).padStart(2,'0')}`;
-  document.getElementById('q-char').textContent = `${char.icon} ${char.name}`;
   document.getElementById('q-text').textContent = q.text;
 
   const pct = ((currentQ+1)/15)*100;
@@ -738,21 +742,21 @@ function renderResult(r) {
         <div class="label">지금 시기의 에너지 흐름</div>
         <span class="special-badge badge-balance">균형형 — 두 흐름이 비슷하게 작동 중</span>
         <div class="main-char">${p.icon}${s.icon}</div>
-        <div class="main-name">${p.name} + ${s.name}</div>
-        <div class="main-sub">두 경향이 비슷한 강도로 흐르고 있어요</div>
+        <div class="main-name">${p.flowKey} + ${s.flowKey}</div>
+        <div class="main-sub">지금 나의 에너지는 ${p.name}·${s.name} 두 패턴이 비슷한 강도로 흐르고 있어요</div>
       </div>`;
   } else {
     heroHTML = `
       <div class="tendency-hero">
         <div class="label">지금 시기의 주된 에너지 흐름</div>
         <div class="main-char">${p.icon}</div>
-        <div class="main-name">${p.name}</div>
-        <div class="main-sub">${p.source} · ${p.en}</div>
+        <div class="main-name">${p.flowKey} 흐름</div>
+        <div class="main-sub">지금 나의 에너지는 <strong>${p.flowKey}</strong>으로 흐르고 있습니다<br><span style="font-size:13px;color:var(--text-mute)">${p.name} 패턴 · ${p.source}</span></div>
         <div class="divider-line"></div>
         <div class="sub-tendency">
           <div class="sub-label">보조 흐름</div>
           <div class="sub-char">${s.icon}</div>
-          <div class="sub-name">${s.name}</div>
+          <div class="sub-name">${s.flowKey} · ${s.name} 패턴</div>
         </div>
       </div>`;
   }
@@ -952,9 +956,18 @@ function shareLink() {
 
 async function shareResult() {
   if (!_result) return;
-  const p = _result.caseType==='low' ? "충전이 필요한 시기" : CHARS[_result.primary].name;
-  const s = _result.caseType==='low' ? "" : CHARS[_result.secondary].name;
-  const text = `나의 5러 경향성 진단 결과\n주된 경향: ${p}${s?` / 보조: ${s}` : ""}\n\n나다움설계연구소 · https://nadaumlap.github.io/nadaumneed/5characters/`;
+  let text;
+  if (_result.caseType === 'low') {
+    text = `나의 5러 경향성 진단 결과\n지금은 회복이 필요한 시기입니다.\n\n나다움설계연구소 · https://nadaumlap.github.io/nadaumneed/5characters/`;
+  } else if (_result.caseType === 'balance') {
+    const p = CHARS[_result.primary];
+    const s = CHARS[_result.secondary];
+    text = `나의 5러 경향성 진단 결과\n지금 나의 에너지는 ${p.flowKey} + ${s.flowKey} 두 흐름이 비슷하게 흐르고 있습니다.\n(${p.name}·${s.name} 패턴)\n\n나다움설계연구소 · https://nadaumlap.github.io/nadaumneed/5characters/`;
+  } else {
+    const p = CHARS[_result.primary];
+    const s = CHARS[_result.secondary];
+    text = `나의 5러 경향성 진단 결과\n지금 나의 에너지는 ${p.flowKey}으로 흐르고 있습니다.\n(주된: ${p.name} 패턴 / 보조: ${s.name} 패턴)\n\n나다움설계연구소 · https://nadaumlap.github.io/nadaumneed/5characters/`;
+  }
   try {
     if (navigator.share) { await navigator.share({text}); return; }
   } catch(e) {}
