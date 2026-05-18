@@ -18,14 +18,27 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:#F8F9FB !important;color:#1E2761 !important;color-scheme:light only}
 body{font-family:'Pretendard','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;background:#F8F9FB;color:#2F2F2F;min-height:100vh;line-height:1.55;letter-spacing:-0.01em}
-.page{max-width:540px;margin:0 auto;padding:2.5rem 1.25rem 5rem}
-.logo-bar{display:flex;align-items:center;gap:12px;margin-bottom:2.75rem}
-.logo-need{font-size:22px;font-weight:800;letter-spacing:3px;line-height:1}
+.page{max-width:540px;margin:0 auto;padding:2.5rem 1.25rem 5rem;transition:padding .25s ease}
+.logo-bar{display:flex;align-items:center;gap:12px;margin-bottom:2.75rem;transition:margin .25s ease}
+.logo-need{font-size:22px;font-weight:800;letter-spacing:3px;line-height:1;transition:font-size .25s ease,letter-spacing .25s ease}
 .logo-need .n{color:#2979C8}.logo-need .e1{color:#3DAA6B}.logo-need .e2{color:#C9983A}.logo-need .d{color:#8B5CF6}
-.logo-sep{width:1px;height:26px;background:#D1D5DB}
+.logo-sep{width:1px;height:26px;background:#D1D5DB;transition:height .25s ease}
 .logo-right{display:flex;flex-direction:column;gap:2px}
-.logo-scan{font-size:11px;font-weight:600;color:#718096;letter-spacing:1.5px}
-.logo-org{font-size:13px;color:#2F2F2F;font-weight:500}
+.logo-scan{font-size:11px;font-weight:600;color:#718096;letter-spacing:1.5px;transition:font-size .25s ease}
+.logo-org{font-size:13px;color:#2F2F2F;font-weight:500;transition:font-size .25s ease}
+/* === 진행 화면 압축 (한 화면에 문항+척도+버튼 표시) === */
+body.mode-q .page{padding-top:1rem}
+body.mode-q .logo-bar{margin-bottom:1.25rem}
+body.mode-q .logo-need{font-size:16px;letter-spacing:2px}
+body.mode-q .logo-sep{height:18px}
+body.mode-q .logo-scan{font-size:9.5px;letter-spacing:1.2px}
+body.mode-q .logo-org{font-size:11px}
+/* 진행 화면 내부 요소 마진 미세 압축 */
+body.mode-q .prog-wrap{margin-bottom:1.1rem}
+body.mode-q .section-pill{margin-bottom:.55rem}
+body.mode-q .q-subtitle{margin-bottom:.9rem;padding:.65rem .9rem}
+body.mode-q .q-hint{margin-bottom:1.25rem}
+body.mode-q .scale-wrap{margin-bottom:1.5rem}
 .screen{display:none}.screen.active{display:block}
 .badge{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid #E2E8F0;border-radius:20px;padding:4px 12px;font-size:11px;color:#718096;margin-bottom:.9rem}
 .badge-dot{width:6px;height:6px;border-radius:50%;background:#C9983A}
@@ -238,7 +251,7 @@ function si(qi){return Math.floor(qi/3)}
 function qi_s(qi){return qi%3}
 function scored(qi,raw){return SECS[si(qi)].qs[qi_s(qi)].reverse?(6-raw):raw;}
 function startDiag(){show('s-q');renderQ(0);}
-function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.body.classList.toggle('mode-q',id==='s-q');window.scrollTo(0,0);}
 function renderQ(qi){cur=qi;const sec=SECS[si(qi)],q=sec.qs[qi_s(qi)];document.getElementById('prog-sec').textContent=sec.label+' · '+(qi_s(qi)+1)+'/3';document.getElementById('prog-cnt').textContent=(qi+1)+' / 12';const pf=document.getElementById('prog-fill');pf.style.width=(qi/12*100)+'%';pf.style.background=sec.color;const pill=document.getElementById('q-pill');pill.textContent=sec.short+' — '+sec.hook;pill.className='section-pill '+sec.pill;const sub=document.getElementById('q-subtitle');if(qi_s(qi)===0){sub.textContent=sec.subtitle;sub.style.display='block';}else{sub.style.display='none';}document.getElementById('q-text').textContent=q.t;document.getElementById('q-hint').textContent=q.h;const row=document.getElementById('scale-row');row.innerHTML='';for(let n=1;n<=5;n++){const btn=document.createElement('div');btn.className='scale-btn'+(ans[qi]===n?' '+sec.activeCls:'');let dots='';for(let d=1;d<=n;d++)dots+='<span class="dot"></span>';btn.innerHTML='<span class="scale-num">'+n+'</span><div class="dots">'+dots+'</div>';btn.onclick=(()=>{const v=n;return()=>pick(qi,v,sec.activeCls);})();row.appendChild(btn);}const nb=document.getElementById('btn-next');nb.disabled=ans[qi]===null;nb.className='btn-next btn-'+sec.id;nb.textContent=qi===11?'결과 보기 →':'다음 →';document.getElementById('btn-prev').style.visibility=qi===0?'hidden':'visible';}
 function pick(qi,val,cls){ans[qi]=val;document.querySelectorAll('.scale-btn').forEach((b,i)=>{b.className='scale-btn'+(i+1===val?' '+cls:'');});document.getElementById('btn-next').disabled=false;}
 function nextQ(){if(cur===11){showResult();return;}renderQ(cur+1);}
