@@ -145,7 +145,7 @@ body {
 .q-text { font-size:16px; font-weight:700; color:var(--text-main); line-height:1.55; margin-bottom:24px; }
 .likert-wrap { display:flex; flex-direction:column; gap:8px; }
 .likert-btn { display:flex; align-items:center; gap:12px; padding:13px 16px; border-radius:10px; border:1.5px solid #E4E8EE; background:#fff; cursor:pointer; font-size:14px; color:var(--text-main); transition:all 0.15s ease; text-align:left; width:100%; }
-.likert-btn:hover { border-color:var(--stage-soft); background:var(--stage-bg); }
+@media (hover:hover) and (pointer:fine){.likert-btn:hover { border-color:var(--stage-soft); background:var(--stage-bg); }}
 .likert-btn.selected { border-color:var(--stage); background:var(--stage-bg); color:var(--stage); font-weight:700; }
 .likert-btn.sdt-sel { border-color:var(--gold); background:var(--gold-bg); color:#7a5c00; font-weight:700; }
 .likert-btn.noise-sel { border-color:var(--purple); background:var(--purple-bg); color:#5b21b6; font-weight:700; }
