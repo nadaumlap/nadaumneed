@@ -7,7 +7,7 @@
 <title>왜 어떤 일은 나를 살리고, 어떤 일은 나를 지치게 할까? — 나다움설계연구소</title>
 <meta property="og:type" content="website">
 <meta property="og:title" content="왜 어떤 일은 나를 살리고, 어떤 일은 나를 지치게 할까?">
-<meta property="og:description" content="열심히 사는데 왜 지치는지, 이제 구조로 읽어봅니다 · 기질 × 동기 × 잡음 통합 진단 · 26문항 · 약 8분 · 나다움설계연구소 김수정 교수">
+<meta property="og:description" content="열심히 사는데 왜 지치는지, 이제 구조로 읽어봅니다 · 기질 × 동기 × 잡음 통합 진단 · 26문항 · 약 8분 · 나다움설계연구소">
 <meta property="og:url" content="https://nadaumlap.github.io/nadaumneed/why/">
 <meta property="og:image" content="https://nadaumlap.github.io/nadaumneed/why/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -26,6 +26,8 @@ body {
   min-height: 100vh;
   -webkit-text-size-adjust: 100%;
   line-height: 1.55;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
 }
 /* 제목용 — Apple SF Pro 계열 시스템 폰트 스택 */
 .heading-font {
@@ -422,6 +424,14 @@ body {
 @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
 .fade-up { animation:fadeUp 0.4s ease forwards; }
 @media(max-width:380px){.intro-card h1{font-size:21px;}.q-text{font-size:15px;}.share-row{flex-direction:column;}.phase-row{gap:5px;}}
+
+/* 통합 리포트 진입 카드 */
+.rep-cta{display:block;text-decoration:none;background:#1E2761;color:#FFF;border-radius:16px;padding:22px 20px;margin:20px 0 14px;transition:transform .15s,box-shadow .15s}
+.rep-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(30,39,97,.22)}
+.rep-cta .rc-tag{font-size:11px;letter-spacing:1.5px;color:#C9983A;font-weight:800;margin-bottom:8px}
+.rep-cta .rc-h{font-size:18px;font-weight:800;color:#FFF;margin-bottom:8px;line-height:1.45;word-break:keep-all;font-family:-apple-system,'SF Pro Display','Apple SD 산돌고딕 Neo','Pretendard',sans-serif}
+.rep-cta .rc-d{font-size:13.5px;color:#C7CEE4;line-height:1.7;word-break:keep-all;margin-bottom:12px}
+.rep-cta .rc-go{font-size:14px;font-weight:700;color:#FFF}
 </style>
 </head>
 <body>
@@ -529,7 +539,7 @@ body {
 
 <footer class="footer">
   <p class="slogan">나다움은 발견이 아니라 설계다</p>
-  <p>© 2026 나다움설계연구소 · 김수정 교수</p>
+  <p>© 2026 나다움설계연구소</p>
 </footer>
 </div>
 
@@ -730,7 +740,7 @@ function selectAnswer(score) {
   const isBridge2End = current === 19;
   const isLast = current === TOTAL - 1;
   if (!isBridge1End && !isBridge2End && !isLast) {
-    setTimeout(() => { if (answers[current] !== null) nextQ(); }, 420);
+    setTimeout(() => { if (answers[current] !== null) nextQ(); }, 300);
   }
 }
 
@@ -782,6 +792,27 @@ function prevQ() {
 // ═══════════════════════════════════════════
 // 채점
 // ═══════════════════════════════════════════
+// ===== 통합 리포트용 프로필 저장 (nd_profile v1) =====
+function saveWhyProfile(res) {
+  try {
+    const KEY = 'nadaum.profile.v1';
+    const p = JSON.parse(localStorage.getItem(KEY) || 'null') || {
+      v: 1,
+      id: 'ND-' + Math.random().toString(36).slice(2,6).toUpperCase()
+          + '-' + Math.random().toString(36).slice(2,6).toUpperCase(),
+      created: new Date().toISOString().slice(0,10),
+      modules: {}, history: []
+    };
+    const ts = new Date().toISOString().slice(0,10);
+    p.modules.temperament = { ts, ns:res.temp.NS, ha:res.temp.HA,
+                              rd:res.temp.RD, ps:res.temp.PS };
+    p.modules.motivation  = { ts, sdtScore: res.sdtScore };
+    p.modules.noiseInner  = { ts, raw: res.noiseRaw, pct: res.noisePct };
+    p.updated = ts;
+    localStorage.setItem(KEY, JSON.stringify(p));
+  } catch (e) { /* 저장 실패해도 결과 표시는 계속 */ }
+}
+
 function calcScores() {
   function avg(indices) {
     let sum = 0;
@@ -801,7 +832,10 @@ function calcScores() {
   const sdtAuto  = avg([12,13,17,18]);  // 자율 방향
   const sdtIntr  = avg([14,15,16,19]);  // 내사 방향 (높을수록 내사)
   // 통합 SDT 자율성 점수 (0~100): 자율↑ 내사↓
-  const sdtScore = Math.round(((sdtAuto - 1) / 4 * 70) + ((5 - sdtIntr - 1) / 4 * 30));
+  // v1.1 수정 (2026.08.25): 5점 척도의 역산은 (6 - x). 종전 (5 - x)는 off-by-one 이었고,
+  // 그 결과 내사 기여분이 최대 22.5점에 그치고 극단 응답에서 총점이 음수가 되었습니다.
+  let sdtScore = Math.round(((sdtAuto - 1) / 4 * 70) + (((6 - sdtIntr) - 1) / 4 * 30));
+  sdtScore = Math.max(0, Math.min(100, sdtScore));
 
   // 잡음 (20~25): 각 문항 점수, 높을수록 잡음 강함
   const noiseRaw = {
@@ -826,7 +860,9 @@ function showResult() {
   const sec = document.getElementById('result-section');
   sec.style.display = 'block';
 
-  const {temp, sdtScore, noiseRaw, noisePct} = calcScores();
+  const _res = calcScores();
+  saveWhyProfile(_res);
+  const {temp, sdtScore, noiseRaw, noisePct} = _res;
 
   // 기질 분석
   const tempDims = Object.entries(temp).sort((a,b) => b[1]-a[1]);
@@ -839,7 +875,8 @@ function showResult() {
   const subInfo  = DIM_INFO[second][lv(temp[second])];
 
   // SDT 단계
-  const sdtStage = SDT_STAGES.find(s => sdtScore >= s.range[0] && sdtScore < s.range[1]) || SDT_STAGES[3];
+  // v1.1: 구간을 못 찾을 때 최고 단계로 떨어지던 fallback을 최저 단계로 교정
+  const sdtStage = SDT_STAGES.find(s => sdtScore >= s.range[0] && sdtScore < s.range[1]) || SDT_STAGES[0];
 
   // 잡음 상위 2개
   const noiseEntries = Object.entries(noiseRaw).sort((a,b)=>b[1]-a[1]);
@@ -1102,7 +1139,7 @@ function showResult() {
   </div>
 
   <div class="chart-card fade-up">
-    <p class="cc-title">잡음 유형별 강도</p>
+    <p class="cc-title">잡음 패턴별 강도</p>
     ${Object.entries(noiseRaw).map(([k,v])=>`
       <div class="chart-item ${k===noiseEntries[0][0]?'noise-highest':''}">
         <div class="chart-label-row">
@@ -1147,7 +1184,7 @@ function showResult() {
   ${hybrid ? `
   <div class="insight-card fade-up">
     <p class="ins-eyebrow">혹시 이런 오해를 해왔나요?</p>
-    <p class="ins-main">당신은<br>"${hybrid.title}"입니다.<br>그렇게 느끼지 못했다면,<br>이런 오해가 있었을 수 있습니다.</p>
+    <p class="ins-main">지금 여러분의 흐름은<br>"${hybrid.title}"에 가깝습니다.<br>그렇게 느끼지 못하셨다면,<br>이런 오해가 있었을 수 있습니다.</p>
     <div style="margin-top:14px">
       ${hybrid.qna.map(item=>`
         <div class="qna-item">
@@ -1225,10 +1262,11 @@ function showResult() {
       <div class="ne-expr-item"><span class="ne-icon">🤝</span><p>어떤 사람은 <strong>관계와 협력 속에서</strong> 비로소 살아납니다.</p></div>
     </div>
     <div class="ne-bridge">
-      이 차이를 구체적으로 탐색하는 것이 <strong>'5러 몰입 유형'</strong>입니다.<br>
+      이 차이를 구체적으로 탐색하는 것이 <strong>'5러 몰입 경향성'</strong>입니다.<br>
       나는 어떤 방식으로 몰입이 살아나는 사람인가 — 다음 탐색에서 함께 읽어봅니다.
     </div>
-    <a class="btn-next-explore" href="https://nadaumlap.github.io/nadaumneed/5characters/" target="_blank">5러 몰입 유형 탐색하기 →</a>
+<a class="rep-cta" href="../report/"><div class="rc-tag">NADAUM DESIGN REPORT</div><div class="rc-h">읽는 것으로는 아무것도 바뀌지 않습니다</div><div class="rc-d">지금까지 하신 진단을 한자리에 모아 읽고, 오늘 시작할 설계 한 문장을 남기는 자리입니다. 진단을 다 하지 않으셔도 됩니다.</div><div class="rc-go">통합 리포트 열기 →</div></a>
+    <a class="btn-next-explore" href="https://nadaumlap.github.io/nadaumneed/5characters/" target="_blank">5러 몰입 경향성 탐색하기 →</a>
   </div>
 
   <!-- 슬로건 -->
@@ -1287,7 +1325,7 @@ function getIntegrationMsg(topDim, topLv, engineState) {
   const msgs = {
     cruise: {
       title:'기질과 동기가 같은 방향을 가리키고 있습니다',
-      body:`${dl} 기질과, 지금 행동의 출처가 내면의 의미와 연결되어 있습니다. 이 상태에서는 억지 추진력이 아닌 조용하지만 지속적인 힘이 흐릅니다. N.E.E.D의 Energy Flow 구간에 가장 가까운 상태입니다.`,
+      body:`${dl} 기질과, 지금 행동의 출처가 내면의 의미와 연결되어 있습니다. 이 상태에서는 억지 추진력이 아닌 조용하지만 지속적인 힘이 흐릅니다. N.E.E.D의 Energy Alignment 구간에 가장 가까운 상태입니다.`,
       note:'지금 이 연결을 유지하는 것 자체가 설계입니다. 잡음이 이 연결을 끊으려 할 때 빠르게 알아채는 것이 다음 과제입니다.'
     },
     overheat: {
