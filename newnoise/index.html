@@ -13,10 +13,12 @@
 <meta property="og:image" content="https://nadaumlap.github.io/nadaumneed/newnoise/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:#F8F9FB !important;color:#1E2761 !important;color-scheme:light only}
-body{font-family:'Pretendard','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;background:#F8F9FB !important;color:#1E2761 !important;min-height:100vh;line-height:1.55;letter-spacing:-0.01em}
+body{font-family:'Pretendard','Noto Sans KR',sans-serif;background:#F8F9FB !important;color:#1E2761 !important;min-height:100vh;line-height:1.55;letter-spacing:-0.01em;-webkit-font-smoothing:antialiased}
 .page{max-width:540px;margin:0 auto;padding:2.5rem 1.25rem 5rem}
 
 /* LOGO — 5러 진단과 동일 양식 */
@@ -244,7 +246,7 @@ body{font-family:'Pretendard','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothi
 
 /* 작은 실천 카드 — N.E.E.D 단계 표기 추가 */
 .action-need-step{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #FDE68A;border-radius:8px;padding:8px 12px;margin-bottom:14px;font-size:11px;color:#92400E}
-.action-need-step-num{font-weight:800;color:#C9983A;font-family:-apple-system,BlinkMacSystemFont,sans-serif}
+.action-need-step-num{font-weight:800;color:#C9983A;font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD 산돌고딕 Neo','Pretendard',sans-serif}
 .action-need-step-arrow{color:#C9983A}
 .action-need-step-name{font-weight:700}
 
@@ -357,6 +359,14 @@ body{font-family:'Pretendard','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothi
   .primary-name{font-size:19px}
   .slider-value{font-size:42px}
 }
+
+/* 통합 리포트 진입 카드 */
+.rep-cta{display:block;text-decoration:none;background:#1E2761;color:#FFF;border-radius:16px;padding:22px 20px;margin:20px 0 14px;transition:transform .15s,box-shadow .15s}
+.rep-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(30,39,97,.22)}
+.rep-cta .rc-tag{font-size:11px;letter-spacing:1.5px;color:#C9983A;font-weight:800;margin-bottom:8px}
+.rep-cta .rc-h{font-size:18px;font-weight:800;color:#FFF;margin-bottom:8px;line-height:1.45;word-break:keep-all;font-family:-apple-system,'SF Pro Display','Apple SD 산돌고딕 Neo','Pretendard',sans-serif}
+.rep-cta .rc-d{font-size:13.5px;color:#C7CEE4;line-height:1.7;word-break:keep-all;margin-bottom:12px}
+.rep-cta .rc-go{font-size:14px;font-weight:700;color:#FFF}
 </style>
 </head>
 <body>
@@ -501,6 +511,7 @@ body{font-family:'Pretendard','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothi
         </div>
       </div>
       <div class="score-label" id="scoreLabel"></div>
+      <div class="score-note" id="scoreNote" style="display:none;margin-top:10px;padding:12px 14px;background:#F7F4EC;border-left:3px solid #C9983A;border-radius:8px;font-size:13.5px;line-height:1.6;color:#4A4A4A;text-align:left"></div>
     </div>
 
     <!-- 신규: 3가지 잡음 요약 카드 (혼재·심각 단계에서만 표시) -->
@@ -573,7 +584,7 @@ body{font-family:'Pretendard','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothi
     </div>
 
     <div class="reflect-card">
-      <div class="reflect-tag">잠시, 스스로에게 물어보세요</div>
+      <div class="reflect-tag">1초의 멈춤 — 스스로에게 물어보세요</div>
       <h3 class="reflect-tit" id="reflectTit"></h3>
       <div id="reflectQuestions"></div>
     </div>
@@ -596,7 +607,7 @@ body{font-family:'Pretendard','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothi
       <div class="action-need-step">
         <span class="action-need-step-num">N.E.E.D 2단계</span>
         <span class="action-need-step-arrow">→</span>
-        <span class="action-need-step-name">Eliminate Noise · 잡음 지도의 첫걸음</span>
+        <span class="action-need-step-name">Eliminate Noise · 왜곡 구조 인식</span>
       </div>
       <div class="action-tit-wrap">
         <span class="action-tit-icon" id="actionTitIcon">⏳</span>
@@ -640,7 +651,8 @@ body{font-family:'Pretendard','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothi
     </div>
 
     <!-- 5러 진단 연결 카드 -->
-    <a class="next-diagnosis-card" href="https://nadaumlap.github.io/nadaumneed/5characters/" target="_blank" rel="noopener noreferrer">
+    <a class="rep-cta" href="../report/"><div class="rc-tag">NADAUM DESIGN REPORT</div><div class="rc-h">읽는 것으로는 아무것도 바뀌지 않습니다</div><div class="rc-d">지금까지 하신 진단을 한자리에 모아 읽고, 오늘 시작할 설계 한 문장을 남기는 자리입니다. 진단을 다 하지 않으셔도 됩니다.</div><div class="rc-go">통합 리포트 열기 →</div></a>
+<a class="next-diagnosis-card" href="https://nadaumlap.github.io/nadaumneed/5characters/" target="_blank" rel="noopener noreferrer">
       <span class="next-diagnosis-tag">NEED SCAN · 다음 단계</span>
       <h3 class="next-diagnosis-h">잡음이 걷히면, 무엇이 남을까요?</h3>
       <p class="next-diagnosis-d">
@@ -650,8 +662,8 @@ body{font-family:'Pretendard','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothi
         <span class="next-diagnosis-type">🔥 열정러</span>
         <span class="next-diagnosis-type">🤝 협력러</span>
         <span class="next-diagnosis-type">⚓ 안정러</span>
-        <span class="next-diagnosis-type">🔧 장인러</span>
-        <span class="next-diagnosis-type">🧭 모험러</span>
+        <span class="next-diagnosis-type">🛠 장인러</span>
+        <span class="next-diagnosis-type">🚀 모험러</span>
       </div>
       <p class="next-diagnosis-d" style="margin-bottom:14px">
         잡음에 가려져 있던 <strong style="color:#14532D">진짜 내 에너지 패턴</strong>은 무엇일까요?
@@ -1159,7 +1171,7 @@ const RESULT_DETAIL = {
 
 const ACTION_DETAIL = {
   'low': {
-    needStepBadge: { num: 'N.E.E.D 3·4단계', name: 'Energy Flow + Daily Drive · 다음 단계로' },
+    needStepBadge: { num: 'N.E.E.D 3·4단계', name: 'Energy Alignment + Daily Authorship · 다음 단계로' },
     titIcon: '✨',
     title: '잡음이 적은 지금, 우선가치로 흐를 시간',
     titHighlight: null,
@@ -1225,7 +1237,18 @@ const SIGNATURE_QUOTE = {
   'high-3': '여러분의 시간은, 알고리즘이 아닌 여러분 자신이 설계해야 합니다'
 };
 
-const STORAGE_KEY = 'noise_diagnosis_v3';
+const STORAGE_KEY = 'nadaum.noise.v3';
+const LEGACY_KEY = 'noise_diagnosis_v3';
+// v3.1: 구 키(네임스페이스 없음)에 남은 진행 상태를 1회 이전
+(function migrateLegacyKey(){
+  try{
+    if (!localStorage.getItem(STORAGE_KEY)) {
+      const old = localStorage.getItem(LEGACY_KEY);
+      if (old) localStorage.setItem(STORAGE_KEY, old);
+    }
+    localStorage.removeItem(LEGACY_KEY);
+  }catch(e){}
+})();
 let state = {
   currentIdx: 0,
   answers: new Array(18).fill(null),
@@ -1326,6 +1349,11 @@ function selectAnswer(value, sec){
   const btns = document.querySelectorAll('.scale-btn');
   btns[value-1].classList.add(sec.activeCls);
   document.getElementById('nextBtn').disabled = false;
+  // 5러·why 진단과 동일하게 선택 즉시 다음 문항으로 (마지막 문항 제외)
+  if (state.currentIdx < 17) {
+    const at = state.currentIdx;
+    setTimeout(()=>{ if (state.currentIdx === at && state.answers[at] !== null) goNext(); }, 300);
+  }
 }
 
 function goNext(){
@@ -1350,11 +1378,12 @@ function answerSlider(){
   const slider = document.getElementById('sliderInput');
   const minutes = parseInt(slider.value, 10);
   state.snsMinutes = minutes;
+  // v3.1: 구간 폭 균등화 (종전: 0 / 1~30 / 31~90 / 91~180 / 181+)
   let scaled;
-  if (minutes <= 0) scaled = 1;
-  else if (minutes <= 30) scaled = 2;
+  if (minutes <= 15) scaled = 1;
+  else if (minutes <= 45) scaled = 2;
   else if (minutes <= 90) scaled = 3;
-  else if (minutes <= 180) scaled = 4;
+  else if (minutes <= 150) scaled = 4;
   else scaled = 5;
   state.answers[12] = scaled;
   saveState();
@@ -1369,16 +1398,59 @@ function calculateResult(){
   const a3 = state.answers.slice(12,18).reduce((a,b)=>a+(b||0), 0);
   const total = a1+a2+a3;
   const score = Math.round(((total-18)/72)*100);
-  let segment;
-  if (score >= 67) segment = 'high';
-  else if (score >= 34) segment = 'mid';
-  else segment = 'low';
+
+  // ===== v3.1 개정 (2026.08.25) =====
+  // ① 총점 세그먼트 (도넛 숫자용 — 종전과 동일)
+  const segOf = v => v >= 67 ? 'high' : (v >= 34 ? 'mid' : 'low');
+  const totalSegment = segOf(score);
+
+  // ② 축별 세그먼트 — 한 축이 만점이어도 총점에 희석되던 문제 보정
+  //    각 축 6~30을 0~100으로 환산해 총점과 같은 기준으로 비교
   const arr = [a1,a2,a3];
-  let maxIdx=0, maxVal=arr[0];
-  for (let i=1; i<3; i++) if (arr[i]>maxVal){maxVal=arr[i];maxIdx=i;}
-  if (arr[2]===maxVal) maxIdx=2;
-  else if (arr[1]===maxVal && maxIdx!==2) maxIdx=1;
-  return {axis1:a1, axis2:a2, axis3:a3, score, segment, primaryAxis:maxIdx+1};
+  const axisScores = arr.map(v => Math.round(((v-6)/24)*100));
+  const maxAxisScore = Math.max.apply(null, axisScores);
+  const axisSegment = segOf(maxAxisScore);
+
+  // ③ 결과 헤드라인은 둘 중 높은 쪽을 따른다 (과소 보고 방지)
+  const rank = {low:0, mid:1, high:2};
+  const segment = rank[axisSegment] > rank[totalSegment] ? axisSegment : totalSegment;
+  const segmentLifted = segment !== totalSegment;
+
+  // ④ 동점 처리 — 브랜드 인과 순서(눈치 → 비교 → 노출)를 따른다
+  //    종전에는 축3 → 축2 우선이어서 눈치 압력이 동점에서 절대 선출되지 않았음
+  let maxVal = Math.max.apply(null, arr);
+  let maxIdx = arr.indexOf(maxVal);
+  const tiedAxes = [];
+  for (let i=0; i<3; i++) if (arr[i] === maxVal) tiedAxes.push(i+1);
+
+  return {axis1:a1, axis2:a2, axis3:a3, axisScores, score, segment,
+          totalSegment, axisSegment, segmentLifted, maxAxisScore,
+          tiedAxes, primaryAxis:maxIdx+1};
+}
+
+// ===== 통합 리포트용 프로필 저장 (nd_profile v1) =====
+function saveNoiseProfile(r){
+  try{
+    const KEY = 'nadaum.profile.v1';
+    const p = JSON.parse(localStorage.getItem(KEY) || 'null') || {
+      v: 1,
+      id: 'ND-' + Math.random().toString(36).slice(2,6).toUpperCase()
+          + '-' + Math.random().toString(36).slice(2,6).toUpperCase(),
+      created: new Date().toISOString().slice(0,10),
+      modules: {}, history: []
+    };
+    p.modules.noise = {
+      ts: new Date().toISOString().slice(0,10),
+      total: r.score,
+      nunchi: r.axis1, compare: r.axis2, exposure: r.axis3,
+      axisScores: r.axisScores,
+      top: r.primaryAxis, tied: r.tiedAxes,
+      seg: r.segment, totalSeg: r.totalSegment,
+      snsMin: state.snsMinutes, branch: state.branch
+    };
+    p.updated = p.modules.noise.ts;
+    localStorage.setItem(KEY, JSON.stringify(p));
+  }catch(e){ /* 저장 실패해도 결과 표시는 계속 */ }
 }
 
 function showLoadingThenResult(){
@@ -1401,6 +1473,23 @@ function renderResult(){
   
   document.getElementById('scoreNum').textContent = r.score;
   document.getElementById('scoreLabel').textContent = msg.segmentLabel;
+
+  // v3.1: 총점은 낮지만 한 축이 높게 나온 경우를 명시
+  const noteEl = document.getElementById('scoreNote');
+  if (r.segmentLifted) {
+    noteEl.style.display = 'block';
+    noteEl.innerHTML = '총점 자체는 높지 않지만, <strong>' + baseInfo.name +
+      '</strong> 한 축이 뚜렷하게 높게 나왔습니다. 세 축의 평균보다 지금 여러분에게 ' +
+      '실제로 작용하는 것은 이 한 축입니다. 아래 해석은 그 축을 기준으로 합니다.';
+  } else if (r.tiedAxes.length > 1) {
+    noteEl.style.display = 'block';
+    noteEl.innerHTML = '두 가지 이상의 잡음이 비슷한 강도로 들어오고 있습니다. ' +
+      '아래 해석은 그중 <strong>' + baseInfo.name + '</strong>를 기준으로 합니다.';
+  } else {
+    noteEl.style.display = 'none';
+  }
+
+  saveNoiseProfile(r);
   const ringFg = document.getElementById('ringFg');
   const circ = 2*Math.PI*105;
   ringFg.setAttribute('stroke', msg.color);
