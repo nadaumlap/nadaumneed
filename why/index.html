@@ -796,7 +796,8 @@ function prevQ() {
 function saveWhyProfile(res) {
   try {
     const KEY = 'nadaum.profile.v1';
-    const p = JSON.parse(localStorage.getItem(KEY) || 'null') || {
+    let _prev = null; try { _prev = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch(e) {}
+    const p = _prev || {
       v: 1,
       id: 'ND-' + Math.random().toString(36).slice(2,6).toUpperCase()
           + '-' + Math.random().toString(36).slice(2,6).toUpperCase(),
@@ -809,7 +810,8 @@ function saveWhyProfile(res) {
     p.modules.motivation  = { ts, sdtScore: res.sdtScore };
     p.modules.noiseInner  = { ts, raw: res.noiseRaw, pct: res.noisePct };
     p.updated = ts;
-    localStorage.setItem(KEY, JSON.stringify(p));
+    _ndProfile = p;
+    try { localStorage.setItem(KEY, JSON.stringify(p)); } catch(e) {}
   } catch (e) { /* 저장 실패해도 결과 표시는 계속 */ }
 }
 
@@ -1265,7 +1267,7 @@ function showResult() {
       이 차이를 구체적으로 탐색하는 것이 <strong>'5러 몰입 경향성'</strong>입니다.<br>
       나는 어떤 방식으로 몰입이 살아나는 사람인가 — 다음 탐색에서 함께 읽어봅니다.
     </div>
-<a class="rep-cta" href="../report/"><div class="rc-tag">NADAUM DESIGN REPORT</div><div class="rc-h">읽는 것으로는 아무것도 바뀌지 않습니다</div><div class="rc-d">지금까지 하신 진단을 한자리에 모아 읽고, 오늘 시작할 설계 한 문장을 남기는 자리입니다. 진단을 다 하지 않으셔도 됩니다.</div><div class="rc-go">통합 리포트 열기 →</div></a>
+<a class="rep-cta" href="https://nadaumlap.github.io/nadaumneed/report/"><div class="rc-tag">NADAUM DESIGN REPORT</div><div class="rc-h">읽는 것으로는 아무것도 바뀌지 않습니다</div><div class="rc-d">지금까지 하신 진단을 한자리에 모아 읽고, 오늘 시작할 설계 한 문장을 남기는 자리입니다. 진단을 다 하지 않으셔도 됩니다.</div><div class="rc-go">통합 리포트 열기 →</div></a>
     <a class="btn-next-explore" href="https://nadaumlap.github.io/nadaumneed/5characters/" target="_blank">5러 몰입 경향성 탐색하기 →</a>
   </div>
 
@@ -1419,6 +1421,63 @@ function doRetry() {
   document.getElementById('intro-section').style.display = 'block';
   window.scrollTo(0,0);
 }
+
+/* ═══════════ 통합 리포트 인계 링크 (handoff v1) ═══════════
+   브라우저 저장(localStorage)이 막히거나 지워져도 결과가 리포트로 넘어가도록,
+   "통합 리포트 열기" 링크에 이 진단 결과를 실어 보낸다.
+   인코딩 형식은 /report/의 pack()과 동일해야 한다. 표는 추가만 하고 기존 항목은 바꾸지 않는다. */
+var _ndProfile = null;
+var ND_RPT = 'https://nadaumlap.github.io/nadaumneed/report/';
+var ND_MK = {tendency:'t',needscan:'n',noise:'x',temperament:'p',motivation:'m',noiseInner:'i',alignment:'a',authorship:'d'};
+var ND_FK = {ts:'s',main:'a',sub:'b',avgs:'v',overall:'o',flag:'f',
+  nci:'c',d1:'1',d2:'2',d3:'3',d4:'4',influence:'n',aware:'w',weak:'k',weakVal:'y',seg:'g',
+  total:'t',nunchi:'u',compare:'r',exposure:'e',top:'p',tied:'d',totalSeg:'q',snsMin:'z',branch:'h',
+  axisScores:'j',ns:'N',ha:'H',rd:'R',ps:'P',sdtScore:'S',raw:'W',pct:'C',z:'Z',
+  score:'l',a1:'5',a2:'6',a3:'7',a4:'8',values:'V',statement:'M',criteria:'T'};
+var ND_AVGO = ['A','C','S','D','E'];
+function _nd8(s){ return String(s||'').replace(/-/g,''); }
+function _ndB64(s){
+  var b = new TextEncoder().encode(s), x = '';
+  b.forEach(function(c){ x += String.fromCharCode(c); });
+  return btoa(x).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+}
+function ndPack(p){
+  var o = {v:1, i:String(p.id||'').replace(/^ND-/,'').replace(/-/g,''),
+    c:_nd8(p.created), u:_nd8(p.updated), m:{},
+    g:(p.designs||[]).map(function(x){ return [_nd8(x.ts), x.axis, x.text, x.id]; })};
+  var ck = {}; for (var kk in (p.checks||{})) ck[_nd8(kk)] = p.checks[kk];
+  if (Object.keys(ck).length) o.k = ck;
+  if (p.values && p.values.length) o.V = p.values;
+  for (var k in (p.modules||{})) {
+    var src = p.modules[k], dst = {};
+    for (var f in src) {
+      var val = src[f];
+      if (val === null || val === undefined) continue;
+      if (f === 'ts') val = _nd8(val);
+      if (f === 'avgs' && typeof val === 'object') val = ND_AVGO.map(function(c){ return val[c]; });
+      if (f === 'z') continue;
+      dst[ND_FK[f] || f] = val;
+    }
+    o.m[ND_MK[k] || k] = dst;
+  }
+  return _ndB64(JSON.stringify(o));
+}
+function ndReportUrl(){
+  try {
+    var p = _ndProfile;
+    if (!p) { try { p = JSON.parse(localStorage.getItem('nadaum.profile.v1') || 'null'); } catch(e){} }
+    if (!p || !p.modules || !Object.keys(p.modules).length) return ND_RPT;
+    var u = ND_RPT + '?d=' + ndPack(p);
+    return u.length > 6000 ? ND_RPT : u;
+  } catch (e) { return ND_RPT; }
+}
+/* 링크를 누르는 순간 최신 결과를 실어 보낸다 (캡처 단계 — 이동 전에 실행) */
+document.addEventListener('click', function(e){
+  var t = e.target, a = null;
+  while (t && t !== document) { if (t.tagName === 'A' && t.className && String(t.className).indexOf('rep-cta') >= 0) { a = t; break; } t = t.parentNode; }
+  if (a) a.href = ndReportUrl();
+}, true);
+
 </script>
 </body>
 </html>
