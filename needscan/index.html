@@ -406,7 +406,8 @@ return{D1,D2,D3,D4,D4inf,AWARE,NCI,seg,weakest,weakVal};
 function saveNeedscanProfile(s){
 try{
   const KEY='nadaum.profile.v1';
-  const p=JSON.parse(localStorage.getItem(KEY)||'null')||{
+  let _prev=null; try{ _prev=JSON.parse(localStorage.getItem(KEY)||'null'); }catch(e){}
+  const p=_prev||{
     v:1,
     id:'ND-'+Math.random().toString(36).slice(2,6).toUpperCase()
        +'-'+Math.random().toString(36).slice(2,6).toUpperCase(),
@@ -419,7 +420,8 @@ try{
     influence:+s.D4inf.toFixed(2),aware:s.AWARE,
     weak:s.weakest,weakVal:+s.weakVal.toFixed(2),seg:s.seg};
   p.updated=ts;
-  localStorage.setItem(KEY,JSON.stringify(p));
+  _ndProfile=p;
+  try{ localStorage.setItem(KEY,JSON.stringify(p)); }catch(e){}
 }catch(e){/* 저장 실패해도 결과 표시는 계속 */}
 }
 
@@ -469,7 +471,7 @@ if(s.AWARE>=4){
 // 변동성 안내 — 이 결과가 고정 정체성이 아님을 명시
 h+=`<div class="variance-note"><b>이 결과는 "지금 시기의 상태"입니다</b>여기 적힌 것은 정답이 아니라, 지금 여러분의 자기 신호를 읽어 본 기록입니다. 한 달 후, 또는 큰 변화를 겪은 시점에 다시 진단해 보면 결과가 달라질 수 있습니다. 욕구 출발점은 "고정된 점수"가 아니라 "그날그날의 환경·관계·잡음 누적도에 따라 흐르는 상태"입니다. 지금의 흐름을 읽는 도구로 활용해 보세요.</div>`;
 // 다음 진단 연결 카드 — Phase 2 v1.1 PART C.2 동선 (NCI 세그먼트별 분기)
-h+=`<a class="rep-cta" href="../report/"><div class="rc-tag">NADAUM DESIGN REPORT</div><div class="rc-h">읽는 것으로는 아무것도 바뀌지 않습니다</div><div class="rc-d">지금까지 하신 진단을 한자리에 모아 읽고, 오늘 시작할 설계 한 문장을 남기는 자리입니다. 진단을 다 하지 않으셔도 됩니다.</div><div class="rc-go">통합 리포트 열기 →</div></a>`;
+h+=`<a class="rep-cta" href="https://nadaumlap.github.io/nadaumneed/report/"><div class="rc-tag">NADAUM DESIGN REPORT</div><div class="rc-h">읽는 것으로는 아무것도 바뀌지 않습니다</div><div class="rc-d">지금까지 하신 진단을 한자리에 모아 읽고, 오늘 시작할 설계 한 문장을 남기는 자리입니다. 진단을 다 하지 않으셔도 됩니다.</div><div class="rc-go">통합 리포트 열기 →</div></a>`;
 h+=`<div class="next-section"><div class="next-section-title">— 다음으로 살펴볼 진단 —</div>`;
 if(s.seg==='high'){
   // High → /5characters/ 강조 (다음 단계 = E2 에너지 흐름 / 골드)
@@ -493,6 +495,63 @@ function restartQuiz(){showModal('처음부터 다시 시작할까요?',()=>{doc
 function shareResult(){const s=calcScores();const sl={high:'양호',mid:'혼재',low:'심각'}[s.seg];const t=`"지금 나의 욕구는 어디서 시작되고 있을까?"\n\n나의 결과: NCI ${s.NCI}점 · ${sl} 단계\n\n눈치 사회와 SNS 비교 속에서 진짜 내 욕구를 만나는 약 5분 진단입니다.\n\nhttps://nadaumlap.github.io/nadaumneed/needscan/`;if(navigator.share)navigator.share({title:'욕구 출발점 진단',text:t}).catch(()=>{});else navigator.clipboard.writeText(t).then(()=>showModal('결과가 클립보드에 복사되었습니다.')).catch(()=>{});}
 function shareLink(){const t=`"지금 나의 욕구는 어디서 시작되고 있을까?"\n약 5분 진단입니다.\n\nhttps://nadaumlap.github.io/nadaumneed/needscan/`;if(navigator.share)navigator.share({title:'욕구 출발점 진단',text:t}).catch(()=>{});else navigator.clipboard.writeText(t).then(()=>showModal('링크가 클립보드에 복사되었습니다.')).catch(()=>{});}
 function showModal(msg,onOk,sc){const ov=document.getElementById('modalOverlay');document.getElementById('modalMsg').textContent=msg;document.getElementById('modalCancel').style.display=sc?'inline-block':'none';ov.classList.add('active');document.getElementById('modalOk').onclick=()=>{ov.classList.remove('active');if(onOk)onOk();};document.getElementById('modalCancel').onclick=()=>ov.classList.remove('active');}
+
+/* ═══════════ 통합 리포트 인계 링크 (handoff v1) ═══════════
+   브라우저 저장(localStorage)이 막히거나 지워져도 결과가 리포트로 넘어가도록,
+   "통합 리포트 열기" 링크에 이 진단 결과를 실어 보낸다.
+   인코딩 형식은 /report/의 pack()과 동일해야 한다. 표는 추가만 하고 기존 항목은 바꾸지 않는다. */
+var _ndProfile = null;
+var ND_RPT = 'https://nadaumlap.github.io/nadaumneed/report/';
+var ND_MK = {tendency:'t',needscan:'n',noise:'x',temperament:'p',motivation:'m',noiseInner:'i',alignment:'a',authorship:'d'};
+var ND_FK = {ts:'s',main:'a',sub:'b',avgs:'v',overall:'o',flag:'f',
+  nci:'c',d1:'1',d2:'2',d3:'3',d4:'4',influence:'n',aware:'w',weak:'k',weakVal:'y',seg:'g',
+  total:'t',nunchi:'u',compare:'r',exposure:'e',top:'p',tied:'d',totalSeg:'q',snsMin:'z',branch:'h',
+  axisScores:'j',ns:'N',ha:'H',rd:'R',ps:'P',sdtScore:'S',raw:'W',pct:'C',z:'Z',
+  score:'l',a1:'5',a2:'6',a3:'7',a4:'8',values:'V',statement:'M',criteria:'T'};
+var ND_AVGO = ['A','C','S','D','E'];
+function _nd8(s){ return String(s||'').replace(/-/g,''); }
+function _ndB64(s){
+  var b = new TextEncoder().encode(s), x = '';
+  b.forEach(function(c){ x += String.fromCharCode(c); });
+  return btoa(x).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+}
+function ndPack(p){
+  var o = {v:1, i:String(p.id||'').replace(/^ND-/,'').replace(/-/g,''),
+    c:_nd8(p.created), u:_nd8(p.updated), m:{},
+    g:(p.designs||[]).map(function(x){ return [_nd8(x.ts), x.axis, x.text, x.id]; })};
+  var ck = {}; for (var kk in (p.checks||{})) ck[_nd8(kk)] = p.checks[kk];
+  if (Object.keys(ck).length) o.k = ck;
+  if (p.values && p.values.length) o.V = p.values;
+  for (var k in (p.modules||{})) {
+    var src = p.modules[k], dst = {};
+    for (var f in src) {
+      var val = src[f];
+      if (val === null || val === undefined) continue;
+      if (f === 'ts') val = _nd8(val);
+      if (f === 'avgs' && typeof val === 'object') val = ND_AVGO.map(function(c){ return val[c]; });
+      if (f === 'z') continue;
+      dst[ND_FK[f] || f] = val;
+    }
+    o.m[ND_MK[k] || k] = dst;
+  }
+  return _ndB64(JSON.stringify(o));
+}
+function ndReportUrl(){
+  try {
+    var p = _ndProfile;
+    if (!p) { try { p = JSON.parse(localStorage.getItem('nadaum.profile.v1') || 'null'); } catch(e){} }
+    if (!p || !p.modules || !Object.keys(p.modules).length) return ND_RPT;
+    var u = ND_RPT + '?d=' + ndPack(p);
+    return u.length > 6000 ? ND_RPT : u;
+  } catch (e) { return ND_RPT; }
+}
+/* 링크를 누르는 순간 최신 결과를 실어 보낸다 (캡처 단계 — 이동 전에 실행) */
+document.addEventListener('click', function(e){
+  var t = e.target, a = null;
+  while (t && t !== document) { if (t.tagName === 'A' && t.className && String(t.className).indexOf('rep-cta') >= 0) { a = t; break; } t = t.parentNode; }
+  if (a) a.href = ndReportUrl();
+}, true);
+
 </script>
 </body>
 </html>
