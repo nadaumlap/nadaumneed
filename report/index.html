@@ -85,6 +85,23 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
 .opt{padding:13px 15px;background:#FFF;border:2px solid #E8E8F0;border-radius:11px;font-size:14px;color:#2D3748;cursor:pointer;line-height:1.55;word-break:keep-all;text-align:left}
 @media (hover:hover) and (pointer:fine){.opt:hover{border-color:#2979C8}}
 .opt.on{border-color:#2979C8;background:#E8F4FD;font-weight:600}
+.step-lab{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:800;color:#1E2761;margin:18px 0 9px}
+.step-lab i{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:#2979C8;color:#FFF;font-style:normal;font-size:12.5px;font-weight:800;flex-shrink:0}
+.step-note{font-size:12.5px;color:#5A6478;line-height:1.65;margin:-3px 0 12px;word-break:keep-all}
+.m-card{background:#FFF;border:2px solid #E8E8F0;border-radius:11px;overflow:hidden}
+.m-card.on,.m-card:has(.m-pick.on){border-color:#2979C8;background:#E8F4FD}
+.m-pick{display:flex;gap:10px;align-items:flex-start;width:100%;border:none;background:transparent;padding:13px 15px 11px;text-align:left}
+.m-num{display:inline-flex;align-items:center;justify-content:center;width:21px;height:21px;border-radius:6px;background:#EDF2F9;color:#2979C8;font-size:12.5px;font-weight:800;flex-shrink:0;margin-top:1px}
+.m-pick.on .m-num{background:#2979C8;color:#FFF}
+.m-txt{flex:1;font-size:14px;color:#2D3748;line-height:1.6;word-break:keep-all}
+.m-pick.on .m-txt{font-weight:600;color:#1E2761}
+.m-ex-btn{display:block;width:100%;text-align:left;padding:0 15px 11px;border:none;background:transparent;font-family:inherit;font-size:12.5px;color:#6B7393;cursor:pointer}
+.m-ex{display:none;padding:0 15px 13px;font-size:12.5px;color:#4A5568;line-height:1.75;word-break:keep-all}
+.m-ex.open{display:block}
+.m-ex div{padding:5px 10px;background:#F6F8FB;border-radius:7px;margin-top:5px}
+.prev-line{font-size:13px;color:#1E2761;line-height:1.6;margin:2px 0 12px;word-break:keep-all}
+.prev-line .pl-lab{display:inline-block;font-size:11px;font-weight:800;color:#2979C8;background:#E8F4FD;padding:2px 8px;border-radius:99px;margin-right:7px}
+.prev-line .pl-empty{color:#8B93A5}
 .fill{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:14px;margin-bottom:14px}
 .fill label{font-size:12px;color:#6B7393;font-weight:600;width:100%;margin-bottom:-2px}
 .fill select,.fill input{font-family:inherit;font-size:14px;padding:11px 12px;border:1.5px solid #D6DEEA;border-radius:10px;background:#FFF;color:#1E2761}
@@ -420,19 +437,41 @@ function crossRules(p){
 /* ───────── 설계 선택지 ───────── */
 const WHENS=['아침에 일어나서','출근길에','점심 먹기 전','일 시작하기 전','퇴근 직후','저녁 먹고 나서','자기 전','주말 오전에'];
 const WHERES=['집에서','책상 앞에서','지하철에서','산책하면서','회의에서','침대에서','카페에서'];
+const AXIS_COPY={
+  N: {h:'내 욕구를 잘 알면, 선명한 선택이 가능합니다', w:'욕구'},
+  E1:{h:'잡음을 걷어내면, 내 신호가 들립니다', w:'잡음'},
+  E2:{h:'에너지가 흐르는 조건을 알면, 애쓰지 않아도 됩니다', w:'에너지'},
+  D: {h:'기준이 있으면, 오늘의 선택이 쉬워집니다', w:'기준'}
+};
 const OPTS={
-  N:['결정하기 전에 "이건 내가 원해서인가, 해야 할 것 같아서인가"를 한 줄로 적는다',
-     '오늘 끝낸 일 하나 옆에 + 또는 − 를 적는다',
-     '결정 직전 30초만 호흡하고 가슴·어깨의 감각을 살핀다'],
-  E1:['알림을 끄고 화면을 보지 않는 시간을 만든다',
-      '무언가 말하기 전에 한 번만 그대로 말해본다',
-      '남의 소식을 본 뒤 흔들린 마음을 한 줄로 적는다'],
-  E2:['가장 집중이 잘 되는 시간에 가장 중요한 일을 배치한다',
-      '지치기 전에 미리 쉬는 시간을 정해둔다',
-      '집중을 방해하는 것 하나를 눈에 안 보이게 치운다'],
-  D:['오늘의 선택 하나가 내 기준과 맞았는지 한 줄로 적는다',
-     '이번 주에 지키고 싶은 것 한 가지를 정한다',
-     '거절해도 되는 일 하나를 실제로 거절한다']
+  N:[{t:'오늘(이번 주) 했던 결정 한 가지를 떠올리고, 그 결정이 내가 원해서인지 해야 할 것 같아서인지 점검한다',
+      s:'결정 하나 점검하기',
+      ex:['저녁 약속을 수락했다 → 해야 할 것 같아서. 다음엔 하루 두고 답하기',
+          '강의를 신청했다 → 내가 원해서. 이 방향은 계속 가도 좋겠다']},
+     {t:'오늘 끝낸 일 중 한두 개를 골라, 에너지를 높였으면 +, 떨어뜨렸으면 − 로 표시한다',
+      s:'끝낸 일에 +/− 표시하기',
+      ex:['기획안 초안 쓰기 +   /   단톡방 대응 −',
+          '오전 산책 +   /   불필요한 회의 −']}],
+  E1:[{t:'알림을 끄고 화면을 보지 않는 시간을 정해, 그 시간만큼만 지켜 본다',
+      s:'화면 없는 시간 정하기',
+      ex:['저녁 9시부터 30분, 폰은 거실에 두기','출근길 지하철에서는 뉴스 앱 열지 않기']},
+     {t:'남의 소식을 본 뒤 마음이 흔들렸다면, 그 장면을 한 줄로 적는다',
+      s:'흔들린 장면 한 줄 적기',
+      ex:['동기 승진 소식 → 조급함. 내 기준은 속도가 아니라 방향',
+          '여행 사진 → 부러움. 사실 나는 쉬고 싶은 거였다']}],
+  E2:[{t:'가장 집중이 잘 되는 시간대에 가장 중요한 일 하나를 먼저 배치한다',
+      s:'중요한 일을 좋은 시간에 놓기',
+      ex:['오전 9~11시 = 글쓰기. 회의는 오후로','아이 등원 직후 1시간 = 제일 어려운 일']},
+     {t:'지치기 전에 쉬는 시간을 미리 정해 두고, 그 시간에 실제로 멈춘다',
+      s:'지치기 전에 미리 멈추기',
+      ex:['50분 일하고 10분은 자리에서 일어나기','점심 후 15분은 아무것도 하지 않기']}],
+  D:[{t:'오늘 한 선택 하나가 내 기준과 맞았는지 한 줄로 적는다',
+      s:'선택과 기준 맞춰 보기',
+      ex:['야근 요청 거절 → 내 기준(가족 저녁)과 맞음',
+          '단톡방 부탁 수락 → 기준과 어긋남. 다음엔 시간을 먼저 말하기']},
+     {t:'이번 주에 지키고 싶은 것 한 가지를 정하고, 지킨 날에 표시한다',
+      s:'이번 주 한 가지 정하기',
+      ex:['주 3회 30분 걷기 → 월·수 완료','자기 전 10분 책 → 화·목·금 완료']}]
 };
 
 /* ───────── 렌더 ───────── */
@@ -559,21 +598,41 @@ function crossView(cr,n){
 }
 
 function designView(bn){
-  const k=bn?bn.key:'N', opts=OPTS[k]||OPTS.N;
+  const k=bn?bn.key:'N', opts=OPTS[k]||OPTS.N, ac=AXIS_COPY[k]||AXIS_COPY.N;
   let h='<div class="sec">'+sn()+'<h2>오늘의 설계</h2>'
    +'<p class="sub">여기부터가 이 리포트의 본론입니다. 읽는 것으로는 아무것도 바뀌지 않습니다. 한 문장만 남기고 나가시면 됩니다.</p>';
-  h+='<div class="design-box"><h3>'+(bn?bn.name+'에서 시작합니다':'여기서 시작합니다')+'</h3>'
-   +'<div class="why">아래에서 하나를 고르고, 언제·어디서를 정해 주세요. '
+
+  h+='<div class="design-box"><h3>'+ac.h+'</h3>'
+   +'<div class="why">하루에 한 번, 주말에 한 번 나의 '+ac.w+'을 체크해 봐요. '
    +'막연한 다짐보다 <b>언제·어디서·무엇을</b>이 정해진 문장이 실제로 훨씬 잘 지켜집니다'
    +'<span style="color:#6B7393">(Gollwitzer &amp; Sheeran, 2006)</span>. '
    +'의지를 쓰지 않고 조건을 미리 정해두는 방식입니다.</div>';
-  h+='<div class="opt-row" id="opts">';
-  opts.forEach((o,i)=>{h+='<button class="opt" data-i="'+i+'">'+o+'</button>'});
-  h+='<button class="opt" data-i="free">직접 쓰겠습니다</button></div>';
-  h+='<div class="fill"><label>언제 · 어디서</label>'
+
+  // 1단계 — 언제·어디서
+  h+='<div class="step-lab"><i>1</i>언제, 어디서 하실지 정해 주세요</div>';
+  h+='<div class="fill">'
    +'<select id="w1">'+WHENS.map(w=>'<option>'+w+'</option>').join('')+'</select>'
    +'<select id="w2">'+WHERES.map(w=>'<option>'+w+'</option>').join('')+'</select></div>';
-  h+='<div class="fill"><label>무엇을</label><input id="w3" type="text" placeholder="위에서 고르면 자동으로 채워집니다" maxlength="60"></div>';
+
+  // 2단계 — 방법 고르기
+  h+='<div class="step-lab"><i>2</i>가장 편한 실행 방법을 하나 고르세요</div>';
+  h+='<div class="step-note">하루를 보내고, 일주일을 마치고 나의 에너지를 점검하는 방법입니다. '
+   +'고르시면 아래 3단계 칸이 자동으로 채워집니다. 채워진 문장은 고쳐 쓰셔도 됩니다.</div>';
+  h+='<div class="opt-row" id="opts">';
+  opts.forEach((o,i)=>{
+    h+='<div class="m-card" data-i="'+i+'">'
+      +'<button class="opt m-pick" data-i="'+i+'"><span class="m-num">'+(i+1)+'</span>'
+      +'<span class="m-txt">'+o.t+'</span></button>'
+      +'<button class="m-ex-btn no-print" data-ex="'+i+'">예시 보기 ▾</button>'
+      +'<div class="m-ex" id="mex'+i+'">'+o.ex.map(e=>'<div>· '+esc(e)+'</div>').join('')+'</div>'
+      +'</div>';
+  });
+  h+='</div>';
+
+  // 3단계 — 무엇을
+  h+='<div class="step-lab"><i>3</i>무엇을 하실지 한 줄로 적어 주세요</div>';
+  h+='<div class="fill"><input id="w3" type="text" placeholder="위에서 방법을 고르면 채워집니다. 직접 적으셔도 됩니다" maxlength="60"></div>';
+  h+='<div class="prev-line" id="prevLine"></div>';
   h+='<button class="btn" id="saveDesign">이 문장을 내 설계에 남기기</button>';
   h+='</div></div>';
   return h;
@@ -727,14 +786,35 @@ function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;',
 function bindDesign(bn){
   const box=document.getElementById('opts'); if(!box)return;
   const w3=document.getElementById('w3');
-  box.querySelectorAll('.opt').forEach(b=>{
+  const upd=()=>{
+    const pl=document.getElementById('prevLine');
+    if(!pl)return;
+    const what=(w3.value||'').trim();
+    pl.innerHTML='<span class="pl-lab">저장될 문장</span>'
+      + (what ? '<b>'+esc(document.getElementById('w1').value+' '+document.getElementById('w2').value+' '+what)+'</b>'
+              : '<span class="pl-empty">3단계 칸을 채우면 여기에 문장이 보입니다</span>');
+  };
+  box.querySelectorAll('.m-pick').forEach(b=>{
     b.onclick=()=>{
-      box.querySelectorAll('.opt').forEach(x=>x.classList.remove('on'));
+      box.querySelectorAll('.m-pick').forEach(x=>x.classList.remove('on'));
+      box.querySelectorAll('.m-card').forEach(x=>x.classList.remove('on'));
       b.classList.add('on');
-      if(b.dataset.i==='free'){w3.value='';w3.focus()}
-      else w3.value=b.textContent;
+      if(b.parentElement)b.parentElement.classList.add('on');
+      w3.value=b.querySelector('.m-txt').textContent;
+      upd();
     };
   });
+  box.querySelectorAll('.m-ex-btn').forEach(b=>{
+    b.onclick=()=>{
+      const p=document.getElementById('mex'+b.dataset.ex);
+      const open=p.classList.toggle('open');
+      b.textContent=open?'예시 접기 ▴':'예시 보기 ▾';
+    };
+  });
+  w3.addEventListener('input',upd);
+  document.getElementById('w1').addEventListener('change',upd);
+  document.getElementById('w2').addEventListener('change',upd);
+  upd();
   document.getElementById('saveDesign').onclick=()=>{
     const what=(w3.value||'').trim();
     if(!what){toast('무엇을 하실지 한 줄만 적어 주세요');w3.focus();return}
