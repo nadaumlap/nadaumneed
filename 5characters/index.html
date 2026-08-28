@@ -361,7 +361,6 @@ h1, h2, h3, h4 { font-family:var(--font-title); }
   <div class="cover">
     <span class="cover-tag">N단계 — Need Scan · 에너지 경향성 읽기</span>
     <h1 class="cover-title">나의 에너지는<br>어디로 흐를까?</h1>
-    <p class="cover-subtitle">5러 경향성 진단 v2<br>빅파이브 단축형 기반 · Big Five / McCrae & Costa</p>
 
   <button class="btn-primary" onclick="startQuiz()">진단 시작하기</button>
   <div style="text-align:center;padding:12px;color:#718096;font-size:13px;cursor:pointer;margin-top:8px" onclick="toggleDetail()" id="detailToggle">진단 구성이 궁금하신가요? ▾</div>
@@ -402,7 +401,7 @@ h1, h2, h3, h4 { font-family:var(--font-title); }
     </div>
     <div class="logo-sep"></div>
     <div class="logo-right">
-      <div class="top">5러 경향성 진단</div>
+      <div class="top">에너지 경향성 진단</div>
       <div class="bottom">나의 에너지는 어디로 흐를까?</div>
     </div>
   </div>
@@ -740,7 +739,8 @@ function calculateScores() {
 function saveProfile(r) {
   try {
     const KEY = "nadaum.profile.v1";
-    const p = JSON.parse(localStorage.getItem(KEY) || "null") || {
+    let _prev = null; try { _prev = JSON.parse(localStorage.getItem(KEY) || "null"); } catch(e) {}
+    const p = _prev || {
       v: 1,
       id: "ND-" + Math.random().toString(36).slice(2,6).toUpperCase()
           + "-" + Math.random().toString(36).slice(2,6).toUpperCase(),
@@ -755,7 +755,8 @@ function saveProfile(r) {
       flag: r.caseType === "normal" ? (r.softFlag ? "soft" : null) : r.caseType
     };
     p.updated = p.modules.tendency.ts;
-    localStorage.setItem(KEY, JSON.stringify(p));
+    _ndProfile = p;
+    try { localStorage.setItem(KEY, JSON.stringify(p)); } catch(e) {}
   } catch (e) { /* 저장 실패해도 결과 표시는 계속 */ }
 }
 
@@ -780,9 +781,9 @@ function strengthRowHTML(r) {
   const m = BAND_META[r.band];
   return `
     <div class="strength-row">
-      <div class="strength-head"><span>${r.caseType==='balance'?'가장 높은 흐름':'주된 흐름'}의 강도</span><span><b class="bv-${r.band}">${v.toFixed(1)}</b> / 5.0</span></div>
+      <div class="strength-head"><span></span><span><b class="bv-${r.band}">${v.toFixed(1)}</b> / 5.0</span></div>
       <div class="strength-bar"><div class="strength-fill sf-${r.band}" style="width:${pctv}%"></div></div>
-      <span class="strength-tag st-${r.band}">${m.label}</span>
+      <span class="strength-tag st-${r.band}">에너지 강도 · ${m.label}</span>
     </div>`;
 }
 function readingCardHTML(r) {
@@ -915,34 +916,32 @@ function renderResult(r) {
       <h3>📌 이 결과에 대해 기억해 주세요</h3>
       <p>이 결과는 <span class="highlight">\"지금 시기의 에너지 흐름\"</span>입니다.
       한 달 후, 또는 큰 변화 시점에 다시 진단해 보면 결과가 달라질 수 있습니다.</p>
-      <p>5러 경향성은 <span class="highlight">\"고정된 유형\"이 아니라 시기와 맥락에 따라 달라지는 에너지 패턴</span>입니다.
+      <p>에너지 경향성은 <span class="highlight">\"고정된 유형\"이 아니라 시기와 맥락에 따라 달라지는 에너지 패턴</span>입니다.
       사람을 칸에 넣지 않습니다. 지금의 흐름을 읽는 도구일 뿐입니다.</p>
-      <p>그러니 <span class="highlight">\"나는 ○○러다\"</span>가 아니라,<br>
-      <span class="highlight">\"지금 나의 에너지는 ○○ 중심으로 흐르고 있다\"</span>고 표현해 보세요.</p>
       <p>이 결과는 정답이 아니라, 지금 여러분의 <span class="highlight">자기 신호</span>를 읽어 본 기록입니다.</p>
     </div>`;
 
   // 8. 다음 진단 연결
   const nextHTML = r.caseType === 'low' ?
-    `<a href="../newnoise/" class="next-card gold">
+    `<a href="https://nadaumlap.github.io/nadaumneed/newnoise/" class="next-card gold">
       <span class="step-tag">강력 추천 — 잡음 점검 먼저</span>
       <h3>지금 무엇이 잡음으로 들어와 있는지 살펴볼까요?</h3>
       <p>잡음 오염도 진단 · 약 5분 · 회복의 첫걸음</p>
       <span class="arrow">바로 가기 →</span>
     </a>` :
-    `<a href="../needscan/" class="next-card blue">
+    `<a href="https://nadaumlap.github.io/nadaumneed/needscan/" class="next-card blue">
       <span class="step-tag">함께 보면 좋은 — Need Scan 축 2</span>
       <h3>지금 나의 욕구는 어디서 시작되고 있을까요?</h3>
       <p>욕구 출발점 진단 · 약 5분 · 에너지 흐름과 함께 보는 진단</p>
       <span class="arrow">바로 가기 →</span>
     </a>
-    <a href="../newnoise/" class="next-card gold" style="margin-top:12px">
+    <a href="https://nadaumlap.github.io/nadaumneed/newnoise/" class="next-card gold" style="margin-top:12px">
       <span class="step-tag">다음 단계 — Eliminate Noise</span>
       <h3>지금 무엇이 잡음으로 들어와 있는지 살펴볼까요?</h3>
       <p>잡음 오염도 진단 · 약 5분</p>
       <span class="arrow">바로 가기 →</span>
     </a>`;
-  document.getElementById('rep-cta-slot').innerHTML = `<a class="rep-cta" href="../report/"><div class="rc-tag">NADAUM DESIGN REPORT</div><div class="rc-h">읽는 것으로는 아무것도 바뀌지 않습니다</div><div class="rc-d">지금까지 하신 진단을 한자리에 모아 읽고, 오늘 시작할 설계 한 문장을 남기는 자리입니다. 진단을 다 하지 않으셔도 됩니다.</div><div class="rc-go">통합 리포트 열기 →</div></a>`;
+  document.getElementById('rep-cta-slot').innerHTML = `<a class="rep-cta" href="https://nadaumlap.github.io/nadaumneed/report/"><div class="rc-tag">NADAUM DESIGN REPORT</div><div class="rc-h">읽는 것으로는 아무것도 바뀌지 않습니다</div><div class="rc-d">지금까지 하신 진단을 한자리에 모아 읽고, 오늘 시작할 설계 한 문장을 남기는 자리입니다. 진단을 다 하지 않으셔도 됩니다.</div><div class="rc-go">통합 리포트 열기 →</div></a>`;
   document.getElementById('next-container').innerHTML = nextHTML;
 }
 
@@ -1145,12 +1144,11 @@ function generateCard5c(r, version){
     }
     const pct = Math.min(1, r.peak/5);
     let o = '';
-    o += tx(x, yLabel, (r.caseType==='balance'?'가장 높은 흐름':'주된 흐름')+'의 강도', 25, 600, SUB, 'start');
     o += '<text x="'+(x+barW)+'" y="'+yLabel+'" font-family="'+FT+'" font-size="28" font-weight="800" fill="'+bandColor+'" text-anchor="end">'+r.peak.toFixed(1)+'<tspan font-size="21" font-weight="600" fill="'+SUB+'"> / 5.0</tspan></text>';
     o += '<rect x="'+x+'" y="'+yBar+'" width="'+barW+'" height="18" rx="9" fill="#EDF0F7"/>';
     o += '<rect x="'+x+'" y="'+yBar+'" width="'+(barW*pct).toFixed(1)+'" height="18" rx="9" fill="'+bandColor+'"/>';
-    o += '<rect x="'+(cx-78)+'" y="'+(yTag2-30)+'" width="156" height="44" rx="22" fill="'+bandColor+'" fill-opacity="0.13"/>';
-    o += tx(cx, yTag2, bandLabel, 24, 700, bandColor, 'middle');
+    o += '<rect x="'+(cx-135)+'" y="'+(yTag2-31)+'" width="270" height="46" rx="23" fill="'+bandColor+'" fill-opacity="0.13"/>';
+    o += tx(cx, yTag2, '에너지 강도 · ' + bandLabel, 24, 700, bandColor, 'middle');
     return o;
   }
 
@@ -1182,10 +1180,6 @@ function generateCard5c(r, version){
   svg += tx(cx, L.sub, subTitle, 24, 500, TEXT, 'middle');
   svg += radar(cx, L.rcy, L.rr);
   svg += strengthBar(cx, L.barLabel, L.bar, L.bandText, L.barW);
-  if (isStory && r.caseType !== 'low') {
-    svg += tx(cx, L.q1, '"나는 ○○러다"가 아니라', 26, 500, SUB, 'middle');
-    svg += tx(cx, L.q2, '"지금 나의 에너지는 ' + p.flowKey + '으로 흐르고 있다"', 28, 700, NAVY, 'middle');
-  }
   svg += tx(cx, L.mark, '나다움은 발견이 아니라 설계다', 23, 600, '#9CA3AF', 'middle');
   svg += tx(cx, L.url, 'nadaumlap.github.io/nadaumneed/5characters/', 19, 500, '#B4BBC6', 'middle');
   svg += '</svg>';
@@ -1233,7 +1227,7 @@ function shareText5c(){
   else head = '지금 나의 에너지는 ' + p.flowKey + '으로 흐르고 있어요.\n(주된 ' + p.name + ' 패턴 / 보조 ' + s.name + ' 패턴)';
   const lvl = r.caseType === 'low' ? '' : '\n주된 흐름의 강도 ' + r.peak.toFixed(1) + ' / 5.0';
   return '5러 경향성 진단 결과\n\n' + head + lvl +
-    '\n\n5러 경향성은 고정된 유형이 아니라 지금 시기의 에너지 패턴이에요.\n5분이면 해볼 수 있어요 👇\nhttps://nadaumlap.github.io/nadaumneed/5characters/';
+    '\n\n에너지 경향성은 고정된 유형이 아니라 지금 시기의 에너지 패턴이에요.\n5분이면 해볼 수 있어요 👇\nhttps://nadaumlap.github.io/nadaumneed/5characters/';
 }
 
 async function downloadCard5c(version){
@@ -1324,6 +1318,63 @@ function restart() {
 window.addEventListener('DOMContentLoaded',()=>{
   document.getElementById('cover-screen').style.display='block';
 });
+
+/* ═══════════ 통합 리포트 인계 링크 (handoff v1) ═══════════
+   브라우저 저장(localStorage)이 막히거나 지워져도 결과가 리포트로 넘어가도록,
+   "통합 리포트 열기" 링크에 이 진단 결과를 실어 보낸다.
+   인코딩 형식은 /report/의 pack()과 동일해야 한다. 표는 추가만 하고 기존 항목은 바꾸지 않는다. */
+var _ndProfile = null;
+var ND_RPT = 'https://nadaumlap.github.io/nadaumneed/report/';
+var ND_MK = {tendency:'t',needscan:'n',noise:'x',temperament:'p',motivation:'m',noiseInner:'i',alignment:'a',authorship:'d'};
+var ND_FK = {ts:'s',main:'a',sub:'b',avgs:'v',overall:'o',flag:'f',
+  nci:'c',d1:'1',d2:'2',d3:'3',d4:'4',influence:'n',aware:'w',weak:'k',weakVal:'y',seg:'g',
+  total:'t',nunchi:'u',compare:'r',exposure:'e',top:'p',tied:'d',totalSeg:'q',snsMin:'z',branch:'h',
+  axisScores:'j',ns:'N',ha:'H',rd:'R',ps:'P',sdtScore:'S',raw:'W',pct:'C',z:'Z',
+  score:'l',a1:'5',a2:'6',a3:'7',a4:'8',values:'V',statement:'M',criteria:'T'};
+var ND_AVGO = ['A','C','S','D','E'];
+function _nd8(s){ return String(s||'').replace(/-/g,''); }
+function _ndB64(s){
+  var b = new TextEncoder().encode(s), x = '';
+  b.forEach(function(c){ x += String.fromCharCode(c); });
+  return btoa(x).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+}
+function ndPack(p){
+  var o = {v:1, i:String(p.id||'').replace(/^ND-/,'').replace(/-/g,''),
+    c:_nd8(p.created), u:_nd8(p.updated), m:{},
+    g:(p.designs||[]).map(function(x){ return [_nd8(x.ts), x.axis, x.text, x.id]; })};
+  var ck = {}; for (var kk in (p.checks||{})) ck[_nd8(kk)] = p.checks[kk];
+  if (Object.keys(ck).length) o.k = ck;
+  if (p.values && p.values.length) o.V = p.values;
+  for (var k in (p.modules||{})) {
+    var src = p.modules[k], dst = {};
+    for (var f in src) {
+      var val = src[f];
+      if (val === null || val === undefined) continue;
+      if (f === 'ts') val = _nd8(val);
+      if (f === 'avgs' && typeof val === 'object') val = ND_AVGO.map(function(c){ return val[c]; });
+      if (f === 'z') continue;
+      dst[ND_FK[f] || f] = val;
+    }
+    o.m[ND_MK[k] || k] = dst;
+  }
+  return _ndB64(JSON.stringify(o));
+}
+function ndReportUrl(){
+  try {
+    var p = _ndProfile;
+    if (!p) { try { p = JSON.parse(localStorage.getItem('nadaum.profile.v1') || 'null'); } catch(e){} }
+    if (!p || !p.modules || !Object.keys(p.modules).length) return ND_RPT;
+    var u = ND_RPT + '?d=' + ndPack(p);
+    return u.length > 6000 ? ND_RPT : u;
+  } catch (e) { return ND_RPT; }
+}
+/* 링크를 누르는 순간 최신 결과를 실어 보낸다 (캡처 단계 — 이동 전에 실행) */
+document.addEventListener('click', function(e){
+  var t = e.target, a = null;
+  while (t && t !== document) { if (t.tagName === 'A' && t.className && String(t.className).indexOf('rep-cta') >= 0) { a = t; break; } t = t.parentNode; }
+  if (a) a.href = ndReportUrl();
+}, true);
+
 </script>
 </body>
 </html>
