@@ -2,204 +2,637 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <meta name="color-scheme" content="light only">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>나다움 설계 현황 진단 — 준비 중 | 나다움설계연구소</title>
-
-<meta name="description" content="Daily Authorship · 자기저자성 실천 단계의 진단을 준비하고 있습니다. 먼저 앞 단계 진단을 만나보세요.">
-<meta property="og:title" content="나다움 설계 현황 진단 — 준비 중">
-<meta property="og:description" content="우선가치로 매일 자기 삶의 저자로 살아가고 있는가. Daily Authorship 진단을 준비하고 있습니다.">
+<title>이 선택은 나의 우선가치와 부합하는가? — 나다움 설계 현황 진단 | 나다움설계연구소</title>
+<meta property="og:title" content="이 선택은 나의 우선가치와 부합하는가?">
+<meta property="og:description" content="나다움 설계 현황 진단 · 20문항 + 우선가치 워크 · 약 7분 · 무료 — 나다움설계연구소">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nadaumlap.github.io/nadaumneed/need/">
-<meta property="og:image" content="https://nadaumlap.github.io/nadaumneed/need/og-image.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:locale" content="ko_KR">
-<meta property="og:site_name" content="나다움설계연구소">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="나다움 설계 현황 진단 — 준비 중">
-<meta name="twitter:description" content="Daily Authorship 진단을 준비하고 있습니다.">
-<meta name="twitter:image" content="https://nadaumlap.github.io/nadaumneed/need/og-image.png">
-<meta name="robots" content="noindex">
-
+<meta name="twitter:title" content="이 선택은 나의 우선가치와 부합하는가?">
+<meta name="twitter:description" content="나다움 설계 현황 진단 · 20문항 + 우선가치 워크 · 약 7분 · 무료 — 나다움설계연구소">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
-
 <style>
-* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-:root {
-  --primary: #8B5CF6;
-  --primary-light: #F3EFFD;
-  --primary-dark: #6D42D1;
-  --navy: #1E2761;
-  --gold: #C9983A;
-  --blue: #2979C8;
-  --green: #3DAA6B;
-  --action: #3DAA6B;
-  --action-dark: #2D8252;
-  --text: #1A1A1A;
-  --text-soft: #555;
-  --text-mute: #888;
-  --bg: #FAFBFC;
-  --card: #FFFFFF;
-  --border: #E5E7EB;
-  --font-body: 'Pretendard', 'Noto Sans KR', sans-serif;
-  --font-title: -apple-system, 'SF Pro Display', 'SF Pro Text', 'Apple SD 산돌고딕 Neo', 'Pretendard', sans-serif;
-}
-body { font-family:var(--font-body); background:var(--bg); color:var(--text);
-  line-height:1.55; letter-spacing:-0.01em; -webkit-font-smoothing:antialiased; }
-h1,h2,h3,h4 { font-family:var(--font-title); word-break:keep-all; }
-.container { max-width:540px; margin:0 auto; padding:24px 20px 80px; min-height:100vh; }
-
-/* 로고 헤더 */
-.brand-header { display:flex; align-items:center; gap:14px; padding:16px 0 24px;
-  border-bottom:1px solid var(--border); margin-bottom:32px; }
-.logo-need { font-family:'Montserrat',sans-serif; font-weight:800; font-size:22px;
-  letter-spacing:3px; display:flex; align-items:center; }
-.logo-need .l1{color:#2979C8}.logo-need .l2{color:#3DAA6B}
-.logo-need .l3{color:#C9983A}.logo-need .l4{color:#8B5CF6}
-.logo-sep { width:1px; height:30px; background:var(--border); }
-.logo-right .top { font-size:12px; font-weight:700; color:var(--text-soft); letter-spacing:.5px; }
-.logo-right .bottom { font-size:11px; color:var(--text-mute); margin-top:2px; }
-
-/* 히어로 */
-.stage-tag { display:inline-block; background:var(--primary-light); color:var(--primary-dark);
-  font-size:12px; font-weight:700; letter-spacing:.5px; padding:7px 14px; border-radius:100px;
-  margin-bottom:18px; }
-.hero-title { font-size:29px; font-weight:800; color:var(--navy); line-height:1.42; margin-bottom:14px; }
-.hero-sub { font-size:15px; color:var(--text-soft); line-height:1.75; margin-bottom:8px; }
-
-/* 준비 중 카드 */
-.prep-card { background:var(--card); border:1px solid var(--border); border-left:4px solid var(--primary);
-  border-radius:14px; padding:1.5rem 1.5rem; margin:28px 0 30px; }
-.prep-tag { font-size:11px; letter-spacing:2px; color:var(--primary-dark); font-weight:700; margin-bottom:10px; }
-.prep-card h2 { font-size:18px; font-weight:700; color:var(--navy); margin-bottom:12px; line-height:1.5; }
-.prep-card p { font-size:14.5px; color:var(--text-soft); line-height:1.8; margin-bottom:10px; }
-.prep-card p:last-child { margin-bottom:0; }
-.prep-card strong { color:var(--primary-dark); font-weight:700; }
-
-/* 주 행동 버튼 — 사이트 공통 액션 색 */
-.btn-primary { display:block; width:100%; padding:18px 24px; background:#1E2761;
-  color:#FFF !important; border:none; border-radius:12px; font-size:16px; font-weight:700;
-  font-family:inherit; cursor:pointer; transition:all .2s; letter-spacing:.3px;
-  text-decoration:none; text-align:center; }
-.btn-primary:hover,.btn-primary:active { background:#151C47;
-  transform:translateY(-1px); box-shadow:0 6px 20px rgba(30,39,97,.22); }
-.cta-meta { display:flex; justify-content:center; gap:20px; flex-wrap:wrap;
-  font-size:14px; color:var(--text-mute); margin:14px 0 8px; }
-.cta-meta span { display:flex; align-items:center; gap:6px; }
-.cta-why { font-size:13.5px; color:var(--text-mute); text-align:center;
-  line-height:1.7; margin-bottom:34px; }
-
-/* 진단 카드 */
-.section-h { font-size:16px; font-weight:700; color:var(--navy); margin:0 0 6px; }
-.section-d { font-size:13.5px; color:var(--text-mute); margin-bottom:16px; line-height:1.7; }
-.diag-card { display:block; text-decoration:none; background:var(--card);
-  border:1px solid var(--border); border-radius:14px; padding:1.15rem 1.25rem;
-  margin-bottom:12px; transition:transform .15s, box-shadow .15s; }
-.diag-card:hover { transform:translateY(-2px); box-shadow:0 6px 18px rgba(30,39,97,.08); }
-.diag-card.blue  { border-left:4px solid var(--blue); }
-.diag-card.green { border-left:4px solid var(--green); }
-.diag-card.gold  { border-left:4px solid var(--gold); }
-.diag-step { font-size:11px; font-weight:700; letter-spacing:1px; margin-bottom:7px; }
-.diag-card.blue  .diag-step { color:var(--blue); }
-.diag-card.green .diag-step { color:var(--green); }
-.diag-card.gold  .diag-step { color:var(--gold); }
-.diag-t { font-size:16px; font-weight:700; color:var(--text); margin-bottom:5px; line-height:1.5; }
-.diag-d { font-size:13px; color:var(--text-mute); line-height:1.65; }
-.diag-arrow { display:inline-block; margin-top:9px; font-size:13px; font-weight:700; color:var(--text-soft); }
-
-/* 안내 */
-.note { background:#F7F4EC; border-left:3px solid var(--gold); border-radius:10px;
-  padding:14px 16px; font-size:13.5px; color:#4A4A4A; line-height:1.75; margin-top:26px; }
-
-/* 푸터 */
-.footer { text-align:center; margin-top:44px; padding-top:26px; border-top:1px solid var(--border); }
-.footer .signature { font-family:var(--font-title); font-size:15px; font-weight:700;
-  color:var(--navy); margin-bottom:10px; line-height:1.6; }
-.footer p { font-size:12.5px; color:var(--text-mute); margin-bottom:4px; }
-.mini-logo { font-family:'Montserrat',sans-serif; font-weight:800; font-size:15px;
-  letter-spacing:2px; margin-bottom:8px; }
-.mini-logo .n{color:#2979C8}.mini-logo .e1{color:#3DAA6B}
-.mini-logo .e2{color:#C9983A}.mini-logo .d{color:#8B5CF6}
-
-/* 통합 리포트 진입 카드 */
-.rep-cta{display:block;text-decoration:none;background:#1E2761;color:#FFF;border-radius:16px;padding:22px 20px;margin:20px 0 14px;transition:transform .15s,box-shadow .15s}
-.rep-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(30,39,97,.22)}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{background:#F8F9FB !important;color:#1E2761 !important;color-scheme:light only}
+body{font-family:'Pretendard','Noto Sans KR',sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;letter-spacing:-0.01em;font-size:16px}
+h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD 산돌고딕 Neo','Pretendard',sans-serif;word-break:keep-all}
+.container{max-width:540px;margin:0 auto;padding:0 20px 48px}
+.logo-bar{padding:20px 0 12px;display:flex;align-items:center;gap:12px}
+.logo-need{font-family:'Montserrat','Pretendard',sans-serif;font-size:20px;font-weight:800;letter-spacing:2px;display:flex;gap:2px}
+.logo-need .n{color:#2979C8}.logo-need .e1{color:#3DAA6B}.logo-need .e2{color:#C9983A}.logo-need .d{color:#8B5CF6}
+.logo-sep{width:1px;height:22px;background:#E8E8F0}
+.logo-right{display:flex;flex-direction:column;gap:1px}
+.logo-right .top{font-size:10px;font-weight:600;letter-spacing:1px;color:#6B7393}
+.logo-right .bottom{font-size:12.5px;font-weight:500;color:#2F2F2F}
+.screen{display:none}.screen.on{display:block}
+/* 표지 */
+.cover-tag{display:inline-block;padding:6px 13px;background:#F5F3FF;color:#6D28D9;border-radius:20px;font-size:12.5px;font-weight:700;margin-bottom:18px}
+.cover-h{font-size:25px;font-weight:800;line-height:1.35;margin-bottom:16px}
+.purpose{background:#FFF;border:1px solid #E8E8F0;border-radius:14px;padding:18px 18px;margin-bottom:16px}
+.purpose .lab{font-size:11px;font-weight:800;letter-spacing:1px;color:#6D28D9;margin-bottom:8px}
+.purpose p{font-size:14.5px;color:#4A5568;line-height:1.8;word-break:keep-all}
+.axis-preview{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+.ap{background:#FFF;border:1px solid #E8E8F0;border-radius:12px;padding:13px 15px}
+.ap .k{display:inline-block;font-family:'Montserrat',sans-serif;font-size:10.5px;font-weight:800;color:#8B5CF6;letter-spacing:1px;margin-right:7px}
+.ap .nm{font-size:14.5px;font-weight:800}
+.ap .ds{font-size:12.5px;color:#6B7393;margin-top:4px;line-height:1.6;word-break:keep-all}
+.btn-primary{display:block;width:100%;padding:16px;background:#1E2761;color:#FFF !important;border:none;border-radius:12px;font-size:16px;font-weight:700;font-family:inherit;cursor:pointer;text-align:center}
+.btn-secondary{display:block;width:100%;padding:14px;background:#FFF;color:#1E2761;border:1.5px solid #D6DEEA;border-radius:12px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;margin-top:10px}
+.cover-meta{display:flex;justify-content:center;gap:16px;font-size:13px;color:#6B7393;margin:16px 0 20px}
+.detail-toggle{text-align:center;padding:12px;color:#718096;font-size:13px;cursor:pointer;margin-top:8px}
+.detail-sec{display:none;margin-top:6px;padding-top:14px;border-top:1px solid #E8E8F0}
+.detail-sec.on{display:block}
+.basis{font-size:12.5px;color:#5A6478;line-height:1.8;background:#FAFAFD;border-radius:11px;padding:12px 14px;margin-bottom:9px;word-break:keep-all}
+.basis b{color:#1E2761} .basis i{font-style:italic}
+.basis .bk{display:block;font-size:11px;font-weight:800;color:#6D28D9;margin-bottom:5px;letter-spacing:.3px}
+/* 문항 */
+.prog-wrap{margin:8px 0 6px}
+.prog-row{display:flex;justify-content:space-between;font-size:12px;color:#6B7393;margin-bottom:7px}
+.prog-bar{height:5px;background:#E8EBF2;border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:#8B5CF6;border-radius:3px;transition:width .3s}
+.q-card{background:#FFF;border:1px solid #E8E8F0;border-radius:16px;padding:24px 20px;margin:16px 0 14px}
+.q-pill{display:inline-block;padding:5px 12px;border-radius:99px;background:#F5F3FF;color:#6D28D9;font-size:12px;font-weight:700;margin-bottom:13px}
+.q-text{font-size:17.5px;font-weight:700;line-height:1.5;margin-bottom:22px}
+.scale-labels{display:flex;justify-content:space-between;align-items:center;margin-bottom:.35rem;padding:0 2px;gap:6px}
+.scale-labels span{font-size:11px;white-space:nowrap}
+.scale-labels .sl-neg{color:#D9534F;font-weight:700}
+.scale-labels .sl-mid{color:#9AA3B2;font-weight:600;flex:1;text-align:center}
+.scale-labels .sl-pos{color:#2979C8;font-weight:700}
+.scale-line{position:relative;display:flex;justify-content:space-between;align-items:flex-start;padding:16px 4px 4px}
+.scale-line::before{content:'';position:absolute;left:8%;right:8%;top:27px;height:2px;background:linear-gradient(90deg,#E9A9A6 0%,#D8DCE4 50%,#A6C4E4 100%);border-radius:2px}
+.sc-node{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;gap:9px;background:transparent;border:none;padding:0;cursor:pointer;font-family:inherit}
+.sc-dot{width:22px;height:22px;border-radius:50%;background:#FFF;border:2px solid #D7DDE7;transition:transform .15s,border-color .15s,background .15s;z-index:1}
+.sc-node.on .sc-dot{transform:scale(1.35);border-width:0}
+.sc-num{font-size:12.5px;font-weight:700;color:#98A0B0}
+.sc-1.on .sc-dot{background:#D9534F}.sc-1.on .sc-num{color:#D9534F}
+.sc-2.on .sc-dot{background:#E39490}.sc-2.on .sc-num{color:#C4726E}
+.sc-3.on .sc-dot{background:#9AA3B2}.sc-3.on .sc-num{color:#6B7280}
+.sc-4.on .sc-dot{background:#6E9BD1}.sc-4.on .sc-num{color:#3E6FA8}
+.sc-5.on .sc-dot{background:#2979C8}.sc-5.on .sc-num{color:#2979C8}
+.nav-row{display:flex;gap:10px}
+.btn-prev{flex:1;padding:14px;background:#FFF;border:1.5px solid #E2E8F0;border-radius:12px;font-family:inherit;font-size:15px;color:#6B7393;cursor:pointer}
+.btn-prev:disabled{opacity:.4}
+.btn-next{flex:2;padding:14px;background:#8B5CF6;color:#FFF;border:none;border-radius:12px;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer}
+.btn-next:disabled{opacity:.45}
+/* 선택형(크로노/가치) */
+.opt-list{display:flex;flex-direction:column;gap:9px;margin-bottom:18px}
+.opt-b{display:flex;align-items:center;gap:11px;width:100%;padding:15px 16px;background:#FFF;border:2px solid #E8E8F0;border-radius:12px;font-family:inherit;font-size:15px;color:#2D3748;cursor:pointer;text-align:left;line-height:1.5}
+.opt-b.on{border-color:#8B5CF6;background:#F5F3FF;font-weight:700;color:#1E2761}
+.opt-b .sub{display:block;font-size:12.5px;color:#8B93A5;font-weight:500;margin-top:3px}
+.opt-b.on .sub{color:#6D28D9}
+.vgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:16px}
+.vcard{padding:14px 12px;background:#FFF;border:2px solid #E8E8F0;border-radius:13px;font-family:inherit;cursor:pointer;text-align:left}
+.vcard .vn{font-size:15.5px;font-weight:800;color:#1E2761}
+.vcard .vd{font-size:11.5px;color:#8B93A5;margin-top:4px;line-height:1.5;word-break:keep-all}
+.vcard.on{border-color:#8B5CF6;background:#F5F3FF}
+.vcard.on .vd{color:#6D28D9}
+.vcount{text-align:center;font-size:13px;color:#6B7393;margin-bottom:12px}
+/* 결과 */
+.rtabs{display:flex;gap:6px;position:sticky;top:0;z-index:20;background:#F8F9FB;padding:10px 0;margin:-4px 0 14px}
+.rtab{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:11px 4px;border-radius:11px;border:1.5px solid #E2E8F0;background:#FFF;font-family:inherit;font-size:13.5px;font-weight:700;color:#8B93A5;cursor:pointer}
+.rtab i{display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;border-radius:50%;background:#EDF0F5;color:#98A0B0;font-style:normal;font-size:11.5px;font-weight:800}
+.rtab.on{border-color:#8B5CF6;background:#F5F3FF;color:#1E2761}
+.rtab.on i{background:#8B5CF6;color:#FFF}
+.rstep{display:none}.rstep.on{display:block}
+.res-tag{font-size:11px;font-weight:800;letter-spacing:1.5px;color:#6D28D9;margin-bottom:8px}
+.res-h{font-size:22px;font-weight:800;line-height:1.4;margin-bottom:10px}
+.res-sub{font-size:14.5px;color:#5A6478;line-height:1.75;margin-bottom:20px;word-break:keep-all}
+.gauge-card{background:#FFF;border:1px solid #E8E8F0;border-radius:16px;padding:20px 18px;margin-bottom:14px}
+.g-item{margin-bottom:15px}
+.g-lab{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.g-nm{font-size:14.5px;font-weight:700}
+.g-nm .wk{font-size:11.5px;font-weight:800;color:#E53935;margin-left:5px}
+.g-vl{font-size:14px;font-weight:800;color:#6D28D9}
+.g-tr{height:9px;background:#EDF0F7;border-radius:99px;overflow:hidden}
+.g-fl{height:100%;border-radius:99px;background:#8B5CF6;transition:width .6s}
+.g-note{font-size:12.5px;color:#6B7393;line-height:1.7;margin-top:12px;padding-top:12px;border-top:1px solid #F0F2F7;word-break:keep-all}
+.bn-card{background:#FFF5F5;border-left:4px solid #E53935;border-radius:12px;padding:17px 18px;margin-bottom:14px}
+.bn-tag{font-size:11px;font-weight:800;letter-spacing:1px;color:#E53935;margin-bottom:7px}
+.bn-h{font-size:18px;font-weight:800;margin-bottom:8px}
+.bn-b{font-size:14px;color:#4A5568;line-height:1.8;word-break:keep-all}
+.card{background:#FFF;border:1px solid #E8E8F0;border-radius:14px;padding:18px;margin-bottom:12px}
+.card h3{font-size:16.5px;font-weight:800;margin-bottom:9px;line-height:1.45}
+.card p{font-size:14px;color:#4A5568;line-height:1.8;word-break:keep-all}
+.card p+p{margin-top:10px}
+.card .tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.5px;color:#6D28D9;background:#F5F3FF;border-radius:99px;padding:3px 10px;margin-bottom:9px}
+.vres{background:#F5F3FF;border:1px solid #DDD6FE;border-radius:16px;padding:20px 18px;margin-bottom:14px;text-align:center}
+.vres .lab{font-size:11.5px;font-weight:800;letter-spacing:1px;color:#6D28D9;margin-bottom:10px}
+.vres .main{font-size:30px;font-weight:800;color:#1E2761;line-height:1.3}
+.vres .md{font-size:13.5px;color:#5A6478;margin-top:6px}
+.vres .subs{margin-top:14px;padding-top:13px;border-top:1px dashed #DDD6FE;font-size:13.5px;color:#4A5568}
+.vres .subs b{color:#1E2761}
+.rstep-head{margin:2px 0 16px}
+.rstep-head .rs-num{display:inline-block;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:800;letter-spacing:1px;color:#8B5CF6;margin-bottom:6px}
+.rstep-head h3{font-size:20px;font-weight:800;line-height:1.4;margin-bottom:6px}
+.rstep-head p{font-size:13.5px;color:#6B7393;line-height:1.7;word-break:keep-all}
+.rstep-foot{margin:22px 0 8px;padding-top:18px;border-top:1px dashed #DCE2EC;text-align:center}
+.rf-q{font-size:14.5px;font-weight:700;line-height:1.6;margin-bottom:12px;word-break:keep-all}
+.rf-btn{width:100%;padding:15px;border:none;border-radius:12px;background:#8B5CF6;color:#FFF;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer}
+.rf-back{width:100%;margin-top:9px;padding:13px;border:1.5px solid #D6DEEA;border-radius:12px;background:#FFF;color:#1E2761;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.rec-card{background:#F1F8FE;border:1px solid #BEE3F8;border-radius:14px;padding:18px;margin-bottom:12px}
+.rec-step{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.5px;color:#2979C8;background:#E1F0FC;border-radius:99px;padding:3px 10px;margin-bottom:9px}
+.rec-card h3{font-size:16.5px;font-weight:800;margin-bottom:8px;line-height:1.45}
+.rec-card p{font-size:13.5px;color:#4A5568;line-height:1.75;word-break:keep-all}
+.rec-note{font-size:12px;color:#7A8296;line-height:1.65;margin-top:11px;padding-top:10px;border-top:1px dashed #C9DEF2;word-break:keep-all}
+.rec-note b{color:#1E2761}
+.rec-go{display:inline-block;margin-top:12px;font-size:14px;font-weight:700;color:#1E2761;text-decoration:none;border-bottom:2px solid #2979C8;padding-bottom:2px}
+.act-list{list-style:none;margin-top:6px}
+.act-list li{display:flex;gap:9px;align-items:flex-start;padding:11px 13px;background:#FAFAFD;border-radius:10px;margin-bottom:7px;font-size:14px;color:#2D3748;line-height:1.65;word-break:keep-all}
+.act-list li::before{content:'□';color:#8B5CF6;font-weight:800;flex-shrink:0}
+.rep-cta{display:block;text-decoration:none;background:#1E2761;color:#FFF;border-radius:16px;padding:22px 20px;margin:18px 0 12px}
 .rep-cta .rc-tag{font-size:11px;letter-spacing:1.5px;color:#C9983A;font-weight:800;margin-bottom:8px}
-.rep-cta .rc-h{font-size:18px;font-weight:800;color:#FFF;margin-bottom:8px;line-height:1.45;word-break:keep-all;font-family:-apple-system,'SF Pro Display','Apple SD 산돌고딕 Neo','Pretendard',sans-serif}
-.rep-cta .rc-d{font-size:13.5px;color:#C7CEE4;line-height:1.7;word-break:keep-all;margin-bottom:12px}
+.rep-cta .rc-h{font-size:18px;font-weight:800;color:#FFF;margin-bottom:8px;line-height:1.45}
+.rep-cta .rc-d{font-size:13.5px;color:#C7CEE4;line-height:1.7;margin-bottom:12px;word-break:keep-all}
 .rep-cta .rc-go{font-size:14px;font-weight:700;color:#FFF}
+.next-card{display:block;text-decoration:none;background:#FFF;border:1.5px solid #E8E8F0;border-radius:14px;padding:17px 18px;margin-bottom:10px}
+.next-card.is-done{opacity:.72;border-style:dashed}
+.next-card .nt{font-size:11px;font-weight:800;letter-spacing:.8px;color:#6B7393;margin-bottom:6px}
+.next-card .nh{font-size:16px;font-weight:800;color:#1E2761;line-height:1.45;margin-bottom:5px}
+.next-card .nd{font-size:13px;color:#6B7393;line-height:1.65;word-break:keep-all}
+.nc-done{display:inline-block;font-size:10px;font-weight:800;color:#2D6A4F;background:#E8F7EF;border-radius:99px;padding:2px 7px;margin-left:5px}
+.share-sec{margin-top:22px;padding-top:20px;border-top:1px solid #E8E8F0}
+.share-sec h4{text-align:center;font-size:14px;color:#6B7393;font-weight:600;margin-bottom:12px}
+.share-row{display:flex;gap:9px;margin-bottom:9px}
+.share-b{flex:1;padding:14px 8px;border-radius:12px;border:1.5px solid #D6DEEA;background:#FFF;font-family:inherit;font-size:13.5px;font-weight:700;color:#1E2761;cursor:pointer}
+.share-b.gold{background:#8B5CF6;color:#FFF;border-color:#8B5CF6}
+.footer{text-align:center;margin-top:30px;padding-top:20px;border-top:1px solid #E8E8F0;font-size:12.5px;color:#8B93A5;line-height:1.9}
+.footer .sig{font-weight:700;color:#6D28D9;margin-bottom:5px;font-size:13.5px}
+.toast{position:fixed;left:50%;bottom:32px;transform:translateX(-50%) translateY(20px);background:#1E2761;color:#FFF;padding:13px 20px;border-radius:99px;font-size:14px;opacity:0;pointer-events:none;transition:all .25s;z-index:99;max-width:88%;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media (hover:hover) and (pointer:fine){
+ .opt-b:hover{border-color:#8B5CF6} .vcard:hover{border-color:#8B5CF6}
+ .btn-primary:hover{background:#151C47} .rep-cta:hover{transform:translateY(-2px)}
+}
 </style>
 </head>
 <body>
 <div class="container">
+ <div class="logo-bar">
+  <div class="logo-need"><span class="n">N.</span><span class="e1">E.</span><span class="e2">E.</span><span class="d">D</span></div>
+  <div class="logo-sep"></div>
+  <div class="logo-right"><div class="top">나다움 설계 현황 진단</div><div class="bottom">나다움을 설계하다</div></div>
+ </div>
 
-  <div class="brand-header">
-    <div class="logo-need">
-      <span class="l1">N.</span><span class="l2">E.</span><span class="l3">E.</span><span class="l4">D</span>
-    </div>
-    <div class="logo-sep"></div>
-    <div class="logo-right">
-      <div class="top">NEED SCAN · 나다움설계연구소</div>
-      <div class="bottom">나다움을 설계하다</div>
-    </div>
+ <!-- 표지 -->
+ <div class="screen on" id="s-cover">
+  <span class="cover-tag">D단계 — Daily Authorship · 자기저자성 실천</span>
+  <h1 class="cover-h">이 선택은 나의<br>우선가치와 부합하는가?</h1>
+  <div class="purpose"><div class="lab">이 진단이 재는 것</div><p>가치가 <b>얼마나 중요한지</b>는 묻지 않습니다. 그 질문은 거의 모두가 높게 답해서 아무것도 구분해 주지 못합니다(Valued Living Questionnaire 규준표본 중요도 평균 81/100). 대신 <b>지난 2주 동안 실제로 어떻게 살았는지</b>를 묻습니다. 의도를 크게 바꿔도 행동은 그 절반쯤만 따라오기 때문입니다(Webb &amp; Sheeran, 2006: 의도 d=0.66 → 행동 d=0.36).</p></div>
+  <div class="axis-preview">
+   <div class="ap"><span class="k">D1</span><span class="nm">기준 선명도</span><div class="ds">내가 무엇을 중요하게 여기는 사람인지 스스로 분명한가</div></div><div class="ap"><span class="k">D2</span><span class="nm">선택 정렬</span><div class="ds">오늘의 구체적 선택이 그 기준과 맞물렸는가</div></div><div class="ap"><span class="k">D3</span><span class="nm">경계 세우기</span><div class="ds">아닌 것에 아니라고 말할 수 있는가</div></div><div class="ap"><span class="k">D4</span><span class="nm">실행 지속</span><div class="ds">정한 것을 실제로 하고, 하고 있는지 스스로 확인하는가</div></div>
   </div>
-
-  <span class="stage-tag">D단계 — Daily Authorship · 자기저자성 실천</span>
-  <h1 class="hero-title">지금 나는<br>나답게 살아가고 있는가</h1>
-  <p class="hero-sub">우선가치가 선명하면, 모든 선택이 명료해집니다. 그 우선가치를 직접 만들어 보는 진단을 준비하고 있습니다.</p>
-
-  <div class="prep-card">
-    <div class="prep-tag">준비 중입니다</div>
-    <h2>이 진단은 점수를 알려주는 데서 끝나지 않습니다</h2>
-    <p>N.E.E.D 루틴의 마지막 단계인 <strong>Daily Authorship</strong>은 읽고 끝나는 진단이 아니라,
-    끝났을 때 손에 <strong>우선가치 세 가지와 나만의 선택 기준</strong>이 남는 설계 작업입니다.</p>
-    <p>그만큼 신중하게 만들고 있습니다. 준비되는 대로 이 자리에서 만나실 수 있습니다.</p>
+  <div class="cover-meta"><span>⏱ 약 7분</span><span>📋 20문항+가치 워크</span><span>🆓 무료</span></div>
+  <button class="btn-primary" onclick="startQuiz()">진단 시작하기</button>
+  <div class="detail-toggle" onclick="toggleDetail()" id="dtog">어떤 근거로 만든 진단인가요? ▾</div>
+  <div class="detail-sec" id="dsec">
+   <div class="basis"><span class="bk">D1 · 기준 선명도</span>자기개념 명료성 척도(Campbell et al., 1996 / 한국 번안 α=.81)의 구인을 참고했습니다. 원척도는 12문항 중 10문항이 역문항인데, 한국 표본에서 역문항이 요인구조를 깨뜨린다는 보고가 반복돼(PLOS ONE, 2013) <b>전 문항을 긍정 진술로 다시 썼습니다</b>.</div><div class="basis"><span class="bk">D2 · 선택 정렬</span>가치 실행 척도(Valuing Questionnaire, Smout et al., 2014, α=.79~.87)의 Progress/Obstruction 구조와 자기일치성 모형(Sheldon &amp; Elliot, 1999)을 반영했습니다. 자기일치성-안녕감 상관은 한국 표본에서도 확인되었습니다(Sheldon et al., 2004, 한양대 194명, r=.27).</div><div class="basis"><span class="bk">D3 · 경계 세우기</span>주장성 척도(Rathus, 1973)의 거절 관련 문항을 한국 맥락으로 다시 썼습니다. 이 축은 브랜드의 사회구조 진단 중 <b>눈치 문화</b>와 정확히 겹치는 자리입니다.</div><div class="basis"><span class="bk">D4 · 실행 지속</span>셀프리더십 척도(Houghton &amp; Neck, 2002)의 자기목표설정·자기관찰 하위척도를 참고했습니다. 한국 대학생 645명 대상 타당화에서 원 요인구조가 유지되었습니다(신윤정 외, 2009).</div>
+   <div class="basis"><span class="bk">공통 설계 원칙</span>모든 문항을 <b>긍정 진술</b>로 썼습니다. 역방향 문항이 한국어 표본에서 요인구조를 깨뜨린다는 보고가 반복되기 때문입니다(PLOS ONE, 2013 / 문항표현 IRT 분석, Frontiers in Psychology, 2024). 또 "얼마나 중요한가"가 아니라 <b>"지난 2주 동안 실제로 얼마나 그랬는가"</b>를 물었습니다. 중요도 문항은 대부분의 응답이 상단에 몰려 구분이 되지 않기 때문입니다.</div>
   </div>
+ </div>
 
-  <a class="btn-primary" href="https://nadaumlap.github.io/nadaumneed/needscan/">욕구 출발점 진단 시작하기</a>
-  <div class="cta-meta">
-    <span>⏱ 약 5분</span>
-    <span>📋 16문항</span>
-    <span>🆓 무료</span>
+ <!-- 문항 -->
+ <div class="screen" id="s-quiz">
+  <div class="prog-wrap"><div class="prog-row"><span id="pgLab"></span><span id="pgNum"></span></div>
+   <div class="prog-bar"><div class="prog-fill" id="pgFill" style="width:0%"></div></div></div>
+  <div class="q-card">
+   <span class="q-pill" id="qPill"></span>
+   <div class="q-text" id="qText"></div>
+   <div style="font-size:12.5px;color:#8B93A5;margin:-14px 0 14px">지난 2주를 떠올려 보세요</div>
+   <div class="scale-labels"><span class="sl-neg">거의 없었다</span><span class="sl-mid">절반쯤</span><span class="sl-pos">거의 매번</span></div>
+   <div class="scale-line" id="scRow"></div>
   </div>
-  <p class="cta-why">우선가치는 맨손으로 정해지지 않습니다.<br>내 욕구가 어디서 왔는지 읽는 것이 첫 단계입니다.</p>
+  <div class="nav-row"><button class="btn-prev" id="bPrev" onclick="prevQ()">← 이전</button>
+   <button class="btn-next" id="bNext" onclick="nextQ()" disabled>다음 →</button></div>
+ </div>
 
-  <h3 class="section-h">다른 진단도 열려 있습니다</h3>
-  <p class="section-d">아래 순서는 N.E.E.D 루틴의 순서이기도 합니다. 욕구를 읽고, 나를 흐리게 하는 것을 걷어내는 순서로 만나보시길 권합니다.</p>
-
-  <a class="diag-card blue" href="https://nadaumlap.github.io/nadaumneed/5characters/">
-    <div class="diag-step">N단계 · Need Scan — 에너지 경향성 읽기</div>
-    <div class="diag-t">나의 에너지는 어디로 흐를까?</div>
-    <div class="diag-d">5러 경향성 진단 · 15문항 · 약 5분</div>
-    <span class="diag-arrow">바로 가기 →</span>
-  </a>
-
-  <a class="diag-card green" href="https://nadaumlap.github.io/nadaumneed/newnoise/">
-    <div class="diag-step">E단계 · Eliminate Noise — 왜곡 구조 인식</div>
-    <div class="diag-t">집중이 안 되는 진짜 이유, 나의 잡음 오염도는?</div>
-    <div class="diag-d">잡음 오염도 진단 · 18문항 · 약 5분</div>
-    <span class="diag-arrow">바로 가기 →</span>
-  </a>
-
-<a class="rep-cta" href="https://nadaumlap.github.io/nadaumneed/report/"><div class="rc-tag">NADAUM DESIGN REPORT</div><div class="rc-h">읽는 것으로는 아무것도 바뀌지 않습니다</div><div class="rc-d">지금까지 하신 진단을 한자리에 모아 읽고, 오늘 시작할 설계 한 문장을 남기는 자리입니다. 진단을 다 하지 않으셔도 됩니다.</div><div class="rc-go">통합 리포트 열기 →</div></a>
-
-  <div class="note">
-    앞 단계 진단을 마치고 오시면, 이 진단은 그 결과를 이어받아 시작합니다.
-    지금 해두신 진단의 결과가 그대로 우선가치를 설계하는 재료가 됩니다.
+ <!-- 부가 화면 (크로노 / 가치) -->
+ <div class="screen" id="s-extra">
+  <div class="prog-wrap"><div class="prog-row"><span id="exLab"></span><span id="exNum"></span></div>
+   <div class="prog-bar"><div class="prog-fill" style="width:100%"></div></div></div>
+  <div class="q-card">
+   <span class="q-pill" id="exPill"></span>
+   <div class="q-text" id="exText"></div>
+   <div style="font-size:12.5px;color:#8B93A5;margin:-14px 0 16px" id="exSub"></div>
+   <div id="exBody"></div>
   </div>
+  <div class="nav-row"><button class="btn-prev" onclick="exPrev()">← 이전</button>
+   <button class="btn-next" id="exNext" onclick="exNext()" disabled>결과 보기 →</button></div>
+ </div>
 
-  <div class="footer">
-    <div class="mini-logo"><span class="n">N.</span><span class="e1">E.</span><span class="e2">E.</span><span class="d">D.</span></div>
-    <p class="signature">우선가치가 선명하면, 모든 선택이 명료해진다</p>
-    <p>나다움설계연구소</p>
-    <p>나다움은 발견이 아니라 설계다</p>
-  </div>
-
+ <!-- 결과 -->
+ <div class="screen" id="s-result"></div>
 </div>
+<div class="toast" id="toast"></div>
+
+<script>
+const BASE='https://nadaumlap.github.io/nadaumneed';
+const ITEMS=[{"a": "D1", "t": "무엇을 중요하게 여기는 사람인지 한 문장으로 말할 수 있었다"}, {"a": "D2", "t": "결정을 내리기 전에 내 기준에 맞는지 한 번 확인했다"}, {"a": "D3", "t": "내키지 않는 부탁에 시간을 먼저 말하고 조율했다"}, {"a": "D4", "t": "하기로 정한 것을 그날 안에 실제로 했다"}, {"a": "D1", "t": "여러 선택지 앞에서 무엇을 먼저 놓아야 할지 분명했다"}, {"a": "D2", "t": "한 선택을 하고 나서 그 선택이 나답다고 느꼈다"}, {"a": "D3", "t": "분위기가 그렇더라도 내 사정을 그대로 말했다"}, {"a": "D4", "t": "오늘 무엇을 했는지 하루 끝에 짧게 돌아봤다"}, {"a": "D1", "t": "내가 어떤 사람인지에 대한 생각이 그 주 내내 일관됐다"}, {"a": "D2", "t": "해야 할 것 같아서가 아니라 내가 원해서 한 일이 있었다"}, {"a": "D3", "t": "거절한 뒤에도 그 결정을 그대로 유지했다"}, {"a": "D4", "t": "이번 주에 지키기로 한 것 하나를 실제로 지켰다"}, {"a": "D1", "t": "누가 물어도 내가 지금 무엇을 향해 가는지 설명할 수 있었다"}, {"a": "D2", "t": "시간을 어디에 쓸지 정할 때 내 기준이 실제로 작동했다"}, {"a": "D3", "t": "가까운 사람의 기대와 내 판단이 다를 때 내 판단을 말했다"}, {"a": "D4", "t": "계획이 어긋난 날에도 다음 날 다시 이어서 했다"}, {"a": "D1", "t": "남들이 좋다고 하는 것과 내가 좋다고 하는 것을 구분했다"}, {"a": "D2", "t": "자동으로 하던 일 하나를 멈추고 다시 정했다"}, {"a": "D3", "t": "할 수 없는 일을 할 수 없다고 그 자리에서 말했다"}, {"a": "D4", "t": "스스로 정한 것을 지키고 있는지 중간에 확인했다"}];
+const AX={"D1": {"name": "기준 선명도", "short": "선명", "desc": "내가 무엇을 중요하게 여기는 사람인지 스스로 분명한가", "basis": "자기개념 명료성 척도(Campbell et al., 1996 / 한국 번안 α=.81)의 구인을 참고했습니다. 원척도는 12문항 중 10문항이 역문항인데, 한국 표본에서 역문항이 요인구조를 깨뜨린다는 보고가 반복돼(PLOS ONE, 2013) <b>전 문항을 긍정 진술로 다시 썼습니다</b>."}, "D2": {"name": "선택 정렬", "short": "정렬", "desc": "오늘의 구체적 선택이 그 기준과 맞물렸는가", "basis": "가치 실행 척도(Valuing Questionnaire, Smout et al., 2014, α=.79~.87)의 Progress/Obstruction 구조와 자기일치성 모형(Sheldon &amp; Elliot, 1999)을 반영했습니다. 자기일치성-안녕감 상관은 한국 표본에서도 확인되었습니다(Sheldon et al., 2004, 한양대 194명, r=.27)."}, "D3": {"name": "경계 세우기", "short": "경계", "desc": "아닌 것에 아니라고 말할 수 있는가", "basis": "주장성 척도(Rathus, 1973)의 거절 관련 문항을 한국 맥락으로 다시 썼습니다. 이 축은 브랜드의 사회구조 진단 중 <b>눈치 문화</b>와 정확히 겹치는 자리입니다."}, "D4": {"name": "실행 지속", "short": "지속", "desc": "정한 것을 실제로 하고, 하고 있는지 스스로 확인하는가", "basis": "셀프리더십 척도(Houghton &amp; Neck, 2002)의 자기목표설정·자기관찰 하위척도를 참고했습니다. 한국 대학생 645명 대상 타당화에서 원 요인구조가 유지되었습니다(신윤정 외, 2009)."}};
+const ORDER=["D1", "D2", "D3", "D4"];
+const READ={"D1": {"low": "내가 무엇을 중요하게 여기는 사람인지가 아직 문장으로 잡히지 않은 상태입니다. 이건 생각이 부족해서가 아니라, 기준이 원래 관찰에서 나오기 때문입니다. 먼저 쌓고 나서 이름을 붙이는 순서가 맞습니다.", "mid": "기준이 있기는 한데 상황마다 흔들립니다. 흔들리는 지점을 몇 번 적어 두면 그 안에서 반복되는 결이 보입니다.", "high": "자기 기준이 분명한 편입니다. 이제 그 기준이 실제 선택에서 작동하는지가 다음 질문입니다."}, "D2": {"low": "기준과 선택 사이가 벌어져 있습니다. 이 간격은 누구에게나 있습니다 — 의도를 바꿔도 행동은 절반쯤만 따라옵니다. 다만 그 간격을 줄이는 방법은 결심이 아니라 언제·어디서를 미리 정해 두는 쪽입니다.", "mid": "맞을 때도 있고 어긋날 때도 있습니다. 어긋난 날에 무엇이 끼어들었는지가 다음 설계의 재료입니다.", "high": "기준이 실제 선택에서 작동하고 있습니다. 이 상태를 만든 조건을 적어 두면 흔들릴 때 돌아올 수 있습니다."}, "D3": {"low": "아닌 것에 아니라고 말하기 어려운 상태입니다. 이건 성격의 약함이 아니라 눈치 문화의 작동 방식입니다 — 원한다는 느낌이 올라오는 순간 먼저 주변을 살피게 만듭니다. 거절보다 조율의 언어부터 시작하는 편이 현실적입니다.", "mid": "어떤 자리에서는 말하고 어떤 자리에서는 삼킵니다. 삼키게 되는 상대나 상황이 정해져 있는지 살펴볼 만합니다.", "high": "아닌 것에 아니라고 말할 수 있습니다. 이 축이 서 있으면 다른 축의 설계가 실제로 지켜집니다."}, "D4": {"low": "정하는 것과 하는 것 사이가 끊겨 있습니다. 정하는 능력이 없어서가 아니라, 정한 것을 확인할 자리가 없어서인 경우가 많습니다.", "mid": "시작은 하는데 중간에 끊깁니다. 계획이 어긋난 다음 날 다시 잇는 것이 지속의 핵심입니다.", "high": "정한 것을 하고, 하고 있는지 스스로 확인하고 계십니다. 이 습관이 우선가치를 실제 삶으로 옮깁니다."}};
+const ACT={"D1": ["오늘 한 선택 하나가 어떤 기준에서 나왔는지 한 줄로 적는다", "남들이 좋다고 한 것과 내가 좋다고 한 것을 나눠 적는다"], "D2": ["결정 직전에 \"이건 내가 원해서인가, 해야 할 것 같아서인가\"를 한 줄로 적는다", "자동으로 하던 일 하나를 멈추고 다시 정해 본다"], "D3": ["즉답 대신 \"확인하고 말씀드리겠습니다\"를 한 번 써 본다", "이번 주에 조율한 부탁 하나를 적어 둔다"], "D4": ["이번 주에 지킬 것 한 가지를 정하고 지킨 날에 표시한다", "하루 끝에 한 줄로 오늘을 돌아본다"]};
+const SEGH={"low": "아직 설계가 시작되기 전 자리입니다", "mid": "기준은 있는데 일상까지 내려오지 않았습니다", "high": "자기 기준으로 하루를 쓰고 계십니다"};
+const SEGB={"low": "네 축이 모두 낮게 나왔습니다. 여기서 필요한 것은 더 큰 결심이 아니라 아주 작은 기록 하나입니다. 관찰이 쌓여야 기준이 생깁니다.", "mid": "가장 낮은 축 하나가 나머지를 끌어내리고 있습니다. 네 축을 고루 올리기보다 이 한 축을 먼저 손대는 편이 빠릅니다.", "high": "기준이 일상에서 작동하고 있습니다. 지금 상태를 문장으로 남겨 두시면 흔들릴 때 돌아올 자리가 됩니다."};
+const VALUES=[{"k": "자율", "d": "내 방식대로 정하는 것"}, {"k": "연결", "d": "사람과 이어져 있는 것"}, {"k": "몰입", "d": "한 가지에 깊이 들어가는 것"}, {"k": "회복", "d": "나를 지키고 되돌리는 것"}, {"k": "성장", "d": "어제보다 나아지는 것"}, {"k": "성취", "d": "목표를 이뤄내는 것"}, {"k": "안정", "d": "흔들리지 않는 리듬을 갖는 것"}, {"k": "기여", "d": "누군가에게 보탬이 되는 것"}, {"k": "정직", "d": "숨기지 않고 그대로 있는 것"}];
+const CHRONO=null;
+const IS_D=true;
+const MODKEY='authorship';
+const COLOR='#8B5CF6';
+const SLUG='need';
+const STAGE_KO='자기저자성 실천';
+const HEADER='나다움 설계 현황 진단';
+let answers=new Array(20).fill(null), cur=0, extra=null, vsel=[], vmain=null, vstage=1, R=null;
+
+function el(i){return document.getElementById(i)}
+function show(s){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('on'));el(s).classList.add('on');window.scrollTo(0,0)}
+function toast(m){const t=el('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}
+function toggleDetail(){const s=el('dsec'),b=el('dtog');const o=s.classList.toggle('on');b.textContent=o?'접기 ▴':'어떤 근거로 만든 진단인가요? ▾'}
+function startQuiz(){cur=0;show('s-quiz');renderQ()}
+
+function renderQ(){
+  const it=ITEMS[cur];
+  el('pgLab').textContent=AX[it.a].name+' · '+STAGE_KO;
+  el('pgNum').textContent=(cur+1)+' / '+ITEMS.length;
+  el('pgFill').style.width=((cur+1)/ITEMS.length*100)+'%';
+  el('qPill').textContent=AX[it.a].name;
+  el('qText').textContent=it.t;
+  const row=el('scRow');row.innerHTML='';
+  const NUMS=['−2','−1','0','+1','+2'];
+  for(let i=1;i<=5;i++){
+    const b=document.createElement('button');
+    b.className='sc-node sc-'+i+(answers[cur]===i?' on':'');
+    b.innerHTML='<span class="sc-dot"></span><span class="sc-num">'+NUMS[i-1]+'</span>';
+    b.onclick=()=>pick(i);
+    row.appendChild(b);
+  }
+  el('bPrev').disabled=cur===0;
+  el('bNext').disabled=answers[cur]===null;
+  el('bNext').textContent=(cur===ITEMS.length-1)?'다음 단계 →':'다음 →';
+}
+function pick(v){
+  answers[cur]=v;
+  document.querySelectorAll('.sc-node').forEach(x=>x.classList.remove('on'));
+  const ns=document.querySelectorAll('.sc-node'); if(ns[v-1])ns[v-1].classList.add('on');
+  el('bNext').disabled=false;
+  if(cur<ITEMS.length-1){const at=cur;setTimeout(()=>{if(cur===at&&answers[at]!==null)nextQ()},300)}
+}
+function prevQ(){if(cur>0){cur--;renderQ()}}
+function nextQ(){
+  if(answers[cur]===null)return;
+  if(cur<ITEMS.length-1){cur++;renderQ();return}
+  renderExtra();
+}
+function renderExtra(){
+  show('s-extra');
+  const b=el('exBody');b.innerHTML='';
+  if(IS_D){
+    el('exLab').textContent='우선가치 워크';el('exNum').textContent='마지막';
+    el('exPill').textContent='우선가치';
+    el('exText').textContent=vstage===1?'지금 삶에서 가장 지키고 싶은 것 세 가지를 고르세요':'그 셋 중 하나만 남긴다면?';
+    el('exSub').textContent=vstage===1?'"얼마나 중요한가"는 묻지 않습니다. 셋만 고르셔야 합니다.':'남긴 하나가 우선가치, 나머지 둘이 보조가치가 됩니다.';
+    if(vstage===1){
+      const g=document.createElement('div');g.className='vgrid';
+      VALUES.forEach(v=>{
+        const c=document.createElement('button');c.className='vcard'+(vsel.includes(v.k)?' on':'');
+        c.innerHTML='<div class="vn">'+v.k+'</div><div class="vd">'+v.d+'</div>';
+        c.onclick=()=>{
+          const i=vsel.indexOf(v.k);
+          if(i>=0)vsel.splice(i,1); else { if(vsel.length>=3){toast('셋까지만 고를 수 있습니다');return} vsel.push(v.k); }
+          renderExtra();
+        };
+        g.appendChild(c);
+      });
+      b.appendChild(g);
+      const cnt=document.createElement('div');cnt.className='vcount';cnt.textContent=vsel.length+' / 3 선택';
+      b.appendChild(cnt);
+      el('exNext').disabled=vsel.length!==3;
+      el('exNext').textContent=vsel.length===3?'하나만 남기기 →':'세 가지를 고르세요';
+    } else {
+      const l=document.createElement('div');l.className='opt-list';
+      vsel.forEach(k=>{
+        const v=VALUES.filter(x=>x.k===k)[0];
+        const c=document.createElement('button');c.className='opt-b'+(vmain===k?' on':'');
+        c.innerHTML='<span><b>'+k+'</b><span class="sub">'+v.d+'</span></span>';
+        c.onclick=()=>{vmain=k;renderExtra()};
+        l.appendChild(c);
+      });
+      b.appendChild(l);
+      const back=document.createElement('button');back.className='btn-secondary';back.textContent='세 가지 다시 고르기';
+      back.onclick=()=>{vstage=1;vmain=null;renderExtra()};
+      b.appendChild(back);
+      el('exNext').disabled=!vmain;
+      el('exNext').textContent='결과 보기 →';
+    }
+  } else {
+    el('exLab').textContent='마지막 한 가지';el('exNum').textContent='마지막';
+    el('exPill').textContent='관찰의 출발점';
+    el('exText').textContent=CHRONO.q;
+    el('exSub').textContent=CHRONO.sub;
+    const l=document.createElement('div');l.className='opt-list';
+    CHRONO.opts.forEach(o=>{
+      const c=document.createElement('button');c.className='opt-b'+(extra===o[0]?' on':'');
+      c.innerHTML='<span><b>'+o[0]+'</b><span class="sub">'+o[1]+'</span></span>';
+      c.onclick=()=>{extra=o[0];renderExtra()};
+      l.appendChild(c);
+    });
+    b.appendChild(l);
+    const nt=document.createElement('div');nt.className='basis';nt.innerHTML='<span class="bk">이 문항을 넣은 이유</span>'+CHRONO.note;
+    b.appendChild(nt);
+    el('exNext').disabled=!extra;
+  }
+}
+function exPrev(){
+  if(IS_D&&vstage===2){vstage=1;vmain=null;renderExtra();return}
+  cur=ITEMS.length-1;show('s-quiz');renderQ();
+}
+function exNext(){
+  if(el('exNext').disabled)return;
+  if(IS_D&&vstage===1){vstage=2;renderExtra();return}
+  computeAndShow();
+}
+
+function compute(){
+  const sum={},cnt={};
+  ORDER.forEach(k=>{sum[k]=0;cnt[k]=0});
+  ITEMS.forEach((it,i)=>{sum[it.a]+=answers[i];cnt[it.a]++});
+  const raw={},sc={};
+  ORDER.forEach(k=>{raw[k]=sum[k]/cnt[k];sc[k]=Math.round((raw[k]-1)/4*100)});
+  const weak=ORDER.slice().sort((a,b)=>raw[a]-raw[b])[0];
+  const weakVal=raw[weak];
+  const seg=weakVal>=3.5?'high':(weakVal>=2.5?'mid':'low');
+  const total=Math.round(ORDER.reduce((a,k)=>a+sc[k],0)/ORDER.length);
+  return {raw:raw,sc:sc,weak:weak,weakVal:weakVal,seg:seg,total:total};
+}
+function saveProfile(r){
+  const KEY='nadaum.profile.v1';
+  let prev=null; try{prev=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}
+  const p=prev||{v:1,id:'ND-'+Math.random().toString(36).slice(2,6).toUpperCase()+'-'+Math.random().toString(36).slice(2,6).toUpperCase(),created:new Date().toISOString().slice(0,10),modules:{},history:[]};
+  p.modules=p.modules||{};
+  const ts=new Date().toISOString().slice(0,10);
+  const m={ts:ts,score:r.total,seg:r.seg,weak:r.weak};
+  ORDER.forEach((k,i)=>{m['a'+(i+1)]=Math.round(r.raw[k]*100)/100});
+  if(IS_D){ m.values=[vmain].concat(vsel.filter(x=>x!==vmain)); }
+  else if(extra){ m.chrono=extra; }
+  p.modules[MODKEY]=m;
+  p.updated=ts;
+  _ndProfile=p;
+  try{localStorage.setItem(KEY,JSON.stringify(p))}catch(e){}
+}
+function computeAndShow(){ R=compute(); saveProfile(R); show('s-result'); renderResult(R); }
+
+function ndDone(k){try{const p=JSON.parse(localStorage.getItem('nadaum.profile.v1')||'null');return !!(p&&p.modules&&p.modules[k])}catch(e){return false}}
+const NEXTS=[
+ {k:'needscan',u:BASE+'/needscan/',t:'N · 욕구 출발점',h:'지금 나의 욕구는 어디서 시작되고 있을까?',d:'16문항 · 약 5분'},
+ {k:'tendency',u:BASE+'/5characters/',t:'N · 에너지 경향성',h:'나의 에너지는 어디로 흐를까?',d:'15문항 · 약 5분'},
+ {k:'noise',u:BASE+'/newnoise/',t:'E1 · 잡음 인식',h:'나의 잡음 오염도는?',d:'18문항 · 약 5분'},
+ {k:'alignment',u:BASE+'/alignment/',t:'E2 · 생명성 정렬',h:'이 활동은 나를 소모시키나, 충전시키나?',d:'20문항 · 약 6분'},
+ {k:'authorship',u:BASE+'/need/',t:'D · 나다움 설계 현황',h:'이 선택은 나의 우선가치와 부합하는가?',d:'20문항 · 약 7분'}
+];
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+
+function renderResult(r){
+  const A=AX, w=r.weak;
+  let h='<div class="rtabs"><button class="rtab on" data-go="1"><i>1</i>결과</button>'
+   +'<button class="rtab" data-go="2"><i>2</i>읽는 법</button>'
+   +'<button class="rtab" data-go="3"><i>3</i>실행</button></div>';
+
+  /* STEP 1 */
+  h+='<div class="rstep on" id="rstep1">';
+  h+='<div class="res-tag">'+HEADER+'</div>';
+  h+='<h2 class="res-h">'+SEGH[r.seg]+'</h2>';
+  h+='<p class="res-sub">'+SEGB[r.seg]+'</p>';
+  if(IS_D&&vmain){
+    const vd=VALUES.filter(x=>x.k===vmain)[0];
+    h+='<div class="vres"><div class="lab">지금의 우선가치</div><div class="main">'+esc(vmain)+'</div>'
+     +'<div class="md">'+esc(vd?vd.d:'')+'</div>'
+     +'<div class="subs">보조가치 <b>'+vsel.filter(x=>x!==vmain).map(esc).join('</b> · <b>')+'</b></div></div>';
+  }
+  h+='<div class="gauge-card">';
+  ORDER.forEach(k=>{
+    h+='<div class="g-item"><div class="g-lab"><span class="g-nm">'+A[k].name+(k===w?'<span class="wk">· 지금의 병목</span>':'')+'</span>'
+     +'<span class="g-vl">'+r.raw[k].toFixed(1)+'</span></div>'
+     +'<div class="g-tr"><div class="g-fl" style="width:'+r.sc[k]+'%"></div></div></div>';
+  });
+  h+='<div class="g-note">네 축 모두 <b>높을수록 정렬된 상태</b>입니다. 단계는 평균이 아니라 <b>가장 낮은 축</b>으로 판정합니다 — 한 축이 무너져 있으면 나머지가 아무리 높아도 실제로는 그 축에서 새기 때문입니다.</div>';
+  h+='</div>';
+  h+='<div class="bn-card"><div class="bn-tag">지금 가장 먼저 손댈 곳</div><div class="bn-h">'+A[w].name+'</div>'
+   +'<div class="bn-b">네 축 가운데 이 축이 가장 낮게('+r.raw[w].toFixed(1)+') 나왔습니다. '+A[w].desc+' — 여기서부터 손대는 것이 가장 빠른 길입니다.</div></div>';
+  if(!IS_D&&extra){
+    h+='<div class="card"><span class="tag">관찰의 출발점</span><h3>스스로 고르신 맑은 시간대 — '+esc(extra)+'</h3>'
+     +'<p>이건 점수가 아닙니다. 이 시간대에 실제로 무엇을 놓았는지 일주일만 적어 보시면, 배치가 맞는지 아닌지가 기록으로 드러납니다.</p></div>';
+  }
+  h+='<div class="rstep-foot"><div class="rf-q">그럼 이 숫자를 어떻게 읽어야 할까요?</div>'
+   +'<button class="rf-btn" data-go="2">② 읽는 법 보기 →</button></div></div>';
+
+  /* STEP 2 */
+  h+='<div class="rstep" id="rstep2">';
+  h+='<div class="rstep-head"><span class="rs-num">02</span><h3>네 축을 하나씩 읽습니다</h3>'
+   +'<p>점수보다 중요한 건 각 축이 지금 어떤 상태인지입니다. 병목 축부터 읽으셔도 됩니다.</p></div>';
+  const sorted=ORDER.slice().sort((a,b)=>r.raw[a]-r.raw[b]);
+  sorted.forEach(k=>{
+    const lv=r.raw[k]>=3.5?'high':(r.raw[k]>=2.5?'mid':'low');
+    const lab=lv==='high'?'잘 서 있는 축':(lv==='mid'?'섞여 있는 축':'가장 약한 축');
+    h+='<div class="card"><span class="tag">'+A[k].name+' · '+lab+' · '+r.raw[k].toFixed(1)+'</span>'
+     +'<h3>'+A[k].desc+'</h3><p>'+READ[k][lv]+'</p></div>';
+  });
+  h+='<div class="card" style="background:#FAFAFD"><span class="tag">이 진단의 근거</span>'
+   +'<h3>어떤 연구를 참고했나</h3>'
+   + ORDER.map(k=>'<p><b>'+A[k].name+'</b> — '+A[k].basis+'</p>').join('')
+   +'</div>';
+  h+='<div class="rstep-foot"><div class="rf-q">그래서 오늘 무엇을 할 수 있을까요?</div>'
+   +'<button class="rf-btn" data-go="3">③ 오늘 할 일 보기 →</button>'
+   +'<button class="rf-back" data-go="1">← 결과로 돌아가기</button></div></div>';
+
+  /* STEP 3 */
+  h+='<div class="rstep" id="rstep3">';
+  h+='<div class="rstep-head"><span class="rs-num">03</span><h3>오늘 할 수 있는 것</h3>'
+   +'<p>큰 결심은 필요 없습니다. 아래 순서대로 하나씩만 보시면 됩니다.</p></div>';
+  h+='<div class="card"><span class="tag">실행 1 · 병목 축부터</span><h3>'+A[w].name+'에서 시작합니다</h3>'
+   +'<p>네 축을 한꺼번에 올리려 하면 아무것도 남지 않습니다. 아래 둘 중 <b>더 쉬운 하나만</b> 고르세요.</p>'
+   +'<ul class="act-list">'+ACT[w].map(a=>'<li>'+a+'</li>').join('')+'</ul></div>';
+  h+='<div class="rec-card"><span class="rec-step">실행 2 · 기록할 곳</span>'
+   +'<h3>고른 하나를 적어 두는 자리가 있습니다</h3>'
+   +'<p>매일 한 줄씩 적을 수 있는 자리가 통합 리포트 안에 있습니다. 날짜별로 모이고, 일주일이 쌓이면 그 안에서 반복되는 결이 보이기 시작합니다. 회원가입 없이 바로 쓰실 수 있습니다.</p>'
+   +'<a class="rec-go" href="'+BASE+'/report/#write">통합 리포트 안 기록 자리로 바로 가기 →</a>'
+   +'<div class="rec-note">아래 <b>통합 리포트 열기</b>와 같은 곳입니다. 이 링크는 리포트를 열면서 기록하는 자리까지 바로 내려갑니다.</div></div>';
+  h+='<div class="card"><span class="tag">실행 3 · 다시 볼 시점</span><h3>4주 뒤에 같은 진단을 다시 해 보세요</h3>'
+   +'<p>이 결과는 <b>지금 시기의 상태</b>입니다. 고정된 점수가 아니라 환경·관계·잡음 누적도에 따라 달라집니다. 4주 뒤 같은 진단을 하시면 통합 리포트가 지금과 비교해서 읽어 드립니다.</p></div>';
+  h+='<a class="rep-cta" href="'+BASE+'/report/"><div class="rc-tag">NADAUM DESIGN REPORT</div>'
+   +'<div class="rc-h">읽는 것으로는 아무것도 바뀌지 않습니다</div>'
+   +'<div class="rc-d">지금까지 하신 진단을 한자리에 모아 읽고, 오늘 시작할 설계 한 문장을 남기는 자리입니다. 진단을 다 하지 않으셔도 됩니다.</div>'
+   +'<div class="rc-go">통합 리포트 열기 →</div></a>';
+  const todo=NEXTS.filter(x=>x.k!==MODKEY&&!ndDone(x.k)), done=NEXTS.filter(x=>x.k!==MODKEY&&ndDone(x.k));
+  h+='<div style="font-size:13px;color:#6B7393;margin:18px 0 9px;font-weight:600">— '+(todo.length?'다음으로 살펴볼 진단':'진단 현황')+' —</div>';
+  todo.concat(done).forEach(x=>{
+    const dn=ndDone(x.k);
+    h+='<a class="next-card'+(dn?' is-done':'')+'" href="'+x.u+'"><div class="nt">'+x.t+(dn?' <span class="nc-done">완료</span>':'')+'</div>'
+     +'<div class="nh">'+x.h+'</div><div class="nd">'+(dn?'이미 마치셨습니다. 다시 하시면 최신 결과로 바뀝니다.':x.d)+'</div></a>';
+  });
+  h+='<div class="share-sec"><h4>결과 공유하기</h4>'
+   +'<div class="share-row"><button class="share-b" onclick="dlCard(\'square\')">🖼 정사각 카드 저장</button>'
+   +'<button class="share-b" onclick="dlCard(\'story\')">📱 스토리 카드 저장</button></div>'
+   +'<div class="share-row"><button class="share-b gold" onclick="shareResult()">🎴 내 결과 공유하기</button></div>'
+   +'<div class="share-row"><button class="share-b" onclick="shareLink()">🔗 진단 링크 공유하기</button></div></div>';
+  h+='<button class="btn-secondary" onclick="restart()">다시 진단하기</button>';
+  h+='<div class="rstep-foot"><button class="rf-back" data-go="2">← 읽는 법 다시 보기</button>'
+   +'<button class="rf-back" data-go="1">← 결과 다시 보기</button></div></div>';
+
+  h+='<div class="footer"><p class="sig">우선가치가 선명하면, 모든 선택이 명료해진다</p><p>나다움설계연구소</p>'
+   +'<p>\'나다움\'은 발견하는 게 아니라 \'설계\'입니다</p></div>';
+  el('s-result').innerHTML=h;
+}
+function goStep(n){
+  document.querySelectorAll('.rstep').forEach(e=>e.classList.toggle('on',e.id==='rstep'+n));
+  document.querySelectorAll('.rtab').forEach(b=>b.classList.toggle('on',b.dataset.go===String(n)));
+  const t=document.querySelector('.rtabs'); if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
+}
+document.addEventListener('click',function(e){
+  let x=e.target;
+  while(x&&x!==document){ if(x.dataset&&x.dataset.go){goStep(x.dataset.go);return} x=x.parentNode; }
+});
+function restart(){answers=new Array(ITEMS.length).fill(null);cur=0;extra=null;vsel=[];vmain=null;vstage=1;R=null;show('s-cover')}
+
+/* ── 공유 카드 ── */
+function isMob(){return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)}
+function isIOS(){return /iPhone|iPad|iPod/i.test(navigator.userAgent)}
+function cardSVG(version){
+  const W=1080,H=version==='story'?1920:1080;
+  const FT="-apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif";
+  const NAVY='#1E2761',SUB='#718096',TEXT='#2F2F2F',BORDER='#E2E8F0';
+  const isS=version==='story', cX=50, cW=W-100, cY=isS?200:40, cH=isS?1520:1000;
+  function tx(x,y,t,fs,fw,fill,an,ls){return '<text x="'+x+'" y="'+y+'" font-family="'+FT+'" font-size="'+fs+'" font-weight="'+fw+'" fill="'+fill+'" text-anchor="'+(an||'middle')+'"'+(ls?' letter-spacing="'+ls+'"':'')+'>'+esc(t)+'</text>'}
+  let s='<svg xmlns="http://www.w3.org/2000/svg" width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#F8F9FB"/>';
+  s+='<rect x="'+cX+'" y="'+cY+'" width="'+cW+'" height="'+cH+'" rx="44" fill="#FFF" stroke="'+BORDER+'" stroke-width="2"/>';
+  const L={logo:cY+(isS?100:100),brand:cY+(isS?134:134),div:cY+(isS?164:164),tag:cY+(isS?230:225),main:cY+(isS?300:295),bars:cY+(isS?400:380),mark:cY+cH-(isS?70:66)};
+  s+='<text x="'+(W/2)+'" y="'+L.logo+'" font-family="'+FT+'" font-weight="800" font-size="46" letter-spacing="6.4" text-anchor="middle"><tspan fill="#2979C8">N.</tspan><tspan fill="#3DAA6B">E.</tspan><tspan fill="#C9983A">E.</tspan><tspan fill="#8B5CF6">D.</tspan></text>';
+  s+=tx(W/2,L.brand,'나다움설계연구소',21,600,SUB,'middle',2);
+  s+='<line x1="'+(cX+90)+'" y1="'+L.div+'" x2="'+(cX+cW-90)+'" y2="'+L.div+'" stroke="#EEF1F6" stroke-width="2"/>';
+  s+=tx(W/2,L.tag,HEADER,24,600,SUB,'middle');
+  if(IS_D&&vmain){
+    s+=tx(W/2,L.main,'우선가치 · '+vmain,54,800,NAVY,'middle');
+  } else {
+    s+=tx(W/2,L.main,SEGH[R.seg].replace(/입니다$/,''),isS?40:36,800,NAVY,'middle');
+  }
+  let y=L.bars;
+  const bw=cW-200, bx=cX+100;
+  ORDER.forEach(k=>{
+    const pct=R.sc[k];
+    s+=tx(bx,y,AX[k].name,26,700,TEXT,'start');
+    s+='<text x="'+(bx+bw)+'" y="'+y+'" font-family="'+FT+'" font-size="27" font-weight="800" fill="'+(k===R.weak?'#D9534F':COLOR)+'" text-anchor="end">'+R.raw[k].toFixed(1)+'</text>';
+    s+='<rect x="'+bx+'" y="'+(y+16)+'" width="'+bw+'" height="18" rx="9" fill="#EDF0F7"/>';
+    s+='<rect x="'+bx+'" y="'+(y+16)+'" width="'+(bw*pct/100).toFixed(1)+'" height="18" rx="9" fill="'+(k===R.weak?'#D9534F':COLOR)+'"/>';
+    y+=isS?128:106;
+  });
+  s+=tx(W/2,y+(isS?60:44),'지금 가장 먼저 손댈 곳 · '+AX[R.weak].name,26,700,'#D9534F','middle');
+  if(isS){ s+=tx(W/2,y+140,'\'나다움\'은 발견하는 게 아니라',26,500,SUB,'middle');
+            s+=tx(W/2,y+184,'\'설계\'입니다',30,800,NAVY,'middle'); }
+  s+=tx(W/2,L.mark,'nadaumlap.github.io/nadaumneed/'+SLUG+'/',19,500,'#B4BBC6','middle');
+  s+='</svg>';
+  return s;
+}
+async function svg2png(sv,w,h){
+  const u='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(sv);
+  const img=new Image();
+  await new Promise((res,rej)=>{img.onload=res;img.onerror=()=>rej(new Error('x'));img.src=u;setTimeout(()=>rej(new Error('t')),8000)});
+  const cv=document.createElement('canvas');cv.width=w;cv.height=h;
+  const cx=cv.getContext('2d');cx.fillStyle='#F8F9FB';cx.fillRect(0,0,w,h);cx.drawImage(img,0,0,w,h);
+  let b=await new Promise(r=>{try{cv.toBlob(x=>r(x),'image/png')}catch(e){r(null)}});
+  if(!b){const d=cv.toDataURL('image/png'),a=d.split(',');const bs=atob(a[1]);let n=bs.length;const u8=new Uint8Array(n);while(n--)u8[n]=bs.charCodeAt(n);b=new Blob([u8],{type:'image/png'})}
+  return b;
+}
+function dlBlob(b,f){const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download=f;a.style.display='none';document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(()=>URL.revokeObjectURL(u),1000)}
+function shareText(){
+  let head=IS_D&&vmain?('지금의 우선가치는 \''+vmain+'\'입니다.'):(SEGH[R.seg]);
+  return HEADER+' 결과\n\n'+head+'\n지금 가장 먼저 손댈 곳: '+AX[R.weak].name+' ('+R.raw[R.weak].toFixed(1)+'/5.0)\n\n'+BASE+'/'+SLUG+'/';
+}
+async function dlCard(v){
+  if(!R){toast('결과 데이터가 없습니다');return}
+  toast('카드를 만들고 있어요...');
+  const W=1080,H=v==='story'?1920:1080, fn=HEADER+'-'+(v==='story'?'스토리':'카드')+'.png';
+  let b; try{b=await svg2png(cardSVG(v),W,H)}catch(e){
+    try{dlBlob(new Blob([cardSVG(v)],{type:'image/svg+xml;charset=utf-8'}),fn.replace('.png','.svg'));toast('PNG 변환 실패 — SVG로 저장했어요')}catch(e2){toast('저장에 실패했습니다')} return}
+  if(isMob()&&navigator.canShare){try{const f=new File([b],fn,{type:'image/png'});
+    if(navigator.canShare({files:[f]})){try{await navigator.share({files:[f]});toast(isIOS()?'"이미지 저장"을 누르면 사진앱에 저장돼요':'저장이 완료되었습니다');return}catch(se){if(se.name==='AbortError')return}}
+  }catch(e){}}
+  dlBlob(b,fn);toast('다운로드 폴더에 저장되었습니다');
+}
+async function shareResult(){
+  if(!R)return; toast('카드를 만들고 있어요...');
+  const t=shareText(),fn=HEADER+'-결과.png';
+  let b; try{b=await svg2png(cardSVG('square'),1080,1080)}catch(e){copyTxt(t);return}
+  if(isMob()&&navigator.canShare){try{const f=new File([b],fn,{type:'image/png'});
+    const d={files:[f],text:t,title:HEADER};
+    if(navigator.canShare(d)){try{await navigator.share(d);toast('공유되었습니다');return}catch(se){if(se.name==='AbortError')return}}
+  }catch(e){}}
+  dlBlob(b,fn);copyTxt(t);toast('카드는 다운로드, 멘트는 복사되었어요');
+}
+function shareLink(){const t='"'+HEADER+'"\n약 '+(IS_D?'7':'6')+'분 진단입니다.\n\n'+BASE+'/'+SLUG+'/';
+  if(navigator.share)navigator.share({title:HEADER,text:t}).catch(()=>copyTxt(t));else copyTxt(t)}
+function copyTxt(t){if(navigator.clipboard)navigator.clipboard.writeText(t).then(()=>toast('복사되었습니다')).catch(()=>{});}
+
+/* ═══════════ 통합 리포트 인계 링크 (handoff v1) ═══════════
+   브라우저 저장(localStorage)이 막히거나 지워져도 결과가 리포트로 넘어가도록,
+   "통합 리포트 열기" 링크에 이 진단 결과를 실어 보낸다.
+   인코딩 형식은 /report/의 pack()과 동일해야 한다. 표는 추가만 하고 기존 항목은 바꾸지 않는다. */
+var _ndProfile = null;
+var ND_RPT = 'https://nadaumlap.github.io/nadaumneed/report/';
+var ND_MK = {tendency:'t',needscan:'n',noise:'x',temperament:'p',motivation:'m',noiseInner:'i',alignment:'a',authorship:'d'};
+var ND_FK = {ts:'s',main:'a',sub:'b',avgs:'v',overall:'o',flag:'f',
+  nci:'c',d1:'1',d2:'2',d3:'3',d4:'4',influence:'n',aware:'w',weak:'k',weakVal:'y',seg:'g',
+  total:'t',nunchi:'u',compare:'r',exposure:'e',top:'p',tied:'d',totalSeg:'q',snsMin:'z',branch:'h',
+  axisScores:'j',ns:'N',ha:'H',rd:'R',ps:'P',sdtScore:'S',raw:'W',pct:'C',z:'Z',
+  score:'l',a1:'5',a2:'6',a3:'7',a4:'8',values:'V',statement:'M',criteria:'T'};
+var ND_AVGO = ['A','C','S','D','E'];
+function _nd8(s){ return String(s||'').replace(/-/g,''); }
+function _ndB64(s){
+  var b = new TextEncoder().encode(s), x = '';
+  b.forEach(function(c){ x += String.fromCharCode(c); });
+  return btoa(x).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+}
+function ndPack(p){
+  var o = {v:1, i:String(p.id||'').replace(/^ND-/,'').replace(/-/g,''),
+    c:_nd8(p.created), u:_nd8(p.updated), m:{},
+    g:(p.designs||[]).map(function(x){ return [_nd8(x.ts), x.axis, x.text, x.id]; })};
+  var ck = {}; for (var kk in (p.checks||{})) ck[_nd8(kk)] = p.checks[kk];
+  if (Object.keys(ck).length) o.k = ck;
+  if (p.values && p.values.length) o.V = p.values;
+  for (var k in (p.modules||{})) {
+    var src = p.modules[k], dst = {};
+    for (var f in src) {
+      var val = src[f];
+      if (val === null || val === undefined) continue;
+      if (f === 'ts') val = _nd8(val);
+      if (f === 'avgs' && typeof val === 'object') val = ND_AVGO.map(function(c){ return val[c]; });
+      if (f === 'z') continue;
+      dst[ND_FK[f] || f] = val;
+    }
+    o.m[ND_MK[k] || k] = dst;
+  }
+  return _ndB64(JSON.stringify(o));
+}
+function ndReportUrl(){
+  try {
+    var p = _ndProfile;
+    if (!p) { try { p = JSON.parse(localStorage.getItem('nadaum.profile.v1') || 'null'); } catch(e){} }
+    if (!p || !p.modules || !Object.keys(p.modules).length) return ND_RPT;
+    var u = ND_RPT + '?d=' + ndPack(p);
+    return u.length > 6000 ? ND_RPT : u;
+  } catch (e) { return ND_RPT; }
+}
+/* 링크를 누르는 순간 최신 결과를 실어 보낸다 (캡처 단계 — 이동 전에 실행) */
+document.addEventListener('click', function(e){
+  var t = e.target, a = null;
+  while (t && t !== document) { if (t.tagName === 'A' && t.className && String(t.className).indexOf('rep-cta') >= 0) { a = t; break; } t = t.parentNode; }
+  if (a) a.href = ndReportUrl();
+}, true);
+
+</script>
 </body>
 </html>
