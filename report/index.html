@@ -193,6 +193,8 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
 .nd-item{background:#FFF;border:1px solid #E8E8F0;border-radius:11px;padding:12px 14px;margin-bottom:7px}
 .nd-t{font-size:14.5px;color:#1E2761;line-height:1.6;word-break:keep-all}
 .nd-s{font-size:11.5px;color:#98A0B0;margin-top:5px;line-height:1.5;word-break:keep-all}
+.sec-flash{animation:secflash 1.8s ease}
+@keyframes secflash{0%{background:#FFF9E6}60%{background:#FFF9E6}100%{background:transparent}}
 .todo{display:flex;align-items:center;gap:13px;padding:15px 16px;border-radius:13px;text-decoration:none;margin-bottom:9px;border:1px solid #E8E8F0;background:#FFF}
 .todo:hover{background:#F7F9FC}
 .todo .ic{width:34px;height:34px;border-radius:50%;color:#FFF;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -350,7 +352,9 @@ const DIAGS=[
   {k:'needscan',   n:'욕구 출발점 진단',   d:'16문항 · 약 5분', url:BASE+'/needscan/',    c:'#2979C8', s:'N'},
   {k:'tendency',   n:'5러 경향성 진단',    d:'15문항 · 약 5분', url:BASE+'/5characters/', c:'#2979C8', s:'N'},
   {k:'noise',      n:'잡음 오염도 진단',   d:'18문항 · 약 5분', url:BASE+'/newnoise/',    c:'#3DAA6B', s:'E'},
-  {k:'temperament',n:'기질·동기·잡음 진단',d:'26문항 · 약 8분', url:BASE+'/why/',         c:'#8B5CF6', s:'+'}
+  {k:'temperament',n:'기질·동기·잡음 진단',d:'26문항 · 약 8분', url:BASE+'/why/',         c:'#8B5CF6', s:'+'},
+  {k:'alignment',  n:'생명성 정렬 진단',    d:'20문항 · 약 6분', url:BASE+'/alignment/',   c:'#C9983A', s:'E'},
+  {k:'authorship', n:'나다움 설계 현황 진단',d:'20문항 · 약 7분', url:BASE+'/need/',        c:'#8B5CF6', s:'D'}
 ];
 const CHARS={A:'열정러',C:'협력러',S:'안정러',D:'장인러',E:'모험러'};
 const FLOWKEY={A:'성취',C:'연결',S:'안정',D:'탐구',E:'모험'};
@@ -378,11 +382,13 @@ function axes(p){
         feeds:['noise','temperament'],
         need:'잡음 오염도',url:BASE+'/newnoise/'};
   // E2 — 정렬도 (미개발)
-  A.E2={v:null,name:'생명성 정렬도',stage:'E2 · Energy Alignment 단계',desc:'에너지가 환경과 얼마나 맞물려 있는가',c:'#C9983A',
-        feeds:[],need:'생명성 정렬 진단 (준비 중)',url:null};
+  const e2 = (m.alignment && typeof m.alignment.score==='number') ? m.alignment.score : null;
+  A.E2={v:e2,name:'생명성 정렬도',stage:'E2 · Energy Alignment 단계',desc:'에너지가 환경과 얼마나 맞물려 있는가',c:'#C9983A',
+        feeds:['alignment'],need:'생명성 정렬 진단',url:BASE+'/alignment/'};
   // D — 저자성 (미개발)
-  A.D={v:null,name:'자기 저자성',stage:'D · Daily Authorship 단계',desc:'내 기준으로 오늘을 쓰고 있는가',c:'#8B5CF6',
-       feeds:[],need:'나다움 설계 현황 (준비 중)',url:BASE+'/need/'};
+  const dv = (m.authorship && typeof m.authorship.score==='number') ? m.authorship.score : null;
+  A.D={v:dv,name:'자기 저자성',stage:'D · Daily Authorship 단계',desc:'내 기준으로 오늘을 쓰고 있는가',c:'#8B5CF6',
+       feeds:['authorship'],need:'나다움 설계 현황 진단',url:BASE+'/need/'};
   return A;
 }
 function bottleneck(A){
@@ -534,8 +540,22 @@ function render(){
   h+=keepView();
   app.innerHTML=h;
   bindDesign(bn);
+  scrollToHash();
 }
 
+window.addEventListener('hashchange',()=>scrollToHash());
+function scrollToHash(){
+  const hh=(location.hash||'').replace('#','');
+  if(!hh)return;
+  let t=null;
+  if(hh==='write') t=document.getElementById('sec-daily')||document.getElementById('sec-design');
+  else t=document.getElementById('sec-'+hh);
+  if(t)setTimeout(()=>{
+    t.scrollIntoView({behavior:'smooth',block:'start'});
+    t.classList.add('sec-flash');
+    setTimeout(()=>t.classList.remove('sec-flash'),1800);
+  },220);
+}
 function emptyView(){
   let t='<div class="empty-hero"><div class="em">🧭</div>'
    +'<h2>아직 읽을 결과가 없습니다</h2>'
@@ -633,6 +653,8 @@ function summaryView(A,bn,done){
      +'<div style="font-size:13px;color:#6B7393;margin-top:6px">'+CHARS[m.tendency.main]+' 패턴'
      +(m.tendency.sub?' + '+CHARS[m.tendency.sub]+' 패턴':'')+'</div></div>';
   }
+  const vcTop=valueCardFromDiag();
+  if(vcTop)h+=vcTop;
   const restN=DIAGS.filter(d=>!P.modules[d.k]).length;
   h+='<div class="sub" style="margin:20px 0 4px"><b>진단 현황</b> — '+(DIAGS.length-restN)+' / '+DIAGS.length+' 완료</div>';
   h+='<p class="sub" style="margin:0 0 10px">N단계에는 진단이 두 개 있습니다. 하나만 하셔도 축은 열리고, 두 개를 다 하시면 더 정확해집니다.</p>';
@@ -652,7 +674,7 @@ function crossView(cr,n){
 
 function designView(bn){
   const k=bn?bn.key:'N', opts=OPTS[k]||OPTS.N, ac=AXIS_COPY[k]||AXIS_COPY.N;
-  let h='<div class="sec">'+sn()+'<h2>오늘의 설계</h2>'
+  let h='<div class="sec" id="sec-design">'+sn()+'<h2>오늘의 설계</h2>'
    +'<p class="sub">여기부터가 이 리포트의 본론입니다. 읽는 것으로는 아무것도 바뀌지 않습니다. 한 문장만 남기고 나가시면 됩니다.</p>';
 
   h+='<div class="design-box"><h3>'+ac.h+'</h3>'
@@ -701,7 +723,7 @@ function sentencesView(){
      +'<div class="body"><div class="txt">'+esc(d.text)+'</div><div class="when">'+d.ts.replace(/-/g,'.')+' 작성</div></div>'
      +'<button class="del no-print" onclick="delDesign('+idx+')" title="지우기">×</button></div>';
   });
-  if(P.designs.length>=3||noteCount()>=5)h+=valueView();
+  if(!valueCardFromDiag() && (P.designs.length>=3||noteCount()>=5))h+=valueView();
   h+='</div>';
   return h;
 }
@@ -761,7 +783,7 @@ function dailyView(){
   const wd=['월','화','수','목','금','토','일'];
   const now=new Date();
   const dnames=['일','월','화','수','목','금','토'];
-  let h='<div class="sec">'+sn()+'<h2>오늘의 실천</h2>'
+  let h='<div class="sec" id="sec-daily">'+sn()+'<h2>오늘의 실천</h2>'
    +'<p class="sub">오늘 지키셨다면 눌러 주세요. 그리고 <b>무엇을 보았는지 한 줄만</b> 적어 주세요. 체크는 지켰다는 표시일 뿐이고, 실제로 남는 것은 이 한 줄들입니다. 못 적은 날이 있어도 괜찮습니다.</p>';
   h+='<div class="today-box"><div class="today-date">'+(now.getMonth()+1)+'월 '+now.getDate()+'일 '+dnames[now.getDay()]+'요일</div>';
   P.designs.forEach((d,i)=>{
@@ -825,6 +847,16 @@ const VALUE_HINTS=[
   {k:'회복',w:['쉬','휴식','잠','산책','호흡','비우','멈추','쉼']},
   {k:'성장',w:['배우','새로','시도','도전','처음','연습','기록']}
 ];
+function valueCardFromDiag(){
+  const a=P.modules&&P.modules.authorship;
+  if(!(a&&a.values&&a.values.length))return '';
+  const main=a.values[0], subs=a.values.slice(1);
+  return '<div class="value-card"><div class="t">우선가치</div>'
+   +'<h3>지금의 우선가치는 \''+esc(main)+'\'입니다</h3>'
+   +'<p>나다움 설계 현황 진단에서 직접 고르신 값입니다.'
+   +(subs.length?' 보조가치는 <b>'+subs.map(esc).join('</b> · <b>')+'</b>입니다.':'')
+   +'</p><p style="font-size:13px">아래 설계 문장과 매일의 기록이 이 가치와 맞물리는지 4주 뒤에 함께 읽어 드립니다.</p></div>';
+}
 function valueView(){
   let all=P.designs.map(d=>d.text).join(' ');
   for(const day in (P.notes||{})) for(const id in P.notes[day]) all+=' '+P.notes[day][id];
