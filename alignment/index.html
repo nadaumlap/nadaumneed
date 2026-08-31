@@ -139,6 +139,8 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
 .rec-step{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.5px;color:#2979C8;background:#E1F0FC;border-radius:99px;padding:3px 10px;margin-bottom:9px}
 .rec-card h3{font-size:16.5px;font-weight:800;margin-bottom:8px;line-height:1.45}
 .rec-card p{font-size:13.5px;color:#4A5568;line-height:1.75;word-break:keep-all}
+.rec-note{font-size:12px;color:#7A8296;line-height:1.65;margin-top:11px;padding-top:10px;border-top:1px dashed #C9DEF2;word-break:keep-all}
+.rec-note b{color:#1E2761}
 .rec-go{display:inline-block;margin-top:12px;font-size:14px;font-weight:700;color:#1E2761;text-decoration:none;border-bottom:2px solid #2979C8;padding-bottom:2px}
 .act-list{list-style:none;margin-top:6px}
 .act-list li{display:flex;gap:9px;align-items:flex-start;padding:11px 13px;background:#FAFAFD;border-radius:10px;margin-bottom:7px;font-size:14px;color:#2D3748;line-height:1.65;word-break:keep-all}
@@ -457,7 +459,8 @@ function renderResult(r){
   h+='<div class="rec-card"><span class="rec-step">실행 2 · 기록할 곳</span>'
    +'<h3>고른 하나를 적어 두는 자리가 있습니다</h3>'
    +'<p>매일 한 줄씩 적을 수 있는 자리가 통합 리포트 안에 있습니다. 날짜별로 모이고, 일주일이 쌓이면 그 안에서 반복되는 결이 보이기 시작합니다. 회원가입 없이 바로 쓰실 수 있습니다.</p>'
-   +'<a class="rec-go" href="'+BASE+'/report/">기록하는 곳 열기 →</a></div>';
+   +'<a class="rec-go" href="'+BASE+'/report/#write">통합 리포트 안 기록 자리로 바로 가기 →</a>'
+   +'<div class="rec-note">아래 <b>통합 리포트 열기</b>와 같은 곳입니다. 이 링크는 리포트를 열면서 기록하는 자리까지 바로 내려갑니다.</div></div>';
   h+='<div class="card"><span class="tag">실행 3 · 다시 볼 시점</span><h3>4주 뒤에 같은 진단을 다시 해 보세요</h3>'
    +'<p>이 결과는 <b>지금 시기의 상태</b>입니다. 고정된 점수가 아니라 환경·관계·잡음 누적도에 따라 달라집니다. 4주 뒤 같은 진단을 하시면 통합 리포트가 지금과 비교해서 읽어 드립니다.</p></div>';
   h+='<a class="rep-cta" href="'+BASE+'/report/"><div class="rc-tag">NADAUM DESIGN REPORT</div>'
