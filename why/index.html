@@ -10,6 +10,11 @@
 <meta property="og:description" content="열심히 사는데 왜 지치는지, 이제 구조로 읽어봅니다 · 기질 × 동기 × 잡음 통합 진단 · 26문항 · 약 8분 · 나다움설계연구소">
 <meta property="og:url" content="https://nadaumlap.github.io/nadaumneed/why/">
 <meta property="og:image" content="https://nadaumlap.github.io/nadaumneed/why/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="나다움설계연구소">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:image" content="https://nadaumlap.github.io/nadaumneed/why/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="왜 어떤 일은 나를 살리고, 어떤 일은 나를 지치게 할까?">
 <meta name="twitter:description" content="열심히 사는데 왜 지치는지, 이제 구조로 읽어봅니다 · 기질 × 동기 × 잡음 통합 진단 · 26문항 · 약 8분">
@@ -426,6 +431,17 @@ body {
 @media(max-width:380px){.intro-card h1{font-size:21px;}.q-text{font-size:15px;}.share-row{flex-direction:column;}.phase-row{gap:5px;}}
 
 /* 통합 리포트 진입 카드 */
+
+/* ===== 실행 기록 카드 (공통 · 네이비+골드) ===== */
+.rec-card{position:relative;overflow:hidden;background:#101736;border:1px solid #232C5C;border-radius:14px;padding:20px 19px;margin:16px 0 12px}
+.rec-card::after{content:'';position:absolute;inset:0;background:radial-gradient(120% 80% at 88% -10%,rgba(245,201,95,.16) 0%,rgba(245,201,95,0) 58%);pointer-events:none}
+.rec-card>*{position:relative;z-index:1}
+.rec-step{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.6px;color:#F5C95F;background:rgba(245,201,95,.18);border-radius:99px;padding:4px 11px;margin-bottom:12px}
+.rec-card h3{font-size:17.5px;font-weight:800;margin-bottom:10px;line-height:1.45;word-break:keep-all;background:linear-gradient(96deg,#FFE9A8 0%,#F5C95F 38%,#FFF3CE 58%,#E8B54A 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.rec-card p{font-size:13.5px;color:#DFE5F5;line-height:1.8;word-break:keep-all}
+.rec-go{display:inline-block;margin-top:15px;font-size:14.5px;font-weight:800;color:#F5C95F;text-decoration:none;border-bottom:2px solid rgba(245,201,95,.55);padding-bottom:3px}
+.rec-note{font-size:12px;color:#A8B2D4;line-height:1.65;margin-top:12px;padding-top:11px;border-top:1px dashed rgba(245,201,95,.28);word-break:keep-all}
+.rec-note b{color:#F5C95F}
 .rep-cta{display:block;text-decoration:none;background:#1E2761;color:#FFF;border-radius:16px;padding:22px 20px;margin:20px 0 14px;transition:transform .15s,box-shadow .15s}
 .rep-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(30,39,97,.22)}
 .rep-cta .rc-tag{font-size:11px;letter-spacing:1.5px;color:#C9983A;font-weight:800;margin-bottom:8px}
@@ -1267,7 +1283,14 @@ function showResult() {
       이 차이를 구체적으로 탐색하는 것이 <strong>'5러 몰입 경향성'</strong>입니다.<br>
       나는 어떤 방식으로 몰입이 살아나는 사람인가 — 다음 탐색에서 함께 읽어봅니다.
     </div>
-<a class="rep-cta" href="https://nadaumlap.github.io/nadaumneed/report/"><div class="rc-tag">NADAUM DESIGN REPORT</div><div class="rc-h">읽는 것으로는 아무것도 바뀌지 않습니다</div><div class="rc-d">지금까지 하신 진단을 한자리에 모아 읽고, 오늘 시작할 설계 한 문장을 남기는 자리입니다. 진단을 다 하지 않으셔도 됩니다.</div><div class="rc-go">통합 리포트 열기 →</div></a>
+<div class="rec-card">
+  <span class="rec-step">기록해 두세요</span>
+  <h3>실행한 내용을 한 줄로 남겨 두세요</h3>
+  <p>실행한 내용을 한 줄로 간단히 기록해 놓으면 작은 여러분의 실행 역사가 됩니다. 회원가입 없이 바로 사용 가능합니다.</p>
+  <a class="rec-go" href="https://nadaumlap.github.io/nadaumneed/report/#write">통합 리포트 안 &#39;기록하기&#39;로 바로 가기 →</a>
+  <div class="rec-note">아래 <b>통합 리포트 열기</b>와 같은 곳입니다. 이 링크는 리포트를 열면서 기록하는 자리까지 바로 내려갑니다.</div>
+</div>
+<a class="rep-cta" href="https://nadaumlap.github.io/nadaumneed/report/"><div class="rc-tag">나다움 설계 통합 리포트</div><div class="rc-h">진단에서 멈추지 마세요</div><div class="rc-d">여러분의 나다움 설계 현황을 기록해 두시고, 나다움을 적극 설계하십시오.</div><div class="rc-go">통합 리포트 열기 →</div></a>
     <a class="btn-next-explore" href="https://nadaumlap.github.io/nadaumneed/5characters/" target="_blank">5러 몰입 경향성 탐색하기 →</a>
   </div>
 
