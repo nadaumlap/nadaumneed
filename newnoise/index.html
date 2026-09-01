@@ -13,6 +13,9 @@
 <meta property="og:image" content="https://nadaumlap.github.io/nadaumneed/newnoise/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:site_name" content="나다움설계연구소">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:image" content="https://nadaumlap.github.io/nadaumneed/newnoise/og-image.png">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
@@ -395,13 +398,15 @@ body{font-family:'Pretendard','Noto Sans KR',sans-serif;background:#F8F9FB !impo
 .rf-q{font-size:14.5px;font-weight:700;color:#1E2761;line-height:1.6;margin-bottom:12px;word-break:keep-all}
 .rf-btn{width:100%;padding:15px;border:none;border-radius:12px;background:#C9983A;color:#FFF;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer}
 .rf-back{width:100%;margin-top:9px;padding:13px;border:1.5px solid #D6DEEA;border-radius:12px;background:#FFF;color:#1E2761;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer}
-.rec-card{background:#F1F8FE;border:1px solid #BEE3F8;border-radius:14px;padding:1.3rem 1.4rem;margin-bottom:1.2rem}
-.rec-card h3{font-size:16.5px;font-weight:800;color:#1E2761;margin-bottom:8px;line-height:1.45;word-break:keep-all}
-.rec-card p{font-size:13.5px;color:#4A5568;line-height:1.75;word-break:keep-all}
-.rec-step{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.5px;color:#2979C8;background:#E1F0FC;border-radius:99px;padding:3px 10px;margin-bottom:9px}
-.rec-note{font-size:12px;color:#7A8296;line-height:1.65;margin-top:11px;padding-top:10px;border-top:1px dashed #C9DEF2;word-break:keep-all}
-.rec-note b{color:#1E2761}
-.rec-go{display:inline-block;margin-top:12px;font-size:14px;font-weight:700;color:#1E2761;text-decoration:none;border-bottom:2px solid #2979C8;padding-bottom:2px}
+.rec-card{position:relative;overflow:hidden;background:#101736;border:1px solid #232C5C;border-radius:14px;padding:20px 19px;margin-bottom:1.2rem}
+.rec-card::after{content:'';position:absolute;inset:0;background:radial-gradient(120% 80% at 88% -10%,rgba(245,201,95,.16) 0%,rgba(245,201,95,0) 58%);pointer-events:none}
+.rec-card>*{position:relative;z-index:1}
+.rec-card h3{font-size:17.5px;font-weight:800;margin-bottom:10px;line-height:1.45;word-break:keep-all;background:linear-gradient(96deg,#FFE9A8 0%,#F5C95F 38%,#FFF3CE 58%,#E8B54A 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.rec-card p{font-size:13.5px;color:#DFE5F5;line-height:1.8;word-break:keep-all}
+.rec-step{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.6px;color:#F5C95F;background:rgba(245,201,95,.18);border-radius:99px;padding:4px 11px;margin-bottom:12px}
+.rec-go{display:inline-block;margin-top:15px;font-size:14.5px;font-weight:800;color:#F5C95F;text-decoration:none;border-bottom:2px solid rgba(245,201,95,.55);padding-bottom:3px}
+.rec-note{font-size:12px;color:#A8B2D4;line-height:1.65;margin-top:12px;padding-top:11px;border-top:1px dashed rgba(245,201,95,.28);word-break:keep-all}
+.rec-note b{color:#F5C95F}
 .rec-step-lab{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.5px;color:#C9983A;background:#FFF7E6;border-radius:99px;padding:3px 10px;margin-bottom:9px}
 .next-diagnosis-card.is-done{opacity:.72;border-style:dashed}
 .nd-done{display:inline-block;font-size:10.5px;font-weight:800;color:#2D6A4F;background:#E8F7EF;border-radius:99px;padding:2px 8px;margin-left:4px}
@@ -742,7 +747,7 @@ body{font-family:'Pretendard','Noto Sans KR',sans-serif;background:#F8F9FB !impo
     </div><!-- /rstep3 -->
 
     <!-- 5러 진단 연결 카드 -->
-    <a class="rep-cta" href="https://nadaumlap.github.io/nadaumneed/report/"><div class="rc-tag">NADAUM DESIGN REPORT</div><div class="rc-h">읽는 것으로는 아무것도 바뀌지 않습니다</div><div class="rc-d">지금까지 하신 진단을 한자리에 모아 읽고, 오늘 시작할 설계 한 문장을 남기는 자리입니다. 진단을 다 하지 않으셔도 됩니다.</div><div class="rc-go">통합 리포트 열기 →</div></a>
+    <a class="rep-cta" href="https://nadaumlap.github.io/nadaumneed/report/"><div class="rc-tag">나다움 설계 통합 리포트</div><div class="rc-h">진단에서 멈추지 마세요</div><div class="rc-d">여러분의 나다움 설계 현황을 기록해 두시고, 나다움을 적극 설계하십시오.</div><div class="rc-go">통합 리포트 열기 →</div></a>
 <a class="next-diagnosis-card" id="nextDiagCard" href="https://nadaumlap.github.io/nadaumneed/5characters/" target="_blank" rel="noopener noreferrer">
       <span class="next-diagnosis-tag" id="nextDiagTag">NEED SCAN · 다음 단계</span>
       <h3 class="next-diagnosis-h">잡음이 걷히면, 무엇이 남을까요?</h3>
