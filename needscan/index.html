@@ -12,6 +12,9 @@
 <meta property="og:image" content="https://nadaumlap.github.io/nadaumneed/needscan/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:site_name" content="나다움설계연구소">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:image" content="https://nadaumlap.github.io/nadaumneed/needscan/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -131,6 +134,16 @@ body.mode-q .q-nav{margin-top:16px}
 .next-card.is-done{opacity:.72;border-style:dashed}
 .next-card.is-done .next-card-arrow{font-size:12px;color:#8B93A5}
 .next-all-done{font-size:13px;color:#5A6478;line-height:1.7;padding:12px 14px;background:#F7F9FC;border-radius:11px;margin-top:8px;word-break:keep-all}
+.practice-card{position:relative;overflow:hidden;background:#101736 !important;border:1px solid #232C5C !important;border-left:none !important;color:#DFE5F5 !important}
+.practice-card::after{content:'';position:absolute;inset:0;background:radial-gradient(120% 80% at 88% -10%,rgba(245,201,95,.16) 0%,rgba(245,201,95,0) 58%);pointer-events:none}
+.practice-card>*{position:relative;z-index:1}
+.practice-card h3{background:linear-gradient(96deg,#FFE9A8 0%,#F5C95F 38%,#FFF3CE 58%,#E8B54A 100%);-webkit-background-clip:text;background-clip:text;color:transparent !important}
+.practice-card p{color:#DFE5F5;line-height:1.8}
+.pc-step{background:rgba(245,201,95,.18) !important;color:#F5C95F !important}
+.pc-go{color:#F5C95F !important;border-bottom-color:rgba(245,201,95,.55) !important;font-weight:800}
+.pc-div{background:rgba(245,201,95,.28) !important}
+.pc-note{color:#A8B2D4 !important}
+.pc-note b{color:#F5C95F !important}
 .slogan-card{background:#1E2761;color:#FFF;padding:28px 20px;border-radius:20px;text-align:center;margin-bottom:16px}
 .slogan-card .main{font-size:18px;font-weight:800;color:#C9983A;margin-bottom:8px}
 .slogan-card .sub{font-size:14px;color:#FFF;line-height:1.5}
@@ -468,7 +481,7 @@ if(s.seg==='mid'){
 }
 h+=`<div class="dist-card"><p>현재 점수는 한국 사회를 살아가는 사람이라면<br><b>지극히 자연스러운 분포</b> 안에 있습니다.</p></div>`;
 h+=`<div class="reflect-section"><h3>자기 성찰 질문</h3>${reflectQs.map(q=>`<div class="reflect-q">${q}</div>`).join('')}</div>`;
-h+=`<div class="practice-card"><span class="pc-step">실행 1 · 기록할 곳부터</span><h3>기록은 통합 리포트에 쌓입니다</h3><p>매일 한 줄씩 적을 수 있는 자리가 통합 리포트 안에 있습니다. 날짜별로 모이고, 일주일이 쌓이면 그 안에서 반복되는 결이 보이기 시작합니다. 회원가입 없이 바로 쓰실 수 있습니다.</p><a class="pc-go" href="https://nadaumlap.github.io/nadaumneed/report/#write">통합 리포트 안 기록 자리로 바로 가기 →</a><div class="pc-note">아래 <b>통합 리포트 열기</b>와 같은 곳입니다. 이 링크는 리포트를 열면서 기록하는 자리까지 바로 내려갑니다.</div><div class="pc-div"></div><span class="pc-step">실행 2 · 그곳에서 이것부터</span><h3>${pr.title}</h3><p>${pr.text}</p>${pr.action?`<p style="margin-top:12px;padding-top:12px;border-top:1px solid #D0E4F0;color:#1E2761;font-weight:600">일주일 뒤에 보이는 것</p><p style="color:#4A5568">${pr.action}</p>`:''}</div>
+h+=`<div class="practice-card"><span class="pc-step">실행 1 · 기록할 곳부터</span><h3>기록은 통합 리포트에 쌓입니다</h3><p>매일 한 줄씩 적을 수 있는 자리가 통합 리포트 안에 있습니다. 날짜별로 모이고, 일주일이 쌓이면 그 안에서 반복되는 결이 보이기 시작합니다. 회원가입 없이 바로 쓰실 수 있습니다.</p><a class="pc-go" href="https://nadaumlap.github.io/nadaumneed/report/#write">통합 리포트 안 기록 자리로 바로 가기 →</a><div class="pc-note">아래 <b>통합 리포트 열기</b>와 같은 곳입니다. 이 링크는 리포트를 열면서 기록하는 자리까지 바로 내려갑니다.</div><div class="pc-div"></div><span class="pc-step">실행 2 · 그곳에서 이것부터</span><h3>${pr.title}</h3><p>${pr.text}</p>${pr.action?`<p style="margin-top:14px;padding-top:13px;border-top:1px dashed rgba(245,201,95,.28);color:#F5C95F;font-weight:700">일주일 뒤에 보이는 것</p><p style="color:#DFE5F5">${pr.action}</p>`:''}</div>
   <a href="https://youtube.com/playlist?list=PLwcKc-MRqyaUSReDLg72ESQ5-x249MlDQ&si=HNjkVfNF4P4EohBQ" target="_blank" class="video-card"><span class="vc-icon">▶</span>진짜 나의 욕구를 찾는 영상 시리즈<span class="vc-desc">N.E.E.D 루틴 — 욕구의 출발점부터 일상 설계까지</span></a>`;
 h+=`<div class="slogan-card"><div class="main">'나다움'은 발견하는 게 아니라 '설계'입니다</div><div class="sub">잡음을 걷어내고, 진짜 에너지가 어디로 흐르는지 설계해 보세요.</div></div>`;
 // 노출 자각 보조 지표 (Q16) — D4 채점에서 분리
@@ -476,7 +489,7 @@ if(s.AWARE>=4){
   h+=`<div class="aware-card"><b>이미 알아차리고 계십니다</b>"내가 원한다고 느끼는 것 중 많은 부분이 사실은 사회나 미디어가 주입한 것일 수 있다" — 이 문항에 강하게 동의하셨습니다. 알아차림은 잡음을 걷어내는 첫 단계이고, 이미 그 단계에 들어와 계십니다.</div>`;
 }
 // 다음 진단 연결 카드 — Phase 2 v1.1 PART C.2 동선 (NCI 세그먼트별 분기)
-h+=`<a class="rep-cta" href="https://nadaumlap.github.io/nadaumneed/report/"><div class="rc-tag">NADAUM DESIGN REPORT</div><div class="rc-h">읽는 것으로는 아무것도 바뀌지 않습니다</div><div class="rc-d">지금까지 하신 진단을 한자리에 모아 읽고, 오늘 시작할 설계 한 문장을 남기는 자리입니다. 진단을 다 하지 않으셔도 됩니다.</div><div class="rc-go">통합 리포트 열기 →</div></a>`;
+h+=`<a class="rep-cta" href="https://nadaumlap.github.io/nadaumneed/report/"><div class="rc-tag">나다움 설계 통합 리포트</div><div class="rc-h">진단에서 멈추지 마세요</div><div class="rc-d">여러분의 나다움 설계 현황을 기록해 두시고, 나다움을 적극 설계하십시오.</div><div class="rc-go">통합 리포트 열기 →</div></a>`;
 // 다음 진단 — 이미 마친 진단은 '완료'로 표기하고 맨 뒤로 보낸다
 const NSCARDS = {
   noise:{k:'noise', url:'https://nadaumlap.github.io/nadaumneed/newnoise/', img:'archie_e1_noise.png', cls:'next-noise',
