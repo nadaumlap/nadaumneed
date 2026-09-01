@@ -10,14 +10,14 @@
 <meta property="og:description" content="왜 어떤 일은 나를 살리고, 어떤 일은 나를 지치게 할까 — 진단 결과를 하나로 모아 읽습니다.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nadaumlap.github.io/nadaumneed/report/">
-<meta property="og:image" content="https://nadaumlap.github.io/nadaumneed/report/og-image.png">
+<meta property="og:image" content="https://nadaumlap.github.io/nadaumneed/report/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="나다움 설계 통합 리포트">
 <meta property="og:site_name" content="나다움설계연구소">
 <meta property="og:locale" content="ko_KR">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://nadaumlap.github.io/nadaumneed/report/og-image.png">
+<meta name="twitter:image" content="https://nadaumlap.github.io/nadaumneed/report/og-image.jpg">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="나다움설계연구소">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,15 +31,77 @@ html,body{background:#F8F9FB !important;color:#1E2761 !important;color-scheme:li
 body{font-family:'Pretendard','Noto Sans KR',sans-serif;line-height:1.55;letter-spacing:-0.01em;-webkit-font-smoothing:antialiased}
 h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD 산돌고딕 Neo','Pretendard',sans-serif;word-break:keep-all}
 .wrap{max-width:620px;margin:0 auto;padding:0 20px 80px}
+@media (min-width:900px){.wrap{max-width:1040px}}
 
 /* 헤더 */
-.logo-bar{padding:20px 0 12px;display:flex;align-items:center;gap:12px;border-bottom:1px solid #E8E8F0;margin-bottom:26px}
+.logo-bar{padding:20px 0 12px;display:flex;align-items:center;gap:12px;border-bottom:1px solid #E8E8F0;margin-bottom:18px}
+.logo-actions{margin-left:auto;display:flex;gap:7px}
+.hbtn{display:inline-flex;align-items:center;gap:5px;padding:8px 13px;border:1px solid #DCE2ED;border-radius:9px;background:#FFF;color:#4A5568;font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer;white-space:nowrap;transition:border-color .15s,color .15s}
+.hbtn:hover{border-color:#1E2761;color:#1E2761}
+.hbtn svg{width:13px;height:13px;flex:0 0 13px}
+@media (max-width:519px){.hbtn .hl{display:none}.hbtn{padding:9px 11px}.hbtn svg{width:15px;height:15px;flex:0 0 15px}}
 .logo-need{font-family:'Montserrat',sans-serif;font-size:20px;font-weight:800;letter-spacing:2px;display:flex;gap:2px}
 .logo-need .n{color:#2979C8}.logo-need .e1{color:#3DAA6B}.logo-need .e2{color:#C9983A}.logo-need .d{color:#8B5CF6}
 .logo-sep{width:1px;height:22px;background:#E8E8F0}
 .logo-right{display:flex;flex-direction:column;gap:1px}
 .logo-right .top{font-size:10px;font-weight:600;letter-spacing:1px;color:#6B7393}
 .logo-right .bot{font-size:12px;font-weight:500;color:#1E2761}
+@media (max-width:399px){.logo-right .top{display:none}.logo-bar{padding:16px 0 10px}}
+
+/* 탭 내비게이션 */
+/* 책갈피 탭 */
+.tabnav{position:sticky;top:0;z-index:40;background:#F8F9FB;padding:6px 0 0;margin:0 0 -1px;box-shadow:0 6px 12px -6px rgba(30,39,97,.10)}
+.tabnav-in{display:flex;align-items:stretch;gap:5px}
+.tabnav a{flex:1 1 0;min-width:0;position:relative;margin-top:7px;display:block;text-decoration:none;
+  background:var(--tb);border:1px solid var(--tbd);border-bottom:none;border-top:3px solid var(--tc);
+  border-radius:13px 13px 0 0;padding:9px 9px 13px;transition:margin-top .16s ease,filter .16s}
+.tabnav a .tno{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:800;color:var(--tc);letter-spacing:.4px;display:block}
+.tabnav a .tnm{font-size:13px;font-weight:800;color:#7B8497;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.tabnav a .tni{position:absolute;right:10px;bottom:12px;color:var(--tc);opacity:.55}
+.tabnav a .tni svg{width:17px;height:17px;display:block}
+.tabnav a:not(.on){filter:saturate(.7)}
+.tabnav a.on{margin-top:0;padding-bottom:19px;z-index:2;box-shadow:0 -3px 10px rgba(30,39,97,.06)}
+.tabnav a.on .tnm{color:#1A2138}
+.tabnav a.on .tni{opacity:1}
+@media (max-width:459px){.tabnav a .tni{display:none}.tabnav a{padding:9px 7px 13px}.tabnav a .tnm{font-size:12px}}
+@media (max-width:339px){.tabnav a .tnm{font-size:11px}}
+.panel{background:#FFF;border:1px solid var(--tbd);border-top:2px solid var(--tc);border-radius:0 0 18px 18px;padding:22px 18px 26px;box-shadow:0 6px 22px rgba(30,39,97,.05);margin-bottom:22px}
+@media (min-width:900px){.panel{padding:30px 30px 34px;border-radius:0 0 20px 20px}}
+.panel>.sec:first-child{margin-top:0}
+/* 단계 이동 */
+.stepnav{display:flex;gap:9px;justify-content:center;margin:26px 0 4px}
+.sb{display:inline-flex;align-items:center;gap:6px;padding:12px 18px;border:1px solid #DCE2ED;border-radius:11px;background:#FFF;color:#4A5568;font-size:13.5px;font-weight:700;text-decoration:none;transition:border-color .15s,color .15s}
+.sb:hover{border-color:#1E2761;color:#1E2761}
+.sb.pri{background:#1E2761;border-color:#1E2761;color:#FFF}
+/* 2단 배치 (데스크톱) */
+@media (min-width:900px){
+  .two{display:grid;grid-template-columns:0.86fr 1fr;gap:26px;align-items:start}
+  .two>*{min-width:0}
+  .two .sec{margin-bottom:0}
+  .panel .sec{max-width:none}
+}
+.guide{background:#F4F7FC;border:1px solid #E1E8F4;border-radius:12px;padding:14px 15px;margin-top:18px}
+.guide .gt{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:800;color:#2979C8;margin-bottom:6px}
+.guide p{font-size:12.5px;color:#5A6478;line-height:1.8;word-break:keep-all}
+.tabnav a.on{color:#1E2761;border-bottom-color:#1E2761}
+.tabnav a.on .tn{color:#2979C8;opacity:1}
+.tab-lead{font-size:13px;color:#6B7393;line-height:1.75;margin:-4px 0 20px;word-break:keep-all}
+.guard{font-size:12.5px;color:#6B7393;background:#F7F9FC;border:1px solid #E7EBF3;border-radius:10px;padding:11px 13px;margin:14px 0 4px;line-height:1.75;word-break:keep-all}
+.empty-tab{background:#F7F9FC;border:1px dashed #CBD3E1;border-radius:12px;padding:22px 16px;text-align:center;font-size:13.5px;color:#5A6478;line-height:1.85;word-break:keep-all}
+.empty-tab .btn{margin-top:14px;display:inline-block}
+.q-grp{font-size:11px;letter-spacing:1.2px;color:#8A93A8;font-weight:800;margin:18px 0 8px}
+.todo.next{border-color:#1E2761;box-shadow:0 4px 14px rgba(30,39,97,.10)}
+.todo.next .ar{color:#1E2761;font-weight:800}
+.todo.dim{opacity:.72}
+/* 처음 → 지금 → 다음 */
+.fnn{display:flex;align-items:stretch;gap:8px;margin:4px 0 16px}
+.fnn>div{flex:1;background:#FFF;border:1px solid #E4E8F2;border-radius:12px;padding:12px 11px;text-align:center}
+.fnn .fl{font-size:10.5px;letter-spacing:.8px;font-weight:800;color:#8A93A8}
+.fnn .fd{font-size:11px;color:#A0AABF;margin-top:3px}
+.fnn .fv{font-size:19px;font-weight:800;color:#1E2761;margin-top:7px}
+.fnn .fu{font-size:11.5px;color:#6B7393;margin-top:3px}
+.fnn .nxt{background:#F3F6FC;border-style:dashed}
+.fnn .nxt .fv{color:#8A93A8}
 
 /* 표지 */
 .cover{padding:6px 0 28px}
@@ -59,6 +121,20 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
 /* 4축 */
 .axes-wrap{background:#FFF;border:1px solid #E8E8F0;border-radius:16px;padding:22px 20px;margin-bottom:14px}
 .radar-box{max-width:300px;margin:0 auto 18px}
+.trend-box{background:#fff;border:1px solid #E4E8F2;border-radius:12px;padding:14px 8px 10px}
+.trend-box svg{width:100%;height:auto;display:block}
+.trend-leg{display:flex;flex-wrap:wrap;gap:9px 14px;justify-content:center;margin-top:10px}
+.trend-leg span{font-size:11.5px;color:#4A5568;display:inline-flex;align-items:center;gap:5px}
+.trend-leg i{width:12px;height:3px;border-radius:2px;display:inline-block}
+.trend-delta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.trend-delta>div{background:#F7F9FC;border:1px solid #E4E8F2;border-radius:9px;padding:9px 11px}
+.trend-delta .tdn{font-size:11.5px;color:#6B7393;letter-spacing:.2px}
+.trend-delta .tdv{font-size:15.5px;font-weight:700;margin-top:3px}
+.trend-note{font-size:12.5px;color:#5A6478;line-height:1.8;margin-top:12px;word-break:keep-all}
+.ics-row .btn{white-space:nowrap;font-size:13.5px;padding-left:14px;padding-right:14px}
+.ics-hint{font-size:11.5px;color:#6B7393;line-height:1.7;margin-top:9px;word-break:keep-all}
+.trend-empty{background:#F7F9FC;border:1px dashed #CBD3E1;border-radius:11px;padding:17px 14px;font-size:13px;color:#5A6478;line-height:1.85;text-align:center;word-break:keep-all}
+.tup{color:#2F855A}.tdown{color:#C05621}.tflat{color:#6B7393}
 .radar-box svg{width:100%;height:auto;display:block}
 .axis-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
 .axis-key{width:34px;flex-shrink:0;font-family:'Montserrat',sans-serif;font-weight:800;font-size:13px;text-align:center}
@@ -72,15 +148,59 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
 .pend-link{font-size:11.5px;color:#6B7393;text-decoration:none;border-bottom:1px dotted #A0AAC0}
 
 /* 병목 */
-.bottleneck{border-radius:16px;padding:20px;margin-bottom:14px;background:#FFF5F5;border:1px solid #FBD5D5;border-left:4px solid #E53935}
-.bottleneck .t{font-size:11px;letter-spacing:1px;color:#E53935;font-weight:700;margin-bottom:7px}
+/* 여정 지도 */
+.jn{margin:2px 0 20px}
+.jn-cap{font-size:11px;letter-spacing:1.5px;color:#8A93A8;font-weight:700;margin-bottom:10px}
+.jn-tip{display:flex;align-items:center;gap:9px;font-size:12px;color:#98A1B5;font-weight:700;margin-bottom:2px}
+.jn-tip i{width:24px;flex:0 0 24px;text-align:center;font-style:normal;color:#C4CBDA;font-size:15px}
+.jn-row{display:flex;gap:12px}
+.jn-rail{width:24px;flex:0 0 24px;display:flex;justify-content:center;position:relative}
+.jn-rail::before{content:'';position:absolute;top:0;bottom:0;width:2px;background:#E7EBF3}
+.jn-row.on .jn-rail::before{background:var(--jc);opacity:.3}
+.jn-dot{position:relative;z-index:1;width:24px;height:24px;border-radius:50%;background:#FFF;border:2px solid #DCE2ED;color:#A8B1C2;font-size:12.5px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.jn-row.on .jn-dot{border-color:var(--jc);color:var(--jc)}
+.jn-row.here .jn-dot{background:var(--jc);border-color:var(--jc);color:#FFF}
+.jn-body{flex:1;padding:0 0 17px}
+.jn-t{font-size:15px;font-weight:800;color:#1A2138;line-height:1.4;word-break:keep-all}
+.jn-row:not(.on) .jn-t{color:#9AA3B6}
+.jn-here{display:inline-block;font-size:10.5px;font-weight:800;color:#FFF;background:var(--jc);border-radius:20px;padding:2.5px 8px;margin-left:6px;vertical-align:2px;white-space:nowrap}
+.jn-meta{display:flex;align-items:baseline;gap:8px;margin-top:4px}
+.jn-ax{font-size:12px;color:#6B7393}
+.jn-v{font-size:14.5px;font-weight:800;color:var(--jc)}
+.jn-row:not(.on) .jn-v{color:#BCC4D2}
+.jn-en{font-size:10.5px;letter-spacing:.5px;color:#AAB2C2;margin-top:3px;font-family:Montserrat,sans-serif;font-weight:600}
+.jn-open{font-size:11.5px;color:#8A93A8;margin-top:5px}
+.jn-open a{color:var(--jc);font-weight:700;text-decoration:none;border-bottom:1px solid rgba(0,0,0,.14)}
+.jn-prog{font-size:12.5px;color:#4A5568;background:#F7F9FC;border:1px solid #E7EBF3;border-radius:10px;padding:10px 13px;margin-top:4px;line-height:1.75;word-break:keep-all}
+.jn-prog b{color:#1E2761}
+
+/* 표지 아래 첫 행동 */
+.hero-cta{background:linear-gradient(140deg,#1A2250 0%,#2B3573 100%);border-radius:17px;padding:20px 19px;margin-bottom:22px;position:relative;overflow:hidden}
+.hero-cta::after{content:'';position:absolute;inset:0;background:radial-gradient(110% 80% at 92% -12%,var(--glow) 0%,rgba(0,0,0,0) 60%);pointer-events:none}
+.hc-eb{font-size:10.5px;letter-spacing:1.6px;font-weight:800;color:var(--ac);margin-bottom:7px}
+.hc-h{font-size:20px;font-weight:800;color:#FFF;line-height:1.35}
+.hc-d{font-size:13px;color:#C3CBE4;line-height:1.7;margin-top:7px;word-break:keep-all}
+.hc-d b{color:#FFF;font-weight:700}
+.hc-btn{display:block;width:100%;margin-top:15px;padding:15px;border:none;border-radius:12px;background:#FFF;color:#1A2250;font-family:inherit;font-size:15.5px;font-weight:800;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.18);transition:transform .15s}
+.hc-btn:active{transform:translateY(1px)}
+.hc-f{font-size:12px;color:#A7B1D0;text-align:center;margin-top:10px}
+
+.bottleneck{border-radius:16px;padding:20px;margin-bottom:14px;background:var(--bnbg);border:1px solid var(--bnbd);border-left:4px solid var(--ac)}
+.bottleneck .t{font-size:11px;letter-spacing:1px;color:var(--ac);font-weight:700;margin-bottom:7px}
 .bottleneck .h{font-size:17px;font-weight:800;margin-bottom:8px;line-height:1.4}
-.bottleneck .bdef{font-size:13.5px;color:#5A6478;line-height:1.75;margin-bottom:10px;padding-bottom:10px;border-bottom:1px dashed #F3CFCC;word-break:keep-all}
+.bottleneck .bdef{font-size:13.5px;color:#5A6478;line-height:1.75;margin-bottom:10px;padding-bottom:10px;border-bottom:1px dashed var(--bnbd);word-break:keep-all}
 .bottleneck .bdef b{color:#1E2761}
 .bn-go{display:block;width:100%;margin-top:14px;padding:16px;border:none;border-radius:13px;background:linear-gradient(135deg,#1E2761 0%,#33409A 100%);color:#FFF;font-family:inherit;font-size:15.5px;font-weight:700;cursor:pointer;line-height:1.45;box-shadow:0 6px 18px rgba(30,39,97,.24);transition:transform .15s,box-shadow .15s}
 .bn-go:active{transform:translateY(1px)}
 .bn-go b{font-weight:800;color:#FFD98A}
 .bfoot{font-size:13.5px;color:#1E2761;font-weight:700;text-align:center;margin-top:11px}
+.axis-open{font-size:11.5px;color:#8A93A8;margin:-4px 0 13px 46px;line-height:1.65}
+.axis-open a{color:#2979C8;font-weight:700;text-decoration:none;border-bottom:1px solid #CFE0F3}
+.q-head{font-size:14.5px;font-weight:800;color:#1A2138;margin:22px 0 5px}
+.q-sub{font-size:12.5px;color:#6B7393;line-height:1.75;margin:0 0 12px;word-break:keep-all}
+.q-sub b{color:#1E2761}
+.todo .tq{font-size:14.5px;font-weight:800;color:#1A2138;line-height:1.45;word-break:keep-all}
+.todo.done .tq{color:#5A6478}
 .bottleneck .b{font-size:14px;color:#4A5568;line-height:1.7;word-break:keep-all}
 
 /* 교차 해석 */
@@ -284,7 +404,8 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
 .empty-hero p{font-size:14.5px;color:#4A5568;line-height:1.75;word-break:keep-all;margin-bottom:20px}
 
 .foot{text-align:center;margin-top:36px;padding-top:24px;border-top:1px solid #E8E8F0}
-.foot .sig{font-family:-apple-system,'SF Pro Display','Apple SD 산돌고딕 Neo','Pretendard',sans-serif;font-size:14px;font-weight:700;color:#1E2761;margin-bottom:8px}
+.foot .sig{font-family:-apple-system,'SF Pro Display','Apple SD 산돌고딕 Neo','Pretendard',sans-serif;font-size:16.5px;font-weight:800;color:#1E2761;margin-bottom:10px;line-height:1.5}
+.foot .slo{font-size:11.5px;color:#8A93A8}
 .foot p{font-size:12px;color:#6B7393;margin-bottom:4px}
 .toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(30,39,97,.95);color:#FFF;padding:12px 22px;border-radius:24px;font-size:13.5px;opacity:0;transition:all .3s;z-index:1100;pointer-events:none;max-width:88%;text-align:center;line-height:1.5}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -305,14 +426,19 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
   <div class="logo-need"><span class="n">N</span><span class="e1">E</span><span class="e2">E</span><span class="d">D</span></div>
   <div class="logo-sep"></div>
   <div class="logo-right"><span class="top">NEED SCAN · 나다움설계연구소</span><span class="bot">나다움을 설계하다</span></div>
+  <div class="logo-actions no-print" id="hact" hidden>
+    <button class="hbtn" onclick="printAll()" title="결과 다운로드" aria-label="결과 다운로드"><svg viewBox="0 0 16 16"><path d="M8 1.6v8.2m0 0L5 6.9m3 2.9 3-2.9M2.4 11.4v1.8c0 .6.5 1.2 1.2 1.2h8.8c.7 0 1.2-.6 1.2-1.2v-1.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="hl">결과 다운로드</span></button>
+    <button class="hbtn" onclick="shareKeep()" title="공유하기" aria-label="공유하기"><svg viewBox="0 0 16 16"><circle cx="12.4" cy="3.6" r="2.1" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="3.6" cy="8" r="2.1" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12.4" cy="12.4" r="2.1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 7 10.5 4.5M5.5 9l5 2.4" stroke="currentColor" stroke-width="1.5"/></svg><span class="hl">공유하기</span></button>
+  </div>
 </div>
 
+<nav class="tabnav no-print" id="tabnav" hidden></nav>
 <div id="app"></div>
 
 <div class="foot">
   <p class="sig">우선가치가 선명하면, 모든 선택이 명료해진다</p>
   <p>나다움설계연구소</p>
-  <p>나다움은 발견이 아니라 설계다</p>
+  <p class="slo">나다움은 발견이 아니라 설계다</p>
 </div>
 </div>
 <div class="toast" id="toast"></div>
@@ -352,6 +478,8 @@ function pack(p){
   var nt={}; for(var nd in (p.notes||{})) nt[d8(nd)]=p.notes[nd];
   if(Object.keys(nt).length)o.o=nt;
   if(p.values&&p.values.length)o.V=p.values;
+  var hs=(p.history||[]).map(function(x){return [d8(x.t)].concat((x.a||[]).map(function(v){return v==null?-1:v}))});
+  if(hs.length)o.h=hs;
   for(const k in p.modules){
     const src=p.modules[k],dst={};
     for(const f in src){
@@ -382,7 +510,8 @@ function unpack(str){
       created:d10(o.c),updated:d10(o.u),modules:mods,
       designs:(o.g||[]).map((a,i)=>({ts:d10(a[0]),axis:a[1],text:a[2],id:typeof a[3]==='number'?a[3]:i+1,ph:a[4]||''})),
       checks:(function(){const c={};for(const k in (o.k||{}))c[d10(k)]=o.k[k];return c})(),
-      notes:(function(){const c={};for(const k in (o.o||{}))c[d10(k)]=o.o[k];return c})(),history:[]};
+      notes:(function(){const c={};for(const k in (o.o||{}))c[d10(k)]=o.o[k];return c})(),
+      history:(o.h||[]).map(function(a){return {t:d10(a[0]),s:'',a:a.slice(1,5).map(function(v){return v===-1?null:v})}})};
     if(o.V)r.values=o.V;
     return r;
   }catch(e){return null}
@@ -416,6 +545,10 @@ function mergeFromUrl(){
   for(const k in (inc.notes||{})){
     out.notes[k]=Object.assign({},inc.notes[k],out.notes[k]);
   }
+  var hm={};
+  (out.history||[]).forEach(function(x){hm[x.t]=x});
+  (inc.history||[]).forEach(function(x){if(!hm[x.t])hm[x.t]=x});
+  out.history=Object.keys(hm).sort().map(function(k){return hm[k]});
   const seen=new Set((out.designs||[]).map(d=>d.ts+'|'+d.text));
   (inc.designs||[]).forEach(d=>{if(!seen.has(d.ts+'|'+d.text))(out.designs=out.designs||[]).push(d)});
   out.updated=today(); save(out); return true;
@@ -423,12 +556,12 @@ function mergeFromUrl(){
 
 /* ───────── 진단 정의 ───────── */
 const DIAGS=[
-  {k:'needscan',   n:'욕구 출발점 진단',   d:'16문항 · 약 5분', url:BASE+'/needscan/',    c:'#2979C8', s:'N', g:'욕구 출처 탐색(N)', o:'Ⅰ'},
-  {k:'tendency',   n:'에너지 경향성 진단',  d:'15문항 · 약 5분', url:BASE+'/5characters/', c:'#2979C8', s:'N', g:'욕구 출처 탐색(N)', o:'Ⅱ'},
-  {k:'noise',      n:'잡음 오염도 진단',   d:'18문항 · 약 5분', url:BASE+'/newnoise/',    c:'#3DAA6B', s:'E', g:'왜곡 구조 인식(E1)', o:''},
-  {k:'temperament',n:'기질·동기·잡음 진단',d:'26문항 · 약 8분', url:BASE+'/why/',         c:'#8B5CF6', s:'+', g:'N·E1 보조 진단', o:''},
-  {k:'alignment',  n:'생명성 정렬 진단',    d:'20문항 · 약 6분', url:BASE+'/alignment/',   c:'#C9983A', s:'E', g:'생명성 정렬(E2)', o:''},
-  {k:'authorship', n:'나다움 설계 현황 진단',d:'20문항 · 약 7분', url:BASE+'/need/',        c:'#8B5CF6', s:'D', g:'자기 저자성(D)', o:''}
+  {k:'needscan',   n:'욕구 출발점 진단',   d:'16문항 · 약 5분', url:BASE+'/needscan/',    c:'#2979C8', s:'N', g:'욕구 출처 탐색(N)', o:'Ⅰ', q:'내가 진짜 원하는 것은 무엇일까?'},
+  {k:'tendency',   n:'에너지 경향성 진단',  d:'15문항 · 약 5분', url:BASE+'/5characters/', c:'#2979C8', s:'N', g:'욕구 출처 탐색(N)', o:'Ⅱ', q:'나는 지금 어디에 에너지를 쓰고 있을까?'},
+  {k:'noise',      n:'잡음 오염도 진단',   d:'18문항 · 약 5분', url:BASE+'/newnoise/',    c:'#3DAA6B', s:'E', g:'왜곡 구조 인식(E1)', o:'', q:'무엇이 나를 흐리게 하고 있을까?'},
+  {k:'temperament',n:'기질·동기·잡음 진단',d:'26문항 · 약 8분', url:BASE+'/why/',         c:'#8B5CF6', s:'+', g:'N·E1 보조 진단', o:'', q:'나는 어떤 방식으로 움직이는 사람일까?'},
+  {k:'alignment',  n:'생명성 정렬 진단',    d:'20문항 · 약 6분', url:BASE+'/alignment/',   c:'#C9983A', s:'E', g:'생명성 정렬(E2)', o:'', q:'내 하루는 나를 살리고 있을까?'},
+  {k:'authorship', n:'나다움 설계 현황 진단',d:'20문항 · 약 7분', url:BASE+'/need/',        c:'#8B5CF6', s:'D', g:'자기 저자성(D)', o:'', q:'지금 나는 얼마나 내 기준으로 살고 있을까?'}
 ];
 const CHARS={A:'열정러',C:'협력러',S:'안정러',D:'장인러',E:'모험러'};
 const FLOWKEY={A:'성취',C:'연결',S:'안정',D:'탐구',E:'모험'};
@@ -464,6 +597,35 @@ function axes(p){
   A.D={v:dv,name:'자기 저자성',stage:'D · Daily Authorship 단계',desc:'내 기준으로 오늘을 쓰고 있는가',c:'#8B5CF6',
        feeds:['authorship'],need:'나다움 설계 현황 진단',url:BASE+'/need/'};
   return A;
+}
+/* ───────── 변화 기록(스냅샷) ─────────
+   진단을 다시 하면 각 진단지가 최신 결과로 덮어쓴다.
+   덮어쓰기 전 값을 남기기 위해, 리포트를 열 때마다 4축 점수를 한 점으로 찍어 둔다.
+   같은 날 여러 번 열면 마지막 것으로 교체하고, 값이 그대로면 점을 늘리지 않는다. */
+const TRAX=[{k:'N',n:'욕구 선명도',c:'#2979C8'},{k:'E1',n:'신호 보존도',c:'#3DAA6B'},
+            {k:'E2',n:'생명성 정렬',c:'#C9983A'},{k:'D',n:'자기 저자성',c:'#8B5CF6'}];
+function sigOf(p){
+  return DIAGS.map(function(d){
+    var m=p.modules[d.k]; if(!m)return '';
+    return d.k+':'+(m.ts||'')+':'+[m.nci,m.overall,m.total,m.sdtScore,m.score]
+      .map(function(x){return x==null?'':x}).join(',');
+  }).join('|');
+}
+function snapshot(p,A){
+  p.history=p.history||[];
+  var vals=TRAX.map(function(x){return A[x.k].v==null?null:A[x.k].v});
+  if(!vals.some(function(v){return v!==null}))return;
+  var sig=sigOf(p), last=p.history[p.history.length-1], t=today();
+  if(last){
+    if(last.s && last.s===sig && last.t!==t) return;
+    if(last.s && last.s===sig && last.t===t) return;
+    if(!last.s && JSON.stringify(last.a)===JSON.stringify(vals)) return;
+  }
+  var ent={t:t,s:sig,a:vals};
+  if(last && last.t===t) p.history[p.history.length-1]=ent;
+  else p.history.push(ent);
+  if(p.history.length>36) p.history=p.history.slice(-36);
+  save(p);
 }
 function bottleneck(A){
   const done=Object.entries(A).filter(([,a])=>a.v!==null);
@@ -599,7 +761,7 @@ const OPTS={
 
 /* ───────── 렌더 ───────── */
 let P=null, sel={opt:null}, SN=0;
-function sn(){SN++;return '<div class="sec-num">'+String(SN).padStart(2,'0')+'</div>'}
+function sn(){SN++;return ''}
 function render(){
   P=load()||blank();
   P.designs=P.designs||[];
@@ -609,34 +771,90 @@ function render(){
   P.designs.forEach((d,i)=>{if(typeof d.id!=='number')d.id=i+1});
   const done=DIAGS.filter(d=>P.modules[d.k]);
   const app=document.getElementById('app');
-  if(!done.length){app.innerHTML=emptyView();return}
+  if(!done.length){const _ha=document.getElementById('hact');if(_ha)_ha.hidden=true;app.innerHTML=emptyView();return}
   const A=axes(P), bn=bottleneck(A), cr=crossRules(P);
+  P.history=P.history||[];
+  snapshot(P,A);
   SN=0;
+  const nav=document.getElementById('tabnav'), hact=document.getElementById('hact');
+  if(hact)hact.hidden=false;
   if((location.hash||'')==='#design'){
+    nav.hidden=true; if(hact)hact.hidden=true;
     app.innerHTML=designPage(bn);
     bindDesign(bn);
     window.scrollTo(0,0);
     return;
   }
   let h='';
-  h+=coverView(done);
-  h+=summaryView(A,bn,done);
-  if(cr.length>=1) h+=crossView(cr,done.length);
-  h+=sentencesView();
-  h+=dailyView();
-  h+=notesView();
-  h+=loopView();
-  h+=keepView();
+  if(_printing){
+    nav.hidden=true;
+    h=mapView(A,bn,done)+readView(A,cr,done)+changeView()+recordView();
+  }else{
+    const tab=curTab(), tt=tabOf(tab);
+    drawNav(tab);
+    let inner='';
+    if(tab==='map')        inner=mapView(A,bn,done);
+    else if(tab==='read')  inner=readView(A,cr,done);
+    else if(tab==='change')inner=changeView();
+    else                   inner=recordView();
+    h='<div class="panel" style="--tc:'+tt.c+';--tbd:'+tt.d+'">'+inner+'</div>'+stepNav(tab);
+  }
   app.innerHTML=h;
   bindDesign(bn);
   scrollToHash();
 }
 
+/* ───────── 탭 ───────── */
+const IC={
+ map:'<path d="M1 4.2 6 2l5 2.2L15.4 2.4a.4.4 0 0 1 .6.4v9.5l-4.6 1.8-5-2.2L1.6 13.7a.4.4 0 0 1-.6-.4V4.2Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M6 2v9.7M11 4.2V14" stroke="currentColor" stroke-width="1.5"/>',
+ read:'<circle cx="8.5" cy="5.5" r="3.2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 15c0-3.2 2.7-5 6-5s6 1.8 6 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
+ change:'<path d="M2 13.5 6 8.5l3 2.6L14.5 3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.6 3h4v4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>',
+ record:'<rect x="3" y="1.8" width="10.5" height="12.6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5.8 5.6h5M5.8 8.3h5M5.8 11h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>'};
+const TABS=[
+ {k:'map',   no:'01',n:'나의 지도',c:'#3E6FD1',b:'#EAF1FC',d:'#CDDFF6'},
+ {k:'read',  no:'02',n:'나를 읽기',c:'#CE6288',b:'#FCECF1',d:'#F4D2DE'},
+ {k:'change',no:'03',n:'나의 변화',c:'#E0A03A',b:'#FDF4E2',d:'#F3E0BB'},
+ {k:'record',no:'04',n:'나의 기록',c:'#3FAE93',b:'#E7F5F1',d:'#C6E7DE'}];
+const TABK=TABS.map(t=>t.k);
+let _printing=false;
+function curTab(){
+  const hh=(location.hash||'').replace('#','');
+  if(TABK.indexOf(hh)>=0)return hh;
+  if(hh==='write')return 'record';
+  return 'map';
+}
+function tabOf(k){return TABS.filter(t=>t.k===k)[0]||TABS[0]}
+function drawNav(tab){
+  const nav=document.getElementById('tabnav');
+  nav.hidden=false;
+  nav.innerHTML='<div class="tabnav-in">'+TABS.map(function(t){
+    return '<a class="'+(t.k===tab?'on':'')+'" href="#'+t.k+'" style="--tc:'+t.c+';--tb:'+t.b+';--tbd:'+t.d+'">'
+     +'<span class="tno">'+t.no+'</span><span class="tnm">'+t.n+'</span>'
+     +'<span class="tni"><svg viewBox="0 0 17 17" xmlns="http://www.w3.org/2000/svg">'+IC[t.k]+'</svg></span></a>';
+  }).join('')+'</div>';
+}
+function stepNav(tab){
+  const i=TABS.map(t=>t.k).indexOf(tab);
+  let h='<div class="stepnav no-print">';
+  if(i>0)  h+='<a class="sb" href="#'+TABS[i-1].k+'">\u2190 '+TABS[i-1].n+'</a>';
+  if(i<TABS.length-1) h+='<a class="sb pri" href="#'+TABS[i+1].k+'">'+TABS[i+1].n+' \u2192</a>';
+  else h+='<a class="sb" href="#map">\u2190 처음으로</a>';
+  return h+'</div>';
+}
+function printAll(){
+  _printing=true; render();
+  setTimeout(function(){ window.print(); _printing=false; render(); },350);
+}
+
 window.addEventListener('hashchange',()=>{
   const hh=(location.hash||'');
-  if(hh==='#design'||_wasDesign){ _wasDesign=(hh==='#design'); render(); return; }
-  scrollToHash();
+  _wasDesign=(hh==='#design');
+  const t=curTab();
+  const before=_curTab; _curTab=t;
+  render();
+  if(hh!=='#write'&&hh.indexOf('#sec-')!==0) window.scrollTo(0,0);
 });
+let _curTab='map';
 let _wasDesign=false;
 function openDesign(){ _wasDesign=true; location.hash='#design'; }
 function closeDesign(){ _wasDesign=false; location.hash=''; history.replaceState(null,'',location.pathname+location.search); render(); }
@@ -663,18 +881,71 @@ function emptyView(){
   t+='<div class="note"><b>이미 진단하신 적이 있다면</b>결과는 진단하신 그 브라우저에 저장됩니다. 다른 기기에서 하셨다면, 그때 받아두신 보관 링크를 열어 주세요.</div>';
   return t;
 }
-function todoRow(d){
+function todoRow(d,st){
   const m=P&&P.modules?P.modules[d.k]:null;
+  const cls=st==='next'?' next':(st==='dim'?' dim':'');
   const grp=(d.g||'')+(d.o?' '+d.o:'');
   const head='<div class="td-grp">'+grp+'</div>';
   if(m){
     const ts=(m.ts||'').replace(/-/g,'.').slice(5);
     return '<a class="todo done" href="'+d.url+'"><div class="ic" style="background:'+d.c+'">'+(d.o||d.s)+'</div>'
-     +'<div class="tb">'+head+'<div class="tt">'+d.n+' <span class="done-badge">완료 '+ts+'</span></div>'
-     +'<div class="td">'+d.d+' · 다시 하면 최신 결과로 바뀝니다</div></div><div class="ar">다시 하기</div></a>';
+     +'<div class="tb">'+head+'<div class="tq">'+(d.q||d.n)+' <span class="done-badge">답하셨습니다 '+ts+'</span></div>'
+     +'<div class="td">'+d.n+' · '+d.d+' · 다시 하면 최신 결과로 바뀝니다</div></div><div class="ar">다시 하기</div></a>';
   }
-  return '<a class="todo" href="'+d.url+'"><div class="ic" style="background:'+d.c+'">'+(d.o||d.s)+'</div>'
-   +'<div class="tb">'+head+'<div class="tt">'+d.n+'</div><div class="td">'+d.d+'</div></div><div class="ar">→</div></a>';
+  return '<a class="todo'+cls+'" href="'+d.url+'"><div class="ic" style="background:'+d.c+'">'+(d.o||d.s)+'</div>'
+   +'<div class="tb">'+head+'<div class="tq">'+(d.q||d.n)+'</div><div class="td">'+d.n+' · '+d.d+'</div></div>'
+   +'<div class="ar">'+(st==='next'?'시작하기 →':'→')+'</div></a>';
+}
+
+/* ───────── 여정 지도 ─────────
+   N.E.E.D는 동시에 존재하는 네 지표가 아니라 순차적 네 단계다(브랜드 가이드 §3-3).
+   레이더는 균형을 보는 보조 도구로 내리고, 순서를 보여주는 그림을 앞에 둔다. */
+const JOURNEY={
+  N :{no:'①',t:'내가 원하는 것을 읽다',           en:'N · Need Scan',        open:'욕구 출발점 진단',   ourl:BASE+'/needscan/'},
+  E1:{no:'②',t:'나를 흐리게 하는 것을 덜어내다',   en:'E · Eliminate Noise',  open:'잡음 오염도 진단',   ourl:BASE+'/newnoise/'},
+  E2:{no:'③',t:'에너지를 중요한 곳에 정렬하다',     en:'E · Energy Alignment', open:'생명성 정렬 진단',   ourl:BASE+'/alignment/'},
+  D :{no:'④',t:'내 기준으로 오늘을 쓰다',          en:'D · Daily Authorship', open:'나다움 설계 현황 진단', ourl:BASE+'/need/'}
+};
+const TINT={N:{bg:'#F2F7FD',bd:'#D2E3F6',glow:'rgba(41,121,200,.30)'},
+            E1:{bg:'#F2FAF5',bd:'#D0EBDB',glow:'rgba(61,170,107,.30)'},
+            E2:{bg:'#FDF9F0',bd:'#EFE0BC',glow:'rgba(201,152,58,.32)'},
+            D:{bg:'#F7F4FE',bd:'#E0D4FB',glow:'rgba(139,92,246,.32)'}};
+function journeyView(A,bn,nocap){
+  const ks=['N','E1','E2','D'];
+  const open=ks.filter(k=>A[k].v!==null).length;
+  let h='<div class="jn">'+(nocap?'':'<div class="jn-cap">나의 설계 여정</div>')
+   +'<div class="jn-tip"><i>·</i>지금의 나</div>';
+  ks.forEach(k=>{
+    const a=A[k],j=JOURNEY[k],has=a.v!==null,here=!!(bn&&bn.key===k);
+    h+='<div class="jn-row'+(has?' on':'')+(here?' here':'')+'" style="--jc:'+a.c+'">'
+     +'<div class="jn-rail"><span class="jn-dot">'+j.no+'</span></div>'
+     +'<div class="jn-body"><div class="jn-t">'+j.t+(here?'<span class="jn-here">지금 여기</span>':'')+'</div>'
+     +'<div class="jn-meta"><span class="jn-ax">'+a.name+'</span><span class="jn-v">'+(has?a.v:'—')+'</span></div>'
+     +'<div class="jn-en">'+j.en+'</div>'
+     +(has?'':'<div class="jn-open"><a href="'+j.ourl+'">'+j.open+'</a>'+(jong(j.open)?'으로':'로')+' 열립니다</div>')
+     +'</div></div>';
+  });
+  h+='<div class="jn-tip"><i>▲</i>나답게 선택하는 삶</div>';
+  let pg;
+  if(open>=4) pg='네 칸이 모두 밝아졌습니다. 이제부터는 점수보다 <b>선의 방향</b>을 보실 차례입니다.';
+  else if(open===0) pg='아직 밝아진 칸이 없습니다. 어느 칸부터 여셔도 됩니다.';
+  else pg='네 칸 중 <b>'+open+'칸</b>이 밝아졌습니다. 질문 하나에 답하실 때마다 한 칸씩 열립니다. '
+        +'네 칸을 다 채우셔야 하는 것은 아닙니다.';
+  h+='<div class="jn-prog">'+pg+'</div></div>';
+  return h;
+}
+
+/* 표지 바로 아래 — 오늘 시작할 자리 */
+function heroCta(bn){
+  if(!bn)return '';
+  const n=P.designs.length, t=TINT[bn.key]||TINT.N;
+  return '<div class="hero-cta" style="--ac:'+bn.c+';--glow:'+t.glow+'">'
+   +'<div class="hc-eb">오늘 시작할 자리</div>'
+   +'<div class="hc-h">'+bn.name+'</div>'
+   +'<div class="hc-d">'+(AXIS_DEF[bn.key]||'')+'</div>'
+   +'<button class="hc-btn no-print" onclick="openDesign()">'+(n?'오늘의 설계 이어서 하기':'오늘의 설계 시작하기')+' →</button>'
+   +'<div class="hc-f">'+(n?'지금까지 '+n+'개의 문장을 남기셨습니다':'1분이면 됩니다. 문장 하나만 남기시면 됩니다')+'</div>'
+   +'</div>';
 }
 
 function coverView(done){
@@ -682,7 +953,7 @@ function coverView(done){
   let h='<div class="cover"><span class="badge">나다움 설계 리포트</span>'
    +'<h1>왜 어떤 일은 나를 살리고,<br>어떤 일은 나를 지치게 할까</h1>'
    +'<p class="lead">지금까지 하신 진단을 한자리에 모아 읽고, 오늘 시작할 설계 한 문장을 남기는 자리입니다.</p>'
-   +'<div class="meta-line"><span>리포트 '+P.id+'</span><span>진단 '+done.length+' / '+DIAGS.length+'</span>';
+   +'<div class="meta-line"><span>리포트 '+P.id+'</span><span>답한 질문 '+done.length+'개</span>';
   if(dates.length)h+='<span>'+dates[0].replace(/-/g,'.')+' ~ '+dates[dates.length-1].replace(/-/g,'.')+'</span>';
   if(P.designs.length)h+='<span>설계 문장 '+P.designs.length+'</span>';
   h+='</div></div>';
@@ -711,58 +982,165 @@ function radar(A){
   return '<div class="radar-box"><svg viewBox="0 0 '+S+' '+S+'" xmlns="http://www.w3.org/2000/svg">'+g+'</svg></div>';
 }
 
-function summaryView(A,bn,done){
-  let h='<div class="sec">'+sn()+'<h2>한 장 요약</h2>'
-   +'<p class="sub">N.E.E.D 네 단계를 축으로 지금 상태를 봅니다. 네 축 모두 높을수록 선명한 상태입니다.</p>';
-  h+='<div class="axes-wrap">'+radar(A);
+function mapView(A,bn,done){
+  const ks=['N','E1','E2','D'], openN=ks.filter(k=>A[k].v!==null).length;
+  let h='<div class="two"><div>'+coverView(done)
+   +'<div class="guide"><div class="gt">해석 가이드</div>'
+   +'<p>각 칸의 점수는 지금 이 시기의 상태를 보여줍니다. 어느 칸부터 보셔도 되지만, 앞 단계부터 보시면 뒤가 한결 쉬워집니다.</p></div>'
+   +'</div><div>';
+  h+='<div class="sec">'+sn()+'<h2>나의 지도</h2>'
+   +'<p class="sub">이 지도는 나를 평가하기 위한 것이 아닙니다. 지금 내 삶을 어디에서부터 살펴보면 좋을지 보여줍니다.</p>';
+  h+='<div class="axes-wrap">'+(openN>=3?radar(A):'');
+  ks.forEach(k=>{
+    const a=A[k],has=a.v!==null;
+    h+='<div class="axis-row'+(has?'':' empty')+'"><div class="axis-key" style="'+(has?'color:'+a.c:'')+'">'+k+'</div>'
+     +'<div class="axis-mid"><div class="axis-name">'+a.name+'</div>'
+     +'<div class="axis-stage">'+a.stage+'</div>'
+     +'<div class="axis-track"><div class="axis-fill" style="width:'+(has?a.v:0)+'%;background:'+(has?a.c:'#E8E8F0')+'"></div></div></div>'
+     +'<div class="axis-val">'+(has?a.v:'\u2014')+'</div></div>';
+    if(!has){
+      const j=JOURNEY[k];
+      h+='<div class="axis-open">아직 열지 않은 칸입니다 &mdash; <a href="'+j.ourl+'">'+j.open+'</a>'+(jong(j.open)?'을':'를')+' 마치시면 여기에 숫자가 들어옵니다.</div>';
+    }
+  });
+  h+='</div>';
+  h+='<div class="guard">점수가 낮다고 나쁜 것도, 높다고 좋은 것도 아닙니다. 지금 나에게 필요한 <b>출발점</b>을 찾는 것이 목적입니다.</div>';
+  h+='</div></div></div>';
+  if(bn){
+    const seq=AXIS_SEQ.join(' \u2192 '), t=TINT[bn.key]||TINT.N;
+    h+='<div class="sec">'+sn()+'<h2>지금 내가 먼저 살펴볼 곳</h2>'
+     +'<div class="bottleneck" style="--ac:'+bn.c+';--bnbg:'+t.bg+';--bnbd:'+t.bd+'">'
+     +'<div class="t">'+((JOURNEY[bn.key]||{}).en||'')+'</div>'
+     +'<div class="h">'+bn.name+' '+bn.v+'</div>'
+     +'<div class="bdef">'+(AXIS_DEF[bn.key]||'')+'</div>'
+     +'<div class="b">이 숫자는 <b>잘하고 있지 못하다</b>는 뜻이 아닙니다. '
+     +'지금의 나를 조금 더 이해하면 <b>삶의 방향이 가장 크게 달라질 수 있는 곳</b>이라는 뜻입니다. '
+     +'네 단계는 순서대로(<b>'+seq+'</b>) 이어질 때 힘이 붙기 때문에, 앞쪽 단계일수록 먼저 보시는 편이 좋습니다.</div>'
+     +'<button class="bn-go no-print" onclick="openDesign()">오늘의 설계 시작하기 \u2192</button>'
+     +'<div class="bfoot">오늘의 설계는 1분이면 됩니다. 한 문장만 남기시면 됩니다.</div></div></div>';
+  }
+  h+='<div class="sec">'+sn()+'<h2>나의 설계 여정</h2>'
+   +'<p class="sub">나다움 설계는 네 단계로 이어집니다. 지금 어디까지 열렸는지 한눈에 보십시오.</p>'
+   +journeyView(A,bn,true)
+   +'<a class="btn ghost" href="#read" style="display:block;text-align:center;text-decoration:none">나를 읽는 6개의 질문 보기 \u2192</a>'
+   +'</div>';
+  return h;
+}
+
+function readView(A,cr,done){
+  const m=P.modules;
+  const dn=DIAGS.filter(d=>P.modules[d.k]).length;
+  const STEPMSG=['어느 질문부터 답하셔도 됩니다.','나에 대해 한 가지를 발견하셨습니다.','나의 패턴이 조금씩 보이기 시작합니다.',
+                 '무엇이 나를 흐리게 하는지 보이기 시작합니다.','네 축이 서로 어떻게 얽혀 있는지 보입니다.',
+                 '거의 다 오셨습니다. 하나만 더 답하시면 전체 그림이 완성됩니다.',''];
+  let qs;
+  if(dn>=DIAGS.length){
+    qs='여섯 질문에 모두 답하셨습니다. 이제 시간을 두고 다시 답해 보시면, 무엇이 달라졌는지 보이기 시작합니다.';
+  }else{
+    qs=(STEPMSG[dn]||'')+' 여섯 개를 다 하실 필요는 없습니다. 하나에 답할 때마다 지도가 한 칸씩 밝아집니다.'
+      +(m.needscan&&m.tendency?'':' <b>첫 칸(욕구 출처 탐색)에는 질문이 두 개</b> 있습니다. 하나만 하셔도 되지만 둘 다 하시면 더 또렷해집니다.');
+  }
+  let h='<div class="sec">'+sn()+'<h2>나를 읽는 6개의 질문</h2>'
+   +'<p class="sub">'+dn+'개에 답하셨습니다. '+qs+'</p>';
+  const todo=DIAGS.filter(d=>!m[d.k]), fin=DIAGS.filter(d=>m[d.k]);
+  if(todo.length){
+    h+='<div class="q-grp">다음에 살펴볼 질문</div>';
+    h+=todoRow(todo[0],'next');
+    if(todo.length>1){
+      h+='<div class="q-grp">그 다음 질문들</div>';
+      todo.slice(1).forEach(d=>{h+=todoRow(d,'dim')});
+    }
+  }
+  if(fin.length){
+    h+='<div class="q-grp">이미 답하신 질문</div>';
+    fin.forEach(d=>{h+=todoRow(d)});
+  }
+  h+='</div>';
+  h+='<div class="sec">'+sn()+'<h2>지금까지 읽은 것</h2>'
+   +'<p class="sub">답하신 질문이 네 축으로 어떻게 모이는지 보여줍니다.</p>';
+  h+='<div class="axes-wrap">';
   ['N','E1','E2','D'].forEach(k=>{
     const a=A[k],has=a.v!==null;
     h+='<div class="axis-row'+(has?'':' empty')+'"><div class="axis-key" style="'+(has?'color:'+a.c:'')+'">'+k+'</div>'
      +'<div class="axis-mid"><div class="axis-name">'+a.name+'</div>'
      +'<div class="axis-stage">'+a.stage+'</div>'
      +'<div class="axis-track"><div class="axis-fill" style="width:'+(has?a.v:0)+'%;background:'+(has?a.c:'#E8E8F0')+'"></div></div></div>'
-     +'<div class="axis-val">'+(has?a.v:'—')+'</div></div>';
+     +'<div class="axis-val">'+(has?a.v:'\u2014')+'</div></div>';
     if(a.feeds&&a.feeds.length){
       const chips=a.feeds.map(function(fk){
         const d=DIAGS.filter(x=>x.k===fk)[0]; if(!d)return '';
         const ok=!!P.modules[fk];
-        return '<span class="feed'+(ok?' on':'')+'">'+(ok?'✓ ':'')+d.n.replace(' 진단','')+'</span>';
+        return '<span class="feed'+(ok?' on':'')+'">'+(ok?'\u2713 ':'')+d.n.replace(' 진단','')+'</span>';
       }).join('');
       const cnt=a.feeds.filter(fk=>P.modules[fk]).length;
       h+='<div class="feed-row"><span class="feed-lab">이 축을 읽는 진단 '+cnt+'/'+a.feeds.length+'</span>'+chips+'</div>';
       if(a.feeds.indexOf('temperament')>=0)
-        h+='<div class="feed-note">기질·동기·잡음 진단은 한 번에 세 가지를 재기 때문에 '+(k==='N'?'동기(자율성) 부분이 이 축에':'잡음 부분이 이 축에')+' 들어갑니다.</div>';
-    }else if(!has){
-      h+='<div style="font-size:11.5px;color:#A0AAC0;margin:-4px 0 12px 46px">아직 열리지 않은 축 · '+a.need+'</div>';
+        h+='<div class="feed-note">기질\u00b7동기\u00b7잡음 진단은 한 번에 세 가지를 재기 때문에 '+(k==='N'?'동기(자율성) 부분이 이 축에':'잡음 부분이 이 축에')+' 들어갑니다.</div>';
     }
   });
   h+='</div>';
-  if(bn){
-    const seq=AXIS_SEQ.join(' → ');
-    h+='<div class="bottleneck"><div class="t">우선적으로 개선할 포인트</div>'
-     +'<div class="h">'+bn.name+'</div>'
-     +'<div class="bdef">'+(AXIS_DEF[bn.key]||'')+'</div>'
-     +'<div class="b">현재 나다움 설계 측면에서 <b>'+bn.name+'</b>'+(jong(bn.name)?'이':'가')+' 가장 낮게('+bn.v+') 나왔습니다. '
-     +'나다움 설계는 가능한 한 순차적으로(<b>'+seq+'</b>) 이루어졌을 때 효과적입니다. '
-     +'우선적으로 '+jo(bn.name,'을','를')+' 개선할 필요가 있습니다.</div>'
-     +'<button class="bn-go no-print" onclick="openDesign()">'+bn.name+' 개선, <b>이것</b>부터 해보십시오 →</button>'
-     +'<div class="bfoot">하루 1분 투자로 더 나다운 삶을 살 수 있습니다.</div></div>';
-  }
-  const m=P.modules;
   if(m.tendency&&m.tendency.flag!=='low'){
     h+='<div class="card"><div style="font-size:11px;letter-spacing:1px;color:#6B7393;font-weight:700;margin-bottom:7px">지금 시기의 에너지 흐름</div>'
      +'<div style="font-size:16px;font-weight:800;line-height:1.5">주된 흐름 '+FLOWKEY[m.tendency.main]+' 중심'
-     +(m.tendency.sub?' · 보조 흐름 '+FLOWKEY[m.tendency.sub]+' 중심':'')+'</div>'
+     +(m.tendency.sub?' \u00b7 보조 흐름 '+FLOWKEY[m.tendency.sub]+' 중심':'')+'</div>'
      +'<div style="font-size:13px;color:#6B7393;margin-top:6px">'+CHARS[m.tendency.main]+' 패턴'
      +(m.tendency.sub?' + '+CHARS[m.tendency.sub]+' 패턴':'')+'</div></div>';
   }
   const vcTop=valueCardFromDiag();
   if(vcTop)h+=vcTop;
-  const restN=DIAGS.filter(d=>!P.modules[d.k]).length;
-  h+='<div class="sub" style="margin:20px 0 4px"><b>진단 현황</b> — '+(DIAGS.length-restN)+' / '+DIAGS.length+' 완료</div>';
-  h+='<p class="sub" style="margin:0 0 10px"><b>욕구 출처 탐색(N)</b> 단계에는 2개의 진단이 있습니다. 한 가지만 하셔도 되지만, 두 개를 다 하시면 더 정확한 결과를 받아보실 수 있습니다.</p>';
-  DIAGS.forEach(d=>{h+=todoRow(d)});
   h+='</div>';
+  if(cr&&cr.length>=1) h+=crossView(cr,done.length);
+  return h;
+}
+
+function changeView(){
+  const H=(P.history||[]);
+  let h='<div class="sec">'+sn()+'<h2>처음의 나 \u2192 지금의 나</h2>';
+  if(H.length<2){
+    h+='<p class="sub">같은 질문에 시간을 두고 다시 답하시면, 그 사이에 무엇이 달라졌는지 여기에 남습니다.</p>'
+     +'<div class="empty-tab">지금은 첫 기록 한 개만 있습니다.<br>한 달 뒤 또는 한 분기 뒤에 다시 답해 보세요.<br>'
+     +'이전 점수가 사라지지 않고 나란히 남습니다.'
+     +'<a class="btn ghost" href="#record" style="text-decoration:none;margin-top:14px;display:inline-block">다시 볼 날짜 정해 두기 \u2192</a></div></div>';
+    return h;
+  }
+  const first=H[0], last=H[H.length-1];
+  h+='<p class="sub">'+String(first.t).replace(/-/g,'.')+'에 처음 답하셨고, 가장 최근 기록은 '+String(last.t).replace(/-/g,'.')+'입니다.</p>';
+  TRAX.forEach(function(ax,ai){
+    let f=null,l=null;
+    for(let i=0;i<H.length;i++){ if(H[i].a[ai]!=null){ f=H[i].a[ai]; break } }
+    for(let j=H.length-1;j>=0;j--){ if(H[j].a[ai]!=null){ l=H[j].a[ai]; break } }
+    if(f==null||l==null)return;
+    const d=l-f, sgn=d>0?'+'+d:(d<0?String(d):'변화 없음');
+    const cls=d>2?'tup':(d<-2?'tdown':'tflat');
+    h+='<div class="fnn"><div><div class="fl">처음의 나</div><div class="fd">'+String(first.t).slice(2).replace(/-/g,'.')+'</div>'
+     +'<div class="fv">'+f+'</div><div class="fu">'+ax.n+'</div></div>'
+     +'<div style="border-color:'+ax.c+'44"><div class="fl" style="color:'+ax.c+'">지금의 나</div><div class="fd">'+String(last.t).slice(2).replace(/-/g,'.')+'</div>'
+     +'<div class="fv" style="color:'+ax.c+'">'+l+'</div><div class="fu '+cls+'">'+sgn+'</div></div>'
+     +'<div class="nxt"><div class="fl">다음의 나</div><div class="fd">아직</div>'
+     +'<div class="fv">?</div><div class="fu">다시 답하면</div></div></div>';
+  });
+  h+='</div>';
+  h+=trendView();
+  h+='<div class="sec">'+sn()+'<h2>다음의 나</h2>'
+   +'<p class="sub">변화는 다시 답해야 보입니다. 다음에 볼 날짜를 정해 두시면 그날 알림이 옵니다.</p>'
+   +'<a class="btn" href="#record" style="display:block;text-align:center;text-decoration:none">다시 볼 날짜 정해 두기 \u2192</a></div>';
+  return h;
+}
+
+function recordView(){
+  let h='';
+  const has=(P.designs&&P.designs.length);
+  if(!has){
+    h+='<div class="sec">'+sn()+'<h2>오늘의 설계 문장</h2>'
+     +'<p class="sub">이 리포트의 결과물은 점수가 아니라, 여러분이 직접 남긴 한 문장입니다.</p>'
+     +'<div class="empty-tab">아직 남기신 문장이 없습니다.<br>&ldquo;나는 ______을 더 중요하게 여기겠습니다.&rdquo;<br>이 한 문장이면 시작됩니다.'
+     +'<button class="btn" style="margin-top:14px" onclick="openDesign()">오늘의 설계 시작하기 \u2192</button></div></div>';
+  }
+  h+=sentencesView();
+  h+=dailyView();
+  h+=notesView();
+  h+=loopView();
+  h+=keepView();
   return h;
 }
 
@@ -1005,14 +1383,97 @@ function toggleValue(k){
   P.updated=today();save(P);render();
 }
 
+function trendView(){
+  var H=(P.history||[]);
+  var h='<div class="sec" id="sec-trend">'+sn()+'<h2>변화 기록</h2>';
+  if(H.length<2){
+    h+='<p class="sub">한 달 뒤, 한 분기 뒤, 또는 나에게 큰 변화가 있을 때 같은 진단을 다시 해 보세요. '
+      +'그때부터 이 자리에 네 축이 어떻게 움직였는지 선으로 그려집니다.</p>'
+      +'<div class="trend-empty">지금은 첫 기록 한 개만 있습니다.<br>'
+      +'다시 진단하시면 이전 점수가 사라지지 않고 나란히 남습니다.</div></div>';
+    return h;
+  }
+  var n=H.length, X0=36, X1=306, Y0=14, Y1=150;
+  var px=function(i){ return n===1?(X0+X1)/2 : X0+i*(X1-X0)/(n-1) };
+  var py=function(v){ return Y1-(v/100)*(Y1-Y0) };
+  var g='';
+  [0,25,50,75,100].forEach(function(v){
+    var y=py(v);
+    g+='<line x1="'+X0+'" y1="'+y+'" x2="'+X1+'" y2="'+y+'" stroke="#EDF0F6" stroke-width="1"/>'
+      +'<text x="'+(X0-7)+'" y="'+(y+3.5)+'" font-size="9" fill="#A0AABF" text-anchor="end">'+v+'</text>';
+  });
+  TRAX.forEach(function(ax,ai){
+    var segs=[],cur=[];
+    H.forEach(function(e,i){
+      var v=(e.a||[])[ai];
+      if(v==null){ if(cur.length)segs.push(cur); cur=[]; }
+      else cur.push([px(i),py(v)]);
+    });
+    if(cur.length)segs.push(cur);
+    segs.forEach(function(sg){
+      if(sg.length>1){
+        g+='<polyline fill="none" stroke="'+ax.c+'" stroke-width="2.2" stroke-linecap="round" '
+          +'stroke-linejoin="round" points="'+sg.map(function(q){return q[0].toFixed(1)+','+q[1].toFixed(1)}).join(' ')+'"/>';
+      }
+      sg.forEach(function(q,j){
+        var lastPt=(sg===segs[segs.length-1]&&j===sg.length-1);
+        g+='<circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="'+(lastPt?3.4:2.4)+'" fill="#fff" stroke="'+ax.c+'" stroke-width="'+(lastPt?2.4:1.8)+'"/>';
+      });
+    });
+  });
+  var step=n<=5?1:Math.ceil(n/4);
+  H.forEach(function(e,i){
+    if(i%step!==0 && i!==n-1) return;
+    var lb=String(e.t).slice(5).replace('-','.');
+    g+='<text x="'+px(i).toFixed(1)+'" y="167" font-size="9.5" fill="#8A93A8" text-anchor="middle">'+lb+'</text>';
+  });
+  h+='<p class="sub">진단을 다시 하실 때마다 한 점씩 찍힙니다. 위로 갈수록 그 축이 선명해진 것입니다.</p>'
+   +'<div class="trend-box"><svg viewBox="0 0 320 176" xmlns="http://www.w3.org/2000/svg">'+g+'</svg>'
+   +'<div class="trend-leg">'+TRAX.map(function(a){
+       return '<span><i style="background:'+a.c+'"></i>'+a.n+'</span>'}).join('')+'</div></div>';
+  var first=H[0], last=H[n-1], deltas=[];
+  h+='<div class="trend-delta">'+TRAX.map(function(ax,ai){
+    var f=null,l=null;
+    for(var i=0;i<n;i++){ if(H[i].a[ai]!=null){ f=H[i].a[ai]; break } }
+    for(var j=n-1;j>=0;j--){ if(H[j].a[ai]!=null){ l=H[j].a[ai]; break } }
+    var body;
+    if(f==null||l==null){ body='<div class="tdv tflat">—</div>'; }
+    else{
+      var d=l-f; deltas.push({n:ax.n,d:d});
+      var cls=d>2?'tup':(d<-2?'tdown':'tflat');
+      var sgn=d>0?'+'+d:(d<0?String(d):'변화 없음');
+      body='<div class="tdv '+cls+'">'+l+'<span style="font-size:11.5px;font-weight:600;margin-left:6px">'+sgn+'</span></div>';
+    }
+    return '<div><div class="tdn">'+ax.n+'</div>'+body+'</div>';
+  }).join('')+'</div>';
+  var span=String(first.t).replace(/-/g,'.')+' → '+String(last.t).replace(/-/g,'.');
+  var note='<b>'+span+'</b> 사이의 변화입니다. ';
+  if(deltas.length){
+    deltas.sort(function(a,b){return b.d-a.d});
+    var up=deltas[0], dn=deltas[deltas.length-1];
+    if(up.d>2) note+=jo(up.n,'이','가')+' 가장 많이 올랐습니다. ';
+    if(dn.d<-2) note+=jo(dn.n,'은','는')+' 내려갔습니다. 이번 달에 먼저 볼 곳입니다.';
+    else if(up.d<=2) note+='네 축 모두 큰 변동은 없습니다. 지금 리듬이 유지되고 있다는 뜻입니다.';
+  }
+  note+='<br>점수 자체보다 <b>선의 방향</b>을 보세요. 한 번의 점수는 그날의 상태이고, 이어진 선이 여러분의 기록입니다.';
+  h+='<div class="trend-note">'+note+'</div></div>';
+  return h;
+}
+
 function loopView(){
-  return '<div class="sec">'+sn()+'<h2>기억을 도와주는 일정 등록을 해 보세요</h2>'
-   +'<p class="sub">설계는 한 번으로 완성되지 않습니다. 한 달 뒤 또는 한 분기 뒤, 나에게 변화가 생겼을 때마다 기록해 두시면 '
-   +'여러분의 나다움 설계 역사를 한눈에 볼 수 있습니다.</p>'
+  return '<div class="sec">'+sn()+'<h2>다시 볼 날짜를 미리 정해 두세요</h2>'
+   +'<p class="sub">기억에 맡기면 대부분 잊습니다. 다시 볼 날을 지금 캘린더에 넣어 두시면, '
+   +'그날 알림이 오고 위의 변화 기록에 점이 하나 더 찍힙니다.</p>'
    +'<div class="card"><div style="font-size:14.5px;line-height:1.75;color:#2D3748;word-break:keep-all">'
-   +'"그 문장, 지켜졌나요?" — 4주 뒤 이 자리로 돌아오시도록 일정에 담아 두실 수 있습니다. '
-   +'알림이나 이메일을 보내지 않습니다. 캘린더에만 담깁니다.</div>'
-   +'<div class="btn-row no-print" style="margin-top:14px"><button class="btn ghost" onclick="makeICS()">📅 캘린더에 담기</button></div></div></div>';
+   +'&quot;그 문장, 지켜졌나요?&quot; — 캘린더에 담으시면 <b>그날 오전 9시에 휴대폰이 알려줍니다.</b> '
+   +'일정 안에 보관 링크도 같이 들어가니, 기기를 바꾸셔도 그 링크로 이어서 보실 수 있습니다.<br>'
+   +'저희가 이메일이나 문자를 보내지는 않습니다. 여러분의 캘린더에만 담깁니다.</div>'
+   +'<div class="btn-row ics-row no-print" style="margin-top:14px">'
+   +'<button class="btn" onclick="makeICS(&#39;once&#39;)">4주 뒤</button>'
+   +'<button class="btn ghost" onclick="makeICS(&#39;month&#39;)">매달</button>'
+   +'<button class="btn ghost" onclick="makeICS(&#39;quarter&#39;)">3개월마다</button>'
+   +'</div><div class="ics-hint">매달은 1년치, 3개월마다는 2년치 반복 일정으로 담깁니다. 언제든 캘린더에서 지우실 수 있습니다.</div>'
+   +'</div></div>';
 }
 
 function keepView(){
@@ -1024,7 +1485,7 @@ function keepView(){
    +'다음에 다시 보시려면 아래 보관 링크를 카톡 &quot;나에게 보내기&quot;로 남겨 두시는 편이 안전합니다.</div>'
    +'<div class="btn-row"><button class="btn" onclick="copyKeep()">🔗 보관 링크 복사</button>'
    +'<button class="btn ghost" onclick="shareKeep()">보내기</button></div>'
-   +'<div class="btn-row"><button class="btn ghost" onclick="window.print()">🖨 인쇄 · PDF로 저장</button>'
+   +'<div class="btn-row"><button class="btn ghost" onclick="printAll()">🖨 인쇄 · PDF로 저장</button>'
    +'<button class="btn ghost" onclick="dlJSON()">백업 파일</button></div>'
    +'<div class="soon"><b>장기 보관 — 준비 중입니다</b>'
    +'나만의 기록을 오래 보관하고 싶으신 분을 위해, 회원가입(무료)으로 기록을 계속 이어서 보관·관리하는 기능을 준비하고 있습니다. '
@@ -1137,30 +1598,36 @@ function icsFold(line){
   return out.join('\r\n');
 }
 function icsEsc(s){return String(s).replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n')}
-function makeICS(){
+function makeICS(mode){
+  mode=mode||'once';
+  const MI={once:{lab:'4주 뒤',rr:'',fn:'4주점검'},
+            month:{lab:'매달',rr:'RRULE:FREQ=MONTHLY;COUNT=12',fn:'매달점검'},
+            quarter:{lab:'3개월마다',rr:'RRULE:FREQ=MONTHLY;INTERVAL=3;COUNT=8',fn:'분기점검'}}[mode];
   const d=new Date();d.setDate(d.getDate()+28);
   const ymd=d.toISOString().slice(0,10).replace(/-/g,'');
   const nx=new Date(d);nx.setDate(nx.getDate()+1);
   const short=BASE+'/report/';
   const keep=keepUrl();
-  const desc='4주 전 남기신 설계 문장을 다시 봅니다.\n\n'
+  const desc=(mode==='once'?'4주 전 남기신 설계 문장을 다시 봅니다.':'지난번 남기신 설계 문장을 다시 봅니다. 진단을 다시 하시면 변화 기록에 점이 하나 더 찍힙니다.')+'\n\n'
     +'· 진단하셨던 기기·브라우저에서 여시면 그대로 이어집니다: '+short+'\n\n'
     +'· 기기를 바꾸셨거나 결과가 사라졌다면 아래 보관 링크로 여세요:\n'+keep;
   const lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//나다움설계연구소//NEED//KO','CALSCALE:GREGORIAN',
-    'BEGIN:VEVENT','UID:need-'+P.id+'-'+ymd+'@nadaumlap.github.io',
+    'BEGIN:VEVENT','UID:need-'+P.id+'-'+mode+'-'+ymd+'@nadaumlap.github.io',
     'DTSTAMP:'+new Date().toISOString().replace(/[-:]/g,'').slice(0,15)+'Z',
     'DTSTART;VALUE=DATE:'+ymd,'DTEND;VALUE=DATE:'+nx.toISOString().slice(0,10).replace(/-/g,''),
     'SUMMARY:'+icsEsc('그 문장, 지켜졌나요? — 나다움 설계 점검'),
     'DESCRIPTION:'+icsEsc(desc),
-    'URL:'+short,
-    'BEGIN:VALARM','TRIGGER:-PT9H','ACTION:DISPLAY',
-    'DESCRIPTION:'+icsEsc('나다움 설계 점검'),'END:VALARM','END:VEVENT','END:VCALENDAR'];
+    'URL:'+short]
+    .concat(MI.rr?[MI.rr]:[])
+    .concat([
+    'BEGIN:VALARM','TRIGGER:PT9H','ACTION:DISPLAY',
+    'DESCRIPTION:'+icsEsc('나다움 설계 점검'),'END:VALARM','END:VEVENT','END:VCALENDAR']);
   const ics=lines.map(icsFold).join('\r\n')+'\r\n';
   const b=new Blob([ics],{type:'text/calendar;charset=utf-8'});
   const a=document.createElement('a');a.href=URL.createObjectURL(b);
-  a.download='나다움설계_4주점검.ics';a.click();
+  a.download='나다움설계_'+MI.fn+'.ics';a.click();
   setTimeout(()=>URL.revokeObjectURL(a.href),1000);
-  toast('4주 뒤 일정을 내려받았습니다');
+  toast(MI.lab+' 일정을 내려받았습니다');
 }
 
 /* ───────── 시작 ───────── */
