@@ -13,6 +13,11 @@
 <meta property="og:image" content="https://nadaumlap.github.io/nadaumneed/report/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="나다움 설계 통합 리포트">
+<meta property="og:site_name" content="나다움설계연구소">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://nadaumlap.github.io/nadaumneed/report/og-image.png">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="나다움설계연구소">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -70,6 +75,12 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
 .bottleneck{border-radius:16px;padding:20px;margin-bottom:14px;background:#FFF5F5;border:1px solid #FBD5D5;border-left:4px solid #E53935}
 .bottleneck .t{font-size:11px;letter-spacing:1px;color:#E53935;font-weight:700;margin-bottom:7px}
 .bottleneck .h{font-size:17px;font-weight:800;margin-bottom:8px;line-height:1.4}
+.bottleneck .bdef{font-size:13.5px;color:#5A6478;line-height:1.75;margin-bottom:10px;padding-bottom:10px;border-bottom:1px dashed #F3CFCC;word-break:keep-all}
+.bottleneck .bdef b{color:#1E2761}
+.bn-go{display:block;width:100%;margin-top:14px;padding:16px;border:none;border-radius:13px;background:linear-gradient(135deg,#1E2761 0%,#33409A 100%);color:#FFF;font-family:inherit;font-size:15.5px;font-weight:700;cursor:pointer;line-height:1.45;box-shadow:0 6px 18px rgba(30,39,97,.24);transition:transform .15s,box-shadow .15s}
+.bn-go:active{transform:translateY(1px)}
+.bn-go b{font-weight:800;color:#FFD98A}
+.bfoot{font-size:13.5px;color:#1E2761;font-weight:700;text-align:center;margin-top:11px}
 .bottleneck .b{font-size:14px;color:#4A5568;line-height:1.7;word-break:keep-all}
 
 /* 교차 해석 */
@@ -83,16 +94,64 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
 .design-box .why{font-size:13px;color:#4A5568;line-height:1.7;margin-bottom:16px;word-break:keep-all}
 .opt-row{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
 .opt{padding:13px 15px;background:#FFF;border:2px solid #E8E8F0;border-radius:11px;font-size:14px;color:#2D3748;cursor:pointer;line-height:1.55;word-break:keep-all;text-align:left}
-@media (hover:hover) and (pointer:fine){.opt:hover{border-color:#2979C8}}
-.opt.on{border-color:#2979C8;background:#E8F4FD;font-weight:600}
+@media (hover:hover) and (pointer:fine){.opt:hover{border-color:var(--ac,#2979C8)}}
+.opt.on{border-color:var(--ac,#2979C8);background:transparent;font-weight:600}
+/* 설계 시트 — 생동감 */
+.design-box{position:relative;overflow:hidden;background:linear-gradient(168deg,color-mix(in srgb,var(--ac,#2979C8) 9%,#FFF) 0%,#FFF 46%);border:1.5px solid color-mix(in srgb,var(--ac,#2979C8) 32%,#FFF);box-shadow:0 10px 30px color-mix(in srgb,var(--ac,#2979C8) 13%,transparent)}
+.design-box::before{content:'';position:absolute;left:0;right:0;top:0;height:5px;background:linear-gradient(90deg,var(--ac,#2979C8) 0%,#F5C95F 52%,var(--ac,#2979C8) 100%)}
+.db-head{display:flex;align-items:center;gap:11px;margin:2px 0 13px}
+.db-ico{width:40px;height:40px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:20px;background:linear-gradient(140deg,var(--ac,#2979C8),#1E2761);box-shadow:0 5px 14px color-mix(in srgb,var(--ac,#2979C8) 34%,transparent);flex-shrink:0}
+.db-head h3{flex:1;font-size:17.5px;font-weight:800;color:#1E2761;line-height:1.4;margin:0;word-break:keep-all}
+.m-card{background:#FFF;border-width:2px}
+.m-pick{gap:12px;padding:15px 15px 12px}
+.m-num{width:26px;height:26px;border-radius:9px;font-size:13.5px;transition:all .16s}
+.m-txt{font-size:14.5px;padding-right:26px}
+.m-card.on .m-txt,.m-card:has(.m-pick.on) .m-txt{color:#1E2761;font-weight:700}
+.m-card.on::after,.m-card:has(.m-pick.on)::after{content:'✓';position:absolute;top:11px;right:13px;width:22px;height:22px;border-radius:50%;background:var(--ac,#2979C8);color:#FFF;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;animation:pop .22s ease}
+.m-card{position:relative}
+@keyframes pop{0%{transform:scale(.4);opacity:0}70%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
+.step-lab{font-size:14px}
+.step-lab i{width:24px;height:24px;font-size:13px;box-shadow:0 3px 9px color-mix(in srgb,var(--ac,#2979C8) 36%,transparent)}
+.fill select,.fill input{border-width:2px;font-weight:600}
+.prev-line{position:relative;overflow:hidden}
+.prev-line.filled::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--ac,#2979C8),#F5C95F)}
+.prev-line.filled{padding-left:18px;animation:slidein .3s ease}
+@keyframes slidein{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}
+.design-box .btn{letter-spacing:-.2px}
+.design-box .btn::after{content:' →'}
+/* 설계 페이지 */
+.dp-top{margin:6px 0 12px}
+.dp-back{padding:11px 15px;border:1.5px solid #D6DEEA;border-radius:11px;background:#FFF;font-family:inherit;font-size:13.5px;font-weight:600;color:#1E2761;cursor:pointer}
+.dp-hero{background:linear-gradient(135deg,var(--ac) 0%,#1E2761 130%);border-radius:20px;padding:26px 22px;margin-bottom:16px;color:#FFF}
+.dp-tag{font-size:11px;font-weight:800;letter-spacing:1.2px;opacity:.85;margin-bottom:9px}
+.dp-h{font-size:23px;font-weight:800;line-height:1.4;margin-bottom:11px;word-break:keep-all;color:#FFF}
+.dp-p{font-size:13.5px;line-height:1.8;opacity:.92;word-break:keep-all}
+.dp-p b{color:#FFE9A8}
+.sec.solo{padding:0;margin-bottom:0}
+.design-box{background:var(--acs,#F1F8FE);border:1.5px solid var(--acl,#BEE3F8)}
+.step-lab i{background:var(--ac,#2979C8)}
+.m-card{transition:transform .14s,box-shadow .14s,border-color .14s,background .14s}
+.m-card.on,.m-card:has(.m-pick.on){border-color:var(--ac,#2979C8);background:#FFF;box-shadow:0 8px 22px color-mix(in srgb,var(--ac,#2979C8) 22%,transparent);transform:translateY(-2px)}
+.m-num{background:#EDF2F9;color:var(--ac,#2979C8)}
+.m-pick.on .m-num{background:var(--ac,#2979C8);color:#FFF;box-shadow:0 0 0 4px color-mix(in srgb,var(--ac,#2979C8) 18%,transparent)}
+.m-pick:active{transform:scale(.995)}
+.m-free input:focus{border-color:var(--ac,#2979C8);box-shadow:0 0 0 3px color-mix(in srgb,var(--ac,#2979C8) 16%,transparent)}
+.fill select:focus,.fill input:focus{border-color:var(--ac,#2979C8)}
+.prev-line{background:#FFF;border:1.5px dashed var(--acl,#BEE3F8);border-radius:12px;padding:13px 14px;margin:10px 0 14px;transition:border-color .2s,background .2s}
+.prev-line.filled{border-style:solid;border-color:var(--ac,#2979C8);background:color-mix(in srgb,var(--ac,#2979C8) 6%,#FFF)}
+.prev-line .pl-lab{background:color-mix(in srgb,var(--ac,#2979C8) 14%,#FFF);color:var(--ac,#2979C8)}
+.design-box .btn{background:linear-gradient(135deg,var(--ac,#2979C8) 0%,#1E2761 130%);box-shadow:0 6px 18px color-mix(in srgb,var(--ac,#2979C8) 28%,transparent);transition:transform .14s,box-shadow .14s;font-size:16px;padding:17px}
+.design-box .btn:active{transform:translateY(1px)}
+.design-box .btn:disabled{opacity:.5;box-shadow:none}
+.m-ex div{background:var(--acs,#F6F8FB)}
 .step-lab{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:800;color:#1E2761;margin:18px 0 9px}
-.step-lab i{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:#2979C8;color:#FFF;font-style:normal;font-size:12.5px;font-weight:800;flex-shrink:0}
+.step-lab i{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;color:#FFF;font-style:normal;font-size:12.5px;font-weight:800;flex-shrink:0}
 .step-note{font-size:12.5px;color:#5A6478;line-height:1.65;margin:-3px 0 12px;word-break:keep-all}
 .m-card{background:#FFF;border:2px solid #E8E8F0;border-radius:11px;overflow:hidden}
-.m-card.on,.m-card:has(.m-pick.on){border-color:#2979C8;background:#E8F4FD}
+.m-card.on,.m-card:has(.m-pick.on){border-color:var(--ac,#2979C8);background:#FFF;box-shadow:0 8px 22px color-mix(in srgb,var(--ac,#2979C8) 22%,transparent);transform:translateY(-2px)}
 .m-pick{display:flex;gap:10px;align-items:flex-start;width:100%;border:none;background:transparent;padding:13px 15px 11px;text-align:left}
-.m-num{display:inline-flex;align-items:center;justify-content:center;width:21px;height:21px;border-radius:6px;background:#EDF2F9;color:#2979C8;font-size:12.5px;font-weight:800;flex-shrink:0;margin-top:1px}
-.m-pick.on .m-num{background:#2979C8;color:#FFF}
+.m-num{display:inline-flex;align-items:center;justify-content:center;width:21px;height:21px;border-radius:6px;background:#EDF2F9;color:var(--ac,#2979C8);font-size:12.5px;font-weight:800;flex-shrink:0;margin-top:1px}
+.m-pick.on .m-num{background:var(--ac,#2979C8);color:#FFF;box-shadow:0 0 0 4px color-mix(in srgb,var(--ac,#2979C8) 18%,transparent)}
 .m-txt{flex:1;font-size:14px;color:#2D3748;line-height:1.6;word-break:keep-all}
 .m-pick.on .m-txt{font-weight:600;color:#1E2761}
 .m-ex-btn{display:block;width:100%;text-align:left;padding:0 15px 11px;border:none;background:transparent;font-family:inherit;font-size:12.5px;color:#6B7393;cursor:pointer}
@@ -105,7 +164,7 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
 .m-free input:focus{outline:none;border-color:#2979C8}
 .design-foot{font-size:12.5px;color:#5A6478;line-height:1.7;margin-top:12px;word-break:keep-all}
 .prev-line{font-size:13px;color:#1E2761;line-height:1.6;margin:2px 0 12px;word-break:keep-all}
-.prev-line .pl-lab{display:inline-block;font-size:11px;font-weight:800;color:#2979C8;background:#E8F4FD;padding:2px 8px;border-radius:99px;margin-right:7px}
+.prev-line .pl-lab{display:inline-block;font-size:11px;font-weight:800;color:var(--ac,#2979C8);background:color-mix(in srgb,var(--ac,#2979C8) 14%,#FFF);padding:2px 8px;border-radius:99px;margin-right:7px}
 .prev-line .pl-empty{color:#8B93A5}
 .fill{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:14px;margin-bottom:14px}
 .fill label{font-size:12px;color:#6B7393;font-weight:600;width:100%;margin-bottom:-2px}
@@ -164,6 +223,8 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
 .chip.on{background:#8B5CF6;color:#FFF;border-color:#8B5CF6}
 
 /* 안내 박스 */
+.soon{padding:14px 16px;border-radius:12px;background:#F5F3FF;border:1px solid #DDD6FE;margin-bottom:12px;font-size:13px;color:#5A5378;line-height:1.75;word-break:keep-all}
+.soon b{display:block;color:#6D28D9;margin-bottom:5px;font-size:13.5px}
 .note{background:#FAFAFD;border:1px dashed #D0D5E2;border-radius:12px;padding:15px 16px;font-size:12.5px;color:#6B7393;line-height:1.7;margin-bottom:12px;word-break:keep-all}
 .note b{color:#1E2761;display:block;margin-bottom:5px;font-size:13px}
 .warn{background:#FFFBEB;border:1px solid #FDE68A;border-radius:12px;padding:15px 16px;font-size:12.5px;color:#78500F;line-height:1.7;margin-bottom:12px;word-break:keep-all}
@@ -187,14 +248,27 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
 .note-row label{display:block;font-size:11.5px;font-weight:700;color:#5A6478;margin-bottom:5px}
 .note-row label span{font-weight:500;color:#98A0B0}
 .note-in{width:100%;font-family:inherit;font-size:14px;padding:10px 12px;border:1.5px solid #E0E6F0;border-radius:10px;background:#FFF;color:#1E2761}
-.note-in:focus{outline:none;border-color:#3DAA6B;background:#FBFFFC}
+.note-in:focus{outline:none;border-color:#3DAA6B;background:#FBFFFC;box-shadow:0 0 0 3px rgba(61,170,107,.16)}
 .nday{margin-bottom:14px}
 .nd-date{font-size:11.5px;font-weight:800;color:#2979C8;letter-spacing:.5px;margin-bottom:7px}
 .nd-item{background:#FFF;border:1px solid #E8E8F0;border-radius:11px;padding:12px 14px;margin-bottom:7px}
 .nd-t{font-size:14.5px;color:#1E2761;line-height:1.6;word-break:keep-all}
 .nd-s{font-size:11.5px;color:#98A0B0;margin-top:5px;line-height:1.5;word-break:keep-all}
+
+/* ===== 실행 기록 카드 (공통 · 네이비+골드) ===== */
+.rec-card{position:relative;overflow:hidden;background:#101736;border:1px solid #232C5C;border-radius:14px;padding:20px 19px;margin:16px 0 12px}
+.rec-card::after{content:'';position:absolute;inset:0;background:radial-gradient(120% 80% at 88% -10%,rgba(245,201,95,.16) 0%,rgba(245,201,95,0) 58%);pointer-events:none}
+.rec-card>*{position:relative;z-index:1}
+.rec-step{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.6px;color:#F5C95F;background:rgba(245,201,95,.18);border-radius:99px;padding:4px 11px;margin-bottom:12px}
+.rec-card h3{font-size:17.5px;font-weight:800;margin-bottom:10px;line-height:1.45;word-break:keep-all;background:linear-gradient(96deg,#FFE9A8 0%,#F5C95F 38%,#FFF3CE 58%,#E8B54A 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.rec-card p{font-size:13.5px;color:#DFE5F5;line-height:1.8;word-break:keep-all}
+.rec-go{display:inline-block;margin-top:15px;font-size:14.5px;font-weight:800;color:#F5C95F;text-decoration:none;border-bottom:2px solid rgba(245,201,95,.55);padding-bottom:3px}
+.rec-note{font-size:12px;color:#A8B2D4;line-height:1.65;margin-top:12px;padding-top:11px;border-top:1px dashed rgba(245,201,95,.28);word-break:keep-all}
+.rec-note b{color:#F5C95F}
 .sec-flash{animation:secflash 1.8s ease}
 @keyframes secflash{0%{background:#FFF9E6}60%{background:#FFF9E6}100%{background:transparent}}
+.td-grp{font-size:10.5px;font-weight:800;letter-spacing:.6px;color:#8B93A5;margin-bottom:3px}
+.todo.done .td-grp{color:#A8AFBD}
 .todo{display:flex;align-items:center;gap:13px;padding:15px 16px;border-radius:13px;text-decoration:none;margin-bottom:9px;border:1px solid #E8E8F0;background:#FFF}
 .todo:hover{background:#F7F9FC}
 .todo .ic{width:34px;height:34px;border-radius:50%;color:#FFF;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -349,12 +423,12 @@ function mergeFromUrl(){
 
 /* ───────── 진단 정의 ───────── */
 const DIAGS=[
-  {k:'needscan',   n:'욕구 출발점 진단',   d:'16문항 · 약 5분', url:BASE+'/needscan/',    c:'#2979C8', s:'N'},
-  {k:'tendency',   n:'5러 경향성 진단',    d:'15문항 · 약 5분', url:BASE+'/5characters/', c:'#2979C8', s:'N'},
-  {k:'noise',      n:'잡음 오염도 진단',   d:'18문항 · 약 5분', url:BASE+'/newnoise/',    c:'#3DAA6B', s:'E'},
-  {k:'temperament',n:'기질·동기·잡음 진단',d:'26문항 · 약 8분', url:BASE+'/why/',         c:'#8B5CF6', s:'+'},
-  {k:'alignment',  n:'생명성 정렬 진단',    d:'20문항 · 약 6분', url:BASE+'/alignment/',   c:'#C9983A', s:'E'},
-  {k:'authorship', n:'나다움 설계 현황 진단',d:'20문항 · 약 7분', url:BASE+'/need/',        c:'#8B5CF6', s:'D'}
+  {k:'needscan',   n:'욕구 출발점 진단',   d:'16문항 · 약 5분', url:BASE+'/needscan/',    c:'#2979C8', s:'N', g:'욕구 출처 탐색(N)', o:'Ⅰ'},
+  {k:'tendency',   n:'에너지 경향성 진단',  d:'15문항 · 약 5분', url:BASE+'/5characters/', c:'#2979C8', s:'N', g:'욕구 출처 탐색(N)', o:'Ⅱ'},
+  {k:'noise',      n:'잡음 오염도 진단',   d:'18문항 · 약 5분', url:BASE+'/newnoise/',    c:'#3DAA6B', s:'E', g:'왜곡 구조 인식(E1)', o:''},
+  {k:'temperament',n:'기질·동기·잡음 진단',d:'26문항 · 약 8분', url:BASE+'/why/',         c:'#8B5CF6', s:'+', g:'N·E1 보조 진단', o:''},
+  {k:'alignment',  n:'생명성 정렬 진단',    d:'20문항 · 약 6분', url:BASE+'/alignment/',   c:'#C9983A', s:'E', g:'생명성 정렬(E2)', o:''},
+  {k:'authorship', n:'나다움 설계 현황 진단',d:'20문항 · 약 7분', url:BASE+'/need/',        c:'#8B5CF6', s:'D', g:'자기 저자성(D)', o:''}
 ];
 const CHARS={A:'열정러',C:'협력러',S:'안정러',D:'장인러',E:'모험러'};
 const FLOWKEY={A:'성취',C:'연결',S:'안정',D:'탐구',E:'모험'};
@@ -480,6 +554,16 @@ function crossRules(p){
 /* ───────── 설계 선택지 ───────── */
 const WHENS=['아침에 일어나서','출근길에','점심 먹기 전','일 시작하기 전','퇴근 직후','저녁 먹고 나서','자기 전','주말 오전에'];
 const WHERES=['집에서','책상 앞에서','지하철에서','산책하면서','회의에서','침대에서','카페에서'];
+function jong(w){const c=String(w||'').trim().slice(-1).charCodeAt(0);
+  if(isNaN(c)||c<0xAC00||c>0xD7A3)return false; return (c-0xAC00)%28!==0;}
+function jo(w,a,b){return w+(jong(w)?a:b)}
+const AXIS_DEF={
+  N:'욕구 선명도는 <b>내가 무엇으로 움직이는 사람인지 스스로 얼마나 분명한가</b>입니다.',
+  E1:'신호 보존도는 <b>내 신호가 바깥 잡음에 얼마나 덜 흐려져 있는가</b>입니다.',
+  E2:'생명성 정렬은 <b>내 하루가 에너지가 흐를 수 있게 배치되어 있는가</b>입니다.',
+  D:'자기 저자성은 <b>내 기준으로 오늘의 선택을 쓰고 있는가</b>입니다.'
+};
+const AXIS_SEQ=['욕구 선명도','신호 보존도','생명성 정렬','자기 저자성'];
 const AXIS_COPY={
   N: {h:'내 욕구를 잘 알면, 선명한 선택이 가능합니다', w:'욕구'},
   E1:{h:'잡음을 걷어내면, 내 신호가 들립니다', w:'잡음'},
@@ -528,11 +612,16 @@ function render(){
   if(!done.length){app.innerHTML=emptyView();return}
   const A=axes(P), bn=bottleneck(A), cr=crossRules(P);
   SN=0;
+  if((location.hash||'')==='#design'){
+    app.innerHTML=designPage(bn);
+    bindDesign(bn);
+    window.scrollTo(0,0);
+    return;
+  }
   let h='';
   h+=coverView(done);
   h+=summaryView(A,bn,done);
   if(cr.length>=1) h+=crossView(cr,done.length);
-  h+=designView(bn);
   h+=sentencesView();
   h+=dailyView();
   h+=notesView();
@@ -543,7 +632,14 @@ function render(){
   scrollToHash();
 }
 
-window.addEventListener('hashchange',()=>scrollToHash());
+window.addEventListener('hashchange',()=>{
+  const hh=(location.hash||'');
+  if(hh==='#design'||_wasDesign){ _wasDesign=(hh==='#design'); render(); return; }
+  scrollToHash();
+});
+let _wasDesign=false;
+function openDesign(){ _wasDesign=true; location.hash='#design'; }
+function closeDesign(){ _wasDesign=false; location.hash=''; history.replaceState(null,'',location.pathname+location.search); render(); }
 function scrollToHash(){
   const hh=(location.hash||'').replace('#','');
   if(!hh)return;
@@ -569,14 +665,16 @@ function emptyView(){
 }
 function todoRow(d){
   const m=P&&P.modules?P.modules[d.k]:null;
+  const grp=(d.g||'')+(d.o?' '+d.o:'');
+  const head='<div class="td-grp">'+grp+'</div>';
   if(m){
     const ts=(m.ts||'').replace(/-/g,'.').slice(5);
-    return '<a class="todo done" href="'+d.url+'"><div class="ic" style="background:'+d.c+'">'+d.s+'</div>'
-     +'<div class="tb"><div class="tt">'+d.n+' <span class="done-badge">완료 '+ts+'</span></div>'
+    return '<a class="todo done" href="'+d.url+'"><div class="ic" style="background:'+d.c+'">'+(d.o||d.s)+'</div>'
+     +'<div class="tb">'+head+'<div class="tt">'+d.n+' <span class="done-badge">완료 '+ts+'</span></div>'
      +'<div class="td">'+d.d+' · 다시 하면 최신 결과로 바뀝니다</div></div><div class="ar">다시 하기</div></a>';
   }
-  return '<a class="todo" href="'+d.url+'"><div class="ic" style="background:'+d.c+'">'+d.s+'</div>'
-   +'<div class="tb"><div class="tt">'+d.n+'</div><div class="td">'+d.d+'</div></div><div class="ar">→</div></a>';
+  return '<a class="todo" href="'+d.url+'"><div class="ic" style="background:'+d.c+'">'+(d.o||d.s)+'</div>'
+   +'<div class="tb">'+head+'<div class="tt">'+d.n+'</div><div class="td">'+d.d+'</div></div><div class="ar">→</div></a>';
 }
 
 function coverView(done){
@@ -640,10 +738,15 @@ function summaryView(A,bn,done){
   });
   h+='</div>';
   if(bn){
-    h+='<div class="bottleneck"><div class="t">지금 가장 먼저 손댈 곳</div>'
+    const seq=AXIS_SEQ.join(' → ');
+    h+='<div class="bottleneck"><div class="t">우선적으로 개선할 포인트</div>'
      +'<div class="h">'+bn.name+'</div>'
-     +'<div class="b">지금 읽을 수 있는 축 가운데 이곳이 가장 낮게('+bn.v+') 나왔습니다. '
-     +'네 단계는 순서가 있어서, 앞 단계가 흐리면 뒤 단계는 아무리 애써도 흐려집니다. 여기서부터 손대는 것이 가장 빠른 길입니다.</div></div>';
+     +'<div class="bdef">'+(AXIS_DEF[bn.key]||'')+'</div>'
+     +'<div class="b">현재 나다움 설계 측면에서 <b>'+bn.name+'</b>'+(jong(bn.name)?'이':'가')+' 가장 낮게('+bn.v+') 나왔습니다. '
+     +'나다움 설계는 가능한 한 순차적으로(<b>'+seq+'</b>) 이루어졌을 때 효과적입니다. '
+     +'우선적으로 '+jo(bn.name,'을','를')+' 개선할 필요가 있습니다.</div>'
+     +'<button class="bn-go no-print" onclick="openDesign()">'+bn.name+' 개선, <b>이것</b>부터 해보십시오 →</button>'
+     +'<div class="bfoot">하루 1분 투자로 더 나다운 삶을 살 수 있습니다.</div></div>';
   }
   const m=P.modules;
   if(m.tendency&&m.tendency.flag!=='low'){
@@ -657,7 +760,7 @@ function summaryView(A,bn,done){
   if(vcTop)h+=vcTop;
   const restN=DIAGS.filter(d=>!P.modules[d.k]).length;
   h+='<div class="sub" style="margin:20px 0 4px"><b>진단 현황</b> — '+(DIAGS.length-restN)+' / '+DIAGS.length+' 완료</div>';
-  h+='<p class="sub" style="margin:0 0 10px">N단계에는 진단이 두 개 있습니다. 하나만 하셔도 축은 열리고, 두 개를 다 하시면 더 정확해집니다.</p>';
+  h+='<p class="sub" style="margin:0 0 10px"><b>욕구 출처 탐색(N)</b> 단계에는 2개의 진단이 있습니다. 한 가지만 하셔도 되지만, 두 개를 다 하시면 더 정확한 결과를 받아보실 수 있습니다.</p>';
   DIAGS.forEach(d=>{h+=todoRow(d)});
   h+='</div>';
   return h;
@@ -672,12 +775,31 @@ function crossView(cr,n){
   return h;
 }
 
-function designView(bn){
+function designPage(bn){
+  const k=bn?bn.key:'N', ac=AXIS_COPY[k]||AXIS_COPY.N;
+  const col={N:'#2979C8',E1:'#3DAA6B',E2:'#C9983A',D:'#8B5CF6'}[k]||'#2979C8';
+  let h='<div class="dp-top no-print"><button class="dp-back" onclick="closeDesign()">← 리포트로 돌아가기</button></div>';
+  h+='<div class="dp-hero" style="--ac:'+col+'">'
+   +'<div class="dp-tag">지금 이 설계를 제안하는 이유</div>'
+   +'<h1 class="dp-h">'+ac.h+'</h1>'
+   +'<p class="dp-p">지금 가장 낮게 나온 축이 <b>'+(bn?bn.name:'욕구 선명도')+'</b>이라서 이 설계를 제안합니다. '
+   +'다른 축이 낮게 나온 분에게는 다른 설계가 나옵니다 — 설계는 사람마다 다릅니다.</p></div>';
+  h+=designView(bn,true);
+  h+=sentencesView(true);
+  h+='<div class="dp-top no-print" style="margin-top:18px"><button class="dp-back" onclick="closeDesign()">← 리포트로 돌아가기</button></div>';
+  return h;
+}
+function designView(bn,solo){
   const k=bn?bn.key:'N', opts=OPTS[k]||OPTS.N, ac=AXIS_COPY[k]||AXIS_COPY.N;
-  let h='<div class="sec" id="sec-design">'+sn()+'<h2>오늘의 설계</h2>'
-   +'<p class="sub">여기부터가 이 리포트의 본론입니다. 읽는 것으로는 아무것도 바뀌지 않습니다. 한 문장만 남기고 나가시면 됩니다.</p>';
+  let h='<div class="sec'+(solo?' solo':'')+'" id="sec-design">'
+   + (solo?'':(sn()+'<h2>오늘의 설계</h2><p class="sub">여기부터가 이 리포트의 본론입니다. 한 문장만 남기고 나가시면 됩니다.</p>'));
 
-  h+='<div class="design-box"><h3>'+ac.h+'</h3>'
+  const AC={N:'#2979C8',E1:'#3DAA6B',E2:'#C9983A',D:'#8B5CF6'}[k]||'#2979C8';
+  const ACS={N:'#F1F8FE',E1:'#F0FDF4',E2:'#FFFBEB',D:'#F5F3FF'}[k]||'#F1F8FE';
+  const ACL={N:'#BEE3F8',E1:'#BBF0D0',E2:'#EADFC4',D:'#DDD6FE'}[k]||'#BEE3F8';
+  const ICO={N:'🧭',E1:'🌿',E2:'⚡',D:'✍️'}[k]||'🧭';
+  h+='<div class="design-box" style="--ac:'+AC+';--acs:'+ACS+';--acl:'+ACL+'">'
+   +(solo?'':'<div class="db-head"><div class="db-ico">'+ICO+'</div><h3>'+ac.h+'</h3></div>')
    +'<div class="why">하루에 한 번, 주말에 한 번 나의 '+ac.w+'을 짧게 적어 두는 자리입니다. '
    +'막연한 다짐보다 <b>언제·어디서·무엇을</b>이 정해진 문장이 실제로 훨씬 잘 지켜집니다'
    +'<span style="color:#6B7393">(Gollwitzer &amp; Sheeran, 2006)</span>. '
@@ -712,9 +834,9 @@ function designView(bn){
   return h;
 }
 
-function sentencesView(){
+function sentencesView(solo){
   if(!P.designs.length)return '';
-  let h='<div class="sec">'+sn()+'<h2>내 설계 문장</h2>'
+  let h='<div class="sec">'+(solo?'':sn())+'<h2>내 설계 문장</h2>'
    +'<p class="sub">지금까지 남기신 문장입니다. 인쇄해서 눈에 보이는 곳에 두시면 더 잘 지켜집니다.</p>';
   const col={N:'#2979C8',E1:'#3DAA6B',E2:'#C9983A',D:'#8B5CF6'};
   P.designs.slice().reverse().forEach((d,i)=>{
@@ -783,8 +905,11 @@ function dailyView(){
   const wd=['월','화','수','목','금','토','일'];
   const now=new Date();
   const dnames=['일','월','화','수','목','금','토'];
-  let h='<div class="sec" id="sec-daily">'+sn()+'<h2>오늘의 실천</h2>'
-   +'<p class="sub">오늘 지키셨다면 눌러 주세요. 그리고 <b>무엇을 보았는지 한 줄만</b> 적어 주세요. 체크는 지켰다는 표시일 뿐이고, 실제로 남는 것은 이 한 줄들입니다. 못 적은 날이 있어도 괜찮습니다.</p>';
+  let h='<div class="sec" id="sec-daily">'+sn()+'<h2>오늘의 실천 — 기록하는 곳</h2>'
+   +'<div class="rec-card"><span class="rec-step">여기가 기록하는 자리입니다</span>'
+   +'<h3>오늘 실행한 내용을 한 줄로 남겨 두세요</h3>'
+   +'<p>체크는 지켰다는 표시일 뿐이고, 실제로 남는 것은 이 한 줄들입니다. '
+   +'한 줄씩 쌓이면 작은 여러분의 실행 역사가 됩니다. 못 적은 날이 있어도 괜찮습니다.</p></div>';
   h+='<div class="today-box"><div class="today-date">'+(now.getMonth()+1)+'월 '+now.getDate()+'일 '+dnames[now.getDay()]+'요일</div>';
   P.designs.forEach((d,i)=>{
     const isOn=on.includes(d.id), nv=noteOf(day,d.id);
@@ -881,8 +1006,9 @@ function toggleValue(k){
 }
 
 function loopView(){
-  return '<div class="sec">'+sn()+'<h2>4주 뒤에 다시 만납니다</h2>'
-   +'<p class="sub">설계는 한 번으로 끝나지 않습니다. 4주 뒤 같은 진단을 다시 하시면 그때는 지금과 비교해서 읽어 드립니다.</p>'
+  return '<div class="sec">'+sn()+'<h2>기억을 도와주는 일정 등록을 해 보세요</h2>'
+   +'<p class="sub">설계는 한 번으로 완성되지 않습니다. 한 달 뒤 또는 한 분기 뒤, 나에게 변화가 생겼을 때마다 기록해 두시면 '
+   +'여러분의 나다움 설계 역사를 한눈에 볼 수 있습니다.</p>'
    +'<div class="card"><div style="font-size:14.5px;line-height:1.75;color:#2D3748;word-break:keep-all">'
    +'"그 문장, 지켜졌나요?" — 4주 뒤 이 자리로 돌아오시도록 일정에 담아 두실 수 있습니다. '
    +'알림이나 이메일을 보내지 않습니다. 캘린더에만 담깁니다.</div>'
@@ -891,15 +1017,19 @@ function loopView(){
 
 function keepView(){
   return '<div class="sec no-print">'+sn()+'<h2>결과 보관</h2>'
-   +'<p class="sub">결과는 이 브라우저에만 저장됩니다. 서버로 보내지 않고, 이름이나 이메일도 받지 않습니다.</p>'
+   +'<p class="sub">회원가입을 하지 않으시면 결과는 <b>이 브라우저에만</b> 저장됩니다. 서버로 보내지 않고, 이름이나 이메일도 받지 않습니다. '
+   +'진단과 기록은 회원가입 없이 모두 무료로 쓰실 수 있습니다.</p>'
    +'<div class="warn"><b>기기를 바꾸거나 브라우저 데이터를 지우면 사라집니다</b>'
    +'특히 아이폰 사파리는 한동안 방문이 없으면 저장된 내용을 스스로 지웁니다. '
-   +'4주 뒤에 다시 보시려면 아래 보관 링크를 카톡 &quot;나에게 보내기&quot;로 남겨 두시는 편이 안전합니다.</div>'
+   +'다음에 다시 보시려면 아래 보관 링크를 카톡 &quot;나에게 보내기&quot;로 남겨 두시는 편이 안전합니다.</div>'
    +'<div class="btn-row"><button class="btn" onclick="copyKeep()">🔗 보관 링크 복사</button>'
    +'<button class="btn ghost" onclick="shareKeep()">보내기</button></div>'
    +'<div class="btn-row"><button class="btn ghost" onclick="window.print()">🖨 인쇄 · PDF로 저장</button>'
    +'<button class="btn ghost" onclick="dlJSON()">백업 파일</button></div>'
-   +'<div class="note"><b>보관 링크에 담기는 것</b>진단 점수와 남기신 설계 문장만 담깁니다. 문항별 응답은 담기지 않습니다. '
+   +'<div class="soon"><b>장기 보관 — 준비 중입니다</b>'
+   +'나만의 기록을 오래 보관하고 싶으신 분을 위해, 회원가입(무료)으로 기록을 계속 이어서 보관·관리하는 기능을 준비하고 있습니다. '
+   +'지금은 위의 보관 링크가 같은 역할을 합니다.</div>'
+   +'<div class="note"><b>보관 링크에 담기는 것</b>진단 점수와 남기신 설계 문장·기록만 담깁니다. 문항별 응답은 담기지 않습니다. '
    +'링크를 여시면 이 기기의 결과와 합쳐집니다.</div></div>';
 }
 
@@ -915,6 +1045,7 @@ function bindDesign(bn){
     const pl=document.getElementById('prevLine');
     if(!pl)return;
     const what = (pickTxt || (w3?(w3.value||'').trim():''));
+    pl.classList.toggle('filled', !!what);
     pl.innerHTML='<span class="pl-lab">저장될 문장</span>'
       + (what ? '<b>'+esc(document.getElementById('w1').value+' '+document.getElementById('w2').value+' '+what)+'</b>'
               : '<span class="pl-empty">위에서 하나를 고르면 여기에 문장이 보입니다</span>');
