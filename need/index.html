@@ -9,7 +9,14 @@
 <meta property="og:description" content="나다움 설계 현황 진단 · 20문항 + 우선가치 워크 · 약 7분 · 무료 — 나다움설계연구소">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nadaumlap.github.io/nadaumneed/need/">
+<meta property="og:image" content="https://nadaumlap.github.io/nadaumneed/need/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="이 선택은 나의 우선가치와 부합하는가?">
+<meta property="og:site_name" content="나다움설계연구소">
+<meta property="og:locale" content="ko_KR">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://nadaumlap.github.io/nadaumneed/need/og-image.png">
 <meta name="twitter:title" content="이 선택은 나의 우선가치와 부합하는가?">
 <meta name="twitter:description" content="나다움 설계 현황 진단 · 20문항 + 우선가치 워크 · 약 7분 · 무료 — 나다움설계연구소">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -116,6 +123,10 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
 .bn-tag{font-size:11px;font-weight:800;letter-spacing:1px;color:#E53935;margin-bottom:7px}
 .bn-h{font-size:18px;font-weight:800;margin-bottom:8px}
 .bn-b{font-size:14px;color:#4A5568;line-height:1.8;word-break:keep-all}
+.bn-def{font-size:13.5px;color:#5A6478;line-height:1.7;margin-bottom:9px;padding-bottom:9px;border-bottom:1px dashed #F0C9C6;word-break:keep-all}
+.bn-go{display:block;width:100%;margin-top:13px;padding:15px;border:none;border-radius:12px;background:#8B5CF6;color:#FFF;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;line-height:1.4}
+.bn-go b{font-weight:800}
+.bn-foot{font-size:13px;color:#6D28D9;font-weight:600;text-align:center;margin-top:10px}
 .card{background:#FFF;border:1px solid #E8E8F0;border-radius:14px;padding:18px;margin-bottom:12px}
 .card h3{font-size:16.5px;font-weight:800;margin-bottom:9px;line-height:1.45}
 .card p{font-size:14px;color:#4A5568;line-height:1.8;word-break:keep-all}
@@ -135,13 +146,16 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
 .rf-q{font-size:14.5px;font-weight:700;line-height:1.6;margin-bottom:12px;word-break:keep-all}
 .rf-btn{width:100%;padding:15px;border:none;border-radius:12px;background:#8B5CF6;color:#FFF;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer}
 .rf-back{width:100%;margin-top:9px;padding:13px;border:1.5px solid #D6DEEA;border-radius:12px;background:#FFF;color:#1E2761;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer}
-.rec-card{background:#F1F8FE;border:1px solid #BEE3F8;border-radius:14px;padding:18px;margin-bottom:12px}
-.rec-step{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.5px;color:#2979C8;background:#E1F0FC;border-radius:99px;padding:3px 10px;margin-bottom:9px}
-.rec-card h3{font-size:16.5px;font-weight:800;margin-bottom:8px;line-height:1.45}
-.rec-card p{font-size:13.5px;color:#4A5568;line-height:1.75;word-break:keep-all}
-.rec-note{font-size:12px;color:#7A8296;line-height:1.65;margin-top:11px;padding-top:10px;border-top:1px dashed #C9DEF2;word-break:keep-all}
-.rec-note b{color:#1E2761}
-.rec-go{display:inline-block;margin-top:12px;font-size:14px;font-weight:700;color:#1E2761;text-decoration:none;border-bottom:2px solid #2979C8;padding-bottom:2px}
+.rec-card{position:relative;overflow:hidden;background:#101736;border:1px solid #232C5C;border-radius:14px;padding:20px 19px;margin-bottom:12px}
+.rec-card::after{content:'';position:absolute;inset:0;background:radial-gradient(120% 80% at 88% -10%,rgba(245,201,95,.16) 0%,rgba(245,201,95,0) 58%);pointer-events:none}
+.rec-card>*{position:relative;z-index:1}
+.rec-step{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.6px;color:#F5C95F;background:rgba(245,201,95,.18);border-radius:99px;padding:4px 11px;margin-bottom:12px}
+.rec-card h3{font-size:17.5px;font-weight:800;margin-bottom:10px;line-height:1.45;
+ background:linear-gradient(96deg,#FFE9A8 0%,#F5C95F 38%,#FFF3CE 58%,#E8B54A 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.rec-card p{font-size:13.5px;color:#DFE5F5;line-height:1.8;word-break:keep-all}
+.rec-note{font-size:12px;color:#A8B2D4;line-height:1.65;margin-top:12px;padding-top:11px;border-top:1px dashed rgba(245,201,95,.28);word-break:keep-all}
+.rec-note b{color:#F5C95F}
+.rec-go{display:inline-block;margin-top:15px;font-size:14.5px;font-weight:800;color:#F5C95F;text-decoration:none;border-bottom:2px solid rgba(245,201,95,.55);padding-bottom:3px}
 .act-list{list-style:none;margin-top:6px}
 .act-list li{display:flex;gap:9px;align-items:flex-start;padding:11px 13px;background:#FAFAFD;border-radius:10px;margin-bottom:7px;font-size:14px;color:#2D3748;line-height:1.65;word-break:keep-all}
 .act-list li::before{content:'□';color:#8B5CF6;font-weight:800;flex-shrink:0}
@@ -394,6 +408,8 @@ const NEXTS=[
  {k:'alignment',u:BASE+'/alignment/',t:'E2 · 생명성 정렬',h:'이 활동은 나를 소모시키나, 충전시키나?',d:'20문항 · 약 6분'},
  {k:'authorship',u:BASE+'/need/',t:'D · 나다움 설계 현황',h:'이 선택은 나의 우선가치와 부합하는가?',d:'20문항 · 약 7분'}
 ];
+function jong(w){const c=String(w||'').trim().slice(-1).charCodeAt(0);if(isNaN(c)||c<0xAC00||c>0xD7A3)return false;return (c-0xAC00)%28!==0}
+function jo(w,a,b){return w+(jong(w)?a:b)}
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 
 function renderResult(r){
@@ -421,8 +437,12 @@ function renderResult(r){
   });
   h+='<div class="g-note">네 축 모두 <b>높을수록 정렬된 상태</b>입니다. 단계는 평균이 아니라 <b>가장 낮은 축</b>으로 판정합니다 — 한 축이 무너져 있으면 나머지가 아무리 높아도 실제로는 그 축에서 새기 때문입니다.</div>';
   h+='</div>';
-  h+='<div class="bn-card"><div class="bn-tag">지금 가장 먼저 손댈 곳</div><div class="bn-h">'+A[w].name+'</div>'
-   +'<div class="bn-b">네 축 가운데 이 축이 가장 낮게('+r.raw[w].toFixed(1)+') 나왔습니다. '+A[w].desc+' — 여기서부터 손대는 것이 가장 빠른 길입니다.</div></div>';
+  h+='<div class="bn-card"><div class="bn-tag">우선적으로 개선할 포인트</div><div class="bn-h">'+A[w].name+'</div>'
+   +'<div class="bn-def">'+jo(A[w].name,'은','는')+' '+A[w].desc+' — 이것을 봅니다.</div>'
+   +'<div class="bn-b">현재 '+STAGE_KO+' 측면에서 <b>'+A[w].name+'</b>'+(jong(A[w].name)?'이':'가')+' 가장 낮게('+r.sc[w]+') 나왔습니다. '
+   +'네 축은 서로 맞물려 있어서, 낮은 축 하나가 나머지를 함께 끌어내립니다. 우선적으로 '+jo(A[w].name,'을','를')+' 개선할 필요가 있습니다.</div>'
+   +'<button class="bn-go" data-go="3">'+A[w].name+' 개선, <b>이것</b>부터 해보십시오 →</button>'
+   +'<div class="bn-foot">하루 1분 투자로 더 나다운 삶을 살 수 있습니다.</div></div>';
   if(!IS_D&&extra){
     h+='<div class="card"><span class="tag">관찰의 출발점</span><h3>스스로 고르신 맑은 시간대 — '+esc(extra)+'</h3>'
      +'<p>이건 점수가 아닙니다. 이 시간대에 실제로 무엇을 놓았는지 일주일만 적어 보시면, 배치가 맞는지 아닌지가 기록으로 드러납니다.</p></div>';
@@ -453,19 +473,20 @@ function renderResult(r){
   h+='<div class="rstep" id="rstep3">';
   h+='<div class="rstep-head"><span class="rs-num">03</span><h3>오늘 할 수 있는 것</h3>'
    +'<p>큰 결심은 필요 없습니다. 아래 순서대로 하나씩만 보시면 됩니다.</p></div>';
-  h+='<div class="card"><span class="tag">실행 1 · 병목 축부터</span><h3>'+A[w].name+'에서 시작합니다</h3>'
-   +'<p>네 축을 한꺼번에 올리려 하면 아무것도 남지 않습니다. 아래 둘 중 <b>더 쉬운 하나만</b> 고르세요.</p>'
+  h+='<div class="card"><span class="tag">실행 1 · '+A[w].name+'부터</span><h3>'+A[w].name+'에서 시작합니다</h3>'
+   +'<p>실천도 우선순위를 정하고 하시는 게 더 효과적입니다. 아래 둘 중 <b>일상에서 손쉽게 실천할 수 있는 한 가지만</b> 골라서 실천해 보십시오.</p>'
    +'<ul class="act-list">'+ACT[w].map(a=>'<li>'+a+'</li>').join('')+'</ul></div>';
-  h+='<div class="rec-card"><span class="rec-step">실행 2 · 기록할 곳</span>'
-   +'<h3>고른 하나를 적어 두는 자리가 있습니다</h3>'
-   +'<p>매일 한 줄씩 적을 수 있는 자리가 통합 리포트 안에 있습니다. 날짜별로 모이고, 일주일이 쌓이면 그 안에서 반복되는 결이 보이기 시작합니다. 회원가입 없이 바로 쓰실 수 있습니다.</p>'
-   +'<a class="rec-go" href="'+BASE+'/report/#write">통합 리포트 안 기록 자리로 바로 가기 →</a>'
-   +'<div class="rec-note">아래 <b>통합 리포트 열기</b>와 같은 곳입니다. 이 링크는 리포트를 열면서 기록하는 자리까지 바로 내려갑니다.</div></div>';
-  h+='<div class="card"><span class="tag">실행 3 · 다시 볼 시점</span><h3>4주 뒤에 같은 진단을 다시 해 보세요</h3>'
-   +'<p>이 결과는 <b>지금 시기의 상태</b>입니다. 고정된 점수가 아니라 환경·관계·잡음 누적도에 따라 달라집니다. 4주 뒤 같은 진단을 하시면 통합 리포트가 지금과 비교해서 읽어 드립니다.</p></div>';
-  h+='<a class="rep-cta" href="'+BASE+'/report/"><div class="rc-tag">NADAUM DESIGN REPORT</div>'
-   +'<div class="rc-h">읽는 것으로는 아무것도 바뀌지 않습니다</div>'
-   +'<div class="rc-d">지금까지 하신 진단을 한자리에 모아 읽고, 오늘 시작할 설계 한 문장을 남기는 자리입니다. 진단을 다 하지 않으셔도 됩니다.</div>'
+  h+='<div class="rec-card"><span class="rec-step">실행 2 · 기록해 두세요</span>'
+   +'<h3>실행한 내용을 한 줄로 남겨 두세요</h3>'
+   +'<p>실행한 내용을 한 줄로 간단히 기록해 놓으면 작은 여러분의 실행 역사가 됩니다. 회원가입 없이 바로 사용 가능합니다.</p>'
+   +'<a class="rec-go" href="'+BASE+'/report/#write">통합 리포트 안 &#39;기록하기&#39;로 바로 가기 →</a></div>';
+  h+='<div class="card"><span class="tag">실행 3 · 통합 리포트 활용하기</span>'
+   +'<h3>나의 변화 역사를 확인하고 싶을 때 다시 진단해 보세요</h3>'
+   +'<p>이 결과는 <b>지금 시기의 상태</b>입니다. 환경·관계·잡음 누적에 따라 결과는 달라질 수 있습니다.</p>'
+   +'<p>일반적으로 한 달, 분기별로, 이벤트별로 기록을 쌓아가시면 통합 리포트가 그 변화를 추적해서 읽어 드립니다.</p></div>';
+  h+='<a class="rep-cta" href="'+BASE+'/report/"><div class="rc-tag">나다움 설계 통합 리포트</div>'
+   +'<div class="rc-h">진단에서 멈추지 마세요</div>'
+   +'<div class="rc-d">여러분의 나다움 설계 현황을 기록해 두시고, 나다움을 적극 설계하십시오.</div>'
    +'<div class="rc-go">통합 리포트 열기 →</div></a>';
   const todo=NEXTS.filter(x=>x.k!==MODKEY&&!ndDone(x.k)), done=NEXTS.filter(x=>x.k!==MODKEY&&ndDone(x.k));
   h+='<div style="font-size:13px;color:#6B7393;margin:18px 0 9px;font-weight:600">— '+(todo.length?'다음으로 살펴볼 진단':'진단 현황')+' —</div>';
