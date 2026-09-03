@@ -84,7 +84,12 @@ section{padding:40px 0 0;}
 .name{color:var(--ink);font-weight:600;}
 .go{font-weight:700;white-space:nowrap;}
 
-.report{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:24px;margin-top:20px;}
+.funnel{margin-top:10px;}
+.funnel svg{display:block;width:100%;height:76px;}
+.funnel .fcap{text-align:center;font-size:13px;color:var(--mute);margin-top:-6px;}
+
+.report{background:linear-gradient(180deg,#F6FAFF 0%,#FFFFFF 60%);border:1px solid #C9DAF0;
+        border-top:5px solid var(--n);border-radius:14px;padding:24px;margin-top:4px;}
 .report h3{font-size:20px;font-weight:800;}
 .report p{font-size:15px;margin-top:8px;}
 .report ul{list-style:none;margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px;}
@@ -103,14 +108,24 @@ section{padding:40px 0 0;}
 .dq{font-size:16px;font-weight:600;color:var(--ink);margin-top:8px;}
 .dp{font-size:15px;margin-top:6px;}
 
-.steps{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:24px;margin-top:20px;}
-.steps h3{font-size:20px;font-weight:800;}
-.steps ol{list-style:none;display:flex;align-items:flex-start;gap:10px;margin-top:16px;}
-.steps li{flex:1 1 0;font-size:15px;color:var(--ink);line-height:1.45;}
-.steps li b{display:inline-block;background:#EDF2F9;color:var(--n);font-size:12px;font-weight:700;
-            padding:4px 12px;border-radius:999px;margin-bottom:8px;}
-.steps li+li{position:relative;padding-left:26px;}
-.steps li+li::before{content:"→";position:absolute;left:4px;top:3px;color:#9AA5B1;font-size:17px;font-weight:700;}
+.steps{background:linear-gradient(180deg,#F7F8FC 0%,#FFFFFF 70%);border:1px solid var(--line);
+       border-radius:16px;padding:30px 24px 28px;margin-top:20px;text-align:center;}
+.steps h3{font-size:23px;font-weight:800;}
+.steps .ssub{font-size:15px;color:var(--mute);margin-top:6px;}
+.road{position:relative;display:flex;gap:14px;margin-top:38px;}
+.road::before{content:"";position:absolute;top:26px;left:12%;right:12%;height:2px;
+              background:repeating-linear-gradient(90deg,#C6CFE0 0 8px,transparent 8px 16px);}
+.stp{position:relative;flex:1 1 0;padding-top:30px;}
+.stp .bd{position:absolute;top:0;left:50%;transform:translateX(-50%);
+         width:52px;height:52px;border-radius:50%;color:#fff;font-size:18px;font-weight:800;
+         display:flex;align-items:center;justify-content:center;border:4px solid #fff;
+         font-family:-apple-system,'SF Pro Display','Pretendard',sans-serif;}
+.stp.s1 .bd{background:var(--n);} .stp.s2 .bd{background:var(--e1);} .stp.s3 .bd{background:var(--d);}
+.stp .box{background:var(--paper);border:1px solid var(--line);border-radius:14px;
+          padding:38px 16px 20px;height:100%;}
+.stp .box b{display:block;font-size:16px;font-weight:800;color:var(--ink);
+            font-family:-apple-system,'SF Pro Display','Apple SD 산돌고딕 Neo','Pretendard',sans-serif;}
+.stp .box p{font-size:14px;color:var(--body);margin-top:8px;line-height:1.55;}
 
 footer{margin-top:44px;border-top:1px solid var(--line);background:var(--paper);padding:26px 0 40px;}
 footer p{font-size:14px;color:var(--mute);}
@@ -122,9 +137,9 @@ footer .brand{color:var(--ink);font-weight:700;margin-bottom:8px;}
   .flow{flex-wrap:wrap;gap:8px;} .flow li{flex:0 0 calc(33.33% - 6px);max-width:none;}
   .flow li+li{padding-left:0;} .flow li+li::before{content:none;}
   .cta{font-size:17px;padding:16px 30px;}
-  .steps ol{flex-direction:column;gap:14px;} .q{font-size:21px;}
-  .steps li+li{padding-left:0;padding-top:4px;}
-  .steps li+li::before{content:"↓";left:2px;top:-14px;}
+  .q{font-size:21px;} .funnel svg{height:54px;}
+  .road{flex-direction:column;gap:26px;} .road::before{content:none;}
+  .steps{padding:26px 18px 24px;} .steps h3{font-size:21px;}
 }
 </style>
 </head>
@@ -190,6 +205,22 @@ footer .brand{color:var(--ink);font-weight:700;margin-bottom:8px;}
         <div class="foot"><span class="name">내 기준으로 오늘을 쓰다 · 20문항 · 약 7분</span><span class="go">진단 시작</span></div>
       </a>
     </div>
+
+    <div class="funnel" aria-hidden="true">
+      <svg viewBox="0 0 760 76" preserveAspectRatio="none">
+        <defs>
+          <marker id="ar" markerWidth="9" markerHeight="9" refX="5" refY="4.5" orient="auto">
+            <path d="M0,0 L9,4.5 L0,9 z" fill="#24528F"></path>
+          </marker>
+        </defs>
+        <path d="M110,0 C110,42 380,26 380,58" fill="none" stroke="#24528F" stroke-width="2" stroke-dasharray="5 5" opacity=".55"></path>
+        <path d="M290,0 C290,42 380,30 380,58" fill="none" stroke="#2F7A4C" stroke-width="2" stroke-dasharray="5 5" opacity=".55"></path>
+        <path d="M470,0 C470,42 380,30 380,58" fill="none" stroke="#96660E" stroke-width="2" stroke-dasharray="5 5" opacity=".55"></path>
+        <path d="M650,0 C650,42 380,26 380,58" fill="none" stroke="#5B4C99" stroke-width="2" stroke-dasharray="5 5" opacity=".55"></path>
+        <line x1="380" y1="54" x2="380" y2="70" stroke="#24528F" stroke-width="2.5" marker-end="url(#ar)"></line>
+      </svg>
+      <p class="fcap">네 진단의 결과가 하나의 리포트로 모입니다</p>
+    </div>
   </section>
 
   <section>
@@ -236,11 +267,18 @@ footer .brand{color:var(--ink);font-weight:700;margin-bottom:8px;}
   <section>
     <div class="steps">
       <h3>진단은 이렇게 진행됩니다</h3>
-      <ol>
-        <li><b>1단계</b>원하는 진단을 하나 고릅니다</li>
-        <li><b>2단계</b>약 5분간 솔직하게 답합니다</li>
-        <li><b>3단계</b>결과를 확인하고 이메일로 보관합니다</li>
-      </ol>
+      <p class="ssub">간단한 3단계로 나다움 설계 리포트를 받아보세요</p>
+      <div class="road">
+        <div class="stp s1"><span class="bd">01</span>
+          <div class="box"><b>원하는 진단 선택</b><p>6가지 진단 중 필요한 진단을 선택하세요.</p></div>
+        </div>
+        <div class="stp s2"><span class="bd">02</span>
+          <div class="box"><b>최대한 솔직하게 응답</b><p>지금의 나를 떠올리며 솔직하게 답변해주세요.</p></div>
+        </div>
+        <div class="stp s3"><span class="bd">03</span>
+          <div class="box"><b>결과 확인 후 보관</b><p>결과를 확인하고 이메일로 받아 보관하세요.</p></div>
+        </div>
+      </div>
     </div>
   </section>
 
