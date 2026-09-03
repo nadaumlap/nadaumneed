@@ -2,6 +2,909 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>나다움 진단 지도 | 나다움설계연구소</title>
+<meta name="description" content="나는 무엇을 원하고, 무엇에 흔들리며, 무엇으로 살아나는가. 네 가지 질문으로 지금의 나를 살펴보는 무료 자기점검 도구입니다.">
+<meta property="og:title" content="나다움 진단 지도">
+<meta property="og:description" content="네 가지 질문으로 지금의 나를 살펴보는 무료 자기점검 도구. 핵심 진단 4개 · 약 23분 · 이름 없이 참여.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+:root{
+  --ink:#141D27; --body:#3F4C5A; --mute:#69757F; --line:#DFE5EC;
+  --paper:#FFFFFF; --bg:#F4F6F9; --soft:#FAFBFD;
+  --n:#24528F; --e1:#2F7A4C; --e2:#96660E; --d:#5B4C99;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);font-family:'Pretendard','Noto Sans KR',sans-serif;color:var(--body);
+     -webkit-font-smoothing:antialiased;line-height:1.6;}
+h1,h2,h3,.q{font-family:-apple-system,'SF Pro Display','Apple SD 산돌고딕 Neo','Pretendard',sans-serif;
+            color:var(--ink);letter-spacing:-0.02em;}
+a{text-decoration:none;color:inherit;}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px;}
+
+.hero{background:var(--paper);border-bottom:1px solid var(--line);padding:56px 0 44px;text-align:center;}
+.eyebrow{font-size:14px;font-weight:600;color:var(--mute);}
+.hero h1{font-size:46px;font-weight:800;margin-top:10px;line-height:1.15;}
+.hero .lede{font-size:20px;font-weight:700;color:var(--ink);margin-top:16px;line-height:1.45;}
+.hero .sub{font-size:16px;margin-top:14px;}
+.facts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:24px;}
+.chip{border:1px solid var(--line);border-radius:999px;padding:9px 16px;font-size:14px;background:var(--soft);}
+.chip b{color:var(--ink);font-weight:700;}
+.cta{display:inline-block;margin-top:26px;background:var(--n);color:#fff;font-size:17px;font-weight:700;
+     padding:16px 32px;border-radius:10px;}
+.cta:hover{background:#1C4276;}
+.hero .tiny{font-size:14px;color:var(--mute);margin-top:12px;}
+
+section{padding:40px 0 0;}
+.shead h2{font-size:24px;font-weight:800;}
+.shead p{font-size:15px;margin-top:6px;}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px;}
+.card{display:block;background:var(--paper);border:1px solid var(--line);border-radius:14px;
+      padding:20px 22px 18px;border-top-width:5px;transition:box-shadow .15s ease, transform .15s ease;}
+.card:hover{box-shadow:0 6px 20px rgba(20,29,39,.09);transform:translateY(-2px);}
+.card:focus-visible{outline:3px solid var(--n);outline-offset:3px;}
+.card.n{border-top-color:var(--n);} .card.e1{border-top-color:var(--e1);}
+.card.e2{border-top-color:var(--e2);} .card.d{border-top-color:var(--d);}
+.tag{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:700;}
+.num{width:22px;height:22px;border-radius:50%;color:#fff;font-size:13px;font-weight:700;
+     display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+.n .num{background:var(--n);} .n .tag{color:var(--n);} .n .go{color:var(--n);}
+.e1 .num{background:var(--e1);} .e1 .tag{color:var(--e1);} .e1 .go{color:var(--e1);}
+.e2 .num{background:var(--e2);} .e2 .tag{color:var(--e2);} .e2 .go{color:var(--e2);}
+.d .num{background:var(--d);} .d .tag{color:var(--d);} .d .go{color:var(--d);}
+.q{font-size:22px;font-weight:800;margin-top:12px;line-height:1.3;}
+.desc{font-size:15px;margin-top:9px;}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:10px;
+      margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:14px;}
+.name{color:var(--ink);font-weight:600;}
+.go{font-weight:700;white-space:nowrap;}
+
+.report{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:24px;margin-top:20px;}
+.report h3{font-size:20px;font-weight:800;}
+.report p{font-size:15px;margin-top:8px;}
+.report ul{list-style:none;margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.report li{font-size:15px;padding-left:16px;position:relative;color:var(--ink);}
+.report li::before{content:"";position:absolute;left:0;top:9px;width:7px;height:7px;border-radius:50%;background:var(--n);}
+.report .badge{display:inline-block;margin-top:18px;background:var(--n);color:#fff;font-size:15px;
+               font-weight:700;padding:13px 22px;border-radius:9px;}
+.report .badge:hover{background:#1C4276;}
+
+.dcard{display:block;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px 22px 18px;
+       transition:box-shadow .15s ease, transform .15s ease;}
+.dcard:hover{box-shadow:0 6px 20px rgba(20,29,39,.08);transform:translateY(-2px);}
+.opt{font-size:13px;font-weight:700;color:var(--mute);}
+.dcard h3{font-size:19px;font-weight:800;margin-top:5px;}
+.dq{font-size:16px;font-weight:600;color:var(--ink);margin-top:8px;}
+.dp{font-size:15px;margin-top:6px;}
+
+.steps{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:24px;margin-top:20px;}
+.steps h3{font-size:20px;font-weight:800;}
+.steps ol{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px;}
+.steps li{font-size:15px;color:var(--ink);}
+.steps li b{display:block;font-size:13px;color:var(--n);font-weight:700;margin-bottom:4px;}
+
+footer{margin-top:44px;border-top:1px solid var(--line);background:var(--paper);padding:26px 0 40px;}
+footer p{font-size:14px;color:var(--mute);}
+footer .brand{color:var(--ink);font-weight:700;margin-bottom:8px;}
+
+@media (max-width:640px){
+  .hero{padding:40px 0 34px;} .hero h1{font-size:34px;} .hero .lede{font-size:18px;}
+  .grid{grid-template-columns:1fr;} .report ul{grid-template-columns:1fr;}
+  .steps ol{grid-template-columns:1fr;gap:12px;} .q{font-size:21px;}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap">
+    <p class="eyebrow">나다움설계연구소 · 무료 자기점검</p>
+    <h1>나다움 진단 지도</h1>
+    <p class="lede">나는 무엇을 원하고, 무엇에 흔들리며, 무엇으로 살아나는가</p>
+    <p class="sub">네 가지 질문으로 지금의 나를 살펴보는 무료 자기이해 도구입니다.<br>
+    진단을 하나씩 마칠 때마다 결과가 리포트에 쌓이고, 네 가지를 모두 마치면 나만의 지도가 완성됩니다.</p>
+    <div class="facts">
+      <span class="chip"><b>핵심 진단 4개</b> · 74문항 · 약 23분</span>
+      <span class="chip"><b>모두 무료</b></span>
+      <span class="chip"><b>이름 없이 참여</b></span>
+      <span class="chip"><b>결과 보관은 이메일만</b></span>
+    </div>
+    <a class="cta" href="#진단">진단 하나부터 시작해보세요</a>
+    <p class="tiny">어디서 시작해도 됩니다. 지금 가장 궁금한 질문부터 하시면 됩니다.</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section id="진단">
+    <div class="shead">
+      <h2>네 축을 여는 핵심 진단</h2>
+      <p>카드를 누르면 진단으로 바로 이동합니다.</p>
+    </div>
+
+    <div class="grid">
+      <a class="card n" href="./needscan/">
+        <div class="tag"><span class="num">1</span>N · Need Scan</div>
+        <p class="q">나는 무엇을<br>진짜 원하는가?</p>
+        <p class="desc">내가 원하는 것을 얼마나 분명히 알고 있는지 살펴봅니다.</p>
+        <div class="foot"><span class="name">나를 읽다 · 16문항 · 약 5분</span><span class="go">진단 시작</span></div>
+      </a>
+
+      <a class="card e1" href="./newnoise/">
+        <div class="tag"><span class="num">2</span>E · Eliminate Noise</div>
+        <p class="q">무엇이 내 판단을<br>흐리게 하는가?</p>
+        <p class="desc">타인의 기대와 정보, 불안이 내 선택에 얼마나 섞여 있는지 봅니다.</p>
+        <div class="foot"><span class="name">흐리게 하는 것을 덜다 · 18문항 · 약 5분</span><span class="go">진단 시작</span></div>
+      </a>
+
+      <a class="card e2" href="./alignment/">
+        <div class="tag"><span class="num">3</span>E · Energy Alignment</div>
+        <p class="q">무엇이 나를 살리고<br>무엇이 나를 지치게 하는가?</p>
+        <p class="desc">지금의 일상과 관계가 나에게 에너지를 주는지, 소진시키는지 살펴봅니다.</p>
+        <div class="foot"><span class="name">에너지를 정렬하다 · 20문항 · 약 6분</span><span class="go">진단 시작</span></div>
+      </a>
+
+      <a class="card d" href="./need/">
+        <div class="tag"><span class="num">4</span>D · Daily Authorship</div>
+        <p class="q">나는 내 기준으로<br>살고 있는가?</p>
+        <p class="desc">나의 가치와 우선순위에 따라 하루를 선택하고 있는지 살펴봅니다.</p>
+        <div class="foot"><span class="name">내 기준으로 오늘을 쓰다 · 20문항 · 약 7분</span><span class="go">진단 시작</span></div>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead">
+      <h2>진단을 마치면 무엇을 받나요?</h2>
+      <p>진단 하나를 마칠 때마다 해당 영역의 결과가 열립니다. 네 가지를 모두 마치면 전체 지도가 완성됩니다.</p>
+    </div>
+    <div class="report">
+      <h3>나의 나다움 설계 리포트</h3>
+      <p>네 진단의 결과를 하나의 지도로 모아 읽습니다.</p>
+      <ul>
+        <li>네 축을 한눈에 보는 나의 지도</li>
+        <li>각 영역에서 현재 두드러지는 경향</li>
+        <li>나를 돕는 요인과 방해하는 요인</li>
+        <li>지금 점검해볼 다음 질문</li>
+      </ul>
+      <a class="badge" href="./report/">내 리포트 보기</a>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead">
+      <h2>해석을 더하는 심화 진단</h2>
+      <p>핵심 결과를 더 깊이 이해하고 싶을 때 선택해서 하시면 됩니다. 점수 대신 해석하는 관점을 더합니다.</p>
+    </div>
+    <div class="grid">
+      <a class="dcard" href="./5characters/">
+        <p class="opt">심화 1 · 에너지 패턴을 더 자세히 보기</p>
+        <h3>에너지 경향성 진단</h3>
+        <p class="dq">나는 지금 어디에 에너지를 쓰고 있을까?</p>
+        <p class="dp">내가 어떤 방식으로 몰입하고 에너지를 얻는지 살펴봅니다. 5러 몰입 경향성(열정러 · 협력러 · 안정러 · 장인러 · 모험러)으로 읽습니다.</p>
+        <div class="foot"><span class="name">15문항 · 약 5분</span><span class="go" style="color:var(--e1)">진단 시작</span></div>
+      </a>
+      <a class="dcard" href="./why/">
+        <p class="opt">심화 2 · 나를 움직이는 방식 이해하기</p>
+        <h3>기질 · 동기 · 잡음 진단</h3>
+        <p class="dq">나는 어떤 방식으로 움직이는 사람일까?</p>
+        <p class="dp">기질과 동기, 판단을 흐리는 요인의 관계를 함께 살펴봅니다.</p>
+        <div class="foot"><span class="name">26문항 · 약 8분</span><span class="go" style="color:var(--d)">진단 시작</span></div>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <div class="steps">
+      <h3>진단은 이렇게 진행됩니다</h3>
+      <ol>
+        <li><b>1단계</b>네 가지 진단 중 하나를 고릅니다</li>
+        <li><b>2단계</b>약 5분간 솔직하게 답합니다</li>
+        <li><b>3단계</b>결과를 확인하고 이메일로 보관합니다</li>
+      </ol>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <p class="brand">나다움설계연구소</p>
+    <p>여기서 잡음은 타인의 기대, 과도한 정보, 불안처럼 내 판단을 흐리게 하는 요소를 뜻합니다.
+    이 진단은 의료적 · 임상적 진단이 아니라, 자기이해를 돕는 자기점검 도구입니다.
+    이름과 개인정보 없이 참여할 수 있고, 결과를 보관하려면 이메일만 등록하면 됩니다.</p>
+  </div>
+</footer>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>나다움 진단 지도 | 나다움설계연구소</title>
+<meta name="description" content="나는 무엇을 원하고, 무엇에 흔들리며, 무엇으로 살아나는가. 네 가지 질문으로 지금의 나를 살펴보는 무료 자기점검 도구입니다.">
+<meta property="og:title" content="나다움 진단 지도">
+<meta property="og:description" content="네 가지 질문으로 지금의 나를 살펴보는 무료 자기점검 도구. 핵심 진단 4개 · 약 23분 · 이름 없이 참여.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+:root{
+  --ink:#141D27; --body:#3F4C5A; --mute:#69757F; --line:#DFE5EC;
+  --paper:#FFFFFF; --bg:#F4F6F9; --soft:#FAFBFD;
+  --n:#24528F; --e1:#2F7A4C; --e2:#96660E; --d:#5B4C99;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);font-family:'Pretendard','Noto Sans KR',sans-serif;color:var(--body);
+     -webkit-font-smoothing:antialiased;line-height:1.6;}
+h1,h2,h3,.q{font-family:-apple-system,'SF Pro Display','Apple SD 산돌고딕 Neo','Pretendard',sans-serif;
+            color:var(--ink);letter-spacing:-0.02em;}
+a{text-decoration:none;color:inherit;}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px;}
+
+.hero{background:var(--paper);border-bottom:1px solid var(--line);padding:56px 0 44px;text-align:center;}
+.eyebrow{font-size:14px;font-weight:600;color:var(--mute);}
+.hero h1{font-size:46px;font-weight:800;margin-top:10px;line-height:1.15;}
+.hero .lede{font-size:20px;font-weight:700;color:var(--ink);margin-top:16px;line-height:1.45;}
+.hero .sub{font-size:16px;margin-top:14px;}
+.facts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:24px;}
+.chip{border:1px solid var(--line);border-radius:999px;padding:9px 16px;font-size:14px;background:var(--soft);}
+.chip b{color:var(--ink);font-weight:700;}
+.cta{display:inline-block;margin-top:26px;background:var(--n);color:#fff;font-size:17px;font-weight:700;
+     padding:16px 32px;border-radius:10px;}
+.cta:hover{background:#1C4276;}
+.hero .tiny{font-size:14px;color:var(--mute);margin-top:12px;}
+
+section{padding:40px 0 0;}
+.shead h2{font-size:24px;font-weight:800;}
+.shead p{font-size:15px;margin-top:6px;}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px;}
+.card{display:block;background:var(--paper);border:1px solid var(--line);border-radius:14px;
+      padding:20px 22px 18px;border-top-width:5px;transition:box-shadow .15s ease, transform .15s ease;}
+.card:hover{box-shadow:0 6px 20px rgba(20,29,39,.09);transform:translateY(-2px);}
+.card:focus-visible{outline:3px solid var(--n);outline-offset:3px;}
+.card.n{border-top-color:var(--n);background:#F3F7FC;}
+.card.e1{border-top-color:var(--e1);background:#F2F8F4;}
+.card.e2{border-top-color:var(--e2);background:#FBF7EF;}
+.card.d{border-top-color:var(--d);background:#F6F5FB;}
+.tag{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:700;}
+.num{width:22px;height:22px;border-radius:50%;color:#fff;font-size:13px;font-weight:700;
+     display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+.n .num{background:var(--n);} .n .tag{color:var(--n);} .n .go{color:var(--n);}
+.e1 .num{background:var(--e1);} .e1 .tag{color:var(--e1);} .e1 .go{color:var(--e1);}
+.e2 .num{background:var(--e2);} .e2 .tag{color:var(--e2);} .e2 .go{color:var(--e2);}
+.d .num{background:var(--d);} .d .tag{color:var(--d);} .d .go{color:var(--d);}
+.q{font-size:22px;font-weight:800;margin-top:12px;line-height:1.3;}
+.desc{font-size:15px;margin-top:9px;}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:10px;
+      margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:14px;}
+.name{color:var(--ink);font-weight:600;}
+.go{font-weight:700;white-space:nowrap;}
+
+.report{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:24px;margin-top:20px;}
+.report h3{font-size:20px;font-weight:800;}
+.report p{font-size:15px;margin-top:8px;}
+.report ul{list-style:none;margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.report li{font-size:15px;padding-left:16px;position:relative;color:var(--ink);}
+.report li::before{content:"";position:absolute;left:0;top:9px;width:7px;height:7px;border-radius:50%;background:var(--n);}
+.report .badge{display:inline-block;margin-top:18px;background:var(--n);color:#fff;font-size:15px;
+               font-weight:700;padding:13px 22px;border-radius:9px;}
+.report .badge:hover{background:#1C4276;}
+
+.dcard{display:block;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px 22px 18px;
+       transition:box-shadow .15s ease, transform .15s ease;}
+.dcard:hover{box-shadow:0 6px 20px rgba(20,29,39,.08);transform:translateY(-2px);}
+.opt{font-size:13px;font-weight:700;color:var(--mute);}
+.dcard h3{font-size:19px;font-weight:800;margin-top:5px;}
+.dq{font-size:16px;font-weight:600;color:var(--ink);margin-top:8px;}
+.dp{font-size:15px;margin-top:6px;}
+
+.steps{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:24px;margin-top:20px;}
+.steps h3{font-size:20px;font-weight:800;}
+.steps ol{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px;}
+.steps li{font-size:15px;color:var(--ink);}
+.steps li b{display:block;font-size:13px;color:var(--n);font-weight:700;margin-bottom:4px;}
+
+footer{margin-top:44px;border-top:1px solid var(--line);background:var(--paper);padding:26px 0 40px;}
+footer p{font-size:14px;color:var(--mute);}
+footer .brand{color:var(--ink);font-weight:700;margin-bottom:8px;}
+
+@media (max-width:640px){
+  .hero{padding:40px 0 34px;} .hero h1{font-size:34px;} .hero .lede{font-size:18px;}
+  .grid{grid-template-columns:1fr;} .report ul{grid-template-columns:1fr;}
+  .steps ol{grid-template-columns:1fr;gap:12px;} .q{font-size:21px;}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap">
+    <p class="eyebrow">나다움설계연구소 · 무료 자기점검</p>
+    <h1>나다움 진단 지도</h1>
+    <p class="lede">나는 무엇을 원하고, 무엇에 흔들리며, 무엇으로 살아나는가</p>
+    <p class="sub">네 가지 질문으로 지금의 나를 살펴보는 무료 자기이해 도구입니다.<br>
+    진단을 하나씩 마칠 때마다 결과가 리포트에 쌓이고, 네 가지를 모두 마치면 나만의 지도가 완성됩니다.</p>
+    <div class="facts">
+      <span class="chip"><b>핵심 진단 4개</b> · 74문항 · 약 23분</span>
+      <span class="chip"><b>모두 무료</b></span>
+      <span class="chip"><b>이름 없이 참여</b></span>
+      <span class="chip"><b>결과 보관은 이메일만</b></span>
+    </div>
+    <a class="cta" href="#진단">진단 하나부터 시작해보세요</a>
+    <p class="tiny">어디서 시작해도 됩니다. 지금 가장 궁금한 질문부터 하시면 됩니다.</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section id="진단">
+    <div class="shead">
+      <h2>네 축을 여는 핵심 진단</h2>
+      <p>카드를 누르면 진단으로 바로 이동합니다.</p>
+    </div>
+
+    <div class="grid">
+      <a class="card n" href="./needscan/">
+        <div class="tag"><span class="num">1</span>N · Need Scan</div>
+        <p class="q">나는 무엇을<br>진짜 원하는가?</p>
+        <p class="desc">내가 원하는 것을 얼마나 분명히 알고 있는지 살펴봅니다.</p>
+        <div class="foot"><span class="name">나를 읽다 · 16문항 · 약 5분</span><span class="go">진단 시작</span></div>
+      </a>
+
+      <a class="card e1" href="./newnoise/">
+        <div class="tag"><span class="num">2</span>E · Eliminate Noise</div>
+        <p class="q">무엇이 내 판단을<br>흐리게 하는가?</p>
+        <p class="desc">타인의 기대와 정보, 불안이 내 선택에 얼마나 섞여 있는지 봅니다.</p>
+        <div class="foot"><span class="name">흐리게 하는 것을 덜다 · 18문항 · 약 5분</span><span class="go">진단 시작</span></div>
+      </a>
+
+      <a class="card e2" href="./alignment/">
+        <div class="tag"><span class="num">3</span>E · Energy Alignment</div>
+        <p class="q">무엇이 나를 살리고<br>무엇이 나를 지치게 하는가?</p>
+        <p class="desc">지금의 일상과 관계가 나에게 에너지를 주는지, 소진시키는지 살펴봅니다.</p>
+        <div class="foot"><span class="name">에너지를 정렬하다 · 20문항 · 약 6분</span><span class="go">진단 시작</span></div>
+      </a>
+
+      <a class="card d" href="./need/">
+        <div class="tag"><span class="num">4</span>D · Daily Authorship</div>
+        <p class="q">나는 내 기준으로<br>살고 있는가?</p>
+        <p class="desc">나의 가치와 우선순위에 따라 하루를 선택하고 있는지 살펴봅니다.</p>
+        <div class="foot"><span class="name">내 기준으로 오늘을 쓰다 · 20문항 · 약 7분</span><span class="go">진단 시작</span></div>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead">
+      <h2>진단을 마치면 무엇을 받나요?</h2>
+      <p>진단 하나를 마칠 때마다 해당 영역의 결과가 열립니다. 네 가지를 모두 마치면 전체 지도가 완성됩니다.</p>
+    </div>
+    <div class="report">
+      <h3>나의 나다움 설계 리포트</h3>
+      <p>네 진단의 결과를 하나의 지도로 모아 읽습니다.</p>
+      <ul>
+        <li>네 축을 한눈에 보는 나의 지도</li>
+        <li>각 영역에서 현재 두드러지는 경향</li>
+        <li>나를 돕는 요인과 방해하는 요인</li>
+        <li>지금 점검해볼 다음 질문</li>
+      </ul>
+      <a class="badge" href="./report/">내 리포트 보기</a>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead">
+      <h2>해석을 더하는 심화 진단</h2>
+      <p>핵심 결과를 더 깊이 이해하고 싶을 때 선택해서 하시면 됩니다. 점수 대신 해석하는 관점을 더합니다.</p>
+    </div>
+    <div class="grid">
+      <a class="dcard" href="./5characters/">
+        <p class="opt">심화 1 · 에너지 패턴을 더 자세히 보기</p>
+        <h3>에너지 경향성 진단</h3>
+        <p class="dq">나는 지금 어디에 에너지를 쓰고 있을까?</p>
+        <p class="dp">내가 어떤 방식으로 몰입하고 에너지를 얻는지 살펴봅니다. 5러 몰입 경향성(열정러 · 협력러 · 안정러 · 장인러 · 모험러)으로 읽습니다.</p>
+        <div class="foot"><span class="name">15문항 · 약 5분</span><span class="go" style="color:var(--e1)">진단 시작</span></div>
+      </a>
+      <a class="dcard" href="./why/">
+        <p class="opt">심화 2 · 나를 움직이는 방식 이해하기</p>
+        <h3>기질 · 동기 · 잡음 진단</h3>
+        <p class="dq">나는 어떤 방식으로 움직이는 사람일까?</p>
+        <p class="dp">기질과 동기, 판단을 흐리는 요인의 관계를 함께 살펴봅니다.</p>
+        <div class="foot"><span class="name">26문항 · 약 8분</span><span class="go" style="color:var(--d)">진단 시작</span></div>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <div class="steps">
+      <h3>진단은 이렇게 진행됩니다</h3>
+      <ol>
+        <li><b>1단계</b>네 가지 진단 중 하나를 고릅니다</li>
+        <li><b>2단계</b>약 5분간 솔직하게 답합니다</li>
+        <li><b>3단계</b>결과를 확인하고 이메일로 보관합니다</li>
+      </ol>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <p class="brand">나다움설계연구소</p>
+    <p>여기서 잡음은 타인의 기대, 과도한 정보, 불안처럼 내 판단을 흐리게 하는 요소를 뜻합니다.
+    이 진단은 의료적 · 임상적 진단이 아니라, 자기이해를 돕는 자기점검 도구입니다.
+    이름과 개인정보 없이 참여할 수 있고, 결과를 보관하려면 이메일만 등록하면 됩니다.</p>
+  </div>
+</footer>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>나다움 진단 지도 | 나다움설계연구소</title>
+<meta name="description" content="나는 무엇을 원하고, 무엇에 흔들리며, 무엇으로 살아나는가. 네 가지 질문으로 지금의 나를 살펴보는 무료 자기점검 도구입니다.">
+<meta property="og:title" content="나다움 진단 지도">
+<meta property="og:description" content="네 가지 질문으로 지금의 나를 살펴보는 무료 자기점검 도구. 핵심 진단 4개 · 약 23분 · 이름 없이 참여.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+:root{
+  --ink:#141D27; --body:#3F4C5A; --mute:#69757F; --line:#DFE5EC;
+  --paper:#FFFFFF; --bg:#F4F6F9; --soft:#FAFBFD;
+  --n:#24528F; --e1:#2F7A4C; --e2:#96660E; --d:#5B4C99;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);font-family:'Pretendard','Noto Sans KR',sans-serif;color:var(--body);
+     -webkit-font-smoothing:antialiased;line-height:1.6;}
+h1,h2,h3,.q{font-family:-apple-system,'SF Pro Display','Apple SD 산돌고딕 Neo','Pretendard',sans-serif;
+            color:var(--ink);letter-spacing:-0.02em;}
+a{text-decoration:none;color:inherit;}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px;}
+
+.hero{background:var(--paper);border-bottom:1px solid var(--line);padding:56px 0 44px;text-align:center;}
+.eyebrow{font-size:14px;font-weight:600;color:var(--mute);}
+.hero h1{font-size:46px;font-weight:800;margin-top:10px;line-height:1.15;}
+.hero .lede{font-size:20px;font-weight:700;color:var(--ink);margin-top:16px;line-height:1.45;}
+.hero .sub{font-size:16px;margin-top:14px;}
+.facts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:24px;}
+.chip{border:1px solid var(--line);border-radius:999px;padding:9px 16px;font-size:14px;background:var(--soft);}
+.chip b{color:var(--ink);font-weight:700;}
+.cta{display:inline-block;margin-top:26px;background:var(--n);color:#fff;font-size:17px;font-weight:700;
+     padding:16px 32px;border-radius:10px;}
+.cta:hover{background:#1C4276;}
+.hero .tiny{font-size:14px;color:var(--mute);margin-top:12px;}
+
+section{padding:40px 0 0;}
+.shead h2{font-size:24px;font-weight:800;}
+.shead p{font-size:15px;margin-top:6px;}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px;}
+.card{display:block;background:var(--paper);border:1px solid var(--line);border-radius:14px;
+      padding:20px 22px 18px;border-top-width:5px;transition:box-shadow .15s ease, transform .15s ease;}
+.card:hover{box-shadow:0 6px 20px rgba(20,29,39,.09);transform:translateY(-2px);}
+.card:focus-visible{outline:3px solid var(--n);outline-offset:3px;}
+.card.n{border-top-color:var(--n);background:#F3F7FC;}
+.card.e1{border-top-color:var(--e1);background:#F2F8F4;}
+.card.e2{border-top-color:var(--e2);background:#FBF7EF;}
+.card.d{border-top-color:var(--d);background:#F6F5FB;}
+.tag{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:700;}
+.num{width:22px;height:22px;border-radius:50%;color:#fff;font-size:13px;font-weight:700;
+     display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+.n .num{background:var(--n);} .n .tag{color:var(--n);} .n .go{color:var(--n);}
+.e1 .num{background:var(--e1);} .e1 .tag{color:var(--e1);} .e1 .go{color:var(--e1);}
+.e2 .num{background:var(--e2);} .e2 .tag{color:var(--e2);} .e2 .go{color:var(--e2);}
+.d .num{background:var(--d);} .d .tag{color:var(--d);} .d .go{color:var(--d);}
+.q{font-size:22px;font-weight:800;margin-top:12px;line-height:1.3;}
+.desc{font-size:15px;margin-top:9px;}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:10px;
+      margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:14px;}
+.name{color:var(--ink);font-weight:600;}
+.go{font-weight:700;white-space:nowrap;}
+
+.report{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:24px;margin-top:20px;}
+.report h3{font-size:20px;font-weight:800;}
+.report p{font-size:15px;margin-top:8px;}
+.report ul{list-style:none;margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.report li{font-size:15px;padding-left:16px;position:relative;color:var(--ink);}
+.report li::before{content:"";position:absolute;left:0;top:9px;width:7px;height:7px;border-radius:50%;background:var(--n);}
+.report .badge{display:inline-block;margin-top:18px;background:var(--n);color:#fff;font-size:15px;
+               font-weight:700;padding:13px 22px;border-radius:9px;}
+.report .badge:hover{background:#1C4276;}
+
+.dcard{display:block;background:#FBF5F6;border:1px solid var(--line);border-radius:14px;padding:20px 22px 18px;
+       transition:box-shadow .15s ease, transform .15s ease;}
+.dcard:hover{box-shadow:0 6px 20px rgba(20,29,39,.08);transform:translateY(-2px);}
+.opt{font-size:13px;font-weight:700;color:var(--mute);}
+.dcard h3{font-size:19px;font-weight:800;margin-top:5px;}
+.dq{font-size:16px;font-weight:600;color:var(--ink);margin-top:8px;}
+.dp{font-size:15px;margin-top:6px;}
+
+.steps{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:24px;margin-top:20px;}
+.steps h3{font-size:20px;font-weight:800;}
+.steps ol{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px;}
+.steps li{font-size:15px;color:var(--ink);}
+.steps li b{display:block;font-size:13px;color:var(--n);font-weight:700;margin-bottom:4px;}
+
+footer{margin-top:44px;border-top:1px solid var(--line);background:var(--paper);padding:26px 0 40px;}
+footer p{font-size:14px;color:var(--mute);}
+footer .brand{color:var(--ink);font-weight:700;margin-bottom:8px;}
+
+@media (max-width:640px){
+  .hero{padding:40px 0 34px;} .hero h1{font-size:34px;} .hero .lede{font-size:18px;}
+  .grid{grid-template-columns:1fr;} .report ul{grid-template-columns:1fr;}
+  .steps ol{grid-template-columns:1fr;gap:12px;} .q{font-size:21px;}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap">
+    <p class="eyebrow">나다움설계연구소 · 무료 자기점검</p>
+    <h1>나다움 진단 지도</h1>
+    <p class="lede">나는 무엇을 원하고, 무엇에 흔들리며, 무엇으로 살아나는가</p>
+    <p class="sub">네 가지 질문으로 지금의 나를 살펴보는 무료 자기이해 도구입니다.<br>
+    진단을 하나씩 마칠 때마다 결과가 리포트에 쌓이고, 네 가지를 모두 마치면 나만의 지도가 완성됩니다.</p>
+    <div class="facts">
+      <span class="chip"><b>핵심 진단 4개</b> · 74문항 · 약 23분</span>
+      <span class="chip"><b>모두 무료</b></span>
+      <span class="chip"><b>이름 없이 참여</b></span>
+      <span class="chip"><b>결과 보관은 이메일만</b></span>
+    </div>
+    <a class="cta" href="#진단">진단 하나부터 시작해보세요</a>
+    <p class="tiny">어디서 시작해도 됩니다. 지금 가장 궁금한 질문부터 하시면 됩니다.</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section id="진단">
+    <div class="shead">
+      <h2>네 축을 여는 핵심 진단</h2>
+      <p>카드를 누르면 진단으로 바로 이동합니다.</p>
+    </div>
+
+    <div class="grid">
+      <a class="card n" href="./needscan/">
+        <div class="tag"><span class="num">1</span>N · Need Scan</div>
+        <p class="q">나는 무엇을<br>진짜 원하는가?</p>
+        <p class="desc">내가 원하는 것을 얼마나 분명히 알고 있는지 살펴봅니다.</p>
+        <div class="foot"><span class="name">나를 읽다 · 16문항 · 약 5분</span><span class="go">진단 시작</span></div>
+      </a>
+
+      <a class="card e1" href="./newnoise/">
+        <div class="tag"><span class="num">2</span>E · Eliminate Noise</div>
+        <p class="q">무엇이 내 판단을<br>흐리게 하는가?</p>
+        <p class="desc">타인의 기대와 정보, 불안이 내 선택에 얼마나 섞여 있는지 봅니다.</p>
+        <div class="foot"><span class="name">흐리게 하는 것을 덜다 · 18문항 · 약 5분</span><span class="go">진단 시작</span></div>
+      </a>
+
+      <a class="card e2" href="./alignment/">
+        <div class="tag"><span class="num">3</span>E · Energy Alignment</div>
+        <p class="q">무엇이 나를 살리고<br>무엇이 나를 지치게 하는가?</p>
+        <p class="desc">지금의 일상과 관계가 나에게 에너지를 주는지, 소진시키는지 살펴봅니다.</p>
+        <div class="foot"><span class="name">에너지를 정렬하다 · 20문항 · 약 6분</span><span class="go">진단 시작</span></div>
+      </a>
+
+      <a class="card d" href="./need/">
+        <div class="tag"><span class="num">4</span>D · Daily Authorship</div>
+        <p class="q">나는 내 기준으로<br>살고 있는가?</p>
+        <p class="desc">나의 가치와 우선순위에 따라 하루를 선택하고 있는지 살펴봅니다.</p>
+        <div class="foot"><span class="name">내 기준으로 오늘을 쓰다 · 20문항 · 약 7분</span><span class="go">진단 시작</span></div>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead">
+      <h2>진단을 마치면 무엇을 받나요?</h2>
+      <p>진단 하나를 마칠 때마다 해당 영역의 결과가 열립니다. 네 가지를 모두 마치면 전체 지도가 완성됩니다.</p>
+    </div>
+    <div class="report">
+      <h3>나의 나다움 설계 리포트</h3>
+      <p>네 진단의 결과를 하나의 지도로 모아 읽습니다.</p>
+      <ul>
+        <li>네 축을 한눈에 보는 나의 지도</li>
+        <li>각 영역에서 현재 두드러지는 경향</li>
+        <li>나를 돕는 요인과 방해하는 요인</li>
+        <li>지금 점검해볼 다음 질문</li>
+      </ul>
+      <a class="badge" href="./report/">내 리포트 보기</a>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead">
+      <h2>해석을 더하는 심화 진단</h2>
+      <p>핵심 결과를 더 깊이 이해하고 싶을 때 선택해서 하시면 됩니다. 점수 대신 해석하는 관점을 더합니다.</p>
+    </div>
+    <div class="grid">
+      <a class="dcard" href="./5characters/">
+        <p class="opt">심화 1 · 에너지 패턴을 더 자세히 보기</p>
+        <h3>에너지 경향성 진단</h3>
+        <p class="dq">나는 지금 어디에 에너지를 쓰고 있을까?</p>
+        <p class="dp">내가 어떤 방식으로 몰입하고 에너지를 얻는지 살펴봅니다. 5러 몰입 경향성(열정러 · 협력러 · 안정러 · 장인러 · 모험러)으로 읽습니다.</p>
+        <div class="foot"><span class="name">15문항 · 약 5분</span><span class="go" style="color:var(--e1)">진단 시작</span></div>
+      </a>
+      <a class="dcard" href="./why/">
+        <p class="opt">심화 2 · 나를 움직이는 방식 이해하기</p>
+        <h3>기질 · 동기 · 잡음 진단</h3>
+        <p class="dq">나는 어떤 방식으로 움직이는 사람일까?</p>
+        <p class="dp">기질과 동기, 판단을 흐리는 요인의 관계를 함께 살펴봅니다.</p>
+        <div class="foot"><span class="name">26문항 · 약 8분</span><span class="go" style="color:var(--d)">진단 시작</span></div>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <div class="steps">
+      <h3>진단은 이렇게 진행됩니다</h3>
+      <ol>
+        <li><b>1단계</b>네 가지 진단 중 하나를 고릅니다</li>
+        <li><b>2단계</b>약 5분간 솔직하게 답합니다</li>
+        <li><b>3단계</b>결과를 확인하고 이메일로 보관합니다</li>
+      </ol>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <p class="brand">나다움설계연구소</p>
+    <p>여기서 잡음은 타인의 기대, 과도한 정보, 불안처럼 내 판단을 흐리게 하는 요소를 뜻합니다.
+    이 진단은 의료적 · 임상적 진단이 아니라, 자기이해를 돕는 자기점검 도구입니다.
+    이름과 개인정보 없이 참여할 수 있고, 결과를 보관하려면 이메일만 등록하면 됩니다.</p>
+  </div>
+</footer>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>나다움 진단 지도 | 나다움설계연구소</title>
+<meta name="description" content="나는 무엇을 원하고, 무엇에 흔들리며, 무엇으로 살아나는가. 네 가지 질문으로 지금의 나를 살펴보는 무료 자기점검 도구입니다.">
+<meta property="og:title" content="나다움 진단 지도">
+<meta property="og:description" content="네 가지 질문으로 지금의 나를 살펴보는 무료 자기점검 도구. 핵심 진단 4개 · 약 23분 · 이름 없이 참여.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+:root{
+  --ink:#141D27; --body:#3F4C5A; --mute:#69757F; --line:#DFE5EC;
+  --paper:#FFFFFF; --bg:#F4F6F9; --soft:#FAFBFD;
+  --n:#24528F; --e1:#2F7A4C; --e2:#96660E; --d:#5B4C99;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);font-family:'Pretendard','Noto Sans KR',sans-serif;color:var(--body);
+     -webkit-font-smoothing:antialiased;line-height:1.6;}
+h1,h2,h3,.q{font-family:-apple-system,'SF Pro Display','Apple SD 산돌고딕 Neo','Pretendard',sans-serif;
+            color:var(--ink);letter-spacing:-0.02em;}
+a{text-decoration:none;color:inherit;}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px;}
+
+.hero{background:var(--paper);border-bottom:1px solid var(--line);padding:56px 0 44px;text-align:center;}
+.eyebrow{font-size:14px;font-weight:600;color:var(--mute);}
+.hero h1{font-size:46px;font-weight:800;margin-top:10px;line-height:1.15;}
+.hero .lede{font-size:20px;font-weight:700;color:var(--ink);margin-top:16px;line-height:1.45;}
+.hero .sub{font-size:16px;margin-top:14px;}
+.facts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:24px;}
+.chip{border:1px solid var(--line);border-radius:999px;padding:9px 16px;font-size:14px;background:var(--soft);}
+.chip b{color:var(--ink);font-weight:700;}
+.cta{display:inline-block;margin-top:26px;background:var(--n);color:#fff;font-size:17px;font-weight:700;
+     padding:16px 32px;border-radius:10px;}
+.cta:hover{background:#1C4276;}
+.hero .tiny{font-size:14px;color:var(--mute);margin-top:12px;}
+
+section{padding:40px 0 0;}
+.shead h2{font-size:24px;font-weight:800;}
+.shead p{font-size:15px;margin-top:6px;}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px;}
+.card{display:block;background:var(--paper);border:1px solid var(--line);border-radius:14px;
+      padding:20px 22px 18px;border-top-width:5px;transition:box-shadow .15s ease, transform .15s ease;}
+.card:hover{box-shadow:0 6px 20px rgba(20,29,39,.09);transform:translateY(-2px);}
+.card:focus-visible{outline:3px solid var(--n);outline-offset:3px;}
+.card.n{border-top-color:var(--n);background:#F3F7FC;}
+.card.e1{border-top-color:var(--e1);background:#F2F8F4;}
+.card.e2{border-top-color:var(--e2);background:#FBF7EF;}
+.card.d{border-top-color:var(--d);background:#F6F5FB;}
+.tag{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:700;}
+.num{width:22px;height:22px;border-radius:50%;color:#fff;font-size:13px;font-weight:700;
+     display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+.n .num{background:var(--n);} .n .tag{color:var(--n);} .n .go{color:var(--n);}
+.e1 .num{background:var(--e1);} .e1 .tag{color:var(--e1);} .e1 .go{color:var(--e1);}
+.e2 .num{background:var(--e2);} .e2 .tag{color:var(--e2);} .e2 .go{color:var(--e2);}
+.d .num{background:var(--d);} .d .tag{color:var(--d);} .d .go{color:var(--d);}
+.q{font-size:22px;font-weight:800;margin-top:12px;line-height:1.3;}
+.desc{font-size:15px;margin-top:9px;}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:10px;
+      margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:14px;}
+.name{color:var(--ink);font-weight:600;}
+.go{font-weight:700;white-space:nowrap;}
+
+.report{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:24px;margin-top:20px;}
+.report h3{font-size:20px;font-weight:800;}
+.report p{font-size:15px;margin-top:8px;}
+.report ul{list-style:none;margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.report li{font-size:15px;padding-left:16px;position:relative;color:var(--ink);}
+.report li::before{content:"";position:absolute;left:0;top:9px;width:7px;height:7px;border-radius:50%;background:var(--n);}
+.report .badge{display:inline-block;margin-top:18px;background:var(--n);color:#fff;font-size:15px;
+               font-weight:700;padding:13px 22px;border-radius:9px;}
+.report .badge:hover{background:#1C4276;}
+
+.dcard{display:block;background:#FBF5F6;border:1px solid var(--line);border-radius:14px;padding:20px 22px 18px;
+       transition:box-shadow .15s ease, transform .15s ease;}
+.dcard:hover{box-shadow:0 6px 20px rgba(20,29,39,.08);transform:translateY(-2px);}
+.opt{font-size:13px;font-weight:700;color:var(--mute);}
+.dcard h3{font-size:19px;font-weight:800;margin-top:5px;}
+.dq{font-size:16px;font-weight:600;color:var(--ink);margin-top:8px;}
+.dp{font-size:15px;margin-top:6px;}
+
+.steps{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:24px;margin-top:20px;}
+.steps h3{font-size:20px;font-weight:800;}
+.steps ol{list-style:none;display:flex;align-items:flex-start;gap:10px;margin-top:16px;}
+.steps li{flex:1 1 0;font-size:15px;color:var(--ink);line-height:1.45;}
+.steps li b{display:inline-block;background:#EDF2F9;color:var(--n);font-size:12px;font-weight:700;
+            padding:4px 12px;border-radius:999px;margin-bottom:8px;}
+.steps li+li{position:relative;padding-left:26px;}
+.steps li+li::before{content:"→";position:absolute;left:4px;top:3px;color:#9AA5B1;font-size:17px;font-weight:700;}
+
+footer{margin-top:44px;border-top:1px solid var(--line);background:var(--paper);padding:26px 0 40px;}
+footer p{font-size:14px;color:var(--mute);}
+footer .brand{color:var(--ink);font-weight:700;margin-bottom:8px;}
+
+@media (max-width:640px){
+  .hero{padding:40px 0 34px;} .hero h1{font-size:34px;} .hero .lede{font-size:18px;}
+  .grid{grid-template-columns:1fr;} .report ul{grid-template-columns:1fr;}
+  .steps ol{flex-direction:column;gap:14px;} .q{font-size:21px;}
+  .steps li+li{padding-left:0;padding-top:4px;}
+  .steps li+li::before{content:"↓";left:2px;top:-14px;}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap">
+    <p class="eyebrow">나다움설계연구소 · 무료 자기점검</p>
+    <h1>나다움 진단 지도</h1>
+    <p class="lede">나는 무엇을 원하고, 무엇에 흔들리며, 무엇으로 살아나는가</p>
+    <p class="sub">네 가지 질문으로 지금의 나를 살펴보는 무료 자기이해 도구입니다.<br>
+    진단을 하나씩 마칠 때마다 결과가 리포트에 쌓이고, 네 가지를 모두 마치면 나만의 지도가 완성됩니다.</p>
+    <div class="facts">
+      <span class="chip"><b>핵심 진단 4개</b> · 74문항 · 약 23분</span>
+      <span class="chip"><b>모두 무료</b></span>
+      <span class="chip"><b>이름 없이 참여</b></span>
+      <span class="chip"><b>결과 보관은 이메일만</b></span>
+    </div>
+    <a class="cta" href="#진단">진단 하나부터 시작해보세요</a>
+    <p class="tiny">어디서 시작해도 됩니다. 지금 가장 궁금한 질문부터 하시면 됩니다.</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section id="진단">
+    <div class="shead">
+      <h2>네 축을 여는 핵심 진단</h2>
+      <p>카드를 누르면 진단으로 바로 이동합니다.</p>
+    </div>
+
+    <div class="grid">
+      <a class="card n" href="./needscan/">
+        <div class="tag"><span class="num">1</span>N · Need Scan</div>
+        <p class="q">나는 무엇을<br>진짜 원하는가?</p>
+        <p class="desc">내가 원하는 것을 얼마나 분명히 알고 있는지 살펴봅니다.</p>
+        <div class="foot"><span class="name">나를 읽다 · 16문항 · 약 5분</span><span class="go">진단 시작</span></div>
+      </a>
+
+      <a class="card e1" href="./newnoise/">
+        <div class="tag"><span class="num">2</span>E · Eliminate Noise</div>
+        <p class="q">무엇이 내 판단을<br>흐리게 하는가?</p>
+        <p class="desc">타인의 기대와 정보, 불안이 내 선택에 얼마나 섞여 있는지 봅니다.</p>
+        <div class="foot"><span class="name">흐리게 하는 것을 덜다 · 18문항 · 약 5분</span><span class="go">진단 시작</span></div>
+      </a>
+
+      <a class="card e2" href="./alignment/">
+        <div class="tag"><span class="num">3</span>E · Energy Alignment</div>
+        <p class="q">무엇이 나를 살리고<br>무엇이 나를 지치게 하는가?</p>
+        <p class="desc">지금의 일상과 관계가 나에게 에너지를 주는지, 소진시키는지 살펴봅니다.</p>
+        <div class="foot"><span class="name">에너지를 정렬하다 · 20문항 · 약 6분</span><span class="go">진단 시작</span></div>
+      </a>
+
+      <a class="card d" href="./need/">
+        <div class="tag"><span class="num">4</span>D · Daily Authorship</div>
+        <p class="q">나는 내 기준으로<br>살고 있는가?</p>
+        <p class="desc">나의 가치와 우선순위에 따라 하루를 선택하고 있는지 살펴봅니다.</p>
+        <div class="foot"><span class="name">내 기준으로 오늘을 쓰다 · 20문항 · 약 7분</span><span class="go">진단 시작</span></div>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead">
+      <h2>진단을 마치면 무엇을 받나요?</h2>
+      <p>진단 하나를 마칠 때마다 해당 영역의 결과가 열립니다. 네 가지를 모두 마치면 전체 지도가 완성됩니다.</p>
+    </div>
+    <div class="report">
+      <h3>나의 나다움 설계 리포트</h3>
+      <p>네 진단의 결과를 하나의 지도로 모아 읽습니다.</p>
+      <ul>
+        <li>네 축을 한눈에 보는 나의 지도</li>
+        <li>각 영역에서 현재 두드러지는 경향</li>
+        <li>나를 돕는 요인과 방해하는 요인</li>
+        <li>지금 점검해볼 다음 질문</li>
+      </ul>
+      <a class="badge" href="./report/">내 리포트 보기</a>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead">
+      <h2>해석을 더하는 심화 진단</h2>
+      <p>핵심 결과를 더 깊이 이해하고 싶을 때 선택해서 하시면 됩니다. 점수 대신 해석하는 관점을 더합니다.</p>
+    </div>
+    <div class="grid">
+      <a class="dcard" href="./5characters/">
+        <p class="opt">심화 1 · 에너지 패턴을 더 자세히 보기</p>
+        <h3>에너지 경향성 진단</h3>
+        <p class="dq">나는 지금 어디에 에너지를 쓰고 있을까?</p>
+        <p class="dp">내가 어떤 방식으로 몰입하고 에너지를 얻는지 살펴봅니다. 5러 몰입 경향성(열정러 · 협력러 · 안정러 · 장인러 · 모험러)으로 읽습니다.</p>
+        <div class="foot"><span class="name">15문항 · 약 5분</span><span class="go" style="color:var(--e1)">진단 시작</span></div>
+      </a>
+      <a class="dcard" href="./why/">
+        <p class="opt">심화 2 · 나를 움직이는 방식 이해하기</p>
+        <h3>기질 · 동기 · 잡음 진단</h3>
+        <p class="dq">나는 어떤 방식으로 움직이는 사람일까?</p>
+        <p class="dp">기질과 동기, 판단을 흐리는 요인의 관계를 함께 살펴봅니다.</p>
+        <div class="foot"><span class="name">26문항 · 약 8분</span><span class="go" style="color:var(--d)">진단 시작</span></div>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <div class="steps">
+      <h3>진단은 이렇게 진행됩니다</h3>
+      <ol>
+        <li><b>1단계</b>네 가지 진단 중 하나를 고릅니다</li>
+        <li><b>2단계</b>약 5분간 솔직하게 답합니다</li>
+        <li><b>3단계</b>결과를 확인하고 이메일로 보관합니다</li>
+      </ol>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <p class="brand">나다움설계연구소</p>
+    <p>여기서 잡음은 타인의 기대, 과도한 정보, 불안처럼 내 판단을 흐리게 하는 요소를 뜻합니다.
+    이 진단은 의료적 · 임상적 진단이 아니라, 자기이해를 돕는 자기점검 도구입니다.
+    이름과 개인정보 없이 참여할 수 있고, 결과를 보관하려면 이메일만 등록하면 됩니다.</p>
+  </div>
+</footer>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
 <title>나다움 진단 지도</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <style>
