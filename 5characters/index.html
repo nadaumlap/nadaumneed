@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="color-scheme" content="light only">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>나의 에너지는 어디로 흐를까? — 5러 경향성 진단 v2 | 나다움설계연구소</title>
+
+<meta property="og:title" content="나의 에너지는 어디로 흐를까?">
+<meta property="og:description" content="5러 경향성 진단 · 빅파이브 단축형 기반 · 약 5분 · 무료 — 나다움설계연구소">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nadaumlap.github.io/nadaumneed/5characters/">
+<meta property="og:image" content="https://nadaumlap.github.io/nadaumneed/5characters/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="나다움설계연구소">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="나의 에너지는 어디로 흐를까?">
+<meta name="twitter:description" content="5러 경향성 진단 · 약 5분 · 무료">
+<meta name="twitter:image" content="https://nadaumlap.github.io/nadaumneed/5characters/og-image.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+:root {
+  --primary: #3DAA6B;
+  --primary-light: #EBF7F1;
+  --primary-dark: #2D8252;
+  --navy: #1E2761;
+  --gold: #C9983A;
+  --blue: #2979C8;
+  --purple: #8B5CF6;
+  --text: #1A1A1A;
+  --text-soft: #555;
+  --text-mute: #888;
+  --bg: #FAFBFC;
+  --card: #FFFFFF;
+  --border: #E5E7EB;
+  --font-body: 'Pretendard', 'Noto Sans KR', sans-serif;
+  --font-title: -apple-system, 'SF Pro Display', 'SF Pro Text', 'Apple SD 산돌고딕 Neo', 'Pretendard', sans-serif;
+}
+body { font-family:var(--font-body);
+  background:var(--bg) !important; color:var(--text) !important; line-height:1.55; letter-spacing:-0.01em;
+  -webkit-font-smoothing:antialiased; }
+h1, h2, h3, h4 { font-family:var(--font-title); }
+.container { max-width:540px; margin:0 auto; padding:24px 20px 80px; min-height:100vh; }
+
+/* 로고 헤더 */
+.brand-header { display:flex; align-items:center; gap:14px; padding:16px 0 24px;
+  border-bottom:1px solid var(--border); margin-bottom:28px; }
+.logo-need { font-family:'Montserrat',sans-serif; font-weight:800; font-size:22px;
+  letter-spacing:3px; display:flex; align-items:center; }
+.logo-need .l1{color:#2979C8}.logo-need .l2{color:#3DAA6B}
+.logo-need .l3{color:#C9983A}.logo-need .l4{color:#8B5CF6}
+.logo-sep { width:1px; height:26px; background:var(--border); }
+.logo-right { display:flex; flex-direction:column; gap:2px; }
+.logo-right .top { font-size:11px; font-weight:600; letter-spacing:1.5px; color:var(--text-soft); }
+.logo-right .bottom { font-size:13px; font-weight:500; color:var(--text); }
+
+/* 표지 */
+.cover { text-align:left; padding:8px 0 36px; }
+.cover-tag { display:inline-block; padding:6px 14px; background:var(--primary-light);
+  color:var(--primary); border-radius:20px; font-size:13px; font-weight:600; margin-bottom:20px; }
+.cover-title { font-family:var(--font-title); font-size:24px; font-weight:800; color:var(--navy); line-height:1.3;
+  margin-bottom:12px; word-break:keep-all; }
+.cover-subtitle { font-size:15px; color:var(--text-soft); margin-bottom:28px; word-break:keep-all; }
+.cover-meta { display:flex; justify-content:flex-start; gap:20px; flex-wrap:wrap;
+  font-size:14px; color:var(--text-mute); margin-bottom:36px; }
+.cover-meta span { display:flex; align-items:center; gap:6px; }
+
+/* 5러 미리보기 카드 */
+.chars-preview { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin-bottom:32px; }
+.char-mini { background:var(--card); border:1.5px solid var(--border); border-radius:10px;
+  padding:10px 6px; text-align:center; }
+.char-mini .icon { font-size:22px; margin-bottom:4px; }
+.char-mini .name { font-size:11px; font-weight:700; color:var(--navy); }
+
+/* 인트로 카드 */
+.intro-card { background:var(--card); border:1px solid var(--border); border-radius:16px;
+  padding:28px 24px; margin-bottom:28px; }
+.intro-card p { font-size:15.5px; color:var(--text); margin:0 0 10px; line-height:1.7; word-break:keep-all; }
+.intro-card p:last-child { margin-bottom:0; }
+.intro-card .quote { padding:16px 18px; background:var(--primary-light);
+  border-left:4px solid var(--primary); border-radius:8px;
+  font-weight:600; color:var(--navy); margin:16px 0; }
+.notice-box { background:#FFF7ED; border:1px solid #FED7AA; border-radius:12px;
+  padding:14px 16px; font-size:14px; color:#92400E; margin-bottom:16px; word-break:keep-all; }
+
+/* 버튼 */
+.btn-primary { display:block; width:100%; padding:18px 24px; background:#1E2761;
+  color:#FFF !important; border:none; border-radius:12px; font-size:16px; font-weight:700;
+  font-family:inherit; cursor:pointer; transition:all .2s; letter-spacing:.3px; text-align:center; }
+.btn-primary:hover,.btn-primary:active { background:#151C47;
+  transform:translateY(-1px); box-shadow:0 6px 20px rgba(30,39,97,.22); }
+.btn-secondary { display:block; width:100%; padding:14px 22px; background:white;
+  color:var(--primary); border:1.5px solid var(--primary); border-radius:12px;
+  font-size:15px; font-weight:600; font-family:inherit; cursor:pointer;
+  transition:all .2s; margin-top:12px; text-decoration:none; text-align:center; }
+.btn-secondary:hover { background:var(--primary-light); }
+
+/* 진단 화면 */
+.quiz-screen { display:none; }
+.quiz-screen.active { display:block; }
+.progress-bar-wrap { background:var(--border); height:6px; border-radius:4px;
+  overflow:hidden; margin-bottom:8px; }
+.progress-bar { height:100%; background:var(--primary); width:0%;
+  transition:width .3s ease; }
+.progress-text { font-size:13px; color:var(--text-mute); margin-bottom:12px; text-align:right; }
+
+.section-divider { text-align:center; padding:12px 0; margin-bottom:8px; }
+.section-divider .section-label { display:inline-block; padding:5px 14px;
+  background:var(--primary-light); color:var(--primary); border-radius:16px;
+  font-size:12.5px; font-weight:700; letter-spacing:.5px; }
+
+.question-card { background:var(--card); border-radius:16px; padding:20px 24px; margin-bottom:16px; }
+.question-num { display:inline-block; font-family:'Montserrat',sans-serif; font-size:13px;
+  font-weight:700; color:var(--primary); letter-spacing:1.5px; margin-bottom:12px; }
+.question-text { font-family:var(--font-title); font-size:17px; font-weight:700; color:var(--text) !important; line-height:1.45;
+  margin-bottom:18px; word-break:keep-all; }
+
+.likert-options { display:flex; flex-direction:column; gap:10px; }
+.likert-option { display:flex; align-items:center; gap:14px; padding:14px 16px;
+  background:white; border:1.5px solid var(--border); border-radius:12px;
+  cursor:pointer; transition:all .15s; font-size:15px; }
+.likert-option:active { border-color:var(--primary); background:var(--primary-light); }
+@media (hover:hover) and (pointer:fine){ .likert-option:hover { border-color:var(--primary); background:var(--primary-light); } }
+.likert-option.selected { border-color:var(--primary); background:var(--primary-light);
+  font-weight:600; color:var(--primary-dark); }
+.likert-circle { width:22px; height:22px; border:2px solid var(--border); border-radius:50%;
+  flex-shrink:0; transition:all .15s; position:relative; }
+.likert-option.selected .likert-circle { border-color:var(--primary); }
+.likert-option.selected .likert-circle::after { content:""; position:absolute;
+  top:50%; left:50%; transform:translate(-50%,-50%);
+  width:10px; height:10px; background:var(--primary); border-radius:50%; }
+
+.nav-buttons { display:flex; gap:10px; margin-top:8px; }
+.btn-nav { flex:1; padding:14px; border-radius:12px; font-size:15px; font-weight:600;
+  font-family:inherit; border:none; cursor:pointer; transition:all .2s; }
+.btn-prev { background:white; color:var(--text-soft); border:1.5px solid var(--border); }
+.btn-prev:hover { background:var(--bg); }
+.btn-next { background:var(--primary); color:white; }
+.btn-next:disabled { background:var(--border); color:var(--text-mute); cursor:not-allowed; }
+.btn-next:not(:disabled):hover { background:var(--primary-dark); }
+
+/* 결과 화면 */
+.result-screen { display:none; }
+.result-screen.active { display:block; }
+
+/* 주·보조 경향 카드 */
+.tendency-hero { background:linear-gradient(135deg,var(--primary-light),#D1FAE5);
+  border-radius:20px; padding:32px 24px; text-align:center; margin-bottom:20px; }
+.tendency-hero .label { font-size:13px; font-weight:600; color:var(--primary-dark);
+  letter-spacing:.5px; margin-bottom:10px; }
+.tendency-hero .main-char { font-size:52px; margin-bottom:8px; }
+.tendency-hero .main-name { font-family:var(--font-title); font-size:26px; font-weight:800; color:var(--navy);
+  margin-bottom:6px; }
+.tendency-hero .main-sub { font-size:14px; color:var(--text-soft); margin-bottom:20px; }
+.tendency-hero .divider-line { width:40px; height:2px; background:var(--border);
+  margin:0 auto 20px; }
+.sub-tendency { display:flex; align-items:center; justify-content:center; gap:12px; }
+.sub-tendency .sub-label { font-size:12px; color:var(--text-mute); }
+.sub-tendency .sub-char { font-size:28px; }
+.sub-tendency .sub-name { font-size:16px; font-weight:700; color:var(--navy); }
+
+/* 균형형·저활성 배지 */
+.special-badge { display:inline-block; padding:6px 16px; border-radius:20px;
+  font-size:13px; font-weight:700; margin-bottom:16px; }
+.badge-balance { background:#EDE9FE; color:#6D28D9; }
+.badge-low { background:#FEF3C7; color:#92400E; }
+
+/* 레이더 차트 카드 */
+.radar-card { background:var(--card); border-radius:16px; padding:24px;
+  margin-bottom:20px; text-align:center; }
+.radar-card h3 { font-size:17px; font-weight:700; color:var(--navy); margin-bottom:4px; }
+.radar-card .caption { font-size:13px; color:var(--text-mute); margin-bottom:20px; }
+.radar-svg-wrap { max-width:340px; margin:0 auto; }
+.radar-svg-wrap svg { width:100%; height:auto; display:block; }
+
+/* 경향성 상세 카드 */
+.detail-card { background:var(--card); border-radius:16px; padding:26px 24px;
+  margin-bottom:16px; border-top:4px solid var(--primary); }
+.detail-card.secondary { border-top-color:var(--border); }
+.detail-card .tag { display:inline-block; padding:4px 12px; border-radius:12px;
+  font-size:12px; font-weight:600; margin-bottom:12px; letter-spacing:.5px; }
+.detail-card .tag.main-tag { background:var(--primary-light); color:var(--primary); }
+.detail-card .tag.sub-tag { background:#F3F4F6; color:var(--text-soft); }
+.detail-card .char-row { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+.detail-card .char-icon { font-size:36px; }
+.detail-card .char-info h3 { font-family:var(--font-title); font-size:20px; font-weight:800; color:var(--navy); }
+.detail-card .char-info .en { font-size:13px; color:var(--text-mute); }
+.detail-card .desc { font-size:15.5px; color:var(--text); margin-bottom:14px;
+  word-break:keep-all; line-height:1.7; }
+.detail-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.detail-item { background:var(--bg); border-radius:10px; padding:12px 14px; }
+.detail-item .item-label { font-size:11.5px; font-weight:700; color:var(--text-mute);
+  letter-spacing:.5px; margin-bottom:6px; }
+.detail-item .item-val { font-size:14px; color:var(--text); line-height:1.5; }
+
+/* 지금 시기의 메시지 */
+.message-card { background:var(--primary-light); border-radius:16px; padding:26px 24px;
+  margin-bottom:20px; border:1.5px solid rgba(61,170,107,.2); }
+.message-card .tag { display:inline-block; padding:4px 12px; background:white;
+  color:var(--primary); border-radius:12px; font-size:12px; font-weight:700;
+  margin-bottom:12px; letter-spacing:.5px; }
+.message-card h3 { font-family:var(--font-title); font-size:19px; font-weight:700; color:var(--navy); margin-bottom:12px;
+  word-break:keep-all; line-height:1.4; }
+.message-card p { font-size:15.5px; color:var(--text); word-break:keep-all;
+  line-height:1.7; }
+
+/* 조심 신호 */
+.caution-card { background:#FFFBEB; border:1.5px solid #FDE68A; border-radius:16px;
+  padding:22px; margin-bottom:20px; }
+.caution-card h3 { font-size:16px; font-weight:700; color:#92400E; margin-bottom:10px; }
+.caution-list { list-style:none; }
+.caution-list li { padding:6px 0; font-size:14.5px; color:var(--text);
+  border-bottom:1px solid #FDE68A; word-break:keep-all; }
+.caution-list li:last-child { border-bottom:none; }
+.caution-list li::before { content:"⚠ "; color:#F59E0B; }
+
+/* 작은 실천 */
+.practice-card { background:white; border:1.5px solid var(--primary);
+  border-radius:16px; padding:24px; margin-bottom:20px; }
+.practice-card .tag { display:inline-block; padding:4px 12px; background:var(--primary);
+  color:white; border-radius:12px; font-size:12px; font-weight:700;
+  margin-bottom:12px; letter-spacing:.5px; }
+.practice-card h3 { font-size:17px; font-weight:700; color:var(--navy); margin-bottom:10px; }
+.practice-card p { font-size:15px; color:var(--text); word-break:keep-all; line-height:1.7; }
+
+/* 변동성 안내 */
+.variability-card { background:linear-gradient(135deg,#F0FDF4,#DCFCE7);
+  border-radius:16px; padding:24px; margin-bottom:20px; }
+.variability-card h3 { font-size:16px; font-weight:700; color:var(--navy); margin-bottom:12px; }
+.variability-card p { font-size:14.5px; color:var(--text); margin-bottom:10px;
+  word-break:keep-all; line-height:1.65; }
+.variability-card p:last-child { margin-bottom:0; }
+.variability-card .highlight { font-weight:700; color:var(--primary-dark); }
+
+/* 다음 진단 연결 */
+.next-card { border-radius:16px; padding:24px; margin-bottom:14px;
+  cursor:pointer; text-decoration:none; display:block; transition:all .2s; color:inherit; }
+.next-card:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.08); }
+.next-card.blue { background:linear-gradient(135deg,#EBF5FF,#DBEAFE); }
+.next-card.gold { background:linear-gradient(135deg,#FFFBEB,#FEF3C7); }
+.next-card .step-tag { display:inline-block; padding:4px 12px; background:white;
+  border-radius:12px; font-size:11.5px; font-weight:700; margin-bottom:10px; letter-spacing:.5px; }
+.next-card.blue .step-tag { color:var(--blue); }
+.next-card.gold .step-tag { color:var(--gold); }
+.next-card h3 { font-family:var(--font-title); font-size:18px; font-weight:700; color:var(--navy); margin-bottom:6px; word-break:keep-all; }
+.next-card p { font-size:14px; color:var(--text-soft); margin-bottom:10px; word-break:keep-all; }
+.next-card .arrow { font-size:14px; font-weight:600; }
+.next-card.blue .arrow { color:var(--blue); }
+.next-card.gold .arrow { color:var(--gold); }
+
+/* 공유 */
+.share-section { margin-top:32px; padding-top:24px; border-top:1px solid var(--border); }
+.share-section h3 { font-size:15px; font-weight:600; color:var(--text);
+  margin-bottom:14px; text-align:center; }
+.share-buttons { display:flex; gap:10px; }
+.btn-share { flex:1; padding:14px 12px; border:none; border-radius:12px;
+  font-size:14px; font-weight:600; font-family:inherit; cursor:pointer;
+  transition:all .2s; display:flex; align-items:center; justify-content:center; gap:6px; }
+.btn-share-result { background:var(--gold); color:white; }
+.btn-share-save { background:#FFF; color:var(--navy); border:1.5px solid #D6DEEA; }
+@media (hover:hover) and (pointer:fine){ .btn-share-save:hover{ background:#F1F5FB; } }
+.btn-share-result:hover { background:#A87E2C; }
+.btn-share-link { background:var(--primary); color:white; }
+.btn-share-link:hover { background:var(--primary-dark); }
+
+/* 푸터 */
+.footer { text-align:center; margin-top:32px; padding-top:24px;
+  border-top:1px solid var(--border); font-size:12px; color:var(--text-mute); }
+.footer p { margin-bottom:6px; }
+.footer .signature { font-weight:600; color:var(--navy); margin-bottom:8px; font-size:13px; }
+
+/* 모달 */
+.modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.5);
+  z-index:1000; align-items:center; justify-content:center; padding:20px;
+  animation:fadeIn .2s; }
+.modal-overlay.active { display:flex; }
+.modal-box { background:white; border-radius:16px; padding:28px 24px;
+  max-width:360px; width:100%; text-align:center; animation:slideUp .25s; }
+.modal-box h4 { font-size:17px; font-weight:700; color:var(--navy); margin-bottom:10px; }
+.modal-box p { font-size:14px; color:var(--text-soft); margin-bottom:20px;
+  word-break:keep-all; line-height:1.6; }
+.modal-buttons { display:flex; gap:8px; }
+.modal-btn { flex:1; padding:12px; border:none; border-radius:10px;
+  font-size:14px; font-weight:600; cursor:pointer; font-family:inherit; }
+.modal-btn-primary { background:var(--primary); color:white; }
+.modal-btn-secondary { background:var(--border); color:var(--text); }
+
+.toast { position:fixed; bottom:32px; left:50%; transform:translateX(-50%) translateY(20px);
+  background:rgba(30,39,97,.95); color:white; padding:12px 24px; border-radius:24px;
+  font-size:14px; font-weight:500; opacity:0; transition:all .3s; z-index:1100;
+  pointer-events:none; }
+.toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+@keyframes slideUp { from{transform:translateY(20px);opacity:0} to{transform:translateY(0);opacity:1} }
+
+@media (max-width:480px) {
+  .container { padding:16px 16px 60px; }
+  .cover-title { font-size:24px; }
+  .chars-preview { grid-template-columns:repeat(5,1fr); gap:5px; }
+  .char-mini { padding:8px 4px; }
+  .char-mini .icon { font-size:18px; }
+  .char-mini .name { font-size:10px; }
+  .question-text { font-size:16.5px; }
+  .tendency-hero .main-char { font-size:42px; }
+  .tendency-hero .main-name { font-size:22px; }
+  .detail-grid { grid-template-columns:1fr; }
+  .share-buttons { flex-direction:column; }
+}
+
+/* ===== 커버 — 다른 진단 3종과 동일한 단색 배경으로 통일 (2026.08.26) ===== */
+#cover-screen {
+  position: relative;
+  padding: 8px 0 40px;
+}
+
+/* 통합 리포트 진입 카드 */
+
+/* ===== 실행 기록 카드 (공통 · 네이비+골드) ===== */
+.rec-card{position:relative;overflow:hidden;background:#101736;border:1px solid #232C5C;border-radius:14px;padding:20px 19px;margin:16px 0 12px}
+.rec-card::after{content:'';position:absolute;inset:0;background:radial-gradient(120% 80% at 88% -10%,rgba(245,201,95,.16) 0%,rgba(245,201,95,0) 58%);pointer-events:none}
+.rec-card>*{position:relative;z-index:1}
+.rec-step{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.6px;color:#F5C95F;background:rgba(245,201,95,.18);border-radius:99px;padding:4px 11px;margin-bottom:12px}
+.rec-card h3{font-size:17.5px;font-weight:800;margin-bottom:10px;line-height:1.45;word-break:keep-all;background:linear-gradient(96deg,#FFE9A8 0%,#F5C95F 38%,#FFF3CE 58%,#E8B54A 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.rec-card p{font-size:13.5px;color:#DFE5F5;line-height:1.8;word-break:keep-all}
+.rec-go{display:inline-block;margin-top:15px;font-size:14.5px;font-weight:800;color:#F5C95F;text-decoration:none;border-bottom:2px solid rgba(245,201,95,.55);padding-bottom:3px}
+.rec-note{font-size:12px;color:#A8B2D4;line-height:1.65;margin-top:12px;padding-top:11px;border-top:1px dashed rgba(245,201,95,.28);word-break:keep-all}
+.rec-note b{color:#F5C95F}
+.rep-cta{display:block;text-decoration:none;background:#1E2761;color:#FFF;border-radius:16px;padding:22px 20px;margin:20px 0 14px;transition:transform .15s,box-shadow .15s}
+.strength-row{margin-top:14px;padding-top:13px;border-top:1px dashed rgba(30,39,97,.14)}
+.strength-head{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;color:var(--text-mute);margin-bottom:7px}
+.strength-head b{font-size:14px;color:var(--primary);font-weight:700}
+.strength-bar{height:8px;border-radius:99px;background:#EDF0F7;overflow:hidden}
+.strength-fill{height:100%;border-radius:99px;transition:width .5s ease}
+.sf-strong{background:#3DAA6B}.sf-mid{background:#C9983A}.sf-weak{background:#9AA3B2}
+.message-card p + p{margin-top:11px}
+.bv-strong{color:#2D8252 !important}.bv-mid{color:#8A6A1F !important}.bv-weak{color:#5B6472 !important}
+.strength-tag{display:inline-block;margin-top:8px;font-size:12px;padding:3px 9px;border-radius:99px;font-weight:600}
+.st-strong{background:#E8F7EF;color:#2D6A4F}.st-mid{background:#FDF6E6;color:#8A6A1F}.st-weak{background:#EEF1F6;color:#5B6472}
+.rep-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(30,39,97,.22)}
+.rep-cta .rc-tag{font-size:11px;letter-spacing:1.5px;color:#C9983A;font-weight:800;margin-bottom:8px}
+.rep-cta .rc-h{font-size:18px;font-weight:800;color:#FFF;margin-bottom:8px;line-height:1.45;word-break:keep-all;font-family:-apple-system,'SF Pro Display','Apple SD 산돌고딕 Neo','Pretendard',sans-serif}
+.rep-cta .rc-d{font-size:13.5px;color:#C7CEE4;line-height:1.7;word-break:keep-all;margin-bottom:12px}
+.rep-cta .rc-go{font-size:14px;font-weight:700;color:#FFF}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ===== 표지 ===== -->
+<div id="cover-screen">
+  <div class="brand-header">
+    <div class="logo-need">
+      <span class="l1">N.</span><span class="l2">E.</span><span class="l3">E.</span><span class="l4">D</span>
+    </div>
+    <div class="logo-sep"></div>
+    <div class="logo-right">
+      <div class="top">NEED SCAN · 나다움설계연구소</div>
+      <div class="bottom">나다움을 설계하다</div>
+    </div>
+  </div>
+
+  <div class="cover">
+    <span class="cover-tag">N단계 — Need Scan · 에너지 경향성 읽기</span>
+    <h1 class="cover-title">나의 에너지는<br>어디로 흐를까?</h1>
+
+  <button class="btn-primary" onclick="startQuiz()">진단 시작하기</button>
+  <div style="text-align:center;padding:12px;color:#718096;font-size:13px;cursor:pointer;margin-top:8px" onclick="toggleDetail()" id="detailToggle">진단 구성이 궁금하신가요? ▾</div>
+  <div id="detailSection" style="display:none;margin-top:8px;padding-top:8px;border-top:1px solid #E2E8F0">
+    <div class="chars-preview">
+      <div class="char-mini"><div class="icon">🔥</div><div class="name">열정러</div></div>
+      <div class="char-mini"><div class="icon">🤝</div><div class="name">협력러</div></div>
+      <div class="char-mini"><div class="icon">⚓</div><div class="name">안정러</div></div>
+      <div class="char-mini"><div class="icon">🛠</div><div class="name">장인러</div></div>
+      <div class="char-mini"><div class="icon">🚀</div><div class="name">모험러</div></div>
+    </div>
+
+    <div class="cover-meta">
+      <span>⏱ 약 5분</span>
+      <span>📋 15문항</span>
+      <span>🆓 무료</span>
+    </div>
+  </div>
+
+  <div class="intro-card">
+    <div class="notice-box">
+      ⚡ 이 진단은 고정된 “유형”이 아닌 <strong>지금 시기의 에너지 흐름</strong>을 읽는 도구입니다.
+      한 달 후 다시 진단하면 결과가 달라질 수 있어요.
+    </div>
+    <p>요즘 어떤 활동에서 에너지를 얻고 있나요?</p>
+    <p>목표를 보면 가슴이 뛰는 시기인가요, 함께할 때 빛나는 시기인가요?</p>
+    <div class="quote">지금 나의 에너지가 어디로 흐르는지 알면,<br>더 자연스럽게 흐를 수 있습니다.</div>
+    <p style="font-size:14px;color:var(--text-soft);">“요즘”, “지금”, “최근”을 기준으로 솔직하게 응답해 주세요.</p>
+  </div>
+  </div>
+</div>
+
+<!-- ===== 진단 화면 ===== -->
+<div id="quiz-screen" class="quiz-screen">
+  <div class="brand-header">
+    <div class="logo-need">
+      <span class="l1">N.</span><span class="l2">E.</span><span class="l3">E.</span><span class="l4">D</span>
+    </div>
+    <div class="logo-sep"></div>
+    <div class="logo-right">
+      <div class="top">에너지 경향성 진단</div>
+      <div class="bottom">나의 에너지는 어디로 흐를까?</div>
+    </div>
+  </div>
+  <div class="progress-bar-wrap"><div class="progress-bar" id="progress-bar"></div></div>
+  <div class="progress-text" id="progress-text">1 / 15</div>
+  <div class="question-card">
+    <span class="question-num" id="q-num">Q01</span>
+    <p class="question-text" id="q-text"></p>
+    <div class="likert-options" id="likert-options"></div>
+  </div>
+  <div class="nav-buttons">
+    <button class="btn-nav btn-prev" id="btn-prev" onclick="prevQuestion()">이전</button>
+    <button class="btn-nav btn-next" id="btn-next" onclick="nextQuestion()" disabled>다음</button>
+  </div>
+</div>
+
+<!-- ===== 결과 화면 ===== -->
+<div id="result-screen" class="result-screen">
+  <div class="brand-header">
+    <div class="logo-need">
+      <span class="l1">N.</span><span class="l2">E.</span><span class="l3">E.</span><span class="l4">D</span>
+    </div>
+    <div class="logo-sep"></div>
+    <div class="logo-right">
+      <div class="top">진단 결과 · 나다움설계연구소</div>
+      <div class="bottom">나의 에너지 흐름</div>
+    </div>
+  </div>
+
+  <div id="tendency-hero-container"></div>
+  <div id="radar-container"></div>
+  <div id="main-detail-container"></div>
+  <div id="sub-detail-container"></div>
+  <div id="message-container"></div>
+  <div id="caution-container"></div>
+  <div id="practice-container"></div>
+  <div id="soft-container"></div>
+  <div id="variability-container"></div>
+  <div class="rec-card-slot" id="rec-card-slot"></div>
+  <div id="rep-cta-slot"></div>
+  <div id="next-container"></div>
+
+  <div class="share-section">
+    <h3>이 진단을 친구와 나누어 보세요</h3>
+    <div class="share-buttons">
+      <button class="btn-share btn-share-result" onclick="shareResult()">🎴 결과 카드 공유하기</button>
+      <button class="btn-share btn-share-link" onclick="shareLink()">🔗 진단 링크 공유하기</button>
+    </div>
+    <div class="share-buttons" style="margin-top:10px">
+      <button class="btn-share btn-share-save" onclick="downloadCard5c('square')">🖼 정사각 카드 저장</button>
+      <button class="btn-share btn-share-save" onclick="downloadCard5c('story')">📱 스토리 카드 저장</button>
+    </div>
+  </div>
+  <button class="btn-secondary" onclick="restart()">다시 진단하기</button>
+  <div class="footer">
+    <p class="signature">우선가치가 선명하면, 모든 선택이 명료해진다</p>
+    <p>나다움설계연구소</p>
+    <p>나다움은 발견이 아니라 설계다</p>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<div class="modal-overlay" id="modal">
+  <div class="modal-box">
+    <h4 id="modal-title">알림</h4>
+    <p id="modal-message">메시지</p>
+    <div class="modal-buttons">
+      <button class="modal-btn modal-btn-secondary" onclick="closeModal()">취소</button>
+      <button class="modal-btn modal-btn-primary" onclick="closeModal()">확인</button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+
+function toggleDetail(){
+  var sec=document.getElementById('detailSection');
+  var btn=document.getElementById('detailToggle');
+  if(sec.style.display==='block'){
+    sec.style.display='none';
+    btn.textContent='진단 구성이 궁금하신가요? ▾';
+  } else {
+    sec.style.display='block';
+    btn.textContent='접기 ▴';
+  }
+}
+/* ============================================
+   5러 경향성 진단 v2
+   15문항, 5경향 × 3문항, 주·보조 경향 산출
+   ============================================ */
+
+// ===== 경향성 데이터 =====
+const CHARS = {
+  A: {
+    key:"A", name:"열정러", en:"Achiever", icon:"🔥",
+    source:"목표 · 도전 · 결과",
+    flowKey:"성취 중심",
+    identity:"목표를 보면 가슴이 뛰는 패턴",
+    flow:"\"결과를 만들어 내는 과정\" 자체에서 에너지를 얻는 시기",
+    drain:"목표가 보이지 않아 동력이 없는 시기",
+    best:"도전적 목표와 마감이 있는 환경",
+    cautions:["목표가 없을 때 무기력·공허감 급격히 상승","번아웃 후 회복이 느릴 수 있음","결과만 보다 과정의 의미를 놓치는 경우"]
+  },
+  C: {
+    key:"C", name:"협력러", en:"Harmonious Connector", icon:"🤝",
+    source:"연결 · 협업 · 관계",
+    flowKey:"연결 중심",
+    identity:"함께할 때 더 빛나는 패턴",
+    flow:"\"우리\"라는 감각이 있을 때 동력이 생기는 시기",
+    drain:"혼자 하는 작업이 많아 에너지가 빠지는 시기",
+    best:"신뢰할 수 있는 사람들과 함께하는 환경",
+    cautions:["혼자 하는 작업이 많을 때 급격히 소진","타인의 기대를 먼저 충족하려다 자신의 욕구를 외면","갈등 상황에서 에너지 소모가 큼"]
+  },
+  S: {
+    key:"S", name:"안정러", en:"Solid Anchor", icon:"⚓",
+    source:"리듬 · 안정 · 지속",
+    flowKey:"안정 중심",
+    identity:"흔들려도 자기 리듬으로 돌아오는 패턴",
+    flow:"익숙한 방식이 자리 잡혀 마음이 편안한 시기",
+    drain:"루틴이 깨져 리듬을 못 찾는 시기",
+    best:"예측 가능한 환경, 충분한 준비 시간",
+    cautions:["잘 흔들리지 않는 만큼, 바꿔야 할 때를 늦게 알아차릴 수 있습니다","리듬이 한 번 깨지면 돌아오는 데 생각보다 오래 걸립니다","주변이 흔들릴 때 그 마음을 가볍게 볼 수 있습니다"]
+  },
+  D: {
+    key:"D", name:"장인러", en:"Deep Specialist", icon:"🛠",
+    source:"탐구 · 완성 · 의미",
+    flowKey:"탐구 중심",
+    identity:"한 가지를 깊이 파는 패턴",
+    flow:"\"왜 하는지의 본질적 의미\"가 분명한 시기",
+    drain:"기준에 안 맞아 넘어가지 못하는 시기",
+    best:"완성도를 인정받는 환경, 충분한 탐구 시간",
+    cautions:["완벽주의로 인한 작업 속도 저하","의미 없다고 느껴지면 전혀 동력이 안 생김","팀 작업보다 독립적 작업 선호"]
+  },
+  E: {
+    key:"E", name:"모험러", en:"Bold Explorer", icon:"🚀",
+    source:"새로움 · 자극 · 변화",
+    flowKey:"모험 중심",
+    identity:"새로운 자극과 모험에서 에너지를 얻는 패턴",
+    flow:"가보지 않은 길을 골랐을 때 살아나는 시기",
+    drain:"맨날 같은 것만 해서 질리는 시기",
+    best:"새로운 시도가 허용되는 환경",
+    cautions:["반복·루틴에 빠르게 식어버림","시작은 잘 하지만 마무리가 약한 경향","구조와 규칙이 강한 환경에서 답답함 강함"]
+  }
+};
+
+// ===== 문항 풀 (15개, 시기 표지어 포함) =====
+const QUESTIONS = [
+  { id:1,  char:"A", text:"요즘 나는 도전적인 목표가 보이면 가슴이 먼저 뛴다." },
+  { id:2,  char:"A", text:"지금 나는 \"결과를 만들어 내는 과정\" 자체에서 에너지를 얻는 편이다." },
+  { id:3,  char:"A", text:"최근 나는 마감과 도전이 있을 때 더 집중이 잘 된다고 느낀다." },
+  { id:4,  char:"C", text:"요즘 나는 신뢰할 수 있는 사람들과 같이 일할 때 가장 빛난다고 느낀다." },
+  { id:5,  char:"C", text:"지금 나는 \"우리\"라는 감각이 있을 때 동력이 더 잘 생긴다." },
+  { id:6,  char:"C", text:"최근 나는 혼자 하는 작업보다 함께 만들어가는 작업에서 에너지를 더 얻는다." },
+  { id:7,  char:"S", text:"요즘 나는 일정한 리듬과 루틴 안에 있을 때 가장 깊이 집중할 수 있다." },
+  { id:8,  char:"S", text:"지금 나는 익숙한 방식이 자리 잡혀 있을 때 마음이 가장 편안하다." },
+  { id:9,  char:"S", text:"최근 나는 큰 변화보다는 차분한 지속에서 에너지를 충전하는 편이다." },
+  { id:10, char:"D", text:"요즘 나는 한 가지 주제를 깊이 파고들 때 가장 살아 있다고 느낀다." },
+  { id:11, char:"D", text:"지금 나는 결과보다 \"왜 이걸 하는지의 본질적 의미\"가 더 중요하다." },
+  { id:12, char:"D", text:"최근 나는 어떤 일을 끝까지 완성하지 않으면 잘 넘어가지지 않는다." },
+  { id:13, char:"E", text:"요즘 나는 새로운 자극과 처음 해보는 일에서 가장 큰 에너지를 얻는다." },
+  { id:14, char:"E", text:"지금 나는 가보지 않은 길을 골랐을 때 마음이 더 살아난다." },
+  { id:15, char:"E", text:"최근 나는 같은 일이 반복되면 에너지가 빠르게 식어버린다." }
+];
+
+const LIKERT_LABELS = [
+  {value:1,label:"전혀 그렇지 않다"},
+  {value:2,label:"그렇지 않다"},
+  {value:3,label:"보통이다"},
+  {value:4,label:"그렇다"},
+  {value:5,label:"매우 그렇다"}
+];
+
+// ===== 26개 메시지 =====
+const CHAR_KEYS = ["A","C","S","D","E"];
+
+const COMBO_MESSAGES = {
+  // 열정러 주된
+  "A_C":"지금은 결과를 향해 달리면서도 함께하는 사람들에게서 동력을 얻는 시기입니다. 혼자 하는 것보다 팀과 함께 목표를 설정할 때 가장 빛나는 조합입니다.",
+  "A_S":"지금은 목표를 향해 달리되 흔들리지 않는 루틴이 받쳐줄 때 가장 강한 시기입니다. 목표와 리듬이 함께 있으면 번아웃 없이 오래 갑니다.",
+  "A_D":"지금은 도전적 목표와 깊이 있는 탐구가 함께 흐르는 시기입니다. 단순한 속도가 아니라 의미 있는 결과를 만들어낼 때 가장 살아납니다.",
+  "A_E":"지금은 새로운 도전과 목표가 동시에 들어올 때 최고조가 되는 시기입니다. 다만 에너지가 너무 넓게 퍼지지 않도록 우선순위 하나를 정하는 게 좋습니다.",
+  // 협력러 주된
+  "C_A":"지금은 함께하되 명확한 목표가 있을 때 가장 빛나는 시기입니다. 팀의 결과를 이끌어내는 역할에서 에너지가 충전됩니다.",
+  "C_S":"지금은 안정된 관계 속에서 함께 천천히 나아가는 시기입니다. 신뢰가 쌓인 사람들과 리듬을 맞추는 것이 가장 자연스러운 흐름입니다.",
+  "C_D":"지금은 의미 있는 일을 좋은 사람들과 함께할 때 가장 깊이 들어가는 시기입니다. \"우리가 왜 이것을 하는가\"가 분명할 때 폭발적인 에너지가 나옵니다.",
+  "C_E":"지금은 새로운 사람들과 새로운 일을 함께 탐험하는 것에서 에너지를 얻는 시기입니다. 고정된 팀보다 다양한 연결이 자극이 되는 시기.",
+  // 안정러 주된
+  "S_A":"지금은 리듬 안에서 목표를 착실히 쌓아가는 시기입니다. 급하게 달리기보다 안정적인 루틴 위에서 목표를 달성할 때 가장 오래 갑니다.",
+  "S_C":"지금은 믿을 수 있는 사람들과 예측 가능한 리듬 속에서 일하는 것이 가장 편안한 시기입니다. 안정감이 협력의 기반이 됩니다.",
+  "S_D":"지금은 흔들리지 않는 리듬 위에서 한 가지를 오래 붙드는 작업이 가장 맞는 시기입니다. 집중이 길게 유지되는 강한 조합입니다.",
+  "S_E":"지금은 안정적인 기반 위에서 새로운 자극을 조금씩 받아들이는 시기입니다. 루틴은 유지하되 그 안에서 변화를 찾는 것이 좋습니다.",
+  // 장인러 주된
+  "D_A":"지금은 의미 있는 목표를 끝까지 완성하려는 힘이 강한 시기입니다. 결과와 의미가 함께 있을 때 가장 강력한 동력이 나옵니다.",
+  "D_C":"지금은 함께하는 사람들과 의미 있는 작업을 깊이 탐구하는 것에서 에너지를 얻는 시기입니다. 혼자가 아닌, 공감하는 동료와 함께하는 탐구가 좋습니다.",
+  "D_S":"지금은 안정적인 환경에서 한 가지를 깊이 파는 작업이 가장 잘 맞는 시기입니다. 집중과 완성도가 모두 살아나는 조합입니다.",
+  "D_E":"지금은 새로운 주제를 깊이 탐구하고 싶은 욕구가 강한 시기입니다. 탐구의 출발은 새로움이지만, 끝까지 완성하는 것까지 가야 만족합니다.",
+  // 모험러 주된
+  "E_A":"지금은 새로운 도전 목표를 향해 달리는 것에서 에너지가 넘치는 시기입니다. 처음 해보는 일에 목표까지 더해지면 최고조가 됩니다.",
+  "E_C":"지금은 새로운 사람들을 만나고 다양한 연결을 탐험하는 것에서 에너지를 얻는 시기입니다. 기존 관계보다 새로운 만남이 더 자극이 되는 시기.",
+  "E_S":"지금은 자유롭게 탐험하면서도 돌아올 수 있는 안정적인 기반이 있는 시기입니다. 완전한 방랑보다 안전한 기반 위의 탐험이 더 오래갑니다.",
+  "E_D":"지금은 새로운 주제를 발견하면 깊이 파고들고 싶은 욕구가 동시에 있는 시기입니다. 탐험과 탐구가 같이 흐르는 가장 지적인 조합.",
+  // 균형형 5개
+  "A_A":"지금은 열정러 에너지가 중심이면서 전반적으로 고르게 활성화된 시기입니다. 다양한 방향에서 에너지를 얻고 있으니, 한 가지 목표로 집중하면 더욱 강해집니다.",
+  "C_C":"지금은 협력러 에너지가 중심이면서 전반적으로 고르게 흐르는 시기입니다. 여러 관계에서 에너지를 얻고 있으니, 가장 신뢰하는 한 팀에 집중해 보세요.",
+  "S_S":"지금은 안정러 에너지가 중심이면서 전반적으로 균형 잡힌 시기입니다. 흔들려도 제자리로 돌아오는 힘이 지금 가장 잘 작동하고 있습니다.",
+  "D_D":"지금은 장인러 에너지가 중심이면서 전반적으로 고르게 흐르는 시기입니다. 한 가지 주제에 완전히 몰입하는 것이 지금 가장 잘 맞는 방식입니다.",
+  "E_E":"지금은 모험러 에너지가 중심이면서 전반적으로 활성화된 시기입니다. 다양한 자극에서 에너지를 얻고 있으니, 하나의 탐험에 집중하면 더욱 빛납니다.",
+  // 저활성
+  "LOW":"지금은 다섯 경향 모두 활성도가 낮은 시기입니다. 에너지가 어디로도 강하게 흐르지 않는다면, 잡음이 너무 많거나 회복이 먼저 필요한 단계일 수 있습니다. 잡음 진단을 먼저 권장합니다."
+};
+
+// ===== 작은 실천 5종 =====
+const PRACTICES = {
+  A:{title:"열정러를 위한 오늘의 실천",body:"지금 당장 달성 가능한 도전 목표 하나를 정하고, 오늘 안에 첫 번째 행동을 하나 실행해 보세요. 목표가 눈에 보이면 에너지가 돌아옵니다."},
+  C:{title:"협력러를 위한 오늘의 실천",body:"지금 신뢰하는 한 사람에게 연락해 보세요. 같이 하고 싶은 일이 있다면 제안해도 좋습니다. 연결되는 것 자체가 에너지가 됩니다."},
+  S:{title:"안정러를 위한 오늘의 실천",body:"오늘 하루의 루틴 중 지키고 싶은 것 한 가지를 정하고 반드시 실행해 보세요. 작은 리듬 하나가 안정감을 회복시킵니다."},
+  D:{title:"장인러를 위한 오늘의 실천",body:"지금 가장 깊이 파고 싶은 주제를 한 가지 정하고, 오늘 30분만 방해 없이 그 주제에만 집중해 보세요. 의미의 실마리가 잡히기 시작합니다."},
+  E:{title:"모험러를 위한 오늘의 실천",body:"오늘 처음 해보는 것 한 가지를 해보세요. 크지 않아도 됩니다. 새로운 카페, 새로운 루트, 새로운 사람. 자극이 에너지를 깨웁니다."}
+};
+
+// ===== 상태 =====
+let currentQ = 0;
+let answers = new Array(15).fill(null);
+let _result = null;
+
+// ===== 시작 =====
+function startQuiz() {
+  document.getElementById('cover-screen').style.display = 'none';
+  document.getElementById('quiz-screen').classList.add('active');
+  currentQ = 0;
+  renderQuestion();
+  window.scrollTo(0,0);
+}
+
+// ===== 문항 렌더링 =====
+function renderQuestion() {
+  const q = QUESTIONS[currentQ];
+  document.getElementById('q-num').textContent = `Q${String(q.id).padStart(2,'0')}`;
+  document.getElementById('q-text').textContent = q.text;
+
+  const pct = ((currentQ+1)/15)*100;
+  document.getElementById('progress-bar').style.width = pct+'%';
+  document.getElementById('progress-text').textContent = `${currentQ+1} / 15`;
+
+  const opts = document.getElementById('likert-options');
+  opts.innerHTML = '';
+  LIKERT_LABELS.forEach(opt => {
+    const div = document.createElement('div');
+    div.className = 'likert-option';
+    if (answers[currentQ] === opt.value) div.classList.add('selected');
+    div.innerHTML = `<div class="likert-circle"></div><span>${opt.label}</span>`;
+    div.onclick = () => selectOption(opt.value);
+    opts.appendChild(div);
+  });
+
+  document.getElementById('btn-prev').disabled = currentQ === 0;
+  document.getElementById('btn-prev').style.opacity = currentQ===0 ? .4 : 1;
+  document.getElementById('btn-next').disabled = answers[currentQ] === null;
+  document.getElementById('btn-next').textContent = currentQ===14 ? "결과 보기" : "다음";
+
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function selectOption(value) {
+  answers[currentQ]=value;
+  renderQuestion();
+  // 마지막 문항이 아니면 0.25초 후 자동으로 다음 문항으로 이동
+  if (currentQ < 14) {
+    setTimeout(() => {
+      currentQ++;
+      renderQuestion();
+    }, 300);
+  }
+}
+function prevQuestion() { if(currentQ>0){currentQ--;renderQuestion();} }
+function nextQuestion() {
+  if(answers[currentQ]===null) return;
+  if(currentQ===14) calculateAndShowResult();
+  else { currentQ++; renderQuestion(); }
+}
+
+// ===== 채점 =====
+function calculateScores() {
+  const scores = {A:0,C:0,S:0,D:0,E:0};
+  const counts = {A:0,C:0,S:0,D:0,E:0};
+  QUESTIONS.forEach((q,i) => {
+    scores[q.char] += answers[i];
+    counts[q.char]++;
+  });
+  const avgs = {};
+  CHAR_KEYS.forEach(k => avgs[k] = scores[k]/counts[k]);
+
+  // ===== v2.1 채점 개정 (2026.08.25) =====
+  // ① 개인 내 표준화 — 척도 사용 습관 보정 (순위 산출·저장용, 화면 미노출)
+  const overall = CHAR_KEYS.reduce((a,k)=>a+avgs[k],0)/5;
+  const sd = Math.sqrt(
+    CHAR_KEYS.reduce((a,k)=>a+Math.pow(avgs[k]-overall,2),0)/5
+  ) || 1;
+  const z = {};
+  CHAR_KEYS.forEach(k => z[k] = (avgs[k]-overall)/sd);
+
+  // ② 동점 시 배열 순서 편향 제거 (기존: 항상 열정러 1위)
+  const sorted = CHAR_KEYS.slice()
+    .map(k => ({k, v: avgs[k], r: Math.random()}))
+    .sort((a,b) => (b.v - a.v) || (a.r - b.r))
+    .map(o => o.k);
+
+  const primary = sorted[0];
+  const secondary = sorted[1];
+  const diff12 = avgs[primary] - avgs[secondary];
+  const diffMax = avgs[primary] - avgs[sorted[4]];
+
+  // ③ 저활성은 편차가 아니라 절대 수준으로 판정
+  //    3문항 평균의 최소 간격이 1/3 이므로 균형형 임계값은 0.34 이상이어야 작동
+  //    v2.2: 최고 흐름이 절대 수준에서도 낮아야 '저활성'으로 본다.
+  //    (한 흐름만 5.0이고 나머지가 낮으면 평균은 낮아도 저활성이 아니다)
+  const peak = avgs[primary];
+  let caseType = "normal";
+  let softFlag = false;
+  if (overall < 2.6 && peak < 3.0) {
+    caseType = "low";
+  } else {
+    if (overall < 3.5) softFlag = true;
+    if (diff12 < 0.34) caseType = "balance";
+  }
+
+  // ④ v2.2 주된 흐름의 '절대 강도' 구간 — 상대 우위와 실제 강도를 구분해 해석
+  const band = peak >= 4.0 ? "strong" : (peak >= 3.0 ? "mid" : "weak");
+
+  return { avgs, z, overall, sorted, primary, secondary, peak, band, diff12, diffMax, caseType, softFlag };
+}
+
+// ===== 통합 리포트용 프로필 저장 (nd_profile v1) =====
+function saveProfile(r) {
+  try {
+    const KEY = "nadaum.profile.v1";
+    let _prev = null; try { _prev = JSON.parse(localStorage.getItem(KEY) || "null"); } catch(e) {}
+    const p = _prev || {
+      v: 1,
+      id: "ND-" + Math.random().toString(36).slice(2,6).toUpperCase()
+          + "-" + Math.random().toString(36).slice(2,6).toUpperCase(),
+      created: new Date().toISOString().slice(0,10),
+      modules: {}, history: []
+    };
+    p.modules.tendency = {
+      ts: new Date().toISOString().slice(0,10),
+      main: r.primary, sub: r.secondary,
+      avgs: r.avgs, z: r.z, overall: Math.round(r.overall*100)/100,
+      peak: Math.round(r.peak*100)/100, band: r.band,
+      flag: r.caseType === "normal" ? (r.softFlag ? "soft" : null) : r.caseType
+    };
+    p.updated = p.modules.tendency.ts;
+    _ndProfile = p;
+    try { localStorage.setItem(KEY, JSON.stringify(p)); } catch(e) {}
+  } catch (e) { /* 저장 실패해도 결과 표시는 계속 */ }
+}
+
+function calculateAndShowResult() {
+  _result = calculateScores();
+  saveProfile(_result);
+  document.getElementById('quiz-screen').classList.remove('active');
+  document.getElementById('result-screen').classList.add('active');
+  window.scrollTo(0,0);
+  renderResult(_result);
+}
+
+// ===== v2.2 주된 흐름 절대 강도 =====
+const BAND_META = {
+  strong: { label:"뚜렷한 편", pct: v => Math.min(100, v/5*100) },
+  mid:    { label:"보통",     pct: v => Math.min(100, v/5*100) },
+  weak:   { label:"약한 편",  pct: v => Math.min(100, v/5*100) }
+};
+function strengthRowHTML(r) {
+  if (r.caseType === 'low') return '';
+  const v = r.peak, pctv = Math.round(v/5*100);
+  const m = BAND_META[r.band];
+  return `
+    <div class="strength-row">
+      <div class="strength-head"><span></span><span><b class="bv-${r.band}">${v.toFixed(1)}</b> / 5.0</span></div>
+      <div class="strength-bar"><div class="strength-fill sf-${r.band}" style="width:${pctv}%"></div></div>
+      <span class="strength-tag st-${r.band}">에너지 강도 · ${m.label}</span>
+    </div>`;
+}
+function readingCardHTML(r) {
+  if (r.caseType === 'low') return '';
+  const v = r.peak.toFixed(1), o = r.overall.toFixed(1);
+  const W = r.caseType === 'balance' ? '가장 높은 흐름' : '주된 흐름';
+  let title, body;
+  if (r.band === 'strong') {
+    title = W + '이 뚜렷하게 나온 결과입니다';
+    body = `<p>${W} 점수가 5점 중 <strong>${v}점</strong>입니다. 다른 흐름보다 높기만 한 것이 아니라 점수 자체가 높습니다. 지금 이 방향으로 실제 에너지가 모여 있다고 보셔도 됩니다.</p>`;
+  } else if (r.band === 'mid') {
+    title = '방향은 보이지만, 아주 강하지는 않습니다';
+    body = `<p>${W} 점수가 5점 중 <strong>${v}점</strong>입니다. 어느 쪽으로 흐르는지는 보이지만, 한쪽으로 확실히 몰려 있는 정도는 아닙니다. 한두 달 뒤에 순서가 바뀔 수 있는 구간입니다.</p>`;
+  } else {
+    title = W + '이라기보다, 상대적으로 조금 높은 정도입니다';
+    body = `<p>${W} 점수가 5점 중 <strong>${v}점</strong>입니다. 다섯 흐름 중에서 가장 높게 나오기는 했지만, 점수 자체는 중간 아래입니다.</p>
+      <p>이럴 때는 "지금 나의 에너지는 ○○ 중심으로 흐르고 있다"보다, <strong>"지금은 어떤 흐름도 강하게 켜져 있지 않다"</strong>고 읽는 편이 정확합니다. 순위보다 전체 수준을 먼저 보셔야 합니다.</p>`;
+  }
+  let extra = '';
+  if (r.softFlag || r.band === 'weak') {
+    extra = `<p>전체 평균은 5점 중 <strong>${o}점</strong>입니다. 다섯 흐름이 모두 선명하게 켜져 있는 시기는 아닙니다. 이건 의지가 약해서가 아니라, 에너지가 어디론가 새고 있다는 신호일 수 있습니다. 아래 잡음 진단을 함께 해보시면 무엇이 에너지를 가져가고 있는지 보입니다.</p>`;
+  }
+  return `
+    <div class="message-card">
+      <span class="tag">결과를 읽는 법</span>
+      <h3>${title}</h3>
+      ${body}${extra}
+    </div>`;
+}
+
+// ===== 결과 렌더링 =====
+function renderResult(r) {
+  const p = CHARS[r.primary];
+  const s = CHARS[r.secondary];
+
+  // 1. 주·보조 경향 카드
+  let heroHTML = '';
+  if (r.caseType === 'low') {
+    heroHTML = `
+      <div class="tendency-hero">
+        <div class="label">지금 시기의 에너지 흐름</div>
+        <span class="special-badge badge-low">전반적 저활성 — 회복 필요 시기</span>
+        <div class="main-char">🌿</div>
+        <div class="main-name">충전이 필요한 시기</div>
+        <div class="main-sub">다섯 경향 모두 활성도가 낮습니다</div>
+      </div>`;
+  } else if (r.caseType === 'balance') {
+    heroHTML = `
+      <div class="tendency-hero">
+        <div class="label">지금 시기의 에너지 흐름</div>
+        <span class="special-badge badge-balance">균형형 — 두 흐름이 비슷하게 작동 중</span>
+        <div class="main-char">${p.icon}${s.icon}</div>
+        <div class="main-name">${p.flowKey} + ${s.flowKey}</div>
+        <div class="main-sub">지금 나의 에너지는 ${p.name}·${s.name} 두 패턴이 비슷한 강도로 흐르고 있어요</div>
+        ${strengthRowHTML(r)}
+      </div>`;
+  } else {
+    heroHTML = `
+      <div class="tendency-hero">
+        <div class="label">지금 시기의 주된 에너지 흐름</div>
+        <div class="main-char">${p.icon}</div>
+        <div class="main-name">${p.flowKey} 흐름</div>
+        <div class="main-sub">지금 나의 에너지는 <strong>${p.flowKey}</strong>으로 흐르고 있습니다<br><span style="font-size:13px;color:var(--text-mute)">${p.name} 패턴 · ${p.source}</span></div>
+        <div class="divider-line"></div>
+        <div class="sub-tendency">
+          <div class="sub-label">보조 흐름</div>
+          <div class="sub-char">${s.icon}</div>
+          <div class="sub-name">${s.flowKey} · ${s.name} 패턴</div>
+        </div>
+        ${strengthRowHTML(r)}
+      </div>`;
+  }
+  document.getElementById('tendency-hero-container').innerHTML = heroHTML;
+
+  // 2. 레이더 차트 (SVG 펜타곤)
+  document.getElementById('radar-container').innerHTML = renderRadar(r.avgs);
+
+  // 3. 주된 경향 상세
+  if (r.caseType !== 'low') {
+    document.getElementById('main-detail-container').innerHTML = renderDetailCard(p, true);
+    document.getElementById('sub-detail-container').innerHTML = renderDetailCard(s, false);
+  } else {
+    document.getElementById('main-detail-container').innerHTML = '';
+    document.getElementById('sub-detail-container').innerHTML = '';
+  }
+
+  // 4. 지금 시기의 메시지
+  const msgKey = r.caseType === 'low' ? 'LOW' : (r.primary + '_' + (r.caseType === 'balance' ? r.primary : r.secondary));
+  const msg = COMBO_MESSAGES[msgKey] || COMBO_MESSAGES['LOW'];
+  const msgTitle = r.caseType === 'low' ? '지금은 회복이 먼저입니다'
+    : r.caseType === 'balance' ? `${p.name} + ${s.name} 균형 시기의 흐름`
+    : `${p.name} + ${s.name} 조합의 이 시기`;
+  document.getElementById('message-container').innerHTML = `
+    <div class="message-card">
+      <span class="tag">지금 시기의 메시지</span>
+      <h3>${msgTitle}</h3>
+      <p>${msg}</p>
+    </div>`;
+
+  // 5. 조심 신호
+  if (r.caseType !== 'low') {
+    const cautions = p.cautions.map(c=>`<li>${c}</li>`).join('');
+    document.getElementById('caution-container').innerHTML = `
+      <div class="caution-card">
+        <h3>⚠ ${p.name}의 조심 신호</h3>
+        <ul class="caution-list">${cautions}</ul>
+      </div>`;
+  } else {
+    document.getElementById('caution-container').innerHTML = '';
+  }
+
+  // 6. 작은 실천
+  const prac = r.caseType === 'low' ? {
+    title:"오늘의 작은 실천 — 회복 먼저",
+    body:"오늘 하루, 아무것도 하지 않아도 됩니다. 에너지가 어디로도 흐르지 않을 때는 회복이 먼저입니다. 잡음 진단 후 무엇이 소진시키고 있는지 살펴보는 것이 첫 번째 실천입니다."
+  } : PRACTICES[r.primary];
+  document.getElementById('practice-container').innerHTML = `
+    <div class="practice-card">
+      <span class="tag">오늘부터 1분</span>
+      <h3>${prac.title}</h3>
+      <p>${prac.body}</p>
+    </div>`;
+
+  // 6-1. 결과를 읽는 법 — 주된 흐름의 절대 강도 (v2.2)
+  document.getElementById('soft-container').innerHTML = readingCardHTML(r);
+
+  // 7. 변동성 안내
+  document.getElementById('variability-container').innerHTML = `
+    <div class="variability-card">
+      <h3>📌 이 결과에 대해 기억해 주세요</h3>
+      <p>이 결과는 <span class="highlight">\"지금 시기의 에너지 흐름\"</span>입니다.
+      한 달 후, 또는 큰 변화 시점에 다시 진단해 보면 결과가 달라질 수 있습니다.</p>
+      <p>에너지 경향성은 <span class="highlight">\"고정된 유형\"이 아니라 시기와 맥락에 따라 달라지는 에너지 패턴</span>입니다.
+      사람을 칸에 넣지 않습니다. 지금의 흐름을 읽는 도구일 뿐입니다.</p>
+      <p>이 결과는 정답이 아니라, 지금 여러분의 <span class="highlight">자기 신호</span>를 읽어 본 기록입니다.</p>
+    </div>`;
+
+  // 8. 다음 진단 연결
+  const nextHTML = r.caseType === 'low' ?
+    `<a href="https://nadaumlap.github.io/nadaumneed/newnoise/" class="next-card gold">
+      <span class="step-tag">강력 추천 — 잡음 점검 먼저</span>
+      <h3>지금 무엇이 잡음으로 들어와 있는지 살펴볼까요?</h3>
+      <p>잡음 오염도 진단 · 약 5분 · 회복의 첫걸음</p>
+      <span class="arrow">바로 가기 →</span>
+    </a>` :
+    `<a href="https://nadaumlap.github.io/nadaumneed/needscan/" class="next-card blue">
+      <span class="step-tag">함께 보면 좋은 — Need Scan 축 2</span>
+      <h3>지금 나의 욕구는 어디서 시작되고 있을까요?</h3>
+      <p>욕구 출발점 진단 · 약 5분 · 에너지 흐름과 함께 보는 진단</p>
+      <span class="arrow">바로 가기 →</span>
+    </a>
+    <a href="https://nadaumlap.github.io/nadaumneed/newnoise/" class="next-card gold" style="margin-top:12px">
+      <span class="step-tag">다음 단계 — Eliminate Noise</span>
+      <h3>지금 무엇이 잡음으로 들어와 있는지 살펴볼까요?</h3>
+      <p>잡음 오염도 진단 · 약 5분</p>
+      <span class="arrow">바로 가기 →</span>
+    </a>`;
+  document.getElementById('rec-card-slot').innerHTML = `<div class="rec-card">  <span class="rec-step">기록해 두세요</span>  <h3>실행한 내용을 한 줄로 남겨 두세요</h3>  <p>실행한 내용을 한 줄로 간단히 기록해 놓으면 작은 여러분의 실행 역사가 됩니다. 회원가입 없이 바로 사용 가능합니다.</p>  <a class="rec-go" href="https://nadaumlap.github.io/nadaumneed/report/#write">통합 리포트 안 &#39;기록하기&#39;로 바로 가기 →</a>  <div class="rec-note">아래 <b>통합 리포트 열기</b>와 같은 곳입니다. 이 링크는 리포트를 열면서 기록하는 자리까지 바로 내려갑니다.</div></div>`;
+  document.getElementById('rep-cta-slot').innerHTML = `<a class="rep-cta" href="https://nadaumlap.github.io/nadaumneed/report/"><div class="rc-tag">나다움 설계 통합 리포트</div><div class="rc-h">진단에서 멈추지 마세요</div><div class="rc-d">여러분의 나다움 설계 현황을 기록해 두시고, 나다움을 적극 설계하십시오.</div><div class="rc-go">통합 리포트 열기 →</div></a>`;
+  document.getElementById('next-container').innerHTML = nextHTML;
+}
+
+// ===== 레이더 차트 =====
+function renderRadar(avgs) {
+  const size = 380;
+  const cx = size/2, cy = size/2, r_max = 95;
+  const labels = [
+    {key:"A",label:"열정러",icon:"🔥"},
+    {key:"C",label:"협력러",icon:"🤝"},
+    {key:"E",label:"모험러",icon:"🚀"},
+    {key:"D",label:"장인러",icon:"🛠"},
+    {key:"S",label:"안정러",icon:"⚓"}
+  ];
+  const n = labels.length;
+  const angles = labels.map((_,i)=> (Math.PI*2*i/n) - Math.PI/2);
+
+  const gridLevels = [1,2,3,4,5];
+  let gridSVG = gridLevels.map(lv => {
+    const pts = angles.map(a => {
+      const rr = (lv/5)*r_max;
+      return `${cx+rr*Math.cos(a)},${cy+rr*Math.sin(a)}`;
+    }).join(' ');
+    return `<polygon points="${pts}" fill="none" stroke="#E5E7EB" stroke-width="1"/>`;
+  }).join('');
+
+  let axesSVG = angles.map(a => {
+    return `<line x1="${cx}" y1="${cy}" x2="${cx+r_max*Math.cos(a)}" y2="${cy+r_max*Math.sin(a)}" stroke="#E5E7EB" stroke-width="1"/>`;
+  }).join('');
+
+  const dataPts = labels.map(({key},i) => {
+    const val = avgs[key];
+    const rr = (val/5)*r_max;
+    return `${cx+rr*Math.cos(angles[i])},${cy+rr*Math.sin(angles[i])}`;
+  }).join(' ');
+
+  // 라벨(아이콘+이름)
+  let labelSVG = labels.map(({label,icon},i) => {
+    const rr = r_max + 50;
+    const lx = cx + rr*Math.cos(angles[i]);
+    const ly = cy + rr*Math.sin(angles[i]);
+    const foW = 70, foH = 44;
+    const fox = lx - foW/2;
+    const foy = ly - foH/2;
+    return `<foreignObject x="${fox}" y="${foy}" width="${foW}" height="${foH}">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="text-align:center;font-family:'Pretendard','Noto Sans KR',sans-serif;">
+          <div style="font-size:22px;line-height:1.1;">${icon}</div>
+          <div style="font-size:12px;color:#555;margin-top:2px;font-weight:500;">${label}</div>
+        </div>
+      </foreignObject>`;
+  }).join('');
+
+  // 점수 라벨: 데이터 포인트에서 바깥 방향으로 밀어 배치 (겹침 방지)
+  let scoreSVG = labels.map(({key},i) => {
+    const val = avgs[key];
+    const rr = (val/5)*r_max;
+    const px = cx + rr*Math.cos(angles[i]);
+    const py = cy + rr*Math.sin(angles[i]);
+    // 바깥쪽으로 18px 밀어 배치 — 점수가 낮아도 박스끼리 겹치지 않음
+    const offset = 18;
+    const sx = px + offset*Math.cos(angles[i]);
+    const sy = py + offset*Math.sin(angles[i]);
+    return `
+      <rect x="${sx-15}" y="${sy-10}" width="30" height="20" rx="10" ry="10" fill="#FFFFFF" stroke="#3DAA6B" stroke-width="1.5"/>
+      <text x="${sx}" y="${sy+4.5}" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="12" font-weight="800" fill="#2D8252">${val.toFixed(1)}</text>`;
+  }).join('');
+
+  return `<div class="radar-card">
+    <h3>5가지 경향성 점수</h3>
+    <p class="caption">\"요즘/지금/최근\"을 기준으로 응답한 에너지 흐름입니다</p>
+    <div class="radar-svg-wrap">
+      <svg viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
+        ${gridSVG}${axesSVG}
+        <polygon points="${dataPts}" fill="rgba(61,170,107,.18)" stroke="#3DAA6B" stroke-width="2.5"/>
+        ${labels.map(({key},i)=>{
+          const val=avgs[key]; const rr=(val/5)*r_max;
+          return `<circle cx="${cx+rr*Math.cos(angles[i])}" cy="${cy+rr*Math.sin(angles[i])}" r="4" fill="#3DAA6B"/>`;
+        }).join('')}
+        ${labelSVG}
+        ${scoreSVG}
+      </svg>
+    </div>
+  </div>`;
+}
+
+// ===== 경향성 상세 카드 =====
+function renderDetailCard(char, isMain) {
+  return `<div class="detail-card ${isMain?'':'secondary'}">
+    <span class="tag ${isMain?'main-tag':'sub-tag'}">${isMain?'주된 흐름':'보조 흐름'}</span>
+    <div class="char-row">
+      <div class="char-icon">${char.icon}</div>
+      <div class="char-info">
+        <h3>${char.name}</h3>
+        <div class="en">${char.en}</div>
+      </div>
+    </div>
+    <p class="desc">${char.identity}</p>
+    <div class="detail-grid">
+      <div class="detail-item">
+        <div class="item-label">에너지 원천</div>
+        <div class="item-val">${char.source}</div>
+      </div>
+      <div class="detail-item">
+        <div class="item-label">몰입 상태</div>
+        <div class="item-val">${char.flow}</div>
+      </div>
+      <div class="detail-item">
+        <div class="item-label">에너지 고갈 신호</div>
+        <div class="item-val">${char.drain}</div>
+      </div>
+      <div class="detail-item">
+        <div class="item-label">최적 환경</div>
+        <div class="item-val">${char.best}</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ===== 공유 =====
+function shareLink() {
+  const url = "https://nadaumlap.github.io/nadaumneed/5characters/";
+  const text = `"나의 에너지는 어디로 흐를까?" 5러 경향성 진단을 해봤어요. 약 5분이에요.\n\n${url}`;
+  if (navigator.share) navigator.share({title:"5러 경향성 진단",text}).catch(()=>copyToClipboard(text));
+  else copyToClipboard(text);
+}
+
+
+// ===== v2.2 공유 카드 (이미지) =====
+function isMobile5c(){ return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent); }
+function isIOS5c(){ return /iPhone|iPad|iPod/i.test(navigator.userAgent); }
+function esc5c(t){ return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function generateCard5c(r, version){
+  const W = 1080, H = version === 'story' ? 1920 : 1080;
+  const BG='#F8F9FB', CARD='#FFFFFF', NAVY='#1E2761', TEXT='#2F2F2F', SUB='#718096', BORDER='#E2E8F0';
+  const GREEN='#3DAA6B', GOLD='#C9983A', GRAY='#9AA3B2';
+  const FT = "-apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif";
+  const p = CHARS[r.primary], s = CHARS[r.secondary];
+  const bandColor = r.band === 'strong' ? GREEN : (r.band === 'mid' ? GOLD : GRAY);
+  const bandLabel = r.band === 'strong' ? '뚜렷한 편' : (r.band === 'mid' ? '보통' : '약한 편');
+
+  const isStory = version === 'story';
+  const cardX = 50, cardW = W - 100;
+  const cardY = isStory ? 200 : 40;
+  const cardH = isStory ? 1520 : 1000;
+  const L = isStory
+    ? { logo:300, brand:334, div:364, tag:424, main:502, mainFs:62, sub:556,
+        rcy:900, rr:210, barLabel:1250, bar:1268, bandText:1322, barW:700,
+        q1:1424, q2:1470, mark:1608, url:1640 }
+    : { logo:140, brand:172, div:200, tag:248, main:316, mainFs:54, sub:362,
+        rcy:632, rr:150, barLabel:882, bar:900, bandText:950, barW:660,
+        q1:0, q2:0, mark:1000, url:1030 };
+
+  function tx(x,y,txt,fs,fw,fill,anchor,ls){
+    return '<text x="'+x+'" y="'+y+'" font-family="'+FT+'" font-size="'+fs+'" font-weight="'+fw+
+      '" fill="'+fill+'" text-anchor="'+(anchor||'middle')+'"'+(ls?' letter-spacing="'+ls+'"':'')+'>'+esc5c(txt)+'</text>';
+  }
+  function logo(x,y,fs){
+    return '<text x="'+x+'" y="'+y+'" font-family="'+FT+'" font-weight="800" font-size="'+fs+'" letter-spacing="'+(fs*0.14)+'" text-anchor="middle">'+
+      '<tspan fill="#2979C8">N.</tspan><tspan fill="#3DAA6B">E.</tspan><tspan fill="#C9983A">E.</tspan><tspan fill="#8B5CF6">D.</tspan></text>';
+  }
+
+  // ---- 레이더 ----
+  function radar(cx, cy, rMax){
+    const labels = [
+      {key:'A', label:'열정러'}, {key:'C', label:'협력러'}, {key:'E', label:'모험러'},
+      {key:'D', label:'장인러'}, {key:'S', label:'안정러'}
+    ];
+    const n = labels.length;
+    const ang = labels.map((_,i)=> (Math.PI*2*i/n) - Math.PI/2);
+    let out = '';
+    [1,2,3,4,5].forEach(function(lv){
+      const pts = ang.map(function(a){ const rr=(lv/5)*rMax; return (cx+rr*Math.cos(a)).toFixed(1)+','+(cy+rr*Math.sin(a)).toFixed(1); }).join(' ');
+      out += '<polygon points="'+pts+'" fill="none" stroke="#E5E7EB" stroke-width="'+(lv===5?2:1.2)+'"/>';
+    });
+    ang.forEach(function(a){
+      out += '<line x1="'+cx+'" y1="'+cy+'" x2="'+(cx+rMax*Math.cos(a)).toFixed(1)+'" y2="'+(cy+rMax*Math.sin(a)).toFixed(1)+'" stroke="#E5E7EB" stroke-width="1.2"/>';
+    });
+    const dp = labels.map(function(o,i){ const rr=(r.avgs[o.key]/5)*rMax; return (cx+rr*Math.cos(ang[i])).toFixed(1)+','+(cy+rr*Math.sin(ang[i])).toFixed(1); }).join(' ');
+    out += '<polygon points="'+dp+'" fill="'+GREEN+'" fill-opacity="0.20" stroke="'+GREEN+'" stroke-width="3.5" stroke-linejoin="round"/>';
+    labels.forEach(function(o,i){
+      const rr=(r.avgs[o.key]/5)*rMax;
+      const px=cx+rr*Math.cos(ang[i]), py=cy+rr*Math.sin(ang[i]);
+      const isP = r.caseType!=='low' && o.key===r.primary, isS = r.caseType!=='low' && o.key===r.secondary;
+      out += '<circle cx="'+px.toFixed(1)+'" cy="'+py.toFixed(1)+'" r="'+(isP?9:(isS?7:5))+'" fill="'+(isP?GREEN:(isS?'#7CC79B':'#B9D9C6'))+'" stroke="#FFF" stroke-width="2.5"/>';
+      const lr = rMax + 52;
+      let lx = cx + lr*Math.cos(ang[i]), ly = cy + lr*Math.sin(ang[i]);
+      out += tx(lx, ly+2, o.label, 27, isP?800:600, isP?NAVY:SUB, 'middle');
+      out += tx(lx, ly+32, r.avgs[o.key].toFixed(1), 23, 700, isP?GREEN:'#A0AAB8', 'middle');
+    });
+    return out;
+  }
+
+  // ---- 강도 바 ----
+  function strengthBar(cx, yLabel, yBar, yTag2, barW){
+    const x = cx - barW/2;
+    if (r.caseType === 'low') {
+      return tx(cx, yLabel + 6, '다섯 흐름 전체 평균 ' + r.overall.toFixed(1) + ' / 5.0', 26, 700, SUB, 'middle')
+           + tx(cx, yBar + 46, '지금은 순위를 읽기보다, 회복이 먼저인 시기입니다', 24, 500, TEXT, 'middle');
+    }
+    const pct = Math.min(1, r.peak/5);
+    let o = '';
+    o += '<text x="'+(x+barW)+'" y="'+yLabel+'" font-family="'+FT+'" font-size="28" font-weight="800" fill="'+bandColor+'" text-anchor="end">'+r.peak.toFixed(1)+'<tspan font-size="21" font-weight="600" fill="'+SUB+'"> / 5.0</tspan></text>';
+    o += '<rect x="'+x+'" y="'+yBar+'" width="'+barW+'" height="18" rx="9" fill="#EDF0F7"/>';
+    o += '<rect x="'+x+'" y="'+yBar+'" width="'+(barW*pct).toFixed(1)+'" height="18" rx="9" fill="'+bandColor+'"/>';
+    o += '<rect x="'+(cx-135)+'" y="'+(yTag2-31)+'" width="270" height="46" rx="23" fill="'+bandColor+'" fill-opacity="0.13"/>';
+    o += tx(cx, yTag2, '에너지 강도 · ' + bandLabel, 24, 700, bandColor, 'middle');
+    return o;
+  }
+
+  // ---- 텍스트 내용 ----
+  let mainTitle, subTitle, tagText;
+  if (r.caseType === 'low') {
+    tagText = '지금 시기의 에너지 흐름';
+    mainTitle = '충전이 필요한 시기';
+    subTitle = '다섯 흐름 모두 활성도가 낮습니다';
+  } else if (r.caseType === 'balance') {
+    tagText = '지금 시기의 에너지 흐름';
+    mainTitle = p.flowKey + ' + ' + s.flowKey;
+    subTitle = p.name + ' · ' + s.name + ' 두 패턴이 비슷하게 흐르는 시기';
+  } else {
+    tagText = '지금 시기의 주된 에너지 흐름';
+    mainTitle = p.flowKey + ' 흐름';
+    subTitle = '주된 ' + p.name + ' 패턴 · 보조 ' + s.name + ' 패턴';
+  }
+
+  const cx = W/2;
+  let svg = '<svg xmlns="http://www.w3.org/2000/svg" width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'">';
+  svg += '<rect width="'+W+'" height="'+H+'" fill="'+BG+'"/>';
+  svg += '<rect x="'+cardX+'" y="'+cardY+'" width="'+cardW+'" height="'+cardH+'" rx="44" fill="'+CARD+'" stroke="'+BORDER+'" stroke-width="2"/>';
+  svg += logo(cx, L.logo, 46);
+  svg += tx(cx, L.brand, '나다움설계연구소', 21, 600, SUB, 'middle', 2);
+  svg += '<line x1="'+(cardX+90)+'" y1="'+L.div+'" x2="'+(cardX+cardW-90)+'" y2="'+L.div+'" stroke="#EEF1F6" stroke-width="2"/>';
+  svg += tx(cx, L.tag, tagText, 24, 600, SUB, 'middle');
+  svg += tx(cx, L.main, mainTitle, L.mainFs, 800, NAVY, 'middle');
+  svg += tx(cx, L.sub, subTitle, 24, 500, TEXT, 'middle');
+  svg += radar(cx, L.rcy, L.rr);
+  svg += strengthBar(cx, L.barLabel, L.bar, L.bandText, L.barW);
+  svg += tx(cx, L.mark, '나다움은 발견이 아니라 설계다', 23, 600, '#9CA3AF', 'middle');
+  svg += tx(cx, L.url, 'nadaumlap.github.io/nadaumneed/5characters/', 19, 500, '#B4BBC6', 'middle');
+  svg += '</svg>';
+  return svg;
+}
+
+async function svgToPng5c(svgString, width, height){
+  const url = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgString);
+  const img = new Image();
+  await new Promise(function(resolve, reject){
+    img.onload = resolve;
+    img.onerror = function(){ reject(new Error('이미지 로드 실패')); };
+    img.src = url;
+    setTimeout(function(){ reject(new Error('타임아웃')); }, 8000);
+  });
+  const cv = document.createElement('canvas');
+  cv.width = width; cv.height = height;
+  const ctx = cv.getContext('2d');
+  ctx.fillStyle = '#F8F9FB'; ctx.fillRect(0,0,width,height);
+  ctx.drawImage(img, 0, 0, width, height);
+  let blob = await new Promise(function(res){ try{ cv.toBlob(function(b){res(b);}, 'image/png'); }catch(e){ res(null); } });
+  if (!blob) {
+    const d = cv.toDataURL('image/png'), a = d.split(',');
+    const bs = atob(a[1]); let n = bs.length; const u8 = new Uint8Array(n);
+    while(n--) u8[n] = bs.charCodeAt(n);
+    blob = new Blob([u8], {type:'image/png'});
+  }
+  return blob;
+}
+
+function downloadBlob5c(blob, filename){
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename; a.style.display='none';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+}
+
+function shareText5c(){
+  const r = _result;
+  const p = CHARS[r.primary], s = CHARS[r.secondary];
+  let head;
+  if (r.caseType === 'low') head = '지금은 회복이 먼저인 시기로 나왔어요.';
+  else if (r.caseType === 'balance') head = '지금 나의 에너지는 ' + p.flowKey + ' + ' + s.flowKey + ' 두 흐름이 비슷하게 흐르고 있어요.';
+  else head = '지금 나의 에너지는 ' + p.flowKey + '으로 흐르고 있어요.\n(주된 ' + p.name + ' 패턴 / 보조 ' + s.name + ' 패턴)';
+  const lvl = r.caseType === 'low' ? '' : '\n주된 흐름의 강도 ' + r.peak.toFixed(1) + ' / 5.0';
+  return '5러 경향성 진단 결과\n\n' + head + lvl +
+    '\n\n에너지 경향성은 고정된 유형이 아니라 지금 시기의 에너지 패턴이에요.\n5분이면 해볼 수 있어요 👇\nhttps://nadaumlap.github.io/nadaumneed/5characters/';
+}
+
+async function downloadCard5c(version){
+  if (!_result) { showToast('결과 데이터가 없습니다'); return; }
+  showToast('카드를 만들고 있어요...');
+  const W = 1080, H = version === 'story' ? 1920 : 1080;
+  const fname = '5러경향성-' + (version === 'story' ? '스토리' : '카드') + '.png';
+  let blob;
+  try {
+    blob = await svgToPng5c(generateCard5c(_result, version), W, H);
+  } catch(e) {
+    try {
+      const sb = new Blob([generateCard5c(_result, version)], {type:'image/svg+xml;charset=utf-8'});
+      downloadBlob5c(sb, fname.replace('.png','.svg'));
+      showToast('PNG 변환 실패 — SVG로 저장했어요');
+    } catch(e2){ showToast('저장에 실패했습니다'); }
+    return;
+  }
+  if (isMobile5c() && navigator.canShare) {
+    try {
+      const file = new File([blob], fname, {type:'image/png'});
+      if (navigator.canShare({files:[file]})) {
+        try { await navigator.share({files:[file]});
+          showToast(isIOS5c() ? '"이미지 저장"을 누르면 사진앱에 저장돼요' : '저장이 완료되었습니다');
+          return;
+        } catch(se){ if (se.name === 'AbortError') return; }
+      }
+    } catch(e){}
+  }
+  downloadBlob5c(blob, fname);
+  showToast('다운로드 폴더에 저장되었습니다');
+}
+
+async function shareResult() {
+  if (!_result) return;
+  showToast('카드를 만들고 있어요...');
+  const fname = '5러경향성-결과.png';
+  const text = shareText5c();
+  let blob;
+  try { blob = await svgToPng5c(generateCard5c(_result,'square'), 1080, 1080); }
+  catch(e) { copyToClipboard(text); return; }
+  if (isMobile5c() && navigator.canShare) {
+    try {
+      const file = new File([blob], fname, {type:'image/png'});
+      const data = { files:[file], text:text, title:'나의 5러 경향성' };
+      if (navigator.canShare(data)) {
+        try { await navigator.share(data); showToast('공유되었습니다'); return; }
+        catch(se){ if (se.name === 'AbortError') return; }
+      }
+      if (navigator.canShare({files:[file]})) {
+        try { await navigator.share({files:[file], title:'나의 5러 경향성'});
+          copyToClipboard(text); showToast('카드 공유 후, 멘트는 복사되었어요'); return;
+        } catch(se){ if (se.name === 'AbortError') return; }
+      }
+    } catch(e){}
+  }
+  downloadBlob5c(blob, fname);
+  copyToClipboard(text);
+  showToast('카드는 다운로드, 멘트는 복사되었어요');
+}
+
+function copyToClipboard(text) {
+  if(navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(()=>showToast('링크가 복사되었습니다')).catch(()=>legacyCopy(text));
+  } else legacyCopy(text);
+}
+function legacyCopy(text) {
+  const ta=document.createElement('textarea'); ta.value=text;
+  ta.style.position='fixed'; ta.style.left='-9999px';
+  document.body.appendChild(ta); ta.select();
+  try{document.execCommand('copy');showToast('링크가 복사되었습니다');}
+  catch(e){showToast('복사 실패');}
+  document.body.removeChild(ta);
+}
+
+function showToast(msg) {
+  const t=document.getElementById('toast'); t.textContent=msg;
+  t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2200);
+}
+function closeModal() { document.getElementById('modal').classList.remove('active'); }
+function restart() {
+  currentQ=0; answers=new Array(15).fill(null); _result=null;
+  document.getElementById('result-screen').classList.remove('active');
+  document.getElementById('cover-screen').style.display='block';
+  window.scrollTo(0,0);
+}
+
+window.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('cover-screen').style.display='block';
+});
+
+/* ═══════════ 통합 리포트 인계 링크 (handoff v1) ═══════════
+   브라우저 저장(localStorage)이 막히거나 지워져도 결과가 리포트로 넘어가도록,
+   "통합 리포트 열기" 링크에 이 진단 결과를 실어 보낸다.
+   인코딩 형식은 /report/의 pack()과 동일해야 한다. 표는 추가만 하고 기존 항목은 바꾸지 않는다. */
+var _ndProfile = null;
+var ND_RPT = 'https://nadaumlap.github.io/nadaumneed/report/';
+var ND_MK = {tendency:'t',needscan:'n',noise:'x',temperament:'p',motivation:'m',noiseInner:'i',alignment:'a',authorship:'d'};
+var ND_FK = {ts:'s',main:'a',sub:'b',avgs:'v',overall:'o',flag:'f',
+  nci:'c',d1:'1',d2:'2',d3:'3',d4:'4',influence:'n',aware:'w',weak:'k',weakVal:'y',seg:'g',
+  total:'t',nunchi:'u',compare:'r',exposure:'e',top:'p',tied:'d',totalSeg:'q',snsMin:'z',branch:'h',
+  axisScores:'j',ns:'N',ha:'H',rd:'R',ps:'P',sdtScore:'S',raw:'W',pct:'C',z:'Z',
+  score:'l',a1:'5',a2:'6',a3:'7',a4:'8',values:'V',statement:'M',criteria:'T'};
+var ND_AVGO = ['A','C','S','D','E'];
+function _nd8(s){ return String(s||'').replace(/-/g,''); }
+function _ndB64(s){
+  var b = new TextEncoder().encode(s), x = '';
+  b.forEach(function(c){ x += String.fromCharCode(c); });
+  return btoa(x).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+}
+function ndPack(p){
+  var o = {v:1, i:String(p.id||'').replace(/^ND-/,'').replace(/-/g,''),
+    c:_nd8(p.created), u:_nd8(p.updated), m:{},
+    g:(p.designs||[]).map(function(x){ return [_nd8(x.ts), x.axis, x.text, x.id]; })};
+  var ck = {}; for (var kk in (p.checks||{})) ck[_nd8(kk)] = p.checks[kk];
+  if (Object.keys(ck).length) o.k = ck;
+  if (p.values && p.values.length) o.V = p.values;
+  for (var k in (p.modules||{})) {
+    var src = p.modules[k], dst = {};
+    for (var f in src) {
+      var val = src[f];
+      if (val === null || val === undefined) continue;
+      if (f === 'ts') val = _nd8(val);
+      if (f === 'avgs' && typeof val === 'object') val = ND_AVGO.map(function(c){ return val[c]; });
+      if (f === 'z') continue;
+      dst[ND_FK[f] || f] = val;
+    }
+    o.m[ND_MK[k] || k] = dst;
+  }
+  return _ndB64(JSON.stringify(o));
+}
+function ndReportUrl(){
+  try {
+    var p = _ndProfile;
+    if (!p) { try { p = JSON.parse(localStorage.getItem('nadaum.profile.v1') || 'null'); } catch(e){} }
+    if (!p || !p.modules || !Object.keys(p.modules).length) return ND_RPT;
+    var u = ND_RPT + '?d=' + ndPack(p);
+    return u.length > 6000 ? ND_RPT : u;
+  } catch (e) { return ND_RPT; }
+}
+/* 링크를 누르는 순간 최신 결과를 실어 보낸다 (캡처 단계 — 이동 전에 실행) */
+document.addEventListener('click', function(e){
+  var t = e.target, a = null;
+  while (t && t !== document) { if (t.tagName === 'A' && t.className && String(t.className).indexOf('rep-cta') >= 0) { a = t; break; } t = t.parentNode; }
+  if (a) a.href = ndReportUrl();
+}, true);
+
+</script>
+</body>
+</html>

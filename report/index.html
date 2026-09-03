@@ -1,0 +1,2347 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<title>나의 나다움 설계 리포트 | 나다움설계연구소</title>
+<meta name="description" content="진단 결과를 하나로 모아 읽고, 오늘의 설계 한 문장을 남깁니다.">
+<meta property="og:title" content="나의 나다움 설계 리포트">
+<meta property="og:description" content="왜 어떤 일은 나를 살리고, 어떤 일은 나를 지치게 할까 — 진단 결과를 하나로 모아 읽습니다.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nadaumlap.github.io/nadaumneed/report/">
+<meta property="og:image" content="https://nadaumlap.github.io/nadaumneed/report/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="나다움 설계 통합 리포트">
+<meta property="og:site_name" content="나다움설계연구소">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://nadaumlap.github.io/nadaumneed/report/og-image.jpg">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="나다움설계연구소">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#F8F9FB !important;color:#1E2761 !important;color-scheme:light only}
+body{font-family:'Pretendard','Noto Sans KR',sans-serif;line-height:1.55;letter-spacing:-0.01em;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD 산돌고딕 Neo','Pretendard',sans-serif;word-break:keep-all}
+.wrap{max-width:620px;margin:0 auto;padding:0 20px 80px}
+@media (min-width:900px){.wrap{max-width:1040px}}
+
+/* 헤더 */
+.logo-bar{padding:20px 0 12px;display:flex;align-items:center;gap:12px;border-bottom:1px solid #E8E8F0;margin-bottom:18px}
+.logo-actions{margin-left:auto;display:flex;gap:7px}
+.hbtn{display:inline-flex;align-items:center;gap:5px;padding:8px 13px;border:1px solid #DCE2ED;border-radius:9px;background:#FFF;color:#4A5568;font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer;white-space:nowrap;transition:border-color .15s,color .15s}
+.hbtn:hover{border-color:#1E2761;color:#1E2761}
+.hbtn svg{width:13px;height:13px;flex:0 0 13px}
+@media (max-width:519px){.hbtn .hl{display:none}.hbtn{padding:9px 11px}.hbtn svg{width:15px;height:15px;flex:0 0 15px}}
+.logo-need{font-family:'Montserrat',sans-serif;font-size:20px;font-weight:800;letter-spacing:2px;display:flex;gap:2px}
+.logo-need .n{color:#2979C8}.logo-need .e1{color:#3DAA6B}.logo-need .e2{color:#C9983A}.logo-need .d{color:#8B5CF6}
+.logo-sep{width:1px;height:22px;background:#E8E8F0}
+.logo-right{display:flex;flex-direction:column;gap:1px}
+.logo-right .top{font-size:10px;font-weight:600;letter-spacing:1px;color:#6B7393}
+.logo-right .bot{font-size:12px;font-weight:500;color:#1E2761}
+@media (max-width:399px){.logo-right .top{display:none}.logo-bar{padding:16px 0 10px}}
+
+/* 탭 내비게이션 */
+/* 책갈피 탭 */
+.tabnav{position:sticky;top:0;z-index:40;background:#F8F9FB;padding:6px 0 0;margin:0 0 -1px;box-shadow:0 6px 12px -6px rgba(30,39,97,.10)}
+.tabnav-in{display:flex;align-items:stretch;gap:5px}
+.tabnav a{flex:1 1 0;min-width:0;position:relative;margin-top:7px;display:block;text-decoration:none;
+  background:var(--tb);border:1px solid var(--tbd);border-bottom:none;border-top:3px solid var(--tc);
+  border-radius:13px 13px 0 0;padding:9px 9px 13px;transition:margin-top .16s ease,filter .16s}
+.tabnav a .tno{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:800;color:var(--tc);letter-spacing:.4px;display:block}
+.tabnav a .tnm{font-size:13px;font-weight:800;color:#5C6478;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.tabnav a .tni{position:absolute;right:10px;bottom:12px;color:var(--tc);opacity:.55}
+.tabnav a .tni svg{width:17px;height:17px;display:block}
+.tabnav a:not(.on){filter:saturate(.7)}
+.tabnav a.on{margin-top:0;padding-bottom:19px;z-index:2;box-shadow:0 -3px 10px rgba(30,39,97,.06)}
+.tabnav a.on .tnm{color:#1A2138}
+.tabnav a.on .tni{opacity:1}
+@media (max-width:459px){.tabnav a .tni{display:none}.tabnav a{padding:9px 7px 13px}.tabnav a .tnm{font-size:12px}}
+@media (max-width:339px){.tabnav a .tnm{font-size:11px}}
+.panel{background:#FFF;border:1px solid var(--tbd);border-top:2px solid var(--tc);border-radius:0 0 18px 18px;padding:22px 18px 26px;box-shadow:0 6px 22px rgba(30,39,97,.05);margin-bottom:22px}
+@media (min-width:900px){.panel{padding:30px 30px 34px;border-radius:0 0 20px 20px}}
+.panel>.sec:first-child{margin-top:0}
+/* 단계 이동 */
+.stepnav{display:flex;gap:9px;justify-content:center;margin:26px 0 4px}
+.sb{display:inline-flex;align-items:center;gap:6px;padding:12px 18px;border:1px solid #DCE2ED;border-radius:11px;background:#FFF;color:#4A5568;font-size:13.5px;font-weight:700;text-decoration:none;transition:border-color .15s,color .15s}
+.sb:hover{border-color:#1E2761;color:#1E2761}
+.sb.pri{background:#1E2761;border-color:#1E2761;color:#FFF}
+/* 2단 배치 (데스크톱) */
+@media (min-width:900px){
+  .two{display:grid;grid-template-columns:0.86fr 1fr;gap:26px;align-items:start}
+  .two>*{min-width:0}
+  .two .sec{margin-bottom:0}
+  .panel .sec{max-width:none}
+}
+/* 표지 질문에 대한 답 한 줄 */
+.answer{background:#1E2761;border-radius:13px;padding:15px 16px;margin:2px 0 4px}
+.answer .al{font-size:10.5px;letter-spacing:1.3px;font-weight:800;color:#8FA8E0;margin-bottom:6px}
+.answer p{font-size:14.5px;line-height:1.7;color:#FFF;word-break:keep-all}
+.answer b{color:#FFD98A;font-weight:800}
+/* 강점 카드 */
+.str-wrap{display:grid;gap:9px}
+@media (min-width:700px){.str-wrap{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}}
+.str{background:#FFF;border:1px solid #E4E8F2;border-left:4px solid var(--sc);border-radius:12px;padding:14px 15px}
+.str .sh{font-size:15px;font-weight:800;color:var(--sc);line-height:1.4}
+.str .sp{font-size:13px;color:#4A5568;line-height:1.75;margin-top:6px;word-break:keep-all}
+/* 다음 한 칸 */
+.nextcard{background:#F4F7FC;border:1px solid #DCE5F4;border-radius:14px;padding:17px 17px 18px;margin-top:14px}
+.nextcard.done{font-size:13.5px;color:#4A5568;line-height:1.8;text-align:center}
+.nextcard.done a{color:#2979C8;font-weight:700}
+.nextcard .nl{font-size:11px;letter-spacing:1px;font-weight:800;color:#5A7BB8;margin-bottom:6px}
+.nextcard .nq{font-size:16px;font-weight:800;color:#1A2138;line-height:1.45;word-break:keep-all;margin-bottom:13px}
+.nextcard .nb{display:block;text-align:center;padding:14px;border-radius:11px;background:#1E2761;color:#FFF;font-size:14.5px;font-weight:800;text-decoration:none}
+.nextcard .nn{font-size:12px;color:#6B7393;margin-top:9px;line-height:1.7;text-align:center}
+/* 축 요약(읽기 탭) */
+.axis-lite{display:flex;align-items:baseline;gap:9px;padding:11px 2px 4px}
+.axis-lite.empty{opacity:.55}
+.axis-lite .al-k{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:800;color:#6B7393;min-width:24px}
+.axis-lite .al-n{font-size:14.5px;font-weight:800;color:#1A2138;flex:1}
+.axis-lite .al-v{font-size:16px;font-weight:800;color:#6B7393}
+.q-more{display:block;width:100%;margin-top:10px;padding:12px;border:1px dashed #C8D2E2;border-radius:11px;background:#FFF;color:#4A5568;font-family:inherit;font-size:13.5px;font-weight:700;cursor:pointer}
+.bwhy{display:block;margin-top:9px;font-size:12.5px;color:#5A6478;line-height:1.75}
+.carenote{background:#FFF8E8;border:1px solid #EDD9A8;border-radius:12px;padding:14px 15px;margin-bottom:16px;font-size:12.5px;color:#6B5A2E;line-height:1.8;word-break:keep-all}
+.carenote b{display:block;color:#8A6D1F;font-size:13px;margin-bottom:5px}
+.guide{background:#F4F7FC;border:1px solid #E1E8F4;border-radius:12px;padding:14px 15px;margin-top:18px}
+.guide .gt{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:800;color:#2979C8;margin-bottom:6px}
+.guide p{font-size:12.5px;color:#5A6478;line-height:1.8;word-break:keep-all}
+.tabnav a.on{color:#1E2761;border-bottom-color:#1E2761}
+.tabnav a.on .tn{color:#2979C8;opacity:1}
+.tab-lead{font-size:13px;color:#6B7393;line-height:1.75;margin:-4px 0 20px;word-break:keep-all}
+.guard{font-size:12.5px;color:#6B7393;background:#F7F9FC;border:1px solid #E7EBF3;border-radius:10px;padding:11px 13px;margin:14px 0 4px;line-height:1.75;word-break:keep-all}
+.empty-tab{background:#F7F9FC;border:1px dashed #CBD3E1;border-radius:12px;padding:22px 16px;text-align:center;font-size:13.5px;color:#5A6478;line-height:1.85;word-break:keep-all}
+.empty-tab .btn{margin-top:14px;display:inline-block}
+.q-grp{font-size:11px;letter-spacing:1.2px;color:#6B7393;font-weight:800;margin:18px 0 8px}
+.todo.next{border-color:#1E2761;box-shadow:0 4px 14px rgba(30,39,97,.10)}
+.todo.next .ar{color:#1E2761;font-weight:800}
+.todo.dim{opacity:.72}
+/* 처음 → 지금 → 다음 */
+.fnn{display:flex;align-items:stretch;gap:8px;margin:4px 0 16px}
+.fnn>div{flex:1;background:#FFF;border:1px solid #E4E8F2;border-radius:12px;padding:12px 11px;text-align:center}
+.fnn .fl{font-size:10.5px;letter-spacing:.8px;font-weight:800;color:#6B7393}
+.fnn .fd{font-size:11px;color:#6B7393;margin-top:3px}
+.fnn .fv{font-size:19px;font-weight:800;color:#1E2761;margin-top:7px}
+.fnn .fu{font-size:11.5px;color:#6B7393;margin-top:3px}
+.fnn .nxt{background:#F3F6FC;border-style:dashed}
+.fnn .nxt .fv{color:#6B7393}
+
+/* 표지 */
+.cover{padding:6px 0 28px}
+.cover .badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;background:#EEF2FB;font-size:12px;font-weight:700;color:#1E2761;margin-bottom:14px}
+.cover h1{font-size:25px;font-weight:800;line-height:1.38;margin-bottom:12px}
+.cover .lead{font-size:15px;color:#4A5568;line-height:1.7;word-break:keep-all}
+.meta-line{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;font-size:12px;color:#6B7393}
+.meta-line span{background:#FFF;border:1px solid #E8E8F0;border-radius:20px;padding:5px 12px}
+
+/* 공통 섹션 */
+.sec{margin-bottom:30px}
+.sec-num{font-size:11px;letter-spacing:1.5px;color:#6B7393;font-weight:700;margin-bottom:6px}
+.sec h2{font-size:19px;font-weight:800;margin-bottom:6px;line-height:1.4}
+.sec .sub{font-size:13.5px;color:#6B7393;line-height:1.7;margin-bottom:16px;word-break:keep-all}
+.card{background:#FFF;border:1px solid #E8E8F0;border-radius:16px;padding:20px;margin-bottom:14px}
+
+/* 4축 */
+.axes-wrap{background:#FFF;border:1px solid #E8E8F0;border-radius:16px;padding:22px 20px;margin-bottom:14px}
+.radar-box{max-width:300px;margin:0 auto 18px}
+.trend-box{background:#fff;border:1px solid #E4E8F2;border-radius:12px;padding:14px 8px 10px}
+.trend-box svg{width:100%;height:auto;display:block}
+.trend-leg{display:flex;flex-wrap:wrap;gap:9px 14px;justify-content:center;margin-top:10px}
+.trend-leg span{font-size:11.5px;color:#4A5568;display:inline-flex;align-items:center;gap:5px}
+.trend-leg i{width:12px;height:3px;border-radius:2px;display:inline-block}
+.trend-delta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.trend-delta>div{background:#F7F9FC;border:1px solid #E4E8F2;border-radius:9px;padding:9px 11px}
+.trend-delta .tdn{font-size:11.5px;color:#6B7393;letter-spacing:.2px}
+.trend-delta .tdv{font-size:15.5px;font-weight:700;margin-top:3px}
+.trend-note{font-size:12.5px;color:#5A6478;line-height:1.8;margin-top:12px;word-break:keep-all}
+.ics-row .btn{white-space:nowrap;font-size:13.5px;padding-left:14px;padding-right:14px}
+.ics-hint{font-size:11.5px;color:#6B7393;line-height:1.7;margin-top:9px;word-break:keep-all}
+.trend-empty{background:#F7F9FC;border:1px dashed #CBD3E1;border-radius:11px;padding:17px 14px;font-size:13px;color:#5A6478;line-height:1.85;text-align:center;word-break:keep-all}
+.tup{color:#2F855A}.tdown{color:#C05621}.tflat{color:#6B7393}
+.radar-box svg{width:100%;height:auto;display:block}
+.axis-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.axis-key{width:34px;flex-shrink:0;font-family:'Montserrat',sans-serif;font-weight:800;font-size:13px;text-align:center}
+.axis-mid{flex:1;min-width:0}
+.axis-name{font-size:12.5px;font-weight:600;color:#1E2761;margin-bottom:5px}
+.axis-track{height:8px;background:#E8E8F0;border-radius:4px;overflow:hidden}
+.axis-fill{height:100%;border-radius:4px;transition:width 1s ease}
+.axis-val{width:52px;flex-shrink:0;text-align:right;font-size:13px;font-weight:800}
+.axis-row.empty .axis-name,.axis-row.empty .axis-val{color:#6B7393}
+.axis-row.empty .axis-key{color:#C4CBDA}
+.pend-link{font-size:11.5px;color:#6B7393;text-decoration:none;border-bottom:1px dotted #A0AAC0}
+
+/* 병목 */
+/* 여정 지도 */
+.jn{margin:2px 0 20px}
+.jn-cap{font-size:11px;letter-spacing:1.5px;color:#6B7393;font-weight:700;margin-bottom:10px}
+.jn-tip{display:flex;align-items:center;gap:9px;font-size:12px;color:#98A1B5;font-weight:700;margin-bottom:2px}
+.jn-tip i{width:24px;flex:0 0 24px;text-align:center;font-style:normal;color:#C4CBDA;font-size:15px}
+.jn-row{display:flex;gap:12px}
+.jn-rail{width:24px;flex:0 0 24px;display:flex;justify-content:center;position:relative}
+.jn-rail::before{content:'';position:absolute;top:0;bottom:0;width:2px;background:#E7EBF3}
+.jn-row.on .jn-rail::before{background:var(--jc);opacity:.3}
+.jn-dot{position:relative;z-index:1;width:24px;height:24px;border-radius:50%;background:#FFF;border:2px solid #DCE2ED;color:#6B7393;font-size:12.5px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.jn-row.on .jn-dot{border-color:var(--jc);color:var(--jc)}
+.jn-row.here .jn-dot{background:var(--jc);border-color:var(--jc);color:#FFF}
+.jn-body{flex:1;padding:0 0 17px}
+.jn-t{font-size:15px;font-weight:800;color:#1A2138;line-height:1.4;word-break:keep-all}
+.jn-row:not(.on) .jn-t{color:#6B7393}
+.jn-here{display:inline-block;font-size:10.5px;font-weight:800;color:#FFF;background:var(--jc);border-radius:20px;padding:2.5px 8px;margin-left:6px;vertical-align:2px;white-space:nowrap}
+.jn-meta{display:flex;align-items:baseline;gap:8px;margin-top:4px}
+.jn-ax{font-size:12px;color:#6B7393}
+.jn-v{font-size:14.5px;font-weight:800;color:var(--jc)}
+.jn-row:not(.on) .jn-v{color:#8B93A6}
+.jn-en{font-size:10.5px;letter-spacing:.5px;color:#6B7393;margin-top:3px;font-family:Montserrat,sans-serif;font-weight:600}
+.jn-open{font-size:11.5px;color:#6B7393;margin-top:5px}
+.jn-open a{color:var(--jc);font-weight:700;text-decoration:none;border-bottom:1px solid rgba(0,0,0,.14)}
+.jn-prog{font-size:12.5px;color:#4A5568;background:#F7F9FC;border:1px solid #E7EBF3;border-radius:10px;padding:10px 13px;margin-top:4px;line-height:1.75;word-break:keep-all}
+.jn-prog b{color:#1E2761}
+
+/* 표지 아래 첫 행동 */
+.hero-cta{background:linear-gradient(140deg,#1A2250 0%,#2B3573 100%);border-radius:17px;padding:20px 19px;margin-bottom:22px;position:relative;overflow:hidden}
+.hero-cta::after{content:'';position:absolute;inset:0;background:radial-gradient(110% 80% at 92% -12%,var(--glow) 0%,rgba(0,0,0,0) 60%);pointer-events:none}
+.hc-eb{font-size:10.5px;letter-spacing:1.6px;font-weight:800;color:var(--ac);margin-bottom:7px}
+.hc-h{font-size:20px;font-weight:800;color:#FFF;line-height:1.35}
+.hc-d{font-size:13px;color:#C3CBE4;line-height:1.7;margin-top:7px;word-break:keep-all}
+.hc-d b{color:#FFF;font-weight:700}
+.hc-btn{display:block;width:100%;margin-top:15px;padding:15px;border:none;border-radius:12px;background:#FFF;color:#1A2250;font-family:inherit;font-size:15.5px;font-weight:800;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.18);transition:transform .15s}
+.hc-btn:active{transform:translateY(1px)}
+.hc-f{font-size:12px;color:#A7B1D0;text-align:center;margin-top:10px}
+
+.bottleneck{border-radius:16px;padding:20px;margin-bottom:14px;background:var(--bnbg);border:1px solid var(--bnbd);border-left:4px solid var(--ac)}
+.bottleneck .t{font-size:11px;letter-spacing:1px;color:var(--ac);font-weight:700;margin-bottom:7px}
+.bottleneck .h{font-size:17px;font-weight:800;margin-bottom:8px;line-height:1.4}
+.bottleneck .bdef{font-size:13.5px;color:#5A6478;line-height:1.75;margin-bottom:10px;padding-bottom:10px;border-bottom:1px dashed var(--bnbd);word-break:keep-all}
+.bottleneck .bdef b{color:#1E2761}
+.bn-go{display:block;width:100%;margin-top:14px;padding:16px;border:none;border-radius:13px;background:linear-gradient(135deg,#1E2761 0%,#33409A 100%);color:#FFF;font-family:inherit;font-size:15.5px;font-weight:700;cursor:pointer;line-height:1.45;box-shadow:0 6px 18px rgba(30,39,97,.24);transition:transform .15s,box-shadow .15s}
+.bn-go:active{transform:translateY(1px)}
+.bn-go b{font-weight:800;color:#FFD98A}
+.bfoot{font-size:13.5px;color:#1E2761;font-weight:700;text-align:center;margin-top:11px}
+.axis-open{font-size:11.5px;color:#6B7393;margin:-4px 0 13px 46px;line-height:1.65}
+.axis-open a{color:#2979C8;font-weight:700;text-decoration:none;border-bottom:1px solid #CFE0F3}
+.q-head{font-size:14.5px;font-weight:800;color:#1A2138;margin:22px 0 5px}
+.q-sub{font-size:12.5px;color:#6B7393;line-height:1.75;margin:0 0 12px;word-break:keep-all}
+.q-sub b{color:#1E2761}
+.todo .tq{font-size:14.5px;font-weight:800;color:#1A2138;line-height:1.45;word-break:keep-all}
+.todo.done .tq{color:#5A6478}
+.bottleneck .b{font-size:14px;color:#4A5568;line-height:1.7;word-break:keep-all}
+
+/* 교차 해석 */
+.cross{background:#FFF;border:1px solid #E8E8F0;border-left:4px solid #8B5CF6;border-radius:14px;padding:18px 20px;margin-bottom:12px}
+.cross .src{font-size:11px;color:#8B5CF6;font-weight:700;letter-spacing:.5px;margin-bottom:7px}
+.cross .txt{font-size:14.5px;color:#2D3748;line-height:1.75;word-break:keep-all}
+
+/* 설계 시트 */
+.design-box{background:#F1F8FE;border:1px solid #BEE3F8;border-radius:16px;padding:22px 20px;margin-bottom:14px}
+.design-box h3{font-size:16px;font-weight:800;margin-bottom:8px}
+.design-box .why{font-size:13px;color:#4A5568;line-height:1.7;margin-bottom:16px;word-break:keep-all}
+.opt-row{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.opt{padding:13px 15px;background:#FFF;border:2px solid #E8E8F0;border-radius:11px;font-size:14px;color:#2D3748;cursor:pointer;line-height:1.55;word-break:keep-all;text-align:left}
+@media (hover:hover) and (pointer:fine){.opt:hover{border-color:var(--ac,#2979C8)}}
+.opt.on{border-color:var(--ac,#2979C8);background:transparent;font-weight:600}
+/* 설계 시트 — 생동감 */
+.design-box{position:relative;overflow:hidden;background:linear-gradient(168deg,color-mix(in srgb,var(--ac,#2979C8) 9%,#FFF) 0%,#FFF 46%);border:1.5px solid color-mix(in srgb,var(--ac,#2979C8) 32%,#FFF);box-shadow:0 10px 30px color-mix(in srgb,var(--ac,#2979C8) 13%,transparent)}
+.design-box::before{content:'';position:absolute;left:0;right:0;top:0;height:5px;background:linear-gradient(90deg,var(--ac,#2979C8) 0%,#F5C95F 52%,var(--ac,#2979C8) 100%)}
+.db-head{display:flex;align-items:center;gap:11px;margin:2px 0 13px}
+.db-ico{width:40px;height:40px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:20px;background:linear-gradient(140deg,var(--ac,#2979C8),#1E2761);box-shadow:0 5px 14px color-mix(in srgb,var(--ac,#2979C8) 34%,transparent);flex-shrink:0}
+.db-head h3{flex:1;font-size:17.5px;font-weight:800;color:#1E2761;line-height:1.4;margin:0;word-break:keep-all}
+.m-card{background:#FFF;border-width:2px}
+.m-pick{gap:12px;padding:15px 15px 12px}
+.m-num{width:26px;height:26px;border-radius:9px;font-size:13.5px;transition:all .16s}
+.m-txt{font-size:14.5px;padding-right:26px}
+.m-card.on .m-txt,.m-card:has(.m-pick.on) .m-txt{color:#1E2761;font-weight:700}
+.m-card.on::after,.m-card:has(.m-pick.on)::after{content:'✓';position:absolute;top:11px;right:13px;width:22px;height:22px;border-radius:50%;background:var(--ac,#2979C8);color:#FFF;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;animation:pop .22s ease}
+.m-card{position:relative}
+@keyframes pop{0%{transform:scale(.4);opacity:0}70%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
+.step-lab{font-size:14px}
+.step-lab i{width:24px;height:24px;font-size:13px;box-shadow:0 3px 9px color-mix(in srgb,var(--ac,#2979C8) 36%,transparent)}
+.fill select,.fill input{border-width:2px;font-weight:600}
+.prev-line{position:relative;overflow:hidden}
+.prev-line.filled::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--ac,#2979C8),#F5C95F)}
+.prev-line.filled{padding-left:18px;animation:slidein .3s ease}
+@keyframes slidein{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}
+.design-box .btn{letter-spacing:-.2px}
+.design-box .btn::after{content:' →'}
+/* 설계 페이지 */
+.dp-top{margin:6px 0 12px}
+.dp-back{padding:11px 15px;border:1.5px solid #D6DEEA;border-radius:11px;background:#FFF;font-family:inherit;font-size:13.5px;font-weight:600;color:#1E2761;cursor:pointer}
+.dp-hero{background:linear-gradient(135deg,var(--ac) 0%,#1E2761 130%);border-radius:20px;padding:26px 22px;margin-bottom:16px;color:#FFF}
+.dp-tag{font-size:11px;font-weight:800;letter-spacing:1.2px;opacity:.85;margin-bottom:9px}
+.dp-h{font-size:23px;font-weight:800;line-height:1.4;margin-bottom:11px;word-break:keep-all;color:#FFF}
+.dp-p{font-size:13.5px;line-height:1.8;opacity:.92;word-break:keep-all}
+.dp-p b{color:#FFE9A8}
+.sec.solo{padding:0;margin-bottom:0}
+.design-box{background:var(--acs,#F1F8FE);border:1.5px solid var(--acl,#BEE3F8)}
+.step-lab i{background:var(--ac,#2979C8)}
+.m-card{transition:transform .14s,box-shadow .14s,border-color .14s,background .14s}
+.m-card.on,.m-card:has(.m-pick.on){border-color:var(--ac,#2979C8);background:#FFF;box-shadow:0 8px 22px color-mix(in srgb,var(--ac,#2979C8) 22%,transparent);transform:translateY(-2px)}
+.m-num{background:#EDF2F9;color:var(--ac,#2979C8)}
+.m-pick.on .m-num{background:var(--ac,#2979C8);color:#FFF;box-shadow:0 0 0 4px color-mix(in srgb,var(--ac,#2979C8) 18%,transparent)}
+.m-pick:active{transform:scale(.995)}
+.m-free input:focus{border-color:var(--ac,#2979C8);box-shadow:0 0 0 3px color-mix(in srgb,var(--ac,#2979C8) 16%,transparent)}
+.fill select:focus,.fill input:focus{border-color:var(--ac,#2979C8)}
+.prev-line{background:#FFF;border:1.5px dashed var(--acl,#BEE3F8);border-radius:12px;padding:13px 14px;margin:10px 0 14px;transition:border-color .2s,background .2s}
+.prev-line.filled{border-style:solid;border-color:var(--ac,#2979C8);background:color-mix(in srgb,var(--ac,#2979C8) 6%,#FFF)}
+.prev-line .pl-lab{background:color-mix(in srgb,var(--ac,#2979C8) 14%,#FFF);color:var(--ac,#2979C8)}
+.design-box .btn{background:linear-gradient(135deg,var(--ac,#2979C8) 0%,#1E2761 130%);box-shadow:0 6px 18px color-mix(in srgb,var(--ac,#2979C8) 28%,transparent);transition:transform .14s,box-shadow .14s;font-size:16px;padding:17px}
+.design-box .btn:active{transform:translateY(1px)}
+.design-box .btn:disabled{opacity:.5;box-shadow:none}
+.m-ex div{background:var(--acs,#F6F8FB)}
+.step-lab{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:800;color:#1E2761;margin:18px 0 9px}
+.step-lab i{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;color:#FFF;font-style:normal;font-size:12.5px;font-weight:800;flex-shrink:0}
+.step-note{font-size:12.5px;color:#5A6478;line-height:1.65;margin:-3px 0 12px;word-break:keep-all}
+.m-card{background:#FFF;border:2px solid #E8E8F0;border-radius:11px;overflow:hidden}
+.m-card.on,.m-card:has(.m-pick.on){border-color:var(--ac,#2979C8);background:#FFF;box-shadow:0 8px 22px color-mix(in srgb,var(--ac,#2979C8) 22%,transparent);transform:translateY(-2px)}
+.m-pick{display:flex;gap:10px;align-items:flex-start;width:100%;border:none;background:transparent;padding:13px 15px 11px;text-align:left}
+.m-num{display:inline-flex;align-items:center;justify-content:center;width:21px;height:21px;border-radius:6px;background:#EDF2F9;color:var(--ac,#2979C8);font-size:12.5px;font-weight:800;flex-shrink:0;margin-top:1px}
+.m-pick.on .m-num{background:var(--ac,#2979C8);color:#FFF;box-shadow:0 0 0 4px color-mix(in srgb,var(--ac,#2979C8) 18%,transparent)}
+.m-txt{flex:1;font-size:14px;color:#2D3748;line-height:1.6;word-break:keep-all}
+.m-pick.on .m-txt{font-weight:600;color:#1E2761}
+.m-ex-btn{display:block;width:100%;text-align:left;padding:0 15px 11px;border:none;background:transparent;font-family:inherit;font-size:12.5px;color:#6B7393;cursor:pointer}
+.m-ex{display:none;padding:0 15px 13px;font-size:12.5px;color:#4A5568;line-height:1.75;word-break:keep-all}
+.m-ex.open{display:block}
+.m-ex div{padding:5px 10px;background:#F6F8FB;border-radius:7px;margin-top:5px}
+  .m-free{display:none;padding:0 15px 13px}
+.m-free.open{display:block}
+.m-free input{width:100%;font-family:inherit;font-size:14px;padding:11px 12px;border:1.5px solid #D6DEEA;border-radius:10px;background:#FFF;color:#1E2761}
+.m-free input:focus{outline:none;border-color:#2979C8}
+.design-foot{font-size:12.5px;color:#5A6478;line-height:1.7;margin-top:12px;word-break:keep-all}
+.prev-line{font-size:13px;color:#1E2761;line-height:1.6;margin:2px 0 12px;word-break:keep-all}
+.prev-line .pl-lab{display:inline-block;font-size:11px;font-weight:800;color:var(--ac,#2979C8);background:color-mix(in srgb,var(--ac,#2979C8) 14%,#FFF);padding:2px 8px;border-radius:99px;margin-right:7px}
+.prev-line .pl-empty{color:#8B93A5}
+.fill{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:14px;margin-bottom:14px}
+.fill label{font-size:12px;color:#6B7393;font-weight:600;width:100%;margin-bottom:-2px}
+.fill select,.fill input{font-family:inherit;font-size:14px;padding:11px 12px;border:1.5px solid #D6DEEA;border-radius:10px;background:#FFF;color:#1E2761}
+.fill select{flex:0 0 auto}
+.fill input{flex:1;min-width:180px}
+.fill input:focus,.fill select:focus{outline:none;border-color:#2979C8}
+.btn{display:block;width:100%;padding:15px;background:#1E2761;color:#FFF;border:none;border-radius:12px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;text-align:center;text-decoration:none}
+.btn:hover{background:#151C47}
+.btn.ghost{background:#FFF;color:#1E2761;border:1.5px solid #D6DEEA}
+.btn.ghost:hover{background:#F1F5FB}
+.btn-row{display:flex;gap:10px;margin-bottom:12px}
+.btn-row .btn{flex:1}
+
+/* 설계 문장 목록 */
+.sent{background:#FFF;border:1px solid #E8E8F0;border-radius:12px;padding:15px 16px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start}
+.sent .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:7px}
+.sent .body{flex:1;min-width:0}
+.sent .txt{font-size:14.5px;color:#1E2761;font-weight:600;line-height:1.6;word-break:keep-all}
+.sent .when{font-size:11.5px;color:#6B7393;margin-top:5px}
+.sent .del{background:none;border:none;color:#C4CBDA;font-size:16px;cursor:pointer;padding:0 2px;flex-shrink:0}
+.sent .del:hover{color:#E53935}
+
+/* 데일리 체크 */
+.today-box{background:#FFF;border:1px solid #E8E8F0;border-radius:16px;padding:20px;margin-bottom:14px}
+.today-date{font-size:12px;color:#6B7393;font-weight:600;margin-bottom:14px}
+.chk{display:flex;align-items:flex-start;gap:12px;padding:13px 14px;border:1.5px solid #E8E8F0;border-radius:12px;margin-bottom:9px;cursor:pointer;background:#FFF;transition:all .15s;text-align:left;width:100%;font-family:inherit}
+@media (hover:hover) and (pointer:fine){.chk:hover{border-color:#2979C8}}
+.chk.on{border-color:#3DAA6B;background:#F0FFF4}
+.chk .box{width:22px;height:22px;border:2px solid #D6DEEA;border-radius:7px;flex-shrink:0;margin-top:1px;position:relative;transition:all .15s}
+.chk.on .box{border-color:#3DAA6B;background:#3DAA6B}
+.chk.on .box::after{content:'';position:absolute;left:6px;top:2px;width:6px;height:11px;border:solid #FFF;border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
+.chk .ct{flex:1;font-size:14.5px;color:#1E2761;line-height:1.6;word-break:keep-all}
+.chk.on .ct{color:#2D6A4F}
+.week{background:#FFF;border:1px solid #E8E8F0;border-radius:16px;padding:18px 20px;margin-bottom:14px}
+.week h4{font-size:13px;font-weight:700;color:#1E2761;margin-bottom:14px}
+.wk-grid{display:flex;gap:6px;margin-bottom:8px}
+.wk-cell{flex:1;text-align:center}
+.wk-dot{width:100%;aspect-ratio:1;max-width:34px;margin:0 auto 5px;border-radius:9px;background:#F1F3F7;border:1.5px solid #E8E8F0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#6B7393}
+.wk-dot.full{background:#3DAA6B;border-color:#3DAA6B;color:#FFF}
+.wk-dot.part{background:#D9F0E3;border-color:#8FCFAC;color:#2D6A4F}
+.wk-dot.today{box-shadow:0 0 0 2px #2979C8}
+.wk-lab{font-size:11px;color:#6B7393}
+.streak{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;padding-top:14px;border-top:1px solid #F1F3F7}
+.streak div{flex:1;min-width:96px}
+.streak .sv{font-size:19px;font-weight:800;color:#1E2761}
+.streak .sl{font-size:11.5px;color:#6B7393;margin-top:2px}
+
+/* 우선가치 */
+.value-card{background:#F8F7FF;border:1px solid #DDD6FE;border-left:4px solid #8B5CF6;border-radius:16px;padding:22px 20px;margin-bottom:14px}
+.value-card .t{font-size:11px;letter-spacing:1px;color:#8B5CF6;font-weight:700;margin-bottom:8px}
+.value-card h3{font-size:17px;font-weight:800;margin-bottom:10px;line-height:1.45}
+.value-card p{font-size:14px;color:#4A5568;line-height:1.7;word-break:keep-all;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.chip{padding:7px 14px;border-radius:20px;background:#FFF;border:1.5px solid #DDD6FE;font-size:13.5px;font-weight:600;color:#6D28D9;cursor:pointer}
+.chip.on{background:#8B5CF6;color:#FFF;border-color:#8B5CF6}
+
+/* 안내 박스 */
+.optin{display:flex;gap:10px;align-items:flex-start;background:#F4F7FC;border:1px solid #DCE5F4;border-radius:11px;padding:13px 14px;margin:12px 0;cursor:pointer}
+.optin input{margin-top:2px;width:17px;height:17px;flex:0 0 17px;accent-color:#1E2761}
+.optin span{font-size:12px;color:#5A6478;line-height:1.75;word-break:keep-all}
+.optin b{display:block;color:#1E2761;font-size:12.5px;margin-bottom:3px}
+.optin b+b,.optin span b:not(:first-child){display:inline;color:#1E2761;margin:0}
+.soon{padding:14px 16px;border-radius:12px;background:#F5F3FF;border:1px solid #DDD6FE;margin-bottom:12px;font-size:13px;color:#5A5378;line-height:1.75;word-break:keep-all}
+/* 계정 카드 */
+.acct{position:relative;background:#FFF;border:1.5px solid #D6DEEA;border-radius:14px;padding:18px 18px 16px;margin-bottom:14px}
+.acct.nudge{border-color:#1E2761;box-shadow:0 8px 24px rgba(30,39,97,.10);margin:4px 0 18px}
+.acct.on{background:#F2FAF5;border-color:#BFE3CE}
+.acct-t{font-size:15.5px;font-weight:800;color:#1E2761;line-height:1.45;word-break:keep-all;margin-bottom:8px;padding-right:26px}
+.acct-lead{font-size:13px;color:#4A5568;line-height:1.75;word-break:keep-all;margin-bottom:12px}
+.acct-row{display:flex;gap:8px;flex-wrap:wrap}
+.acct-row input{flex:1;min-width:180px;font-family:inherit;font-size:14.5px;padding:12px 13px;border:1.5px solid #D6DEEA;border-radius:11px;background:#FFF;color:#1E2761}
+.acct-row input:focus{outline:none;border-color:#1E2761;box-shadow:0 0 0 3px rgba(30,39,97,.12)}
+.acct-row .btn{width:auto;flex:0 0 auto;padding:12px 16px;font-size:14px;white-space:nowrap}
+.acct-agree{display:flex;gap:9px;align-items:flex-start;margin-top:11px;font-size:12px;color:#6B7393;line-height:1.7;word-break:keep-all;cursor:pointer}
+.acct-agree input{margin-top:4px;width:16px;height:16px;flex:0 0 16px;accent-color:#1E2761}
+.acct-agree a{color:#2979C8;font-weight:700;text-decoration:none;border-bottom:1px solid #CFE0F3}
+.acct-sent{font-size:13.5px;color:#1E2761;line-height:1.8;background:#F4F7FC;border:1px solid #E1E8F4;border-radius:11px;padding:13px 14px;word-break:keep-all}
+.acct-me{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline;font-size:14px;color:#1E2761;margin-bottom:8px}
+.acct-me span{font-size:12px;color:#6B7393}
+.acct-foot{font-size:12px;color:#6B7393;line-height:1.7;margin-top:10px;word-break:keep-all}
+.acct-foot a{color:#6B7393;text-decoration:underline}
+.acct-x{position:absolute;top:10px;right:12px;background:none;border:none;color:#A0AAC0;font-size:20px;cursor:pointer;line-height:1;padding:2px 4px}
+.acct-x:hover{color:#1E2761}
+@media print{.acct{display:none !important}}
+.soon b{display:block;color:#6D28D9;margin-bottom:5px;font-size:13.5px}
+.note{background:#FAFAFD;border:1px dashed #D0D5E2;border-radius:12px;padding:15px 16px;font-size:12.5px;color:#6B7393;line-height:1.7;margin-bottom:12px;word-break:keep-all}
+.note b{color:#1E2761;display:block;margin-bottom:5px;font-size:13px}
+.warn{background:#FFFBEB;border:1px solid #FDE68A;border-radius:12px;padding:15px 16px;font-size:12.5px;color:#78500F;line-height:1.7;margin-bottom:12px;word-break:keep-all}
+.warn b{display:block;color:#78350F;margin-bottom:5px;font-size:13px}
+
+/* 미완료 진단 */
+.axis-stage{font-size:11px;color:#8B93A5;margin:1px 0 5px;letter-spacing:.2px}
+.feed-row{display:flex;flex-wrap:wrap;gap:5px;align-items:center;margin:-5px 0 13px 46px}
+.feed-lab{font-size:11px;color:#8B93A5;margin-right:3px}
+.feed{font-size:11px;padding:2px 8px;border-radius:99px;background:#F1F3F8;color:#6B7393;border:1px solid #E8EBF2}
+.feed-note{font-size:11px;color:#6B7393;line-height:1.6;margin:-7px 0 12px 46px;word-break:keep-all}
+.feed.on{background:#E8F4FD;color:#1E5A9E;border-color:#BEE3F8;font-weight:700}
+.todo.done{background:#F7F9FC;border-style:dashed}
+.todo.done .tt{color:#6B7393}
+.todo.done .ar{font-size:12px;color:#8B93A5}
+.done-badge{display:inline-block;font-size:10.5px;font-weight:800;color:#2D6A4F;background:#E8F7EF;border-radius:99px;padding:2px 7px;margin-left:5px;vertical-align:1px}
+.chk-wrap{margin-bottom:9px}
+.chk-wrap .chk{margin-bottom:0}
+.note-row{display:none;padding:9px 4px 2px 34px}
+.note-row.open{display:block}
+.note-row label{display:block;font-size:11.5px;font-weight:700;color:#5A6478;margin-bottom:5px}
+.note-row label span{font-weight:500;color:#6B7393}
+.note-in{width:100%;font-family:inherit;font-size:14px;padding:10px 12px;border:1.5px solid #E0E6F0;border-radius:10px;background:#FFF;color:#1E2761}
+.note-in:focus{outline:none;border-color:#3DAA6B;background:#FBFFFC;box-shadow:0 0 0 3px rgba(61,170,107,.16)}
+.nday{margin-bottom:14px}
+.nd-date{font-size:11.5px;font-weight:800;color:#2979C8;letter-spacing:.5px;margin-bottom:7px}
+.nd-item{background:#FFF;border:1px solid #E8E8F0;border-radius:11px;padding:12px 14px;margin-bottom:7px}
+.nd-t{font-size:14.5px;color:#1E2761;line-height:1.6;word-break:keep-all}
+.nd-s{font-size:11.5px;color:#6B7393;margin-top:5px;line-height:1.5;word-break:keep-all}
+
+/* ===== 실행 기록 카드 (공통 · 네이비+골드) ===== */
+.rec-card{position:relative;overflow:hidden;background:#101736;border:1px solid #232C5C;border-radius:14px;padding:20px 19px;margin:16px 0 12px}
+.rec-card::after{content:'';position:absolute;inset:0;background:radial-gradient(120% 80% at 88% -10%,rgba(245,201,95,.16) 0%,rgba(245,201,95,0) 58%);pointer-events:none}
+.rec-card>*{position:relative;z-index:1}
+.rec-step{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.6px;color:#F5C95F;background:rgba(245,201,95,.18);border-radius:99px;padding:4px 11px;margin-bottom:12px}
+.rec-card h3{font-size:17.5px;font-weight:800;margin-bottom:10px;line-height:1.45;word-break:keep-all;background:linear-gradient(96deg,#FFE9A8 0%,#F5C95F 38%,#FFF3CE 58%,#E8B54A 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.rec-card p{font-size:13.5px;color:#DFE5F5;line-height:1.8;word-break:keep-all}
+.rec-go{display:inline-block;margin-top:15px;font-size:14.5px;font-weight:800;color:#F5C95F;text-decoration:none;border-bottom:2px solid rgba(245,201,95,.55);padding-bottom:3px}
+.rec-note{font-size:12px;color:#A8B2D4;line-height:1.65;margin-top:12px;padding-top:11px;border-top:1px dashed rgba(245,201,95,.28);word-break:keep-all}
+.rec-note b{color:#F5C95F}
+.sec-flash{animation:secflash 1.8s ease}
+@keyframes secflash{0%{background:#FFF9E6}60%{background:#FFF9E6}100%{background:transparent}}
+.td-grp{font-size:10.5px;font-weight:800;letter-spacing:.6px;color:#8B93A5;margin-bottom:3px}
+.todo.done .td-grp{color:#A8AFBD}
+.todo{display:flex;align-items:center;gap:13px;padding:15px 16px;border-radius:13px;text-decoration:none;margin-bottom:9px;border:1px solid #E8E8F0;background:#FFF}
+.todo:hover{background:#F7F9FC}
+.todo .ic{width:34px;height:34px;border-radius:50%;color:#FFF;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.todo .tb{flex:1;min-width:0}
+.todo .tt{font-size:14px;font-weight:700;color:#1E2761;line-height:1.4}
+.todo .td{font-size:12px;color:#6B7393;margin-top:3px}
+.todo .ar{color:#6B7393;flex-shrink:0}
+
+/* 빈 상태 */
+.empty-hero{text-align:center;padding:36px 20px}
+.empty-hero .em{font-size:44px;margin-bottom:14px}
+.empty-hero h2{font-size:20px;font-weight:800;margin-bottom:10px}
+.empty-hero p{font-size:14.5px;color:#4A5568;line-height:1.75;word-break:keep-all;margin-bottom:20px}
+
+.foot{text-align:center;margin-top:36px;padding-top:24px;border-top:1px solid #E8E8F0}
+.foot .sig{font-family:-apple-system,'SF Pro Display','Apple SD 산돌고딕 Neo','Pretendard',sans-serif;font-size:16.5px;font-weight:800;color:#1E2761;margin-bottom:10px;line-height:1.5}
+.foot .slo{font-size:11.5px;color:#6B7393}
+.foot p{font-size:12px;color:#6B7393;margin-bottom:4px}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(30,39,97,.95);color:#FFF;padding:12px 22px;border-radius:24px;font-size:13.5px;opacity:0;transition:all .3s;z-index:1100;pointer-events:none;max-width:88%;text-align:center;line-height:1.5}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media print{
+  body{background:#FFF !important}
+  .no-print{display:none !important}
+  .wrap{max-width:100%;padding:0}
+  .sec{page-break-inside:avoid}
+  .card,.axes-wrap,.cross,.design-box,.value-card{break-inside:avoid}
+}
+
+/* 인쇄 — 링크가 텍스트만 남으면 종이에서 따라갈 수 없다 */
+@media print{
+  .tabnav,.stepnav,.logo-actions,.no-print{display:none !important}
+  .panel{border:none !important;box-shadow:none !important;padding:0 !important}
+  .two{display:block !important}
+  .sec{page-break-inside:avoid}
+  a[href^="http"]::after{content:" (" attr(href) ")";font-size:10px;color:#6B7393;word-break:break-all}
+  .answer{background:#FFF !important;border:1px solid #1E2761}
+  .answer p,.answer b{color:#1E2761 !important}
+  .hero-cta{background:#FFF !important;border:1px solid #1E2761}
+  .hc-h,.hc-d{color:#1E2761 !important}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="logo-bar">
+  <div class="logo-need"><span class="n">N</span><span class="e1">E</span><span class="e2">E</span><span class="d">D</span></div>
+  <div class="logo-sep"></div>
+  <div class="logo-right"><span class="top">NEED SCAN · 나다움설계연구소</span><span class="bot">나다움을 설계하다</span></div>
+  <div class="logo-actions no-print" id="hact" hidden>
+    <button class="hbtn" onclick="printAll()" title="결과 다운로드" aria-label="결과 다운로드"><svg viewBox="0 0 16 16"><path d="M8 1.6v8.2m0 0L5 6.9m3 2.9 3-2.9M2.4 11.4v1.8c0 .6.5 1.2 1.2 1.2h8.8c.7 0 1.2-.6 1.2-1.2v-1.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="hl">결과 다운로드</span></button>
+    <button class="hbtn" onclick="shareKeep()" title="공유하기" aria-label="공유하기"><svg viewBox="0 0 16 16"><circle cx="12.4" cy="3.6" r="2.1" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="3.6" cy="8" r="2.1" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12.4" cy="12.4" r="2.1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 7 10.5 4.5M5.5 9l5 2.4" stroke="currentColor" stroke-width="1.5"/></svg><span class="hl">공유하기</span></button>
+  </div>
+</div>
+
+<nav class="tabnav no-print" id="tabnav" hidden></nav>
+<div id="app"></div>
+
+<div class="foot">
+  <p class="sig">우선가치가 선명하면, 모든 선택이 명료해진다</p>
+  <p>나다움설계연구소</p>
+  <p class="slo">나다움은 발견이 아니라 설계다</p>
+</div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const KEY='nadaum.profile.v1';
+const BASE='https://nadaumlap.github.io/nadaumneed';
+/* 익명 집계 — 규준(low/mid/high 경계)과 재검사 신뢰도를 만들려면 분포가 필요하다.
+   지금의 모든 경계(40/65, 34/67, 55 등)는 이론적·임시 경계다.
+   아래 주소를 채우기 전까지 아무것도 보내지 않고 화면에도 뜨지 않는다.
+   Google Apps Script 웹앱이나 폼 엔드포인트 주소를 넣으면 활성화된다.
+   보내는 것: 리포트 ID(개인 식별 불가), 네 축 점수, 세그먼트, 문항판 번호, 날짜.
+   보내지 않는 것: 문항별 응답, 설계 문장, 기록, 이름·이메일. */
+const COLLECT_URL='';
+/* ───────── 회원가입(선택) ─────────
+   정책: 종합리포트는 누구나 익명으로, 가입은 기록을 오래 갖고 싶은 사람만.
+   가입 시 받는 것은 이메일 하나. 이름은 받지 않는다. 비밀번호도 없다(매직링크).
+   AUTH.url·AUTH.key가 비어 있으면 가입 관련 UI는 전혀 뜨지 않고 아무것도 불러오지 않는다.
+   Supabase 프로젝트 → Settings → API 의 Project URL / anon public key 를 넣는다. */
+const AUTH={url:'https://twvladqeqnuuknofjsfa.supabase.co', key:'sb_publishable_OJ4w2vUoRB2nkPDHOi6mMA_kc42Pfh2', table:'profiles', privacy:BASE+'/report/privacy.html'};
+const SHORT={v:'v',id:'i',created:'c',updated:'u',modules:'m',designs:'g'};
+
+/* ───────── 저장 ───────── */
+function load(){try{return JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){return null}}
+function save(p){try{localStorage.setItem(KEY,JSON.stringify(p))}catch(e){} if(typeof cloudQueue==='function')cloudQueue();}
+function blank(){return{v:1,id:'ND-'+r4()+'-'+r4(),created:today(),updated:today(),modules:{},designs:[],checks:{},history:[]}}
+function r4(){return Math.random().toString(36).slice(2,6).toUpperCase()}
+function today(){return new Date().toISOString().slice(0,10)}
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2400)}
+
+/* ───────── 보관 링크 인코딩 ─────────
+   형식 v1: base64url(JSON) — 키를 1글자로 줄여 길이를 압축한다.
+   이 형식은 이미 발급된 링크를 깨뜨리지 않기 위해 변경하지 않는다. */
+/* 모듈·필드 이름을 1~2글자로 줄여 링크 길이를 압축한다.
+   이미 발급된 링크가 깨지지 않도록 이 표는 항목 추가만 하고 기존 항목은 바꾸지 않는다. */
+const MK={tendency:'t',needscan:'n',noise:'x',temperament:'p',motivation:'m',noiseInner:'i',alignment:'a',authorship:'d'};
+const MKr=Object.fromEntries(Object.entries(MK).map(([a,b])=>[b,a]));
+const FK={ts:'s',main:'a',sub:'b',avgs:'v',overall:'o',flag:'f',
+  nci:'c',d1:'1',d2:'2',d3:'3',d4:'4',influence:'n',aware:'w',weak:'k',weakVal:'y',seg:'g',
+  total:'t',nunchi:'u',compare:'r',exposure:'e',top:'p',tied:'d',totalSeg:'q',snsMin:'z',branch:'h',
+  axisScores:'j',ns:'N',ha:'H',rd:'R',ps:'P',sdtScore:'S',raw:'W',pct:'C',z:'Z',
+  score:'l',a1:'5',a2:'6',a3:'7',a4:'8',values:'V',statement:'M',criteria:'T',qv:'Q',care:'X'};
+const FKr=Object.fromEntries(Object.entries(FK).map(([a,b])=>[b,a]));
+const AVGO=['A','C','S','D','E'];
+function pack(p){
+  const o={v:1,i:p.id.replace(/^ND-/,'').replace(/-/g,''),c:d8(p.created),u:d8(p.updated),m:{},
+    g:(p.designs||[]).map(x=>[d8(x.ts),x.axis,x.text,x.id,x.ph||''])};
+  const ck={};for(const k in (p.checks||{}))ck[d8(k)]=p.checks[k];
+  if(Object.keys(ck).length)o.k=ck;
+  /* 링크가 수천 자가 되면 일부 메신저가 잘라 버린다.
+     기록은 최근 30일, 변화 스냅샷은 최근 6개만 링크에 담고 나머지는 백업 파일로 간다. */
+  var cut=new Date(); cut.setDate(cut.getDate()-30); cut=cut.toISOString().slice(0,10);
+  var nt={}; for(var nd in (p.notes||{})) if(nd>=cut) nt[d8(nd)]=p.notes[nd];
+  if(Object.keys(nt).length)o.o=nt;
+  if(p.values&&p.values.length)o.V=p.values;
+  var hs=(p.history||[]).slice(-6).map(function(x){return [d8(x.t)].concat((x.a||[]).map(function(v){return v==null?-1:v})).concat([x.f||''])});
+  if(hs.length)o.h=hs;
+  for(const k in p.modules){
+    const src=p.modules[k],dst={};
+    for(const f in src){
+      let val=src[f]; if(val===null||val===undefined)continue;
+      if(f==='ts')val=d8(val);
+      if(f==='avgs'&&typeof val==='object')val=AVGO.map(c=>val[c]);
+      if(f==='z')continue;                       // 순위 산출용 파생값 — 링크에서 제외
+      dst[FK[f]||f]=val;
+    }
+    o.m[MK[k]||k]=dst;
+  }
+  return b64e(JSON.stringify(o));
+}
+function unpack(str){
+  try{
+    const o=JSON.parse(b64d(str)); const mods={};
+    for(const k in (o.m||{})){
+      const src=o.m[k],dst={};
+      for(const f in src){
+        const name=FKr[f]||f; let val=src[f];
+        if(name==='ts')val=d10(val);
+        if(name==='avgs'&&Array.isArray(val)){const t={};AVGO.forEach((c,i)=>t[c]=val[i]);val=t}
+        dst[name]=val;
+      }
+      mods[MKr[k]||k]=dst;
+    }
+    const r={v:1,id:'ND-'+String(o.i).slice(0,4)+'-'+String(o.i).slice(4),
+      created:d10(o.c),updated:d10(o.u),modules:mods,
+      designs:(o.g||[]).map((a,i)=>({ts:d10(a[0]),axis:a[1],text:a[2],id:typeof a[3]==='number'?a[3]:i+1,ph:a[4]||''})),
+      checks:(function(){const c={};for(const k in (o.k||{}))c[d10(k)]=o.k[k];return c})(),
+      notes:(function(){const c={};for(const k in (o.o||{}))c[d10(k)]=o.o[k];return c})(),
+      history:(o.h||[]).map(function(a){return {t:d10(a[0]),s:'',a:a.slice(1,5).map(function(v){return v===-1?null:v}),f:(typeof a[5]==='string'?a[5]:'')}})};
+    if(o.V)r.values=o.V;
+    return r;
+  }catch(e){return null}
+}
+function d8(s){return String(s||'').replace(/-/g,'')}
+function d10(s){s=String(s||'');return s.length===8?s.slice(0,4)+'-'+s.slice(4,6)+'-'+s.slice(6):s}
+function b64e(s){const b=new TextEncoder().encode(s);let x='';b.forEach(c=>x+=String.fromCharCode(c));
+  return btoa(x).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
+function b64d(s){s=s.replace(/-/g,'+').replace(/_/g,'/');const bin=atob(s);
+  const b=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)b[i]=bin.charCodeAt(i);
+  return new TextDecoder().decode(b)}
+
+/* 복원 링크 병합 — 더 최근에 갱신된 모듈을 남긴다 */
+function mergeFromUrl(){
+  const q=new URLSearchParams(location.search).get('d');
+  if(!q)return false;
+  const inc=unpack(q); if(!inc)return false;
+  const cur=load();
+  if(!cur){save(inc);return true}
+  save(mergeProfiles(cur,inc)); return true;
+}
+/* 두 프로필을 합친다 — 보관 링크 복원과 계정 동기화가 같은 규칙을 쓴다.
+   모듈은 더 최근 것, 체크·기록·문장은 합집합, 히스토리는 날짜 기준 합집합. */
+function mergeProfiles(cur,inc){
+  if(!cur) return inc;
+  if(!inc) return cur;
+  const out=cur;
+  inc.modules=inc.modules||{};
+  for(const k in inc.modules){
+    const a=cur.modules[k],b=inc.modules[k];
+    if(!a||(b.ts||'')>=(a.ts||'')) out.modules[k]=b;
+  }
+  out.checks=out.checks||{};
+  for(const k in (inc.checks||{})){
+    const a=new Set(out.checks[k]||[]);(inc.checks[k]||[]).forEach(x=>a.add(x));
+    out.checks[k]=[...a];
+  }
+  out.notes=out.notes||{};
+  for(const k in (inc.notes||{})){
+    out.notes[k]=Object.assign({},inc.notes[k],out.notes[k]);
+  }
+  var hm={};
+  (out.history||[]).forEach(function(x){hm[x.t]=x});
+  (inc.history||[]).forEach(function(x){if(!hm[x.t])hm[x.t]=x});
+  out.history=Object.keys(hm).sort().map(function(k){return hm[k]});
+  const seen=new Set((out.designs||[]).map(d=>d.ts+'|'+d.text));
+  (inc.designs||[]).forEach(d=>{if(!seen.has(d.ts+'|'+d.text))(out.designs=out.designs||[]).push(d)});
+  if(inc.values&&inc.values.length&&!(out.values&&out.values.length)) out.values=inc.values;
+  out.updated=today(); return out;
+}
+
+/* ───────── 진단 정의 ───────── */
+const DIAGS=[
+  /* core:true 네 개가 지도의 네 칸을 하나씩 연다(74문항·약 23분).
+     5러·기질은 칸을 열지 않고 방향과 해석을 더하는 심화 진단이다. */
+  {k:'needscan',   n:'욕구 출발점 진단',   d:'20문항 · 약 6분', url:BASE+'/needscan/',    c:'#2979C8', s:'N', g:'① 나를 읽다 · N', o:'', core:true, ax:'N',  q:'내가 진짜 원하는 것은 무엇일까?'},
+  {k:'noise',      n:'잡음 오염도 진단',   d:'18문항 · 약 5분', url:BASE+'/newnoise/',    c:'#3DAA6B', s:'E', g:'② 흐리게 하는 것을 덜다 · E1', o:'', core:true, ax:'E1', q:'무엇이 나를 흐리게 하고 있을까?'},
+  {k:'alignment',  n:'생명성 정렬 진단',    d:'20문항 · 약 6분', url:BASE+'/alignment/',   c:'#C9983A', s:'E', g:'③ 에너지를 정렬하다 · E2', o:'', core:true, ax:'E2', q:'내 하루는 나를 살리고 있을까?'},
+  {k:'authorship', n:'나다움 설계 현황 진단',d:'20문항 · 약 7분', url:BASE+'/need/',        c:'#8B5CF6', s:'D', g:'④ 내 기준으로 오늘을 쓰다 · D', o:'', core:true, ax:'D', q:'지금 나는 얼마나 내 기준으로 살고 있을까?'},
+  {k:'tendency',   n:'에너지 경향성 진단',  d:'15문항 · 약 5분', url:BASE+'/5characters/', c:'#2979C8', s:'+', g:'심화 · 에너지가 흐르는 방향', o:'', core:false, q:'나는 지금 어디에 에너지를 쓰고 있을까?'},
+  {k:'temperament',n:'기질·동기·잡음 진단',d:'26문항 · 약 8분', url:BASE+'/why/',         c:'#8B5CF6', s:'+', g:'심화 · 기질과 동기의 토대', o:'', core:false, q:'나는 어떤 방식으로 움직이는 사람일까?'}
+];
+const CHARS={A:'열정러',C:'협력러',S:'안정러',D:'장인러',E:'모험러'};
+const FLOWKEY={A:'성취',C:'연결',S:'안정',D:'탐구',E:'모험'};
+const NOISEAX={1:'눈치 압력',2:'비교 압력',3:'노출'};
+const TEMPN={ns:'새로움에 끌리는 힘',ha:'위험을 살피는 힘',rd:'사람 반응을 읽는 힘',ps:'한 가지를 지속하는 힘'};
+const DIMN={D1:'욕구의 출발점',D2:'에너지의 방향',D3:'몸의 신호',D4:'욕구의 출처 구분'};
+
+/* ───────── 4축 산출 ───────── */
+/* 한 축 = 한 진단.
+   종전에는 N축이 needscan·tendency·why 세 값의 평균이었다. 두 가지 문제가 있었다.
+   ① tendency.overall은 5러 진단이 '척도 사용 습관 보정용'으로 계산한 응답 편향 지표라
+      선명도 점수로 합산할 수 없다.
+   ② 진단을 하나 더 하면 실제 변화가 없어도 축 점수가 바뀌어 변화 그래프가 오염된다.
+   그래서 축마다 진단 하나만 대응시킨다. 5러·기질은 방향과 해석에만 쓴다. */
+function axes(p){
+  const m=p.modules, A={};
+  // N — 욕구 선명도 (needscan 단독)
+  A.N={v:(m.needscan&&typeof m.needscan.nci==='number')?m.needscan.nci:null,
+       name:'욕구 선명도', stage:'N · Need Scan 단계', desc:'내가 무엇으로 움직이는지 얼마나 선명한가', c:'#2979C8',
+       feeds:['needscan'],
+       need:'욕구 출발점 진단', url:BASE+'/needscan/'};
+  // E1 — 신호 보존도
+  let e1=null;
+  if(m.noise) e1=Math.max(0,100-m.noise.total);
+  else if(m.noiseInner&&typeof m.noiseInner.pct==='number') e1=Math.max(0,100-m.noiseInner.pct);
+  A.E1={v:e1,name:'신호 보존도',stage:'E1 · Eliminate Noise 단계',desc:'내 신호가 얼마나 덜 흐려져 있는가',c:'#3DAA6B',
+        feeds:['noise'],
+        need:'잡음 오염도 진단',url:BASE+'/newnoise/'};
+  // E2 — 정렬도 (미개발)
+  const e2 = (m.alignment && typeof m.alignment.score==='number') ? m.alignment.score : null;
+  A.E2={v:e2,name:'생명성 정렬',stage:'E2 · Energy Alignment 단계',desc:'에너지가 환경과 얼마나 맞물려 있는가',c:'#C9983A',
+        feeds:['alignment'],need:'생명성 정렬 진단',url:BASE+'/alignment/'};
+  // D — 저자성 (미개발)
+  const dv = (m.authorship && typeof m.authorship.score==='number') ? m.authorship.score : null;
+  A.D={v:dv,name:'자기 저자성',stage:'D · Daily Authorship 단계',desc:'내 기준으로 오늘을 쓰고 있는가',c:'#8B5CF6',
+       feeds:['authorship'],need:'나다움 설계 현황 진단',url:BASE+'/need/'};
+  return A;
+}
+/* ───────── 변화 기록(스냅샷) ─────────
+   진단을 다시 하면 각 진단지가 최신 결과로 덮어쓴다.
+   덮어쓰기 전 값을 남기기 위해, 리포트를 열 때마다 4축 점수를 한 점으로 찍어 둔다.
+   같은 날 여러 번 열면 마지막 것으로 교체하고, 값이 그대로면 점을 늘리지 않는다. */
+const TRAX=[{k:'N',n:'욕구 선명도',c:'#2979C8'},{k:'E1',n:'신호 보존도',c:'#3DAA6B'},
+            {k:'E2',n:'생명성 정렬',c:'#C9983A'},{k:'D',n:'자기 저자성',c:'#8B5CF6'}];
+function sigOf(p){
+  return DIAGS.map(function(d){
+    var m=p.modules[d.k]; if(!m)return '';
+    return d.k+':'+(m.ts||'')+':'+[m.nci,m.overall,m.total,m.sdtScore,m.score]
+      .map(function(x){return x==null?'':x}).join(',');
+  }).join('|');
+}
+/* 각 축을 어느 진단이 만들었는지도 함께 남긴다.
+   구성이 바뀐 구간(예: E1이 why 대체값 → 잡음 진단 본값)은
+   재진단으로 생긴 변화가 아니므로 델타 계산에서 뺀다. */
+/* 문항이 개정되면 같은 진단이라도 같은 자로 잰 것이 아니다.
+   각 진단이 넘기는 문항판 번호(qv)를 구성 서명에 포함해, 개정 전후 값을 비교하지 않는다. */
+function fcode(m,c){ return m ? c+(m.qv||1) : '-'; }
+function feedSigOf(p){
+  const m=p.modules||{};
+  return [ fcode(m.needscan,'n'),
+           m.noise?fcode(m.noise,'x'):fcode(m.noiseInner,'i'),
+           fcode(m.alignment,'a'),
+           fcode(m.authorship,'d') ].join('|');
+}
+function snapshot(p,A){
+  p.history=p.history||[];
+  var vals=TRAX.map(function(x){return A[x.k].v==null?null:A[x.k].v});
+  if(!vals.some(function(v){return v!==null}))return;
+  var fs=feedSigOf(p);
+  var sig=sigOf(p), last=p.history[p.history.length-1], t=today();
+  if(last){
+    if(last.s && last.s===sig && last.t!==t) return;
+    if(last.s && last.s===sig && last.t===t) return;
+    if(!last.s && JSON.stringify(last.a)===JSON.stringify(vals)) return;
+  }
+  var ent={t:t,s:sig,a:vals,f:fs};
+  var isNew=!(last && last.t===t);
+  if(last && last.t===t) p.history[p.history.length-1]=ent;
+  else p.history.push(ent);
+  if(p.history.length>36) p.history=p.history.slice(-36);
+  save(p);
+  // 새 점이 찍힐 때마다 익명 집계로 보낸다(옵트인한 경우). 같은 리포트 ID가
+  // 다시 오는 것이 재검사 자료가 되므로, 체크 시점 한 번으로는 부족하다.
+  if(isNew && typeof sendAnon==='function') sendAnon();
+}
+/* 병목 결정.
+   종전에는 네 축 점수의 단순 최저값이었다. 네 축은 응답 프레임이 다르다 —
+   N·E1은 일반적 성향(특성) 자기보고, E2·D는 지난 2주 실제 행동(상태) 빈도다.
+   행동 빈도는 특성 동의보다 체계적으로 낮게 나오므로(의도–행동 간극,
+   Webb & Sheeran 2006), 최저값을 고르면 E2 또는 D가 구조적으로 선정된다.
+   그래서 ① 각 진단이 넘긴 세그먼트로 먼저 판정하고
+        ② low인 축 중 N→E1→E2→D 순서에서 가장 앞선 축을 고른다.
+   이렇게 하면 브랜드 §3-3의 순차 논리와 코드가 같은 규칙을 따른다. */
+const AXORD=['N','E1','E2','D'];
+function segOf(p,k,A){
+  const m=p.modules;
+  if(k==='N' && m.needscan && m.needscan.seg) return m.needscan.seg;
+  if(k==='E1'&& m.noise){
+    /* 잡음 진단은 총점 세그먼트(totalSeg)와 최고 축 세그먼트를 따로 재고
+       둘 중 나쁜 쪽을 seg로 넘긴다. 나머지 세 축이 모두 '가장 낮은 하위축' 기준이므로
+       여기서도 보정된 seg를 먼저 읽어야 판정 기준이 같아진다.
+       잡음 세그먼트는 '잡음이 높다'는 뜻이라 신호 보존도로 뒤집는다. */
+    const ns=m.noise.seg||m.noise.totalSeg;
+    if(ns) return ns==='high'?'low':(ns==='low'?'high':'mid');
+  }
+  if(k==='E1'&& !m.noise && m.noiseInner && typeof m.noiseInner.pct==='number'){
+    // why 대체값도 잡음 진단과 같은 34/67 경계를 쓴다
+    const q=m.noiseInner.pct;
+    return q>=67?'low':(q>=34?'mid':'high');
+  }
+  if(k==='E2'&& m.alignment && m.alignment.seg) return m.alignment.seg;
+  if(k==='D' && m.authorship&& m.authorship.seg) return m.authorship.seg;
+  const v=A[k].v; if(v===null||v===undefined) return null;
+  return v<40?'low':(v<65?'mid':'high');   // 규준 없음 — 임시 경계
+}
+function bottleneck(A,p){
+  p=p||P;
+  const open=AXORD.filter(k=>A[k].v!==null);
+  if(!open.length)return null;
+  const segs={}; open.forEach(k=>{segs[k]=segOf(p,k,A)});
+  let key=null,why='';
+  key=open.filter(k=>segs[k]==='low')[0]; if(key)why='low';
+  if(!key){ key=open.filter(k=>segs[k]==='mid')[0]; if(key)why='mid'; }
+  if(!key){ key=open[0]; why='high'; }
+  const o={key:key,seg:segs[key],why:why,segs:segs,openKeys:open};
+  for(const f in A[key]) o[f]=A[key][f];
+  return o;
+}
+
+/* ───────── 교차 해석 규칙 ───────── */
+const FLOWxNOISE={
+  A:{1:'성취 에너지가 남의 눈에 맞춰 방향을 틉니다. 목표는 있는데 그 목표를 누가 정했는지가 흐린 상태입니다.',
+     2:'성취 에너지가 자기 목표가 아니라 남의 속도계에 연결되어 있습니다.',
+     3:'달릴 방향을 알고리즘이 계속 새로 제시합니다. 목표가 자주 갈아치워집니다.'},
+  C:{1:'연결을 읽는 감도가 승인을 확인하는 데 소모되고 있습니다. 같은 감각인데 쓰이는 방향이 다릅니다.',
+     2:'함께할 때 살아나는 사람인데, 비교가 그 관계를 경쟁으로 바꿔놓습니다.',
+     3:'화면 너머의 사람들과 연결된 듯하지만, 실제로 에너지를 주는 건 눈앞의 관계입니다.'},
+  S:{1:'리듬으로 사는 사람에게 눈치는 리듬을 끊는 방식으로 작동합니다.',
+     2:'남의 속도와 비교하는 순간, 안정은 정체로 오해받기 시작합니다.',
+     3:'리듬으로 사는 사람에게 알고리즘은 정확히 리듬을 끊는 방식으로 작동합니다. 의지가 약해서가 아닙니다.'},
+  D:{1:'깊이 파고드는 시간이 중간 점검 요구에 반복해서 잘려 나가고 있습니다.',
+     2:'완성도로 승부하는 사람인데, 비교가 기준을 자꾸 바깥에 세웁니다.',
+     3:'한 주제에 머무를 시간을 알고리즘이 계속 흩뜨립니다.'},
+  E:{1:'새로움을 향한 힘이 "이래도 될까"에서 먼저 걸립니다.',
+     2:'탐험의 기준이 내 호기심이 아니라 남의 경험담이 되어 있습니다.',
+     3:'새로움을 찾는 힘을 알고리즘이 대신 쓰고 있습니다. 탐색은 계속되는데 내가 고른 탐색이 아닙니다.'}
+};
+const TEMPxNOISE={
+  ha:{1:'위험을 살피는 힘이 높은 것과 눈치에 눌리는 것은 다릅니다. 지금은 그 힘이 방어에만 쓰이고 있습니다.',
+      2:'신중함이 강점인 토대인데, 비교가 그것을 "느리다"는 자책으로 바꿉니다.',
+      3:'살펴야 움직이는 토대인데, 알고리즘은 살필 틈을 주지 않습니다.'},
+  rd:{1:'사람의 반응을 읽는 감도가 높습니다. 그 감도가 지금은 자기 검열로 쓰이고 있습니다.',
+      2:'타인을 잘 읽는 힘이 비교의 재료로 되돌아오고 있습니다.',
+      3:'사람을 읽는 힘이 화면 속 낯선 사람들에게 쓰이고 있습니다.'},
+  ns:{1:'새로움에서 켜지는 토대인데, 눈치가 시도 자체를 막습니다.',
+      2:'새로운 것을 시작하기 전에 남들이 이미 했는지부터 확인하게 됩니다.',
+      3:'새로움을 알고리즘이 먼저 가져다줍니다. 찾을 필요가 사라진 상태입니다.'},
+  ps:{1:'오래 붙드는 힘이 있는데, 주변 반응이 자꾸 중간에 끼어듭니다.',
+      2:'끝까지 가는 힘이 남과의 비교 앞에서 자주 흔들립니다.',
+      3:'한 가지를 오래 붙드는 힘이 잦은 알림에 잘려 나갑니다.'}
+};
+const AUTOxNOISE=[
+  {a:1,n:0,t:'지금은 방향과 에너지가 같은 쪽을 보고 있습니다. 새 설계보다 이 상태를 유지하는 리듬이 필요한 시점입니다.'},
+  {a:1,n:1,t:'방향은 맞는데 소음 속에서 달리고 있습니다. 성과는 나지만 이 에너지는 회복형이 아닙니다.'},
+  {a:0,n:1,t:'지금 에너지는 생존형으로 가동 중입니다. 오래 외부 기준을 내면화한 결과이지 의지의 문제가 아닙니다.'},
+  {a:0,n:0,t:'지금은 방향을 찾는 구간입니다. 낭비처럼 느껴질 수 있지만 설계 전에 반드시 지나는 자리입니다.'}
+];
+/* 5러는 캐릭터당 3문항이라 1·2위 차이가 문항 한 칸(0.33) 안쪽인 경우가 흔하다.
+   강제선택 블록이 들어가기 전까지는 해석의 과신만 줄인다. */
+function close2(t){
+  if(!t||!t.sub||!t.avgs)return false;
+  const a=t.avgs[t.main], b=t.avgs[t.sub];
+  return (typeof a==='number'&&typeof b==='number'&&Math.abs(a-b)<0.34);
+}
+function crossRules(p){
+  const m=p.modules,out=[];
+  const top=m.noise?m.noise.top:null;
+  if(m.tendency&&top&&FLOWxNOISE[m.tendency.main]&&FLOWxNOISE[m.tendency.main][top]){
+    out.push({pri:10,ax:'E1',src:'5러 경향성 × 잡음 지도',
+      txt:'주된 흐름이 '+CHARS[m.tendency.main]+'인데 가장 강한 잡음이 '+NOISEAX[top]+'입니다. '+FLOWxNOISE[m.tendency.main][top]});
+  }
+  if(m.temperament&&top){
+    const t=m.temperament,ord=[['ns',t.ns],['ha',t.ha],['rd',t.rd],['ps',t.ps]].sort((a,b)=>b[1]-a[1]);
+    const k=ord[0][0];
+    if(TEMPxNOISE[k]&&TEMPxNOISE[k][top])
+      out.push({pri:9,ax:'E1',src:'기질 토대 × 잡음 지도',
+        txt:'가장 두드러진 기질이 '+TEMPN[k]+'입니다. '+TEMPxNOISE[k][top]});
+  }
+  if(m.motivation&&typeof m.motivation.introj==='number'&&m.motivation.introj>=60&&m.motivation.sdtScore>=60){
+    out.push({pri:6.7,ax:'N',src:'동기의 두 겹',
+      txt:'의미로 움직이는 힘이 이미 상당한데, 동시에 <b>인정에 기대는 부분</b>도 함께 높게 나왔습니다. 둘은 반대가 아니라 겹쳐 있을 수 있습니다. '
+       +'문제는 인정을 바라는 마음 자체가 아니라, 그것이 방향을 정하는 자리까지 올라올 때입니다. '
+       +'어떤 일을 시작할 때 \u0027이걸 하면 어떻게 보일까\u0027가 먼저 떠오르는지 한 번만 확인해 보시면 됩니다.'});
+  }
+  if(m.motivation&&m.noise){
+    /* 임시 경계 — 규준 없음.
+       55는 기질·동기 진단의 SDT 단계 경계를 그대로 쓴 것이고 50은 임의값이다.
+       sdtScore가 자율동기 단독으로 바뀌면서 분포가 위로 이동해 60으로 옮긴다(why의 SDT_STAGES와 동일).
+       익명 집계로 분포가 모이면 중앙값 기준으로 다시 잡아야 한다. */
+    const a=m.motivation.sdtScore>=60?1:0, n=m.noise.total>=50?1:0;
+    const r=AUTOxNOISE.find(x=>x.a===a&&x.n===n);
+    if(r)out.push({pri:8,ax:'N',src:'동기 출처 × 잡음 총량',txt:r.t});
+  }
+  if(m.needscan&&m.noise){
+    const w=m.needscan.weak;
+    if(w==='D4') out.push({pri:7,ax:'N',src:'욕구 출발점 × 잡음 지도',
+      txt:'욕구 진단에서 가장 낮은 축은 <b>욕구의 출처를 되짚는 힘</b>이었고, 잡음은 '+NOISEAX[top]+'에서 가장 강하게 들어옵니다. 밖에서 들어오는 양이 많은데 되짚을 자리가 없으면, 들어온 것이 그대로 내 욕구 자리에 앉습니다. 여기가 지금 가장 확실한 출발점입니다.'});
+    else out.push({pri:6,ax:'N',src:'욕구 출발점 × 잡음 지도',
+      txt:'잡음은 '+NOISEAX[top]+'에서 가장 강하게 들어오는데, 정작 가장 낮은 축은 '+DIMN[w]+'입니다. 밖에서 오는 것과 안에서 흐린 것이 서로 다른 자리에 있습니다. 둘을 같은 문제로 묶지 않는 편이 낫습니다.'});
+  }
+  if(m.needscan&&m.tendency){
+    out.push({pri:5,ax:'N',src:'5러 경향성 × 욕구 출발점',
+      txt:'지금 에너지는 '+FLOWKEY[m.tendency.main]+' 중심으로 흐르고 있는데, 욕구 진단의 병목은 '+DIMN[m.needscan.weak]+'입니다. '+
+      (m.needscan.weak==='D2'?'무엇에서 힘을 얻는지는 알지만, 그 일을 하고 난 뒤 실제로 채워졌는지를 읽는 감각이 아직 흐립니다.'
+       :m.needscan.weak==='D3'?'머리로는 방향이 분명한데, 몸이 보내는 신호는 아직 잘 들리지 않습니다.'
+       :m.needscan.weak==='D1'?'에너지의 방향은 있는데, 그 방향을 누가 정했는지가 아직 흐립니다.'
+       :'에너지의 방향은 뚜렷한데, 그 방향이 어디서 왔는지 되짚어 볼 자리가 아직 없습니다.')});
+  }
+  if(m.needscan&&m.needscan.aware>=4){
+    out.push({pri:4,ax:'N',src:'메타인지 지표',
+      txt:'"무언가 원하게 됐을 때, 그것이 광고나 피드에서 온 것인지 알아차린 적이 있다" — 이 문항에 강하게 동의하셨습니다. 알아차린 적이 있다는 것은 되짚는 자리가 이미 있다는 뜻입니다. 잡음을 걷어내는 일은 여기서 시작됩니다.'});
+  }
+  /* ───── E2·D 교차 규칙 ─────
+     종전 여섯 규칙은 모두 needscan·tendency·noise·temperament·motivation 조합이라,
+     생명성 정렬과 설계 현황을 마쳐도 읽을 문장이 늘지 않았다. */
+  const al=m.alignment, au=m.authorship;
+  if(al&&al.weak&&m.tendency&&FLOWKEY[m.tendency.main]){
+    const t={A1:'무엇이 나를 채우는지 읽는 감각',A2:'하루의 시간 배치',A3:'일하는 환경의 여지',A4:'회복을 넣는 설계'}[al.weak];
+    const add={A1:'힘이 어디서 오는지는 아는데, 그날그날 무엇이 채웠는지는 아직 흐립니다.',
+               A2:'힘이 나는 방향은 분명한데, 하루의 배치가 그 방향을 받쳐 주지 못하고 있습니다.',
+               A3:'방향은 있는데, 그 방향대로 할 수 있는 여지가 지금 자리에 적습니다.',
+               A4:'쓰는 쪽은 분명한데, 채우는 쪽이 설계에 들어가 있지 않습니다.'}[al.weak];
+    out.push({pri:7.5,ax:'E2',src:'생명성 정렬 × 에너지 경향성',
+      txt:'지금 에너지는 '+FLOWKEY[m.tendency.main]+' 중심으로 흐르고 있는데, 생명성 정렬에서 가장 낮은 곳은 '+t+'입니다. '+add});
+  }
+  if(al&&al.weak&&top){
+    const t2={A1:'무엇이 나를 채우는지 읽는 감각',A2:'하루의 시간 배치',A3:'일하는 환경의 여지',A4:'회복을 넣는 설계'}[al.weak];
+    let add2='';
+    if(al.weak==='A4'&&top===3) add2='쉬는 시간이 화면에 먹히고 있을 가능성이 큽니다. 쉼의 양이 아니라 쉼의 내용을 먼저 보시는 편이 좋습니다.';
+    else if(al.weak==='A2'&&top===1) add2='주변 반응을 살피느라 하루의 순서가 남의 일정에 맞춰지고 있을 수 있습니다.';
+    else if(al.weak==='A3'&&top===2) add2='지금 자리의 여지가 적을수록 비교가 더 크게 들립니다. 둘은 같이 움직입니다.';
+    else add2='밖에서 들어오는 잡음('+NOISEAX[top]+')과 하루의 배치가 서로를 밀고 있습니다. 한쪽만 손대면 되돌아오기 쉽습니다.';
+    out.push({pri:7.2,ax:'E2',src:'생명성 정렬 × 잡음 지도',
+      txt:'생명성 정렬에서 가장 낮은 곳은 '+t2+'이고, 잡음은 '+NOISEAX[top]+'에서 가장 강하게 들어옵니다. '+add2});
+  }
+  if(au&&au.weak&&top){
+    const t3={D1:'기준 선명도',D2:'선택 정렬',D3:'경계 세우기',D4:'실행 지속'}[au.weak];
+    let add3='';
+    if(au.weak==='D3'&&top===1) add3='두 진단이 같은 곳을 가리키고 있습니다. 눈치가 경계를 세우기 어렵게 만들고, 경계가 없으니 눈치가 더 세게 들어옵니다. 여기가 지금 가장 확실한 출발점입니다.';
+    else if(au.weak==='D1'&&top===2) add3='기준이 흐릴수록 비교가 기준 자리를 대신합니다. 내 기준 한 문장을 적어 두는 것부터가 잡음을 막는 일입니다.';
+    else if(au.weak==='D4'&&top===3) add3='지키기로 한 것이 화면에 먹히는 구간이 있는지 보시면 좋습니다. 의지의 문제가 아니라 시간이 새는 자리의 문제입니다.';
+    else add3='밖에서 들어오는 것과 안에서 흐린 것이 서로 다른 자리에 있습니다. 둘을 같은 문제로 묶지 않는 편이 낫습니다.';
+    out.push({pri:7.1,ax:'D',src:'설계 현황 × 잡음 지도',
+      txt:'설계 현황에서 가장 낮은 곳은 '+t3+'이고, 잡음은 '+NOISEAX[top]+'에서 가장 강합니다. '+add3});
+  }
+  if(au&&au.values&&au.values.length&&m.tendency&&m.tendency.flag!=='low'&&FLOWKEY[m.tendency.main]){
+    const VF={자율:'E',연결:'C',몰입:'D',회복:'S',성장:'E',성취:'A',안정:'S',기여:'C',정직:null};
+    const v=au.values[0], want=VF[v];
+    const same=(want&&want===m.tendency.main);
+    out.push({pri:6.5,ax:'D',src:'우선가치 × 에너지 경향성',
+      txt:'직접 고르신 우선가치는 <b>'+esc(v)+'</b>이고, 지금 에너지는 '+FLOWKEY[m.tendency.main]+' 중심으로 흐르고 있습니다. '
+       +(same?'가치와 에너지가 같은 방향입니다. 지금은 새로 무엇을 더하기보다, 이미 흐르는 쪽을 조금 더 크게 만드는 편이 낫습니다.'
+             :'가치와 지금의 에너지가 서로 다른 쪽을 보고 있습니다. 둘 중 하나가 틀린 것이 아니라, 가치는 오래 가는 방향이고 에너지는 지금 시기의 흐름입니다. 이번 달은 어느 쪽을 따를지만 정하시면 됩니다.')});
+  }
+  /* 기본 경로(욕구·잡음·정렬·설계 현황) 네 개만 마친 사용자는 종전에
+     '○○ × 잡음 지도' 형식의 문장만 세 개를 받았다. 잡음을 끼지 않는 조합 둘을 더한다. */
+  if(m.needscan&&al&&al.weak){
+    const nw=m.needscan.weak;
+    let t='';
+    if(nw==='D2'&&al.weak==='A1') t='무엇이 나를 채우고 무엇이 나를 비우는지 읽는 감각이 두 진단에서 모두 낮게 나왔습니다. 같은 것을 두 각도에서 재고 있으니, 여기가 지금 가장 분명한 자리입니다.';
+    else if(nw==='D3'&&al.weak==='A4') t='몸의 신호를 읽는 감각도, 지치기 전에 멈추는 설계도 함께 낮습니다. 신호가 안 들리니 멈출 시점을 놓치고, 멈추지 못하니 신호가 더 묻힙니다.';
+    else if(nw==='D1'&&al.weak==='A2') t='무엇을 원하는지가 흐린 상태에서 하루를 배치하면, 급한 일이 중요한 일의 자리를 대신 차지합니다. 순서상 욕구 쪽을 먼저 보시는 편이 낫습니다.';
+    else t='욕구 진단의 '+DIMN[nw]+'과 생명성 정렬의 '+({A1:'에너지 자각',A2:'시간 배치',A3:'환경 적합',A4:'회복 설계'}[al.weak])+'이 각각 가장 낮습니다. 하나는 읽는 힘, 하나는 배치의 문제라 서로 다른 손질이 필요합니다.';
+    out.push({pri:6.9,ax:'E2',src:'욕구 출발점 × 생명성 정렬',txt:t});
+  }
+  if(al&&al.weak&&au&&au.weak){
+    let t='';
+    if(al.weak==='A2'&&au.weak==='D4') t='지키기로 한 것이 하루 어디에도 자리를 잡지 못하고 있습니다. 의지의 문제가 아니라 시간표의 문제입니다. 무엇을 더 할지보다 어디에 넣을지를 먼저 정하시면 됩니다.';
+    else if(al.weak==='A4'&&au.weak==='D3') t='회복이 설계에 없고 경계도 세워지지 않았습니다. 이 둘은 대개 같이 움직입니다 — 거절하지 못하면 쉴 시간이 남지 않고, 쉬지 못하면 거절할 힘이 줄어듭니다.';
+    else t='생명성 정렬의 '+({A1:'에너지 자각',A2:'시간 배치',A3:'환경 적합',A4:'회복 설계'}[al.weak])+'과 설계 현황의 '+({D1:'기준 선명도',D2:'선택 정렬',D3:'경계 세우기',D4:'실행 지속'}[au.weak])+'이 각각 가장 낮습니다. 하루의 조건과 하루의 선택은 서로를 밀고 당기니, 한쪽만 손대면 되돌아오기 쉽습니다.';
+    out.push({pri:6.8,ax:'D',src:'생명성 정렬 × 설계 현황',txt:t});
+  }
+  // 5러를 하지 않으신 분도 우선가치 문장을 받을 수 있게
+  if(au&&au.values&&au.values.length&&!(m.tendency&&m.tendency.flag!=='low')){
+    out.push({pri:5.5,ax:'D',src:'우선가치',
+      txt:'직접 고르신 우선가치는 <b>'+esc(au.values[0])+'</b>입니다. '
+       +'설계 현황에서 가장 낮은 곳은 '+({D1:'기준 선명도',D2:'선택 정렬',D3:'경계 세우기',D4:'실행 지속'}[au.weak]||'')+'입니다. '
+       +'가치를 고르는 것과 그 가치대로 하루를 쓰는 것은 다른 일입니다. 아래 설계는 고르신 것과 사는 것 사이를 좁히는 자리입니다.'});
+  }
+
+  /* 노출 규칙 — 종전에는 우선순위 상위 4개만 보여, 새로 넣은 E2·D 규칙이
+     여섯 진단을 모두 마친 사용자에게 한 번도 나오지 않았다.
+     축별로 가장 높은 것을 하나씩 뽑고, 남는 자리를 전체 최고로 채운다. */
+  const picked=[], used=new Set();
+  ['N','E1','E2','D'].forEach(function(ax){
+    const c=out.filter(r=>r.ax===ax&&!used.has(r)).sort((a,b)=>b.pri-a.pri)[0];
+    if(c){picked.push(c);used.add(c)}
+  });
+  const rest=out.filter(r=>!used.has(r)).sort((a,b)=>b.pri-a.pri);
+  while(picked.length<5&&rest.length) picked.push(rest.shift());
+  return picked.sort((a,b)=>b.pri-a.pri);
+}
+
+/* ───────── 설계 선택지 ───────── */
+const WHENS=['아침에 일어나서','출근길에','점심 먹기 전','일 시작하기 전','퇴근 직후','저녁 먹고 나서','자기 전','주말 오전에'];
+const WHERES=['집에서','책상 앞에서','지하철에서','산책하면서','회의에서','침대에서','카페에서'];
+function jong(w){const c=String(w||'').trim().slice(-1).charCodeAt(0);
+  if(isNaN(c)||c<0xAC00||c>0xD7A3)return false; return (c-0xAC00)%28!==0;}
+function jo(w,a,b){return w+(jong(w)?a:b)}
+const AXIS_DEF={
+  N:'욕구 선명도는 <b>내가 무엇으로 움직이는 사람인지 스스로 얼마나 분명한가</b>입니다.',
+  E1:'신호 보존도는 <b>내 신호가 바깥 잡음에 얼마나 덜 흐려져 있는가</b>입니다.',
+  E2:'생명성 정렬은 <b>내 하루가 에너지가 흐를 수 있게 배치되어 있는가</b>입니다.',
+  D:'자기 저자성은 <b>내 기준으로 오늘의 선택을 쓰고 있는가</b>입니다.'
+};
+const AXIS_SEQ=['욕구 선명도','신호 보존도','생명성 정렬','자기 저자성'];
+const AXIS_COPY={
+  N: {h:'내 욕구를 잘 알면, 선명한 선택이 가능합니다', w:'욕구'},
+  E1:{h:'잡음을 걷어내면, 내 신호가 들립니다', w:'잡음'},
+  E2:{h:'에너지가 흐르는 조건을 알면, 애쓰지 않아도 됩니다', w:'에너지'},
+  D: {h:'기준이 있으면, 오늘의 선택이 쉬워집니다', w:'기준'}
+};
+/* 설계 선택지 — 축 × 세부 병목.
+   종전에는 축당 2개 고정이라, 여섯 진단 115문항에 답해도 받는 제안이
+   '4가지 중 하나 × 2개'로 수렴했다. 각 진단이 이미 넘기고 있는 세부 병목
+   (needscan.weak / noise.top / alignment.weak / authorship.weak)으로 분기한다. */
+const OPTS={
+  N:{
+    D1:[{t:'오늘의 결정 하나를 "내가 원해서"인지 "해야 할 것 같아서"인지 나눠 본다',
+        ph:'예) 저녁 약속 수락 → 해야 할 것 같아서',
+        ex:['저녁 약속을 수락했다 → 해야 할 것 같아서','강의를 신청했다 → 내가 원해서']},
+       {t:'오늘 한 선택 하나의 이유를 한 문장으로 적는다',
+        ph:'예) 회의 자료를 먼저 만든 이유 → 내가 납득하고 싶어서',
+        ex:['회의 자료 먼저 만듦 → 내가 납득하고 싶어서','점심 약속 미룸 → 오늘은 혼자 있고 싶어서']}],
+    D2:[{t:'오늘 한 일 한두 개에 +(채워짐) 또는 −(소모됨)를 붙인다',
+        ph:'예) 기획안 초안 + / 단톡방 대응 −',
+        ex:['기획안 초안 쓰기 +   ·   단톡방 대응 −','오전 산책 +   ·   불필요한 회의 −']},
+       {t:'하루를 마칠 때 무엇이 나를 채웠는지 한 단어로 적는다',
+        ph:'예) 오늘 나를 채운 것 → 대화',
+        ex:['오늘 나를 채운 것 → 대화','오늘 나를 채운 것 → 혼자 걷기']}],
+    D3:[{t:'결정하기 전에 몸이 편했는지 굳었는지 한 단어로 적는다',
+        ph:'예) 야근 제안 들었을 때 → 어깨가 굳음',
+        ex:['야근 제안 → 어깨가 굳음','새 프로젝트 제안 → 숨이 트임']},
+       {t:'오늘 몸이 가장 편했던 순간과 그때 하던 일을 적는다',
+        ph:'예) 오후 3시 산책 → 어깨가 풀림',
+        ex:['오후 3시 산책 → 어깨가 풀림','아침에 창 열고 커피 → 숨이 깊어짐']}],
+    D4:[{t:'오늘 갖고 싶어진 것 하나가 어디서 왔는지 되짚어 적는다',
+        ph:'예) 새 가방 → 피드에서 세 번 봄',
+        ex:['새 가방이 갖고 싶었다 → 피드에서 세 번 봄','자격증 등록 생각 → 동료가 땄다는 말 듣고']},
+       {t:'오늘의 결정 하나를 "내가 원해서"인지 "해야 할 것 같아서"인지 나눠 본다',
+        ph:'예) 저녁 약속 수락 → 해야 할 것 같아서',
+        ex:['저녁 약속을 수락했다 → 해야 할 것 같아서','강의를 신청했다 → 내가 원해서']}]
+  },
+  E1:{
+    1:[{t:'오늘 말하려다 삼킨 말 하나를 적는다',
+        ph:'예) 회의에서 일정이 빠듯하다는 말',
+        ex:['회의에서 일정이 빠듯하다는 말을 삼켰다','모임에서 먼저 가고 싶다는 말을 못 했다']},
+       {t:'하고 싶은 말을 그대로 한 순간이 있었는지 적는다',
+        ph:'예) 자료 마감을 하루 미뤄 달라고 말함',
+        ex:['자료 마감을 하루 미뤄 달라고 말함','내 의견이 소수였는데 그대로 말함']}],
+    2:[{t:'남의 소식을 보고 마음이 흔들린 장면 하나를 적는다',
+        ph:'예) 동기 승진 소식 → 조급함',
+        ex:['동기 승진 소식 → 조급함. 내 기준은 속도가 아니라 방향','여행 사진 → 부러움. 사실 나는 쉬고 싶었다']},
+       {t:'비교가 올라왔을 때 내 기준이 무엇이었는지 한 줄 적는다',
+        ph:'예) 연봉 이야기 → 내 기준은 시간의 자유',
+        ex:['연봉 이야기 → 내 기준은 시간의 자유','남의 결과물 → 내 기준은 끝까지 해보는 것']}],
+    3:[{t:'화면을 보지 않은 시간이 오늘 얼마나 있었는지 적는다',
+        ph:'예) 저녁 9시~9시 30분, 폰은 거실에',
+        ex:['저녁 9시부터 30분, 폰은 거실에 두기','출근길 지하철에서는 뉴스 앱 열지 않기']},
+       {t:'생각 없이 폰을 켠 순간 하나와 그때 하던 일을 적는다',
+        ph:'예) 보고서 쓰다가 → 15분 사라짐',
+        ex:['보고서 쓰다가 폰 켬 → 15분 사라짐','밥 먹으며 폰 켬 → 무엇을 먹었는지 기억 안 남']}]
+  },
+  E2:{
+    A1:[{t:'오늘 나를 채운 것과 비운 것을 하나씩 적는다',
+        ph:'예) 채움 = 오전 글쓰기 / 비움 = 긴 회의',
+        ex:['채움 = 오전 글쓰기   ·   비움 = 긴 회의','채움 = 저녁 산책   ·   비움 = 단톡방']},
+       {t:'하루 중 가장 힘이 났던 순간을 한 줄로 적는다',
+        ph:'예) 오전 10시, 정리가 끝났을 때',
+        ex:['오전 10시, 정리가 끝났을 때','퇴근길에 음악 들을 때']}],
+    A2:[{t:'오늘 가장 집중이 잘 된 시간대와 그때 한 일을 적는다',
+        ph:'예) 오전 9~11시, 글쓰기',
+        ex:['오전 9~11시 = 글쓰기가 제일 잘 됨','아이 등원 직후 1시간이 가장 맑음']},
+       {t:'가장 중요한 일을 몇 시에 했는지 적는다',
+        ph:'예) 제일 중요한 일 → 오후 5시에 시작',
+        ex:['제일 중요한 일 → 오후 5시에 시작(늦었다)','제일 중요한 일 → 오전 9시에 먼저 함']}],
+    A3:[{t:'오늘 내 방식대로 할 수 있었던 일 하나를 적는다',
+        ph:'예) 보고 순서를 내가 정함',
+        ex:['보고 순서를 내가 정함','작업 시간을 오전으로 옮김']},
+       {t:'일하는 자리에서 바꿀 수 있는 것 하나를 적는다',
+        ph:'예) 알림 끄기 / 자리 옮기기',
+        ex:['오전에는 알림 전부 끄기','창가 자리로 옮겨 앉기']}],
+    A4:[{t:'지치기 전에 멈춘 순간이 있었는지 적는다',
+        ph:'예) 50분 뒤 10분 일어나 걷기',
+        ex:['50분 일하고 10분 자리에서 일어남','점심 후 15분은 아무것도 안 함']},
+       {t:'오늘 쉰 시간에 실제로 무엇을 했는지 적는다',
+        ph:'예) 쉰다고 앉아서 30분 피드 봄',
+        ex:['쉰다고 앉아서 30분 피드 봄','10분 눈 감고 있었다 → 머리가 가벼워짐']}]
+  },
+  D:{
+    D1:[{t:'오늘 결정에 쓴 내 기준을 한 문장으로 적는다',
+        ph:'예) 오늘의 기준 → 저녁은 비운다',
+        ex:['오늘의 기준 → 저녁은 비운다','오늘의 기준 → 급한 것보다 중요한 것 먼저']},
+       {t:'"나는 ___을 더 중요하게 여긴다"를 오늘 버전으로 적는다',
+        ph:'예) 나는 속도보다 방향을 더 중요하게 여긴다',
+        ex:['나는 속도보다 방향을 더 중요하게 여긴다','나는 인정보다 납득을 더 중요하게 여긴다']}],
+    D2:[{t:'오늘 한 선택 하나가 내 기준과 맞았는지 적는다',
+        ph:'예) 야근 요청 거절 → 내 기준과 맞음',
+        ex:['야근 요청 거절 → 내 기준(가족 저녁)과 맞음','단톡방 부탁 수락 → 어긋남. 다음엔 시간을 먼저 말하기']},
+       {t:'오늘 가장 시간을 많이 쓴 일이 내 기준과 맞았는지 적는다',
+        ph:'예) 3시간 = 회의 → 기준과 어긋남',
+        ex:['3시간 = 회의 → 기준과 어긋남','2시간 = 기획 초안 → 기준과 맞음']}],
+    D3:[{t:'부탁을 받았을 때 시간을 먼저 말했는지 적는다',
+        ph:'예) 자료 요청 → "목요일까지 가능합니다"',
+        ex:['자료 요청 → 목요일까지 가능하다고 먼저 말함','급한 부탁 → 오늘은 어렵다고 말함']},
+       {t:'거절하거나 미룬 일 하나와 그때 기분을 적는다',
+        ph:'예) 주말 모임 거절 → 처음엔 불편, 나중엔 편함',
+        ex:['주말 모임 거절 → 처음엔 불편, 나중엔 편함','추가 업무 미룸 → 미안했지만 필요했다']}],
+    D4:[{t:'이번 주에 지키기로 한 것을 오늘 지켰는지 적는다',
+        ph:'예) 30분 걷기 → 지킴',
+        ex:['주 3회 30분 걷기 → 오늘 지킴','자기 전 10분 책 → 오늘 못 지킴']},
+       {t:'못 지킨 날이면 무엇이 걸렸는지 한 줄 적는다',
+        ph:'예) 야근 → 걷기를 건너뜀',
+        ex:['야근 → 걷기를 건너뜀','피곤해서 → 책 대신 바로 잠']}]
+  }
+};
+/* 축 안에서 어느 세부 병목을 쓸지 고른다. 해당 진단이 없으면 첫 번째 묶음. */
+/* 5러 경향성만 마친 사용자를 위한 설계.
+   5characters는 네 축 어디에도 점수를 주지 않으므로 지도가 비어 있다.
+   이때는 '지금 흐르는 결 위에 하루를 얹는' 설계를 대신 제안한다. */
+OPTS.F={
+  A:[{t:'오늘 끝낸 것 하나를 적는다',ph:'예) 기획안 1차 마감',
+      ex:['기획안 1차 마감','밀린 정산 정리 끝']},
+     {t:'오늘 목표에 한 칸 다가간 일을 적는다',ph:'예) 자료 절반까지 정리',
+      ex:['자료 절반까지 정리','면접 준비 1차 정리']}],
+  C:[{t:'오늘 이야기 나눠서 힘이 난 사람 한 명을 적는다',ph:'예) 점심에 만난 동료',
+      ex:['점심에 만난 동료 — 이야기하고 나니 가벼워짐','저녁 통화 — 오래 미뤘던 말을 함']},
+     {t:'오늘 누군가에게 보탬이 된 일 하나를 적는다',ph:'예) 후배 자료 손봐 줌',
+      ex:['후배 자료 손봐 줌','친구 이사 짐 정리 도움']}],
+  S:[{t:'오늘 지킨 리듬 하나를 적는다',ph:'예) 아침 7시 기상',
+      ex:['아침 7시 기상 — 오늘도 지킴','점심은 12시에 먹음']},
+     {t:'오늘 흐트러진 리듬 하나와 그 이유를 적는다',ph:'예) 야근 → 저녁 산책 건너뜀',
+      ex:['야근 → 저녁 산책 건너뜀','늦게 자서 아침이 밀림']}],
+  D:[{t:'오늘 한 가지를 깊이 파고든 시간을 적는다',ph:'예) 오전 2시간, 자료 구조 정리',
+      ex:['오전 2시간 자료 구조 정리','저녁 1시간 책 한 챕터']},
+     {t:'오늘 새로 알게 된 것 하나를 적는다',ph:'예) 통계 처리 방법 하나',
+      ex:['통계 처리 방법 하나','몰랐던 단축키 두 개']}],
+  E:[{t:'오늘 처음 해 본 것 하나를 적는다',ph:'예) 다른 길로 퇴근',
+      ex:['다른 길로 퇴근','처음 가는 카페에서 작업']},
+     {t:'오늘 하던 방식을 바꿔 본 것 하나를 적는다',ph:'예) 회의 순서를 뒤집어 봄',
+      ex:['회의 순서를 뒤집어 봄','메모를 손으로 써 봄']}]
+};
+AXIS_COPY.F={h:'지금 흐르는 결 위에 하루를 얹습니다', w:'흐름'};
+AXIS_DEF.F='지금 여러분의 에너지가 어느 쪽으로 흐르는지는 읽으셨습니다. <b>네 칸은 아직 열리지 않았습니다.</b>';
+function flowDesign(){
+  const t=P.modules&&P.modules.tendency;
+  if(!t||!FLOWKEY[t.main])return null;
+  return {key:'F', flow:t.main, seg:null, why:'flow',
+          name:FLOWKEY[t.main]+' 중심의 흐름', v:null, c:'#2979C8',
+          stage:'지금 시기의 에너지 경향성'};
+}
+const SUBDEF={N:'D1',E1:1,E2:'A2',D:'D2',F:'A'};
+function subKeyOf(k,p){
+  const m=(p||P).modules||{};
+  if(k==='N' && m.needscan   && m.needscan.weak)   return m.needscan.weak;
+  if(k==='E1'&& m.noise      && m.noise.top)       return String(m.noise.top);
+  if(k==='E2'&& m.alignment  && m.alignment.weak)  return m.alignment.weak;
+  if(k==='D' && m.authorship && m.authorship.weak) return m.authorship.weak;
+  if(k==='F' && m.tendency && m.tendency.main) return m.tendency.main;
+  return SUBDEF[k];
+}
+function optsOf(k,p){
+  const g=OPTS[k]||OPTS.N, sk=subKeyOf(k,p);
+  return g[sk]||g[SUBDEF[k]]||g[Object.keys(g)[0]];
+}
+const SUBNAME={
+  N:{D1:'욕구의 출발점',D2:'에너지의 방향',D3:'몸의 신호',D4:'욕구의 출처 구분'},
+  E1:{1:'눈치 압력',2:'비교 압력',3:'노출'},
+  E2:{A1:'에너지 자각',A2:'시간 배치',A3:'환경 적합',A4:'회복 설계'},
+  D:{D1:'기준 선명도',D2:'선택 정렬',D3:'경계 세우기',D4:'실행 지속'},
+  F:{A:'성취',C:'연결',S:'안정',D:'탐구',E:'모험'}
+};
+
+/* ───────── 렌더 ───────── */
+let P=null, sel={opt:null}, SN=0;
+function sn(){SN++;return ''}
+function render(){
+  P=load()||blank();
+  P.designs=P.designs||[];
+  P.checks=P.checks||{};
+  P.notes=P.notes||{};
+  // 예전 형식(문장 id 없음) 보정
+  P.designs.forEach((d,i)=>{if(typeof d.id!=='number')d.id=i+1});
+  const done=DIAGS.filter(d=>P.modules[d.k]);
+  const app=document.getElementById('app');
+  if(!done.length){const _ha=document.getElementById('hact');if(_ha)_ha.hidden=true;app.innerHTML=emptyView();return}
+  const A=axes(P), bn=bottleneck(A,P)||flowDesign(), cr=crossRules(P);
+  P.history=P.history||[];
+  snapshot(P,A);
+  SN=0;
+  const nav=document.getElementById('tabnav'), hact=document.getElementById('hact');
+  if(hact)hact.hidden=false;
+  if((location.hash||'')==='#design'){
+    nav.hidden=true; if(hact)hact.hidden=true;
+    app.innerHTML=designPage(bn);
+    bindDesign(bn);
+    window.scrollTo(0,0);
+    return;
+  }
+  let h='';
+  if(_printing){
+    nav.hidden=true;
+    h=mapView(A,bn,done)+readView(A,cr,done)+changeView()+recordView();
+  }else{
+    const tab=curTab(), tt=tabOf(tab);
+    if(('#'+tab)!==(location.hash||'#map')&&location.hash&&location.hash!=='#write'&&location.hash.indexOf('#sec-')!==0){
+      history.replaceState(null,'',location.pathname+location.search+'#'+tab);
+    }
+    drawNav(tab);
+    let inner='';
+    if(tab==='map')        inner=mapView(A,bn,done);
+    else if(tab==='read')  inner=readView(A,cr,done);
+    else if(tab==='change')inner=changeView();
+    else                   inner=recordView();
+    h='<div class="panel" style="--tc:'+tt.c+';--tbd:'+tt.d+'">'+inner+'</div>'+stepNav(tab);
+  }
+  app.innerHTML=h;
+  bindDesign(bn);
+  scrollToHash();
+}
+
+/* ───────── 탭 ───────── */
+const IC={
+ map:'<path d="M1 4.2 6 2l5 2.2L15.4 2.4a.4.4 0 0 1 .6.4v9.5l-4.6 1.8-5-2.2L1.6 13.7a.4.4 0 0 1-.6-.4V4.2Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M6 2v9.7M11 4.2V14" stroke="currentColor" stroke-width="1.5"/>',
+ read:'<circle cx="8.5" cy="5.5" r="3.2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 15c0-3.2 2.7-5 6-5s6 1.8 6 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
+ change:'<path d="M2 13.5 6 8.5l3 2.6L14.5 3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.6 3h4v4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>',
+ record:'<rect x="3" y="1.8" width="10.5" height="12.6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5.8 5.6h5M5.8 8.3h5M5.8 11h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>'};
+const TABS=[
+ {k:'map',   no:'01',n:'나의 지도',c:'#3E6FD1',b:'#EAF1FC',d:'#CDDFF6'},
+ {k:'read',  no:'02',n:'나를 읽기',c:'#CE6288',b:'#FCECF1',d:'#F4D2DE'},
+ {k:'change',no:'03',n:'나의 변화',c:'#E0A03A',b:'#FDF4E2',d:'#F3E0BB'},
+ {k:'record',no:'04',n:'나의 기록',c:'#3FAE93',b:'#E7F5F1',d:'#C6E7DE'}];
+const TABK=TABS.map(t=>t.k);
+let _printing=false;
+/* 네 탭 중 하나가 첫 방문에 비어 있으면 리포트가 미완성으로 보인다.
+   기록이 두 개 이상 쌓이기 전까지는 변화 탭을 감춘다. */
+function visTabs(){
+  const has=((P&&P.history)||[]).length>=2;
+  return TABS.filter(t=>t.k!=='change'||has);
+}
+function curTab(){
+  const hh=(location.hash||'').replace('#','');
+  const vk=visTabs().map(t=>t.k);
+  if(vk.indexOf(hh)>=0)return hh;
+  if(hh==='change')return 'record';
+  if(hh==='write')return 'record';
+  return 'map';
+}
+function tabOf(k){return TABS.filter(t=>t.k===k)[0]||TABS[0]}
+function drawNav(tab){
+  const nav=document.getElementById('tabnav');
+  nav.hidden=false;
+  // 변화 탭이 숨겨진 동안 번호가 건너뛰지 않도록, 보이는 순서대로 다시 매긴다
+  nav.innerHTML='<div class="tabnav-in">'+visTabs().map(function(t,i){
+    return '<a class="'+(t.k===tab?'on':'')+'" href="#'+t.k+'" style="--tc:'+t.c+';--tb:'+t.b+';--tbd:'+t.d+'">'
+     +'<span class="tno">'+('0'+(i+1))+'</span><span class="tnm">'+t.n+'</span>'
+     +'<span class="tni"><svg viewBox="0 0 17 17" xmlns="http://www.w3.org/2000/svg">'+IC[t.k]+'</svg></span></a>';
+  }).join('')+'</div>';
+}
+function stepNav(tab){
+  const T=visTabs(), i=T.map(t=>t.k).indexOf(tab);
+  let h='<div class="stepnav no-print">';
+  if(i>0)  h+='<a class="sb" href="#'+T[i-1].k+'">\u2190 '+T[i-1].n+'</a>';
+  if(i>=0&&i<T.length-1) h+='<a class="sb pri" href="#'+T[i+1].k+'">'+T[i+1].n+' \u2192</a>';
+  else h+='<a class="sb" href="#map">\u2190 처음으로</a>';
+  return h+'</div>';
+}
+function printAll(){
+  _printing=true; render();
+  setTimeout(function(){ window.print(); _printing=false; render(); },350);
+}
+
+window.addEventListener('hashchange',()=>{
+  const hh=(location.hash||'');
+  _wasDesign=(hh==='#design');
+  const t=curTab();
+  const before=_curTab; _curTab=t;
+  render();
+  if(hh!=='#write'&&hh.indexOf('#sec-')!==0) window.scrollTo(0,0);
+});
+let _curTab='map';
+let _wasDesign=false;
+function openDesign(){ _wasDesign=true; location.hash='#design'; }
+function closeDesign(){ _wasDesign=false; location.hash=''; history.replaceState(null,'',location.pathname+location.search); render(); }
+function scrollToHash(){
+  const hh=(location.hash||'').replace('#','');
+  if(!hh)return;
+  let t=null;
+  if(hh==='write') t=document.getElementById('sec-daily')||document.getElementById('sec-design');
+  else t=document.getElementById('sec-'+hh);
+  if(t)setTimeout(()=>{
+    t.scrollIntoView({behavior:'smooth',block:'start'});
+    t.classList.add('sec-flash');
+    setTimeout(()=>t.classList.remove('sec-flash'),1800);
+  },220);
+}
+function emptyView(){
+  let t='<div class="empty-hero"><div class="em">🧭</div>'
+   +'<h2>아직 읽을 결과가 없습니다</h2>'
+   +'<p>질문 하나에 답하시면 이 자리에 지도가 그려집니다.<br>네 개를 다 하실 필요는 없습니다. <b>하나만 해도 설계는 시작됩니다.</b></p></div>';
+  const core=DIAGS.filter(d=>d.core), ext=DIAGS.filter(d=>!d.core);
+  t+='<div class="sec"><h2>여기서 시작하시면 됩니다</h2>'
+   +'<p class="sub">지도의 네 칸을 하나씩 여는 질문이 네 개 있습니다. 첫 칸은 5분입니다. '
+   +'오늘 하나만 하시고 나머지는 다음에 하셔도 이어집니다.</p>';
+  t+=todoRow(core[0],'next');
+  t+='<button class="q-more no-print" onclick="var e=document.getElementById(\'morequ\');e.hidden=!e.hidden;this.textContent=e.hidden?\'남은 세 칸 보기 ▾\':\'접기 ▴\'">남은 세 칸 보기 ▾</button>'
+   +'<div id="morequ" hidden>';
+  core.slice(1).forEach(d=>{t+=todoRow(d,'dim')});
+  t+='<div class="q-grp">더 또렷하게 보고 싶다면 (선택)</div>';
+  ext.forEach(d=>{t+=todoRow(d,'dim')});
+  t+='</div></div>';
+  t+='<div class="note"><b>이미 진단하신 적이 있다면</b>결과는 진단하신 그 브라우저에 저장됩니다. 다른 기기에서 하셨다면, 그때 받아두신 보관 링크를 열어 주세요.</div>';
+  return t;
+}
+function todoRow(d,st){
+  const m=P&&P.modules?P.modules[d.k]:null;
+  const cls=st==='next'?' next':(st==='dim'?' dim':'');
+  const grp=(d.g||'')+(d.o?' '+d.o:'');
+  const head='<div class="td-grp">'+grp+'</div>';
+  if(m){
+    const ts=(m.ts||'').replace(/-/g,'.').slice(5);
+    return '<a class="todo done" href="'+d.url+'"><div class="ic" style="background:'+d.c+'">'+(d.o||d.s)+'</div>'
+     +'<div class="tb">'+head+'<div class="tq">'+(d.q||d.n)+' <span class="done-badge">답하셨습니다 '+ts+'</span></div>'
+     +'<div class="td">'+d.n+' · '+d.d+' · 다시 하면 최신 결과로 바뀝니다</div></div><div class="ar">다시 하기</div></a>';
+  }
+  return '<a class="todo'+cls+'" href="'+d.url+'"><div class="ic" style="background:'+d.c+'">'+(d.o||d.s)+'</div>'
+   +'<div class="tb">'+head+'<div class="tq">'+(d.q||d.n)+'</div><div class="td">'+d.n+' · '+d.d+'</div></div>'
+   +'<div class="ar">'+(st==='next'?'시작하기 →':'→')+'</div></a>';
+}
+
+/* ───────── 여정 지도 ─────────
+   N.E.E.D는 동시에 존재하는 네 지표가 아니라 순차적 네 단계다(브랜드 가이드 §3-3).
+   레이더는 균형을 보는 보조 도구로 내리고, 순서를 보여주는 그림을 앞에 둔다. */
+const JOURNEY={
+  N :{no:'①',t:'내가 원하는 것을 읽다',           en:'N · Need Scan',        open:'욕구 출발점 진단',   ourl:BASE+'/needscan/'},
+  E1:{no:'②',t:'나를 흐리게 하는 것을 덜어내다',   en:'E · Eliminate Noise',  open:'잡음 오염도 진단',   ourl:BASE+'/newnoise/'},
+  E2:{no:'③',t:'에너지를 중요한 곳에 정렬하다',     en:'E · Energy Alignment', open:'생명성 정렬 진단',   ourl:BASE+'/alignment/'},
+  D :{no:'④',t:'내 기준으로 오늘을 쓰다',          en:'D · Daily Authorship', open:'나다움 설계 현황 진단', ourl:BASE+'/need/'}
+};
+const TINT={N:{bg:'#F2F7FD',bd:'#D2E3F6',glow:'rgba(41,121,200,.30)'},
+            E1:{bg:'#F2FAF5',bd:'#D0EBDB',glow:'rgba(61,170,107,.30)'},
+            E2:{bg:'#FDF9F0',bd:'#EFE0BC',glow:'rgba(201,152,58,.32)'},
+            D:{bg:'#F7F4FE',bd:'#E0D4FB',glow:'rgba(139,92,246,.32)'},
+            F:{bg:'#F2F7FD',bd:'#D2E3F6',glow:'rgba(41,121,200,.30)'}};
+function journeyView(A,bn,nocap){
+  const ks=['N','E1','E2','D'];
+  const open=ks.filter(k=>A[k].v!==null).length;
+  let h='<div class="jn">'+(nocap?'':'<div class="jn-cap">나의 설계 여정</div>')
+   +'<div class="jn-tip"><i>·</i>지금의 나</div>';
+  ks.forEach(k=>{
+    const a=A[k],j=JOURNEY[k],has=a.v!==null,here=!!(bn&&bn.key===k);
+    h+='<div class="jn-row'+(has?' on':'')+(here?' here':'')+'" style="--jc:'+a.c+'">'
+     +'<div class="jn-rail"><span class="jn-dot">'+j.no+'</span></div>'
+     +'<div class="jn-body"><div class="jn-t">'+j.t+(here?'<span class="jn-here">지금 여기</span>':'')+'</div>'
+     +'<div class="jn-meta"><span class="jn-ax">'+a.name+'</span><span class="jn-v">'+(has?a.v:'—')+'</span></div>'
+     +'<div class="jn-en">'+j.en+'</div>'
+     +(has?'':'<div class="jn-open"><a href="'+j.ourl+'">'+j.open+'</a>'+(jong(j.open)?'으로':'로')+' 열립니다</div>')
+     +'</div></div>';
+  });
+  h+='<div class="jn-tip"><i>▲</i>나답게 선택하는 삶</div>';
+  let pg;
+  if(open>=4) pg='네 칸이 모두 밝아졌습니다. 이제부터는 점수보다 <b>선의 방향</b>을 보실 차례입니다.';
+  else if(open===0){
+    const _t=P.modules&&P.modules.tendency, _p=P.modules&&P.modules.temperament;
+    pg = _t ? '<b>에너지가 어느 쪽으로 흐르는지</b>는 이미 읽으셨습니다. 다만 그 정보는 네 칸을 열지는 않습니다. '
+             +'<b>첫 칸(욕구 출발점 진단, 약 6분)</b>을 여시면 여기에 지도가 그려지기 시작합니다.'
+       : _p ? '<b>기질과 동기의 토대</b>는 이미 읽으셨습니다. 다만 그 정보는 네 칸을 열지는 않습니다. '
+             +'<b>첫 칸(욕구 출발점 진단, 약 6분)</b>을 여시면 여기에 지도가 그려지기 시작합니다.'
+       : '아직 밝아진 칸이 없습니다. 어느 칸부터 여셔도 됩니다.';
+  }
+  else pg='네 칸 중 <b>'+open+'칸</b>이 밝아졌습니다. 질문 하나에 답하실 때마다 한 칸씩 열립니다. '
+        +'네 칸을 다 채우셔야 하는 것은 아닙니다.';
+  h+='<div class="jn-prog">'+pg+'</div></div>';
+  return h;
+}
+
+/* 표지 바로 아래 — 오늘 시작할 자리 */
+function heroCta(bn){
+  if(!bn)return '';
+  const n=P.designs.length, t=TINT[bn.key]||TINT.N;
+  return '<div class="hero-cta" style="--ac:'+bn.c+';--glow:'+t.glow+'">'
+   +'<div class="hc-eb">오늘 시작할 자리</div>'
+   +'<div class="hc-h">'+bn.name+'</div>'
+   +'<div class="hc-d">'+(AXIS_DEF[bn.key]||'')+'</div>'
+   +'<button class="hc-btn no-print" onclick="openDesign()">'+(n?'오늘의 설계 이어서 하기':'오늘의 설계 시작하기')+' →</button>'
+   +'<div class="hc-f">'+(n?'지금까지 '+n+'개의 문장을 남기셨습니다':'1분이면 됩니다. 문장 하나만 남기시면 됩니다')+'</div>'
+   +'</div>';
+}
+
+function coverView(done){
+  const dates=done.map(d=>P.modules[d.k].ts).filter(Boolean).sort();
+  let h='<div class="cover"><span class="badge">나다움 설계 리포트</span>'
+   +'<h1>왜 어떤 일은 나를 살리고,<br>어떤 일은 나를 지치게 할까</h1>'
+   +'<p class="lead">지금까지 하신 진단을 한자리에 모아 읽고, 오늘 시작할 설계 한 문장을 남기는 자리입니다.</p>'
+   +'<div class="meta-line"><span>리포트 '+P.id+'</span><span>답한 질문 '+done.length+'개</span>';
+  if(dates.length)h+='<span>'+dates[0].replace(/-/g,'.')+' ~ '+dates[dates.length-1].replace(/-/g,'.')+'</span>';
+  if(P.designs.length)h+='<span>설계 문장 '+P.designs.length+'</span>';
+  h+='</div></div>';
+  return h;
+}
+
+function radar(A){
+  const S=260,cx=S/2,cy=S/2,R=88;
+  const ks=['N','E1','E2','D'];
+  const ang=ks.map((_,i)=>(Math.PI*2*i/4)-Math.PI/2);
+  let g='';
+  [.25,.5,.75,1].forEach(l=>{
+    const pts=ang.map(a=>(cx+R*l*Math.cos(a)).toFixed(1)+','+(cy+R*l*Math.sin(a)).toFixed(1)).join(' ');
+    g+='<polygon points="'+pts+'" fill="none" stroke="#E8E8F0" stroke-width="1"/>';
+  });
+  ang.forEach(a=>{g+='<line x1="'+cx+'" y1="'+cy+'" x2="'+(cx+R*Math.cos(a)).toFixed(1)+'" y2="'+(cy+R*Math.sin(a)).toFixed(1)+'" stroke="#E8E8F0"/>'});
+  const pts=ks.map((k,i)=>{const v=A[k].v===null?0:A[k].v/100;
+    return (cx+R*v*Math.cos(ang[i])).toFixed(1)+','+(cy+R*v*Math.sin(ang[i])).toFixed(1)}).join(' ');
+  g+='<polygon points="'+pts+'" fill="rgba(41,121,200,.14)" stroke="#2979C8" stroke-width="2" stroke-dasharray="'+
+     (ks.some(k=>A[k].v===null)?'5 4':'0')+'"/>';
+  ks.forEach((k,i)=>{const a=A[k],v=a.v===null?0:a.v/100;
+    g+='<circle cx="'+(cx+R*v*Math.cos(ang[i])).toFixed(1)+'" cy="'+(cy+R*v*Math.sin(ang[i])).toFixed(1)+'" r="4" fill="'+(a.v===null?'#C4CBDA':a.c)+'"/>';
+    const lx=cx+(R+26)*Math.cos(ang[i]), ly=cy+(R+26)*Math.sin(ang[i]);
+    g+='<text x="'+lx.toFixed(1)+'" y="'+(ly+4).toFixed(1)+'" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="12" font-weight="800" fill="'+(a.v===null?'#C4CBDA':a.c)+'">'+k+'</text>';
+  });
+  return '<div class="radar-box"><svg viewBox="0 0 '+S+' '+S+'" xmlns="http://www.w3.org/2000/svg">'+g+'</svg></div>';
+}
+
+/* 표지 질문("왜 어떤 일은 나를 살리고, 어떤 일은 나를 지치게 할까")에
+   그 사람의 답을 한 문장으로 돌려준다. 정보는 이미 갖고 있었는데 쓰지 않고 있었다. */
+function answerLine(A,bn){
+  const m=P.modules;
+  let alive=null, drain=null;
+  if(m.tendency&&m.tendency.flag!=='low'&&FLOWKEY[m.tendency.main]) alive=FLOWKEY[m.tendency.main]+' 쪽으로 흐를 때';
+  else{
+    const hi=AXORD.filter(k=>A[k].v!==null).sort((a,b)=>A[b].v-A[a].v)[0];
+    if(hi&&A[hi].v>=50) alive={N:'내가 무엇을 원하는지 분명할 때',E1:'바깥 소리가 덜 들어올 때',
+                               E2:'하루가 내 리듬에 맞을 때',D:'내 기준으로 정할 때'}[hi];
+  }
+  if(m.noise&&m.noise.top) drain=NOISEAX[m.noise.top]+'이 들어올 때';
+  else if(bn&&bn.key!=='F') drain={N:'무엇을 원하는지 흐릴 때',E1:'바깥 소리가 크게 들어올 때',
+                     E2:'하루가 내 리듬과 어긋날 때',D:'남의 기준으로 정할 때'}[bn.key];
+  if(!alive&&!drain)return '';
+  let t='';
+  if(alive&&drain) t='지금 여러분을 <b>살리는 것</b>은 '+alive+'이고, <b>지치게 하는 것</b>은 '+drain+'입니다.';
+  else if(alive)   t='지금 여러분을 <b>살리는 것</b>은 '+alive+'입니다. 지치게 하는 쪽은 잡음 오염도 진단을 마치시면 함께 읽어 드립니다.';
+  else             t='지금 여러분을 <b>지치게 하는 것</b>은 '+drain+'입니다. 살리는 쪽은 에너지 경향성 진단을 마치시면 함께 읽어 드립니다.';
+  return '<div class="answer"><div class="al">이 질문에 대한 지금의 답</div><p>'+t+'</p></div>';
+}
+/* 강점 카드 — 리포트가 가장 낮은 곳만 조명하면 제안이 '결핍 보완'으로 읽힌다.
+   Seligman et al.(2005): 대표 강점을 확인하고 새 방식으로 쓰는 과제는
+   다섯 개 개입 중 6개월까지 효과가 유지된 두 개 중 하나였다. */
+function strengthCard(A,bn){
+  const m=P.modules, bits=[];
+  // 세그먼트가 low인 축은 '강점'이 아니다. 점수만 보고 덜 낮은 쪽을 강점으로 부르면 안 된다.
+  const hi=AXORD.filter(k=>A[k].v!==null&&(!bn||k!==bn.key)&&segOf(P,k,A)!=='low').sort((a,b)=>A[b].v-A[a].v)[0];
+  if(hi&&A[hi].v!==null) bits.push({h:A[hi].name+' '+A[hi].v, p:{N:'무엇을 원하는지 스스로 꽤 분명하게 알고 계십니다.',
+      E1:'바깥에서 들어오는 소리에 덜 흔들리는 편입니다.',
+      E2:'하루가 이미 어느 정도 내 리듬에 맞물려 있습니다.',
+      D:'내 기준으로 오늘을 쓰는 힘이 이미 있습니다.'}[hi], c:A[hi].c});
+  // 흐름 설계(F)일 때는 아래 카드가 이미 흐름을 제목으로 쓰므로 여기서는 뺀다
+  if(m.tendency&&m.tendency.flag!=='low'&&FLOWKEY[m.tendency.main]&&!(bn&&bn.key==='F'))
+    bits.push({h:FLOWKEY[m.tendency.main]+' 중심의 흐름', p:'지금 시기에 힘이 나는 방향입니다. 새 습관을 만들 때 이 결에 얹으면 덜 애씁니다.', c:'#2979C8'});
+  if(m.temperament){
+    const t=m.temperament,ord=[['ns',t.ns],['ha',t.ha],['rd',t.rd],['ps',t.ps]].sort((a,b)=>b[1]-a[1]);
+    bits.push({h:TEMPN[ord[0][0]], p:'기질에서 가장 두드러진 힘입니다. 오래 버텨 온 방식이니 바꾸기보다 쓰는 편이 낫습니다.', c:'#8B5CF6'});
+  }
+  if(!bits.length)return '';
+  return '<div class="sec">'+sn()+'<h2>지금 가장 잘 작동하는 것</h2>'
+   +'<p class="sub">설계는 부족한 것을 메우는 일이 아니라, 이미 있는 것 위에 얹는 일입니다. 먼저 가진 것을 봅니다.</p>'
+   +'<div class="str-wrap">'+bits.slice(0,3).map(function(b){
+      return '<div class="str" style="--sc:'+b.c+'"><div class="sh">'+b.h+'</div><div class="sp">'+b.p+'</div></div>';
+   }).join('')+'</div></div>';
+}
+
+/* 부주의 응답이 잡힌 진단이 있으면 결과를 지우지 않고 참고용임을 알린다. */
+function careNote(){
+  const bad=DIAGS.filter(d=>P.modules[d.k]&&P.modules[d.k].care===1);
+  if(!bad.length)return '';
+  return '<div class="carenote"><b>이 결과는 참고용으로 보십시오</b>'
+   +bad.map(d=>d.n).join(' · ')+'에서 같은 칸을 오래 이어서 누르신 흔적이 있습니다. '
+   +'문항을 빠르게 넘기셨을 수 있어 점수가 실제와 다를 수 있습니다. 시간이 있으실 때 다시 해보시면 더 정확해집니다.</div>';
+}
+function mapView(A,bn,done){
+  const ks=['N','E1','E2','D'], openN=ks.filter(k=>A[k].v!==null).length;
+  let h='<div class="two"><div>'+coverView(done)+answerLine(A,bn)
+   +'<div class="guide"><div class="gt">해석 가이드</div>'
+   +'<p>각 칸의 점수는 지금 이 시기의 상태를 보여줍니다. 어느 칸부터 보셔도 되지만, 앞 단계부터 보시면 뒤가 한결 쉬워집니다.</p></div>'
+   +'</div><div>';
+  h+='<div class="sec">'+sn()+'<h2>나의 지도</h2>'
+   +'<p class="sub">이 지도는 나를 평가하기 위한 것이 아닙니다. 지금 내 삶을 어디에서부터 살펴보면 좋을지 보여줍니다.</p>';
+  h+='<div class="axes-wrap">'+(openN>=3?radar(A):'');
+  ks.forEach(k=>{
+    const a=A[k],has=a.v!==null;
+    h+='<div class="axis-row'+(has?'':' empty')+'"><div class="axis-key" style="'+(has?'color:'+a.c:'')+'">'+k+'</div>'
+     +'<div class="axis-mid"><div class="axis-name">'+a.name+'</div>'
+     +'<div class="axis-stage">'+a.stage+'</div>'
+     +'<div class="axis-track"><div class="axis-fill" style="width:'+(has?a.v:0)+'%;background:'+(has?a.c:'#E8E8F0')+'"></div></div></div>'
+     +'<div class="axis-val">'+(has?a.v:'\u2014')+'</div></div>';
+    if(!has){
+      const j=JOURNEY[k];
+      h+='<div class="axis-open">아직 열지 않은 칸입니다 &mdash; <a href="'+j.ourl+'">'+j.open+'</a>'+(jong(j.open)?'을':'를')+' 마치시면 여기에 숫자가 들어옵니다.</div>';
+    }
+  });
+  h+='</div>';
+  h+='<div class="guard">점수가 낮다고 나쁜 것도, 높다고 좋은 것도 아닙니다. 지금 나에게 필요한 <b>출발점</b>을 찾는 것이 목적입니다.</div>';
+  h+='</div></div></div>';
+  h+=careNote();
+  h+=strengthCard(A,bn);
+  if(bn&&bn.key==='F'){
+    const t=TINT.F;
+    h+='<div class="sec">'+sn()+'<h2>오늘 시작할 자리</h2>'
+     +'<div class="bottleneck" style="--ac:'+bn.c+';--bnbg:'+t.bg+';--bnbd:'+t.bd+'">'
+     +'<div class="t">지금 시기의 에너지 경향성</div>'
+     +'<div class="h">'+bn.name+'</div>'
+     +'<div class="bdef">'+AXIS_DEF.F+'</div>'
+     +'<div class="b">아직 어느 칸도 열리지 않아 <b>어디부터 손대면 좋을지</b>는 말씀드릴 수 없습니다. '
+     +'대신 지금 힘이 나는 결이 어느 쪽인지는 알고 있으니, <b>그 결 위에 오늘 하루를 얹는 설계</b>부터 시작하시면 됩니다. '
+     +'첫 칸을 여시면 그때부터는 여러분의 지도에 맞춘 설계가 나옵니다.'
+     +'<br><span class="bwhy">에너지 경향성은 나침반이고, 네 칸은 지도입니다. 나침반만으로도 오늘 한 걸음은 뗄 수 있습니다.</span></div>'
+     +'<button class="bn-go no-print" onclick="openDesign()">오늘의 설계 시작하기 \u2192</button>'
+     +'<div class="bfoot">오늘의 설계는 1분이면 됩니다. 한 문장만 남기시면 됩니다.</div></div></div>';
+  }
+  else if(bn){
+    const seq=AXIS_SEQ.join(' \u2192 '), t=TINT[bn.key]||TINT.N;
+    const sk=subKeyOf(bn.key), sname=(SUBNAME[bn.key]||{})[sk]||'';
+    const lead = bn.why==='low'
+      ? '네 단계 가운데 <b>'+bn.name+'</b>'+(jong(bn.name)?'이':'가')+' 아직 낮은 구간이고, 앞 단계 중 가장 먼저 나오는 자리입니다.'
+      : (bn.why==='mid'
+      ? '낮게 나온 축은 없습니다. 앞 단계 중 아직 더 볼 여지가 있는 <b>'+bn.name+'</b>부터 보시면 좋습니다.'
+      : '네 축 모두 안정적인 구간입니다. 무엇을 고치기보다 <b>'+bn.name+'</b>에서 지금 되고 있는 것을 유지하는 설계를 권합니다.');
+    h+='<div class="sec">'+sn()+'<h2>지금 내가 먼저 살펴볼 곳</h2>'
+     +'<div class="bottleneck" style="--ac:'+bn.c+';--bnbg:'+t.bg+';--bnbd:'+t.bd+'">'
+     +'<div class="t">'+((JOURNEY[bn.key]||{}).en||'')+'</div>'
+     +'<div class="h">'+bn.name+' '+bn.v+'</div>'
+     +'<div class="bdef">'+(AXIS_DEF[bn.key]||'')+'</div>'
+     +'<div class="b">'+lead+' 이 숫자는 <b>잘하고 있지 못하다</b>는 뜻이 아니라, '
+     +'지금의 나를 조금 더 이해하면 <b>삶의 방향이 가장 크게 달라질 수 있는 곳</b>이라는 뜻입니다.'
+     +(sname?' 그 안에서도 지금 가장 낮은 것은 <b>'+sname+'</b>입니다. 아래 설계는 그 자리에 맞춰 제안됩니다.':'')
+     +'<br><span class="bwhy">네 단계는 순서대로(<b>'+seq+'</b>) 이어질 때 힘이 붙기 때문에, 점수가 가장 낮은 축이 아니라 <b>앞 단계 중 아직 낮은 축</b>을 먼저 봅니다. 네 진단은 묻는 방식이 서로 달라 점수를 나란히 놓고 비교할 수 없습니다.</span></div>'
+     +'<button class="bn-go no-print" onclick="openDesign()">오늘의 설계 시작하기 \u2192</button>'
+     +'<div class="bfoot">오늘의 설계는 1분이면 됩니다. 한 문장만 남기시면 됩니다.</div></div></div>';
+  }
+  h+='<div class="sec">'+sn()+'<h2>나의 설계 여정</h2>'
+   +'<p class="sub">나다움 설계는 네 단계로 이어집니다. 지금 어디까지 열렸는지 한눈에 보십시오.</p>'
+   +journeyView(A,bn,true)
+   +nextStepCard()
+   +'</div>';
+  return h;
+}
+/* 다음 한 개만 제안한다. 선택지가 많을수록 시작 자체를 미룬다(Iyengar & Lepper, 2000). */
+function nextStepCard(){
+  const core=DIAGS.filter(d=>d.core), todo=core.filter(d=>!P.modules[d.k]);
+  if(!todo.length){
+    const ext=DIAGS.filter(d=>!d.core&&!P.modules[d.k]);
+    if(!ext.length) return '<div class="nextcard done">여섯 질문에 모두 답하셨습니다. 이제는 <a href="#record">오늘의 실천</a>을 쌓는 자리입니다.</div>';
+    return '<div class="nextcard"><div class="nl">네 칸이 모두 열렸습니다</div>'
+      +'<div class="nq">더 또렷하게 보고 싶으시면 심화 질문이 남아 있습니다.</div>'
+      +'<a class="nb" href="#read">심화 질문 보기 \u2192</a></div>';
+  }
+  const d=todo[0], n=core.length-todo.length;
+  return '<div class="nextcard"><div class="nl">'+(n?'다음 칸':'여기서 시작하시면 됩니다')+' · '+d.d+'</div>'
+   +'<div class="nq">'+d.q+'</div>'
+   +'<a class="nb" href="'+d.url+'">'+d.n+' 시작하기 \u2192</a>'
+   +(n?'<div class="nn">오늘은 여기까지 하셔도 됩니다. 다음 칸은 언제 열어도 이어집니다.</div>':'')
+   +'</div>';
+}
+
+function readView(A,cr,done){
+  const m=P.modules;
+  const core=DIAGS.filter(d=>d.core), ext=DIAGS.filter(d=>!d.core);
+  const cdone=core.filter(d=>m[d.k]).length;
+  const ctodo=core.filter(d=>!m[d.k]);
+  const STEPMSG=['어느 칸부터 여셔도 됩니다.','한 칸이 열렸습니다. 나에 대해 한 가지를 발견하셨습니다.',
+                 '두 칸이 열렸습니다. 나의 패턴이 조금씩 보이기 시작합니다.',
+                 '세 칸이 열렸습니다. 하나만 더 답하시면 네 축이 모두 이어집니다.',''];
+  let qs;
+  if(cdone>=core.length) qs='네 칸이 모두 열렸습니다. 아래 심화 질문은 방향과 이유를 더해 줍니다. 하지 않으셔도 리포트는 온전합니다.';
+  else qs=(STEPMSG[cdone]||'')+' 네 개를 한 번에 하실 필요는 없습니다. 하나에 답할 때마다 지도가 한 칸씩 밝아집니다.';
+
+  let h='<div class="sec">'+sn()+'<h2>나를 읽는 네 개의 질문</h2>'
+   +'<p class="sub">네 칸을 하나씩 여는 기본 질문 네 개입니다. 모두 마치면 78문항, 약 24분입니다. '+qs+'</p>';
+  if(ctodo.length){
+    h+='<div class="q-grp">여기서 이어 가시면 됩니다</div>';
+    h+=todoRow(ctodo[0],'next');
+    if(ctodo.length>1){
+      h+='<div class="q-grp">그 다음 칸</div>';
+      ctodo.slice(1).forEach(d=>{h+=todoRow(d,'dim')});
+    }
+  }
+  const cfin=core.filter(d=>m[d.k]);
+  if(cfin.length){
+    h+='<div class="q-grp">이미 답하신 질문</div>';
+    cfin.forEach(d=>{h+=todoRow(d)});
+  }
+  h+='</div>';
+
+  h+='<div class="sec">'+sn()+'<h2>더 또렷하게 보고 싶다면</h2>'
+   +'<p class="sub">아래 두 질문은 새로운 칸을 열지는 않습니다. 대신 <b>에너지가 어느 쪽으로 흐르는지</b>와 '
+   +'<b>왜 그렇게 움직이는지</b>를 더해, 위 네 칸의 해석을 훨씬 촘촘하게 만듭니다.</p>';
+  ext.forEach(d=>{ h+=todoRow(d, m[d.k]?'':'dim'); });
+  h+='</div>';
+
+  h+='<div class="sec">'+sn()+'<h2>지금까지 읽은 것</h2>'
+   +'<p class="sub">답하신 질문이 어느 칸을 열었는지 보여줍니다. 점수와 지도는 <a href="#map">나의 지도</a>에 있습니다.</p>';
+  h+='<div class="axes-wrap">';
+  ['N','E1','E2','D'].forEach(k=>{
+    const a=A[k],has=a.v!==null;
+    h+='<div class="axis-lite'+(has?'':' empty')+'"><span class="al-k" style="'+(has?'color:'+a.c:'')+'">'+k+'</span>'
+     +'<span class="al-n">'+a.name+'</span>'
+     +'<span class="al-v"'+(has?' style="color:'+a.c+'"':'')+'>'+(has?a.v:'\u2014')+'</span></div>';
+    const chips=(a.feeds||[]).map(function(fk){
+      const d=DIAGS.filter(x=>x.k===fk)[0]; if(!d)return '';
+      const ok=!!P.modules[fk];
+      return '<span class="feed'+(ok?' on':'')+'">'+(ok?'\u2713 ':'')+d.n.replace(' 진단','')+'</span>';
+    }).join('');
+    h+='<div class="feed-row">'+chips+(has?'':'<span class="feed-lab">아직 열지 않음</span>')+'</div>';
+  });
+  h+='</div>';
+  if(m.tendency){
+    const low=(m.tendency.flag==='low');
+    h+='<div class="card"><div style="font-size:11px;letter-spacing:1px;color:#6B7393;font-weight:700;margin-bottom:7px">지금 시기의 에너지 경향성</div>'
+     +(low
+       ? '<div style="font-size:16px;font-weight:800;line-height:1.5">지금은 어느 한 방향으로 쏠려 있지 않습니다</div>'
+        +'<div style="font-size:13px;color:#6B7393;margin-top:6px">다섯 방향의 차이가 크지 않다는 뜻입니다. 좋고 나쁨이 아니라, 지금이 여러 쪽을 고르게 쓰는 시기라는 신호입니다.</div>'
+       : (close2(m.tendency)
+         ? '<div style="font-size:16px;font-weight:800;line-height:1.5">지금은 '+FLOWKEY[m.tendency.main]+'과 '+FLOWKEY[m.tendency.sub]+', 두 흐름이 비슷한 세기입니다</div>'
+          +'<div style="font-size:13px;color:#6B7393;margin-top:6px">'+CHARS[m.tendency.main]+' 패턴 · '+CHARS[m.tendency.sub]+' 패턴 — 두 값의 차이가 문항 한 개 차이 안쪽이라 순위를 단정하지 않습니다. 둘 다 지금의 나로 읽으시면 됩니다.</div>'
+         : '<div style="font-size:16px;font-weight:800;line-height:1.5">지금 에너지는 '+FLOWKEY[m.tendency.main]+' 중심으로 흐르고 있습니다'
+          +(m.tendency.sub?'<br><span style="font-size:14px;font-weight:700;color:#4A5568">보조 흐름은 '+FLOWKEY[m.tendency.sub]+' 쪽입니다</span>':'')+'</div>'
+          +'<div style="font-size:13px;color:#6B7393;margin-top:6px">'+CHARS[m.tendency.main]+' 패턴'
+          +(m.tendency.sub?' + '+CHARS[m.tendency.sub]+' 패턴':'')+' · 고정된 유형이 아니라 지금 시기의 흐름입니다.</div>'))
+     +'</div>';
+  }
+  const vcTop=valueCardFromDiag();
+  if(vcTop)h+=vcTop;
+  h+='</div>';
+  if(cr&&cr.length>=1) h+=crossView(cr,done.length);
+  return h;
+}
+
+function changeView(){
+  const H=(P.history||[]);
+  let h='<div class="sec">'+sn()+'<h2>처음의 나 \u2192 지금의 나</h2>';
+  if(H.length<2){
+    h+='<p class="sub">같은 질문에 시간을 두고 다시 답하시면, 그 사이에 무엇이 달라졌는지 여기에 남습니다.</p>'
+     +'<div class="empty-tab">지금은 첫 기록 한 개만 있습니다.<br>한 달 뒤 또는 한 분기 뒤에 다시 답해 보세요.<br>'
+     +'이전 점수가 사라지지 않고 나란히 남습니다.'
+     +'<a class="btn ghost" href="#record" style="text-decoration:none;margin-top:14px;display:inline-block">다시 볼 날짜 정해 두기 \u2192</a></div></div>';
+    return h;
+  }
+  const first=H[0], last=H[H.length-1];
+  h+='<p class="sub">'+String(first.t).replace(/-/g,'.')+'에 처음 답하셨고, 가장 최근 기록은 '+String(last.t).replace(/-/g,'.')+'입니다.</p>';
+  let anyMix=false;
+  TRAX.forEach(function(ax,ai){
+    let f=null,l=null,fi=-1,li=-1;
+    for(let i=0;i<H.length;i++){ if(H[i].a[ai]!=null){ f=H[i].a[ai]; fi=i; break } }
+    for(let j=H.length-1;j>=0;j--){ if(H[j].a[ai]!=null){ l=H[j].a[ai]; li=j; break } }
+    if(f==null||l==null)return;
+    // 이 축을 만든 진단이 중간에 바뀌었으면 두 값은 같은 자로 잰 것이 아니다
+    const _ff=String(H[fi].f||'').split('|'), _lf=String(H[li].f||'').split('|');
+    const fc=_ff[ai]||'', lc=_lf[ai]||'';
+    const mixed=!!(fc&&lc&&fc!==lc);
+    if(mixed)anyMix=true;
+    const d=l-f, sgn=mixed?'비교 보류':(d>0?'+'+d:(d<0?String(d):'변화 없음'));
+    const cls=mixed?'tflat':(d>2?'tup':(d<-2?'tdown':'tflat'));
+    h+='<div class="fnn"><div><div class="fl">처음의 나</div><div class="fd">'+String(H[fi].t).slice(2).replace(/-/g,'.')+'</div>'
+     +'<div class="fv">'+f+'</div><div class="fu">'+ax.n+'</div></div>'
+     +'<div style="border-color:'+ax.c+'44"><div class="fl" style="color:'+ax.c+'">지금의 나</div><div class="fd">'+String(H[li].t).slice(2).replace(/-/g,'.')+'</div>'
+     +'<div class="fv" style="color:'+ax.c+'">'+l+'</div><div class="fu '+cls+'">'+sgn+'</div></div>'
+     +'<div class="nxt"><div class="fl">다음의 나</div><div class="fd">아직</div>'
+     +'<div class="fv">?</div><div class="fu">다시 답하면</div></div></div>';
+  });
+  if(anyMix) h+='<div class="guard">중간에 이 축을 재는 진단이나 문항이 바뀐 칸이 있어 <b>비교 보류</b>로 두었습니다. '
+   +'2026년 9월에 <b>욕구 출발점 진단이 20문항으로 개정</b>되었고, 기질·동기 진단의 채점식도 함께 손봤습니다. '
+   +'같은 문항으로 다시 답하시면 그때부터 비교가 시작됩니다.</div>';
+  h+='</div>';
+  h+=trendView();
+  h+='<div class="sec">'+sn()+'<h2>다음의 나</h2>'
+   +'<p class="sub">변화는 다시 답해야 보입니다. 다음에 볼 날짜를 정해 두시면 그날 알림이 옵니다.</p>'
+   +'<a class="btn" href="#record" style="display:block;text-align:center;text-decoration:none">다시 볼 날짜 정해 두기 \u2192</a></div>';
+  return h;
+}
+
+function recordView(){
+  let h='';
+  const has=(P.designs&&P.designs.length);
+  if(!has){
+    h+='<div class="sec">'+sn()+'<h2>오늘의 설계 문장</h2>'
+     +'<p class="sub">이 리포트의 결과물은 점수가 아니라, 여러분이 직접 남긴 한 문장입니다.</p>'
+     +'<div class="empty-tab">아직 남기신 문장이 없습니다.<br>&ldquo;나는 ______을 더 중요하게 여기겠습니다.&rdquo;<br>이 한 문장이면 시작됩니다.'
+     +'<button class="btn" style="margin-top:14px" onclick="openDesign()">오늘의 설계 시작하기 \u2192</button></div></div>';
+  }
+  h+=sentencesView();
+  h+=dailyView();
+  h+=notesView();
+  h+=loopView();
+  h+=keepView();
+  return h;
+}
+
+function crossView(cr,n){
+  let h='<div class="sec">'+sn()+'<h2>교차 해석</h2>'
+   +'<p class="sub">진단 하나만으로는 나올 수 없는 문장들입니다. 두 진단이 만나는 자리에서만 보이는 것을 적었습니다.</p>';
+  cr.forEach(c=>{h+='<div class="cross"><div class="src">'+c.src+'</div><div class="txt">'+c.txt+'</div></div>'});
+  if(n<DIAGS.length)h+='<div class="note">진단을 하나 더 마치시면 읽을 수 있는 문장이 늘어날 수 있습니다. 두 진단이 만나야 나오는 문장이라, 조합에 따라 늘어나지 않는 경우도 있습니다.</div>';
+  h+='</div>';
+  return h;
+}
+
+function designPage(bn){
+  const k=bn?bn.key:'N', ac=AXIS_COPY[k]||AXIS_COPY.N;
+  const col={N:'#2979C8',E1:'#3DAA6B',E2:'#C9983A',D:'#8B5CF6',F:'#2979C8'}[k]||'#2979C8';
+  let h='<div class="dp-top no-print"><button class="dp-back" onclick="closeDesign()">← 리포트로 돌아가기</button></div>';
+  const _sk=subKeyOf(k), _sn=(SUBNAME[k]||{})[_sk]||'';
+  if(k==='F'){
+    h+='<div class="dp-hero" style="--ac:'+col+'">'
+     +'<div class="dp-tag">지금 이 설계를 제안하는 이유</div>'
+     +'<h1 class="dp-h">'+ac.h+'</h1>'
+     +'<p class="dp-p">아직 지도의 네 칸이 열리지 않아, 어디부터 손대면 좋을지는 말씀드릴 수 없습니다. '
+     +'다만 지금 에너지가 <b>'+FLOWKEY[bn.flow]+'</b> 쪽으로 흐르고 있다는 것은 읽었습니다. '
+     +'그 결에 맞는 기록부터 시작하시면 됩니다. '
+     +'<a href="'+BASE+'/needscan/" style="color:#FFD98A;font-weight:700">첫 칸(욕구 출발점 진단)</a>을 여시면 그때부터는 여러분의 지도에 맞춘 설계가 나옵니다.</p></div>';
+    h+=designView(bn,true);
+    h+=sentencesView(true);
+    h+='<div class="dp-top no-print" style="margin-top:18px"><button class="dp-back" onclick="closeDesign()">← 리포트로 돌아가기</button></div>';
+    return h;
+  }
+  const _why=bn&&bn.why==='low'?'앞 단계 중 아직 낮은 축':(bn&&bn.why==='mid'?'앞 단계 중 아직 더 볼 여지가 있는 축':'지금 보는 축');
+  const _fl=(P.modules&&P.modules.tendency&&P.modules.tendency.flag!=='low'&&FLOWKEY[P.modules.tendency.main])?
+      ' 지금 에너지는 <b>'+FLOWKEY[P.modules.tendency.main]+'</b> 중심으로 흐르고 있으니, 그 결에 맞게 적으셔도 됩니다.':'';
+  h+='<div class="dp-hero" style="--ac:'+col+'">'
+   +'<div class="dp-tag">지금 이 설계를 제안하는 이유</div>'
+   +'<h1 class="dp-h">'+ac.h+'</h1>'
+   +'<p class="dp-p">'+_why+'이 <b>'+(bn?bn.name:'욕구 선명도')+'</b>입니다. '
+   +(_sn?'그 안에서도 지금 가장 낮은 것은 <b>'+_sn+'</b>'+(jong(_sn)?'이라':'라')+'서 이 설계를 제안합니다. ':'그래서 이 설계를 제안합니다. ')
+   +'다른 축이 낮게 나온 분에게는 다른 설계가 나옵니다 — 설계는 사람마다 다릅니다.'+_fl+'</p></div>';
+  h+=designView(bn,true);
+  h+=sentencesView(true);
+  h+='<div class="dp-top no-print" style="margin-top:18px"><button class="dp-back" onclick="closeDesign()">← 리포트로 돌아가기</button></div>';
+  return h;
+}
+function designView(bn,solo){
+  const k=bn?bn.key:'N', opts=optsOf(k), ac=AXIS_COPY[k]||AXIS_COPY.N;
+  let h='<div class="sec'+(solo?' solo':'')+'" id="sec-design">'
+   + (solo?'':(sn()+'<h2>오늘의 설계</h2><p class="sub">여기부터가 이 리포트의 본론입니다. 한 문장만 남기고 나가시면 됩니다.</p>'));
+
+  const AC={N:'#2979C8',E1:'#3DAA6B',E2:'#C9983A',D:'#8B5CF6',F:'#2979C8'}[k]||'#2979C8';
+  const ACS={N:'#F1F8FE',E1:'#F0FDF4',E2:'#FFFBEB',D:'#F5F3FF',F:'#F1F8FE'}[k]||'#F1F8FE';
+  const ACL={N:'#BEE3F8',E1:'#BBF0D0',E2:'#EADFC4',D:'#DDD6FE',F:'#BEE3F8'}[k]||'#BEE3F8';
+  const ICO={N:'🧭',E1:'🌿',E2:'⚡',D:'✍️',F:'🧭'}[k]||'🧭';
+  h+='<div class="design-box" style="--ac:'+AC+';--acs:'+ACS+';--acl:'+ACL+'">'
+   +(solo?'':'<div class="db-head"><div class="db-ico">'+ICO+'</div><h3>'+ac.h+'</h3></div>')
+   +'<div class="why">하루에 한 번, 주말에 한 번 나의 '+ac.w+'을 짧게 적어 두는 자리입니다. '
+   +'막연한 다짐보다 <b>언제·어디서·무엇을</b>이 정해진 문장이 실제로 훨씬 잘 지켜집니다'
+   +'<span style="color:#6B7393">(Gollwitzer &amp; Sheeran, 2006)</span>. '
+   +'적은 것이 쌓이면, 그 안에서 우선가치가 드러납니다.</div>';
+
+  h+='<div class="step-lab"><i>1</i>언제, 어디서 하실지 정해 주세요</div>';
+  h+='<div class="fill">'
+   +'<select id="w1">'+WHENS.map(w=>'<option>'+w+'</option>').join('')+'</select>'
+   +'<select id="w2">'+WHERES.map(w=>'<option>'+w+'</option>').join('')+'</select></div>';
+
+  h+='<div class="step-lab"><i>2</i>그때 무엇을 적으실지 고르세요</div>';
+  h+='<div class="opt-row" id="opts">';
+  opts.forEach((o,i)=>{
+    h+='<div class="m-card" data-i="'+i+'">'
+      +'<button class="opt m-pick" data-i="'+i+'"><span class="m-num">'+(i+1)+'</span>'
+      +'<span class="m-txt">'+o.t+'</span></button>'
+      +'<button class="m-ex-btn no-print" data-ex="'+i+'">이렇게 기록됩니다 ▾</button>'
+      +'<div class="m-ex" id="mex'+i+'">'+o.ex.map(e=>'<div>· '+esc(e)+'</div>').join('')+'</div>'
+      +'</div>';
+  });
+  h+='<div class="m-card" data-i="free">'
+    +'<button class="opt m-pick" data-i="free"><span class="m-num">＋</span>'
+    +'<span class="m-txt">직접 쓰기</span></button>'
+    +'<div class="m-free" id="mfree"><input id="w3" type="text" maxlength="60" placeholder="무엇을 적으실지 한 줄로"></div>'
+    +'</div>';
+  h+='</div>';
+
+  h+='<div class="prev-line" id="prevLine"></div>';
+  h+='<button class="btn" id="saveDesign">이 문장을 내 설계에 남기기</button>';
+  h+='<div class="design-foot">남기신 뒤에는 아래 <b>오늘의 실천</b>에서 매일 한 줄씩 적게 됩니다. 그 기록이 이 리포트의 결과물입니다.</div>';
+  h+='</div></div>';
+  return h;
+}
+
+function sentencesView(solo){
+  if(!P.designs.length)return '';
+  let h='<div class="sec">'+(solo?'':sn())+'<h2>내 설계 문장</h2>'
+   +'<p class="sub">지금까지 남기신 문장입니다. 인쇄해서 눈에 보이는 곳에 두시면 더 잘 지켜집니다.</p>'
+   +(solo?'':acctNudge());
+  const col={N:'#2979C8',E1:'#3DAA6B',E2:'#C9983A',D:'#8B5CF6'};
+  P.designs.slice().reverse().forEach((d,i)=>{
+    const idx=P.designs.length-1-i;
+    h+='<div class="sent"><div class="dot" style="background:'+(col[d.axis]||'#2979C8')+'"></div>'
+     +'<div class="body"><div class="txt">'+esc(d.text)+'</div><div class="when">'+d.ts.replace(/-/g,'.')+' 작성</div></div>'
+     +'<button class="del no-print" onclick="delDesign('+idx+')" title="지우기">×</button></div>';
+  });
+  if(!valueCardFromDiag() && (P.designs.length>=3||noteCount()>=5))h+=valueView();
+  h+='</div>';
+  return h;
+}
+
+
+/* ───────── 데일리 체크 ───────── */
+function dkey(d){return d.toISOString().slice(0,10)}
+function checksOf(day){return (P.checks&&P.checks[day])||[]}
+function noteOf(day,id){return (P.notes&&P.notes[day]&&P.notes[day][id])||''}
+function setNote(id,val){
+  const day=today(); P.notes=P.notes||{};
+  const v=String(val||'').slice(0,120).trim();
+  if(v){ P.notes[day]=P.notes[day]||{}; P.notes[day][id]=v; }
+  else if(P.notes[day]){ delete P.notes[day][id]; if(!Object.keys(P.notes[day]).length)delete P.notes[day]; }
+  P.updated=day; save(P);
+}
+function noteCount(){let n=0;for(const d in (P.notes||{}))n+=Object.keys(P.notes[d]).length;return n}
+function toggleCheck(id){
+  const day=today();
+  P.checks=P.checks||{};
+  const arr=(P.checks[day]||[]).slice();
+  const at=arr.indexOf(id);
+  if(at>=0)arr.splice(at,1);else arr.push(id);
+  if(arr.length)P.checks[day]=arr;else delete P.checks[day];
+  P.updated=day;save(P);render();
+}
+function weekDays(){
+  const out=[],now=new Date();
+  const dow=(now.getDay()+6)%7;               // 월=0
+  const mon=new Date(now);mon.setDate(now.getDate()-dow);
+  for(let i=0;i<7;i++){const d=new Date(mon);d.setDate(mon.getDate()+i);out.push(d)}
+  return out;
+}
+function streakStats(){
+  const total=P.designs.length||1;
+  let kept=0,days=0,run=0,best=0,cur=0;
+  const keys=Object.keys(P.checks||{}).sort();
+  const first=keys.length?new Date(keys[0]):new Date();
+  const span=Math.max(1,Math.round((new Date(today())-first)/86400000)+1);
+  for(let i=0;i<span;i++){
+    const d=new Date(first);d.setDate(first.getDate()+i);
+    const n=checksOf(dkey(d)).length;
+    if(n>0){days++;kept+=n;run++;if(run>best)best=run}else run=0;
+  }
+  // 오늘 기준 연속
+  cur=0;
+  for(let i=0;;i++){
+    const d=new Date();d.setDate(d.getDate()-i);
+    if(checksOf(dkey(d)).length>0)cur++;else break;
+    if(i>400)break;
+  }
+  return{span,days,kept,best,cur,total};
+}
+function dailyView(){
+  if(!P.designs.length)return '';
+  const day=today(),on=checksOf(day);
+  const wd=['월','화','수','목','금','토','일'];
+  const now=new Date();
+  const dnames=['일','월','화','수','목','금','토'];
+  let h='<div class="sec" id="sec-daily">'+sn()+'<h2>오늘의 실천 — 기록하는 곳</h2>'
+   +'<div class="rec-card"><span class="rec-step">여기가 기록하는 자리입니다</span>'
+   +'<h3>오늘 실행한 내용을 한 줄로 남겨 두세요</h3>'
+   +'<p>체크는 지켰다는 표시일 뿐이고, 실제로 남는 것은 이 한 줄들입니다. '
+   +'한 줄씩 쌓이면 작은 여러분의 실행 역사가 됩니다. 못 적은 날이 있어도 괜찮습니다.</p></div>';
+  h+='<div class="today-box"><div class="today-date">'+(now.getMonth()+1)+'월 '+now.getDate()+'일 '+dnames[now.getDay()]+'요일</div>';
+  P.designs.forEach((d,i)=>{
+    const isOn=on.includes(d.id), nv=noteOf(day,d.id);
+    h+='<div class="chk-wrap">'
+      +'<button class="chk'+(isOn?' on':'')+'" onclick="toggleCheck('+d.id+')">'
+      +'<span class="box"></span><span class="ct">'+esc(d.text)+'</span></button>'
+      +'<div class="note-row'+((isOn||nv)?' open':'')+'" id="nr'+d.id+'">'
+      +'<label>오늘의 한 줄 <span>· 비워 두셔도 됩니다</span></label>'
+      +'<input class="note-in" id="ni'+d.id+'" type="text" maxlength="120" value="'+esc(nv)+'" placeholder="'+esc(d.ph||'예) 오늘 무엇을 보았는지 한 줄로')+'"'
+      +' oninput="setNote('+d.id+',this.value)">'
+      +'</div></div>';
+  });
+  h+='</div>';
+  // 주간 그리드
+  const days=weekDays(),tot=P.designs.length;
+  h+='<div class="week"><h4>이번 주</h4><div class="wk-grid">';
+  days.forEach((d,i)=>{
+    const k=dkey(d),n=checksOf(k).length,isFuture=k>day;
+    const cls=n===0?'':(n>=tot?'full':'part');
+    h+='<div class="wk-cell"><div class="wk-dot '+cls+(k===day?' today':'')+'">'
+      +(isFuture?'':(n>0?n:''))+'</div><div class="wk-lab">'+wd[i]+'</div></div>';
+  });
+  h+='</div>';
+  /* '연속 실천 중 0일'은 하루만 거르면 뜨고, 바로 옆의 "못 적은 날이 있어도 괜찮습니다"와
+     같은 화면에서 충돌한다. 주간 달성과 누적일을 기본으로 두고,
+     연속 카운트는 7일 이상일 때만 보여 준다. */
+  const st=streakStats();
+  const wk=weekDays().filter(d=>checksOf(dkey(d)).length>0).length;
+  h+='<div class="streak">'
+   +'<div><div class="sv">'+wk+'/7일</div><div class="sl">이번 주 실천</div></div>'
+   +'<div><div class="sv">'+st.days+'일</div><div class="sl">지금까지 실천한 날</div></div>'
+   +(st.cur>=7?'<div><div class="sv">'+st.cur+'일</div><div class="sl">연속 실천 중</div></div>':'')
+   +'</div>';
+  h+='</div></div>';
+  return h;
+}
+
+function notesView(){
+  const n=noteCount();
+  if(!n) return '';
+  let h='<div class="sec">'+sn()+'<h2>쌓인 기록</h2>'
+   +'<p class="sub">지금까지 남기신 한 줄들입니다. 우선가치는 물어서 나오는 것이 아니라 여기에서 드러납니다. '
+   +''+n+'개가 모였습니다.</p>';
+  const days=Object.keys(P.notes).sort().reverse();
+  const byId={}; P.designs.forEach(d=>byId[d.id]=d);
+  days.forEach(day=>{
+    h+='<div class="nday"><div class="nd-date">'+day.replace(/-/g,'.').slice(5)+'</div>';
+    for(const id in P.notes[day]){
+      const d=byId[id]||byId[+id];
+      h+='<div class="nd-item"><div class="nd-t">'+esc(P.notes[day][id])+'</div>'
+       +(d?'<div class="nd-s">'+esc(d.text)+'</div>':'')+'</div>';
+    }
+    h+='</div>';
+  });
+  if(n<7)h+='<div class="note">일주일치가 모이면 여기에서 반복되는 결이 보이기 시작합니다.</div>';
+  h+='</div>';
+  return h;
+}
+
+/* 우선가치 귀납 */
+/* 우선가치 목록 — 나다움 설계 현황 진단(need)과 동일한 9개.
+   종전에는 설계 문장을 키워드 부분 일치로 훑어 '후보'를 자동 제시했는데,
+   목록에 '끄','쉬','말','새로' 같은 조각이 있어 '끄적이다','쉬운','말고'에도
+   반응했고, 리포트 자체가 반복 쓰는 '기록'이 성장 가치로 잡혔다.
+   자동 귀납을 걷어내고, 사용자가 자기 문장을 다시 읽고 직접 고르게 한다. */
+const VALUE_LIST=[
+  {k:'자율',d:'내 방식대로 정하는 것'},{k:'연결',d:'사람과 이어져 있는 것'},
+  {k:'몰입',d:'한 가지에 깊이 들어가는 것'},{k:'회복',d:'나를 지키고 되돌리는 것'},
+  {k:'성장',d:'어제보다 나아지는 것'},{k:'성취',d:'목표를 이뤄내는 것'},
+  {k:'안정',d:'흔들리지 않는 리듬을 갖는 것'},{k:'기여',d:'누군가에게 보탬이 되는 것'},
+  {k:'정직',d:'숨기지 않고 그대로 있는 것'}
+];
+function valueCardFromDiag(){
+  const a=P.modules&&P.modules.authorship;
+  if(!(a&&a.values&&a.values.length))return '';
+  const main=a.values[0], subs=a.values.slice(1);
+  return '<div class="value-card"><div class="t">우선가치</div>'
+   +'<h3>지금의 우선가치는 \''+esc(main)+'\'입니다</h3>'
+   +'<p>나다움 설계 현황 진단에서 직접 고르신 값입니다.'
+   +(subs.length?' 보조가치는 <b>'+subs.map(esc).join('</b> · <b>')+'</b>입니다.':'')
+   +'</p><p style="font-size:13px">아래 설계 문장과 매일의 기록이 이 가치와 맞물리는지는, 기록이 쌓인 뒤 <b>나의 변화</b>에서 직접 견줘 보실 수 있습니다.</p></div>';
+}
+function valueView(){
+  const n=P.designs.length;
+  let h='<div class="value-card"><div class="t">우선가치</div>';
+  if(n<3){
+    h+='<h3>조금 더 모이면 물어보겠습니다</h3>'
+     +'<p>문장이 세 개 이상 쌓이면, 그 문장들을 다시 읽고 어느 가치에 가까운지 직접 고르시게 됩니다. 지금은 '+n+'개입니다.</p></div>';
+    return h;
+  }
+  const picked=P.values||[];
+  h+='<h3>남기신 문장 '+n+'개를 다시 읽어 보세요</h3>'
+   +'<p>이 문장들이 어느 가치에 가까운가요? 프로그램이 단어를 세어 맞히는 대신, 직접 고르시는 편이 정확합니다. '
+   +'하나만 고르셔도 되고, 나중에 바꾸셔도 됩니다.</p>'
+   +'<div class="chips">'+VALUE_LIST.map(v=>'<button class="chip'+(picked.indexOf(v.k)>=0?' on':'')
+      +'" title="'+v.d+'" onclick="toggleValue(\''+v.k+'\')">'+v.k+'</button>').join('')+'</div>';
+  if(picked.length) h+='<p style="font-size:13px">고르신 것: <b>'+picked.map(esc).join('</b> · <b>')+'</b>. '
+     +'우선가치는 물어서 답이 나오는 것이 아니라 실제로 지킨 것들에서 드러납니다. 기록이 쌓이면 다시 보세요.</p>';
+  else h+='<p style="font-size:13px">각 가치에 손을 올리면 뜻이 나옵니다. 자율 = 내 방식대로 정하는 것, 회복 = 나를 지키고 되돌리는 것 …</p>';
+  h+='</div>';
+  return h;
+}
+function toggleValue(k){
+  P.values=P.values||[];
+  const i=P.values.indexOf(k);
+  if(i>=0)P.values.splice(i,1);else P.values.push(k);
+  P.updated=today();save(P);render();
+}
+
+function trendView(){
+  var H=(P.history||[]);
+  var h='<div class="sec" id="sec-trend">'+sn()+'<h2>변화 기록</h2>';
+  if(H.length<2){
+    h+='<p class="sub">한 달 뒤, 한 분기 뒤, 또는 나에게 큰 변화가 있을 때 같은 진단을 다시 해 보세요. '
+      +'그때부터 이 자리에 네 축이 어떻게 움직였는지 선으로 그려집니다.</p>'
+      +'<div class="trend-empty">지금은 첫 기록 한 개만 있습니다.<br>'
+      +'다시 진단하시면 이전 점수가 사라지지 않고 나란히 남습니다.</div></div>';
+    return h;
+  }
+  var n=H.length, X0=36, X1=306, Y0=14, Y1=150;
+  var px=function(i){ return n===1?(X0+X1)/2 : X0+i*(X1-X0)/(n-1) };
+  var py=function(v){ return Y1-(v/100)*(Y1-Y0) };
+  var g='';
+  [0,25,50,75,100].forEach(function(v){
+    var y=py(v);
+    g+='<line x1="'+X0+'" y1="'+y+'" x2="'+X1+'" y2="'+y+'" stroke="#EDF0F6" stroke-width="1"/>'
+      +'<text x="'+(X0-7)+'" y="'+(y+3.5)+'" font-size="9" fill="#6B7393" text-anchor="end">'+v+'</text>';
+  });
+  TRAX.forEach(function(ax,ai){
+    var segs=[],cur=[];
+    H.forEach(function(e,i){
+      var v=(e.a||[])[ai];
+      if(v==null){ if(cur.length)segs.push(cur); cur=[]; }
+      else cur.push([px(i),py(v)]);
+    });
+    if(cur.length)segs.push(cur);
+    segs.forEach(function(sg){
+      if(sg.length>1){
+        g+='<polyline fill="none" stroke="'+ax.c+'" stroke-width="2.2" stroke-linecap="round" '
+          +'stroke-linejoin="round" points="'+sg.map(function(q){return q[0].toFixed(1)+','+q[1].toFixed(1)}).join(' ')+'"/>';
+      }
+      sg.forEach(function(q,j){
+        var lastPt=(sg===segs[segs.length-1]&&j===sg.length-1);
+        g+='<circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="'+(lastPt?3.4:2.4)+'" fill="#fff" stroke="'+ax.c+'" stroke-width="'+(lastPt?2.4:1.8)+'"/>';
+      });
+    });
+  });
+  var step=n<=5?1:Math.ceil(n/4);
+  H.forEach(function(e,i){
+    if(i%step!==0 && i!==n-1) return;
+    var lb=String(e.t).slice(5).replace('-','.');
+    g+='<text x="'+px(i).toFixed(1)+'" y="167" font-size="9.5" fill="#6B7393" text-anchor="middle">'+lb+'</text>';
+  });
+  h+='<p class="sub">진단을 다시 하실 때마다 한 점씩 찍힙니다. 위로 갈수록 그 축이 선명해진 것입니다.</p>'
+   +'<div class="trend-box"><svg viewBox="0 0 320 176" xmlns="http://www.w3.org/2000/svg">'+g+'</svg>'
+   +'<div class="trend-leg">'+TRAX.map(function(a){
+       return '<span><i style="background:'+a.c+'"></i>'+a.n+'</span>'}).join('')+'</div></div>';
+  var first=H[0], last=H[n-1], deltas=[];
+  h+='<div class="trend-delta">'+TRAX.map(function(ax,ai){
+    var f=null,l=null;
+    for(var i=0;i<n;i++){ if(H[i].a[ai]!=null){ f=H[i].a[ai]; break } }
+    for(var j=n-1;j>=0;j--){ if(H[j].a[ai]!=null){ l=H[j].a[ai]; break } }
+    var body;
+    if(f==null||l==null){ body='<div class="tdv tflat">—</div>'; }
+    else{
+      var d=l-f; deltas.push({n:ax.n,d:d});
+      var cls=d>2?'tup':(d<-2?'tdown':'tflat');
+      var sgn=d>0?'+'+d:(d<0?String(d):'변화 없음');
+      body='<div class="tdv '+cls+'">'+l+'<span style="font-size:11.5px;font-weight:600;margin-left:6px">'+sgn+'</span></div>';
+    }
+    return '<div><div class="tdn">'+ax.n+'</div>'+body+'</div>';
+  }).join('')+'</div>';
+  var span=String(first.t).replace(/-/g,'.')+' → '+String(last.t).replace(/-/g,'.');
+  var note='<b>'+span+'</b> 사이의 변화입니다. ';
+  if(deltas.length){
+    deltas.sort(function(a,b){return b.d-a.d});
+    var up=deltas[0], dn=deltas[deltas.length-1];
+    if(up.d>2) note+=jo(up.n,'이','가')+' 가장 많이 올랐습니다. ';
+    if(dn.d<-2) note+=jo(dn.n,'은','는')+' 내려갔습니다. 이번 달에 먼저 볼 곳입니다.';
+    else if(up.d<=2) note+='네 축 모두 큰 변동은 없습니다. 지금 리듬이 유지되고 있다는 뜻입니다.';
+  }
+  note+='<br>점수 자체보다 <b>선의 방향</b>을 보세요. 한 번의 점수는 그날의 상태이고, 이어진 선이 여러분의 기록입니다.';
+  h+='<div class="trend-note">'+note+'</div></div>';
+  return h;
+}
+
+function loopView(){
+  return '<div class="sec">'+sn()+'<h2>다시 볼 날짜를 미리 정해 두세요</h2>'
+   +'<p class="sub">기억에 맡기면 대부분 잊습니다. 다시 볼 날을 지금 캘린더에 넣어 두시면, '
+   +'그날 알림이 오고 위의 변화 기록에 점이 하나 더 찍힙니다.</p>'
+   +'<div class="card"><div style="font-size:14.5px;line-height:1.75;color:#2D3748;word-break:keep-all">'
+   +'&quot;그 문장, 지켜졌나요?&quot; — 캘린더에 담으시면 <b>그날 오전 9시에 휴대폰이 알려줍니다.</b> '
+   +'일정 안에 보관 링크도 같이 들어가니, 기기를 바꾸셔도 그 링크로 이어서 보실 수 있습니다.<br>'
+   +(AUTH_USER?'회원이시니 4주 뒤 같은 안내를 메일로도 보내 드립니다. 캘린더는 겹쳐 두셔도 됩니다.':'저희가 이메일이나 문자를 보내지는 않습니다. 여러분의 캘린더에만 담깁니다.')+'</div>'
+   +'<div class="btn-row ics-row no-print" style="margin-top:14px">'
+   +'<button class="btn" onclick="makeICS(&#39;once&#39;)">4주 뒤</button>'
+   +'<button class="btn ghost" onclick="makeICS(&#39;month&#39;)">매달</button>'
+   +'<button class="btn ghost" onclick="makeICS(&#39;quarter&#39;)">3개월마다</button>'
+   +'</div><div class="ics-hint">매달은 1년치, 3개월마다는 2년치 반복 일정으로 담깁니다. 언제든 캘린더에서 지우실 수 있습니다.</div>'
+   +'</div></div>';
+}
+
+function keepView(){
+  return '<div class="sec no-print">'+sn()+'<h2>결과 보관</h2>'
+   +'<p class="sub">회원가입을 하지 않으시면 결과는 <b>이 브라우저에만</b> 저장됩니다. 서버로 보내지 않고, 이름이나 이메일도 받지 않습니다. '
+   +'진단과 기록은 회원가입 없이 모두 무료로 쓰실 수 있습니다.</p>'
+   +'<div class="warn"><b>기기를 바꾸거나 브라우저 데이터를 지우면 사라집니다</b>'
+   +'특히 아이폰 사파리는 한동안 방문이 없으면 저장된 내용을 스스로 지웁니다. '
+   +'다음에 다시 보시려면 아래 보관 링크를 카톡 &quot;나에게 보내기&quot;로 남겨 두시는 편이 안전합니다.</div>'
+   +'<div class="btn-row"><button class="btn" onclick="copyKeep()">🔗 보관 링크 복사</button>'
+   +'<button class="btn ghost" onclick="shareKeep()">보내기</button></div>'
+   +'<div class="btn-row"><button class="btn ghost" onclick="printAll()">🖨 인쇄 · PDF로 저장</button>'
+   +'<button class="btn ghost" onclick="dlJSON()">백업 파일</button></div>'
+   +(COLLECT_URL?('<label class="optin"><input type="checkbox" '+(collectOptedIn()?'checked':'')+' onchange="toggleCollect(this)">'
+     +'<span><b>익명으로 기준 만들기에 참여합니다</b>'
+     +'지금의 단계 구분(낮음·보통·높음)은 아직 이론적으로 잡은 임시 경계입니다. '
+     +'점수와 단계만 익명으로 모이면 실제 분포로 경계를 다시 잡을 수 있습니다. '
+     +'<b>문항별 답, 설계 문장, 이름·이메일은 보내지 않습니다.</b> 언제든 해제하실 수 있습니다.</span></label>'):'')
+   +acctCard()
+   +'<div class="note"><b>보관 링크에 담기는 것</b>진단 점수와 남기신 설계 문장·기록만 담깁니다. 문항별 응답은 담기지 않습니다. '
+   +'링크를 여시면 이 기기의 결과와 합쳐집니다.</div></div>';
+}
+
+/* ───────── 동작 ───────── */
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+
+function bindDesign(bn){
+  const box=document.getElementById('opts'); if(!box)return;
+  const w3=document.getElementById('w3');
+  const opts=optsOf(bn?bn.key:'N');
+  let pickTxt='', pickPh='';
+  const upd=()=>{
+    const pl=document.getElementById('prevLine');
+    if(!pl)return;
+    const what = (pickTxt || (w3?(w3.value||'').trim():''));
+    pl.classList.toggle('filled', !!what);
+    pl.innerHTML='<span class="pl-lab">저장될 문장</span>'
+      + (what ? '<b>'+esc(document.getElementById('w1').value+' '+document.getElementById('w2').value+' '+what)+'</b>'
+              : '<span class="pl-empty">위에서 하나를 고르면 여기에 문장이 보입니다</span>');
+  };
+  box.querySelectorAll('.m-pick').forEach(b=>{
+    b.onclick=()=>{
+      box.querySelectorAll('.m-pick').forEach(x=>x.classList.remove('on'));
+      box.querySelectorAll('.m-card').forEach(x=>x.classList.remove('on'));
+      b.classList.add('on'); if(b.parentElement)b.parentElement.classList.add('on');
+      const fr=document.getElementById('mfree');
+      if(b.dataset.i==='free'){
+        pickTxt=''; pickPh='';
+        if(fr){fr.classList.add('open'); if(w3)w3.focus();}
+      }else{
+        const o=opts[+b.dataset.i];
+        pickTxt=o.t; pickPh=o.ph||'';
+        if(fr)fr.classList.remove('open');
+      }
+      upd();
+    };
+  });
+  box.querySelectorAll('.m-ex-btn').forEach(b=>{
+    b.onclick=()=>{
+      const p=document.getElementById('mex'+b.dataset.ex);
+      const open=p.classList.toggle('open');
+      b.textContent=open?'예시 접기 ▴':'이렇게 기록됩니다 ▾';
+    };
+  });
+  if(w3)w3.addEventListener('input',upd);
+  document.getElementById('w1').addEventListener('change',upd);
+  document.getElementById('w2').addEventListener('change',upd);
+  upd();
+  document.getElementById('saveDesign').onclick=()=>{
+    const what = (pickTxt || (w3?(w3.value||'').trim():''));
+    if(!what){toast('무엇을 적으실지 하나만 골라 주세요');return}
+    const text=document.getElementById('w1').value+' '+document.getElementById('w2').value+' '+what;
+    P.designs.push({id:newDesignId(),ts:today(),axis:bn?bn.key:'N',text:text,ph:pickPh||''});
+    P.updated=today();save(P);toast('설계 문장이 저장되었습니다');
+    render();
+    setTimeout(()=>{const el=document.getElementById('sec-account-nudge')||document.querySelector('.sent');if(el)el.scrollIntoView({behavior:'smooth',block:'center'})},200);
+  };
+}
+function newDesignId(){
+  let m=0;(P.designs||[]).forEach(d=>{if(typeof d.id==='number'&&d.id>m)m=d.id});
+  return m+1;
+}
+function delDesign(i){
+  const d=P.designs[i];
+  P.designs.splice(i,1);
+  // 지운 문장의 과거 체크 기록도 함께 정리
+  if(d&&P.checks){for(const k in P.checks){
+    const a=P.checks[k].filter(x=>x!==d.id);
+    if(a.length)P.checks[k]=a;else delete P.checks[k];
+  }}
+  P.updated=today();save(P);render();
+}
+
+function keepUrl(){return BASE+'/report/?d='+pack(P)}
+const OPTKEY='nadaum.collect.optin';
+function collectOptedIn(){try{return localStorage.getItem(OPTKEY)==='1'}catch(e){return false}}
+function toggleCollect(el){
+  try{localStorage.setItem(OPTKEY, el.checked?'1':'0')}catch(e){}
+  if(el.checked){ sendAnon(); toast('감사합니다. 점수와 단계만 익명으로 보냈습니다'); }
+}
+function sendAnon(){
+  if(!COLLECT_URL||!collectOptedIn())return;
+  try{
+    const A=axes(P);
+    const body={id:P.id, d:today(),
+      n:A.N.v, e1:A.E1.v, e2:A.E2.v, dd:A.D.v,
+      sn:segOf(P,'N',A), se1:segOf(P,'E1',A), se2:segOf(P,'E2',A), sd:segOf(P,'D',A),
+      qv:feedSigOf(P)};
+    fetch(COLLECT_URL,{method:'POST',mode:'no-cors',
+      headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body)}).catch(()=>{});
+  }catch(e){}
+}
+function copyKeep(){
+  const u=keepUrl();
+  const go=()=>{toast('보관 링크가 복사되었습니다'); setTimeout(nudgeAccount,900)};
+  if(navigator.clipboard)navigator.clipboard.writeText(u).then(go).catch(()=>legacy(u,go));
+  else legacy(u,go);
+}
+function legacy(t,cb){const a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.left='-9999px';
+  document.body.appendChild(a);a.select();try{document.execCommand('copy');cb()}catch(e){toast('복사에 실패했습니다')}document.body.removeChild(a)}
+function shareKeep(){
+  const u=keepUrl();
+  const t='나의 나다움 설계 리포트입니다. 이 링크를 열면 결과가 복원됩니다.\n\n'+u;
+  if(navigator.share)navigator.share({title:'나다움 설계 리포트',text:t}).catch(()=>copyKeep());
+  else copyKeep();
+}
+function dlJSON(){
+  const b=new Blob([JSON.stringify(P,null,1)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(b);
+  a.download='나다움설계_'+P.id+'.json';a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+  toast('백업 파일을 내려받았습니다');
+}
+function icsFold(line){
+  // RFC 5545 — 한 줄 75옥텟 제한. UTF-8 이므로 바이트 기준으로 접고, 이어지는 줄은 공백으로 시작한다.
+  const enc=new TextEncoder(), out=[]; let cur='', bytes=0;
+  for(const ch of line){
+    const n=enc.encode(ch).length;
+    if(bytes+n>73){ out.push(cur); cur=' '; bytes=1; }
+    cur+=ch; bytes+=n;
+  }
+  out.push(cur);
+  return out.join('\r\n');
+}
+function icsEsc(s){return String(s).replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n')}
+function makeICS(mode){
+  mode=mode||'once';
+  const MI={once:{lab:'4주 뒤',rr:'',fn:'4주점검'},
+            month:{lab:'매달',rr:'RRULE:FREQ=MONTHLY;COUNT=12',fn:'매달점검'},
+            quarter:{lab:'3개월마다',rr:'RRULE:FREQ=MONTHLY;INTERVAL=3;COUNT=8',fn:'분기점검'}}[mode];
+  const d=new Date();d.setDate(d.getDate()+28);
+  const ymd=d.toISOString().slice(0,10).replace(/-/g,'');
+  const nx=new Date(d);nx.setDate(nx.getDate()+1);
+  const short=BASE+'/report/';
+  const keep=keepUrl();
+  const desc=(mode==='once'?'4주 전 남기신 설계 문장을 다시 봅니다.':'지난번 남기신 설계 문장을 다시 봅니다. 진단을 다시 하시면 변화 기록에 점이 하나 더 찍힙니다.')+'\n\n'
+    +'· 진단하셨던 기기·브라우저에서 여시면 그대로 이어집니다: '+short+'\n\n'
+    +'· 기기를 바꾸셨거나 결과가 사라졌다면 아래 보관 링크로 여세요:\n'+keep;
+  const lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//나다움설계연구소//NEED//KO','CALSCALE:GREGORIAN',
+    'BEGIN:VEVENT','UID:need-'+P.id+'-'+mode+'-'+ymd+'@nadaumlap.github.io',
+    'DTSTAMP:'+new Date().toISOString().replace(/[-:]/g,'').slice(0,15)+'Z',
+    'DTSTART;VALUE=DATE:'+ymd,'DTEND;VALUE=DATE:'+nx.toISOString().slice(0,10).replace(/-/g,''),
+    'SUMMARY:'+icsEsc('그 문장, 지켜졌나요? — 나다움 설계 점검'),
+    'DESCRIPTION:'+icsEsc(desc),
+    'URL:'+short]
+    .concat(MI.rr?[MI.rr]:[])
+    .concat([
+    'BEGIN:VALARM','TRIGGER:PT9H','ACTION:DISPLAY',
+    'DESCRIPTION:'+icsEsc('나다움 설계 점검'),'END:VALARM','END:VEVENT','END:VCALENDAR']);
+  const ics=lines.map(icsFold).join('\r\n')+'\r\n';
+  const b=new Blob([ics],{type:'text/calendar;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(b);
+  a.download='나다움설계_'+MI.fn+'.ics';a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+  toast(MI.lab+' 일정을 내려받았습니다');
+}
+
+/* ───────── 계정 · 동기화 ─────────
+   흐름: 이메일 입력 → 매직링크 메일 → 링크를 열면 이 페이지로 돌아와 로그인됨
+        → 서버 프로필과 이 기기 프로필을 합쳐 양쪽에 저장
+        → 이후 save()가 호출될 때마다 1.5초 뒤 서버에 올린다.
+   서버에 올라가는 것은 localStorage의 프로필 JSON 그대로(점수·설계 문장·기록·히스토리).
+   문항별 응답은 애초에 프로필에 없으므로 올라가지 않는다. */
+let SB=null, AUTH_USER=null, _cloudT=null, _cloudBusy=false, _lastSync='';
+const AUTH_DISMISS='nadaum.auth.dismiss';
+function authReady(){return !!(AUTH.url&&AUTH.key)}
+function authDismissed(){try{return localStorage.getItem(AUTH_DISMISS)==='1'}catch(e){return false}}
+function dismissAuth(){try{localStorage.setItem(AUTH_DISMISS,'1')}catch(e){} render();}
+function initAuth(){
+  if(!authReady())return;
+  const s=document.createElement('script');
+  s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js';
+  s.onload=function(){
+    try{
+      SB=window.supabase.createClient(AUTH.url,AUTH.key,{auth:{persistSession:true,detectSessionInUrl:true,flowType:'implicit'}});
+      SB.auth.getSession().then(r=>{const u=r&&r.data&&r.data.session?r.data.session.user:null; setUser(u,false)});
+      SB.auth.onAuthStateChange((ev,sess)=>{
+        const u=sess?sess.user:null;
+        if(ev==='SIGNED_IN'&&u&&(!AUTH_USER||AUTH_USER.id!==u.id)) setUser(u,true);
+        else if(ev==='SIGNED_OUT') setUser(null,false);
+      });
+    }catch(e){}
+  };
+  document.head.appendChild(s);
+}
+function setUser(u,fresh){
+  const was=AUTH_USER; AUTH_USER=u;
+  if(u){
+    cloudPull().then(remote=>{
+      const local=load();
+      const merged=mergeProfiles(local,remote)||local||blank();
+      try{localStorage.setItem(KEY,JSON.stringify(merged))}catch(e){}
+      return cloudPush(merged);
+    }).then(()=>{ if(fresh)toast('로그인되었습니다. 기록이 계정에 이어집니다'); render(); })
+      .catch(()=>{ render(); });
+  }else{ if(was)render(); }
+}
+let _remindOn=true;
+function cloudPull(){
+  if(!SB||!AUTH_USER)return Promise.resolve(null);
+  return SB.from(AUTH.table).select('data,updated_at,remind_on').eq('user_id',AUTH_USER.id).maybeSingle()
+    .then(r=>{ if(r&&r.data){ _lastSync=r.data.updated_at||''; if(typeof r.data.remind_on==='boolean')_remindOn=r.data.remind_on; return r.data.data||null } return null })
+    .catch(()=>null);
+}
+function setRemind(on){
+  _remindOn=!!on; if(!SB||!AUTH_USER)return;
+  SB.from(AUTH.table).update({remind_on:_remindOn}).eq('user_id',AUTH_USER.id)
+    .then(()=>toast(_remindOn?'4주 뒤 메일로 알려 드립니다':'알림 메일을 보내지 않습니다')).catch(()=>{});
+}
+function cloudPush(p){
+  if(!SB||!AUTH_USER)return Promise.resolve();
+  p=p||load(); if(!p)return Promise.resolve();
+  _cloudBusy=true;
+  return SB.from(AUTH.table).upsert({user_id:AUTH_USER.id,report_id:p.id,data:p,updated_at:new Date().toISOString()},{onConflict:'user_id'})
+    .then(()=>{_lastSync=new Date().toISOString(); _cloudBusy=false; const el=document.getElementById('syncState'); if(el)el.textContent=syncLabel();})
+    .catch(()=>{_cloudBusy=false});
+}
+function cloudQueue(){
+  if(!SB||!AUTH_USER)return;
+  clearTimeout(_cloudT); _cloudT=setTimeout(()=>cloudPush(),1500);
+}
+function syncLabel(){
+  if(!_lastSync)return '동기화 대기 중';
+  const d=new Date(_lastSync); if(isNaN(d))return '동기화됨';
+  return '마지막 동기화 '+(d.getMonth()+1)+'.'+d.getDate()+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+}
+function signIn(inputId){
+  const el=document.getElementById(inputId); const email=(el?el.value:'').trim();
+  const agree=document.getElementById(inputId+'-agree');
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){toast('이메일 주소를 확인해 주세요');return}
+  if(agree&&!agree.checked){toast('개인정보 처리 안내에 동의해 주세요');return}
+  if(!SB){toast('잠시 뒤 다시 눌러 주세요');return}
+  const btn=document.getElementById(inputId+'-btn'); if(btn){btn.disabled=true;btn.textContent='보내는 중…'}
+  SB.auth.signInWithOtp({email:email,options:{emailRedirectTo:BASE+'/report/'}})
+    .then(r=>{
+      if(r&&r.error){toast('메일을 보내지 못했습니다. 잠시 뒤 다시 시도해 주세요'); if(btn){btn.disabled=false;btn.textContent='로그인 링크 받기'} return}
+      const box=document.getElementById(inputId+'-box');
+      if(box)box.innerHTML='<div class="acct-sent"><b>'+esc(email)+'</b>로 링크를 보냈습니다.<br>메일의 링크를 열면 이 리포트가 계정에 연결됩니다. 링크는 1시간 동안 유효합니다.</div>';
+    });
+}
+function signOut(){ if(SB)SB.auth.signOut().then(()=>{AUTH_USER=null;_lastSync='';toast('로그아웃했습니다. 이 기기의 기록은 그대로 남습니다');render()}); }
+function acctForm(id,lead){
+  return '<div id="'+id+'-box">'
+   +(lead?'<p class="acct-lead">'+lead+'</p>':'')
+   +'<div class="acct-row"><input id="'+id+'" type="email" inputmode="email" autocomplete="email" placeholder="이메일 주소">'
+   +'<button class="btn" id="'+id+'-btn" onclick="signIn(\''+id+'\')">로그인 링크 받기</button></div>'
+   +'<label class="acct-agree"><input type="checkbox" id="'+id+'-agree"><span>이메일 주소와 진단 점수·설계 문장·기록을 계정에 보관하는 데 동의합니다. '
+   +'이름은 받지 않습니다. 언제든 계정과 기록을 지울 수 있습니다. <a href="'+AUTH.privacy+'" target="_blank" rel="noopener">개인정보 처리 안내</a></span></label>'
+   +'</div>';
+}
+/* 가입 카드 1 — 첫 설계 문장을 남긴 직후, 기록 탭 문장 목록 위에 한 번 */
+function acctNudge(){
+  if(!authReady()||AUTH_USER||authDismissed())return '';
+  if(!(P.designs&&P.designs.length))return '';
+  return '<div class="acct nudge" id="sec-account-nudge">'
+   +'<button class="acct-x no-print" onclick="dismissAuth()" title="닫기">×</button>'
+   +'<div class="acct-t">이 문장을 다른 기기에서도 보시려면 이메일 하나면 됩니다</div>'
+   +acctForm('em1','지금 기록은 이 브라우저에만 있습니다. 이메일로 로그인해 두면 휴대폰과 컴퓨터에서 같은 기록이 이어지고, 4주 뒤 다시 볼 때 메일로 알려 드립니다.')
+   +'</div>';
+}
+/* 가입 카드 2 — 결과 보관 섹션의 고정 자리 */
+function acctCard(){
+  if(!authReady()){
+    return '<div class="soon"><b>장기 보관 — 준비 중입니다</b>'
+     +'나만의 기록을 오래 보관하고 싶으신 분을 위해, 회원가입(무료)으로 기록을 계속 이어서 보관·관리하는 기능을 준비하고 있습니다. '
+     +'지금은 위의 보관 링크가 같은 역할을 합니다.</div>';
+  }
+  if(AUTH_USER){
+    return '<div class="acct on" id="sec-account"><div class="acct-t">계정에 이어지고 있습니다</div>'
+     +'<div class="acct-me"><b>'+esc(AUTH_USER.email||'')+'</b><span id="syncState">'+syncLabel()+'</span></div>'
+     +'<p class="acct-lead">이 기기에서 남기는 문장과 기록은 자동으로 계정에 저장됩니다. 다른 기기에서 같은 이메일로 로그인하면 이어집니다.</p>'
+     +'<label class="acct-agree" style="margin:0 0 12px"><input type="checkbox" id="remindOn" '+(_remindOn?'checked':'')+' onchange="setRemind(this.checked)"><span>4주 뒤 다시 볼 때 메일로 알려 주세요</span></label>'
+     +'<div class="btn-row"><button class="btn ghost" onclick="cloudPush().then(()=>toast(\'지금 저장했습니다\'))">지금 저장</button>'
+     +'<button class="btn ghost" onclick="signOut()">로그아웃</button></div>'
+     +'<div class="acct-foot">계정과 기록을 모두 지우시려면 <a href="mailto:?subject='+encodeURIComponent('나다움 설계 계정 삭제 요청')+'&body='+encodeURIComponent('삭제할 계정 이메일: '+(AUTH_USER.email||''))+'">삭제 요청</a>을 보내 주세요. 확인 후 지웁니다.</div></div>';
+  }
+  return '<div class="acct" id="sec-account"><div class="acct-t">기록을 오래 갖고 싶다면 — 회원가입(무료)</div>'
+   +acctForm('em2','진단과 리포트는 가입 없이 그대로 쓰실 수 있습니다. 가입은 기기를 바꿔도 기록이 이어지고, 변화 기록이 제한 없이 남고, 4주 뒤 메일로 알림을 받고 싶은 분을 위한 것입니다.')
+   +'</div>';
+}
+function nudgeAccount(){
+  if(!authReady()||AUTH_USER)return;
+  const t=document.getElementById('sec-account');
+  if(t){t.scrollIntoView({behavior:'smooth',block:'center'});t.classList.add('sec-flash');setTimeout(()=>t.classList.remove('sec-flash'),1800)}
+}
+
+/* ───────── 시작 ───────── */
+(function(){
+  const merged=mergeFromUrl();
+  initAuth();
+  render();
+  if(merged){
+    toast('보관 링크의 결과를 불러왔습니다');
+    history.replaceState(null,'',location.pathname);
+  }
+})();
+</script>
+</body>
+</html>
