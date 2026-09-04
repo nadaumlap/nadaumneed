@@ -448,6 +448,13 @@ body {
 .rep-cta .rc-h{font-size:18px;font-weight:800;color:#FFF;margin-bottom:8px;line-height:1.45;word-break:keep-all;font-family:-apple-system,'SF Pro Display','Apple SD 산돌고딕 Neo','Pretendard',sans-serif}
 .rep-cta .rc-d{font-size:13.5px;color:#C7CEE4;line-height:1.7;word-break:keep-all;margin-bottom:12px}
 .rep-cta .rc-go{font-size:14px;font-weight:700;color:#FFF}
+
+.cover-more{margin:14px 0 0;text-align:left;}
+.cover-more>summary{cursor:pointer;list-style:none;text-align:center;font-size:13px;color:#7A8796;padding:10px 0;}
+.cover-more>summary::-webkit-details-marker{display:none;}
+.cover-more>summary::after{content:" ▾";}
+.cover-more[open]>summary::after{content:" ▴";}
+.cover-more>summary:hover{color:#3F4C5A;}
 </style>
 </head>
 <body>
@@ -478,7 +485,8 @@ body {
     </div>
     <button class="btn-start" onclick="startQuiz()">진단 시작하기 →</button>
 
-    <div class="phase-row">
+    <details class="cover-more"><summary>진단 구성이 궁금하신가요?</summary>
+<div class="phase-row">
       <div class="phase-item p1">
         <div class="pi-icon">○</div>
         <div class="pi-label">기질 토대</div>
@@ -502,6 +510,7 @@ body {
       이 세 층이 어떻게 연결되어 있는지 볼 때,<br>
       "왜 열심히 해도 지치는가"의 구조적 원인이 보입니다.
     </div>
+</details>
   </div>
 </section>
 
