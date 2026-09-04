@@ -456,7 +456,7 @@ body{font-family:'Pretendard','Noto Sans KR',sans-serif;background:#F8F9FB !impo
       <ul class="scope-list">
         <li><strong>눈치 압력</strong> — 주변 반응을 먼저 살피게 만드는 잡음</li>
         <li><strong>비교 압력</strong> — 남들과의 비교가 먼저 작동하게 만드는 잡음</li>
-        <li><strong>비교 노출</strong> — SNS 알고리즘이 노출시키는 잡음</li>
+        <li><strong>알고리즘 노출</strong> — SNS 알고리즘이 노출시키는 잡음</li>
       </ul>
       <div class="scope-note"><strong style="color:#1E2761">② 심리적 잡음</strong>(성장과정에서 형성된 내면 잡음 — 완벽주의·자존심 의존·감정 회피 패턴 등)은 <strong style="color:#1E2761">별도 진단</strong>으로 곧 출시됩니다.</div>
     </div>
@@ -509,12 +509,12 @@ body{font-family:'Pretendard','Noto Sans KR',sans-serif;background:#F8F9FB !impo
   <div class="screen" id="screen-slider">
     <div class="prog-wrap">
       <div class="prog-top">
-        <span class="prog-section">비교 노출 · 1/6</span>
+        <span class="prog-section">알고리즘 노출 · 1/6</span>
         <span class="prog-count">13 / 18</span>
       </div>
       <div class="prog-bar"><div class="prog-fill" style="width:67%;background:#C9983A"></div></div>
     </div>
-    <div class="section-pill pill-E2">비교 노출</div>
+    <div class="section-pill pill-E2">알고리즘 노출</div>
     <h2 class="q-text" id="sliderQText">하루에 평균 SNS(인스타그램, 틱톡, 유튜브 쇼츠 등)를 얼마나 보시나요?</h2>
     <p class="q-hint" style="display:block">대략적인 평균값으로 답해주시면 됩니다.</p>
     <div class="slider-wrap">
@@ -585,7 +585,7 @@ body{font-family:'Pretendard','Noto Sans KR',sans-serif;background:#F8F9FB !impo
         <div class="noise-item-desc">남들과의 비교가 먼저 작동해 내 기준이 자라날 자리를 잃는 잡음</div>
       </div>
       <div class="noise-item">
-        <div class="noise-item-name"><span class="noise-item-num">3</span><span id="noise3Name">비교 노출</span></div>
+        <div class="noise-item-name"><span class="noise-item-num">3</span><span id="noise3Name">알고리즘 노출</span></div>
         <div class="noise-item-desc" id="noise3Desc">SNS 알고리즘이 반복 노출한 것을 내 욕구로 착각하게 만드는 잡음</div>
       </div>
     </div>
@@ -909,7 +909,7 @@ const NOISE_BASE = {
     coreNeed: '내 인생을 내 손으로 정의하고 싶다'
   },
   3: {
-    name: '비교 노출',
+    name: '알고리즘 노출',
     define: 'SNS 알고리즘이 반복 노출한 것을 내 욕구로 착각하게 만드는 잡음',
     defineKakao: '카톡 프사·단톡방의 반복 노출이 내 욕구로 착각하게 만드는 잡음',
     surfaceNeed: '세상과 연결되고 싶다',
@@ -941,7 +941,7 @@ const CONTEXT_DETAIL = {
   3: {
     headline: '의지력이 부족한 게 아닙니다. 게임의 룰 자체가 불공정합니다',
     body: [
-      'SNS 알고리즘은 사용자의 비교 노출을 <strong>24시간 지속적·증폭적</strong>으로 매개하는 디지털 환경입니다. 큐레이션된 타인의 최상의 순간만을 끝없이 보여주며, 인간의 사회비교 본능을 교묘하게 파고듭니다.',
+      'SNS 알고리즘은 사용자의 알고리즘 노출을 <strong>24시간 지속적·증폭적</strong>으로 매개하는 디지털 환경입니다. 큐레이션된 타인의 최상의 순간만을 끝없이 보여주며, 인간의 사회비교 본능을 교묘하게 파고듭니다.',
       '여러분이 무의식적으로 화면을 켜는 건 자제력 부족이 아닙니다. <strong>수십억 달러가 투입된 고도의 디지털 행동 설계</strong>가 여러분의 주의력을 빼앗아간 결과입니다. 잠시라도 머무를 시간을 주지 않도록 의도적으로 만들어진 환경에서, 의지만으로 버티는 건 처음부터 불가능에 가까웠습니다.'
     ],
     cite: '— Festinger (1954) 사회비교 이론 / Charry & Tessitore (2021) SNS 동조 효과 RCT 기반 해석'
@@ -1000,7 +1000,7 @@ const SCENE_DETAIL = {
     ]
   },
   3: {
-    title: '여러분의 비교 노출은, 이런 순간에 작동합니다',
+    title: '여러분의 알고리즘 노출은, 이런 순간에 작동합니다',
     items: [
       {
         when: '아침 — 잠에서 깨자마자',
@@ -1024,7 +1024,7 @@ const SCENE_DETAIL = {
   }
 };
 
-// 카카오 분기용 — 비교 노출(3) 일상 장면 변형
+// 카카오 분기용 — 알고리즘 노출(3) 일상 장면 변형
 const SCENE_DETAIL_KAKAO_3 = {
   title: '여러분의 카톡·온라인 노출은, 이런 순간에 작동합니다',
   items: [
@@ -1248,7 +1248,7 @@ const RESULT_DETAIL = {
   },
   'high-3': {
     desc: '여러분은 알고리즘이 큐레이션한 콘텐츠에 거의 끊임없이 노출되고 있어요. 그 노출이 어느새 "내가 원하는 것"의 모습을 결정하고 있습니다. 이건 의지의 문제가 아니라 환경 설계의 문제입니다.',
-    warningBody: '비교 노출(SNS 알고리즘이 반복 노출한 것을 내 욕구로 착각하게 만드는 잡음)이 잦으면, 내 안의 진짜 욕구(<strong>내부 발생 동기</strong>)와 알고리즘이 반복 노출해 만든 욕구(<strong>외부 유도 동기</strong>)의 경계가 무너집니다. 더 무서운 건, 어느 순간부터는 "이게 내가 원해서 보는 건지, 그냥 보다 보니 원하게 된 건지" 스스로도 알 수 없게 된다는 점입니다.',
+    warningBody: '알고리즘 노출(SNS 알고리즘이 반복 노출한 것을 내 욕구로 착각하게 만드는 잡음)이 잦으면, 내 안의 진짜 욕구(<strong>내부 발생 동기</strong>)와 알고리즘이 반복 노출해 만든 욕구(<strong>외부 유도 동기</strong>)의 경계가 무너집니다. 더 무서운 건, 어느 순간부터는 "이게 내가 원해서 보는 건지, 그냥 보다 보니 원하게 된 건지" 스스로도 알 수 없게 된다는 점입니다.',
     warningCite: 'Charry & Tessitore (2021) + SDT 기반 해석',
     needFoundTitle: '여러분 안에서 작동 중인 욕구',
     needFoundBody: [
@@ -1374,7 +1374,7 @@ function getQuestionText(idx){
 function getSectionInfo(idx){
   if (idx <= 5) return {section:'눈치 압력', sectionNum:idx+1, sectionTotal:6, color:'#2979C8', cls:'pill-N', btnCls:'btn-N', activeCls:'active-N'};
   if (idx <= 11) return {section:'비교 압력', sectionNum:idx-5, sectionTotal:6, color:'#3DAA6B', cls:'pill-E1', btnCls:'btn-E1', activeCls:'active-E1'};
-  return {section:'비교 노출', sectionNum:idx-11, sectionTotal:6, color:'#C9983A', cls:'pill-E2', btnCls:'btn-E2', activeCls:'active-E2'};
+  return {section:'알고리즘 노출', sectionNum:idx-11, sectionTotal:6, color:'#C9983A', cls:'pill-E2', btnCls:'btn-E2', activeCls:'active-E2'};
 }
 
 function updateProgress(){
@@ -1607,7 +1607,7 @@ function renderResult(){
       document.getElementById('noise3Name').textContent = '카톡·온라인 노출';
       document.getElementById('noise3Desc').textContent = '카톡 프사·단톡방의 반복 노출이 내 욕구로 착각하게 만드는 잡음';
     } else {
-      document.getElementById('noise3Name').textContent = '비교 노출';
+      document.getElementById('noise3Name').textContent = '알고리즘 노출';
       document.getElementById('noise3Desc').textContent = 'SNS 알고리즘이 반복 노출한 것을 내 욕구로 착각하게 만드는 잡음';
     }
   } else {
