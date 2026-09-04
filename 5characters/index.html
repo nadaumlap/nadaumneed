@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="color-scheme" content="light only">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>나의 에너지는 어디로 흐를까? — 5러 경향성 진단 v2 | 나다움설계연구소</title>
+<title>나의 에너지는 어디로 흐를까? — 5러 몰입 경향성 진단 | 나다움설계연구소</title>
 
 <meta property="og:title" content="나의 에너지는 어디로 흐를까?">
-<meta property="og:description" content="5러 경향성 진단 · 빅파이브 단축형 기반 · 15문항 · 약 5분 · 무료 — 나다움설계연구소">
+<meta property="og:description" content="5러 몰입 경향성 진단 · 빅파이브 단축형 기반 · 15문항 · 약 5분 · 무료 — 나다움설계연구소">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nadaumlap.github.io/nadaumneed/5characters/">
 <meta property="og:image" content="https://nadaumlap.github.io/nadaumneed/5characters/og-image.png">
@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="나다움설계연구소">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="나의 에너지는 어디로 흐를까?">
-<meta name="twitter:description" content="5러 경향성 진단 · 15문항 · 약 5분 · 무료">
+<meta name="twitter:description" content="5러 몰입 경향성 진단 · 15문항 · 약 5분 · 무료">
 <meta name="twitter:image" content="https://nadaumlap.github.io/nadaumneed/5characters/og-image.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -502,7 +502,7 @@ function toggleDetail(){
   }
 }
 /* ============================================
-   5러 경향성 진단 v2
+   5러 몰입 경향성 진단
    15문항, 5경향 × 3문항, 주·보조 경향 산출
    ============================================ */
 
@@ -1076,8 +1076,8 @@ function renderDetailCard(char, isMain) {
 // ===== 공유 =====
 function shareLink() {
   const url = "https://nadaumlap.github.io/nadaumneed/5characters/";
-  const text = `"나의 에너지는 어디로 흐를까?" 5러 경향성 진단을 해봤어요. 약 5분이에요.\n\n${url}`;
-  if (navigator.share) navigator.share({title:"5러 경향성 진단",text}).catch(()=>copyToClipboard(text));
+  const text = `"나의 에너지는 어디로 흐를까?" 5러 몰입 경향성 진단을 해봤어요. 약 5분이에요.\n\n${url}`;
+  if (navigator.share) navigator.share({title:"5러 몰입 경향성 진단",text}).catch(()=>copyToClipboard(text));
   else copyToClipboard(text);
 }
 
@@ -1239,7 +1239,7 @@ function shareText5c(){
   else if (r.caseType === 'balance') head = '지금 나의 에너지는 ' + p.flowKey + ' + ' + s.flowKey + ' 두 흐름이 비슷하게 흐르고 있어요.';
   else head = '지금 나의 에너지는 ' + p.flowKey + '으로 흐르고 있어요.\n(주된 ' + p.name + ' 패턴 / 보조 ' + s.name + ' 패턴)';
   const lvl = r.caseType === 'low' ? '' : '\n주된 흐름의 강도 ' + r.peak.toFixed(1) + ' / 5.0';
-  return '5러 경향성 진단 결과\n\n' + head + lvl +
+  return '5러 몰입 경향성 진단 결과\n\n' + head + lvl +
     '\n\n에너지 경향성은 고정된 유형이 아니라 지금 시기의 에너지 패턴이에요.\n5분이면 해볼 수 있어요 👇\nhttps://nadaumlap.github.io/nadaumneed/5characters/';
 }
 
@@ -1285,13 +1285,13 @@ async function shareResult() {
   if (isMobile5c() && navigator.canShare) {
     try {
       const file = new File([blob], fname, {type:'image/png'});
-      const data = { files:[file], text:text, title:'나의 5러 경향성' };
+      const data = { files:[file], text:text, title:'나의 5러 몰입 경향성' };
       if (navigator.canShare(data)) {
         try { await navigator.share(data); showToast('공유되었습니다'); return; }
         catch(se){ if (se.name === 'AbortError') return; }
       }
       if (navigator.canShare({files:[file]})) {
-        try { await navigator.share({files:[file], title:'나의 5러 경향성'});
+        try { await navigator.share({files:[file], title:'나의 5러 몰입 경향성'});
           copyToClipboard(text); showToast('카드 공유 후, 멘트는 복사되었어요'); return;
         } catch(se){ if (se.name === 'AbortError') return; }
       }
