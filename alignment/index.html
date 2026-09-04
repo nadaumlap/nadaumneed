@@ -190,6 +190,17 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
 .cover-more>summary::after{content:" ▾";}
 .cover-more[open]>summary::after{content:" ▴";}
 .cover-more>summary:hover{color:#3F4C5A;}
+
+.one-line{background:#FFFDF5;border:1px solid #EBDFC0;border-left:4px solid #C79A2B;border-radius:12px;
+  padding:14px 16px;margin:14px 0 4px;font-size:15px;line-height:1.65;color:#16202B;text-align:left;}
+.scene-card{background:#FFF;border:1px solid #E4E9F0;border-radius:14px;padding:18px 18px 16px;margin:14px 0;text-align:left;}
+.scene-tag{font-size:12px;font-weight:700;color:#8B93A5;margin-bottom:6px;}
+.scene-lead{font-size:14.5px;color:#3F4C5A;line-height:1.6;margin:0 0 10px;}
+.scene-list{list-style:none;padding:0;margin:0;}
+.scene-list li{position:relative;padding-left:16px;font-size:14.5px;line-height:1.65;color:#16202B;margin-bottom:7px;}
+.scene-list li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:#C79A2B;}
+.scene-exp{margin-top:12px;padding-top:11px;border-top:1px dashed #E4E9F0;font-size:14px;line-height:1.6;color:#3F4C5A;}
+.scene-exp b{color:#16202B;}
 </style>
 </head>
 <body>
@@ -422,6 +433,24 @@ function jong(w){const c=String(w||'').trim().slice(-1).charCodeAt(0);if(isNaN(c
 function jo(w,a,b){return w+(jong(w)?a:b)}
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 
+
+var ONE_LINE={
+ '에너지 자각':'무엇이 나를 채우고 무엇이 나를 비우는지에 대한 감각이 아직 선명하지 않을 수 있습니다. 할 일을 먼저 찾기보다, 하고 난 뒤 몸이 어떻게 달라지는지부터 살펴보세요.',
+ '시간 배치':'무엇이 나를 살리는지는 이미 어느 정도 알고 있습니다. 다만 그 활동이 가장 좋은 시간에 들어갈 배치는 아직 부족해 보입니다. 컨디션이 좋을 때 중요한 일을 배치하도록 관심 가져 보세요.',
+ '환경 적합':'나에게 맞는 방식은 어느 정도 알고 있습니다. 다만 지금의 역할·공간·관계가 여러분의 방식을 충분히 허용하고 있는지 먼저 살펴보세요.',
+ '회복 설계':'버티는 힘은 이미 있습니다. 다만 너무 지쳐 회복이 필요해진 뒤에야 쉬는 흐름이 반복되는지 확인해 보시고, 회복을 하루 안에 미리 배치할 자리를 찾아 보세요.'
+};
+var SCENE_HTML='<div class="scene-card">'
+ +'<div class="scene-tag">생활 속 실천 팁</div>'
+ +'<p class="scene-lead">여러분을 살아나게 하는 환경을 생활 속에서 만들도록 노력해 봐요.</p>'
+ +'<ul class="scene-list">'
+ +'<li>가장 맑은 시간대에 가장 사소한 일을 처리하고 있을 때, 내 에너지 활용을 눈여겨 봐 보세요.</li>'
+ +'<li>쉬었는데도 몸과 마음이 개운해지지 않을 때는 무엇이 나를 붙잡고 있는지 생각을 정리해 보세요.</li>'
+ +'<li>늘 하던 일인데 이상하게 지칠 때는 여러분의 우선 가치를 떠올려 보세요.</li>'
+ +'</ul>'
+ +'<div class="scene-exp"><b>한 줄 실험</b> 하루 중 가장 맑은 30분을 찾아, 그 시간을 \'나를 살리는 일\'에 먼저 배치해 보세요.</div>'
+ +'</div>';
+
 function renderResult(r){
   const A=AX, w=r.weak;
   let h='<div class="rtabs"><button class="rtab on" data-go="1"><i>1</i>결과</button>'
@@ -435,7 +464,7 @@ function renderResult(r){
   h+='<p class="res-sub">'+SEGB[r.seg]+'</p>';
   if(IS_D&&vmain){
     const vd=VALUES.filter(x=>x.k===vmain)[0];
-    h+='<div class="vres"><div class="lab">지금의 우선가치</div><div class="main">'+esc(vmain)+'</div>'
+    h+='<div class="vres"><div class="lab">지금의 우선가치</div><div class="one-line">'+esc(ONE_LINE[A[w].name]||'')+'</div><div class="main">'+esc(vmain)+'</div>'
      +'<div class="md">'+esc(vd?vd.d:'')+'</div>'
      +'<div class="subs">보조가치 <b>'+vsel.filter(x=>x!==vmain).map(esc).join('</b> · <b>')+'</b></div></div>';
   }
@@ -447,7 +476,7 @@ function renderResult(r){
   });
   h+='<div class="g-note">네 축 모두 <b>높을수록 정렬된 상태</b>입니다. 단계는 평균이 아니라 <b>가장 낮은 축</b>으로 판정합니다 — 한 축이 무너져 있으면 나머지가 아무리 높아도 실제로는 그 축에서 새기 때문입니다.</div>';
   h+='</div>';
-  h+='<div class="bn-card"><div class="bn-tag">먼저 살펴볼 지점</div><div class="bn-h">'+A[w].name+'</div>'
+  h+=''+SCENE_HTML+'<div class="bn-card"><div class="bn-tag">먼저 살펴볼 지점</div><div class="bn-h">'+A[w].name+'</div>'
    +'<div class="bn-def">'+jo(A[w].name,'은','는')+' '+A[w].desc+' — 이것을 봅니다.</div>'
    +'<div class="bn-b">현재 '+STAGE_KO+' 측면에서 <b>'+A[w].name+'</b>'+(jong(A[w].name)?'이':'가')+' 가장 낮게('+r.sc[w]+') 나왔습니다. '
    +'네 축은 함께 작동합니다. 지금은 이 축이 상대적으로 낮아 먼저 살펴볼 지점으로 보입니다. '+jo(A[w].name,'을','를')+' 먼저 살펴보시면 현재 흐름을 이해하는 데 도움이 됩니다.</div>'
