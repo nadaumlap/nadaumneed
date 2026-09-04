@@ -1218,7 +1218,7 @@ function render(){
   let h='';
   if(_printing){
     nav.hidden=true;
-    h=mapView(A,bn,done)+readView(A,cr,done)+changeView()+recordView();
+    h=mapView(A,bn,done)+readExtras(A,cr,done)+changeView()+recordView();
   }else{
     const tab=curTab(), tt=tabOf(tab);
     if(('#'+tab)!==(location.hash||'#map')&&location.hash&&location.hash!=='#write'&&location.hash.indexOf('#sec-')!==0){
@@ -1226,8 +1226,7 @@ function render(){
     }
     drawNav(tab);
     let inner='';
-    if(tab==='map')        inner=mapView(A,bn,done);
-    else if(tab==='read')  inner=readView(A,cr,done);
+    if(tab==='map')        inner=mapView(A,bn,done)+readExtras(A,cr,done);
     else if(tab==='change')inner=changeView();
     else                   inner=recordView();
     h='<div class="panel" style="--tc:'+tt.c+';--tbd:'+tt.d+'">'+inner+'</div>'+stepNav(tab);
@@ -1245,9 +1244,8 @@ const IC={
  record:'<rect x="3" y="1.8" width="10.5" height="12.6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5.8 5.6h5M5.8 8.3h5M5.8 11h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>'};
 const TABS=[
  {k:'map',   no:'01',n:'나의 지도',c:'#3E6FD1',b:'#EAF1FC',d:'#CDDFF6'},
- {k:'read',  no:'02',n:'나를 읽기',c:'#CE6288',b:'#FCECF1',d:'#F4D2DE'},
- {k:'change',no:'03',n:'나의 변화',c:'#E0A03A',b:'#FDF4E2',d:'#F3E0BB'},
- {k:'record',no:'04',n:'나의 기록',c:'#3FAE93',b:'#E7F5F1',d:'#C6E7DE'}];
+ {k:'change',no:'02',n:'나의 변화',c:'#E0A03A',b:'#FDF4E2',d:'#F3E0BB'},
+ {k:'record',no:'03',n:'나의 기록',c:'#3FAE93',b:'#E7F5F1',d:'#C6E7DE'}];
 const TABK=TABS.map(t=>t.k);
 let _printing=false;
 /* 네 탭 중 하나가 첫 방문에 비어 있으면 리포트가 미완성으로 보인다.
@@ -1567,7 +1565,7 @@ function nextStepCard(){
     if(!ext.length) return '<div class="nextcard done">여섯 질문에 모두 답하셨습니다. 이제는 <a href="#record">오늘의 실천</a>을 쌓는 자리입니다.</div>';
     return '<div class="nextcard"><div class="nl">네 칸이 모두 열렸습니다</div>'
       +'<div class="nq">더 또렷하게 보고 싶으시면 심화 질문이 남아 있습니다.</div>'
-      +'<a class="nb" href="#read">심화 질문 보기 \u2192</a></div>';
+      +'<a class="nb" href="#map">심화 질문 보기 \u2192</a></div>';
   }
   const d=todo[0], n=core.length-todo.length;
   return '<div class="nextcard"><div class="nl">'+(n?'다음 칸':'여기서 시작하시면 됩니다')+' · '+d.d+'</div>'
@@ -1575,6 +1573,32 @@ function nextStepCard(){
    +'<a class="nb" href="'+d.url+'">'+d.n+' 시작하기 \u2192</a>'
    +(n?'<div class="nn">오늘은 여기까지 하셔도 됩니다. 다음 칸은 언제 열어도 이어집니다.</div>':'')
    +'</div>';
+}
+
+function readExtras(A,cr,done){
+  const m=P.modules;
+  const _vc=valueCardFromDiag();
+  let h='';
+  if(m.tendency||_vc){ h+='<div class="sec">'+sn()+'<h2>지금 시기의 흐름</h2>';
+  if(m.tendency){
+    const low=(m.tendency.flag==='low');
+    h+='<div class="card"><div style="font-size:11px;letter-spacing:1px;color:#6B7393;font-weight:700;margin-bottom:7px">지금 시기의 에너지 경향성</div>'
+     +(low
+       ? '<div style="font-size:16px;font-weight:800;line-height:1.5">지금은 어느 한 방향으로 쏠려 있지 않습니다</div>'
+        +'<div style="font-size:13px;color:#6B7393;margin-top:6px">다섯 방향의 차이가 크지 않다는 뜻입니다. 좋고 나쁨이 아니라, 지금이 여러 쪽을 고르게 쓰는 시기라는 신호입니다.</div>'
+       : (close2(m.tendency)
+         ? '<div style="font-size:16px;font-weight:800;line-height:1.5">지금은 '+FLOWKEY[m.tendency.main]+'과 '+FLOWKEY[m.tendency.sub]+', 두 흐름이 비슷한 세기입니다</div>'
+          +'<div style="font-size:13px;color:#6B7393;margin-top:6px">'+CHARS[m.tendency.main]+' 패턴 · '+CHARS[m.tendency.sub]+' 패턴 — 두 값의 차이가 문항 한 개 차이 안쪽이라 순위를 단정하지 않습니다. 둘 다 지금의 나로 읽으시면 됩니다.</div>'
+         : '<div style="font-size:16px;font-weight:800;line-height:1.5">지금 에너지는 '+FLOWKEY[m.tendency.main]+' 중심으로 흐르고 있습니다'
+          +(m.tendency.sub?'<br><span style="font-size:14px;font-weight:700;color:#4A5568">보조 흐름은 '+FLOWKEY[m.tendency.sub]+' 쪽입니다</span>':'')+'</div>'
+          +'<div style="font-size:13px;color:#6B7393;margin-top:6px">'+CHARS[m.tendency.main]+' 패턴'
+          +(m.tendency.sub?' + '+CHARS[m.tendency.sub]+' 패턴':'')+' · 고정된 유형이 아니라 지금 시기의 흐름입니다.</div>'))
+     +'</div>';
+  }
+  if(_vc)h+=_vc;
+  h+='</div>'; }
+  if(cr&&cr.length>=1) h+=crossView(cr,done.length);
+  return h;
 }
 
 function readView(A,cr,done){
