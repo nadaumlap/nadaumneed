@@ -351,6 +351,9 @@ h1, h2, h3, h4 { font-family:var(--font-title); }
 .rep-cta .rc-h{font-size:18px;font-weight:800;color:#FFF;margin-bottom:8px;line-height:1.45;word-break:keep-all;font-family:-apple-system,'SF Pro Display','Apple SD 산돌고딕 Neo','Pretendard',sans-serif}
 .rep-cta .rc-d{font-size:13.5px;color:#C7CEE4;line-height:1.7;word-break:keep-all;margin-bottom:12px}
 .rep-cta .rc-go{font-size:14px;font-weight:700;color:#FFF}
+
+.one-line{background:#FDF6F8;border:1px solid #EED8DF;border-left:4px solid #B0576F;border-radius:12px;
+  padding:14px 16px;margin:14px 0 4px;font-size:15px;line-height:1.65;color:#16202B;text-align:left;}
 </style>
 </head>
 <body>
@@ -827,6 +830,15 @@ function readingCardHTML(r) {
 }
 
 // ===== 결과 렌더링 =====
+
+var ONE_LINE_5R={
+ A:'지금의 당신은 목표가 보일 때 에너지가 빠르게 살아나는 편입니다. 그래서 목표가 흐릿한 구간에서는 힘이 떨어져 보일 수 있습니다. 이럴 땐 무엇을 향해 가는지 목표를 구체화할 필요가 있습니다.',
+ C:'지금의 당신은 함께 만들고 주고받을 때 에너지가 크게 살아나는 편입니다. 혼자만의 시간이 길어질수록 느끼는 감정을 눈여겨보고, 사람과 연결되는 방식과 빈도를 자신에게 맞게 설계해 보세요.',
+ S:'지금의 당신은 예측 가능한 리듬이 지켜질 때 깊이 들어가는 편입니다. 변화가 잦은 시기에는 불안감이 커지고 효율이 급격히 떨어질 수 있습니다. 다시 안정된 리듬을 세팅하는 데 시간을 쓰는 것이 먼저입니다.',
+ D:'지금의 당신은 하나를 깊게 파고들어 완성해 갈 때 에너지가 살아나는 편입니다. 여러 일이 동시에 열릴 때 소모가 커진다면, 집중할 하나를 정하고 나머지는 분배하거나 과감히 내려놓는 것도 방법입니다.',
+ E:'지금의 당신은 새로운 가능성을 만날 때 에너지가 살아나는 편입니다. 반복 구간에서 답답함이 커진다면, 같은 일 안에서도 실행 방법을 바꾸거나 적어도 공간이라도 바꾸는 식으로 작은 시도가 가능한 환경을 설계해 보세요.'
+};
+
 function renderResult(r) {
   const p = CHARS[r.primary];
   const s = CHARS[r.secondary];
@@ -869,6 +881,7 @@ function renderResult(r) {
       </div>`;
   }
   document.getElementById('tendency-hero-container').innerHTML = heroHTML;
+  try{var _k=(typeof primary!=='undefined')?primary:null; if(_k&&ONE_LINE_5R[_k]){document.getElementById('tendency-hero-container').insertAdjacentHTML('beforeend','<div class="one-line">'+ONE_LINE_5R[_k]+'</div>');}}catch(e){}
 
   // 2. 레이더 차트 (SVG 펜타곤)
   document.getElementById('radar-container').innerHTML = renderRadar(r.avgs);
