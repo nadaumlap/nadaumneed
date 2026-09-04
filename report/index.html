@@ -485,6 +485,33 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
   .hero-cta{background:#FFF !important;border:1px solid #1E2761}
   .hc-h,.hc-d{color:#1E2761 !important}
 }
+
+/* 로그인 인사 */
+.hello-bar{margin-left:auto;font-size:12.5px;color:#4A5568;display:flex;align-items:center;gap:6px}
+.hello-bar b{color:#1E2761;font-weight:800}
+.hello-bar .hb-dot{width:6px;height:6px;border-radius:50%;background:#3DAA6B;display:inline-block}
+@media (max-width:520px){.hello-bar{width:100%;margin:6px 0 0;order:9}}
+.jmap{margin:4px 0 18px}
+.jmap-grid{display:flex;gap:8px;align-items:stretch}
+.jstep{flex:1 1 0;position:relative;border:1.5px solid #E3E7EF;background:#F5F6F9;border-radius:13px;padding:13px 10px 12px;text-decoration:none;display:flex;flex-direction:column;gap:6px;min-width:0}
+.jstep .jno{width:26px;height:26px;border-radius:50%;background:#B9C0CE;color:#FFF;font-size:12.5px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.jstep .jt{font-size:12.5px;font-weight:800;color:#8A92A4;line-height:1.4;word-break:keep-all}
+.jstep .jv{font-size:11.5px;color:#A7AEBD;margin-top:auto}
+.jstep .jlock{position:absolute;top:11px;right:10px;font-size:13px;opacity:.5}
+.jstep.on{background:var(--jbg);border-color:var(--jbd)}
+.jstep.on .jno{background:var(--jc)}
+.jstep.on .jt{color:#1A2138}
+.jstep.on .jv{color:var(--jc);font-weight:800;font-size:13px}
+.jstep.on .jlock{opacity:1}
+.jstep.here{box-shadow:0 0 0 3px var(--jglow)}
+.jgoal{flex:0 0 62px;display:flex;align-items:center;justify-content:center;font-size:24px;border:1.5px dashed #DCE2ED;border-radius:13px;background:#FAFBFD;color:#B9C0CE}
+.jgoal.on{border-style:solid;border-color:#C9DAF0;background:#F2F7FD;color:#2979C8}
+.jmap-foot{font-size:12.5px;color:#4A5568;background:#F7F9FC;border:1px solid #E7EBF3;border-radius:10px;padding:10px 13px;margin-top:10px;line-height:1.75;word-break:keep-all}
+.jmap-foot b{color:#1E2761}
+@media (max-width:640px){.jmap-grid{flex-wrap:wrap}.jstep{flex:1 1 calc(33.33% - 6px)}.jgoal{flex:1 1 100%;height:44px}}
+.daily-change{display:flex;justify-content:flex-end;margin:-6px 0 10px}
+.daily-change button{background:none;border:1px solid #DCE2ED;border-radius:8px;padding:7px 12px;font-family:inherit;font-size:12px;color:#4A5568;cursor:pointer}
+.daily-change button:hover{border-color:#B9C0CE;color:#1E2761}
 </style>
 </head>
 <body>
@@ -494,6 +521,7 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
   <div class="logo-need"><span class="n">N</span><span class="e1">E</span><span class="e2">E</span><span class="d">D</span></div>
   <div class="logo-sep"></div>
   <div class="logo-right"><span class="top">NEED SCAN · 나다움설계연구소</span><span class="bot">나다움을 설계하다</span></div>
+  <div id="helloBar" class="hello-bar"></div>
   <div class="logo-actions no-print" id="hact" hidden>
     <button class="hbtn" onclick="printAll()" title="결과 다운로드" aria-label="결과 다운로드"><svg viewBox="0 0 16 16"><path d="M8 1.6v8.2m0 0L5 6.9m3 2.9 3-2.9M2.4 11.4v1.8c0 .6.5 1.2 1.2 1.2h8.8c.7 0 1.2-.6 1.2-1.2v-1.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="hl">결과 다운로드</span></button>
     <button class="hbtn" onclick="shareKeep()" title="공유하기" aria-label="공유하기"><svg viewBox="0 0 16 16"><circle cx="12.4" cy="3.6" r="2.1" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="3.6" cy="8" r="2.1" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12.4" cy="12.4" r="2.1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 7 10.5 4.5M5.5 9l5 2.4" stroke="currentColor" stroke-width="1.5"/></svg><span class="hl">공유하기</span></button>
@@ -1143,6 +1171,13 @@ const SUBNAME={
 /* ───────── 렌더 ───────── */
 let P=null, sel={opt:null}, SN=0;
 function sn(){SN++;return ''}
+function nickOf(email){ const e=String(email||''); const i=e.indexOf('@'); return i>0?e.slice(0,i):e; }
+function renderHello(){
+  const el=document.getElementById('helloBar'); if(!el)return;
+  if(typeof AUTH_USER!=='undefined' && AUTH_USER){
+    el.innerHTML='<span class="hb-dot"></span><b>'+esc(nickOf(AUTH_USER.email))+'</b>님, 기록이 계정에 이어지고 있습니다';
+  } else { el.innerHTML=''; }
+}
 function render(){
   P=load()||blank();
   P.designs=P.designs||[];
@@ -1159,6 +1194,7 @@ function render(){
   SN=0;
   const nav=document.getElementById('tabnav'), hact=document.getElementById('hact');
   if(hact)hact.hidden=false;
+  renderHello();
   if((location.hash||'')==='#design'){
     nav.hidden=true; if(hact)hact.hidden=true;
     app.innerHTML=designPage(bn);
@@ -1312,34 +1348,32 @@ const TINT={N:{bg:'#F2F7FD',bd:'#D2E3F6',glow:'rgba(41,121,200,.30)'},
             D:{bg:'#F7F4FE',bd:'#E0D4FB',glow:'rgba(139,92,246,.32)'},
             F:{bg:'#F2F7FD',bd:'#D2E3F6',glow:'rgba(41,121,200,.30)'}};
 function journeyView(A,bn,nocap){
-  const ks=['N','E1','E2','D'];
-  const open=ks.filter(k=>A[k].v!==null).length;
-  let h='<div class="jn">'+(nocap?'':'<div class="jn-cap">나의 설계 여정</div>')
-   +'<div class="jn-tip"><i>·</i>지금의 나</div>';
-  ks.forEach(k=>{
-    const a=A[k],j=JOURNEY[k],has=a.v!==null,here=!!(bn&&bn.key===k);
-    h+='<div class="jn-row'+(has?' on':'')+(here?' here':'')+'" style="--jc:'+a.c+'">'
-     +'<div class="jn-rail"><span class="jn-dot">'+j.no+'</span></div>'
-     +'<div class="jn-body"><div class="jn-t">'+j.t+(here?'<span class="jn-here">지금 여기</span>':'')+'</div>'
-     +'<div class="jn-meta"><span class="jn-ax">'+a.name+'</span><span class="jn-v">'+(has?a.v:'—')+'</span></div>'
-     +'<div class="jn-en">'+j.en+'</div>'
-     +(has?'':'<div class="jn-open"><a href="'+j.ourl+'">'+j.open+'</a>'+(jong(j.open)?'으로':'로')+' 열립니다</div>')
-     +'</div></div>';
+  const T=P.modules&&P.modules.tendency;
+  const STEPS=[
+    {k:'N', no:'01', t:'나를 읽다',                     v:A.N.v,  c:'#2979C8', url:BASE+'/needscan/'},
+    {k:'E1',no:'02', t:'나를 흐리게 하는 것을 덜어내다', v:A.E1.v, c:'#3DAA6B', url:BASE+'/newnoise/'},
+    {k:'E2',no:'03', t:'에너지를 중요한 곳에 정렬하다',  v:A.E2.v, c:'#C9983A', url:BASE+'/alignment/'},
+    {k:'F', no:'04', t:'내 에너지는 지금 어디로 흐르는가', v:(T&&T.main)?((typeof CHARS!=='undefined'&&CHARS[T.main])||'확인함'):null, c:'#B0576F', url:BASE+'/5characters/'},
+    {k:'D', no:'05', t:'내 기준으로 오늘을 쓰다',        v:A.D.v,  c:'#8B5CF6', url:BASE+'/need/'}
+  ];
+  const openN=STEPS.filter(x=>x.v!==null&&x.v!==undefined).length;
+  const TINTS={N:TINT.N,E1:TINT.E1,E2:TINT.E2,D:TINT.D,F:{bg:'#FDF6F8',bd:'#EED8DF',glow:'rgba(176,87,111,.28)'}};
+  let h='<div class="jmap">'+(nocap?'':'<div class="jn-cap">나의 설계 여정</div>')+'<div class="jmap-grid">';
+  STEPS.forEach(function(x){
+    const has=(x.v!==null&&x.v!==undefined), here=!!(bn&&bn.key===x.k), ti=TINTS[x.k]||TINT.N;
+    h+='<a class="jstep'+(has?' on':'')+(here?' here':'')+'" href="'+x.url+'"'
+     +' style="--jc:'+x.c+';--jbg:'+ti.bg+';--jbd:'+ti.bd+';--jglow:'+ti.glow+'">'
+     +'<span class="jlock">'+(has?'\uD83D\uDD13':'\uD83D\uDD12')+'</span>'
+     +'<span class="jno">'+x.no+'</span>'
+     +'<span class="jt">'+x.t+'</span>'
+     +'<span class="jv">'+(has?x.v:'아직 열리지 않음')+'</span></a>';
   });
-  h+='<div class="jn-tip"><i>▲</i>나답게 선택하는 삶</div>';
+  h+='<div class="jgoal'+(openN>=5?' on':'')+'">\u2691</div></div>';
   let pg;
-  if(open>=4) pg='네 칸이 모두 밝아졌습니다. 이제부터는 점수보다 <b>선의 방향</b>을 보실 차례입니다.';
-  else if(open===0){
-    const _t=P.modules&&P.modules.tendency, _p=P.modules&&P.modules.temperament;
-    pg = _t ? '<b>에너지가 어느 쪽으로 흐르는지</b>는 이미 읽으셨습니다. 다만 그 정보는 네 칸을 열지는 않습니다. '
-             +'<b>첫 칸(욕구 출발점 진단, 약 6분)</b>을 여시면 여기에 지도가 그려지기 시작합니다.'
-       : _p ? '<b>기질과 동기의 토대</b>는 이미 읽으셨습니다. 다만 그 정보는 네 칸을 열지는 않습니다. '
-             +'<b>첫 칸(욕구 출발점 진단, 약 6분)</b>을 여시면 여기에 지도가 그려지기 시작합니다.'
-       : '아직 밝아진 칸이 없습니다. 어느 칸부터 여셔도 됩니다.';
-  }
-  else pg='네 칸 중 <b>'+open+'칸</b>이 밝아졌습니다. 질문 하나에 답하실 때마다 한 칸씩 열립니다. '
-        +'네 칸을 다 채우셔야 하는 것은 아닙니다.';
-  h+='<div class="jn-prog">'+pg+'</div></div>';
+  if(openN>=5) pg='다섯 단계가 모두 열렸습니다. 이제부터는 점수보다 <b>선의 방향</b>을 보실 차례입니다.';
+  else if(openN===0) pg='아직 열린 칸이 없습니다. 어느 칸부터 여셔도 됩니다.';
+  else pg='다섯 칸 중 <b>'+openN+'칸</b>이 열렸습니다. 잠긴 칸을 누르시면 그 진단으로 바로 이동합니다.';
+  h+='<div class="jmap-foot">'+pg+'</div></div>';
   return h;
 }
 
@@ -1826,6 +1860,7 @@ function dailyView(){
    +'<h3>오늘 실행한 내용을 한 줄로 남겨 두세요</h3>'
    +'<p>체크는 지켰다는 표시일 뿐이고, 실제로 남는 것은 이 한 줄들입니다. '
    +'한 줄씩 쌓이면 작은 여러분의 실행 역사가 됩니다. 못 적은 날이 있어도 괜찮습니다.</p></div>';
+  h+='<div class="daily-change no-print"><button onclick="openDesign()">문장 바꾸거나 새로 추가하기</button></div>';
   h+='<div class="today-box"><div class="today-date">'+(now.getMonth()+1)+'월 '+now.getDate()+'일 '+dnames[now.getDay()]+'요일</div>';
   P.designs.forEach((d,i)=>{
     const isOn=on.includes(d.id), nv=noteOf(day,d.id);
