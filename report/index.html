@@ -527,23 +527,33 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
 @media (max-width:560px){.rc-h{font-size:19px}.rc-steps{flex-direction:column;align-items:flex-start}.rc-arrow{display:none}}
 
 /* 변화 탭 */
-.chg-row{display:flex;align-items:stretch;gap:8px;margin-bottom:10px;flex-wrap:wrap}
-.chg-ax{flex:1 1 210px;min-width:180px;display:flex;align-items:center;gap:11px;background:#F7F9FC;border:1px solid #E4E9F0;border-left:4px solid var(--cc);border-radius:13px;padding:13px 14px}
-.chg-ic{width:34px;height:34px;flex:0 0 34px;border-radius:50%;background:#fff;border:1px solid #E4E9F0;display:flex;align-items:center;justify-content:center;font-size:17px}
-.chg-n{font-size:14.5px;font-weight:800;color:var(--cc)}
-.chg-q{font-size:11.5px;color:#6B7393;line-height:1.45;margin-top:2px;word-break:keep-all}
-.chg-box{flex:1 1 120px;min-width:110px;border:1px solid #E4E9F0;border-radius:13px;background:#fff;padding:11px 12px;text-align:center;display:flex;flex-direction:column;justify-content:center}
-.chg-box b{font-size:23px;font-weight:800;color:#1A2138;line-height:1.25}
-.chg-box.now{border-color:var(--cc);background:#FBFCFE}
+.chg-tip{display:inline-block;background:#EAF6EE;color:#2F7A4C;font-size:12.5px;font-weight:700;border-radius:10px;padding:9px 14px;margin:2px 0 14px}
+.chg-row{display:flex;align-items:stretch;gap:9px;margin-bottom:11px;flex-wrap:wrap}
+.chg-ax{flex:1 1 230px;min-width:200px;display:flex;align-items:center;gap:13px;background:var(--cbg);border:1px solid transparent;border-radius:14px;padding:15px 16px}
+.chg-ic{width:42px;height:42px;flex:0 0 42px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:20px}
+.chg-n{font-size:17px;font-weight:800;color:var(--cc);line-height:1.3}
+.chg-q{font-size:12.5px;color:#6B7393;line-height:1.5;margin-top:4px;word-break:keep-all}
+.chg-box{flex:1 1 150px;min-width:130px;border:1px solid #E4E9F0;border-radius:14px;background:#fff;padding:13px 12px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.chg-box b{font-size:30px;font-weight:800;color:#1A2138;line-height:1.15}
+.chg-box.now{border-color:var(--cc);background:var(--cbg)}
 .chg-box.now b{color:var(--cc)}
+.chg-box.now .chg-lab{color:var(--cc)}
 .chg-box.next{background:#F7F9FC;border-style:dashed}
-.chg-box.next b{color:#A7AEBD}
-.chg-lab{font-size:11px;font-weight:800;color:#6B7393}
-.chg-d{font-size:11px;color:#98A1B5;margin:2px 0 3px}
-.chg-box span{font-size:11px;color:#8A92A4;margin-top:3px}
-.chg-badge{display:inline-block;margin-top:5px;font-size:11px;font-weight:700;background:#EEF2FB;color:#3A4360;border-radius:20px;padding:3px 9px}
-.chg-arrow{display:flex;align-items:center;color:#C4CBDA;font-size:17px;font-weight:800}
-@media (max-width:640px){.chg-arrow{display:none}.chg-box{flex:1 1 calc(33% - 8px)}}
+.chg-box.next b{font-size:17px;color:#8A92A4}
+.chg-nic{font-size:17px;margin-bottom:4px;opacity:.6}
+.chg-lab{font-size:12px;font-weight:800;color:#6B7393}
+.chg-d{font-size:11.5px;color:#98A1B5;margin:3px 0 5px}
+.chg-box span{font-size:11.5px;color:#8A92A4;margin-top:4px}
+.chg-badge{display:inline-block;margin-top:7px;font-size:11.5px;font-weight:800;background:#fff;color:var(--cc);border:1px solid var(--cc);border-radius:20px;padding:3px 11px}
+.chg-arrow{display:flex;align-items:center;color:#C4CBDA;font-size:19px;font-weight:800}
+.tr-legend{background:#fff;border:1px solid #E4E9F0;border-radius:14px;padding:14px 15px;margin-top:12px}
+.tr-item{display:flex;gap:10px;align-items:flex-start;margin-bottom:11px}
+.tr-item:last-child{margin-bottom:0}
+.tr-dot{width:13px;height:13px;flex:0 0 13px;border-radius:50%;margin-top:3px}
+.tr-nm{font-size:13.5px;font-weight:800;color:#1A2138}
+.tr-q{font-size:11.5px;color:#6B7393;line-height:1.45;margin-top:2px;word-break:keep-all}
+.tr-count{display:inline-block;background:#F2F5FA;color:#3A4360;font-size:12px;font-weight:700;border-radius:10px;padding:8px 13px;margin-bottom:10px}
+@media (max-width:640px){.chg-arrow{display:none}.chg-box{flex:1 1 calc(50% - 9px)}.chg-n{font-size:15.5px}.chg-box b{font-size:25px}}
 </style>
 </head>
 <body>
@@ -1684,45 +1694,47 @@ function changeView(){
   const QMAP={'욕구 선명도':'내가 원하는 것을 얼마나 분명히 알고 있는가?','신호 보존도':'내 신호가 바깥 잡음에 얼마나 흔들리는가?','생명성 정렬':'지금의 일상이 나에게 에너지를 주는가?','자기 저자성':'내 기준으로 오늘을 살고 있는가?'};
   const IMAP={'욕구 선명도':'\uD83E\uDDED','신호 보존도':'\uD83D\uDEA9','생명성 정렬':'\u2600','자기 저자성':'\uD83D\uDC64'};
   let h='<div class="sec">'+sn()+'<h2>이전의 나 \u2192 지금의 나</h2>'
-   +'<p class="sub">기록을 할수록, 조금씩 변화하고 있는 나를 확인할 수 있습니다.</p>';
+   +'<p class="sub">기록을 할수록, 조금씩 변화하고 있는 나를 확인할 수 있습니다.</p>'
+   +'<div class="chg-tip">\uD83C\uDF31 작은 기록이 모여, 더 나다운 나를 만들어갑니다.</div>';
   if(!H.length){
     h+='<div class="empty-tab">아직 기록이 없습니다.<br>진단을 하나 마치시면 이 자리에 첫 점이 찍힙니다.</div></div>';
     return h;
   }
   const dt=function(t){return String(t||'').replace(/-/g,'.').slice(2)};
+  const rgba=function(hex,a){var n=parseInt(String(hex).slice(1),16);return 'rgba('+((n>>16)&255)+','+((n>>8)&255)+','+(n&255)+','+a+')'};
   TRAX.forEach(function(ax,ai){
     let fi=-1, li=-1;
     H.forEach(function(en,i){ const v=(en.a||[])[ai]; if(v!=null){ if(fi<0)fi=i; li=i; } });
     if(fi<0){
-      h+='<div class="chg-row" style="--cc:'+ax.c+'"><div class="chg-ax"><span class="chg-ic">'+(IMAP[ax.n]||'\u25CF')+'</span>'
+      h+='<div class="chg-row" style="--cc:'+ax.c+';--cbg:'+rgba(ax.c,.10)+'"><div class="chg-ax"><span class="chg-ic">'+(IMAP[ax.n]||'\u25CF')+'</span>'
        +'<div><div class="chg-n">'+ax.n+'</div><div class="chg-q">'+(QMAP[ax.n]||'')+'</div></div></div>'
        +'<div class="chg-box next"><div class="chg-lab">아직</div><b>\u2014</b><span>진단을 하시면 기록됩니다</span></div>'
        +'<div class="chg-arrow">\u2192</div>'
-       +'<div class="chg-box next"><div class="chg-lab">다음의 나</div><b>?</b><span>다시 진단해보세요</span></div></div>';
+       +'<div class="chg-box next"><span class="chg-nic">\uD83D\uDCCA</span><div class="chg-lab">다음의 나</div><b>아직</b><span>다시 진단해보세요</span></div></div>';
       return;
     }
     const pv=(H[fi].a||[])[ai], nv=(H[li].a||[])[ai];
     const diff=(fi===li)?null:(nv-pv);
     const badge=(diff===null)?'기록 시작':(diff===0?'변화 없음':(diff>0?'+'+diff:String(diff)));
-    h+='<div class="chg-row" style="--cc:'+ax.c+'">'
+    h+='<div class="chg-row" style="--cc:'+ax.c+';--cbg:'+rgba(ax.c,.10)+'">'
      +'<div class="chg-ax"><span class="chg-ic">'+(IMAP[ax.n]||'\u25CF')+'</span>'
      +'<div><div class="chg-n">'+ax.n+'</div><div class="chg-q">'+(QMAP[ax.n]||'')+'</div></div></div>'
      +'<div class="chg-box"><div class="chg-lab">이전의 나</div><div class="chg-d">'+dt(H[fi].t)+'</div><b>'+pv+'</b></div>'
      +'<div class="chg-arrow">\u2192</div>'
      +'<div class="chg-box now"><div class="chg-lab">지금의 나</div><div class="chg-d">'+dt(H[li].t)+'</div><b>'+nv+'</b>'
      +'<span class="chg-badge">'+badge+'</span></div>'
-     +'<div class="chg-box next"><div class="chg-lab">다음의 나</div><b>?</b><span>다시 진단해보세요</span></div></div>';
+     +'<div class="chg-box next"><span class="chg-nic">\uD83D\uDCCA</span><div class="chg-lab">다음의 나</div><b>아직</b><span>다시 진단해보세요</span></div></div>';
   });
   if(m.tendency&&m.tendency.main){
     const nm=(typeof CHARS!=='undefined'&&CHARS[m.tendency.main])||'';
-    h+='<div class="chg-row" style="--cc:#B0576F">'
+    h+='<div class="chg-row" style="--cc:#B0576F;--cbg:rgba(176,87,111,.10)">'
      +'<div class="chg-ax"><span class="chg-ic">\u2764</span>'
      +'<div><div class="chg-n">에너지 경향성</div><div class="chg-q">내 에너지는 지금 어디로 흐르는가?</div></div></div>'
      +'<div class="chg-box"><div class="chg-lab">이전의 나</div><b>\u2014</b><span>기록 없음</span></div>'
      +'<div class="chg-arrow">\u2192</div>'
      +'<div class="chg-box now"><div class="chg-lab">지금의 나</div><b style="font-size:19px">'+nm+'</b>'
      +'<span class="chg-badge">지금 시기의 흐름</span></div>'
-     +'<div class="chg-box next"><div class="chg-lab">다음의 나</div><b>?</b><span>다시 진단해보세요</span></div></div>';
+     +'<div class="chg-box next"><span class="chg-nic">\uD83D\uDCCA</span><div class="chg-lab">다음의 나</div><b>아직</b><span>다시 진단해보세요</span></div></div>';
   }
   h+='</div>';
   h+=trendView();
@@ -2030,9 +2042,10 @@ function toggleValue(k){
   P.updated=today();save(P);render();
 }
 
+const QAX={'욕구 선명도':'내가 원하는 것을 얼마나 분명히 아는가?','신호 보존도':'내 신호가 바깥 잡음에 얼마나 흔들리는가?','생명성 정렬':'지금의 일상이 나에게 에너지를 주는가?','자기 저자성':'내 기준으로 오늘을 살고 있는가?'};
 function trendView(){
   var H=(P.history||[]).slice(-5);
-  var h='<div class="sec" id="sec-trend">'+sn()+'<h2>변화 기록</h2>';
+  var h='<div class="sec" id="sec-trend">'+sn()+'<h2>나의 변화 기록</h2>'+'<div class="tr-count">\uD83D\uDCD8 지금까지 '+((P.history||[]).length)+'회의 기록이 있습니다.</div>';
   if(H.length<2){
     h+='<p class="sub">한 달 뒤, 한 분기 뒤, 또는 나에게 큰 변화가 있을 때 같은 진단을 다시 해 보세요. '
       +'그때부터 이 자리에 네 축이 어떻게 움직였는지 선으로 그려집니다.</p>'
@@ -2055,7 +2068,7 @@ function trendView(){
     H.forEach(function(e,i){
       var v=(e.a||[])[ai];
       if(v==null){ if(cur.length)segs.push(cur); cur=[]; }
-      else cur.push([px(i),py(v)]);
+      else cur.push([px(i),py(v),v]);
     });
     if(cur.length)segs.push(cur);
     segs.forEach(function(sg){
@@ -2066,6 +2079,7 @@ function trendView(){
       sg.forEach(function(q,j){
         var lastPt=(sg===segs[segs.length-1]&&j===sg.length-1);
         g+='<circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="'+(lastPt?3.4:2.4)+'" fill="#fff" stroke="'+ax.c+'" stroke-width="'+(lastPt?2.4:1.8)+'"/>';
+        if(lastPt&&q[2]!=null) g+='<text x="'+(q[0]+7).toFixed(1)+'" y="'+(q[1]+3.4).toFixed(1)+'" font-size="10" font-weight="700" fill="'+ax.c+'">'+q[2]+'</text>';
       });
     });
   });
@@ -2080,7 +2094,8 @@ function trendView(){
    +'<div class="trend-leg">'+TRAX.map(function(a){
        return '<span><i style="background:'+a.c+'"></i>'+a.n+'</span>'}).join('')+'</div></div>';
   var first=H[0], last=H[n-1], deltas=[];
-  h+=_capNote+'<p class="sub" style="margin-top:6px">한 축에 점이 두 개 이상 쌓여야 선이 그려집니다. 점이 하나뿐인 축은 아직 선이 생기지 않습니다.</p>';
+  var _LEG='<div class="tr-legend">'+TRAX.map(function(a){return '<div class="tr-item"><span class="tr-dot" style="background:'+a.c+'"></span><div><div class="tr-nm">'+a.n+'</div><div class="tr-q">('+(QAX[a.n]||'')+')</div></div></div>'}).join('')+'</div>';
+  h+=_LEG+_capNote+'<p class="sub" style="margin-top:6px">한 축에 점이 두 개 이상 쌓여야 선이 그려집니다. 점이 하나뿐인 축은 아직 선이 생기지 않습니다.</p>';
   h+='<div class="trend-delta">'+TRAX.map(function(ax,ai){
     var f=null,l=null;
     for(var i=0;i<n;i++){ if(H[i].a[ai]!=null){ f=H[i].a[ai]; break } }
