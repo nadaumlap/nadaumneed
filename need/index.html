@@ -190,6 +190,17 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
 .cover-more>summary::after{content:" ▾";}
 .cover-more[open]>summary::after{content:" ▴";}
 .cover-more>summary:hover{color:#3F4C5A;}
+
+.one-line{background:#FBFAFF;border:1px solid #DFD9F0;border-left:4px solid #5B4C99;border-radius:12px;
+  padding:14px 16px;margin:14px 0 4px;font-size:15px;line-height:1.65;color:#16202B;text-align:left;}
+.scene-card{background:#FFF;border:1px solid #E4E9F0;border-radius:14px;padding:18px 18px 16px;margin:14px 0;text-align:left;}
+.scene-tag{font-size:12px;font-weight:700;color:#8B93A5;margin-bottom:6px;}
+.scene-lead{font-size:14.5px;color:#3F4C5A;line-height:1.6;margin:0 0 10px;}
+.scene-list{list-style:none;padding:0;margin:0;}
+.scene-list li{position:relative;padding-left:16px;font-size:14.5px;line-height:1.65;color:#16202B;margin-bottom:7px;}
+.scene-list li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:#5B4C99;}
+.scene-exp{margin-top:12px;padding-top:11px;border-top:1px dashed #E4E9F0;font-size:14px;line-height:1.6;color:#3F4C5A;}
+.scene-exp b{color:#16202B;}
 </style>
 </head>
 <body>
@@ -422,6 +433,24 @@ function jong(w){const c=String(w||'').trim().slice(-1).charCodeAt(0);if(isNaN(c
 function jo(w,a,b){return w+(jong(w)?a:b)}
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 
+
+var ONE_LINE={
+ '기준 선명도':'행동은 이미 하고 있습니다. 다만 그 행동을 고르는 기준이 아직 한 문장으로 선명하게 정리되지 않았습니다. 최근 \'잘했다\'고 느낀 선택 하나에서 여러분의 우선 가치를 찾아볼 수 있습니다.',
+ '선택 정렬':'무엇이 중요한지는 알고 있습니다. 다만 실제 선택의 순간에는 익숙한 이유나 주변의 기대가 먼저 올라와서 정작 중요한 일을 못하고 있는지 살펴볼 필요가 있습니다.',
+ '경계 세우기':'무엇이 중요한지 알고 있고, 그쪽으로 가려는 마음도 있습니다. 지금은 우선 가치를 실천하기 위해 무엇을 덜어내고 거절해야 하는지 살펴볼 시점입니다.',
+ '실행 지속':'기준은 이미 꽤 분명합니다. 그리고 그 기준에 맞는 선택도 이미 하고 있습니다. 지금 필요한 것은 더 큰 목표가 아니라, 이미 하고 있는 것을 매일의 일상 속에서 하루하루 실천해 가는 것, 그 기간을 조금 더 늘리는 일입니다.'
+};
+var SCENE_HTML='<div class="scene-card">'
+ +'<div class="scene-tag">생활 속 나다움 설계 실천 팁</div>'
+ +'<p class="scene-lead">나다움 설계는 특별한 무엇이라기보다, 여러분의 우선 가치가 하루의 작은 선택에서 만들어져 갑니다. 일상 속에서 놓치고 있는 것은 없는지 확인해 보세요.</p>'
+ +'<ul class="scene-list">'
+ +'<li>중요하다고 말한 일이 일정표에는 없지 않나요?</li>'
+ +'<li>거절하거나 경계를 세운 뒤에도 마음이 오래 불편할 때는, 우선 가치를 명확하게 떠올려 보세요.</li>'
+ +'<li>하루가 끝났을 때 무엇을 중요하게 살았는지 떠오르지 않는다면, 휴대폰 배경화면이나 프로필에 우선 가치를 적어 두는 것도 방법입니다.</li>'
+ +'</ul>'
+ +'<div class="scene-exp"><b>한 줄 실험</b> 오늘 이미 내 기준에 맞게 선택했던 작은 행동 하나를 찾아보세요. 새로 만들기보다 이미 하고 있는 것을 발견하는 데서 시작합니다.</div>'
+ +'</div>';
+
 function renderResult(r){
   const A=AX, w=r.weak;
   let h='<div class="rtabs"><button class="rtab on" data-go="1"><i>1</i>결과</button>'
@@ -435,7 +464,7 @@ function renderResult(r){
   h+='<p class="res-sub">'+SEGB[r.seg]+'</p>';
   if(IS_D&&vmain){
     const vd=VALUES.filter(x=>x.k===vmain)[0];
-    h+='<div class="vres"><div class="lab">지금의 우선가치</div><div class="main">'+esc(vmain)+'</div>'
+    h+='<div class="vres"><div class="lab">지금의 우선가치</div><div class="one-line">'+esc(ONE_LINE[A[w].name]||'')+'</div><div class="main">'+esc(vmain)+'</div>'
      +'<div class="md">'+esc(vd?vd.d:'')+'</div>'
      +'<div class="subs">보조가치 <b>'+vsel.filter(x=>x!==vmain).map(esc).join('</b> · <b>')+'</b></div></div>';
   }
@@ -447,7 +476,7 @@ function renderResult(r){
   });
   h+='<div class="g-note">네 축 모두 <b>높을수록 정렬된 상태</b>입니다. 단계는 평균이 아니라 <b>가장 낮은 축</b>으로 판정합니다 — 한 축이 무너져 있으면 나머지가 아무리 높아도 실제로는 그 축에서 새기 때문입니다.</div>';
   h+='</div>';
-  h+='<div class="bn-card"><div class="bn-tag">먼저 살펴볼 지점</div><div class="bn-h">'+A[w].name+'</div>'
+  h+=''+SCENE_HTML+'<div class="bn-card"><div class="bn-tag">먼저 살펴볼 지점</div><div class="bn-h">'+A[w].name+'</div>'
    +'<div class="bn-def">'+jo(A[w].name,'은','는')+' '+A[w].desc+' — 이것을 봅니다.</div>'
    +'<div class="bn-b">현재 '+STAGE_KO+' 측면에서 <b>'+A[w].name+'</b>'+(jong(A[w].name)?'이':'가')+' 가장 낮게('+r.sc[w]+') 나왔습니다. '
    +'네 축은 함께 작동합니다. 지금은 이 축이 상대적으로 낮아 먼저 살펴볼 지점으로 보입니다. '+jo(A[w].name,'을','를')+' 먼저 살펴보시면 현재 흐름을 이해하는 데 도움이 됩니다.</div>'
