@@ -183,6 +183,13 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
  .opt-b:hover{border-color:#8B5CF6} .vcard:hover{border-color:#8B5CF6}
  .btn-primary:hover{background:#151C47} .rep-cta:hover{transform:translateY(-2px)}
 }
+
+.cover-more{margin:16px 0 0;text-align:left;}
+.cover-more>summary{cursor:pointer;list-style:none;text-align:center;font-size:13px;color:#7A8796;padding:8px 0;}
+.cover-more>summary::-webkit-details-marker{display:none;}
+.cover-more>summary::after{content:" ▾";}
+.cover-more[open]>summary::after{content:" ▴";}
+.cover-more>summary:hover{color:#3F4C5A;}
 </style>
 </head>
 <body>
@@ -197,12 +204,15 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
  <div class="screen on" id="s-cover">
   <span class="cover-tag">D단계 — Daily Authorship · 자기저자성 실천</span>
   <h1 class="cover-h">이 선택은 나의<br>우선가치와 부합하는가?</h1>
-  <div class="purpose"><div class="lab">이 진단이 재는 것</div><p>가치가 <b>얼마나 중요한지</b>는 묻지 않습니다. 그 질문은 거의 모두가 높게 답해서 아무것도 구분해 주지 못합니다(Valued Living Questionnaire 규준표본 중요도 평균 81/100). 대신 <b>최근 한 달 동안 실제로 어떻게 살았는지</b>를 묻습니다. 의도를 크게 바꿔도 행동은 그 절반쯤만 따라오기 때문입니다(Webb &amp; Sheeran, 2006: 의도 d=0.66 → 행동 d=0.36).</p></div>
+  <div class="cover-meta"><span>⏱ 약 7분</span><span>📋 20문항+가치 워크</span><span>🆓 무료</span></div>
+  <button class="btn-primary" onclick="startQuiz()">진단 시작하기</button>
+<details class="cover-more"><summary>진단 구성이 궁금하신가요?</summary>
+<div class="purpose"><div class="lab">이 진단이 재는 것</div><p>가치가 <b>얼마나 중요한지</b>는 묻지 않습니다. 그 질문은 거의 모두가 높게 답해서 아무것도 구분해 주지 못합니다(Valued Living Questionnaire 규준표본 중요도 평균 81/100). 대신 <b>최근 한 달 동안 실제로 어떻게 살았는지</b>를 묻습니다. 의도를 크게 바꿔도 행동은 그 절반쯤만 따라오기 때문입니다(Webb &amp; Sheeran, 2006: 의도 d=0.66 → 행동 d=0.36).</p></div>
   <div class="axis-preview">
    <div class="ap"><span class="k">D1</span><span class="nm">기준 선명도</span><div class="ds">내가 무엇을 중요하게 여기는 사람인지 스스로 분명한가</div></div><div class="ap"><span class="k">D2</span><span class="nm">선택 정렬</span><div class="ds">오늘의 구체적 선택이 그 기준과 맞물렸는가</div></div><div class="ap"><span class="k">D3</span><span class="nm">경계 세우기</span><div class="ds">아닌 것에 아니라고 말할 수 있는가</div></div><div class="ap"><span class="k">D4</span><span class="nm">실행 지속</span><div class="ds">정한 것을 실제로 하고, 하고 있는지 스스로 확인하는가</div></div>
   </div>
-  <div class="cover-meta"><span>⏱ 약 7분</span><span>📋 20문항+가치 워크</span><span>🆓 무료</span></div>
-  <button class="btn-primary" onclick="startQuiz()">진단 시작하기</button>
+  </details>
+
   <div class="detail-toggle" onclick="toggleDetail()" id="dtog">어떤 근거로 만든 진단인가요? ▾</div>
   <div class="detail-sec" id="dsec">
    <div class="basis"><span class="bk">D1 · 기준 선명도</span>자기개념 명료성 척도(Campbell et al., 1996 / 한국 번안 α=.81)의 구인을 참고했습니다. 원척도는 12문항 중 10문항이 역문항인데, 한국 표본에서 역문항이 요인구조를 깨뜨린다는 보고가 반복돼(PLOS ONE, 2013) <b>전 문항을 긍정 진술로 다시 썼습니다</b>.</div><div class="basis"><span class="bk">D2 · 선택 정렬</span>가치 실행 척도(Valuing Questionnaire, Smout et al., 2014, α=.79~.87)의 Progress/Obstruction 구조와 자기일치성 모형(Sheldon &amp; Elliot, 1999)을 반영했습니다. 자기일치성-안녕감 상관은 한국 표본에서도 확인되었습니다(Sheldon et al., 2004, 한양대 194명, r=.27).</div><div class="basis"><span class="bk">D3 · 경계 세우기</span>주장성 척도(Rathus, 1973)의 거절 관련 문항을 한국 맥락으로 다시 썼습니다. 이 축은 브랜드의 사회구조 진단 중 <b>눈치 문화</b>와 정확히 겹치는 자리입니다.</div><div class="basis"><span class="bk">D4 · 실행 지속</span>셀프리더십 척도(Houghton &amp; Neck, 2002)의 자기목표설정·자기관찰 하위척도를 참고했습니다. 한국 대학생 645명 대상 타당화에서 원 요인구조가 유지되었습니다(신윤정 외, 2009).</div>
