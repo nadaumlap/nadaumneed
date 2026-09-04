@@ -183,6 +183,13 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
  .opt-b:hover{border-color:#C9983A} .vcard:hover{border-color:#C9983A}
  .btn-primary:hover{background:#151C47} .rep-cta:hover{transform:translateY(-2px)}
 }
+
+.cover-more{margin:16px 0 0;text-align:left;}
+.cover-more>summary{cursor:pointer;list-style:none;text-align:center;font-size:13px;color:#7A8796;padding:8px 0;}
+.cover-more>summary::-webkit-details-marker{display:none;}
+.cover-more>summary::after{content:" ▾";}
+.cover-more[open]>summary::after{content:" ▴";}
+.cover-more>summary:hover{color:#3F4C5A;}
 </style>
 </head>
 <body>
@@ -197,12 +204,15 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
  <div class="screen on" id="s-cover">
   <span class="cover-tag">E2단계 — Energy Alignment · 생명성 정렬</span>
   <h1 class="cover-h">이 활동은 나를<br>소모시키나, 충전시키나?</h1>
-  <div class="purpose"><div class="lab">이 진단이 재는 것</div><p>에너지가 <b>얼마나 많은지</b>를 재는 진단이 아닙니다. 지금 내 하루가 <b>에너지가 흐를 수 있게 배치되어 있는지</b>를 봅니다. 같은 양의 에너지를 가지고도 어떤 사람은 살아나고 어떤 사람은 소진되는데, 그 차이는 의지가 아니라 배치에서 옵니다.</p></div>
+  <div class="cover-meta"><span>⏱ 약 6분</span><span>📋 20문항</span><span>🆓 무료</span></div>
+  <button class="btn-primary" onclick="startQuiz()">진단 시작하기</button>
+<details class="cover-more"><summary>진단 구성이 궁금하신가요?</summary>
+<div class="purpose"><div class="lab">이 진단이 재는 것</div><p>에너지가 <b>얼마나 많은지</b>를 재는 진단이 아닙니다. 지금 내 하루가 <b>에너지가 흐를 수 있게 배치되어 있는지</b>를 봅니다. 같은 양의 에너지를 가지고도 어떤 사람은 살아나고 어떤 사람은 소진되는데, 그 차이는 의지가 아니라 배치에서 옵니다.</p></div>
   <div class="axis-preview">
    <div class="ap"><span class="k">A1</span><span class="nm">에너지 자각</span><div class="ds">무엇이 나를 채우고 무엇이 소모시키는지 구분할 수 있는가</div></div><div class="ap"><span class="k">A2</span><span class="nm">시간 배치</span><div class="ds">가장 잘 되는 시간대에 가장 중요한 일이 놓여 있는가</div></div><div class="ap"><span class="k">A3</span><span class="nm">환경 적합</span><div class="ds">지금 있는 자리가 내가 원하는 것·잘하는 것과 맞물려 있는가</div></div><div class="ap"><span class="k">A4</span><span class="nm">회복 설계</span><div class="ds">고갈된 뒤가 아니라 고갈되기 전에 회복이 들어와 있는가</div></div>
   </div>
-  <div class="cover-meta"><span>⏱ 약 6분</span><span>📋 20문항</span><span>🆓 무료</span></div>
-  <button class="btn-primary" onclick="startQuiz()">진단 시작하기</button>
+  </details>
+
   <div class="detail-toggle" onclick="toggleDetail()" id="dtog">어떤 근거로 만든 진단인가요? ▾</div>
   <div class="detail-sec" id="dsec">
    <div class="basis"><span class="bk">A1 · 에너지 자각</span>이 축은 기존 척도가 다루지 않는 자리입니다. 기존 활력 척도(Ryan &amp; Frederick, 1997)는 에너지의 <i>양</i>을 재지만, 그 에너지가 <i>어디서 오는지</i>를 묻지는 않습니다.</div><div class="basis"><span class="bk">A2 · 시간 배치</span>몰입 연구 메타분석(Fong, Zaleski &amp; Leach, 2015, 28개 연구)은 도전-기술 균형만으로는 몰입을 설명하기 어렵고, <b>명확한 목표와 통제감</b>이 함께 있어야 한다고 보고합니다.</div><div class="basis"><span class="bk">A3 · 환경 적합</span>개인-환경 적합 이론(Edwards, Caplan &amp; Harrison, 1998)은 <b>주관적으로 지각된 부적합</b>이 정신건강으로 가는 결정적 경로라고 봅니다. 객관적 조건보다 본인이 어떻게 느끼는지가 먼저입니다.</div><div class="basis"><span class="bk">A4 · 회복 설계</span>회복경험 척도(Sonnentag &amp; Fritz, 2007 / 한국판 허태균, 2011)의 네 요소 중 <b>심리적 분리·이완·숙달</b>을 반영했습니다. 316개 연구 메타분석(Headrick et al., 2023, N=99,329)에서 통제감의 추가 효과는 미미해 문항에서 제외했습니다.</div>
