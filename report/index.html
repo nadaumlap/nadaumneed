@@ -682,7 +682,7 @@ function axes(p){
   let e1=null;
   if(m.noise) e1=Math.max(0,100-m.noise.total);
   else if(m.noiseInner&&typeof m.noiseInner.pct==='number') e1=Math.max(0,100-m.noiseInner.pct);
-  A.E1={v:e1,name:'신호 보존도',stage:'E1 · Eliminate Noise 단계',desc:'내 신호가 얼마나 덜 흐려져 있는가',c:'#3DAA6B',
+  A.E1={v:e1,name:'신호 보존도',stage:'E1 · Eliminate Noise 단계',desc:'내 신호가 얼마나 덜 흐려져 있는가 · 잡음 오염도를 뒤집은 값',c:'#3DAA6B',
         feeds:['noise'],
         need:'잡음 오염도 진단',url:BASE+'/newnoise/'};
   // E2 — 정렬도 (미개발)
