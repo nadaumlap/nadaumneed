@@ -525,6 +525,25 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
 .rc-cta{display:block;width:100%;margin-top:18px;padding:15px;border:none;border-radius:12px;background:#1A2250;color:#FFF;font-family:inherit;font-size:15px;font-weight:800;cursor:pointer}
 .rc-cta:hover{background:#141B41}
 @media (max-width:560px){.rc-h{font-size:19px}.rc-steps{flex-direction:column;align-items:flex-start}.rc-arrow{display:none}}
+
+/* 변화 탭 */
+.chg-row{display:flex;align-items:stretch;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.chg-ax{flex:1 1 210px;min-width:180px;display:flex;align-items:center;gap:11px;background:#F7F9FC;border:1px solid #E4E9F0;border-left:4px solid var(--cc);border-radius:13px;padding:13px 14px}
+.chg-ic{width:34px;height:34px;flex:0 0 34px;border-radius:50%;background:#fff;border:1px solid #E4E9F0;display:flex;align-items:center;justify-content:center;font-size:17px}
+.chg-n{font-size:14.5px;font-weight:800;color:var(--cc)}
+.chg-q{font-size:11.5px;color:#6B7393;line-height:1.45;margin-top:2px;word-break:keep-all}
+.chg-box{flex:1 1 120px;min-width:110px;border:1px solid #E4E9F0;border-radius:13px;background:#fff;padding:11px 12px;text-align:center;display:flex;flex-direction:column;justify-content:center}
+.chg-box b{font-size:23px;font-weight:800;color:#1A2138;line-height:1.25}
+.chg-box.now{border-color:var(--cc);background:#FBFCFE}
+.chg-box.now b{color:var(--cc)}
+.chg-box.next{background:#F7F9FC;border-style:dashed}
+.chg-box.next b{color:#A7AEBD}
+.chg-lab{font-size:11px;font-weight:800;color:#6B7393}
+.chg-d{font-size:11px;color:#98A1B5;margin:2px 0 3px}
+.chg-box span{font-size:11px;color:#8A92A4;margin-top:3px}
+.chg-badge{display:inline-block;margin-top:5px;font-size:11px;font-weight:700;background:#EEF2FB;color:#3A4360;border-radius:20px;padding:3px 9px}
+.chg-arrow{display:flex;align-items:center;color:#C4CBDA;font-size:17px;font-weight:800}
+@media (max-width:640px){.chg-arrow{display:none}.chg-box{flex:1 1 calc(33% - 8px)}}
 </style>
 </head>
 <body>
@@ -1661,40 +1680,50 @@ function readView(A,cr,done){
 }
 
 function changeView(){
-  const H=(P.history||[]);
-  let h='<div class="sec">'+sn()+'<h2>이전의 나 \u2192 지금의 나</h2>';
-  if(H.length<2){
-    h+='<p class="sub">같은 질문에 시간을 두고 다시 답하시면, 그 사이에 무엇이 달라졌는지 여기에 남습니다.</p>'
-     +'<div class="empty-tab">지금은 첫 기록 한 개만 있습니다.<br>한 달 뒤 또는 한 분기 뒤에 다시 답해 보세요.<br>'
-     +'이전 점수가 사라지지 않고 나란히 남습니다.'
-     +'<a class="btn ghost" href="#record" style="text-decoration:none;margin-top:14px;display:inline-block">다시 볼 날짜 정해 두기 \u2192</a></div></div>';
+  const H=(P.history||[]), m=P.modules||{};
+  const QMAP={'욕구 선명도':'내가 원하는 것을 얼마나 분명히 알고 있는가?','신호 보존도':'내 신호가 바깥 잡음에 얼마나 흔들리는가?','생명성 정렬':'지금의 일상이 나에게 에너지를 주는가?','자기 저자성':'내 기준으로 오늘을 살고 있는가?'};
+  const IMAP={'욕구 선명도':'\uD83E\uDDED','신호 보존도':'\uD83D\uDEA9','생명성 정렬':'\u2600','자기 저자성':'\uD83D\uDC64'};
+  let h='<div class="sec">'+sn()+'<h2>이전의 나 \u2192 지금의 나</h2>'
+   +'<p class="sub">기록을 할수록, 조금씩 변화하고 있는 나를 확인할 수 있습니다.</p>';
+  if(!H.length){
+    h+='<div class="empty-tab">아직 기록이 없습니다.<br>진단을 하나 마치시면 이 자리에 첫 점이 찍힙니다.</div></div>';
     return h;
   }
-  const first=H[0], last=H[H.length-1];
-  h+='<p class="sub">'+String(first.t).replace(/-/g,'.')+'에 처음 답하셨고, 가장 최근 기록은 '+String(last.t).replace(/-/g,'.')+'입니다.</p>';
-  let anyMix=false;
+  const dt=function(t){return String(t||'').replace(/-/g,'.').slice(2)};
   TRAX.forEach(function(ax,ai){
-    let f=null,l=null,fi=-1,li=-1;
-    for(let i=0;i<H.length;i++){ if(H[i].a[ai]!=null){ f=H[i].a[ai]; fi=i; break } }
-    for(let j=H.length-1;j>=0;j--){ if(H[j].a[ai]!=null){ l=H[j].a[ai]; li=j; break } }
-    if(f==null||l==null)return;
-    // 이 축을 만든 진단이 중간에 바뀌었으면 두 값은 같은 자로 잰 것이 아니다
-    const _ff=String(H[fi].f||'').split('|'), _lf=String(H[li].f||'').split('|');
-    const fc=_ff[ai]||'', lc=_lf[ai]||'';
-    const mixed=!!(fc&&lc&&fc!==lc);
-    if(mixed)anyMix=true;
-    const d=l-f, sgn=mixed?'비교 보류':(d>0?'+'+d:(d<0?String(d):'변화 없음'));
-    const cls=mixed?'tflat':(d>2?'tup':(d<-2?'tdown':'tflat'));
-    h+='<div class="fnn"><div><div class="fl">이전의 나</div><div class="fd">'+String(H[fi].t).slice(2).replace(/-/g,'.')+'</div>'
-     +'<div class="fv">'+f+'</div><div class="fu">'+ax.n+'</div></div>'
-     +'<div style="border-color:'+ax.c+'44"><div class="fl" style="color:'+ax.c+'">지금의 나</div><div class="fd">'+String(H[li].t).slice(2).replace(/-/g,'.')+'</div>'
-     +'<div class="fv" style="color:'+ax.c+'">'+l+'</div><div class="fu '+cls+'">'+sgn+'</div></div>'
-     +'<div class="nxt"><div class="fl">다음의 나</div><div class="fd">아직</div>'
-     +'<div class="fv">?</div><div class="fu">다시 답하면</div></div></div>';
+    let fi=-1, li=-1;
+    H.forEach(function(en,i){ const v=(en.a||[])[ai]; if(v!=null){ if(fi<0)fi=i; li=i; } });
+    if(fi<0){
+      h+='<div class="chg-row" style="--cc:'+ax.c+'"><div class="chg-ax"><span class="chg-ic">'+(IMAP[ax.n]||'\u25CF')+'</span>'
+       +'<div><div class="chg-n">'+ax.n+'</div><div class="chg-q">'+(QMAP[ax.n]||'')+'</div></div></div>'
+       +'<div class="chg-box next"><div class="chg-lab">아직</div><b>\u2014</b><span>진단을 하시면 기록됩니다</span></div>'
+       +'<div class="chg-arrow">\u2192</div>'
+       +'<div class="chg-box next"><div class="chg-lab">다음의 나</div><b>?</b><span>다시 진단해보세요</span></div></div>';
+      return;
+    }
+    const pv=(H[fi].a||[])[ai], nv=(H[li].a||[])[ai];
+    const diff=(fi===li)?null:(nv-pv);
+    const badge=(diff===null)?'기록 시작':(diff===0?'변화 없음':(diff>0?'+'+diff:String(diff)));
+    h+='<div class="chg-row" style="--cc:'+ax.c+'">'
+     +'<div class="chg-ax"><span class="chg-ic">'+(IMAP[ax.n]||'\u25CF')+'</span>'
+     +'<div><div class="chg-n">'+ax.n+'</div><div class="chg-q">'+(QMAP[ax.n]||'')+'</div></div></div>'
+     +'<div class="chg-box"><div class="chg-lab">이전의 나</div><div class="chg-d">'+dt(H[fi].t)+'</div><b>'+pv+'</b></div>'
+     +'<div class="chg-arrow">\u2192</div>'
+     +'<div class="chg-box now"><div class="chg-lab">지금의 나</div><div class="chg-d">'+dt(H[li].t)+'</div><b>'+nv+'</b>'
+     +'<span class="chg-badge">'+badge+'</span></div>'
+     +'<div class="chg-box next"><div class="chg-lab">다음의 나</div><b>?</b><span>다시 진단해보세요</span></div></div>';
   });
-  if(anyMix) h+='<div class="guard">중간에 이 축을 재는 진단이나 문항이 바뀐 칸이 있어 <b>비교 보류</b>로 두었습니다. '
-   +'2026년 9월에 <b>욕구 출발점 진단이 20문항으로 개정</b>되었고, 기질·동기 진단의 채점식도 함께 손봤습니다. '
-   +'같은 문항으로 다시 답하시면 그때부터 비교가 시작됩니다.</div>';
+  if(m.tendency&&m.tendency.main){
+    const nm=(typeof CHARS!=='undefined'&&CHARS[m.tendency.main])||'';
+    h+='<div class="chg-row" style="--cc:#B0576F">'
+     +'<div class="chg-ax"><span class="chg-ic">\u2764</span>'
+     +'<div><div class="chg-n">에너지 경향성</div><div class="chg-q">내 에너지는 지금 어디로 흐르는가?</div></div></div>'
+     +'<div class="chg-box"><div class="chg-lab">이전의 나</div><b>\u2014</b><span>기록 없음</span></div>'
+     +'<div class="chg-arrow">\u2192</div>'
+     +'<div class="chg-box now"><div class="chg-lab">지금의 나</div><b style="font-size:19px">'+nm+'</b>'
+     +'<span class="chg-badge">지금 시기의 흐름</span></div>'
+     +'<div class="chg-box next"><div class="chg-lab">다음의 나</div><b>?</b><span>다시 진단해보세요</span></div></div>';
+  }
   h+='</div>';
   h+=trendView();
   h+='<div class="sec">'+sn()+'<h2>다음의 나</h2>'
