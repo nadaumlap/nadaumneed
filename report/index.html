@@ -512,6 +512,19 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
 .daily-change{display:flex;justify-content:flex-end;margin:-6px 0 10px}
 .daily-change button{background:none;border:1px solid #DCE2ED;border-radius:8px;padding:7px 12px;font-family:inherit;font-size:12px;color:#4A5568;cursor:pointer}
 .daily-change button:hover{border-color:#B9C0CE;color:#1E2761}
+
+/* 오늘의 실천 배너 */
+.rec-card2{position:relative;background:linear-gradient(135deg,#FBF7EE 0%,#F7F3EA 100%);border:1px solid #EADFCB;border-radius:16px;padding:22px 22px 20px;margin:14px 0 14px}
+.rc-badge{display:inline-block;background:#1A2250;color:#F5C95F;font-size:11.5px;font-weight:800;padding:6px 13px;border-radius:20px}
+.rc-h{font-size:23px;font-weight:800;color:#1A2250;line-height:1.4;margin:12px 0 16px;word-break:keep-all}
+.rc-h b{color:#B98A2E}
+.rc-steps{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.rc-step{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:700;color:#3A4360;line-height:1.5}
+.rc-ic{width:34px;height:34px;flex:0 0 34px;border-radius:50%;background:#FFF;border:1px solid #EADFCB;display:flex;align-items:center;justify-content:center;font-size:15px;color:#B98A2E}
+.rc-arrow{color:#C9BDA4;font-size:16px;font-weight:800}
+.rc-cta{display:block;width:100%;margin-top:18px;padding:15px;border:none;border-radius:12px;background:#1A2250;color:#FFF;font-family:inherit;font-size:15px;font-weight:800;cursor:pointer}
+.rc-cta:hover{background:#141B41}
+@media (max-width:560px){.rc-h{font-size:19px}.rc-steps{flex-direction:column;align-items:flex-start}.rc-arrow{display:none}}
 </style>
 </head>
 <body>
@@ -683,7 +696,7 @@ const DIAGS=[
   {k:'noise',      n:'잡음 오염도 진단',   d:'18문항 · 약 5분', url:BASE+'/newnoise/',    c:'#3DAA6B', s:'E', g:'② 흐리게 하는 것을 덜다 · E1', o:'', core:true, ax:'E1', q:'무엇이 나를 흐리게 하고 있을까?'},
   {k:'alignment',  n:'생명성 정렬 진단',    d:'20문항 · 약 6분', url:BASE+'/alignment/',   c:'#C9983A', s:'E', g:'③ 에너지를 정렬하다 · E2', o:'', core:true, ax:'E2', q:'내 하루는 나를 살리고 있을까?'},
   {k:'authorship', n:'나다움 설계 현황 진단',d:'20문항 · 약 7분', url:BASE+'/need/',        c:'#8B5CF6', s:'D', g:'④ 내 기준으로 오늘을 쓰다 · D', o:'', core:true, ax:'D', q:'지금 나는 얼마나 내 기준으로 살고 있을까?'},
-  {k:'tendency',   n:'에너지 경향성 진단',  d:'15문항 · 약 5분', url:BASE+'/5characters/', c:'#2979C8', s:'+', g:'심화 · 에너지가 흐르는 방향', o:'', core:false, q:'나는 지금 어디에 에너지를 쓰고 있을까?'},
+  {k:'tendency',   n:'에너지 경향성 진단',  d:'15문항 · 약 5분', url:BASE+'/5characters/', c:'#B0576F', s:'F', g:'④ 내 에너지는 어디로 흐르는가 · 5러', o:'', core:true, q:'나는 지금 어디에 에너지를 쓰고 있을까?'},
   {k:'temperament',n:'기질·동기·잡음 진단',d:'26문항 · 약 8분', url:BASE+'/why/',         c:'#8B5CF6', s:'+', g:'심화 · 기질과 동기의 토대', o:'', core:false, q:'나는 어떤 방식으로 움직이는 사람일까?'}
 ];
 const CHARS={A:'열정러',C:'협력러',S:'안정러',D:'장인러',E:'모험러'};
@@ -1571,13 +1584,14 @@ function readView(A,cr,done){
   const ctodo=core.filter(d=>!m[d.k]);
   const STEPMSG=['어느 칸부터 여셔도 됩니다.','한 칸이 열렸습니다. 나에 대해 한 가지를 발견하셨습니다.',
                  '두 칸이 열렸습니다. 나의 패턴이 조금씩 보이기 시작합니다.',
-                 '세 칸이 열렸습니다. 하나만 더 답하시면 네 축이 모두 이어집니다.',''];
+                 '세 칸이 열렸습니다. 조금만 더 하시면 지도가 이어집니다.',
+                 '네 칸이 열렸습니다. 하나만 더 답하시면 지도가 완성됩니다.',''];
   let qs;
-  if(cdone>=core.length) qs='네 칸이 모두 열렸습니다. 아래 심화 질문은 방향과 이유를 더해 줍니다. 하지 않으셔도 리포트는 온전합니다.';
-  else qs=(STEPMSG[cdone]||'')+' 네 개를 한 번에 하실 필요는 없습니다. 하나에 답할 때마다 지도가 한 칸씩 밝아집니다.';
+  if(cdone>=core.length) qs='다섯 질문에 모두 답하셨습니다. 이제 지도와 기록을 보실 차례입니다.';
+  else qs=(STEPMSG[cdone]||'')+' 한 번에 다 하실 필요는 없습니다. 하나에 답할 때마다 지도가 한 칸씩 밝아집니다.';
 
-  let h='<div class="sec">'+sn()+'<h2>나를 읽는 네 개의 질문</h2>'
-   +'<p class="sub">네 칸을 하나씩 여는 기본 질문 네 개입니다. 모두 마치면 78문항, 약 24분입니다. '+qs+'</p>';
+  let h='<div class="sec">'+sn()+'<h2>나를 읽는 다섯 개의 질문</h2>'
+   +'<p class="sub">지도를 여는 기본 질문 다섯 개입니다. 모두 마치면 89문항, 약 28분입니다. '+qs+'</p>';
   if(ctodo.length){
     h+='<div class="q-grp">여기서 이어 가시면 됩니다</div>';
     h+=todoRow(ctodo[0],'next');
@@ -1593,28 +1607,13 @@ function readView(A,cr,done){
   }
   h+='</div>';
 
-  h+='<div class="sec">'+sn()+'<h2>더 또렷하게 보고 싶다면</h2>'
+  if(ext.some(function(d){return m[d.k]})){
+  h+='<div class="sec">'+sn()+'<h2>이전에 하신 심화 질문</h2>'
    +'<p class="sub">아래 두 질문은 새로운 칸을 열지는 않습니다. 대신 <b>에너지가 어느 쪽으로 흐르는지</b>와 '
-   +'<b>왜 그렇게 움직이는지</b>를 더해, 위 네 칸의 해석을 훨씬 촘촘하게 만듭니다.</p>';
-  ext.forEach(d=>{ h+=todoRow(d, m[d.k]?'':'dim'); });
-  h+='</div>';
+   +'<b>왜 그렇게 움직이는지</b>를 더해 해석을 촘촘하게 만듭니다. 지금은 새로 권하지 않지만, 이미 하신 결과는 리포트에 계속 반영됩니다.</p>';
+  ext.filter(function(d){return m[d.k]}).forEach(d=>{ h+=todoRow(d); });
+  h+='</div>'; }
 
-  h+='<div class="sec">'+sn()+'<h2>지금까지 읽은 것</h2>'
-   +'<p class="sub">답하신 질문이 어느 칸을 열었는지 보여줍니다. 점수와 지도는 <a href="#map">나의 지도</a>에 있습니다.</p>';
-  h+='<div class="axes-wrap">';
-  ['N','E1','E2','D'].forEach(k=>{
-    const a=A[k],has=a.v!==null;
-    h+='<div class="axis-lite'+(has?'':' empty')+'"><span class="al-k" style="'+(has?'color:'+a.c:'')+'">'+k+'</span>'
-     +'<span class="al-n">'+a.name+'</span>'
-     +'<span class="al-v"'+(has?' style="color:'+a.c+'"':'')+'>'+(has?a.v:'\u2014')+'</span></div>';
-    const chips=(a.feeds||[]).map(function(fk){
-      const d=DIAGS.filter(x=>x.k===fk)[0]; if(!d)return '';
-      const ok=!!P.modules[fk];
-      return '<span class="feed'+(ok?' on':'')+'">'+(ok?'\u2713 ':'')+d.n.replace(' 진단','')+'</span>';
-    }).join('');
-    h+='<div class="feed-row">'+chips+(has?'':'<span class="feed-lab">아직 열지 않음</span>')+'</div>';
-  });
-  h+='</div>';
   if(m.tendency){
     const low=(m.tendency.flag==='low');
     h+='<div class="card"><div style="font-size:11px;letter-spacing:1px;color:#6B7393;font-weight:700;margin-bottom:7px">지금 시기의 에너지 경향성</div>'
@@ -1787,7 +1786,7 @@ function sentencesView(solo){
   if(!P.designs.length)return '';
   let h='<div class="sec">'+(solo?'':sn())+'<h2>내 설계 문장</h2>'
    +'<p class="sub">지금까지 남기신 문장입니다. 인쇄해서 눈에 보이는 곳에 두시면 더 잘 지켜집니다.</p>'
-   +(solo?'':acctNudge());
+   ;
   const col={N:'#2979C8',E1:'#3DAA6B',E2:'#C9983A',D:'#8B5CF6'};
   P.designs.slice().reverse().forEach((d,i)=>{
     const idx=P.designs.length-1-i;
@@ -1856,11 +1855,19 @@ function dailyView(){
   const now=new Date();
   const dnames=['일','월','화','수','목','금','토'];
   let h='<div class="sec" id="sec-daily">'+sn()+'<h2>오늘의 실천 — 기록하는 곳</h2>'
-   +'<div class="rec-card"><span class="rec-step">여기가 기록하는 자리입니다</span>'
-   +'<h3>오늘 실행한 내용을 한 줄로 남겨 두세요</h3>'
-   +'<p>체크는 지켰다는 표시일 뿐이고, 실제로 남는 것은 이 한 줄들입니다. '
-   +'한 줄씩 쌓이면 작은 여러분의 실행 역사가 됩니다. 못 적은 날이 있어도 괜찮습니다.</p></div>';
-  h+='<div class="daily-change no-print"><button onclick="openDesign()">문장 바꾸거나 새로 추가하기</button></div>';
+   +'<p class="sub">작은 실천이 모여, 나다운 삶을 만들어갑니다.</p>'
+   +'<div class="rec-card2">'
+   +'<span class="rc-badge">여기가 기록하는 자리입니다</span>'
+   +'<h3 class="rc-h">오늘, <b>한 가지 실천</b>을 남겨보세요.</h3>'
+   +'<div class="rc-steps">'
+   +'<div class="rc-step"><span class="rc-ic">\u270D</span><span>오늘 한 일을<br>간단히 기록해요</span></div>'
+   +'<span class="rc-arrow">\u203A</span>'
+   +'<div class="rc-step"><span class="rc-ic">\u2197</span><span>작은 기록이<br>변화를 만듭니다</span></div>'
+   +'<span class="rc-arrow">\u203A</span>'
+   +'<div class="rc-step"><span class="rc-ic">\u2740</span><span>꾸준한 실천이<br>나다운 삶으로 이어져요</span></div>'
+   +'</div>'
+   +'<button class="rc-cta no-print" onclick="openDesign()">\u2295 실천 기록 문장 변경 및 추가하기 \u2192</button>'
+   +'</div>';
   h+='<div class="today-box"><div class="today-date">'+(now.getMonth()+1)+'월 '+now.getDate()+'일 '+dnames[now.getDay()]+'요일</div>';
   P.designs.forEach((d,i)=>{
     const isOn=on.includes(d.id), nv=noteOf(day,d.id);
