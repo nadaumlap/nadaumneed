@@ -467,7 +467,7 @@ let h=`<div class="archie-stage"><div class="archie-stage-img"><img src="archie_
 h+=`<div class="gauge-section"><h3>4축 프로파일</h3>`;
 for(const d of['D1','D2','D3','D4']){const v=s[d],p=(v/5*100).toFixed(0);
 const isWeak=(d===s.weakest);
-h+=`<div class="gauge-item"><div class="gauge-label"><span class="name">${dn[d]}${isWeak?' <b style="color:#E53935">· 지금의 병목</b>':''}</span><span class="val">${v.toFixed(1)}</span></div><div class="gauge-track"><div class="gauge-fill ${dc[d]}" style="width:${p}%"></div></div></div>`;}
+h+=`<div class="gauge-item"><div class="gauge-label"><span class="name">${dn[d]}${isWeak?' <b style="color:#E53935">· 지금 가장 낮음</b>':''}</span><span class="val">${v.toFixed(1)}</span></div><div class="gauge-track"><div class="gauge-fill ${dc[d]}" style="width:${p}%"></div></div></div>`;}
 h+=`<div class="gauge-note" style="font-style:normal;margin-top:10px">네 축 모두 <b>높을수록 선명한 상태</b>입니다. 단계는 평균이 아니라 <b>가장 낮은 축</b>으로 판정합니다 — 한 축이 무너져 있으면 나머지가 아무리 높아도 선택은 흐려지기 때문입니다.</div>`;
 h+=`</div>`;
 h+=`<div class="bottleneck-card"><div class="bn-tag">지금 가장 먼저 손댈 곳</div><div class="bn-title">${dn[s.weakest]}</div><div class="bn-body">네 축 가운데 이 축이 가장 낮게(${s.weakVal.toFixed(1)}) 나왔습니다. 여기서부터 손대는 것이 가장 빠른 길입니다.</div></div>`;
