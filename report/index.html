@@ -2330,7 +2330,8 @@ function initAuth(){
   s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js';
   s.onload=function(){
     try{
-      SB=window.supabase.(function(){try{ if(__AUTH_HASH && location.hash.indexOf('access_token')<0){ history.replaceState(null,'',location.pathname+location.search+__AUTH_HASH); } }catch(e){} return createClient(AUTH.url,AUTH.key,{auth:{persistSession:true,detectSessionInUrl:true,flowType:'implicit'}});})();
+  try{ if(__AUTH_HASH && location.hash.indexOf('access_token')<0){ history.replaceState(null,'',location.pathname+location.search+__AUTH_HASH); } }catch(e){}
+      SB=window.supabase.createClient(AUTH.url,AUTH.key,{auth:{persistSession:true,detectSessionInUrl:true,flowType:'implicit'}});
       SB.auth.getSession().then(r=>{const u=r&&r.data&&r.data.session?r.data.session.user:null;
         try{ sessionStorage.removeItem('nd.authhash'); if(location.hash.indexOf('access_token')>=0) history.replaceState(null,'',location.pathname+location.search+'#map'); }catch(e){}
         setUser(u,false);});
