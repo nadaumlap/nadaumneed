@@ -622,7 +622,8 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
 .guide .gt:last-child{margin-bottom:0}
 .guide .gt::before{content:"\2713";position:absolute;left:0;top:2px;width:18px;height:18px;border-radius:50%;background:#2662B8;color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
 .cover .lead{font-size:15.5px;line-height:1.85}
-@media (max-width:640px){.answer{padding:20px}.answer p,.answer div:not(.al){font-size:17px}}</style>
+@media (max-width:640px){.answer{padding:20px}.answer p,.answer div:not(.al){font-size:17px}}.cal-cell.sel{outline:2px solid #2662B8;outline-offset:-2px}
+.cal-cell{cursor:pointer}</style>
 </head>
 <body>
 <div class="wrap">
@@ -1933,18 +1934,18 @@ function designView(bn,solo){
 }
 
 function sentencesView(){
-  var day=today(), on=checksOf(day);
+  var day=selDay(), on=checksOf(day);
   var h='<div class="sec">'+sn()
    +'<div class="sec-head"><div><h2>내 설계 문장</h2>'
-   +'<p class="sub">지금까지 남기신 문장입니다. 오늘 실천할 문장을 하나 고르면 아래 기록에 쌓입니다.</p></div>'
+   +'<p class="sub">지금까지 남기신 문장입니다. '+(selDay()===today()?'오늘':(selDay().slice(5).replace('-','월 ')+'일'))+' 실천할 문장을 고르면 아래 달력에 표시됩니다.</p></div>'
    +'<div class="tipchip green">\uD83C\uDF31 작은 실천이 모여,<br>더 나다운 나를 만듭니다.</div></div>';
   P.designs.slice().reverse().forEach(function(dg){
     var picked=on.indexOf(dg.id)>=0;
     var dt=String(dg.created||'').slice(0,10).replace(/-/g,'.');
     h+='<div class="sent3'+(picked?' on':'')+'">'
-     +'<span class="s3-radio no-print" onclick="toggleCheck(\''+dg.id+'\')"></span>'
+     +'<span class="s3-radio no-print" onclick="toggleFor(\''+dg.id+'\')"></span>'
      +'<div class="s3-body"><div class="s3-txt">'+esc(dg.text)+'</div><div class="s3-date">'+dt+'</div></div>'
-     +'<button class="s3-pick no-print" onclick="toggleCheck(\''+dg.id+'\')">'+(picked?'선택됨 \u2713':'선택하기')+'</button>'
+     +'<button class="s3-pick no-print" onclick="toggleFor(\''+dg.id+'\')">'+(picked?'선택됨 \u2713':'선택하기')+'</button>'
      +'<button class="s3-del no-print" title="삭제" onclick="delDesign(\''+dg.id+'\')">\uD83D\uDDD1</button>'
      +'</div>';
   });
@@ -2019,7 +2020,8 @@ function dailyView(){
     var dd=(d0 instanceof Date)?d0:new Date(d0);
     var d=dkey(dd);
     var isToday=(d===day), done=checksOf(d).length>0;
-    h+='<div class="cal-cell'+(isToday?' today':'')+(done?' done':'')+'" onclick="toggleDay(\''+d+'\')">'
+    var sel=(d===selDay()), tips=textsOf(d);
+    h+='<div class="cal-cell'+(isToday?' today':'')+(done?' done':'')+(sel?' sel':'')+'" title="'+(tips.length?esc(tips.join(' / ')):'기록 없음')+'" onclick="pickDay(\''+d+'\')">'
      +'<div class="cal-w">'+dn[dd.getDay()]+'</div>'
      +'<div class="cal-d">'+(dd.getMonth()+1)+'/'+dd.getDate()+'</div>'
      +'<div class="cal-mark">'+(done?'\u2713':'')+'</div></div>';
@@ -2032,12 +2034,37 @@ function dailyView(){
   h+='</div>';
   return h;
 }
-function saveNow(){
+function saveNow(btn){
+  var lab=btn?btn.textContent:'';
+  var ok=function(){ if(btn){ btn.textContent='저장됨 \u2713'; btn.disabled=true; setTimeout(function(){ btn.textContent=lab; btn.disabled=false; },2500);} toast('계정에 저장했습니다'); };
+  var ng=function(){ if(btn){ btn.textContent=lab; btn.disabled=false; } toast('저장에 실패했습니다. 잠시 후 다시 시도해 주세요'); };
+  if(btn){ btn.textContent='저장 중…'; btn.disabled=true; }
+  try{ var p=cloudPush(); if(p&&p.then){ p.then(ok).catch(ng); } else ok(); }catch(e){ ng(); }
+  return;
+}
+function __oldSaveNow(){
   try{
     var p=cloudPush();
     if(p&&p.then){ p.then(function(){ toast('계정에 저장했습니다'); }).catch(function(){ toast('저장에 실패했습니다. 잠시 후 다시 시도해 주세요'); }); }
     else toast('계정에 저장했습니다');
   }catch(e){ toast('저장에 실패했습니다. 잠시 후 다시 시도해 주세요'); }
+}
+var SELDAY=null;
+function selDay(){ return SELDAY||today(); }
+function pickDay(d){ SELDAY=(SELDAY===d)?null:d; render(); }
+function toggleFor(id){
+  var d=selDay();
+  P.checks=P.checks||{};
+  var arr=(P.checks[d]||[]).slice();
+  var k=arr.indexOf(id);
+  if(k>=0) arr.splice(k,1); else arr.push(id);
+  P.checks[d]=arr;
+  P.updated=new Date().toISOString(); save(P); render();
+}
+function textsOf(d){
+  var ids=(P.checks&&P.checks[d])?P.checks[d]:[];
+  var m={}; P.designs.forEach(function(x){ m[x.id]=x.text; });
+  return ids.map(function(i){ return m[i]||''; }).filter(Boolean);
 }
 function toggleDay(d){
   P.checks=P.checks||{};
@@ -2133,51 +2160,80 @@ function toggleValue(k){
 const QAX={'욕구 선명도':'내가 원하는 것을 얼마나 분명히 아는가?','신호 보존도':'내 신호가 바깥 잡음에 얼마나 흔들리는가?','생명성 정렬':'지금의 일상이 나에게 에너지를 주는가?','자기 저자성':'내 기준으로 오늘을 살고 있는가?'};
 function trendView(){
   var ALL=(P.history||[]), H=ALL.slice(-5), n=H.length;
-  var h='<div class="sec" id="sec-trend">'+sn()+'<h2>나의 변화 기록</h2>'
-   +'<div class="tr-count">\uD83D\uDCD8 지금까지 '+ALL.length+'회의 기록이 있습니다.</div>';
-  if(!n){ h+='<div class="trend-empty">아직 기록이 없습니다. 진단을 마치시면 이 자리에 첫 점이 찍힙니다.</div></div>'; return h; }
-  h+='<div class="tr-key">'+TRAX.map(function(a){return '<span class="tr-k"><i style="background:'+a.c+'"></i>'+a.n+'</span>'}).join('')+'</div>';
+  var h='<div class="sec" id="sec-trend">'+sn()
+    +'<h2>나의 변화 기록</h2>'
+    +'<div class="tr-count">\uD83D\uDCD6 지금까지 '+ALL.length+'회의 기록이 있습니다.</div>';
+  if(!n){
+    h+='<div class="trend-empty">아직 기록이 없습니다. 진단을 마치시면 이 자리에 첫 점이 찍힙니다.</div></div>';
+    return h;
+  }
+  h+='<div class="tr-key">'+TRAX.map(function(a){
+    return '<span class="tr-k"><i style="background:'+a.c+'"></i>'+a.n+'</span>';
+  }).join('')+'</div>';
+  h+='<div style="display:flex;justify-content:flex-end;gap:14px;font-size:11px;color:#6B7393;margin:2px 4px 8px">'
+    +'<span><i style="display:inline-block;width:22px;height:2px;background:#6B7393;vertical-align:middle;margin-right:5px"></i>실제 검사</span>'
+    +'<span><i style="display:inline-block;width:22px;border-top:2px dashed #9AA3B5;vertical-align:middle;margin-right:5px"></i>미검사 · 50(임시값)</span>'
+    +'</div>';
   var X0=34,X1=306,Y0=14,Y1=140;
-  var py=function(v){return Y1-(Y1-Y0)*(Math.max(0,Math.min(100,v))/100)};
-  var px=function(i){return n===1?(X0+X1)/2:X0+(X1-X0)*i/(n-1)};
+  var py=function(v){ return Y1-(Y1-Y0)*(Math.max(0,Math.min(100,v))/100); };
+  var px=function(i){ return n===1 ? (X0+X1)/2 : X0+(X1-X0)*i/(n-1); };
   var g='';
-  [0,25,50,75,100].forEach(function(v){var y=py(v);
+  [0,25,50,75,100].forEach(function(v){
+    var y=py(v);
     g+='<line x1="'+X0+'" y1="'+y.toFixed(1)+'" x2="'+X1+'" y2="'+y.toFixed(1)+'" stroke="#EDF0F5" stroke-width="1"/>';
-    g+='<text x="'+(X0-6)+'" y="'+(y+3).toFixed(1)+'" font-size="8" fill="#98A1B5" text-anchor="end">'+v+'</text>';});
+    g+='<text x="'+(X0-6)+'" y="'+(y+3).toFixed(1)+'" font-size="8" fill="#98A1B5" text-anchor="end">'+v+'</text>';
+  });
   TRAX.forEach(function(ax,ai){
-    var pts=[];
-    H.forEach(function(en,i){ var v=(en.a||[])[ai]; if(v!=null) pts.push([px(i),py(v),v]); });
-    if(!pts.length) return;
-    if(pts.length>1){
-      g+='<polyline fill="none" stroke="'+ax.c+'" stroke-width="2.2" stroke-linejoin="round" points="'+pts.map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1)}).join(' ')+'"/>';
-    } else if(pts[0][0]<X1-2){
-      g+='<line x1="'+pts[0][0].toFixed(1)+'" y1="'+pts[0][1].toFixed(1)+'" x2="'+X1+'" y2="'+pts[0][1].toFixed(1)+'" stroke="'+ax.c+'" stroke-width="1.8" stroke-dasharray="4 4" opacity=".5"/>';
+    var points=[];
+    H.forEach(function(en,i){
+      var raw=(en.a||[])[ai];
+      var estimated=(raw==null);
+      var value=estimated ? 50 : Number(raw);
+      points.push({x:px(i), y:py(value), value:value, estimated:estimated});
+    });
+    for(var i=0;i<points.length-1;i++){
+      var p1=points[i], p2=points[i+1];
+      var dashed=(p1.estimated || p2.estimated);
+      g+='<line x1="'+p1.x.toFixed(1)+'" y1="'+p1.y.toFixed(1)+'" x2="'+p2.x.toFixed(1)+'" y2="'+p2.y.toFixed(1)+'"'
+        +' stroke="'+ax.c+'" stroke-width="2.2" stroke-linecap="round"'
+        +(dashed ? ' stroke-dasharray="5 5" opacity=".55"' : '')+' />';
     }
-    pts.forEach(function(p,k){
-      var last=(k===pts.length-1);
-      g+='<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+(last?4:3)+'" fill="#fff" stroke="'+ax.c+'" stroke-width="2.4"/>';
-      if(last) g+='<text x="'+(p[0]+8).toFixed(1)+'" y="'+(p[1]+3.4).toFixed(1)+'" font-size="9.5" font-weight="700" fill="'+ax.c+'">'+p[2]+'</text>';
+    points.forEach(function(p){
+      g+='<circle cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="'+(p.estimated?3.5:4)+'"'
+        +' fill="#fff" stroke="'+ax.c+'" stroke-width="'+(p.estimated?1.8:2.4)+'"'
+        +(p.estimated?' stroke-dasharray="3 2"':'')+'/>';
+      if(!p.estimated){
+        g+='<text x="'+(p.x+8).toFixed(1)+'" y="'+(p.y+3.4).toFixed(1)+'" font-size="9.5" font-weight="700" fill="'+ax.c+'">'+p.value+'</text>';
+      } else {
+        g+='<text x="'+(p.x+7).toFixed(1)+'" y="'+(p.y-5).toFixed(1)+'" font-size="7.5" fill="#9AA3B5">50*</text>';
+      }
     });
   });
   H.forEach(function(en,i){
-    g+='<text x="'+px(i).toFixed(1)+'" y="'+(Y1+14)+'" font-size="8.5" fill="#6B7393" text-anchor="middle">'+String(en.t||'').replace(/-/g,'.').slice(5)+'</text>';
+    g+='<text x="'+px(i).toFixed(1)+'" y="'+(Y1+14)+'" font-size="8.5" fill="#6B7393" text-anchor="middle">'+(i+1)+'차 검사</text>';
   });
   g+='<line x1="'+X0+'" y1="'+Y1+'" x2="'+X1+'" y2="'+Y1+'" stroke="#D8DEE9" stroke-width="1"/>';
   h+='<div class="trend-box"><svg viewBox="0 0 320 168" width="100%" role="img">'+g+'</svg></div>';
-  var note=(function(){
-    var ups=[],downs=[];
-    TRAX.forEach(function(a,ai){var f=-1,l=-1;H.forEach(function(e,i){var v=(e.a||[])[ai];if(v!=null){if(f<0)f=i;l=i;}});
-      if(f>=0&&l>f){var dd=H[l].a[ai]-H[f].a[ai];if(dd>0)ups.push({n:a.n,d:dd});else if(dd<0)downs.push({n:a.n,d:dd});}});
-    if(!ups.length&&!downs.length) return '아직 두 번 이상 답한 축이 없습니다. 한 번 더 답하시면 선이 이어집니다.';
-    ups.sort(function(x,y){return y.d-x.d}); downs.sort(function(x,y){return x.d-y.d});
-    var parts=[];
-    if(ups.length) parts.push('<b>'+ups[0].n+'</b> +'+ups[0].d+'으로 가장 많이 올랐습니다.');
-    if(downs.length) parts.push('<b>'+downs[0].n+'</b> '+downs[0].d+'으로 내려갔습니다. 이번 달에 먼저 볼 곳입니다.');
-    else parts.push('내려간 축은 없습니다. 지금 리듬이 유지되고 있습니다.');
-    return parts.join(' ');
-  })();
-  if(ALL.length>5) h+='<p class="sub" style="margin-top:8px">최근 5회만 보여 드립니다. 이전 기록은 그대로 남아 있습니다.</p>';
+  h+='<div class="trend-note" style="margin-top:12px"><b>그래프 보는 방법</b><br>'
+    +'실선은 실제 검사 결과이며, 미검사 항목은 중간값 <b>50</b>을 임시로 표시하고 점선으로 연결했습니다. '
+    +'50은 실제 점수가 아니며, 해당 항목을 검사하면 실제 결과로 업데이트됩니다.</div>';
+  var ups=[],downs=[];
+  TRAX.forEach(function(a,ai){
+    var actual=[];
+    H.forEach(function(e){ var v=(e.a||[])[ai]; if(v!=null) actual.push(Number(v)); });
+    if(actual.length>=2){
+      var dd=actual[actual.length-1]-actual[0];
+      if(dd>0) ups.push({n:a.n,d:dd});
+      if(dd<0) downs.push({n:a.n,d:dd});
+    }
+  });
+  ups.sort(function(x,y){return y.d-x.d}); downs.sort(function(x,y){return x.d-y.d});
+  var note='';
+  if(ups.length) note+='<b>'+ups[0].n+'</b>가 실제 검사 기준 +'+ups[0].d+'으로 가장 많이 올랐습니다.';
+  if(downs.length){ if(note) note+=' '; note+='<b>'+downs[0].n+'</b>는 '+downs[0].d+'으로 내려갔습니다. 이번에 먼저 살펴볼 영역입니다.'; }
+  if(!note) note='두 번 이상 실제로 검사한 항목이 생기면 변화의 방향을 읽어드릴 수 있습니다.';
   h+='<div class="trend-note">'+note+'</div>';
+  if(ALL.length>5) h+='<p class="sub" style="margin-top:8px">최근 5회의 검사만 보여 드립니다. 이전 기록은 그대로 남아 있습니다.</p>';
   h+='</div>';
   return h;
 }
@@ -2491,7 +2547,7 @@ function acctCard(){
      +'<div class="acct-me"><b>'+esc(AUTH_USER.email||'')+'</b><span id="syncState">'+syncLabel()+'</span></div>'
      +'<p class="acct-lead">이 기기에서 남기는 문장과 기록은 자동으로 계정에 저장됩니다. 다른 기기에서 같은 이메일로 로그인하면 이어집니다.</p>'
      +'<label class="acct-agree" style="margin:0 0 12px"><input type="checkbox" id="remindOn" '+(_remindOn?'checked':'')+' onchange="setRemind(this.checked)"><span>4주 뒤 다시 볼 때 메일로 알려 주세요</span></label>'
-     +'<div class="btn-row"><button class="btn ghost" onclick="saveNow()">지금 저장</button>'
+     +'<div class="btn-row"><button class="btn ghost" onclick="saveNow(this)">지금 저장</button>'
      +'<button class="btn ghost" onclick="signOut()">로그아웃</button></div>'
      +'<div class="acct-foot">계정과 기록을 모두 지우시려면 <a href="mailto:?subject='+encodeURIComponent('나다움 설계 계정 삭제 요청')+'&body='+encodeURIComponent('삭제할 계정 이메일: '+(AUTH_USER.email||''))+'">삭제 요청</a>을 보내 주세요. 확인 후 지웁니다.</div></div>';
   }
