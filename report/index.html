@@ -612,7 +612,18 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
 .cf-num b{font-size:22px;font-weight:800;color:#1A2138}
 .cf-num em{font-style:normal;font-size:15px;font-weight:700;color:#3A4360}
 .cal-foot b{display:inline}
-.s3-radio{cursor:pointer}</style>
+.s3-radio{cursor:pointer}/* 핵심 문장 카드 확대 */
+.answer{background:linear-gradient(140deg,#1B2A5E 0%,#22315F 55%,#2B3C6E 100%);border-radius:18px;padding:26px 26px 28px;margin:18px 0 16px;box-shadow:0 10px 26px rgba(27,42,94,.18)}
+.answer .al{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:800;color:#BFD3FF;letter-spacing:-0.01em;margin-bottom:14px}
+.answer p,.answer div:not(.al){font-size:20px;line-height:1.75;color:#fff;font-weight:700;word-break:keep-all;letter-spacing:-0.02em}
+.answer b{color:#FFD469}
+.answer .hi{color:#8FC4FF}
+.guide{background:#F4F8FF;border:1px solid #DCE7F8;border-radius:16px;padding:20px 22px;margin-bottom:14px}
+.guide .gt{font-size:14.5px;line-height:1.75;color:#33405C;padding-left:26px;position:relative;margin-bottom:12px;word-break:keep-all}
+.guide .gt:last-child{margin-bottom:0}
+.guide .gt::before{content:"\2713";position:absolute;left:0;top:2px;width:18px;height:18px;border-radius:50%;background:#2662B8;color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.cover .lead{font-size:15.5px;line-height:1.85}
+@media (max-width:640px){.answer{padding:20px}.answer p,.answer div:not(.al){font-size:17px}}</style>
 </head>
 <body>
 <div class="wrap">
@@ -1654,20 +1665,7 @@ function mapView(A,bn,done){
      +'<button class="bn-go no-print" onclick="openDesign()">오늘의 설계 시작하기 \u2192</button>'
      +'<div class="bfoot">오늘의 설계는 1분이면 됩니다. 한 문장만 남기시면 됩니다.</div></div></div>';
   }
-  h+='<div class="sec">'+sn()+'<h2>나의 설계 여정</h2>'
-   +'<p class="sub">나다움 설계는 네 단계로 이어집니다. 지금 어디까지 열렸는지 한눈에 보십시오.</p>'
-   +journeyView(A,bn,true)
-   +nextStepCard()
-   +'</div>';
-  return h;
-}
-/* 다음 한 개만 제안한다. 선택지가 많을수록 시작 자체를 미룬다(Iyengar & Lepper, 2000). */
-function nextStepCard(){
-  const core=DIAGS.filter(d=>d.core), todo=core.filter(d=>!P.modules[d.k]);
-  if(!todo.length){
-    const ext=DIAGS.filter(d=>!d.core&&!P.modules[d.k]);
-    if(!ext.length) return '<div class="nextcard done">여섯 질문에 모두 답하셨습니다. 이제는 <a href="#record">오늘의 실천</a>을 쌓는 자리입니다.</div>';
-    return '<div class="nextcard"><div class="nl">네 칸이 모두 열렸습니다</div>'
+      return '<div class="nextcard"><div class="nl">네 칸이 모두 열렸습니다</div>'
       +'<div class="nq">더 또렷하게 보고 싶으시면 심화 질문이 남아 있습니다.</div>'
       +'<a class="nb" href="#map">심화 질문 보기 \u2192</a></div>';
   }
@@ -2009,7 +2007,7 @@ function dailyView(){
     var dd=(d0 instanceof Date)?d0:new Date(d0);
     var d=dkey(dd);
     var isToday=(d===day), done=checksOf(d).length>0;
-    h+='<div class="cal-cell'+(isToday?' today':'')+(done?' done':'')+'"'+(isToday?' onclick="toggleToday()"':'')+'>'
+    h+='<div class="cal-cell'+(isToday?' today':'')+(done?' done':'')+'" onclick="toggleDay(\''+d+'\')">'
      +'<div class="cal-w">'+dn[dd.getDay()]+'</div>'
      +'<div class="cal-d">'+(dd.getMonth()+1)+'/'+dd.getDate()+'</div>'
      +'<div class="cal-mark">'+(done?'\u2713':'')+'</div></div>';
@@ -2021,6 +2019,25 @@ function dailyView(){
   h+='</div>';
   h+='</div>';
   return h;
+}
+function saveNow(){
+  try{
+    var p=cloudPush();
+    if(p&&p.then){ p.then(function(){ toast('계정에 저장했습니다'); }).catch(function(){ toast('저장에 실패했습니다. 잠시 후 다시 시도해 주세요'); }); }
+    else toast('계정에 저장했습니다');
+  }catch(e){ toast('저장에 실패했습니다. 잠시 후 다시 시도해 주세요'); }
+}
+function toggleDay(d){
+  P.checks=P.checks||{};
+  var cur=(P.checks[d]||[]).slice();
+  if(cur.length){ P.checks[d]=[]; }
+  else{
+    var t=today(), on=(P.checks[t]||[]);
+    var id=on[0]||(P.designs.length?P.designs[P.designs.length-1].id:null);
+    if(!id){ toast('먼저 설계 문장을 하나 만들어 주세요'); return; }
+    P.checks[d]=[id];
+  }
+  P.updated=new Date().toISOString(); save(P); render();
 }
 function toggleToday(){
   var day=today(), on=checksOf(day);
@@ -2462,7 +2479,7 @@ function acctCard(){
      +'<div class="acct-me"><b>'+esc(AUTH_USER.email||'')+'</b><span id="syncState">'+syncLabel()+'</span></div>'
      +'<p class="acct-lead">이 기기에서 남기는 문장과 기록은 자동으로 계정에 저장됩니다. 다른 기기에서 같은 이메일로 로그인하면 이어집니다.</p>'
      +'<label class="acct-agree" style="margin:0 0 12px"><input type="checkbox" id="remindOn" '+(_remindOn?'checked':'')+' onchange="setRemind(this.checked)"><span>4주 뒤 다시 볼 때 메일로 알려 주세요</span></label>'
-     +'<div class="btn-row"><button class="btn ghost" onclick="cloudPush().then(()=>toast(\'지금 저장했습니다\'))">지금 저장</button>'
+     +'<div class="btn-row"><button class="btn ghost" onclick="saveNow()">지금 저장</button>'
      +'<button class="btn ghost" onclick="signOut()">로그아웃</button></div>'
      +'<div class="acct-foot">계정과 기록을 모두 지우시려면 <a href="mailto:?subject='+encodeURIComponent('나다움 설계 계정 삭제 요청')+'&body='+encodeURIComponent('삭제할 계정 이메일: '+(AUTH_USER.email||''))+'">삭제 요청</a>을 보내 주세요. 확인 후 지웁니다.</div></div>';
   }
