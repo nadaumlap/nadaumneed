@@ -508,23 +508,25 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
 .jgoal.on{border-style:solid;border-color:#C9DAF0;background:#F2F7FD;color:#2979C8}
 .jmap-foot{font-size:12.5px;color:#4A5568;background:#F7F9FC;border:1px solid #E7EBF3;border-radius:10px;padding:10px 13px;margin-top:10px;line-height:1.75;word-break:keep-all}
 .jmap-foot b{color:#1E2761}
+.go-change{display:block;margin:14px 0 4px;padding:17px;border-radius:13px;background:#6B4FD8;color:#FFF;text-align:center;font-size:17px;font-weight:800;text-decoration:none;letter-spacing:-0.01em}
+.go-change:hover{background:#5A40C0}
 @media (max-width:640px){.jmap-grid{flex-wrap:wrap}.jstep{flex:1 1 calc(33.33% - 6px)}.jgoal{flex:1 1 100%;height:44px}}
 .daily-change{display:flex;justify-content:flex-end;margin:-6px 0 10px}
 .daily-change button{background:none;border:1px solid #DCE2ED;border-radius:8px;padding:7px 12px;font-family:inherit;font-size:12px;color:#4A5568;cursor:pointer}
 .daily-change button:hover{border-color:#B9C0CE;color:#1E2761}
 
 /* 오늘의 실천 배너 */
-.rec-card2{position:relative;background:linear-gradient(135deg,#FBF7EE 0%,#F7F3EA 100%);border:1px solid #EADFCB;border-radius:16px;padding:22px 22px 20px;margin:14px 0 14px}
+.rec-card2{position:relative;background:linear-gradient(135deg,#FBF7EE 0%,#F7F3EA 100%);border:1px solid #EADFCB;border-radius:16px;padding:18px 18px 16px;margin:12px 0}
 .rc-badge{display:inline-block;background:#1A2250;color:#F5C95F;font-size:11.5px;font-weight:800;padding:6px 13px;border-radius:20px}
-.rc-h{font-size:23px;font-weight:800;color:#1A2250;line-height:1.4;margin:12px 0 16px;word-break:keep-all}
+.rc-h{font-size:21px;font-weight:800;color:#1A2250;line-height:1.4;margin:10px 0 12px;word-break:keep-all}
 .rc-h b{color:#B98A2E}
-.rc-steps{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:4px}
+.rc-steps{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:2px}
 .rc-step{flex:1 1 190px;display:flex;align-items:center;gap:12px;font-size:13.5px;font-weight:700;color:#3A4360;line-height:1.6}
 .rc-ic{width:42px;height:42px;flex:0 0 42px;border-radius:50%;background:#FFF;border:1px solid #EADFCB;display:flex;align-items:center;justify-content:center;font-size:19px;color:#B98A2E}
 .rc-arrow{flex:0 0 auto;color:#B98A2E;font-size:24px;font-weight:800;opacity:.55;padding:0 2px}
-.rc-cta{display:block;width:100%;margin-top:18px;padding:15px;border:none;border-radius:12px;background:#1A2250;color:#FFF;font-family:inherit;font-size:15px;font-weight:800;cursor:pointer}
-.rc-cta:hover{background:#141B41}
-@media (max-width:560px){.rc-h{font-size:19px}.rc-steps{flex-direction:column;align-items:flex-start;gap:12px}.rc-arrow{transform:rotate(90deg);margin-left:18px}}
+.rc-cta{display:block;width:100%;margin-top:14px;padding:15px;border:none;border-radius:12px;background:#6B4FD8;color:#FFF;font-family:inherit;font-size:15.5px;font-weight:800;cursor:pointer}
+.rc-cta:hover{background:#5A40C0}
+@media (max-width:560px){.rc-h{font-size:18px;margin:8px 0 10px}.rec-card2{padding:15px 15px 14px}.rc-steps{gap:8px}.rc-step{flex:1 1 100%;font-size:13px;gap:10px}.rc-ic{width:34px;height:34px;flex:0 0 34px;font-size:16px}.rc-arrow{display:none}.rc-cta{padding:14px;font-size:14.5px;margin-top:12px}}
 
 /* 변화 탭 */
 .chg-tip{display:inline-block;background:#EAF6EE;color:#2F7A4C;font-size:12.5px;font-weight:700;border-radius:10px;padding:9px 14px;margin:2px 0 14px}
@@ -1420,6 +1422,7 @@ function journeyView(A,bn,nocap){
   else if(openN===0) pg='아직 열린 칸이 없습니다. 어느 칸부터 여셔도 됩니다.';
   else pg='다섯 칸 중 <b>'+openN+'칸</b>이 열렸습니다. 잠긴 칸을 누르시면 그 진단으로 바로 이동합니다.';
   h+='<div class="jmap-foot">'+pg+'</div></div>';
+  h+='<a class="go-change no-print" href="#change" onclick="setTimeout(function(){window.scrollTo(0,0)},60)">나의 변화 보러가기 \u2192</a>';
   return h;
 }
 
@@ -2098,6 +2101,18 @@ function trendView(){
    +'<div class="trend-leg">'+TRAX.map(function(a){
        return '<span><i style="background:'+a.c+'"></i>'+a.n+'</span>'}).join('')+'</div></div>';
   var first=H[0], last=H[n-1], deltas=[];
+  var note=(function(){
+    var ups=[],downs=[];
+    TRAX.forEach(function(a,ai){var f=-1,l=-1;H.forEach(function(e,i){var v=(e.a||[])[ai];if(v!=null){if(f<0)f=i;l=i;}});
+      if(f>=0&&l>f){var d=H[l].a[ai]-H[f].a[ai];if(d>0)ups.push({n:a.n,d:d});else if(d<0)downs.push({n:a.n,d:d});}});
+    if(!ups.length&&!downs.length) return '아직 두 번 이상 답한 축이 없어 변화를 비교할 수 없습니다. 한 번 더 답하시면 선이 이어집니다.';
+    ups.sort(function(x,y){return y.d-x.d}); downs.sort(function(x,y){return x.d-y.d});
+    var parts=[];
+    if(ups.length) parts.push('<b>'+ups[0].n+'</b>이 가장 많이 올랐습니다 (+'+ups[0].d+').');
+    if(downs.length) parts.push('<b>'+downs[0].n+'</b>은 '+downs[0].d+'만큼 내려갔습니다. 이번 달에 먼저 볼 곳입니다.');
+    else parts.push('내려간 축은 없습니다. 지금 리듬이 유지되고 있다는 뜻입니다.');
+    return parts.join(' ');
+  })();
   var _LEG='<div class="tr-legend">'+TRAX.map(function(a){return '<div class="tr-item"><span class="tr-dot" style="background:'+a.c+'"></span><div><div class="tr-nm">'+a.n+'</div><div class="tr-q">('+(QAX[a.n]||'')+')</div></div></div>'}).join('')+'</div>';
   h+=_LEG+_capNote+'<p class="sub" style="margin-top:6px">한 축에 점이 두 개 이상 쌓여야 선이 그려집니다. 점이 하나뿐인 축은 아직 선이 생기지 않습니다.</p>';
   h+='<div class="trend-note">'+note+'</div></div>';
