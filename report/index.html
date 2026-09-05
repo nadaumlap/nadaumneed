@@ -487,10 +487,10 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
 }
 
 /* 로그인 인사 */
-.hello-bar{margin-left:auto;font-size:12.5px;color:#4A5568;display:flex;align-items:center;gap:6px}
-.hello-bar b{color:#1E2761;font-weight:800}
-.hello-bar .hb-dot{width:6px;height:6px;border-radius:50%;background:#3DAA6B;display:inline-block}
-@media (max-width:520px){.hello-bar{width:100%;margin:6px 0 0;order:9}}
+.hello-bar{display:none;align-items:center;gap:9px;background:#EEF4FF;border:1px solid #D3E1F7;border-radius:12px;padding:13px 16px;margin:0 0 12px;font-size:15px;font-weight:700;color:#25406E}
+.hello-bar b{color:#173063;font-weight:800;font-size:16.5px}
+.hello-bar .hb-dot{width:9px;height:9px;flex:0 0 9px;border-radius:50%;background:#3DAA6B;display:inline-block}
+@media (max-width:520px){.hello-bar{font-size:14px;padding:11px 13px}}
 .jmap{margin:4px 0 18px}
 .jmap-grid{display:flex;gap:8px;align-items:stretch}
 .jstep{flex:1 1 0;position:relative;border:1.5px solid #E3E7EF;background:#F5F6F9;border-radius:13px;padding:13px 10px 12px;text-decoration:none;display:flex;flex-direction:column;gap:6px;min-width:0}
@@ -518,13 +518,13 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
 .rc-badge{display:inline-block;background:#1A2250;color:#F5C95F;font-size:11.5px;font-weight:800;padding:6px 13px;border-radius:20px}
 .rc-h{font-size:23px;font-weight:800;color:#1A2250;line-height:1.4;margin:12px 0 16px;word-break:keep-all}
 .rc-h b{color:#B98A2E}
-.rc-steps{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.rc-step{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:700;color:#3A4360;line-height:1.5}
-.rc-ic{width:34px;height:34px;flex:0 0 34px;border-radius:50%;background:#FFF;border:1px solid #EADFCB;display:flex;align-items:center;justify-content:center;font-size:15px;color:#B98A2E}
-.rc-arrow{color:#C9BDA4;font-size:16px;font-weight:800}
+.rc-steps{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:4px}
+.rc-step{flex:1 1 190px;display:flex;align-items:center;gap:12px;font-size:13.5px;font-weight:700;color:#3A4360;line-height:1.6}
+.rc-ic{width:42px;height:42px;flex:0 0 42px;border-radius:50%;background:#FFF;border:1px solid #EADFCB;display:flex;align-items:center;justify-content:center;font-size:19px;color:#B98A2E}
+.rc-arrow{flex:0 0 auto;color:#B98A2E;font-size:24px;font-weight:800;opacity:.55;padding:0 2px}
 .rc-cta{display:block;width:100%;margin-top:18px;padding:15px;border:none;border-radius:12px;background:#1A2250;color:#FFF;font-family:inherit;font-size:15px;font-weight:800;cursor:pointer}
 .rc-cta:hover{background:#141B41}
-@media (max-width:560px){.rc-h{font-size:19px}.rc-steps{flex-direction:column;align-items:flex-start}.rc-arrow{display:none}}
+@media (max-width:560px){.rc-h{font-size:19px}.rc-steps{flex-direction:column;align-items:flex-start;gap:12px}.rc-arrow{transform:rotate(90deg);margin-left:18px}}
 
 /* 변화 탭 */
 .chg-tip{display:inline-block;background:#EAF6EE;color:#2F7A4C;font-size:12.5px;font-weight:700;border-radius:10px;padding:9px 14px;margin:2px 0 14px}
@@ -569,13 +569,13 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
   <div class="logo-need"><span class="n">N</span><span class="e1">E</span><span class="e2">E</span><span class="d">D</span></div>
   <div class="logo-sep"></div>
   <div class="logo-right"><span class="top">나다움설계연구소</span><span class="bot">나다움을 설계하다</span></div>
-  <div id="helloBar" class="hello-bar"></div>
   <div class="logo-actions no-print" id="hact" hidden>
     <button class="hbtn" onclick="printAll()" title="결과 다운로드" aria-label="결과 다운로드"><svg viewBox="0 0 16 16"><path d="M8 1.6v8.2m0 0L5 6.9m3 2.9 3-2.9M2.4 11.4v1.8c0 .6.5 1.2 1.2 1.2h8.8c.7 0 1.2-.6 1.2-1.2v-1.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="hl">결과 다운로드</span></button>
     <button class="hbtn" onclick="shareKeep()" title="공유하기" aria-label="공유하기"><svg viewBox="0 0 16 16"><circle cx="12.4" cy="3.6" r="2.1" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="3.6" cy="8" r="2.1" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12.4" cy="12.4" r="2.1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 7 10.5 4.5M5.5 9l5 2.4" stroke="currentColor" stroke-width="1.5"/></svg><span class="hl">공유하기</span></button>
   </div>
 </div>
 
+<div id="helloBar" class="hello-bar no-print"></div>
 <nav class="tabnav no-print" id="tabnav" hidden></nav>
 <div id="app"></div>
 
@@ -1223,8 +1223,8 @@ function nickOf(email){ const e=String(email||''); const i=e.indexOf('@'); retur
 function renderHello(){
   const el=document.getElementById('helloBar'); if(!el)return;
   if(typeof AUTH_USER!=='undefined' && AUTH_USER){
-    el.innerHTML='<span class="hb-dot"></span><b>'+esc(nickOf(AUTH_USER.email))+'</b>님, 기록이 계정에 이어지고 있습니다';
-  } else { el.innerHTML=''; }
+    el.innerHTML='<span class="hb-dot"></span><b>'+esc(nickOf(AUTH_USER.email))+'</b>님, 기록이 계정에 이어지고 있습니다';el.style.display='flex';
+  } else { el.innerHTML=''; el.style.display='none'; }
 }
 function render(){
   P=load()||blank();
