@@ -637,7 +637,15 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
 .vh-h{font-size:21px;font-weight:800;color:#1A2138;margin-top:4px}
 .vh-d{font-size:13.5px;color:#4A5568;line-height:1.75;margin-top:8px}
 .vh-btn{display:block;margin-top:16px;padding:15px;border-radius:12px;background:#2662B8;color:#fff;font-size:15px;font-weight:800;text-decoration:none}
-@media (max-width:640px){.vh-badge{width:130px;height:130px}.vh-word{font-size:36px}}</style>
+@media (max-width:640px){.vh-badge{width:130px;height:130px}.vh-word{font-size:36px}}/* 지도 오른쪽 열 */
+.two{align-items:start}
+.two > div:last-child > .sec:first-child > h2, .two h2{font-size:24px}
+.axis-name{font-size:15px;font-weight:800;color:#1A2138;margin-bottom:7px;letter-spacing:-0.01em}
+.axis-en{font-size:12.5px;font-weight:700;color:#8B93A5}
+.map-head{text-align:center;margin-bottom:6px}
+.map-head h2{font-size:26px;font-weight:800}
+.map-head p{font-size:14.5px;line-height:1.75;color:#4A5568;margin-top:8px}
+@media (min-width:900px){.two > div:last-child{padding-top:64px}}</style>
 </head>
 <body>
 <div class="wrap">
@@ -1646,14 +1654,14 @@ function mapView(A,bn,done){
    +'<div class="guide"><div class="gt">해석 가이드</div>'
    +'<p>각 칸의 점수는 지금 이 시기의 상태를 보여줍니다. 어느 칸부터 보셔도 되지만, 앞 단계부터 보시면 뒤가 한결 쉬워집니다.</p></div>'
    +'</div><div>';
-  h+='<div class="sec">'+sn()+'<h2>나의 지도</h2>'
-   +'<p class="sub">이 지도는 나를 평가하기 위한 것이 아닙니다. 지금 내 삶을 어디에서부터 살펴보면 좋을지 보여줍니다.</p>';
+  h+='<div class="sec">'+sn()+'<div class="map-head"><h2>나의 지도</h2>'
+   +'<p class="sub">이 지도는 나를 평가하기 위한 것이 아닙니다.<br>지금 내 삶을 어디에서부터 살펴보면 좋을지 보여줍니다.</div></p>';
   h+='<div class="axes-wrap">'+(openN>=3?radar(A):'');
   ks.forEach(k=>{
     const a=A[k],has=a.v!==null;
     h+='<div class="axis-row'+(has?'':' empty')+'"><div class="axis-key" style="'+(has?'color:'+a.c:'')+'">'+k+'</div>'
-     +'<div class="axis-mid"><div class="axis-name">'+a.name+'</div>'
-     +'<div class="axis-stage">'+a.stage+'</div>'
+     +'<div class="axis-mid"><div class="axis-name">'+a.name+' <span class="axis-en">('+(a.stage||'').replace(/ ?단계$/,'')+')</span>'</div>'
+     +'
      +'<div class="axis-track"><div class="axis-fill" style="width:'+(has?a.v:0)+'%;background:'+(has?a.c:'#E8E8F0')+'"></div></div></div>'
      +'<div class="axis-val">'+(has?a.v:'\u2014')+'</div></div>';
     if(!has){
