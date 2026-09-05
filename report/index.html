@@ -604,7 +604,15 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
 .cal-foot>div{flex:1}
 .cal-foot b{font-size:20px;font-weight:800;color:#1A2138;display:block}
 .cal-foot span{font-size:12px;color:#8A92A4;display:block;margin-top:3px}
-@media (max-width:640px){.tipchip{flex:1 1 100%}.sent3{flex-wrap:wrap}.s3-body{flex:1 1 100%;order:2}.cal-grid{gap:4px}.cal-d{font-size:10.5px}}</style>
+@media (max-width:640px){.tipchip{flex:1 1 100%}.sent3{flex-wrap:wrap}.s3-body{flex:1 1 100%;order:2}.cal-grid{gap:4px}.cal-d{font-size:10.5px}}/* 그래프 상단 범례 */
+.tr-key{display:flex;flex-wrap:wrap;gap:8px 16px;margin:10px 0 6px}
+.tr-key .tr-k{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:#3A4360}
+.tr-key .tr-k i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.cf-num{display:flex;align-items:baseline;gap:6px}
+.cf-num b{font-size:22px;font-weight:800;color:#1A2138}
+.cf-num em{font-style:normal;font-size:15px;font-weight:700;color:#3A4360}
+.cal-foot b{display:inline}
+.s3-radio{cursor:pointer}</style>
 </head>
 <body>
 <div class="wrap">
@@ -769,6 +777,22 @@ function mergeProfiles(cur,inc){
   if(inc.values&&inc.values.length&&!(out.values&&out.values.length)) out.values=inc.values;
   out.updated=today(); return out;
 }
+var __mergeOrig=mergeProfiles;
+mergeProfiles=function(remote,local){
+  var m=__mergeOrig(remote,local)||{};
+  try{
+    local=local||{};
+    m.modules=m.modules||{};
+    Object.keys(local.modules||{}).forEach(function(k){ if(!m.modules[k]) m.modules[k]=local.modules[k]; });
+    var ids={}; (m.designs||[]).forEach(function(d){ if(d&&d.id) ids[d.id]=1; });
+    m.designs=(m.designs||[]).concat((local.designs||[]).filter(function(d){return d&&d.id&&!ids[d.id]}));
+    var seen={}; (m.history||[]).forEach(function(x){ if(x&&x.t) seen[x.t]=1; });
+    m.history=(m.history||[]).concat((local.history||[]).filter(function(x){return x&&x.t&&!seen[x.t]}))
+      .sort(function(a,b){return String(a.t).localeCompare(String(b.t))});
+    if(local.values&&!m.values) m.values=local.values;
+  }catch(e){}
+  return m;
+};
 
 /* ───────── 진단 정의 ───────── */
 const DIAGS=[
@@ -1908,7 +1932,7 @@ function sentencesView(){
     var picked=on.indexOf(dg.id)>=0;
     var dt=String(dg.created||'').slice(0,10).replace(/-/g,'.');
     h+='<div class="sent3'+(picked?' on':'')+'">'
-     +'<span class="s3-radio"></span>'
+     +'<span class="s3-radio no-print" onclick="toggleCheck(\''+dg.id+'\')"></span>'
      +'<div class="s3-body"><div class="s3-txt">'+esc(dg.text)+'</div><div class="s3-date">'+dt+'</div></div>'
      +'<button class="s3-pick no-print" onclick="toggleCheck(\''+dg.id+'\')">'+(picked?'선택됨 \u2713':'선택하기')+'</button>'
      +'<button class="s3-del no-print" title="삭제" onclick="delDesign(\''+dg.id+'\')">\uD83D\uDDD1</button>'
@@ -1992,7 +2016,7 @@ function dailyView(){
   });
   h+='</div>';
   var wk=W.filter(function(d0){return checksOf(dkey(d0)).length>0}).length;
-  h+='<div class="cal-foot"><div><b>'+wk+'</b> / 7일<span>이번 주 실천</span></div>'
+  h+='<div class="cal-foot"><div><div class="cf-num"><b>'+wk+'</b><em>/ 7일</em></div><span>이번 주 실천</span></div>'
    +'<div><b>'+(now.getMonth()+1)+'월 '+now.getDate()+'일 '+dn[now.getDay()]+'요일</b><span>'+(on.length?'오늘 실천을 남기셨습니다':'오늘은 아직 비어 있습니다')+'</span></div></div>';
   h+='</div>';
   h+='</div>';
@@ -2082,25 +2106,32 @@ function trendView(){
   var ALL=(P.history||[]), H=ALL.slice(-5), n=H.length;
   var h='<div class="sec" id="sec-trend">'+sn()+'<h2>나의 변화 기록</h2>'
    +'<div class="tr-count">\uD83D\uDCD8 지금까지 '+ALL.length+'회의 기록이 있습니다.</div>';
-  if(!n){ h+='<div class="trend-empty">아직 기록이 없습니다. 진단을 마치시면 이 자리에 첫 막대가 생깁니다.</div></div>'; return h; }
-  h+='<p class="sub">진단을 다시 하실 때마다 그날의 막대가 하나씩 늘어납니다. 같은 색끼리 비교하시면 변화가 보입니다.</p>';
-  var X0=34,X1=312,Y0=14,Y1=140;
+  if(!n){ h+='<div class="trend-empty">아직 기록이 없습니다. 진단을 마치시면 이 자리에 첫 점이 찍힙니다.</div></div>'; return h; }
+  h+='<div class="tr-key">'+TRAX.map(function(a){return '<span class="tr-k"><i style="background:'+a.c+'"></i>'+a.n+'</span>'}).join('')+'</div>';
+  var X0=34,X1=306,Y0=14,Y1=140;
   var py=function(v){return Y1-(Y1-Y0)*(Math.max(0,Math.min(100,v))/100)};
+  var px=function(i){return n===1?(X0+X1)/2:X0+(X1-X0)*i/(n-1)};
   var g='';
   [0,25,50,75,100].forEach(function(v){var y=py(v);
     g+='<line x1="'+X0+'" y1="'+y.toFixed(1)+'" x2="'+X1+'" y2="'+y.toFixed(1)+'" stroke="#EDF0F5" stroke-width="1"/>';
     g+='<text x="'+(X0-6)+'" y="'+(y+3).toFixed(1)+'" font-size="8" fill="#98A1B5" text-anchor="end">'+v+'</text>';});
-  var gw=(X1-X0)/n, bw=Math.max(5,Math.min(13,(gw-14)/4));
-  H.forEach(function(en,i){
-    var gx=X0+gw*i, inner=bw*4+9, sx=gx+(gw-inner)/2;
-    TRAX.forEach(function(ax,ai){
-      var v=(en.a||[])[ai]; if(v==null) return;
-      var x=sx+ai*(bw+3), y=py(v);
-      g+='<rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+(Y1-y).toFixed(1)+'" rx="2" fill="'+ax.c+'" opacity="'+(i===n-1?1:0.45)+'"/>';
-      if(i===n-1) g+='<text x="'+(x+bw/2).toFixed(1)+'" y="'+(y-4).toFixed(1)+'" font-size="8" font-weight="700" fill="'+ax.c+'" text-anchor="middle">'+v+'</text>';
+  TRAX.forEach(function(ax,ai){
+    var pts=[];
+    H.forEach(function(en,i){ var v=(en.a||[])[ai]; if(v!=null) pts.push([px(i),py(v),v]); });
+    if(!pts.length) return;
+    if(pts.length>1){
+      g+='<polyline fill="none" stroke="'+ax.c+'" stroke-width="2.2" stroke-linejoin="round" points="'+pts.map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1)}).join(' ')+'"/>';
+    } else if(pts[0][0]<X1-2){
+      g+='<line x1="'+pts[0][0].toFixed(1)+'" y1="'+pts[0][1].toFixed(1)+'" x2="'+X1+'" y2="'+pts[0][1].toFixed(1)+'" stroke="'+ax.c+'" stroke-width="1.8" stroke-dasharray="4 4" opacity=".5"/>';
+    }
+    pts.forEach(function(p,k){
+      var last=(k===pts.length-1);
+      g+='<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+(last?4:3)+'" fill="#fff" stroke="'+ax.c+'" stroke-width="2.4"/>';
+      if(last) g+='<text x="'+(p[0]+8).toFixed(1)+'" y="'+(p[1]+3.4).toFixed(1)+'" font-size="9.5" font-weight="700" fill="'+ax.c+'">'+p[2]+'</text>';
     });
-    var lab=String(en.t||'').replace(/-/g,'.').slice(5);
-    g+='<text x="'+(gx+gw/2).toFixed(1)+'" y="'+(Y1+13)+'" font-size="8.5" fill="#6B7393" text-anchor="middle">'+lab+'</text>';
+  });
+  H.forEach(function(en,i){
+    g+='<text x="'+px(i).toFixed(1)+'" y="'+(Y1+14)+'" font-size="8.5" fill="#6B7393" text-anchor="middle">'+String(en.t||'').replace(/-/g,'.').slice(5)+'</text>';
   });
   g+='<line x1="'+X0+'" y1="'+Y1+'" x2="'+X1+'" y2="'+Y1+'" stroke="#D8DEE9" stroke-width="1"/>';
   h+='<div class="trend-box"><svg viewBox="0 0 320 168" width="100%" role="img">'+g+'</svg></div>';
@@ -2108,16 +2139,15 @@ function trendView(){
     var ups=[],downs=[];
     TRAX.forEach(function(a,ai){var f=-1,l=-1;H.forEach(function(e,i){var v=(e.a||[])[ai];if(v!=null){if(f<0)f=i;l=i;}});
       if(f>=0&&l>f){var dd=H[l].a[ai]-H[f].a[ai];if(dd>0)ups.push({n:a.n,d:dd});else if(dd<0)downs.push({n:a.n,d:dd});}});
-    if(!ups.length&&!downs.length) return '아직 두 번 이상 답한 축이 없습니다. 한 번 더 답하시면 막대가 나란히 서고 변화가 보입니다.';
+    if(!ups.length&&!downs.length) return '아직 두 번 이상 답한 축이 없습니다. 한 번 더 답하시면 선이 이어집니다.';
     ups.sort(function(x,y){return y.d-x.d}); downs.sort(function(x,y){return x.d-y.d});
     var parts=[];
-    if(ups.length) parts.push('<b>'+ups[0].n+'</b>이 가장 많이 올랐습니다 (+'+ups[0].d+').');
-    if(downs.length) parts.push('<b>'+downs[0].n+'</b>은 '+downs[0].d+'만큼 내려갔습니다. 이번 달에 먼저 볼 곳입니다.');
-    else parts.push('내려간 축은 없습니다. 지금 리듬이 유지되고 있다는 뜻입니다.');
+    if(ups.length) parts.push('<b>'+ups[0].n+'</b> +'+ups[0].d+'으로 가장 많이 올랐습니다.');
+    if(downs.length) parts.push('<b>'+downs[0].n+'</b> '+downs[0].d+'으로 내려갔습니다. 이번 달에 먼저 볼 곳입니다.');
+    else parts.push('내려간 축은 없습니다. 지금 리듬이 유지되고 있습니다.');
     return parts.join(' ');
   })();
-  h+='<div class="tr-legend">'+TRAX.map(function(a){return '<div class="tr-item"><span class="tr-dot" style="background:'+a.c+'"></span><div><div class="tr-nm">'+a.n+'</div><div class="tr-q">('+(QAX[a.n]||'')+')</div></div></div>'}).join('')+'</div>';
-  if(ALL.length>5) h+='<p class="sub" style="margin-top:8px">기록이 많아지면 최근 5회만 보여 드립니다. 이전 기록은 그대로 남아 있습니다.</p>';
+  if(ALL.length>5) h+='<p class="sub" style="margin-top:8px">최근 5회만 보여 드립니다. 이전 기록은 그대로 남아 있습니다.</p>';
   h+='<div class="trend-note">'+note+'</div>';
   h+='</div>';
   return h;
