@@ -1660,7 +1660,7 @@ function mapView(A,bn,done){
   ks.forEach(k=>{
     const a=A[k],has=a.v!==null;
     h+='<div class="axis-row'+(has?'':' empty')+'"><div class="axis-key" style="'+(has?'color:'+a.c:'')+'">'+k+'</div>'
-     +'<div class="axis-mid"><div class="axis-name">'+a.name+' <span class="axis-en">('+(a.stage||'').replace(/ ?단계$/,'')+')</span>'</div>'
+     +'<div class="axis-mid"><div class="axis-name">'+a.name+' <span class="axis-en">('+(a.stage||'').split(' 단계')[0]+')</span>'</div>'
      +'
      +'<div class="axis-track"><div class="axis-fill" style="width:'+(has?a.v:0)+'%;background:'+(has?a.c:'#E8E8F0')+'"></div></div></div>'
      +'<div class="axis-val">'+(has?a.v:'\u2014')+'</div></div>';
