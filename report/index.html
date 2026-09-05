@@ -614,10 +614,9 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
 .cal-foot b{display:inline}
 .s3-radio{cursor:pointer}/* 핵심 문장 카드 확대 */
 .answer{background:linear-gradient(140deg,#1B2A5E 0%,#22315F 55%,#2B3C6E 100%);border-radius:18px;padding:26px 26px 28px;margin:18px 0 16px;box-shadow:0 10px 26px rgba(27,42,94,.18)}
-.answer .al{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:800;color:#BFD3FF;letter-spacing:-0.01em;margin-bottom:14px}
+.answer .al{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:800;color:#BFD3FF;margin-bottom:14px}
 .answer p,.answer div:not(.al){font-size:20px;line-height:1.75;color:#fff;font-weight:700;word-break:keep-all;letter-spacing:-0.02em}
 .answer b{color:#FFD469}
-.answer .hi{color:#8FC4FF}
 .guide{background:#F4F8FF;border:1px solid #DCE7F8;border-radius:16px;padding:20px 22px;margin-bottom:14px}
 .guide .gt{font-size:14.5px;line-height:1.75;color:#33405C;padding-left:26px;position:relative;margin-bottom:12px;word-break:keep-all}
 .guide .gt:last-child{margin-bottom:0}
@@ -1665,7 +1664,20 @@ function mapView(A,bn,done){
      +'<button class="bn-go no-print" onclick="openDesign()">오늘의 설계 시작하기 \u2192</button>'
      +'<div class="bfoot">오늘의 설계는 1분이면 됩니다. 한 문장만 남기시면 됩니다.</div></div></div>';
   }
-      return '<div class="nextcard"><div class="nl">네 칸이 모두 열렸습니다</div>'
+  h+='<div class="sec">'+sn()+'<h2>나의 설계 여정</h2>'
+   +'<p class="sub">나다움 설계는 네 단계로 이어집니다. 지금 어디까지 열렸는지 한눈에 보십시오.</p>'
+   +journeyView(A,bn,true)
+   +nextStepCard()
+   +'</div>';
+  return h;
+}
+/* 다음 한 개만 제안한다. 선택지가 많을수록 시작 자체를 미룬다(Iyengar & Lepper, 2000). */
+function nextStepCard(){
+  const core=DIAGS.filter(d=>d.core), todo=core.filter(d=>!P.modules[d.k]);
+  if(!todo.length){
+    const ext=DIAGS.filter(d=>!d.core&&!P.modules[d.k]);
+    if(!ext.length) return '<div class="nextcard done">여섯 질문에 모두 답하셨습니다. 이제는 <a href="#record">오늘의 실천</a>을 쌓는 자리입니다.</div>';
+    return '<div class="nextcard"><div class="nl">네 칸이 모두 열렸습니다</div>'
       +'<div class="nq">더 또렷하게 보고 싶으시면 심화 질문이 남아 있습니다.</div>'
       +'<a class="nb" href="#map">심화 질문 보기 \u2192</a></div>';
   }
