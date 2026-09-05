@@ -1979,7 +1979,8 @@ function dailyView(){
   var W=weekDays();
   h+='<div class="cal-box"><div class="cal-top"><b>'+now.getFullYear()+'년 '+(now.getMonth()+1)+'월</b></div>';
   h+='<div class="cal-grid">';
-  W.forEach(function(d){
+  W.forEach(function(d0){
+    var d=String(d0).slice(0,10);
     var isToday=(d===day), done=checksOf(d).length>0;
     var dd=new Date(d+'T00:00:00');
     h+='<div class="cal-cell'+(isToday?' today':'')+(done?' done':'')+'"'+(isToday?' onclick="toggleToday()"':'')+'>'
@@ -1988,7 +1989,7 @@ function dailyView(){
      +'<div class="cal-mark">'+(done?'\u2713':'')+'</div></div>';
   });
   h+='</div>';
-  var wk=W.filter(function(d){return checksOf(d).length>0}).length;
+  var wk=W.filter(function(d0){return checksOf(String(d0).slice(0,10)).length>0}).length;
   h+='<div class="cal-foot"><div><b>'+wk+'</b> / 7일<span>이번 주 실천</span></div>'
    +'<div><b>'+(now.getMonth()+1)+'월 '+now.getDate()+'일 '+dn[now.getDay()]+'요일</b><span>'+(on.length?'오늘 실천을 남기셨습니다':'오늘은 아직 비어 있습니다')+'</span></div></div>';
   h+='</div>';
