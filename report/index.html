@@ -643,7 +643,21 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
 .map-head .sub{font-size:14.5px;line-height:1.75;margin-top:6px}
 .axis-name{font-size:15px;font-weight:800;color:#1A2138;margin-bottom:7px;letter-spacing:-0.01em}
 .axis-en{font-size:12.5px;font-weight:700;color:#8B93A5}
-@media (min-width:861px){.map-col{margin-top:26px}}</style>
+@media (min-width:861px){.map-col{margin-top:26px}}/* 가독성 조정 */
+.tr-key{gap:10px 18px;margin:12px 0 8px}
+.tr-key .tr-k{font-size:14px}
+.tr-key .tr-k i{width:12px;height:12px}
+.sec h2{font-size:25px;letter-spacing:-0.02em}
+.two h2{font-size:24px}
+.map-head h2{font-size:26px}
+.sec .sub{font-size:15px;line-height:1.75}
+.chg-n{font-size:17.5px}
+.chg-q{font-size:13px;line-height:1.55}
+.chg-lab{font-size:12.5px}
+.chg-box b{font-size:31px}
+.trend-note{font-size:14px;line-height:1.8}
+.tr-count{font-size:13px}
+@media (min-width:861px){.map-col{margin-top:44px}}</style>
 </head>
 <body>
 <div class="wrap">
@@ -2235,12 +2249,12 @@ function trendView(){
       var p1=points[i], p2=points[i+1];
       var dashed=(p1.estimated || p2.estimated);
       g+='<line x1="'+p1.x.toFixed(1)+'" y1="'+p1.y.toFixed(1)+'" x2="'+p2.x.toFixed(1)+'" y2="'+p2.y.toFixed(1)+'"'
-        +' stroke="'+ax.c+'" stroke-width="2.2" stroke-linecap="round"'
+        +' stroke="'+ax.c+'" stroke-width="1.6" stroke-linecap="round"'
         +(dashed ? ' stroke-dasharray="5 5" opacity=".55"' : '')+' />';
     }
     points.forEach(function(p){
-      g+='<circle cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="'+(p.estimated?3.5:4)+'"'
-        +' fill="#fff" stroke="'+ax.c+'" stroke-width="'+(p.estimated?1.8:2.4)+'"'
+      g+='<circle cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="'+(p.estimated?3:3.4)+'"'
+        +' fill="#fff" stroke="'+ax.c+'" stroke-width="'+(p.estimated?1.5:1.9)+'"'
         +(p.estimated?' stroke-dasharray="3 2"':'')+'/>';
       if(!p.estimated){
         g+='<text x="'+(p.x+8).toFixed(1)+'" y="'+(p.y+3.4).toFixed(1)+'" font-size="9.5" font-weight="700" fill="'+ax.c+'">'+p.value+'</text>';
@@ -2250,7 +2264,7 @@ function trendView(){
     });
   });
   H.forEach(function(en,i){
-    g+='<text x="'+px(i).toFixed(1)+'" y="'+(Y1+14)+'" font-size="8.5" fill="#6B7393" text-anchor="middle">'+(i+1)+'차 검사</text>';
+    g+='<text x="'+px(i).toFixed(1)+'" y="'+(Y1+14)+'" font-size="7.5" fill="#8A92A4" text-anchor="middle">'+(i+1)+'차 검사</text>';
   });
   g+='<line x1="'+X0+'" y1="'+Y1+'" x2="'+X1+'" y2="'+Y1+'" stroke="#D8DEE9" stroke-width="1"/>';
   h+='<div class="trend-box"><svg viewBox="0 0 320 168" width="100%" role="img">'+g+'</svg></div>';
