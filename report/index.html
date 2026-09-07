@@ -1994,7 +1994,7 @@ function designView(bn,solo){
 
   h+='<div class="prev-line" id="prevLine"></div>';
   h+='<button class="btn" id="saveDesign">이 문장을 내 설계에 남기기</button>';
-  h+='<div class="design-foot">남기신 뒤에는 아래 <b>오늘의 실천</b>에서 매일 한 줄씩 적게 됩니다. 그 기록이 이 리포트의 결과물입니다.</div>';
+  h+='<div class="design-foot">남기신 뒤에는 <b>나의 기록</b>의 달력에서 실천한 날을 표시하게 됩니다. 그 기록이 이 리포트의 결과물입니다.</div>';
   h+='</div></div>';
   return h;
 }
@@ -2627,6 +2627,1049 @@ function nudgeAccount(){
   const t=document.getElementById('sec-account');
   if(t){t.scrollIntoView({behavior:'smooth',block:'center'});t.classList.add('sec-flash');setTimeout(()=>t.classList.remove('sec-flash'),1800)}
 }
+
+
+
+/* === 나의 기록 v4 · 여기서부터 === */
+
+/* =========================================================
+   N.E.E.D · 나의 기록 v4  (통합본)
+   ---------------------------------------------------------
+   매일   : 잠깐 멈춤 → 10초 기록 → 저장 → 여기서 끝내도 됨
+   원할 때: 알아차림 → 욕구 출처 → 나의 선택 → 에너지 → 한 문장
+   시간이 지나면: 달력 → 나의 생각들 → 반복해서 나타나는 나
+
+   기존 데이터 : P.designs / P.checks / P.notes / P.history  (그대로 유지)
+   새 데이터   : P.pauses / P.rpWeeklyReflections
+   ========================================================= */
+
+/* ── 1. 상태 ─────────────────────────────────────────── */
+var RP4_DAY = null;
+var RP4_CAL_Y = new Date().getFullYear();
+var RP4_CAL_M = new Date().getMonth();
+var RP4_ACTIVE = null;
+var RP4_AWARE = false;
+var RP4_STEP = 1;
+var RP4_CTX = '';   /* 선택한 장소를 render() 후에도 유지 */
+
+/* ── 2. 기본 유틸 ────────────────────────────────────── */
+function rp4Today(){
+  return typeof today === 'function' ? today() : new Date().toISOString().slice(0,10);
+}
+function rp4Esc(v){
+  if(typeof esc === 'function') return esc(String(v||''));
+  return String(v||'').replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+}
+function rp4Date(d){
+  var x = String(d||'').split('-');
+  if(x.length !== 3) return d || '';
+  return x[0]+'년 '+Number(x[1])+'월 '+Number(x[2])+'일';
+}
+function rp4ShortDate(d){
+  var x = String(d||'').split('-');
+  if(x.length !== 3) return d || '';
+  return Number(x[1])+'.'+Number(x[2]);
+}
+function rp4DayName(d){
+  var x = new Date(String(d)+'T12:00:00');
+  return ['일','월','화','수','목','금','토'][x.getDay()];
+}
+function rp4Toast(msg){ if(typeof toast === 'function') toast(msg); }
+function rp4Ensure(){
+  P.pauses = Array.isArray(P.pauses) ? P.pauses : [];
+  P.rpWeeklyReflections = Array.isArray(P.rpWeeklyReflections) ? P.rpWeeklyReflections : [];
+}
+function rp4Save(){
+  P.updated = new Date().toISOString();
+  save(P);   /* 기존 localStorage + 계정 동기화 흐름을 그대로 사용한다 */
+}
+
+/* ── 3. 기록 데이터 ──────────────────────────────────── */
+function rp4Records(){
+  rp4Ensure();
+  return P.pauses.slice().sort(function(a,b){
+    var d = String(b.date||'').localeCompare(String(a.date||''));
+    if(d !== 0) return d;
+    return String(b.createdAt||'').localeCompare(String(a.createdAt||''));
+  });
+}
+function rp4RecordsOf(day){
+  return rp4Records().filter(function(r){ return r.date === day; });
+}
+function rp4Find(id){
+  rp4Ensure();
+  return P.pauses.find(function(r){ return String(r.id) === String(id); }) || null;
+}
+function rp4NewId(){
+  return 'pause-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8);
+}
+
+/* ── 4. STEP 1 · 잠깐 멈춤 ───────────────────────────── */
+function rp4ChooseContext(v){
+  RP4_CTX = v;
+  var el = document.getElementById('rp4-context');
+  if(el) el.value = v;
+  document.querySelectorAll('.rp4-context-chip').forEach(function(btn){
+    btn.classList.toggle('on', btn.getAttribute('data-value') === v);
+  });
+}
+function rp4SavePause(){
+  rp4Ensure();
+  var contextEl = document.getElementById('rp4-context');
+  var context = (contextEl ? contextEl.value.trim() : '') || RP4_CTX;
+  if(!context){ rp4Toast('잠깐 멈춘 순간이 어디였는지 골라 주세요'); return; }
+
+  var dateEl = document.getElementById('rp4-date');
+  var day = (dateEl && dateEl.value) ? dateEl.value : rp4Today();
+  var now = new Date().toISOString();
+
+  var rec = {
+    id: rp4NewId(), date: day,
+    context: context,
+    desire:'', source:'', choice:'', energy:'', reflection:'',
+    createdAt: now, updatedAt: now
+  };
+  P.pauses.push(rec);
+  rp4Save();
+
+  RP4_DAY = day;
+  RP4_ACTIVE = rec.id;
+  RP4_AWARE = false;   /* 저장 직후 알아차림으로 자동 진입하지 않는다 */
+  RP4_STEP = 1;
+  RP4_CTX = '';
+
+  rp4Toast('잠깐 멈춘 순간이 기록되었습니다');
+  render();
+  setTimeout(function(){
+    var el = document.getElementById('rp4-after-'+rec.id);
+    if(el) el.scrollIntoView({behavior:'smooth',block:'center'});
+  },120);
+}
+
+/* ── 5. 저장 직후 · 여기서 끝내도 된다 ───────────────── */
+function rp4AfterPause(rec){
+  if(!rec) return '';
+  return '<div class="rp4-after" id="rp4-after-'+rp4Esc(rec.id)+'">'
+    +'<div class="rp4-success">✓</div>'
+    +'<div class="rp4-after-eyebrow">잠깐 멈춤 기록 완료</div>'
+    +'<h3>잠깐 멈춘 순간이 기록되었습니다.</h3>'
+    +'<div class="rp4-after-context">'+rp4Esc(rec.context)+'</div>'
+    +'<p class="rp4-after-question">이 순간을 조금 더 들여다보고 싶다면<br><b>알아차림을 이어가도 좋습니다.</b></p>'
+    +'<div class="rp4-after-buttons">'
+      +'<button class="rp4-aware-start" onclick="rp4StartAwareness(\''+rp4Esc(rec.id)+'\')">알아차림 이어가기 →</button>'
+      +'<button class="rp4-finish" onclick="rp4FinishPause()">괜찮아요, 여기까지</button>'
+    +'</div>'
+    +'<p class="rp4-after-note">오늘은 여기까지여도 충분합니다.<br>멈췄다는 것을 알아차린 것 자체가 하나의 기록입니다.</p>'
+  +'</div>';
+}
+function rp4FinishPause(){
+  RP4_ACTIVE = null; RP4_AWARE = false;
+  render();
+  setTimeout(function(){
+    var el = document.getElementById('rp4-calendar');
+    if(el) el.scrollIntoView({behavior:'smooth',block:'center'});
+  },100);
+}
+
+/* ── 6. 알아차림 시작 / 종료 ─────────────────────────── */
+function rp4StartAwareness(id){
+  var rec = rp4Find(id);
+  if(!rec) return;
+  RP4_ACTIVE = id; RP4_AWARE = true; RP4_STEP = 1;
+  render();
+  rp4ScrollAwareness();
+}
+function rp4CloseAwareness(){
+  RP4_ACTIVE = null; RP4_AWARE = false;
+  render();
+}
+function rp4ScrollAwareness(){
+  setTimeout(function(){
+    var el = document.getElementById('rp4-awareness');
+    if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+  },60);
+}
+
+/* ── 7. 진행 표시 ────────────────────────────────────── */
+function rp4Progress(){
+  var names = ['알아차림','욕구의 출처','나의 선택','에너지','기록하기'];
+  var h = '<div class="rp4-progress">';
+  names.forEach(function(name,i){
+    var n = i+1;
+    h += '<div class="rp4-progress-item '+(n<RP4_STEP?'done ':'')+(n===RP4_STEP?'active':'')+'">'
+       + '<div class="rp4-progress-dot">'+(n<RP4_STEP?'✓':n)+'</div><span>'+name+'</span></div>';
+    if(i < names.length-1){
+      h += '<div class="rp4-progress-line '+(n<RP4_STEP?'done':'')+'"></div>';
+    }
+  });
+  return h+'</div>';
+}
+
+/* ── 8. 알아차림 화면 ────────────────────────────────── */
+function rp4AwarenessView(){
+  var rec = rp4Find(RP4_ACTIVE);
+  if(!rec) return '';
+  var h = '<div class="rp4-awareness" id="rp4-awareness">'
+    +'<div class="rp4-awareness-head"><div>'
+      +'<div class="rp4-card-eyebrow">잠깐 멈춤 · 알아차림</div>'
+      +'<h3>이 순간을 조금 더 들여다볼까요?</h3></div>'
+      +'<button class="rp4-close" onclick="rp4CloseAwareness()">×</button>'
+    +'</div>'+rp4Progress()+'<div class="rp4-step-body">';
+
+  if(RP4_STEP === 1){
+    h += '<div class="rp4-step-label">STEP 1 · 알아차림</div>'
+      +'<h4>그 순간, 나는 무엇을 원했을까요?</h4>'
+      +'<p class="rp4-help">정답은 없습니다.<br>지금 가장 가까운 것을 골라보거나 직접 적어보세요.</p>'
+      +'<div class="rp4-desire-options">'
+      +['잠깐 쉬고 싶었다.','인정받고 싶었다.','혼자 있고 싶었다.','누군가와 연결되고 싶었다.',
+        '내 생각을 정리하고 싶었다.','재미있는 것을 보고 싶었다.','잘 모르겠다.']
+        .map(function(v){
+          return '<button onclick="rp4SetDesire(\''+rp4Esc(v)+'\')">'+rp4Esc(v)+'</button>';
+        }).join('')
+      +'</div>'
+      +'<div class="rp4-direct"><label>직접 적어보기</label>'
+      +'<textarea id="rp4-desire-input" maxlength="200" placeholder="그 순간, 내가 원했던 것은…">'+rp4Esc(rec.desire)+'</textarea></div>'
+      +'<div class="rp4-step-buttons"><button class="rp4-next" onclick="rp4NextDesire()">다음 →</button></div>';
+  }
+
+  if(RP4_STEP === 2){
+    h += '<div class="rp4-step-label">STEP 2 · 욕구의 출처</div>'
+      +'<h4>그 욕구는 어디에서 온 것 같나요?</h4>'
+      +'<p class="rp4-help">지금 가장 가깝게 느껴지는 것을 골라보세요.<br>잘 모르겠다면 그것도 괜찮습니다.</p>'
+      +'<div class="rp4-source-options">'
+      +[['내 안의 신호','내가 정말 필요했던 것'],
+        ['사람들의 기대','타인의 시선·평가'],
+        ['미디어·알고리즘','콘텐츠·추천·비교'],
+        ['상황적 압박','시간·역할·의무'],
+        ['아직 잘 모르겠다','조금 더 지켜보기']]
+        .map(function(v){
+          return '<button class="'+(rec.source===v[0]?'selected':'')+'" onclick="rp4SetSource(\''+rp4Esc(v[0])+'\')">'
+            +'<b>'+rp4Esc(v[0])+'</b><small>'+rp4Esc(v[1])+'</small></button>';
+        }).join('')
+      +'</div>'
+      +'<div class="rp4-step-buttons">'
+        +'<button class="rp4-prev" onclick="rp4PrevStep()">← 이전</button>'
+        +'<button class="rp4-next" onclick="rp4NextSource()">다음 →</button></div>';
+  }
+
+  if(RP4_STEP === 3){
+    h += '<div class="rp4-step-label">STEP 3 · 나의 선택</div>'
+      +'<h4>그래서 나는 어떻게 선택했을까요?</h4>'
+      +'<p class="rp4-help">완벽한 선택이 아니어도 괜찮습니다.<br>그때 실제로 내가 한 선택을 적어봅니다.</p>'
+      +'<textarea id="rp4-choice-input" class="rp4-large-textarea" maxlength="300" '
+      +'placeholder="예: SNS를 바로 열지 않고 잠시 창밖을 바라봤다.">'+rp4Esc(rec.choice)+'</textarea>'
+      +'<div class="rp4-step-buttons">'
+        +'<button class="rp4-prev" onclick="rp4PrevStep()">← 이전</button>'
+        +'<button class="rp4-next" onclick="rp4NextChoice()">다음 →</button></div>';
+  }
+
+  if(RP4_STEP === 4){
+    h += '<div class="rp4-step-label">STEP 4 · 선택 후의 에너지</div>'
+      +'<h4>그 선택을 하고 난 뒤, 나는 어땠을까요?</h4>'
+      +'<p class="rp4-help">정답을 찾기보다 몸과 마음에 가까운 느낌을 골라봅니다.</p>'
+      +'<div class="rp4-energy-options">'
+      +[['조금 살아났다','조금 더 나다운 느낌'],
+        ['비슷했다','큰 변화는 없었다'],
+        ['조금 소모됐다','지치는 느낌이 남았다']]
+        .map(function(v){
+          return '<button class="'+(rec.energy===v[0]?'selected':'')+'" onclick="rp4SetEnergy(\''+rp4Esc(v[0])+'\')">'
+            +'<b>'+rp4Esc(v[0])+'</b><small>'+rp4Esc(v[1])+'</small></button>';
+        }).join('')
+      +'</div>'
+      +'<div class="rp4-step-buttons">'
+        +'<button class="rp4-prev" onclick="rp4PrevStep()">← 이전</button>'
+        +'<button class="rp4-next" onclick="rp4NextEnergy()">다음 →</button></div>';
+  }
+
+  if(RP4_STEP === 5){
+    h += '<div class="rp4-step-label">STEP 5 · 기록하기</div>'
+      +'<h4>오늘의 나에게 남기고 싶은 말이 있나요?</h4>'
+      +'<p class="rp4-help">지금 이 순간의 생각을 한 문장으로 남겨보세요.<br>나중에 다시 보았을 때 도움이 될 수 있습니다.</p>'
+      +'<textarea id="rp4-reflection-input" class="rp4-large-textarea" maxlength="300" '
+      +'placeholder="예: 나는 쉬고 싶을 때, 먼저 나를 돌아보는 연습을 해보자.">'+rp4Esc(rec.reflection)+'</textarea>'
+      +'<div class="rp4-step-buttons">'
+        +'<button class="rp4-prev" onclick="rp4PrevStep()">← 이전</button>'
+        +'<button class="rp4-finish-aware" onclick="rp4FinishAwareness()">기록하기 ✓</button></div>';
+  }
+
+  return h+'</div></div>';
+}
+
+/* ── 9. 알아차림 입력 ────────────────────────────────── */
+function rp4SetDesire(v){
+  var el = document.getElementById('rp4-desire-input');
+  if(el){ el.value = v; el.focus(); }
+}
+function rp4NextDesire(){
+  var rec = rp4Find(RP4_ACTIVE);
+  var el = document.getElementById('rp4-desire-input');
+  if(!rec || !el) return;
+  var v = el.value.trim();
+  if(!v){ rp4Toast('그 순간 내가 원했던 것을 하나만 적어보세요'); return; }
+  rec.desire = v; rec.updatedAt = new Date().toISOString();
+  rp4Save(); RP4_STEP = 2; render(); rp4ScrollAwareness();
+}
+function rp4SetSource(v){
+  var rec = rp4Find(RP4_ACTIVE);
+  if(!rec) return;
+  rec.source = v; rec.updatedAt = new Date().toISOString();
+  rp4Save(); render(); rp4ScrollAwareness();
+}
+function rp4NextSource(){
+  var rec = rp4Find(RP4_ACTIVE);
+  if(!rec || !rec.source){ rp4Toast('가장 가까운 출처를 하나 골라보세요'); return; }
+  RP4_STEP = 3; render(); rp4ScrollAwareness();
+}
+function rp4NextChoice(){
+  var rec = rp4Find(RP4_ACTIVE);
+  var el = document.getElementById('rp4-choice-input');
+  if(!rec || !el) return;
+  var v = el.value.trim();
+  if(!v){ rp4Toast('그때 내가 한 선택을 한 줄 적어보세요'); return; }
+  rec.choice = v; rec.updatedAt = new Date().toISOString();
+  rp4Save(); RP4_STEP = 4; render(); rp4ScrollAwareness();
+}
+function rp4SetEnergy(v){
+  var rec = rp4Find(RP4_ACTIVE);
+  if(!rec) return;
+  rec.energy = v; rec.updatedAt = new Date().toISOString();
+  rp4Save(); render(); rp4ScrollAwareness();
+}
+function rp4NextEnergy(){
+  var rec = rp4Find(RP4_ACTIVE);
+  if(!rec || !rec.energy){ rp4Toast('선택 후의 에너지를 골라보세요'); return; }
+  RP4_STEP = 5; render(); rp4ScrollAwareness();
+}
+function rp4FinishAwareness(){
+  var rec = rp4Find(RP4_ACTIVE);
+  if(!rec) return;
+  var el = document.getElementById('rp4-reflection-input');
+  if(el) rec.reflection = el.value.trim();
+  rec.updatedAt = new Date().toISOString();
+  rp4Save();
+  var id = rec.id;
+  RP4_ACTIVE = null; RP4_AWARE = false; RP4_STEP = 1;
+  rp4Toast('오늘의 알아차림이 기록되었습니다');
+  render();
+  setTimeout(function(){
+    var t = document.getElementById('rp4-record-'+id);
+    if(t) t.scrollIntoView({behavior:'smooth',block:'center'});
+  },120);
+}
+/* 이전으로 돌아가도 이미 적은 내용은 지우지 않는다 */
+function rp4PrevStep(){
+  if(RP4_STEP > 1){ RP4_STEP--; render(); rp4ScrollAwareness(); }
+}
+
+/* ── 10. 빠른 기록 ───────────────────────────────────── */
+function rp4QuickView(){
+  var selected = RP4_DAY || rp4Today();
+  return '<div class="rp4-card rp4-quick">'
+    +'<div class="rp4-quick-intro">'
+      +'<div class="rp4-card-eyebrow">오늘의 잠깐 멈춤</div>'
+      +'<h3>반응하기 전에, 잠시 멈춰볼까요?</h3>'
+      +'<p>거창한 기록은 필요하지 않습니다.<br>오늘 나를 알아차린 순간 하나만 남겨보세요.</p>'
+    +'</div>'
+    +'<div class="rp4-ten"><b>10초</b><span>짧게 기록해도<br>괜찮습니다.</span></div>'
+    +'<label class="rp4-label">어디에서 잠깐 멈췄나요?</label>'
+    +'<div class="rp4-context-list">'
+    +['SNS','쇼핑','대화','일','식사','휴식','기타'].map(function(v){
+        return '<button class="rp4-context-chip'+(RP4_CTX===v?' on':'')+'" data-value="'+rp4Esc(v)+'" '
+          +'onclick="rp4ChooseContext(\''+rp4Esc(v)+'\')">'+rp4Esc(v)+'</button>';
+      }).join('')
+    +'</div>'
+    +'<input type="hidden" id="rp4-context" value="'+rp4Esc(RP4_CTX)+'">'
+    +'<div class="rp4-quick-bottom">'
+      +'<label class="rp4-date"><span>기록 날짜</span>'
+      +'<input id="rp4-date" type="date" value="'+rp4Esc(selected)+'"></label>'
+      +'<button class="rp4-main-btn" onclick="rp4SavePause()">잠깐 멈춘 순간 기록하기 →</button>'
+    +'</div></div>';
+}
+
+/* ── 11. 달력 ────────────────────────────────────────── */
+function rp4PickDay(day){
+  var next = (RP4_DAY === day) ? null : day;
+  RP4_DAY = next;
+  /* 설계 문장 실천 체크도 같은 날을 바라보게 한다 (달력 하나로 통합) */
+  try{ SELDAY = next; }catch(e){}
+  RP4_ACTIVE = null; RP4_AWARE = false;
+  render();
+}
+/* 그날 실천으로 표시한 설계 문장 */
+function rp4ChecksOf(day){
+  try{ return (typeof textsOf === 'function') ? textsOf(day) : []; }catch(e){ return []; }
+}
+function rp4HasCheck(day){
+  try{ return (typeof checksOf === 'function') && checksOf(day).length > 0; }catch(e){ return false; }
+}
+function rp4GoSentences(){
+  var el = document.getElementById('rp4-sent-anchor') || document.querySelector('.sent3');
+  if(el) el.scrollIntoView({behavior:'smooth', block:'center'});
+}
+function rp4MoveMonth(delta){
+  RP4_CAL_M += delta;
+  if(RP4_CAL_M < 0){ RP4_CAL_M = 11; RP4_CAL_Y--; }
+  if(RP4_CAL_M > 11){ RP4_CAL_M = 0; RP4_CAL_Y++; }
+  render();
+}
+function rp4TodayMonth(){
+  var d = new Date();
+  RP4_CAL_Y = d.getFullYear(); RP4_CAL_M = d.getMonth();
+  RP4_DAY = rp4Today();
+  try{ SELDAY = RP4_DAY; }catch(e){}
+  render();
+}
+function rp4Calendar(){
+  var first = new Date(RP4_CAL_Y, RP4_CAL_M, 1);
+  var last  = new Date(RP4_CAL_Y, RP4_CAL_M+1, 0);
+  var start = (first.getDay()+6)%7;          /* 월요일 시작 */
+  var total = last.getDate();
+  var cells = [];
+  for(var i=0;i<start;i++) cells.push(null);
+  for(var d=1; d<=total; d++) cells.push(new Date(RP4_CAL_Y, RP4_CAL_M, d));
+  while(cells.length % 7 !== 0) cells.push(null);
+
+  var todayKey = rp4Today();
+  var monthPrefix = RP4_CAL_Y+'-'+('0'+(RP4_CAL_M+1)).slice(-2);
+
+  var h = '<div class="rp4-card rp4-calendar" id="rp4-calendar">'
+    +'<div class="rp4-cal-head"><div>'
+      +'<div class="rp4-card-eyebrow">나를 알아차린 날</div>'
+      +'<h3>'+RP4_CAL_Y+'년 '+(RP4_CAL_M+1)+'월</h3></div>'
+      +'<div class="rp4-cal-nav">'
+        +'<button onclick="rp4MoveMonth(-1)">‹</button>'
+        +'<button onclick="rp4TodayMonth()">오늘</button>'
+        +'<button onclick="rp4MoveMonth(1)">›</button></div></div>'
+    +'<div class="rp4-week">'
+    +['월','화','수','목','금','토','일'].map(function(x){ return '<span>'+x+'</span>'; }).join('')
+    +'</div><div class="rp4-grid">';
+
+  var checkDays = 0;
+  cells.forEach(function(dt){
+    if(!dt){ h += '<div class="rp4-empty-cell"></div>'; return; }
+    var key = dt.getFullYear()+'-'+('0'+(dt.getMonth()+1)).slice(-2)+'-'+('0'+dt.getDate()).slice(-2);
+    var records = rp4RecordsOf(key);
+    var done = rp4HasCheck(key);
+    if(done) checkDays++;
+    var tips = rp4ChecksOf(key);
+    h += '<button class="rp4-day '+(records.length?'has ':'')+(done?'done ':'')
+      +(key===todayKey?'today ':'')+(key===RP4_DAY?'selected':'')
+      +'" onclick="rp4PickDay(\''+key+'\')"'
+      +(tips.length?' title="'+rp4Esc(tips.join(' / '))+'"':'')
+      +'><span>'+dt.getDate()+'</span>'
+      +(done?'<b class="rp4-check">✓</b>':'')
+      +(records.length?'<i></i>':'')
+      +(records.length>1?'<small>'+records.length+'</small>':'')
+      +'</button>';
+  });
+
+  var monthCount = rp4Records().filter(function(r){
+    return String(r.date||'').indexOf(monthPrefix) === 0;
+  }).length;
+
+  return h+'</div>'
+    +'<div class="rp4-legend">'
+      +'<span><i class="lg-dot"></i>멈춤을 기록한 날</span>'
+      +'<span><i class="lg-chk">✓</i>설계 문장을 실천한 날</span>'
+    +'</div>'
+    +'<div class="rp4-cal-foot">'
+    +'<div><b>'+monthCount+'</b><span>이번 달 멈춤</span></div>'
+    +'<div><b>'+checkDays+'</b><span>이번 달 실천</span></div>'
+    +'<p>기록한 날은 성공한 날이 아니라,<br><strong>나를 알아차린 날</strong>입니다.</p>'
+    +'</div></div>';
+}
+
+/* ── 12. 선택한 날짜의 기록 ──────────────────────────── */
+function rp4DayRecords(){
+  var day = RP4_DAY || rp4Today();
+  var list = rp4RecordsOf(day);
+  var done = rp4ChecksOf(day);
+
+  var h = '<div class="rp4-day-records"><div class="rp4-day-head"><div>'
+    +'<div class="rp4-card-eyebrow">그날의 기록</div>'
+    +'<h3>'+rp4Date(day)+' '+rp4DayName(day)+'요일</h3></div>'
+    +'<span>멈춤 '+list.length+' · 실천 '+done.length+'</span></div>';
+
+  /* 그날 실천으로 표시한 설계 문장 */
+  h += '<div class="rp4-done-box">'
+    +'<div class="rp4-done-label">이 날 실천한 설계 문장</div>';
+  if(done.length){
+    h += '<ul class="rp4-done-list">'
+      + done.map(function(t){ return '<li>'+rp4Esc(t)+'</li>'; }).join('')
+      + '</ul>';
+  }else{
+    h += '<p class="rp4-done-empty">아직 표시한 문장이 없습니다.</p>';
+  }
+  h += '<button class="rp4-done-go" onclick="rp4GoSentences()">위에서 문장 고르기 →</button></div>';
+
+  if(!list.length){
+    return h + '<div class="rp4-empty-day"><div class="rp4-empty-symbol">○</div>'
+      +'<b>멈춤 기록이 없는 날입니다</b><p>그날의 작은 순간을 나중에 적어도 괜찮습니다.</p></div></div>';
+  }
+
+  list.forEach(function(r){
+    h += '<div class="rp4-record-card" id="rp4-record-'+rp4Esc(r.id)+'">'
+      +'<div class="rp4-record-head">'
+        +'<span class="rp4-record-context">'+rp4Esc(r.context)+'</span>'
+        +'<button class="rp4-delete" onclick="rp4Delete(\''+rp4Esc(r.id)+'\')">삭제</button></div>'
+      +'<div class="rp4-record-date">'+rp4Date(r.date)+'</div>';
+
+    if(!r.desire){
+      h += '<div class="rp4-not-aware"><p>여기서 기록을 마쳐도 괜찮습니다.</p>'
+        +'<button onclick="rp4StartAwareness(\''+rp4Esc(r.id)+'\')">이 순간을 조금 더 알아차려 보기 →</button></div>';
+    } else {
+      h += '<div class="rp4-aware-result">'
+        +'<div><span>내가 원했던 것</span><p>“'+rp4Esc(r.desire)+'”</p></div>';
+      if(r.source)  h += '<div><span>욕구의 출처</span><p>'+rp4Esc(r.source)+'</p></div>';
+      if(r.choice)  h += '<div><span>내가 한 선택</span><p>'+rp4Esc(r.choice)+'</p></div>';
+      if(r.energy)  h += '<div class="rp4-energy-result"><span>선택 후의 에너지</span><b>'+rp4Esc(r.energy)+'</b></div>';
+      if(r.reflection) h += '<div class="rp4-reflection">“'+rp4Esc(r.reflection)+'”</div>';
+      h += '<button class="rp4-reopen" onclick="rp4StartAwareness(\''+rp4Esc(r.id)+'\')">다시 들여다보기</button></div>';
+    }
+    h += '</div>';
+  });
+  return h+'</div>';
+}
+
+/* ── 13. 삭제 ────────────────────────────────────────── */
+function rp4Delete(id){
+  var rec = rp4Find(id);
+  if(!rec) return;
+  if(!confirm('이 기록을 지울까요?\n지운 기록은 복구할 수 없습니다.')) return;
+  P.pauses = P.pauses.filter(function(x){ return String(x.id) !== String(id); });
+  rp4Save();
+  RP4_ACTIVE = null; RP4_AWARE = false;
+  rp4Toast('기록을 지웠습니다');
+  render();
+}
+
+/* ── 14. 나의 생각들 ─────────────────────────────────── */
+function rp4Timeline(){
+  var list = rp4Records();
+  if(!list.length) return '';
+  var h = '<div class="rp4-card rp4-timeline">'
+    +'<div class="rp4-card-eyebrow">이전의 나</div><h3>나의 생각들</h3>'
+    +'<p class="rp4-muted">예전의 내가 무엇을 원했고 어떻게 선택했는지 다시 볼 수 있습니다.</p>';
+  list.forEach(function(r){
+    h += '<div class="rp4-timeline-item">'
+      +'<div class="rp4-timeline-date">'+rp4ShortDate(r.date)+'</div>'
+      +'<div class="rp4-timeline-dot"></div>'
+      +'<div class="rp4-timeline-content"><span>'+rp4Esc(r.context)+'</span>';
+    h += r.desire
+      ? '<p>“'+rp4Esc(r.desire)+'”</p>'
+      : '<p class="rp4-pending">잠깐 멈춘 순간을 기록했습니다. '
+        +'<button class="rp4-resume" onclick="rp4StartAwareness(\''+rp4Esc(r.id)+'\')">'
+        +'지금 이어서 알아차리기</button></p>';
+    if(r.choice) h += '<small>→ '+rp4Esc(r.choice)+'</small>';
+    if(r.energy) h += '<em>'+rp4Esc(r.energy)+'</em>';
+    h += '</div></div>';
+  });
+  return h+'</div>';
+}
+
+/* ── 15. 반복해서 나타나는 나 ────────────────────────── */
+function rp4Pattern(){
+  var list = rp4Records();
+  if(list.length < 7){
+    if(!list.length) return '';
+    return '<div class="rp4-before-pattern">'
+      +'<div class="rp4-card-eyebrow">'+list.length+'개의 기록이 쌓였습니다</div>'
+      +'<h3>조금 더 모이면,<br>반복해서 나타나는 나를 볼 수 있어요.</h3>'
+      +'<p>지금은 해석하지 않아도 괜찮습니다.<br>기록이 쌓이면 반복해서 나타나는 장면과 욕구를 다시 바라볼 수 있습니다.</p>'
+      +'<div class="rp4-pattern-progress"><span style="width:'+Math.min(100,(list.length/7)*100)+'%"></span></div>'
+      +'<small>'+list.length+' / 7번</small></div>';
+  }
+
+  function count(key){
+    var m = {};
+    list.slice(0,20).forEach(function(r){
+      var v = String(r[key]||'').trim();
+      if(v) m[v] = (m[v]||0)+1;
+    });
+    return Object.keys(m).sort(function(a,b){ return m[b]-m[a]; }).slice(0,4)
+      .map(function(k){ return {label:k, count:m[k]}; });
+  }
+
+  /* 기록 시각은 이미 저장되어 있다. 추가 질문 없이 시간대를 읽는다. */
+  function countHours(){
+    var band = ['새벽 0–6시','오전 6–12시','오후 12–18시','밤 18–24시'];
+    var m = {};
+    list.slice(0,20).forEach(function(r){
+      var d = new Date(r.createdAt || (String(r.date||'')+'T12:00:00'));
+      if(isNaN(d)) return;
+      var b = band[Math.min(3, Math.floor(d.getHours()/6))];
+      m[b] = (m[b]||0)+1;
+    });
+    return Object.keys(m).sort(function(a,b){ return m[b]-m[a]; })
+      .map(function(k){ return {label:k, count:m[k]}; });
+  }
+
+  var contexts = count('context'), desires = count('desire'),
+      sources  = count('source'),  energies = count('energy'),
+      hours    = countHours();
+
+  var h = '<div class="rp4-card rp4-pattern">'
+    +'<div class="rp4-card-eyebrow">기록이 쌓였습니다</div>'
+    +'<h3>반복해서 나타나는 나</h3>'
+    +'<p class="rp4-muted">정답을 대신 찾아드리기보다, 실제 기록에서 반복해서 나타난 장면을 다시 바라봅니다.</p>';
+
+  if(contexts.length){
+    h += '<div class="rp4-pattern-block"><label>나는 주로 어디에서 멈췄을까요?</label><div class="rp4-tags">'
+      +contexts.map(function(x){ return '<span>'+rp4Esc(x.label)+' <b>'+x.count+'</b></span>'; }).join('')
+      +'</div></div>';
+  }
+  if(hours.length){
+    h += '<div class="rp4-pattern-block"><label>나는 주로 언제 멈췄을까요?</label><div class="rp4-tags">'
+      +hours.map(function(x){ return '<span>'+rp4Esc(x.label)+' <b>'+x.count+'</b></span>'; }).join('')
+      +'</div></div>';
+  }
+  if(desires.length){
+    h += '<div class="rp4-pattern-block"><label>반복해서 나타난 욕구</label><div class="rp4-desire-list">'
+      +desires.map(function(x){
+        return '<div><span>“'+rp4Esc(x.label)+'”</span><small>'+x.count+'회</small></div>';
+      }).join('')+'</div></div>';
+  }
+  if(sources.length){
+    h += '<div class="rp4-pattern-block"><label>욕구의 출처를 돌아보면</label><div class="rp4-tags">'
+      +sources.map(function(x){ return '<span>'+rp4Esc(x.label)+' <b>'+x.count+'</b></span>'; }).join('')
+      +'</div></div>';
+  }
+  if(energies.length){
+    h += '<div class="rp4-pattern-block"><label>선택 뒤의 에너지</label><div class="rp4-energy-summary">'
+      +energies.map(function(x){
+        return '<div><b>'+x.count+'</b><span>'+rp4Esc(x.label)+'</span></div>';
+      }).join('')+'</div></div>';
+  }
+
+  /* 지난 주에 남긴 발견을 다시 볼 수 있게 한다 */
+  var past = (P.rpWeeklyReflections||[]).slice().reverse().slice(0,5);
+  if(past.length){
+    h += '<div class="rp4-pattern-block"><label>지난번에 내가 발견한 것</label><div class="rp4-week-list">'
+      +past.map(function(x){
+        return '<div><span>'+rp4ShortDate(x.week)+'</span>'
+          +'<div class="rp4-week-body"><p>“'+rp4Esc(x.text)+'”</p>'
+          +'<button class="rp4-to-design" onclick="rp4ToDesign(\''+rp4Esc(x.id)+'\')">'
+          +'이 발견을 설계 문장으로 →</button></div></div>';
+      }).join('')+'</div></div>';
+  }
+
+  return h+'<div class="rp4-week-reflection">'
+    +'<label>이번 주, 내가 발견한 것은</label>'
+    +'<textarea id="rp4-week-reflection" maxlength="300" '
+    +'placeholder="예: 나는 쉬고 싶을 때도 습관처럼 화면을 열고 있었다."></textarea>'
+    +'<button onclick="rp4SaveReflection()">기록하기</button>'
+    +'<p class="rp4-week-hint">기록한 발견은 바로 아래에서 <b>설계 문장</b>으로 옮길 수 있습니다.</p>'
+    +'</div></div>';
+}
+
+/* 발견 → 설계 문장 : 고리를 닫는 지점 */
+function rp4ToDesign(id){
+  rp4Ensure();
+  var r = P.rpWeeklyReflections.find(function(x){ return String(x.id) === String(id); });
+  var seed = r ? String(r.text||'').trim().slice(0,60) : '';
+  if(typeof openDesign !== 'function'){ rp4Toast('설계 화면을 열 수 없습니다'); return; }
+  openDesign();
+  setTimeout(function(){
+    try{
+      var fr = document.getElementById('mfree');
+      var w3 = document.getElementById('w3');
+      if(fr && w3 && seed){
+        fr.classList.add('open');
+        w3.value = seed;
+        w3.dispatchEvent(new Event('input', {bubbles:true}));
+        w3.focus();
+        rp4Toast('발견한 내용을 옮겨 두었습니다. 문장으로 다듬어 보세요');
+      }
+    }catch(e){}
+  }, 320);
+}
+function rp4SaveReflection(){
+  var el = document.getElementById('rp4-week-reflection');
+  if(!el) return;
+  var v = el.value.trim();
+  if(!v){ rp4Toast('이번 주 내가 발견한 것을 한 줄 적어보세요'); return; }
+  rp4Ensure();
+  P.rpWeeklyReflections.push({
+    id: rp4NewId(), week: rp4Today(), text: v,
+    createdAt: new Date().toISOString()
+  });
+  rp4Save();
+  rp4Toast('이번 주의 발견이 기록되었습니다');
+  render();
+}
+
+/* ── 16. 기록 탭 ─────────────────────────────────────── */
+function recordView(){
+  rp4Ensure();
+  var h = '';
+
+  if(!(P.designs && P.designs.length)){
+    h += '<div class="sec">'+sn()+'<h2>오늘의 설계 문장</h2>'
+      +'<p class="sub">이 리포트의 결과물은 점수가 아니라, 여러분이 직접 남긴 한 문장입니다.</p>'
+      +'<div class="empty-tab">아직 남기신 문장이 없습니다.<br>'
+      +'&ldquo;나는 ______을 더 중요하게 여기겠습니다.&rdquo;<br>이 한 문장이면 시작됩니다.'
+      +'<button class="btn" style="margin-top:14px" onclick="openDesign()">오늘의 설계 시작하기 →</button></div></div>';
+  }
+
+  h += '<div id="rp4-sent-anchor"></div>';
+  h += sentencesView();
+  /* 주간 달력(dailyView)은 아래 월간 달력으로 통합했다 */
+
+  /* id="sec-daily" 유지 — goRecord() 와 #write 이동이 이 자리를 찾는다 */
+  h += '<div class="sec rp4-main-section" id="sec-daily">'+sn()
+    +'<div class="rp4-section-head"><div>'
+      +'<div class="rp4-section-number">03 · 나의 기록</div>'
+      +'<h2>나를 알아차린 순간을<br>조금씩 쌓아보세요.</h2>'
+      +'<p>기록의 목적은 잘 해낸 날을 모으는 것이 아닙니다.<br>'
+      +'내가 무엇을 원했고, 어떻게 선택했는지 다시 보는 것입니다.</p></div></div>'
+    +'<div class="rp4-flow">'
+      +'<span class="active">멈춤</span><i>→</i><span>알아차림</span><i>→</i>'
+      +'<span>선택</span><i>→</i><span>다시 보기</span></div>'
+    + rp4QuickView();
+
+  if(RP4_ACTIVE && !RP4_AWARE){
+    var activeRec = rp4Find(RP4_ACTIVE);
+    if(activeRec && !activeRec.desire) h += rp4AfterPause(activeRec);
+  }
+  if(RP4_ACTIVE && RP4_AWARE) h += rp4AwarenessView();
+
+  h += rp4Calendar();
+  h += rp4DayRecords();
+  h += '</div>';
+
+  h += '<div class="sec">'+sn()+rp4Pattern()+'</div>';
+  h += '<div class="sec">'+sn()+rp4Timeline()+'</div>';
+
+  h += notesView();
+  h += loopView();
+  h += keepView();
+  return h;
+}
+
+/* ── 17. 계정 동기화 병합 ────────────────────────────── */
+(function(){
+  if(typeof mergeProfiles !== 'function') return;
+  var oldMerge = mergeProfiles;
+  mergeProfiles = function(cur, inc){
+    var out = oldMerge(cur, inc);
+    try{
+      out = out || {};
+      var a = Array.isArray(cur && cur.pauses) ? cur.pauses : [];
+      var b = Array.isArray(inc && inc.pauses) ? inc.pauses : [];
+      var map = {};
+      a.concat(b).forEach(function(r){
+        if(!r || !r.id) return;
+        var old = map[r.id];
+        if(!old || String(r.updatedAt||r.createdAt||'') >= String(old.updatedAt||old.createdAt||'')){
+          map[r.id] = r;
+        }
+      });
+      out.pauses = Object.keys(map).map(function(k){ return map[k]; })
+        .sort(function(x,y){ return String(x.date||'').localeCompare(String(y.date||'')); });
+
+      var wr1 = Array.isArray(cur && cur.rpWeeklyReflections) ? cur.rpWeeklyReflections : [];
+      var wr2 = Array.isArray(inc && inc.rpWeeklyReflections) ? inc.rpWeeklyReflections : [];
+      var wm = {};
+      wr1.concat(wr2).forEach(function(r){ if(r && r.id) wm[r.id] = r; });
+      out.rpWeeklyReflections = Object.keys(wm).map(function(k){ return wm[k]; });
+    }catch(e){ /* 새 기능의 병합 오류가 기존 리포트를 깨뜨리지 않도록 한다 */ }
+    return out;
+  };
+})();
+
+/* ── 18. 보관 링크 ───────────────────────────────────────
+   원본 pack()은 링크가 길어지면 메신저가 잘라 버리는 것을 막기 위해
+   기록을 최근 30일, 변화 스냅샷을 최근 6개로 제한한다.
+   같은 규칙을 잠깐 멈춤 기록에도 적용하고, 배열 형태로 줄여 담는다.
+   ───────────────────────────────────────────────────── */
+(function(){
+  if(typeof pack !== 'function' || typeof unpack !== 'function') return;
+  var oldPack = pack, oldUnpack = unpack;
+
+  function rp4Cut(){
+    var c = new Date(); c.setDate(c.getDate()-30);
+    return c.toISOString().slice(0,10);
+  }
+  function rp4D8(s){ return String(s||'').replace(/-/g,''); }
+  function rp4D10(s){
+    s = String(s||'');
+    return s.length === 8 ? s.slice(0,4)+'-'+s.slice(4,6)+'-'+s.slice(6) : s;
+  }
+
+  /* 링크 전체 길이 상한.
+     GitHub Pages(CDN)와 일부 메신저가 긴 주소를 거부하거나 잘라 버린다.
+     상한을 넘으면 오래된 기록부터 링크에서 뺀다. 원본 데이터는 그대로 남는다. */
+  var RP4_LINK_MAX = 3200;
+
+  pack = function(p){
+    try{
+      var base = JSON.parse(b64d(oldPack(p)));
+      var cut = rp4Cut();
+
+      var rs = (p.pauses||[]).filter(function(r){
+        return r && String(r.date||'') >= cut;
+      }).map(function(r){
+        var a = [r.id||'', rp4D8(r.date), r.context||'', r.desire||'',
+                 r.source||'', r.choice||'', r.energy||'', r.reflection||''];
+        while(a.length > 3 && !a[a.length-1]) a.pop();   /* 빈 칸은 담지 않는다 */
+        return a;
+      });
+
+      var ws = (p.rpWeeklyReflections||[]).slice(-6).map(function(x){
+        return [x.id||'', rp4D8(x.week), x.text||''];
+      });
+
+      function build(n){
+        var o = base;
+        if(n > 0) o.r = rs.slice(-n); else delete o.r;
+        if(ws.length) o.w = ws; else delete o.w;
+        return b64e(JSON.stringify(o));
+      }
+
+      var n = rs.length;
+      var s = build(n);
+      while(s.length > RP4_LINK_MAX && n > 0){
+        n = (n > 4) ? Math.floor(n * 0.6) : n - 1;   /* 오래된 것부터 덜어낸다 */
+        s = build(n);
+      }
+      return s;
+    }catch(e){ return oldPack(p); }
+  };
+
+  unpack = function(str){
+    var r = oldUnpack(str);
+    if(!r) return r;
+    try{
+      var o = JSON.parse(b64d(str));
+      r.pauses = Array.isArray(o.r) ? o.r.map(function(a){
+        var d = rp4D10(a[1]);
+        var t = d ? (d+'T00:00:00.000Z') : new Date().toISOString();
+        return {
+          id: a[0] || ('lnk-'+d+'-'+Math.random().toString(36).slice(2,8)),
+          date: d, context: a[2]||'', desire: a[3]||'', source: a[4]||'',
+          choice: a[5]||'', energy: a[6]||'', reflection: a[7]||'',
+          createdAt: t, updatedAt: t
+        };
+      }) : (r.pauses || []);
+      r.rpWeeklyReflections = Array.isArray(o.w) ? o.w.map(function(a){
+        var d = rp4D10(a[1]);
+        return {
+          id: a[0] || ('lnkw-'+d), week: d, text: a[2]||'',
+          createdAt: d ? (d+'T00:00:00.000Z') : new Date().toISOString()
+        };
+      }) : (r.rpWeeklyReflections || []);
+    }catch(e){
+      r.pauses = r.pauses || [];
+      r.rpWeeklyReflections = r.rpWeeklyReflections || [];
+    }
+    return r;
+  };
+})();
+
+/* ── 19. 스타일 ──────────────────────────────────────── */
+(function(){
+  if(document.getElementById('rp4-style')) return;
+  var css = `
+  .rp4-main-section{scroll-margin-top:30px}
+  .rp4-section-number{font-size:12px;letter-spacing:.12em;color:#8B5CF6;font-weight:800;margin-bottom:10px}
+  .rp4-section-head h2{margin:0 0 12px;font-size:30px;line-height:1.4;letter-spacing:-.045em}
+  .rp4-section-head p{margin:0;color:#777;font-size:14px;line-height:1.8}
+  .rp4-flow{display:flex;align-items:center;justify-content:center;gap:12px;margin:22px 0;padding:15px;border-radius:14px;background:rgba(139,92,246,.055);color:#777;font-size:13px}
+  .rp4-flow span{font-weight:700}
+  .rp4-flow span.active{color:#8B5CF6}
+  .rp4-flow i{font-style:normal;opacity:.35}
+  .rp4-card{background:#fff;border:1px solid #e9e5de;border-radius:20px;padding:25px;margin:18px 0;box-shadow:0 5px 24px rgba(40,35,25,.045)}
+  .rp4-card-eyebrow{font-size:11px;letter-spacing:.12em;font-weight:800;color:#9a8b78;margin-bottom:7px}
+  .rp4-quick{position:relative;background:linear-gradient(135deg,#fffdf9,#fff)}
+  .rp4-quick-intro{padding-right:120px}
+  .rp4-quick-intro h3{margin:0;font-size:26px;line-height:1.4;letter-spacing:-.035em}
+  .rp4-quick-intro p{margin:8px 0 0;color:#777;font-size:14px;line-height:1.75}
+  .rp4-ten{position:absolute;right:25px;top:25px;width:86px;height:86px;border-radius:50%;background:#f6f1e8;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+  .rp4-ten b{color:#8B5CF6;font-size:18px}
+  .rp4-ten span{margin-top:3px;color:#888;font-size:9px;line-height:1.4}
+  .rp4-label{display:block;margin:22px 0 10px;color:#444;font-size:13px;font-weight:800}
+  .rp4-context-list{display:flex;flex-wrap:wrap;gap:8px}
+  .rp4-context-chip{border:1px solid #ded9d0;background:#fff;border-radius:999px;padding:9px 14px;color:#555;font-family:inherit;font-size:13px;cursor:pointer}
+  .rp4-context-chip.on{border-color:#8B5CF6;background:rgba(139,92,246,.08);color:#7043d2;font-weight:800}
+  .rp4-quick-bottom{display:flex;align-items:end;justify-content:space-between;gap:15px;margin-top:18px}
+  .rp4-date{display:flex;flex-direction:column;gap:5px;color:#999;font-size:10px}
+  .rp4-date input{border:1px solid #dedad3;border-radius:9px;padding:9px;color:#555;font-family:inherit}
+  .rp4-main-btn{border:0;border-radius:12px;padding:13px 18px;background:#8B5CF6;color:#fff;font-family:inherit;font-size:13px;font-weight:800;cursor:pointer}
+  .rp4-after{margin:18px 0;padding:28px;border:1px solid #e6def7;border-radius:20px;background:#fbf9ff;text-align:center}
+  .rp4-success{width:42px;height:42px;margin:0 auto 13px;border-radius:50%;background:#8B5CF6;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900}
+  .rp4-after-eyebrow{color:#9a8b78;font-size:10px;font-weight:800;letter-spacing:.1em}
+  .rp4-after h3{margin:6px 0 0;font-size:20px}
+  .rp4-after-context{display:inline-block;margin-top:10px;padding:6px 11px;border-radius:999px;background:#f1ebfc;color:#7448d5;font-size:11px;font-weight:800}
+  .rp4-after-question{margin:20px 0 0;color:#777;font-size:13px;line-height:1.75}
+  .rp4-after-question b{color:#555}
+  .rp4-after-buttons{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:17px}
+  .rp4-aware-start{border:0;border-radius:11px;padding:12px 18px;background:#8B5CF6;color:#fff;font-family:inherit;font-size:12px;font-weight:800;cursor:pointer}
+  .rp4-finish{border:1px solid #dedad3;border-radius:11px;padding:12px 18px;background:#fff;color:#777;font-family:inherit;font-size:12px;cursor:pointer}
+  .rp4-after-note{margin:15px 0 0;color:#aaa;font-size:10px;line-height:1.6}
+  .rp4-awareness{margin:18px 0;padding:25px;border:1px solid #ddd4f1;border-radius:20px;background:#fff;box-shadow:0 8px 28px rgba(90,60,130,.07);scroll-margin-top:30px}
+  .rp4-awareness-head{display:flex;justify-content:space-between;gap:15px}
+  .rp4-awareness-head h3{margin:0;font-size:22px;letter-spacing:-.03em}
+  .rp4-close{border:0;background:none;color:#aaa;font-size:24px;cursor:pointer}
+  .rp4-progress{display:flex;align-items:center;margin:23px 0 30px}
+  .rp4-progress-item{display:flex;flex-direction:column;align-items:center;min-width:72px;color:#bbb}
+  .rp4-progress-item.active,.rp4-progress-item.done{color:#8B5CF6}
+  .rp4-progress-dot{width:28px;height:28px;border-radius:50%;background:#f0edf5;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800}
+  .rp4-progress-item.active .rp4-progress-dot,.rp4-progress-item.done .rp4-progress-dot{background:#8B5CF6;color:#fff}
+  .rp4-progress-item span{margin-top:6px;font-size:9px;font-weight:800;white-space:nowrap}
+  .rp4-progress-line{flex:1;height:2px;margin-bottom:20px;background:#eeeaf3}
+  .rp4-progress-line.done{background:#cdbbe9}
+  .rp4-step-label{margin-bottom:8px;color:#8B5CF6;font-size:11px;letter-spacing:.1em;font-weight:900}
+  .rp4-step-body h4{margin:0;font-size:23px;line-height:1.45;letter-spacing:-.035em}
+  .rp4-help{margin:8px 0 18px;color:#777;font-size:13px;line-height:1.7}
+  .rp4-desire-options{display:flex;flex-direction:column;gap:7px}
+  .rp4-desire-options button{text-align:left;border:1px solid #e1ddd7;background:#fff;border-radius:11px;padding:11px 13px;color:#555;font-family:inherit;font-size:13px;cursor:pointer}
+  .rp4-desire-options button:hover{border-color:#8B5CF6;background:rgba(139,92,246,.06)}
+  .rp4-direct{margin-top:13px}
+  .rp4-direct label{display:block;margin-bottom:7px;color:#999;font-size:11px;font-weight:800}
+  .rp4-direct textarea,.rp4-large-textarea,.rp4-week-reflection textarea{width:100%;box-sizing:border-box;border:1px solid #dedad3;border-radius:12px;padding:12px;color:#444;font-family:inherit;font-size:13px;line-height:1.65;outline:none;resize:vertical}
+  .rp4-direct textarea{min-height:85px}
+  .rp4-large-textarea{min-height:120px}
+  .rp4-direct textarea:focus,.rp4-large-textarea:focus,.rp4-week-reflection textarea:focus{border-color:#8B5CF6;box-shadow:0 0 0 3px rgba(139,92,246,.08)}
+  .rp4-source-options,.rp4-energy-options{display:flex;flex-direction:column;gap:8px}
+  .rp4-source-options button,.rp4-energy-options button{text-align:left;border:1px solid #e1ddd7;background:#fff;border-radius:12px;padding:12px 14px;font-family:inherit;cursor:pointer}
+  .rp4-source-options button b,.rp4-energy-options button b{display:block;color:#555;font-size:13px}
+  .rp4-source-options button small,.rp4-energy-options button small{display:block;margin-top:3px;color:#999;font-size:10px}
+  .rp4-source-options button.selected,.rp4-energy-options button.selected{border-color:#8B5CF6;background:rgba(139,92,246,.07)}
+  .rp4-source-options button.selected b,.rp4-energy-options button.selected b{color:#7043d2}
+  .rp4-step-buttons{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}
+  .rp4-prev,.rp4-next,.rp4-finish-aware{border-radius:10px;padding:11px 17px;font-family:inherit;font-size:12px;font-weight:800;cursor:pointer}
+  .rp4-prev{border:1px solid #ddd9d2;background:#fff;color:#777}
+  .rp4-next,.rp4-finish-aware{border:0;background:#8B5CF6;color:#fff}
+  .rp4-calendar{scroll-margin-top:30px}
+  .rp4-cal-head{display:flex;align-items:center;justify-content:space-between}
+  .rp4-cal-head h3{margin:0;font-size:21px}
+  .rp4-cal-nav{display:flex;gap:5px}
+  .rp4-cal-nav button{border:1px solid #e0ddd6;background:#fff;border-radius:8px;padding:6px 10px;color:#666;font-family:inherit;cursor:pointer}
+  .rp4-week,.rp4-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+  .rp4-week{margin:20px 0 5px;text-align:center}
+  .rp4-week span{color:#aaa;font-size:10px;font-weight:800}
+  .rp4-day{position:relative;height:65px;border:1px solid transparent;border-radius:10px;background:#faf9f7;color:#555;font-family:inherit;cursor:pointer}
+  .rp4-day:hover{background:#f4f0e9}
+  .rp4-day.today{border-color:#cbb9ec}
+  .rp4-day.selected{border-color:#8B5CF6;background:rgba(139,92,246,.075)}
+  .rp4-day i{position:absolute;left:50%;bottom:9px;width:6px;height:6px;border-radius:50%;background:#8B5CF6;transform:translateX(-50%)}
+  .rp4-day small{position:absolute;top:4px;right:5px;color:#8B5CF6;font-size:8px}
+  .rp4-day.done{background:#f1f8f3}
+  .rp4-day .rp4-check{position:absolute;left:5px;top:4px;color:#2F9E5E;font-size:11px;font-weight:900}
+  .rp4-day.selected .rp4-check{color:#2F7A4C}
+  .rp4-legend{display:flex;gap:16px;margin-top:12px;color:#999;font-size:10px}
+  .rp4-legend span{display:flex;align-items:center;gap:5px}
+  .rp4-legend .lg-dot{width:6px;height:6px;border-radius:50%;background:#8B5CF6;font-style:normal}
+  .rp4-legend .lg-chk{color:#2F9E5E;font-size:11px;font-weight:900;font-style:normal}
+  .rp4-done-box{margin:14px 0 10px;padding:14px 16px;border:1px solid #e3ece6;border-radius:14px;background:#f7fbf8}
+  .rp4-done-label{color:#6f8a79;font-size:10px;font-weight:800;letter-spacing:.06em;margin-bottom:8px}
+  .rp4-done-list{margin:0;padding-left:16px;color:#3f5a4a;font-size:13px;line-height:1.7}
+  .rp4-done-empty{margin:0;color:#9aa8a0;font-size:12px}
+  .rp4-done-go{margin-top:9px;border:0;background:none;padding:0;color:#2F9E5E;font-family:inherit;font-size:11px;font-weight:800;cursor:pointer}
+  .rp4-resume{border:0;background:none;padding:0;margin-left:4px;color:#8B5CF6;font-family:inherit;font-size:11px;font-weight:800;cursor:pointer}
+  .rp4-week-body{flex:1}
+  .rp4-to-design{margin-top:5px;border:0;background:none;padding:0;color:#8B5CF6;font-family:inherit;font-size:11px;font-weight:800;cursor:pointer}
+  .rp4-week-hint{margin:9px 0 0;color:#9a92a8;font-size:10.5px;line-height:1.6}
+  .rp4-week-hint b{color:#7043d2}
+  .rp4-cal-foot{display:grid;grid-template-columns:100px 100px 1fr;gap:18px;align-items:center;margin-top:17px;padding-top:15px;border-top:1px solid #eeeae3}
+  .rp4-cal-foot b{display:block;font-size:21px}
+  .rp4-cal-foot span{color:#999;font-size:10px}
+  .rp4-cal-foot p{margin:0;color:#777;font-size:11px;line-height:1.6}
+  .rp4-day-records{margin-top:20px}
+  .rp4-day-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+  .rp4-day-head h3{margin:0;font-size:18px}
+  .rp4-day-head>span{padding:5px 9px;border-radius:999px;background:#f5f1ea;color:#887d6f;font-size:10px}
+  .rp4-record-card{margin-bottom:9px;padding:18px;border:1px solid #e8e4dc;border-radius:16px;background:#fff}
+  .rp4-record-head{display:flex;align-items:center;justify-content:space-between}
+  .rp4-record-context{display:inline-block;padding:5px 9px;border-radius:999px;background:#f5f1ea;color:#776e63;font-size:10px;font-weight:800}
+  .rp4-delete{border:0;background:none;color:#aaa;font-family:inherit;font-size:10px;cursor:pointer}
+  .rp4-record-date{margin-top:5px;color:#aaa;font-size:10px}
+  .rp4-not-aware{margin-top:14px;padding:14px;border-radius:11px;background:#faf8f4}
+  .rp4-not-aware p{margin:0 0 7px;color:#777;font-size:11px}
+  .rp4-not-aware button,.rp4-reopen{border:0;background:none;padding:0;color:#8B5CF6;font-family:inherit;font-size:11px;font-weight:800;cursor:pointer}
+  .rp4-aware-result{margin-top:14px}
+  .rp4-aware-result>div{padding:11px 0;border-top:1px solid #f0ede8}
+  .rp4-aware-result span{display:block;color:#999;font-size:10px;font-weight:800}
+  .rp4-aware-result p{margin:4px 0 0;color:#555;font-size:13px;line-height:1.6}
+  .rp4-energy-result{display:flex;justify-content:space-between;gap:10px}
+  .rp4-energy-result b{color:#7043d2;font-size:11px}
+  .rp4-reflection{margin-top:9px;padding:12px;border-left:3px solid #d8c8f8;background:#fbf9fe;color:#615a6d;font-size:12px;line-height:1.6}
+  .rp4-reopen{margin-top:12px}
+  .rp4-empty-day{padding:25px;border:1px dashed #ddd8d0;border-radius:15px;text-align:center;color:#888}
+  .rp4-empty-symbol{color:#c5bbb0;font-size:24px}
+  .rp4-empty-day b{display:block;margin-top:7px;color:#555}
+  .rp4-empty-day p{margin:7px 0 3px;font-size:12px}
+  .rp4-empty-day span{font-size:10px}
+  .rp4-timeline h3{margin-bottom:5px}
+  .rp4-muted{color:#777;font-size:13px;line-height:1.7}
+  .rp4-timeline-item{display:grid;grid-template-columns:45px 12px 1fr;gap:8px;margin-top:20px}
+  .rp4-timeline-date{color:#999;font-size:10px;text-align:right}
+  .rp4-timeline-dot{position:relative}
+  .rp4-timeline-dot:before{content:"";position:absolute;left:4px;top:3px;width:8px;height:8px;border-radius:50%;background:#8B5CF6}
+  .rp4-timeline-dot:after{content:"";position:absolute;left:7px;top:12px;bottom:-25px;width:1px;background:#e4dfd7}
+  .rp4-timeline-content>span{color:#999;font-size:10px;font-weight:800}
+  .rp4-timeline-content p{margin:4px 0;color:#444;font-size:13px;line-height:1.6}
+  .rp4-timeline-content small{color:#777;font-size:10px}
+  .rp4-timeline-content em{display:inline-block;margin-top:6px;padding:4px 7px;border-radius:6px;background:#f7f4ee;color:#888;font-size:9px;font-style:normal}
+  .rp4-pending{color:#aaa !important;font-size:11px !important}
+  .rp4-before-pattern{padding:25px;border:1px solid #ebe6de;border-radius:20px;background:#faf8f4}
+  .rp4-before-pattern h3{margin:5px 0 10px;font-size:20px;line-height:1.45}
+  .rp4-before-pattern p{color:#777;font-size:13px;line-height:1.75}
+  .rp4-pattern-progress{height:5px;margin-top:18px;border-radius:99px;background:#e8e2d9;overflow:hidden}
+  .rp4-pattern-progress span{display:block;height:100%;border-radius:99px;background:#b7a2df}
+  .rp4-before-pattern small{display:block;margin-top:7px;color:#999;text-align:right}
+  .rp4-pattern{background:#faf8f4}
+  .rp4-pattern h3{margin-bottom:5px}
+  .rp4-pattern-block{margin-top:19px;padding-top:15px;border-top:1px solid #eeeae4}
+  .rp4-pattern-block>label,.rp4-week-reflection>label{display:block;margin-bottom:9px;color:#999;font-size:10px;font-weight:800}
+  .rp4-tags{display:flex;flex-wrap:wrap;gap:7px}
+  .rp4-tags span{padding:7px 10px;border-radius:999px;background:#f1ece5;color:#665f56;font-size:10px}
+  .rp4-tags b{color:#8B5CF6}
+  .rp4-desire-list>div{display:flex;justify-content:space-between;padding:7px 0;color:#555;font-size:11px}
+  .rp4-desire-list small{color:#aaa}
+  .rp4-energy-summary{display:flex;gap:7px}
+  .rp4-energy-summary div{flex:1;padding:10px;border-radius:10px;background:#f6f2eb;text-align:center}
+  .rp4-energy-summary b{display:block;color:#8B5CF6;font-size:17px}
+  .rp4-energy-summary span{display:block;margin-top:3px;color:#999;font-size:9px}
+  .rp4-week-list>div{display:flex;gap:10px;padding:8px 0;border-top:1px solid #f2eee8}
+  .rp4-week-list>div:first-child{border-top:0}
+  .rp4-week-list span{flex:0 0 34px;color:#aaa;font-size:10px;padding-top:2px}
+  .rp4-week-list p{margin:0;color:#615a6d;font-size:12px;line-height:1.6}
+  .rp4-week-reflection{margin-top:19px;padding:15px;border-radius:12px;background:#fbf9fe}
+  .rp4-week-reflection textarea{min-height:75px}
+  .rp4-week-reflection button{margin-top:7px;border:0;border-radius:9px;background:#8B5CF6;color:#fff;padding:8px 13px;font-family:inherit;font-size:11px;font-weight:800;cursor:pointer}
+  @media(max-width:600px){
+    .rp4-section-head h2{font-size:24px}
+    .rp4-quick-intro{padding-right:0}
+    .rp4-ten{position:relative;right:auto;top:auto;width:auto;height:auto;margin-top:15px;padding:8px;border-radius:10px;flex-direction:row;gap:7px}
+    .rp4-quick-bottom{flex-direction:column;align-items:stretch}
+    .rp4-cal-foot{grid-template-columns:70px 70px 1fr;gap:10px}
+    .rp4-progress-item{min-width:45px}
+    .rp4-progress-item span{font-size:8px}
+    .rp4-energy-summary{flex-direction:column}
+  }
+  @media print{
+    .rp4-quick,.rp4-after,.rp4-awareness,.rp4-cal-nav,.rp4-delete,.rp4-reopen,.rp4-not-aware button,.rp4-week-reflection button{display:none !important}
+  }
+  `;
+  var style = document.createElement('style');
+  style.id = 'rp4-style';
+  style.textContent = css;
+  document.head.appendChild(style);
+})();
+
+/* ── 20. 초기화 ──────────────────────────────────────── */
+(function(){
+  try{
+    if(typeof P !== 'undefined' && P){
+      P.pauses = P.pauses || [];
+      P.rpWeeklyReflections = P.rpWeeklyReflections || [];
+    }
+  }catch(e){}
+})();
+
+/* === 나의 기록 v4 · 여기까지 === */
 
 /* ───────── 시작 ───────── */
 (function(){
