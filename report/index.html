@@ -2651,6 +2651,8 @@ var RP4_EDIT = null;    /* 수정 중인 기록 id (null이면 새 기록) */
 var RP4_CTX  = '';
 var RP4_SRC  = '';
 var RP4_ENG  = '';
+var RP4_CHO  = '';
+var RP4_VAL  = '';
 
 /* 축마다 연습 이름이 다르다. 최종은 우선가치 설계. */
 var RP4_PRACTICE = {
@@ -2660,6 +2662,12 @@ var RP4_PRACTICE = {
   D : '내 기준으로 쓰기 연습',
   F : '나다움 연습'
 };
+function rp4Josa(w, a, b){
+  var c = String(w||'').replace(/[”"’'\)\]]+$/,'').slice(-1);
+  var code = c.charCodeAt(0);
+  if(!(code>=0xAC00 && code<=0xD7A3)) return a;      /* 한글이 아니면 기본형 */
+  return ((code-0xAC00)%28) ? a : b;                  /* 받침 있으면 a */
+}
 function rp4PracticeName(axis){
   return RP4_PRACTICE[axis] || RP4_PRACTICE.F;
 }
@@ -2729,6 +2737,7 @@ function rp4Pick(kind, v){
   if(kind === 'ctx') RP4_CTX = v;
   if(kind === 'src') RP4_SRC = v;
   if(kind === 'eng') RP4_ENG = v;
+  if(kind === 'cho') RP4_CHO = v;
   var el = document.getElementById('rp4-'+kind);
   if(el) el.value = v;
   /* render()를 부르지 않는다 — 적던 글이 지워지면 안 된다 */
@@ -2758,6 +2767,8 @@ function rp4EditRecord(id){
   RP4_CTX = r.context || '';
   RP4_SRC = r.source || '';
   RP4_ENG = r.energy || '';
+  RP4_CHO = r.choiceOpt || '';
+  RP4_VAL = r.value || '';
   render();
   setTimeout(function(){
     var el = document.getElementById('rp4-form');
@@ -2766,28 +2777,51 @@ function rp4EditRecord(id){
 }
 function rp4CancelEdit(){
   RP4_EDIT = null; RP4_OPEN = false;
-  RP4_CTX = ''; RP4_SRC = ''; RP4_ENG = '';
+  RP4_CTX = ''; RP4_SRC = ''; RP4_ENG = ''; RP4_CHO = ''; RP4_VAL = '';
   render();
 }
 
+var RP4_CONTEXTS = [
+  ['무심코','스마트폰을 열다'],
+  ['메시지','보내기 전 잠깐 멈춤'],
+  ['구매','무언가를 사려던 순간'],
+  ['부탁','누군가의 부탁에 바로 답하려다'],
+  ['커피','마시며 문득 생각이 든 순간'],
+  ['이동','어디로 갈지 고민하던 순간'],
+  ['잠들기 전','하루를 돌아보던 순간'],
+  ['그 외에도','일상 속 어떤 순간이든']
+];
 var RP4_DESIRES = [
-  '조금 지쳐 있었다.','마음이 조급했다.','괜히 짜증이 났다.',
-  '누군가의 반응이 신경 쓰였다.','혼자 있고 싶다는 생각이 들었다.',
-  '누군가와 이야기하고 싶었다.','이건 내가 정말 원하는 게 아닌 것 같았다.',
-  '그냥 습관처럼 하고 있었다.','생각보다 이 일에 마음을 많이 쓰고 있었다.',
-  '내가 중요하게 생각하는 것이 조금 보였다.','잘 모르겠지만 마음이 불편했다.'
+  '조금 더 쉬고 싶었다.','인정받고 싶었다.','다른 사람들과 비교하고 싶었다.',
+  '혼자 있고 싶었다.','궁금했다 / 알고 싶었다.','조금 지쳐 있었다.',
+  '마음이 조급했다.','괜히 짜증이 났다.','누군가의 반응이 신경 쓰였다.',
+  '그냥 습관처럼 하고 있었다.','잘 모르겠지만 마음이 불편했다.'
 ];
 var RP4_SOURCES = [
-  ['내 안의 신호','내가 정말 필요했던 것'],
-  ['사람들의 기대','타인의 시선·평가'],
-  ['미디어·알고리즘','콘텐츠·추천·비교'],
-  ['상황적 압박','시간·역할·의무'],
-  ['아직 잘 모르겠다','조금 더 지켜보기']
+  ['내 욕구와 감정','전부 내 마음'],
+  ['타인의 기대와 비교','사람들의 시선'],
+  ['미디어와 알고리즘','콘텐츠·추천·SNS'],
+  ['상황과 책임의 압박','시간·역할·의무'],
+  ['두 가지가 섞여 있다','안팎이 함께'],
+  ['잘 모르겠다','조금 더 지켜보기']
+];
+/* 04 · 우선가치 — 순서 고정. 나의 지도의 우선가치와 연동된다. */
+var RP4_VALUES = [
+  '내 휴식과 회복','내 감정과 마음의 평화','내 집중과 성장',
+  '소중한 관계','내 건강','내 시간의 주도권','정직함과 일관성','배움과 호기심'
+];
+var RP4_CHOICES = [
+  ['하려던 것을 하지 않았다','멈춘 채로 지나갔다'],
+  ['다른 일을 했다','방향을 바꿨다'],
+  ['잠시 미뤘다','조금 늦췄다'],
+  ['하던 대로 했다','그대로 진행했다'],
+  ['아직 선택하지 못했다','지금도 고민 중']
 ];
 var RP4_ENERGIES = [
-  ['조금 살아났다','조금 더 나다운 느낌'],
+  ['조금 더 힘이 생겼다','충전되는 느낌'],
   ['비슷했다','큰 변화는 없었다'],
-  ['조금 소모됐다','지치는 느낌이 남았다']
+  ['조금 더 부담이 됐다','지치거나 힘이 빠짐'],
+  ['조금 더 선명해졌다','내가 원하는 것이 분명해짐']
 ];
 
 /* ── 진행 표시 ───────────────────────────────────────── */
@@ -2795,9 +2829,9 @@ function rp4StepBar(){
   var rec = RP4_EDIT ? rp4Find(RP4_EDIT) : null;
   var s1 = !!(RP4_CTX || (rec && rec.context));
   var s2 = !!(rec && rec.desire) || !!document.querySelector('.rp4-chip.soft.on');
-  var s3 = !!(rec && rec.choice);
-  var s4 = rp4Records().length > 0;
-  var steps = [['멈춤',s1],['알아차림',s2],['선택',s3],['다시 보기',s4]];
+  var s3 = !!(rec && (rec.choice||rec.choiceOpt)) || !!RP4_CHO;
+  var s4 = !!(rec && (rec.line1||rec.line2));
+  var steps = [['멈춤',s1],['마음',s2],['선택',s3],['한 줄',s4]];
   var h = '<div class="rp4-steps">';
   steps.forEach(function(st,i){
     if(i) h += '<span class="rp4-steps-line"></span>';
@@ -2815,79 +2849,77 @@ function rp4Count(id, max){
 function rp4Form(){
   var rec = RP4_EDIT ? rp4Find(RP4_EDIT) : null;
   var day = rec ? rec.date : (RP4_DAY || rp4Today());
+  var g = function(k){ return rec ? (rec[k]||'') : ''; };
 
   var h = '<div class="rp4-card rp4-quick" id="rp4-form">';
 
   h += '<div class="rp4-quick-top">'
     +'<div class="rp4-quick-intro">'
-      +'<div class="rp4-card-eyebrow">'+(rec ? '기록 이어서 적기' : '오늘의 잠깐 멈춤')+'</div>'
+      +'<div class="rp4-card-eyebrow">'+(rec ? '기록 이어서 적기' : '오늘의 잠깐 멈춤 기록')+'</div>'
       +'<h3>오늘 나의 ‘잠깐 멈춤’은 언제였나요?</h3>'
-      +'<p>오늘 하루 중, 습관적으로 하던 행동을 하다가<br>'
-      +'문득 멈추고 생각이 스친 순간을 적어보세요.</p>'
+      +'<p>멈추어 바라보는 순간, 나는 반복하던 선택을 다시 고를 수 있습니다.<br>'
+      +'이 기록은 잘하는 날을 모으는 것이 아니라, 나를 이해하고 더 나다운 선택을 연습하는 과정입니다.</p>'
     +'</div>'
     +'<div class="rp4-ten"><b>10초</b><span>짧게 기록해도<br>괜찮습니다.</span></div>'
   +'</div>';
 
   h += rp4StepBar();
 
-  /* 1 — 이것만으로 기록이 완료된다 */
-  h += '<div class="rp4-q">'
+  /* ── 01 · 자동행동 알아차리기 (필수) ── */
+  h += '<div class="rp4-q rp4-s1">'
     +'<div class="rp4-q-head">'
-      +'<div class="rp4-q-title"><i>1</i>어디에서 잠깐 멈췄나요?</div>'
-      +'<span class="rp4-badge green">이 항목만 선택해도<br>기록이 완료됩니다</span>'
+      +'<div class="rp4-q-title"><i>01</i>오늘, 익숙한 행동을 하다가 잠깐 멈추어 생각이 스친 순간은 언제였나요?</div>'
+      +'<span class="rp4-tagline s1">자동행동 알아차리기</span>'
     +'</div>'
-    +'<p class="rp4-help">오늘 멈춘 순간이 있었던 상황을 선택해보세요.</p>'
-    +'<div class="rp4-chips">'
-    +['SNS','쇼핑','대화','일','식사','휴식','기타'].map(function(v){
-        return '<button type="button" class="rp4-chip'+(RP4_CTX===v?' on':'')+'" '
-          +'data-chip="ctx" data-value="'+rp4Esc(v)+'" '
-          +'onclick="rp4Pick(\'ctx\',\''+rp4Esc(v)+'\')">'+rp4Esc(v)+'</button>';
+    +'<p class="rp4-help">오늘 하루, 습관처럼 하던 행동을 하다가 문득 멈추거나 다른 생각이 스친 순간을 떠올려 보세요.</p>'
+    +'<div class="rp4-opts grid4">'
+    +RP4_CONTEXTS.map(function(v){
+        return '<button type="button" class="rp4-opt'+(RP4_CTX===v[0]?' on':'')+'" '
+          +'data-chip="ctx" data-value="'+rp4Esc(v[0])+'" '
+          +'onclick="rp4Pick(\'ctx\',\''+rp4Esc(v[0])+'\')">'
+          +'<b>'+rp4Esc(v[0])+'</b><small>'+rp4Esc(v[1])+'</small></button>';
       }).join('')
     +'</div>'
     +'<input type="hidden" id="rp4-ctx" value="'+rp4Esc(RP4_CTX)+'">'
+    +'<textarea id="rp4-ctxnote" maxlength="120" class="rp4-eg" '
+    +'placeholder="예) 출근길 지하철에서 무심코 SNS를 열려다 멈췄다.">'+rp4Esc(g('ctxnote'))+'</textarea>'
+    +'<div class="rp4-badge green solo">이 항목만 선택해도 기록이 완료됩니다</div>'
   +'</div>';
 
-  /* 2 — 알아차림 */
-  h += '<div class="rp4-q">'
+  /* ── 02~06 · 접힘 ── */
+  h += '<button type="button" class="rp4-more-btn" id="rp4-more-btn" onclick="rp4ToggleMore()">'
+    +(RP4_OPEN ? '접기 ▴' : '조금 더 들여다보기 <span>(선택 · 02–06)</span> ▾')
+  +'</button>';
+
+  h += '<div class="rp4-more'+(RP4_OPEN?' open':'')+'" id="rp4-more">';
+  h += '<p class="rp4-more-note">여기서부터는 선택입니다. 오늘 여유가 있는 만큼만 적으세요.</p>';
+
+  /* 02 */
+  h += '<div class="rp4-q rp4-s2">'
     +'<div class="rp4-q-head">'
-      +'<div class="rp4-q-title"><i>2</i>그 순간, 문득 무엇을 알아차렸나요? <em>(선택)</em></div>'
-      +'<span class="rp4-badge">선택하지 않아도<br>괜찮습니다.</span>'
+      +'<div class="rp4-q-title"><i>02</i>그 순간, 나는 무엇을 원했거나 느끼고 있었나요?</div>'
+      +'<span class="rp4-tagline s2">내 마음 들여다보기</span>'
     +'</div>'
-    +'<p class="rp4-help">정답은 없습니다. 떠오르는 것 중 가장 가까운 것을 골라보세요.</p>'
+    +'<p class="rp4-help"><b>나를 움직인 것</b>입니다. 그 행동을 하려던 순간, 내 마음에 있던 욕구나 감정을 골라보세요.</p>'
     +'<div class="rp4-chips wrap">'
     +RP4_DESIRES.map(function(v){
-        return '<button type="button" class="rp4-chip soft'+((rec&&rec.desire===v)?' on':'')+'" '
+        return '<button type="button" class="rp4-chip soft'+((g('desire')===v)?' on':'')+'" '
           +'data-chip="des" data-value="'+rp4Esc(v)+'" '
           +'onclick="rp4SetDesire(\''+rp4Esc(v)+'\')">'+rp4Esc(v)+'</button>';
       }).join('')
     +'</div>'
-    +'<textarea id="rp4-desire" maxlength="200" placeholder="직접 적으셔도 됩니다">'
-    +rp4Esc(rec?rec.desire:'')+'</textarea>'
+    +'<textarea id="rp4-desire" maxlength="200" placeholder="기타 — 직접 적어보기">'
+    +rp4Esc(g('desire'))+'</textarea>'
   +'</div>';
 
-  /* 3 — 자세히 적기 */
-  h += '<div class="rp4-q">'
+  /* 03 */
+  h += '<div class="rp4-q rp4-s3">'
     +'<div class="rp4-q-head">'
-      +'<div class="rp4-q-title"><i>3</i>이 순간, 더 자세히 적어볼까요? <em>(선택)</em></div>'
-      +'<span class="rp4-badge">이 항목은 선택입니다.<br>한 문장만 적어도 좋아요.</span>'
+      +'<div class="rp4-q-title"><i>03</i>그 욕구는 어디에서 온 것 같나요?</div>'
+      +'<span class="rp4-tagline s3">욕구의 출처 구분하기</span>'
     +'</div>'
-    +'<p class="rp4-help">짧게 적어도 충분합니다.<br>지금 떠오르는 생각을 자유롭게 적어보세요.</p>'
-    +'<textarea id="rp4-choice" class="big" maxlength="300" oninput="rp4Count(\'rp4-choice\',300)" '
-    +'placeholder="예) SNS를 보다가 괜히 마음이 조급해지는 걸 느꼈다···">'+rp4Esc(rec?rec.choice:'')+'</textarea>'
-    +'<div class="rp4-count"><span id="rp4-choice-n">'+String((rec&&rec.choice?rec.choice.length:0))+'/300</span></div>'
-  +'</div>';
-
-  /* 더 적어보기 — 기본은 접힘 */
-  h += '<button type="button" class="rp4-more-btn" id="rp4-more-btn" onclick="rp4ToggleMore()">'
-    +(RP4_OPEN ? '접기 ▴' : '조금 더 적어보기 <span>(선택)</span> ▾')
-  +'</button>';
-
-  h += '<div class="rp4-more'+(RP4_OPEN?' open':'')+'" id="rp4-more">';
-
-  h += '<div class="rp4-q">'
-    +'<div class="rp4-q-head"><div class="rp4-q-title"><i>+</i>그 마음은 어디에서 왔을까요?</div>'
-    +'<span class="rp4-badge">선택</span></div>'
-    +'<div class="rp4-opts">'
+    +'<p class="rp4-help">그 욕구는 나에게서 온 것인가요, 아니면 외부의 영향(사람, 미디어, 상황)에서 온 것인가요?</p>'
+    +'<div class="rp4-opts grid3">'
     +RP4_SOURCES.map(function(v){
         return '<button type="button" class="rp4-opt'+(RP4_SRC===v[0]?' on':'')+'" '
           +'data-chip="src" data-value="'+rp4Esc(v[0])+'" '
@@ -2898,10 +2930,57 @@ function rp4Form(){
     +'<input type="hidden" id="rp4-src" value="'+rp4Esc(RP4_SRC)+'">'
   +'</div>';
 
-  h += '<div class="rp4-q">'
-    +'<div class="rp4-q-head"><div class="rp4-q-title"><i>+</i>그 뒤에 나는 어땠나요?</div>'
-    +'<span class="rp4-badge">선택</span></div>'
-    +'<div class="rp4-opts row">'
+  /* 04 — 우선가치. 나의 지도와 연동 */
+  var curVal = g('value') || RP4_VAL;
+  var mapVal = rp4MapValue();
+  h += '<div class="rp4-q rp4-s4">'
+    +'<div class="rp4-q-head">'
+      +'<div class="rp4-q-title"><i>04</i>이 순간, 내가 지키고 싶은 것은 무엇이었나요?</div>'
+      +'<span class="rp4-tagline s4">나다운 기준 확인하기</span>'
+    +'</div>'
+    +'<p class="rp4-help">02가 <b>나를 움직인 것</b>이라면, 여기는 <b>그럼에도 지키려던 것</b>입니다.</p>'
+    +(mapVal ? '<div class="rp4-valnow">지금 나의 지도에 적힌 우선가치는 <b>'+rp4Esc(mapVal)+'</b>입니다. 여기서 고르시면 그 값이 바뀝니다.</div>' : '')
+    +'<div class="rp4-chips wrap val">'
+    +RP4_VALUES.map(function(v){
+        return '<button type="button" class="rp4-chip val'+(curVal===v?' on':'')+'" '
+          +'data-chip="val" data-value="'+rp4Esc(v)+'" '
+          +'onclick="rp4PickValue(\''+rp4Esc(v)+'\')">'+rp4Esc(v)+'</button>';
+      }).join('')
+    +'</div>'
+    +'<input type="text" id="rp4-value" maxlength="30" class="rp4-line" '
+    +'placeholder="기타 — 직접 적어보기" value="'+rp4Esc(curVal)+'" oninput="rp4SyncValChips()">'
+    +'<p class="rp4-help dim">여기서 정한 값은 <b>나의 지도 우선가치</b>에 그대로 반영되고, 언제든 다시 바꾸실 수 있습니다.</p>'
+  +'</div>';
+
+  /* 05 */
+  h += '<div class="rp4-q rp4-s5">'
+    +'<div class="rp4-q-head">'
+      +'<div class="rp4-q-title"><i>05</i>그래서 나는 무엇을 선택했나요?</div>'
+      +'<span class="rp4-tagline s5">실제 선택 기록하기</span>'
+    +'</div>'
+    +'<p class="rp4-help">완벽한 선택이 아니어도 괜찮습니다. 하던 대로 했더라도 그것 역시 기록입니다.</p>'
+    +'<div class="rp4-opts grid3">'
+    +RP4_CHOICES.map(function(v){
+        return '<button type="button" class="rp4-opt'+(RP4_CHO===v[0]?' on':'')+'" '
+          +'data-chip="cho" data-value="'+rp4Esc(v[0])+'" '
+          +'onclick="rp4Pick(\'cho\',\''+rp4Esc(v[0])+'\')">'
+          +'<b>'+rp4Esc(v[0])+'</b><small>'+rp4Esc(v[1])+'</small></button>';
+      }).join('')
+    +'</div>'
+    +'<input type="hidden" id="rp4-cho" value="'+rp4Esc(RP4_CHO)+'">'
+    +'<textarea id="rp4-choice" maxlength="300" class="rp4-eg" oninput="rp4Count(\'rp4-choice\',300)" '
+    +'placeholder="예) SNS를 열지 않고 책을 펼쳤다. / 일단 하던 대로 했다.">'+rp4Esc(g('choice'))+'</textarea>'
+    +'<div class="rp4-count"><span id="rp4-choice-n">'+String((g('choice')||'').length)+'/300</span></div>'
+  +'</div>';
+
+  /* 06 */
+  h += '<div class="rp4-q rp4-s6">'
+    +'<div class="rp4-q-head">'
+      +'<div class="rp4-q-title"><i>06</i>그 선택은 나에게 어떤 영향을 주었나요?</div>'
+      +'<span class="rp4-tagline s6">선택의 영향 느끼기</span>'
+    +'</div>'
+    +'<p class="rp4-help">그 선택이 나에게 어떤 힘이나 부담을 주었는지 살펴보세요.</p>'
+    +'<div class="rp4-opts grid4">'
     +RP4_ENERGIES.map(function(v){
         return '<button type="button" class="rp4-opt'+(RP4_ENG===v[0]?' on':'')+'" '
           +'data-chip="eng" data-value="'+rp4Esc(v[0])+'" '
@@ -2912,37 +2991,80 @@ function rp4Form(){
     +'<input type="hidden" id="rp4-eng" value="'+rp4Esc(RP4_ENG)+'">'
   +'</div>';
 
-  h += '<div class="rp4-q">'
-    +'<div class="rp4-q-head"><div class="rp4-q-title"><i>+</i>남기고 싶은 말이 있나요?</div>'
-    +'<span class="rp4-badge">선택</span></div>'
-    +'<textarea id="rp4-reflection" class="big" maxlength="300" '
-    +'placeholder="예: 나는 쉬고 싶을 때, 먼저 나를 돌아보는 연습을 해보자.">'
-    +rp4Esc(rec?rec.reflection:'')+'</textarea>'
-  +'</div>';
-
   h += '</div>';  /* /more */
 
-  /* 4 — 저장 */
-  h += '<div class="rp4-q rp4-q-save">'
+  /* ── 07 · 사후 회고 (항상 보임) ── */
+  h += '<div class="rp4-q rp4-s7">'
     +'<div class="rp4-q-head">'
-      +'<div class="rp4-q-title"><i>4</i>'+(rec?'수정한 내용을 저장하세요':'오늘의 기록을 남겨주세요')+' <em>(선택)</em></div>'
-      +'<span class="rp4-badge">날짜만 남겨도<br>좋은 기록입니다.</span>'
+      +'<div class="rp4-q-title"><i>07</i>오늘의 나다움 한 줄</div>'
+      +'<span class="rp4-tagline s7">나를 다시 만나기</span>'
     +'</div>'
-    +'<p class="rp4-help">기록 날짜를 확인하고, 아래 버튼을 누르면 오늘의 기록이 저장됩니다.</p>'
-    +'<div class="rp4-save-row">'
-      +'<label class="rp4-date"><span>기록 날짜</span>'
-      +'<input id="rp4-date" type="date" value="'+rp4Esc(day)+'"></label>'
-      +'<div class="rp4-save-btns">'
-      +(rec ? '<button type="button" class="rp4-ghost" onclick="rp4CancelEdit()">취소</button>' : '')
-      +'<button type="button" class="rp4-main-btn" onclick="rp4SaveForm()">'
-      +(rec ? '수정 내용 저장하기 →' : '지금까지 작성한 내용 저장하기 →')+'</button>'
-      +'</div>'
+    +'<p class="rp4-help">오늘의 기록을 바탕으로, 나를 한 문장으로 표현해 보세요. <span class="dim">비워두셔도 됩니다.</span></p>'
+    +'<div class="rp4-fill"><span>오늘 나는</span>'
+    +'<input type="text" id="rp4-l1" maxlength="60" value="'+rp4Esc(g('line1'))+'" placeholder="무엇을">'
+    +'<span>을(를) 선택했다.</span></div>'
+    +'<div class="rp4-fill"><span>그 선택에서 나는</span>'
+    +'<input type="text" id="rp4-l2" maxlength="60" value="'+rp4Esc(g('line2'))+'" placeholder="예) 조금 더 힘이 나는">'
+    +'<span>나를 발견했다.</span></div>'
+    +'<div class="rp4-fill-btns">'
+      +'<button type="button" class="rp4-ghost" onclick="rp4SuggestLine()">위 기록으로 채워보기</button>'
+      +'<label class="rp4-keep"><input type="checkbox" id="rp4-topractice"> 이 문장을 오늘의 연습으로 남기기</label>'
+    +'</div>'
+    +'<div class="rp4-quote">“작은 선택이 모여, 나다운 방향이 됩니다.”</div>'
+  +'</div>';
+
+  /* 저장 */
+  h += '<div class="rp4-save-row">'
+    +'<label class="rp4-date"><span>기록 날짜</span>'
+    +'<input id="rp4-date" type="date" value="'+rp4Esc(day)+'"></label>'
+    +'<div class="rp4-save-btns">'
+    +(rec ? '<button type="button" class="rp4-ghost" onclick="rp4CancelEdit()">취소</button>' : '')
+    +'<button type="button" class="rp4-main-btn" onclick="rp4SaveForm()">'
+    +(rec ? '수정 내용 저장하기 →' : '지금까지 작성한 내용 저장하기 →')+'</button>'
     +'</div>'
   +'</div>';
 
-  h += '<p class="rp4-form-note">매번 모든 항목을 채울 필요는 없습니다. 오늘 한 번 멈췄다면 그것으로 충분합니다.</p>';
+  h += '<p class="rp4-form-note">매번 모든 단계를 채울 필요는 없습니다. 당신의 속도로, 꾸준히.</p>';
 
   return h + '</div>';
+}
+
+/* 04 · 우선가치 연동 ------------------------------------ */
+function rp4MapValue(){
+  if(P.priorityValue) return P.priorityValue;
+  var au = (P.modules && P.modules.authorship) || null;
+  var vs = (au && au.values) || [];
+  return vs[0] || '';
+}
+function rp4PickValue(v){
+  RP4_VAL = v;
+  var el = document.getElementById('rp4-value');
+  if(el) el.value = v;
+  rp4SyncValChips();
+}
+function rp4SyncValChips(){
+  var el = document.getElementById('rp4-value');
+  var v = el ? el.value.trim() : '';
+  RP4_VAL = v;
+  document.querySelectorAll('[data-chip="val"]').forEach(function(b){
+    b.classList.toggle('on', b.getAttribute('data-value') === v);
+  });
+}
+function rp4SuggestLine(){
+  var cho = rp4Val('rp4-choice') || rp4Val('rp4-cho') || RP4_CHO;
+  var eng = rp4Val('rp4-eng') || RP4_ENG;
+  var val = rp4Val('rp4-value') || RP4_VAL;
+  var l1 = document.getElementById('rp4-l1'), l2 = document.getElementById('rp4-l2');
+  var nm = {'하려던 것을 하지 않았다':'하려던 것을 멈추기','다른 일을 했다':'다른 일을 하기',
+            '잠시 미뤘다':'잠시 미루기','하던 대로 했다':'하던 대로 하기',
+            '아직 선택하지 못했다':'아직 정하지 않기'};
+  if(l1 && !l1.value) l1.value = nm[cho] || cho || val || '';
+  if(l2 && !l2.value){
+    var m = {'조금 더 힘이 생겼다':'조금 더 힘이 나는','비슷했다':'평소와 비슷한',
+             '조금 더 부담이 됐다':'조금 지쳐 있던','조금 더 선명해졌다':'원하는 것이 분명해진'};
+    l2.value = m[eng] || (val ? (val+rp4Josa(val,'을','를')+' 지키려는') : '');
+  }
+  if(!(l1&&l1.value)&&!(l2&&l2.value)) rp4Toast('먼저 05·06을 골라 주세요');
 }
 
 /* ── 사이드바 ────────────────────────────────────────── */
@@ -3033,19 +3155,38 @@ function rp4SaveForm(){
   }
   rec.date       = day;
   rec.context    = ctx;
+  rec.ctxnote    = rp4Val('rp4-ctxnote');
   rec.desire     = rp4Val('rp4-desire');
   rec.source     = rp4Val('rp4-src') || RP4_SRC;
+  rec.value      = rp4Val('rp4-value') || RP4_VAL;
+  rec.choiceOpt  = rp4Val('rp4-cho') || RP4_CHO;
   rec.choice     = rp4Val('rp4-choice');
   rec.energy     = rp4Val('rp4-eng') || RP4_ENG;
-  rec.reflection = rp4Val('rp4-reflection');
+  rec.line1      = rp4Val('rp4-l1');
+  rec.line2      = rp4Val('rp4-l2');
+  rec.reflection = (rec.line1 || rec.line2)
+    ? ('오늘 나는 '+(rec.line1||'…')+rp4Josa(rec.line1,'을','를')+' 선택했다. '
+       +'그 선택에서 나는 '+(rec.line2||'…')+' 나를 발견했다.')
+    : '';
   rec.updatedAt  = now;
+
+  /* 04 → 나의 지도 우선가치 연동 */
+  if(rec.value) P.priorityValue = rec.value;
+
+  /* 07 → 연습 문장으로 승격 (선택) */
+  var keep = document.getElementById('rp4-topractice');
+  if(keep && keep.checked && rec.reflection){
+    P.designs = P.designs || [];
+    var nid = 1; P.designs.forEach(function(d){ if(+d.id >= nid) nid = +d.id + 1; });
+    P.designs.push({id:nid, text:rec.reflection, axis:'D', created:day});
+  }
 
   rp4Save();
 
   var id = rec.id;
   RP4_DAY = day;
   RP4_EDIT = null; RP4_OPEN = false;
-  RP4_CTX = ''; RP4_SRC = ''; RP4_ENG = '';
+  RP4_CTX = ''; RP4_SRC = ''; RP4_ENG = ''; RP4_CHO = ''; RP4_VAL = '';
 
   rp4Toast(isNew ? '잠깐 멈춘 순간이 기록되었습니다' : '기록을 수정했습니다');
   render();
@@ -3176,15 +3317,18 @@ function rp4DayRecords(){
         +'<span class="rp4-record-context">'+rp4Esc(r.context)+'</span>'
         +'<button type="button" class="rp4-delete" onclick="rp4Delete(\''+rp4Esc(r.id)+'\')">삭제</button></div>';
 
-    if(!r.desire && !r.choice && !r.reflection){
+    if(!r.desire && !r.choice && !r.choiceOpt && !r.value && !r.reflection && !r.ctxnote){
       h += '<div class="rp4-not-aware"><p>여기서 기록을 마쳐도 괜찮습니다.</p>'
         +'<button type="button" onclick="rp4EditRecord(\''+rp4Esc(r.id)+'\')">이 순간을 조금 더 적어보기 →</button></div>';
     }else{
       h += '<div class="rp4-aware-result">';
-      if(r.desire) h += '<div><span>그때 알아차린 것</span><p>“'+rp4Esc(r.desire)+'”</p></div>';
-      if(r.source) h += '<div><span>마음의 출처</span><p>'+rp4Esc(r.source)+'</p></div>';
-      if(r.choice) h += '<div><span>내가 한 선택</span><p>'+rp4Esc(r.choice)+'</p></div>';
-      if(r.energy) h += '<div class="rp4-energy-result"><span>그 뒤의 에너지</span><b>'+rp4Esc(r.energy)+'</b></div>';
+      if(r.ctxnote) h += '<div><span>그 순간</span><p>'+rp4Esc(r.ctxnote)+'</p></div>';
+      if(r.desire) h += '<div><span>나를 움직인 것</span><p>“'+rp4Esc(r.desire)+'”</p></div>';
+      if(r.source) h += '<div><span>욕구의 출처</span><p>'+rp4Esc(r.source)+'</p></div>';
+      if(r.value)  h += '<div><span>그럼에도 지키려던 것</span><p>'+rp4Esc(r.value)+'</p></div>';
+      if(r.choiceOpt) h += '<div><span>내가 한 선택</span><p>'+rp4Esc(r.choiceOpt)+'</p></div>';
+      if(r.choice) h += '<div><span>선택 메모</span><p>'+rp4Esc(r.choice)+'</p></div>';
+      if(r.energy) h += '<div class="rp4-energy-result"><span>선택의 영향</span><b>'+rp4Esc(r.energy)+'</b></div>';
       if(r.reflection) h += '<div class="rp4-reflection">“'+rp4Esc(r.reflection)+'”</div>';
       h += '<button type="button" class="rp4-reopen" onclick="rp4EditRecord(\''+rp4Esc(r.id)+'\')">다시 들여다보기</button></div>';
     }
@@ -3557,6 +3701,38 @@ function recordView(){
   };
 })();
 
+
+/* ── 14. 나의 지도 우선가치 연동 ─────────────────────── */
+(function(){
+  if(typeof valueHero !== 'function') return;
+  var orig = valueHero;
+  valueHero = function(){
+    var pv = P && P.priorityValue;
+    if(!pv) return orig();
+    var au = (P.modules && P.modules.authorship) || null;
+    var vs = (au && au.values) || [];
+    var subs = vs.filter(function(v){ return v !== pv; }).slice(0,2);
+    return '<div class="vhero" id="sec-values">'
+      +'<div class="vh-lab">나의 우선가치</div>'
+      +'<div class="vh-badge"><span class="vh-word">'+rp4Esc(pv)+'</span><span class="vh-leaf">\uD83C\uDF31</span></div>'
+      +(subs.length?'<div class="vh-sub">보조가치 <b>'+subs.map(rp4Esc).join(' \u00b7 ')+'</b></div>':'')
+      +'<div class="vh-note">이 가치가 오늘의 선택과 얼마나 맞닿아 있는지가 나다움 설계의 기준입니다.</div>'
+      +'<button type="button" class="rp4-linkbtn" onclick="rp4GoValueEdit()">우선가치 바꾸기 →</button>'
+      +'</div>';
+  };
+})();
+function rp4GoValueEdit(){
+  RP4_OPEN = true;
+  try{ location.hash = '#record'; }catch(e){}
+  setTimeout(function(){
+    if(typeof render === 'function') render();
+    setTimeout(function(){
+      var el = document.querySelector('.rp4-s4');
+      if(el) el.scrollIntoView({behavior:'smooth', block:'center'});
+    },120);
+  },140);
+}
+
 /* ── 13. 스타일 ──────────────────────────────────────── */
 (function(){
   if(document.getElementById('rp4-style')) return;
@@ -3813,6 +3989,56 @@ function recordView(){
   .rp4-calendar .rp4-cal-foot{display:block;text-align:center;margin-top:12px;padding-top:12px;border-top:1px solid #f0ece4}
   .rp4-calendar .rp4-cal-foot p{margin:0;font-size:13.6px;line-height:1.65;color:#8b9099}
   .rp4-legend{display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:12px;font-size:13px;color:#8b9099}
+
+  /* ── v6 · 7단계 ─────────────────────────────────── */
+  .rp4-tagline{flex:0 0 auto;padding:6px 12px;border-radius:9px;font-size:13.5px;font-weight:800;line-height:1.4;white-space:nowrap}
+  .rp4-tagline.s1{background:#e8f1fd;color:#2d6fbf}
+  .rp4-tagline.s2{background:#e6f6ec;color:#2b8a55}
+  .rp4-tagline.s3{background:#fdefe1;color:#b8722a}
+  .rp4-tagline.s4{background:#f0ebfd;color:#6d4fd0}
+  .rp4-tagline.s5{background:#e8f0fd;color:#3763b8}
+  .rp4-tagline.s6{background:#fdeaf1;color:#bf4f7e}
+  .rp4-tagline.s7{background:#e6f6ec;color:#2b8a55}
+  .rp4-s1{background:#f5f9ff;border-color:#e0ebfa}
+  .rp4-s2{background:#f4fbf7;border-color:#dcefe4}
+  .rp4-s3{background:#fffaf3;border-color:#f4e6d3}
+  .rp4-s4{background:#f9f7ff;border-color:#e9e2fa}
+  .rp4-s5{background:#f5f9ff;border-color:#e0ebfa}
+  .rp4-s6{background:#fff7fa;border-color:#f7e2ea}
+  .rp4-s7{background:#f4fbf7;border-color:#dcefe4}
+  .rp4-q .rp4-q-title i{width:auto;min-width:30px;padding:0 7px;border-radius:9px;font-size:12.5px}
+  .rp4-s1 .rp4-q-title i{background:#2d6fbf}
+  .rp4-s2 .rp4-q-title i{background:#2b8a55}
+  .rp4-s3 .rp4-q-title i{background:#d1873a}
+  .rp4-s4 .rp4-q-title i{background:#8B5CF6}
+  .rp4-s5 .rp4-q-title i{background:#3763b8}
+  .rp4-s6 .rp4-q-title i{background:#d9628f}
+  .rp4-s7 .rp4-q-title i{background:#2b8a55}
+
+  /* 펼친 영역 — 포스트잇처럼 구분되게 */
+  .rp4-more.open{margin:6px 0 4px;padding:16px 14px 6px;border-radius:16px;
+    background:linear-gradient(180deg,#fbfaf6,#fdfcfa);border:1px dashed #ddd8cf;
+    box-shadow:inset 0 2px 8px rgba(0,0,0,.03)}
+  .rp4-more-note{margin:0 2px 14px;font-size:14.5px;color:#8b8375;font-weight:700}
+  .rp4-more.open .rp4-q{box-shadow:0 1px 3px rgba(0,0,0,.04)}
+
+  .rp4-opts.grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+  .rp4-opts.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+  .rp4-eg{margin-top:10px;background:rgba(255,255,255,.75)}
+  .rp4-badge.solo{display:inline-block;margin-top:12px}
+  .rp4-chip.val.on{background:#8B5CF6;border-color:#8B5CF6;color:#fff}
+  .rp4-valnow{margin:0 0 12px;padding:10px 13px;border-radius:11px;background:#fff;border:1px solid #e9e2fa;font-size:14.3px;color:#5f5878;line-height:1.6}
+  .rp4-line{width:100%;margin-top:10px;padding:12px 14px;border:1px solid #e4e0d8;border-radius:11px;font-size:15.5px;font-family:inherit;background:rgba(255,255,255,.8)}
+  .rp4-help.dim{color:#9aa0a8;font-size:13.8px;margin-top:10px}
+
+  /* 07 빈칸 문장 */
+  .rp4-fill{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:12px;font-size:16px;color:#2b3038}
+  .rp4-fill input{flex:1 1 200px;min-width:150px;padding:10px 13px;border:0;border-bottom:2px solid #b9d8c6;background:transparent;font-size:16px;font-family:inherit;color:#20242c}
+  .rp4-fill input:focus{outline:none;border-bottom-color:#2b8a55}
+  .rp4-fill-btns{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:6px}
+  .rp4-keep{display:flex;align-items:center;gap:7px;font-size:14.5px;color:#3a3f48;cursor:pointer}
+  .rp4-keep input{width:17px;height:17px;accent-color:#2b8a55}
+  .rp4-quote{margin-top:14px;text-align:right;font-size:14.5px;color:#2b8a55;font-style:italic}
   .rp4-linkbtn{margin-top:12px;padding:9px 14px;border-radius:10px;border:1px solid #e3ddf5;background:#faf9ff;color:#6d4fd0;font-size:14.5px;font-weight:700;cursor:pointer}
   .rp4-linkbtn:hover{background:#f3f0ff}
   .rp4-tl-more{margin-top:12px;width:100%;padding:11px;border-radius:11px;border:1px dashed #ddd8cf;background:#fff;color:#6b7280;font-size:14.5px;font-weight:700;cursor:pointer}
