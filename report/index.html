@@ -3730,20 +3730,9 @@ function rp4ReflectionToDesign(){
 }
 function rp4SeedDesign(seed){
   seed = String(seed||'').trim().slice(0,60);
-  if(typeof openDesign !== 'function'){ rp4Toast('연습 화면을 열 수 없습니다'); return; }
-  openDesign();
-  setTimeout(function(){
-    try{
-      var fr = document.getElementById('mfree'), w3 = document.getElementById('w3');
-      if(fr && w3 && seed){
-        fr.classList.add('open');
-        w3.value = seed;
-        w3.dispatchEvent(new Event('input',{bubbles:true}));
-        w3.focus();
-        rp4Toast('발견한 내용을 옮겨 두었습니다. 문장으로 다듬어 보세요');
-      }
-    }catch(e){}
-  },320);
+  if(!seed){ rp4Toast('먼저 이번 주 발견을 한 줄 적어 주세요'); return; }
+  rp4Toast('발견한 내용을 옮겨 두었습니다. 문장으로 다듬어 보세요');
+  rp4NewOpen(seed);
 }
 /* 지난 발견을 아래 입력칸으로 옮긴다. 버튼은 아래 하나만 남긴다. */
 function rp4ReuseReflection(id){
@@ -3759,22 +3748,9 @@ function rp4ReuseReflection(id){
 }
 function rp4ToDesign(id){
   rp4Ensure();
-  var r = P.rpWeeklyReflections.find(function(x){ return String(x.id)===String(id); });
+  var r = (P.rpWeeklyReflections||[]).filter(function(x){ return String(x.id)===String(id); })[0];
   var seed = r ? String(r.text||'').trim().slice(0,60) : '';
-  if(typeof openDesign !== 'function'){ rp4Toast('연습 화면을 열 수 없습니다'); return; }
-  openDesign();
-  setTimeout(function(){
-    try{
-      var fr = document.getElementById('mfree'), w3 = document.getElementById('w3');
-      if(fr && w3 && seed){
-        fr.classList.add('open');
-        w3.value = seed;
-        w3.dispatchEvent(new Event('input',{bubbles:true}));
-        w3.focus();
-        rp4Toast('발견한 내용을 옮겨 두었습니다. 문장으로 다듬어 보세요');
-      }
-    }catch(e){}
-  },320);
+  rp4SeedDesign(seed);
 }
 /* 연습 화면 → 나의 기록 */
 function rp4GoValues(){
@@ -3797,6 +3773,89 @@ function rp4GoRecord(){
 }
 
 /* ── 9. 연습 문장 목록 (기존 sentencesView 대체) ─────── */
+/* ── 연습 문장 만들기 · 연습 탭 안에서 끝난다 ─────────── */
+var RP4_NEW = false;
+var RP4_NEW_AX = 'E1';
+var RP4_SEED = '';
+function rp4NewOpen(seed){
+  RP4_NEW = true;
+  if(seed) RP4_SEED = String(seed).slice(0,60);
+  try{ location.hash = '#practice'; }catch(e){}
+  setTimeout(function(){
+    if(typeof render === 'function') render();
+    setTimeout(function(){
+      var el = document.getElementById('rp4-new');
+      if(el) el.scrollIntoView({behavior:'smooth', block:'center'});
+      var t = document.getElementById('rp4-new-text');
+      if(t) t.focus();
+    },140);
+  },160);
+}
+function rp4NewClose(){ RP4_NEW = false; RP4_SEED = ''; render(); }
+function rp4NewAxis(a){
+  RP4_NEW_AX = a;
+  document.querySelectorAll('[data-newax]').forEach(function(b){
+    b.classList.toggle('on', b.getAttribute('data-newax') === a);
+  });
+}
+function rp4NewSave(){
+  var t = document.getElementById('rp4-new-text');
+  var txt = t ? String(t.value||'').trim() : '';
+  if(!txt){ rp4Toast('연습할 문장을 한 줄 적어 주세요'); return; }
+  P.designs = P.designs || [];
+  var nid = 1; P.designs.forEach(function(d){ if(+d.id >= nid) nid = +d.id + 1; });
+  var day = rp4Today();
+  P.designs.push({ id:nid, ts:day, created:day, axis:RP4_NEW_AX, text:txt });
+
+  /* 만들자마자 오늘의 연습으로 둔다 — 만들고 또 고르게 하지 않는다 */
+  var d = (typeof selDay==='function') ? selDay() : day;
+  P.checks = P.checks || {};
+  var arr = (P.checks[d]||[]).slice();
+  arr.push(nid);
+  P.checks[d] = arr;
+
+  P.updated = new Date().toISOString();
+  save(P);
+  RP4_NEW = false; RP4_SEED = '';
+  rp4Toast('연습 문장을 남기고 오늘의 연습으로 두었습니다');
+  render();
+}
+function rp4NewPanel(){
+  if(!RP4_NEW){
+    return '<button type="button" class="rp4-add" onclick="rp4NewOpen()">'
+      +'<span>+</span> 새로운 연습 문장 만들기</button>';
+  }
+  var axes = [['N','욕구 읽기 연습'],['E1','잡음 덜어내기 연습'],['E2','에너지 정렬 연습'],
+              ['D','내 기준으로 쓰기 연습'],['F','나다움 연습']];
+  var ex = {
+    N :'예) 무언가 하고 싶어질 때, 내가 지금 무엇을 원하는지 한 번 물어본다.',
+    E1:'예) 휴대폰을 열기 전에 한 번 멈춰본다.',
+    E2:'예) 자기 전에 오늘 한 일 하나에 +(채워짐) 또는 −(소모됨)를 붙인다.',
+    D :'예) 바로 답하지 않고, 내 기준으로 한 번 생각한 뒤 말한다.',
+    F :'예) 하루에 한 번, 지금 내 상태를 그대로 적어본다.'
+  };
+  return '<div class="rp4-newpanel" id="rp4-new">'
+    +'<div class="rp4-new-head"><b>새로운 연습 문장 만들기</b>'
+    +'<button type="button" class="rp4-new-x" onclick="rp4NewClose()">닫기</button></div>'
+    +'<p class="rp4-new-lead">완벽한 문장이 아니어도 됩니다. 오늘 한 번 떠올릴 수 있으면 충분합니다.</p>'
+    +'<div class="rp4-new-lab">어느 연습인가요?</div>'
+    +'<div class="rp4-chips wrap">'
+    +axes.map(function(a){
+        return '<button type="button" class="rp4-chip'+(RP4_NEW_AX===a[0]?' on':'')+'" '
+          +'data-newax="'+a[0]+'" onclick="rp4NewAxis(\''+a[0]+'\')">'+rp4Esc(a[1])+'</button>';
+      }).join('')
+    +'</div>'
+    +'<div class="rp4-new-lab">오늘 어떤 문장을 연습해볼까요?</div>'
+    +'<input type="text" id="rp4-new-text" class="rp4-line" maxlength="60" '
+    +'value="'+rp4Esc(RP4_SEED)+'" placeholder="'+rp4Esc(ex[RP4_NEW_AX]||ex.E1)+'">'
+    +'<p class="rp4-new-hint">짧을수록 좋습니다. 한 문장이면 충분합니다.</p>'
+    +'<div class="rp4-new-btns">'
+      +'<button type="button" class="rp4-ghost" onclick="rp4NewClose()">취소</button>'
+      +'<button type="button" class="rp4-main-btn" onclick="rp4NewSave()">이 문장을 오늘의 연습으로 남기기 →</button>'
+    +'</div>'
+  +'</div>';
+}
+
 /* ── 오늘의 연습 탭 · 최근 14일 가로 스트립 ───────────── */
 function rp4Strip(){
   var days = [], base = new Date();
@@ -3855,8 +3914,8 @@ function practiceView(){
     left = '<div class="rp4-empty-practice">'
       +'<b>아직 남기신 연습 문장이 없습니다.</b>'
       +'<p>“나는 ______을 더 중요하게 여기겠습니다.”<br>이 한 문장이면 시작됩니다.</p>'
-      +'<button type="button" class="rp4-main-btn" onclick="openDesign()">오늘의 연습 시작하기 →</button>'
-      +'</div>';
+      +(RP4_NEW ? '' : '<button type="button" class="rp4-main-btn" onclick="rp4NewOpen()">첫 연습 문장 만들기 →</button>')
+      +'</div>' + rp4NewPanel();
   }else{
     left = '<div class="rp4-practice-list">';
     P.designs.slice().reverse().forEach(function(dg){
@@ -3874,9 +3933,7 @@ function practiceView(){
         +'onclick="event.stopPropagation();rp4DelDesign(\''+dg.id+'\')">🗑</button>'
         +'</div>';
     });
-    left += '</div>'
-      +'<button type="button" class="rp4-add" onclick="openDesign()">'
-      +'<span>+</span> 새로운 연습 문장 추가하기</button>';
+    left += '</div>' + rp4NewPanel();
   }
 
   h += '<div class="rp4-layout">'
@@ -4541,6 +4598,18 @@ function rp4GoValueEdit(){
   .rp4-strip-foot p{margin:8px 0 0;font-size:14.3px;color:#8b9099}
   .rp4-strip-card .rp4-side-dim{margin-top:12px}
   .rp4-footband .rp4-next-btn{margin-left:auto;white-space:nowrap}
+
+  /* ── v8.1 · 연습 문장 만들기 ─────────────────────── */
+  .rp4-newpanel{margin-top:14px;padding:20px 18px;border-radius:16px;background:linear-gradient(180deg,#faf9ff,#fff);border:1px solid #e3ddf5}
+  .rp4-new-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+  .rp4-new-head b{font-size:17px;color:#20242c;letter-spacing:-.02em}
+  .rp4-new-x{padding:6px 11px;border-radius:9px;border:1px solid #e4e0d8;background:#fff;color:#8b9099;font-size:13.5px;font-weight:700;cursor:pointer}
+  .rp4-new-lead{margin:0 0 16px;font-size:14.8px;color:#5f6470;line-height:1.7}
+  .rp4-new-lab{margin:16px 0 9px;font-size:14.5px;color:#6b7280;font-weight:800}
+  .rp4-newpanel .rp4-chips.wrap{gap:9px}
+  .rp4-new-hint{margin:8px 0 0;font-size:13.8px;color:#9aa0a8;line-height:1.65}
+  .rp4-new-btns{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;margin-top:18px}
+  @media(max-width:560px){.rp4-new-btns{justify-content:stretch}.rp4-new-btns button{flex:1 1 auto}}
   .rp4-linkbtn{margin-top:12px;padding:9px 14px;border-radius:10px;border:1px solid #e3ddf5;background:#faf9ff;color:#6d4fd0;font-size:14.5px;font-weight:700;cursor:pointer}
   .rp4-linkbtn:hover{background:#f3f0ff}
   .rp4-tl-more{margin-top:12px;width:100%;padding:11px;border-radius:11px;border:1px dashed #ddd8cf;background:#fff;color:#6b7280;font-size:14.5px;font-weight:700;cursor:pointer}
