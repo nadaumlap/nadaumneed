@@ -2698,6 +2698,7 @@ function rp4DayName(d){
 }
 function rp4Toast(m){ if(typeof toast === 'function') toast(m); }
 function rp4Ensure(){
+  rp4MigrateValue();
   P.pauses = Array.isArray(P.pauses) ? P.pauses : [];
   P.rpWeeklyReflections = Array.isArray(P.rpWeeklyReflections) ? P.rpWeeklyReflections : [];
 }
@@ -2759,7 +2760,7 @@ function rp4ToggleMore(){
   var box = document.getElementById('rp4-more');
   var btn = document.getElementById('rp4-more-btn');
   if(box) box.classList.toggle('open', RP4_OPEN);
-  if(btn) btn.innerHTML = RP4_OPEN ? '접기 ▴' : '조금 더 적어보기 <span>(선택)</span> ▾';
+  if(btn) btn.innerHTML = RP4_OPEN ? '접기 ▴' : '조금 더 나의 욕구 들여다보기 <span>(선택)</span> ▾';
 }
 function rp4EditRecord(id){
   var r = rp4Find(id);
@@ -2785,15 +2786,20 @@ function rp4CancelEdit(){
 }
 
 var RP4_CONTEXTS = [
-  ['무심코','스마트폰을 열다'],
-  ['메시지','보내기 전 잠깐 멈춤'],
-  ['구매','무언가를 사려던 순간'],
-  ['부탁','누군가의 부탁에 바로 답하려다'],
-  ['커피','마시며 문득 생각이 든 순간'],
-  ['이동','어디로 갈지 고민하던 순간'],
-  ['잠들기 전','하루를 돌아보던 순간'],
-  ['그 외에도','일상 속 어떤 순간이든']
+  ['무심코','스마트폰을 열다 멈춤'],
+  ['메시지','메시지를 보내기 전 멈춤'],
+  ['구매','무언가를 사려다 멈춤'],
+  ['부탁','부탁에 바로 답하려다 멈춤'],
+  ['커피','커피를 마시다 멈춤'],
+  ['이동','어디로 갈지 고민하다 멈춤'],
+  ['잠들기 전','하루를 돌아보다 멈춤'],
+  ['그 외에도','일상 속 어떤 순간에든 멈춤']
 ];
+/* 저장된 기록·달력에서도 같은 표기를 쓴다 */
+function rp4CtxLabel(v){
+  for(var i=0;i<RP4_CONTEXTS.length;i++) if(RP4_CONTEXTS[i][0]===v) return RP4_CONTEXTS[i][1];
+  return v;
+}
 var RP4_DESIRES = [
   '조금 더 쉬고 싶었다.','인정받고 싶었다.','다른 사람들과 비교하고 싶었다.',
   '혼자 있고 싶었다.','궁금했다 / 알고 싶었다.','조금 지쳐 있었다.',
@@ -2809,6 +2815,23 @@ var RP4_SOURCES = [
   ['잘 모르겠다','조금 더 지켜보기']
 ];
 /* 04 · 우선가치 — 순서 고정. 나의 지도의 우선가치와 연동된다. */
+/* 04의 구체적 표현 → 진단 9개 어휘. 06에서 같은 말로 비교하기 위한 대응표 */
+var RP4_VALUE_MAP = {
+  '내 휴식과 회복':'회복', '내 건강':'회복',
+  '내 집중과 성장':'성장', '배움과 호기심':'성장',
+  '소중한 관계':'연결',
+  '내 시간의 주도권':'자율',
+  '정직함과 일관성':'정직',
+  '내 감정과 마음의 평화':'안정'
+};
+function rp4ValueKey(v){
+  v = String(v||'').trim();
+  if(!v) return '';
+  if(RP4_VALUE_MAP[v]) return RP4_VALUE_MAP[v];
+  var keys = ['자율','연결','몰입','회복','성장','성취','안정','기여','정직'];
+  for(var i=0;i<keys.length;i++) if(v.indexOf(keys[i])>=0) return keys[i];
+  return v;   /* 직접 적으신 말은 그대로 둔다 */
+}
 var RP4_VALUES = [
   '내 휴식과 회복','내 감정과 마음의 평화','내 집중과 성장',
   '소중한 관계','내 건강','내 시간의 주도권','정직함과 일관성','배움과 호기심'
@@ -2891,7 +2914,7 @@ function rp4Form(){
 
   /* ── 02~06 · 접힘 ── */
   h += '<button type="button" class="rp4-more-btn" id="rp4-more-btn" onclick="rp4ToggleMore()">'
-    +(RP4_OPEN ? '접기 ▴' : '조금 더 들여다보기 <span>(선택 · 02–06)</span> ▾')
+    +(RP4_OPEN ? '접기 ▴' : '조금 더 나의 욕구 들여다보기 <span>(선택)</span> ▾')
   +'</button>';
 
   h += '<div class="rp4-more'+(RP4_OPEN?' open':'')+'" id="rp4-more">';
@@ -2942,7 +2965,8 @@ function rp4Form(){
       +'<span class="rp4-tagline s4">나다운 기준 확인하기</span>'
     +'</div>'
     +'<p class="rp4-help">02가 <b>나를 움직인 것</b>이라면, 여기는 <b>그럼에도 지키려던 것</b>입니다.</p>'
-    +(mapVal ? '<div class="rp4-valnow">지금 나의 지도에 적힌 우선가치는 <b>'+rp4Esc(mapVal)+'</b>입니다. 여기서 고르시면 그 값이 바뀝니다.</div>' : '')
+    +(mapVal ? '<div class="rp4-valnow">지금 나의 지도에서 선택한 우선가치는 <b>'+rp4Esc(mapVal)+'</b>입니다.<br>'
+        +'오늘 이 순간에도 그 가치가 중요했는지, 또는 다른 것이 더 중요했는지 살펴보세요.</div>' : '')
     +'<div class="rp4-chips wrap val">'
     +RP4_VALUES.map(function(v){
         return '<button type="button" class="rp4-chip val'+(curVal===v?' on':'')+'" '
@@ -2952,7 +2976,7 @@ function rp4Form(){
     +'</div>'
     +'<input type="text" id="rp4-value" maxlength="30" class="rp4-line" '
     +'placeholder="기타 — 직접 적어보기" value="'+rp4Esc(curVal)+'" oninput="rp4SyncValChips()">'
-    +'<p class="rp4-help dim">여기서 정한 값은 <b>나의 지도 우선가치</b>에 그대로 반영되고, 언제든 다시 바꾸실 수 있습니다.</p>'
+    +'<p class="rp4-help dim">오늘의 기록은 나의 지도와 <b>별도로</b> 남습니다. 오늘 다른 가치가 더 중요하게 느껴졌다면 그것도 좋은 발견입니다. 기록이 쌓이면 06에서 다시 살펴볼 수 있습니다.</p>'
   +'</div>';
 
   /* 05 */
@@ -3059,8 +3083,24 @@ function rp4Form(){
 }
 
 /* 04 · 우선가치 연동 ------------------------------------ */
+/* 우선가치 저장소는 둘뿐이다.
+   · P.modules.authorship.values — 진단 원본. 읽기 전용. 절대 쓰지 않는다.
+   · P.values                    — 지금 나의 기준. 06 재선정에서만 바뀐다.
+   (v7·v7.1의 P.priorityValue는 기록 저장이 덮어쓰던 값이라 폐기한다) */
+function rp4MigrateValue(){
+  if(P && P.priorityValue !== undefined){
+    try{ delete P.priorityValue; }catch(e){ P.priorityValue = undefined; }
+    save(P);
+  }
+}
 function rp4MapValue(){
-  if(P.priorityValue) return P.priorityValue;
+  var mine = (P.values && P.values.length) ? P.values[0] : '';
+  if(mine) return mine;
+  var au = (P.modules && P.modules.authorship) || null;
+  var vs = (au && au.values) || [];
+  return vs[0] || '';
+}
+function rp4DiagValue(){
   var au = (P.modules && P.modules.authorship) || null;
   var vs = (au && au.values) || [];
   return vs[0] || '';
@@ -3153,7 +3193,7 @@ function rp4SideRecent(){
   return '<div class="rp4-side-card rp4-side-recent" onclick="rp4PickDay(\''+rp4Esc(r.date)+'\')">'
     +'<div class="rp4-side-head"><span class="rp4-side-ico">📄</span><b>가장 최근의 기록</b></div>'
     +'<div class="rp4-side-date">'+rp4Date(r.date)+'</div>'
-    +(r.context?'<span class="rp4-side-tag">'+rp4Esc(r.context)+'</span>':'')
+    +(r.context?'<span class="rp4-side-tag">'+rp4Esc(rp4CtxLabel(r.context))+'</span>':'')
     +(body?'<h4>'+rp4Esc(body)+'</h4>':'<h4>이 날의 멈춤을 기록하셨습니다.</h4>')
     +'<p class="rp4-side-dim">지금은 해석하지 않아도 괜찮습니다. 기록이 쌓이면 반복에서 나타나는 관계와 욕구를 다시 이해할 수 있습니다.</p>'
     +'<span class="rp4-side-go">›</span>'
@@ -3209,8 +3249,7 @@ function rp4SaveForm(){
     : '';
   rec.updatedAt  = now;
 
-  /* 04 → 나의 지도 우선가치 연동 */
-  if(rec.value) P.priorityValue = rec.value;
+  /* 오늘의 기록은 나의 지도와 별도로 남는다. 우선가치는 06에서만 바뀐다. */
 
   /* 07 → 연습 문장으로 승격 (선택) */
   var keep = document.getElementById('rp4-topractice');
@@ -3295,7 +3334,7 @@ function rp4Calendar(){
     var tips = rp4ChecksOf(key).slice();
     recs.forEach(function(r){
       var w = r.desire || r.choice || r.reflection || r.context;
-      if(w) tips.push(r.context ? (r.context+' · '+String(w).slice(0,24)) : String(w).slice(0,24));
+      if(w) tips.push(r.context ? (rp4CtxLabel(r.context)+' · '+String(w).slice(0,24)) : String(w).slice(0,24));
     });
     h += '<button type="button" class="rp4-day '+(recs.length?'has ':'')+(rich?'rich ':'')
       +(done?'done ':'')+(key===todayKey?'today ':'')+(key===RP4_DAY?'selected':'')+'" '
@@ -3353,7 +3392,7 @@ function rp4DayRecords(){
   list.forEach(function(r){
     h += '<div class="rp4-record-card" id="rp4-record-'+rp4Esc(r.id)+'">'
       +'<div class="rp4-record-head">'
-        +'<span class="rp4-record-context">'+rp4Esc(r.context)+'</span>'
+        +'<span class="rp4-record-context">'+rp4Esc(rp4CtxLabel(r.context))+'</span>'
         +'<button type="button" class="rp4-delete" onclick="rp4Delete(\''+rp4Esc(r.id)+'\')">삭제</button></div>';
 
     if(!r.desire && !r.choice && !r.choiceOpt && !r.value && !r.reflection && !r.ctxnote){
@@ -3407,7 +3446,7 @@ function rp4Timeline(){
     h += '<div class="rp4-timeline-item">'
       +'<div class="rp4-timeline-date">'+rp4ShortDate(r.date)+'</div>'
       +'<div class="rp4-timeline-dot"></div>'
-      +'<div class="rp4-timeline-content"><span>'+rp4Esc(r.context)+'</span>';
+      +'<div class="rp4-timeline-content"><span>'+rp4Esc(rp4CtxLabel(r.context))+'</span>';
     h += r.desire
       ? '<p>“'+rp4Esc(r.desire)+'”</p>'
       : '<p class="rp4-pending">잠깐 멈춘 순간을 기록했습니다. '
@@ -3514,10 +3553,10 @@ function rp4Weekly(){
   if(past.length){
     h += '<div class="rp4-pattern-block"><label>지난번에 내가 발견한 것</label><div class="rp4-week-list">'
       +past.map(function(x){
-        return '<div><span>'+rp4ShortDate(x.week)+'</span><div class="rp4-week-body">'
-          +'<p>“'+rp4Esc(x.text)+'”</p>'
-          +'<button type="button" class="rp4-to-design" onclick="rp4ToDesign(\''+rp4Esc(x.id)+'\')">'
-          +'이 발견으로 연습 만들기 →</button></div></div>';
+        return '<div><span>'+rp4ShortDate(x.week)+'</span>'
+          +'<div class="rp4-week-body pick" onclick="rp4ReuseReflection(\''+rp4Esc(x.id)+'\')" '
+          +'title="누르면 아래 칸으로 옮겨집니다">'
+          +'<p>“'+rp4Esc(x.text)+'”</p><em>다시 쓰기 ↓</em></div></div>';
       }).join('')+'</div></div>';
   }
   if(n < 3){
@@ -3537,24 +3576,39 @@ function rp4Weekly(){
 
 /* ── 06 · 나의 우선가치 · 거울(읽기 전용) ──────────────── */
 function rp4ValueMirror(){
-  var cur = rp4MapValue();
-  var list = rp4Records().filter(function(r){ return r.value; });
-  var m = {}; list.forEach(function(r){ m[r.value] = (m[r.value]||0)+1; });
-  var top = Object.keys(m).sort(function(a,b){ return m[b]-m[a]; }).slice(0,4);
+  rp4Ensure();
+  var cur  = rp4MapValue();
+  var diag = rp4DiagValue();
+  var mine = (P.values && P.values.length) ? P.values[0] : '';
+
+  /* 기록에서 지키려던 것 — 진단 어휘로 환산해 집계 */
+  var m = {};
+  rp4Records().forEach(function(r){
+    var k = rp4ValueKey(r.value);
+    if(k) m[k] = (m[k]||0)+1;
+  });
+  var top = Object.keys(m).sort(function(a,b){ return m[b]-m[a]; });
+  var lead = top[0] || '';
 
   var h = '<div class="rp4-card rp4-mirror">';
+
+  /* 현재 기준 */
   if(cur){
-    h += '<div class="rp4-mirror-now"><span>지금 나의 우선가치</span><b>'+rp4Esc(cur)+'</b></div>';
-  }else if(top.length){
-    h += '<div class="rp4-mirror-now soft"><span>기록에서 가장 자주 나온 것</span><b>'+rp4Esc(top[0])+'</b>'
-      +'<em>아직 확정하지 않으셨습니다. 맞다고 느끼시면 아래에서 정하시면 됩니다.</em></div>';
+    h += '<div class="rp4-mirror-now'+(mine?'':' soft')+'">'
+      +'<span>'+(mine ? '내가 다시 선택한 우선가치' : '진단에서 고르신 우선가치')+'</span>'
+      +'<b>'+rp4Esc(cur)+'</b>'
+      +(mine && diag && diag!==mine ? '<em>진단에서 고르신 것은 '+rp4Esc(diag)+'이었습니다. 진단 기록은 그대로 남아 있습니다.</em>' : '')
+    +'</div>';
   }else{
-    h += '<div class="rp4-mirror-now empty"><span>지금 나의 우선가치</span><b>아직 정하지 않으셨습니다</b></div>';
+    h += '<div class="rp4-mirror-now empty"><span>지금 나의 우선가치</span>'
+      +'<b>아직 정하지 않으셨습니다</b>'
+      +'<em>진단을 하셨거나 기록이 쌓이면 여기에서 정하실 수 있습니다.</em></div>';
   }
 
+  /* 기록 집계 */
   if(top.length){
     h += '<div class="rp4-pattern-block"><label>기록에서 내가 지키려던 것</label><div class="rp4-mirror-list">'
-      +top.map(function(k){
+      +top.slice(0,5).map(function(k){
         return '<div'+(k===cur?' class="on"':'')+'><span>'+rp4Esc(k)+'</span><small>'+m[k]+'회</small></div>';
       }).join('')+'</div>'
       +'<p class="rp4-lens-note dim">여기 적힌 숫자는 판정이 아니라, 실제로 몇 번 그것을 지키려 했는지입니다.</p></div>';
@@ -3562,7 +3616,73 @@ function rp4ValueMirror(){
     h += '<p class="rp4-muted">기록의 04단계에서 “그럼에도 지키려던 것”을 고르시면, 그 값이 여기에 모입니다.</p>';
   }
 
-  return h+'<button type="button" class="rp4-linkbtn" onclick="rp4GoValueEdit()">우선가치 바꾸기 →</button></div>';
+  /* 불일치 알림 — 4회 이상 · 현재 기준과 다를 때만 */
+  if(lead && cur && lead !== cur && m[lead] >= 4){
+    h += '<div class="rp4-mismatch">'
+      +'<b>'+rp4Esc(cur)+'</b>'+rp4Josa(cur,'을','를')+' 기준으로 두고 계시지만, 최근 기록에서는 '
+      +'<b>'+rp4Esc(lead)+'</b>'+rp4Josa(lead,'을','를')+' '+m[lead]+'번 지키려 하셨습니다.'
+      +'<p>지금도 '+rp4Esc(cur)+rp4Josa(cur,'이','가')+' 나의 기준인지 한번 살펴보시겠어요? 바꾸지 않으셔도 괜찮습니다.</p>'
+    +'</div>';
+  }
+
+  /* 재선정 패널 — P.values 를 바꾸는 유일한 자리 */
+  h += '<button type="button" class="rp4-linkbtn" onclick="rp4ToggleValueEdit()" id="rp4-vedit-btn">'
+    +(RP4_VEDIT ? '접기 ▴' : '우선가치 재선정하기 →')+'</button>';
+
+  h += '<div class="rp4-vedit'+(RP4_VEDIT?' open':'')+'" id="rp4-vedit">'
+    +'<p class="rp4-vedit-lead">이 문장들을 다시 읽고, 지금 나에게 가장 가까운 것을 고르세요. '
+    +'프로그램이 단어를 세어 맞히는 대신 직접 고르시는 편이 정확합니다. 나중에 다시 바꾸셔도 됩니다.</p>'
+    +'<div class="rp4-chips wrap val">'
+    +RP4_DIAG_VALUES.map(function(v){
+        return '<button type="button" class="rp4-chip val'+((P.values||[]).indexOf(v[0])>=0?' on':'')+'" '
+          +'title="'+rp4Esc(v[1])+'" onclick="rp4SetPriority(\''+rp4Esc(v[0])+'\')">'
+          +rp4Esc(v[0])+'<small>'+rp4Esc(v[1])+'</small></button>';
+      }).join('')
+    +'</div>'
+    +((P.values&&P.values.length)
+      ? '<p class="rp4-vedit-now">고르신 것: <b>'+P.values.map(rp4Esc).join('</b> · <b>')+'</b>'
+        +'<button type="button" class="rp4-vedit-clear" onclick="rp4ClearPriority()">모두 지우기</button></p>'
+      : '<p class="rp4-vedit-now dim">아직 고르지 않으셨습니다. 고르지 않으시면 진단에서 나온 값을 그대로 씁니다.</p>')
+    +'<p class="rp4-lens-note dim">진단에서 고르신 값은 지워지지 않습니다. 여기서 정한 것이 앞으로의 기준이 됩니다.</p>'
+  +'</div>';
+
+  return h+'</div>';
+}
+
+/* 진단과 같은 9개 어휘 */
+var RP4_DIAG_VALUES = [
+  ['자율','내 방식대로 정하는 것'],['연결','사람과 이어져 있는 것'],
+  ['몰입','한 가지에 깊이 들어가는 것'],['회복','나를 지키고 되돌리는 것'],
+  ['성장','어제보다 나아지는 것'],['성취','목표를 이뤄내는 것'],
+  ['안정','흔들리지 않는 리듬을 갖는 것'],['기여','누군가에게 보탬이 되는 것'],
+  ['정직','숨기지 않고 그대로 있는 것']
+];
+var RP4_VEDIT = false;
+function rp4ToggleValueEdit(){
+  RP4_VEDIT = !RP4_VEDIT;
+  var box = document.getElementById('rp4-vedit');
+  var btn = document.getElementById('rp4-vedit-btn');
+  if(box) box.classList.toggle('open', RP4_VEDIT);
+  if(btn) btn.textContent = RP4_VEDIT ? '접기 ▴' : '우선가치 재선정하기 →';
+}
+/* P.values 를 바꾸는 유일한 함수. authorship.values 는 건드리지 않는다. */
+function rp4SetPriority(k){
+  P.values = P.values || [];
+  var i = P.values.indexOf(k);
+  if(i >= 0) P.values.splice(i,1); else P.values.unshift(k);
+  P.updated = new Date().toISOString();
+  save(P);
+  RP4_VEDIT = true;
+  rp4Toast(P.values.length ? ('우선가치를 ' + P.values[0] + rp4Josa(P.values[0],'으로','로') + ' 두었습니다') : '우선가치 선택을 지웠습니다');
+  render();
+}
+function rp4ClearPriority(){
+  P.values = [];
+  P.updated = new Date().toISOString();
+  save(P);
+  RP4_VEDIT = true;
+  rp4Toast('진단에서 나온 값으로 돌아갑니다');
+  render();
 }
 function rp4SaveReflection(){
   var v = rp4Val('rp4-week-reflection');
@@ -3601,6 +3721,18 @@ function rp4SeedDesign(seed){
       }
     }catch(e){}
   },320);
+}
+/* 지난 발견을 아래 입력칸으로 옮긴다. 버튼은 아래 하나만 남긴다. */
+function rp4ReuseReflection(id){
+  rp4Ensure();
+  var r = (P.rpWeeklyReflections||[]).filter(function(x){ return String(x.id)===String(id); })[0];
+  if(!r) return;
+  var ta = document.getElementById('rp4-week-reflection');
+  if(!ta){ rp4Toast('이번 주 기록이 세 개쯤 모이면 열립니다'); return; }
+  ta.value = r.text || '';
+  ta.focus();
+  ta.scrollIntoView({behavior:'smooth', block:'center'});
+  rp4Toast('아래 칸으로 옮겼습니다. 다듬어서 다음 연습으로 만드세요');
 }
 function rp4ToDesign(id){
   rp4Ensure();
@@ -3767,7 +3899,7 @@ function recordView(){
     + rp4SecHead('06 · 나의 우선가치',
         '내가 실제로 중요하게<br>여기는 것은 무엇일까요?',
         '우선가치는 물어서 나오는 것이 아니라, 실제로 지킨 것들에서 드러납니다.',
-        '고치실 때는 02의 04단계에서 바꾸시면 여기와 나의 지도에 함께 반영됩니다.')
+        '오늘의 기록에서 고른 가치는 여기에 쌓이기만 합니다. 기준을 바꾸는 것은 아래 재선정에서만 일어납니다.')
     + rp4ValueMirror() + '</div>';
 
   h += notesView();
@@ -3874,30 +4006,30 @@ function recordView(){
   if(typeof valueHero !== 'function') return;
   var orig = valueHero;
   valueHero = function(){
-    var pv = P && P.priorityValue;
+    var pv = (P && P.values && P.values.length) ? P.values[0] : '';
     if(!pv) return orig();
-    var au = (P.modules && P.modules.authorship) || null;
-    var vs = (au && au.values) || [];
-    var subs = vs.filter(function(v){ return v !== pv; }).slice(0,2);
+    var subs = (P.values||[]).slice(1,3);
     return '<div class="vhero" id="sec-values">'
       +'<div class="vh-lab">나의 우선가치</div>'
       +'<div class="vh-badge"><span class="vh-word">'+rp4Esc(pv)+'</span><span class="vh-leaf">\uD83C\uDF31</span></div>'
       +(subs.length?'<div class="vh-sub">보조가치 <b>'+subs.map(rp4Esc).join(' \u00b7 ')+'</b></div>':'')
       +'<div class="vh-note">이 가치가 오늘의 선택과 얼마나 맞닿아 있는지가 나다움 설계의 기준입니다.</div>'
-      +'<button type="button" class="rp4-linkbtn" onclick="rp4GoValueEdit()">우선가치 바꾸기 →</button>'
+      +'<div class="vh-note dim">진단에서 고르신 값은 그대로 남아 있습니다.</div>'
+      +'<button type="button" class="rp4-linkbtn" onclick="rp4GoValueEdit()">우선가치 재선정하기 →</button>'
       +'</div>';
   };
 })();
+/* 우선가치는 06에서만 바꾼다. 04(오늘의 기록)로는 보내지 않는다. */
 function rp4GoValueEdit(){
-  RP4_OPEN = true;
+  RP4_VEDIT = true;
   try{ location.hash = '#record'; }catch(e){}
   setTimeout(function(){
     if(typeof render === 'function') render();
     setTimeout(function(){
-      var el = document.querySelector('.rp4-s4');
-      if(el) el.scrollIntoView({behavior:'smooth', block:'center'});
-    },120);
-  },140);
+      var el = document.getElementById('sec-value-mirror');
+      if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    },140);
+  },160);
 }
 
 /* ── 13. 스타일 ──────────────────────────────────────── */
@@ -4264,6 +4396,27 @@ function rp4GoValueEdit(){
     .rp4-fill{gap:6px}
     .rp4-fill input{flex:1 1 100%}
   }
+
+  /* ── v7.2 · 06 재선정 ────────────────────────────── */
+  .rp4-mismatch{margin:14px 0 4px;padding:15px 17px;border-radius:14px;background:#fffaf3;border:1px solid #f4e6d3;font-size:15.5px;line-height:1.7;color:#5f5344}
+  .rp4-mismatch b{color:#b8722a}
+  .rp4-mismatch p{margin:8px 0 0;font-size:14.5px;color:#8b8074}
+  .rp4-vedit{display:none;margin-top:14px;padding:18px 16px;border-radius:16px;background:#faf9f6;border:1px dashed #ddd8cf}
+  .rp4-vedit.open{display:block}
+  .rp4-vedit-lead{margin:0 0 14px;font-size:14.8px;line-height:1.75;color:#5f6470}
+  .rp4-vedit .rp4-chip.val{display:flex;flex-direction:column;align-items:flex-start;gap:3px;text-align:left;padding:10px 14px}
+  .rp4-vedit .rp4-chip.val small{font-size:12.5px;color:#9aa0a8;font-weight:600}
+  .rp4-vedit .rp4-chip.val.on small{color:#e6ddfb}
+  .rp4-vedit-now{margin:14px 0 0;font-size:14.8px;color:#3a3f48;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .rp4-vedit-now.dim{color:#9aa0a8}
+  .rp4-vedit-clear{padding:7px 12px;border-radius:9px;border:1px solid #e4e0d8;background:#fff;color:#8b9099;font-size:13.5px;font-weight:700;cursor:pointer}
+  .rp4-mirror-now em{flex:1 1 100%}
+  .vh-note.dim{color:#9aa0a8;font-size:13.8px;margin-top:6px}
+
+  /* 05 · 지난 발견 다시 쓰기 */
+  .rp4-week-body.pick{cursor:pointer;border-radius:11px;padding:10px 12px;transition:background .15s}
+  .rp4-week-body.pick:hover{background:#f7f5fd}
+  .rp4-week-body.pick em{display:block;margin-top:6px;font-style:normal;font-size:13.5px;color:#8B5CF6;font-weight:700}
   .rp4-linkbtn{margin-top:12px;padding:9px 14px;border-radius:10px;border:1px solid #e3ddf5;background:#faf9ff;color:#6d4fd0;font-size:14.5px;font-weight:700;cursor:pointer}
   .rp4-linkbtn:hover{background:#f3f0ff}
   .rp4-tl-more{margin-top:12px;width:100%;padding:11px;border-radius:11px;border:1px dashed #ddd8cf;background:#fff;color:#6b7280;font-size:14.5px;font-weight:700;cursor:pointer}
