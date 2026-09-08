@@ -2653,6 +2653,7 @@ var RP4_SRC  = '';
 var RP4_ENG  = '';
 var RP4_CHO  = '';
 var RP4_VAL  = '';
+var RP4_LENS = '';
 
 /* 축마다 연습 이름이 다르다. 최종은 우선가치 설계. */
 var RP4_PRACTICE = {
@@ -2738,6 +2739,7 @@ function rp4Pick(kind, v){
   if(kind === 'src') RP4_SRC = v;
   if(kind === 'eng') RP4_ENG = v;
   if(kind === 'cho') RP4_CHO = v;
+  if(kind === 'lens') RP4_LENS = v;
   var el = document.getElementById('rp4-'+kind);
   if(el) el.value = v;
   /* render()를 부르지 않는다 — 적던 글이 지워지면 안 된다 */
@@ -2769,6 +2771,7 @@ function rp4EditRecord(id){
   RP4_ENG = r.energy || '';
   RP4_CHO = r.choiceOpt || '';
   RP4_VAL = r.value || '';
+  RP4_LENS = r.lensHit || '';
   render();
   setTimeout(function(){
     var el = document.getElementById('rp4-form');
@@ -2777,7 +2780,7 @@ function rp4EditRecord(id){
 }
 function rp4CancelEdit(){
   RP4_EDIT = null; RP4_OPEN = false;
-  RP4_CTX = ''; RP4_SRC = ''; RP4_ENG = ''; RP4_CHO = ''; RP4_VAL = '';
+  RP4_CTX = ''; RP4_SRC = ''; RP4_ENG = ''; RP4_CHO = ''; RP4_VAL = ''; RP4_LENS = '';
   render();
 }
 
@@ -2993,6 +2996,32 @@ function rp4Form(){
 
   h += '</div>';  /* /more */
 
+  /* ── 렌즈 확인 · 성공/실패가 아니다 ── */
+  var lensD = rp4TodayLens();
+  if(lensD){
+    var lv = g('lensHit') || RP4_LENS;
+    h += '<div class="rp4-q rp4-lensq">'
+      +'<div class="rp4-q-head">'
+        +'<div class="rp4-q-title"><i>◎</i>오늘의 연습이 떠오른 순간이었나요?</div>'
+        +'<span class="rp4-tagline s7">연습과 잇기</span>'
+      +'</div>'
+      +'<div class="rp4-lens-quote">“'+rp4Esc(lensD.text)+'”</div>'
+      +'<p class="rp4-help">잘 지켰는지를 묻는 것이 아닙니다. 그 문장이 마음에 스쳤는지만 표시해 주세요.</p>'
+      +'<div class="rp4-opts grid3">'
+      +[['떠올랐다','그 순간 이 문장이 스쳤다'],
+        ['떠오르지 않았다','지나고 나서 알았다'],
+        ['잘 모르겠다','굳이 정하지 않기']].map(function(v){
+          return '<button type="button" class="rp4-opt'+(lv===v[0]?' on':'')+'" '
+            +'data-chip="lens" data-value="'+rp4Esc(v[0])+'" '
+            +'onclick="rp4Pick(\'lens\',\''+rp4Esc(v[0])+'\')">'
+            +'<b>'+rp4Esc(v[0])+'</b><small>'+rp4Esc(v[1])+'</small></button>';
+        }).join('')
+      +'</div>'
+      +'<input type="hidden" id="rp4-lens" value="'+rp4Esc(lv)+'">'
+      +'<p class="rp4-help dim">떠오르지 않은 날도 기록입니다. 그런 날이 어떤 날이었는지가 오히려 더 많은 것을 알려줍니다.</p>'
+    +'</div>';
+  }
+
   /* ── 07 · 사후 회고 (항상 보임) ── */
   h += '<div class="rp4-q rp4-s7">'
     +'<div class="rp4-q-head">'
@@ -3088,18 +3117,28 @@ function rp4SideAxis(){
     +'<div class="rp4-side-quote">'+rp4Esc(c[3])+'</div>'
   +'</div>';
 }
+function rp4TodayLens(){
+  var day = rp4Today();
+  var on  = (typeof checksOf==='function') ? checksOf(day) : [];
+  var ds  = (P.designs||[]).filter(function(d){ return on.indexOf(d.id)>=0; });
+  return ds[0] || null;
+}
 function rp4SideMission(){
-  var today = rp4Today();
-  var n = rp4RecordsOf(today).length;
-  var goal = 3;
-  var pct = Math.min(100, Math.round(n/goal*100));
-  return '<div class="rp4-side-card">'
-    +'<div class="rp4-side-head"><span class="rp4-side-ico">🎯</span><b>오늘의 미션</b></div>'
-    +'<h4>오늘 하루,<br>한 번이라도 멈춰보기</h4>'
-    +'<div class="rp4-side-bar"><span style="width:'+pct+'%"></span></div>'
-    +'<div class="rp4-side-bar-n">'+n+' / '+goal+'</div>'
-    +'<p class="rp4-side-dim">작은 멈춤이 모여 큰 변화를 만듭니다.</p>'
-  +'</div>';
+  var d = rp4TodayLens();
+  if(!d){
+    return '<div class="rp4-side-card rp4-side-lens">'
+      +'<div class="rp4-side-head"><span class="rp4-side-ico">🔎</span><b>오늘의 연습</b></div>'
+      +'<h4>아직 오늘의 문장을 고르지 않으셨습니다.</h4>'
+      +'<p class="rp4-side-dim">왼쪽 <b>01 · 오늘의 연습</b>에서 한 문장을 고르시면 여기에 하루 종일 남아 있습니다.</p>'
+      +'</div>';
+  }
+  return '<div class="rp4-side-card rp4-side-lens on">'
+    +'<div class="rp4-side-head"><span class="rp4-side-ico">🔎</span><b>오늘의 연습</b></div>'
+    +'<div class="rp4-lens-sentence">“'+rp4Esc(d.text)+'”</div>'
+    +'<div class="rp4-side-tag">'+rp4Esc(rp4PracticeName(d.axis))+'</div>'
+    +'<p class="rp4-side-dim">오늘 하루, 이 문장을 한 번 떠올려 보세요.<br>'
+    +'잘해내는 것이 목적은 아닙니다. 한 번 떠오르는 것만으로 충분합니다.</p>'
+    +'</div>';
 }
 function rp4SideRecent(){
   var list = rp4Records();
@@ -3126,9 +3165,7 @@ function rp4SideStats(){
   var days = {};
   recs.forEach(function(r){ days[r.date] = 1; });
   var dn = Object.keys(days).length;
-  var msg = dn===0 ? '이번 달 첫 기록을 기다리고 있어요.'
-          : (dn<5 ? '조금씩 시작하고 있어요.<br>오늘도 수고했어요. 🌱'
-                  : '꾸준히 기록하고 있어요!<br>오늘도 수고했어요. 🌱');
+  var msg = '이 숫자는 잘한 정도가 아니라,<br>내가 나를 들여다본 횟수입니다.';
   return '<div class="rp4-side-card">'
     +'<div class="rp4-side-head"><span class="rp4-side-ico">📊</span><b>이번 달 기록 현황</b></div>'
     +'<div class="rp4-side-stats">'
@@ -3162,6 +3199,8 @@ function rp4SaveForm(){
   rec.choiceOpt  = rp4Val('rp4-cho') || RP4_CHO;
   rec.choice     = rp4Val('rp4-choice');
   rec.energy     = rp4Val('rp4-eng') || RP4_ENG;
+  rec.lensHit    = rp4Val('rp4-lens') || RP4_LENS;
+  if(rec.lensHit){ var _ld = rp4TodayLens(); if(_ld) rec.lensId = _ld.id; }
   rec.line1      = rp4Val('rp4-l1');
   rec.line2      = rp4Val('rp4-l2');
   rec.reflection = (rec.line1 || rec.line2)
@@ -3186,7 +3225,7 @@ function rp4SaveForm(){
   var id = rec.id;
   RP4_DAY = day;
   RP4_EDIT = null; RP4_OPEN = false;
-  RP4_CTX = ''; RP4_SRC = ''; RP4_ENG = ''; RP4_CHO = ''; RP4_VAL = '';
+  RP4_CTX = ''; RP4_SRC = ''; RP4_ENG = ''; RP4_CHO = ''; RP4_VAL = ''; RP4_LENS = '';
 
   rp4Toast(isNew ? '잠깐 멈춘 순간이 기록되었습니다' : '기록을 수정했습니다');
   render();
@@ -3276,11 +3315,11 @@ function rp4Calendar(){
     +'<div class="rp4-legend">'
       +'<span><i class="lg-dot"></i>기록한 날</span>'
       +'<span><i class="lg-rich"></i>여러 항목을 기록한 날</span>'
-      +'<span><i class="lg-chk">✓</i>연습을 실천한 날</span>'
+      +'<span><i class="lg-chk">✓</i>연습 문장을 고른 날</span>'
     +'</div>'
     +'<div class="rp4-selbar">'
       +'<b>'+rp4Date(selDayKey)+' '+rp4DayName(selDayKey)+'요일</b>'
-      +'<span>멈춤 '+selRecs+' · 실천 '+selDone+'</span>'
+      +'<span>멈춤 '+selRecs+' · 연습 '+selDone+'</span>'
     +'</div>'
     +'<div class="rp4-cal-foot">'
       +'<p>기록한 날은 성공한 날이 아니라,<br><strong>나를 알아차린 날</strong>입니다.</p>'
@@ -3298,12 +3337,12 @@ function rp4DayRecords(){
     +'<div class="rp4-day-head"><div>'
       +'<div class="rp4-card-eyebrow">'+(day===rp4Today()?'오늘의 기록':'그날의 기록')+'</div>'
       +'<h3>'+rp4Date(day)+' '+rp4DayName(day)+'요일</h3></div>'
-      +'<span>멈춤 '+list.length+' · 실천 '+done.length+'</span></div>';
+      +'<span>멈춤 '+list.length+' · 연습 '+done.length+'</span></div>';
 
   h += '<div class="rp4-done-box"><div class="rp4-done-label">이 날 실천한 연습</div>';
   h += done.length
     ? '<ul class="rp4-done-list">'+done.map(function(t){return '<li>'+rp4Esc(t)+'</li>';}).join('')+'</ul>'
-    : '<p class="rp4-done-empty">아직 표시한 연습이 없습니다.</p>';
+    : '<p class="rp4-done-empty">이 날은 연습 문장을 고르지 않았습니다. 괜찮습니다.</p>';
   h += '<button type="button" class="rp4-done-go" onclick="rp4GoPractice()">위에서 연습 고르기 →</button></div>';
 
   if(!list.length){
@@ -3437,6 +3476,22 @@ function rp4Pattern(){
       }).join('')+'</div></div>';
   }
 
+  /* 연습이 실제로 어디서 작동했는지 */
+  var hit = list.filter(function(r){ return r.lensHit === '떠올랐다'; });
+  var miss = list.filter(function(r){ return r.lensHit === '떠오르지 않았다'; });
+  if(hit.length || miss.length){
+    var hm = {}; hit.forEach(function(r){ if(r.context) hm[r.context]=(hm[r.context]||0)+1; });
+    var top = Object.keys(hm).sort(function(a,b){return hm[b]-hm[a];}).slice(0,3);
+    h += '<div class="rp4-pattern-block"><label>연습이 떠오른 순간</label>'
+      +'<div class="rp4-lens-stat">'
+        +'<div><b>'+hit.length+'</b><span>떠올랐다</span></div>'
+        +'<div><b>'+miss.length+'</b><span>떠오르지 않았다</span></div>'
+      +'</div>'
+      +(top.length ? '<p class="rp4-lens-note">연습이 떠오른 순간은 주로 <b>'+top.map(rp4Esc).join(' · ')+'</b>에서였습니다.</p>' : '')
+      +'<p class="rp4-lens-note dim">떠오르지 않은 날은 실패가 아니라, 아직 그 문장이 닿지 않은 자리입니다.</p>'
+    +'</div>';
+  }
+
   var past = (P.rpWeeklyReflections||[]).slice().reverse().slice(0,5);
   if(past.length){
     h += '<div class="rp4-pattern-block"><label>지난번에 내가 발견한 것</label><div class="rp4-week-list">'
@@ -3453,8 +3508,10 @@ function rp4Pattern(){
     +'<textarea id="rp4-week-reflection" maxlength="300" '
     +'placeholder="예: 나는 쉬고 싶을 때도 습관처럼 화면을 열고 있었다."></textarea>'
     +'<button type="button" onclick="rp4SaveReflection()">기록하기</button>'
-    +'<p class="rp4-week-hint">기록한 발견은 바로 아래에서 <b>연습 문장</b>으로 옮길 수 있습니다.</p>'
-    +'</div></div>';
+    +'<div class="rp4-next"><b>그렇다면 다음에는 어떤 한 문장을 연습해볼까요?</b>'
+    +'<p>위에 적은 발견을 그대로 옮겨 다음 연습 문장으로 다듬을 수 있습니다.</p>'
+    +'<button type="button" class="rp4-next-btn" onclick="rp4ReflectionToDesign()">이 발견으로 다음 연습 만들기 →</button>'
+    +'</div></div></div>';
 }
 function rp4SaveReflection(){
   var v = rp4Val('rp4-week-reflection');
@@ -3464,10 +3521,36 @@ function rp4SaveReflection(){
     id: rp4NewId(), week: rp4Today(), text: v, createdAt: new Date().toISOString()
   });
   rp4Save();
-  rp4Toast('이번 주의 발견이 기록되었습니다');
+  rp4Toast('이번 주의 발견이 기록되었습니다. 다음 연습으로 옮길 수 있습니다');
   render();
 }
 /* 발견 → 연습 문장 */
+/* 방금 적은(또는 가장 최근) 발견을 다음 연습으로 */
+function rp4ReflectionToDesign(){
+  rp4Ensure();
+  var draft = rp4Val('rp4-week-reflection');
+  if(draft){ rp4SeedDesign(draft); return; }
+  var last = (P.rpWeeklyReflections||[]).slice(-1)[0];
+  if(!last){ rp4Toast('먼저 이번 주 발견을 한 줄 적어 주세요'); return; }
+  rp4SeedDesign(last.text);
+}
+function rp4SeedDesign(seed){
+  seed = String(seed||'').trim().slice(0,60);
+  if(typeof openDesign !== 'function'){ rp4Toast('연습 화면을 열 수 없습니다'); return; }
+  openDesign();
+  setTimeout(function(){
+    try{
+      var fr = document.getElementById('mfree'), w3 = document.getElementById('w3');
+      if(fr && w3 && seed){
+        fr.classList.add('open');
+        w3.value = seed;
+        w3.dispatchEvent(new Event('input',{bubbles:true}));
+        w3.focus();
+        rp4Toast('발견한 내용을 옮겨 두었습니다. 문장으로 다듬어 보세요');
+      }
+    }catch(e){}
+  },320);
+}
 function rp4ToDesign(id){
   rp4Ensure();
   var r = P.rpWeeklyReflections.find(function(x){ return String(x.id)===String(id); });
@@ -3594,7 +3677,7 @@ function recordView(){
     +'</div>'
     +'<div class="rp4-footband">'
       +'<div class="rp4-footband-mark">🌱</div>'
-      +'<div><b>오늘의 작은 기록이, 더 나다운 내일을 만듭니다.</b>'
+      +'<div><b>우선가치는 물어서 나오는 것이 아니라, 실제로 지킨 것들에서 드러납니다.</b>'
       +'<p>매번 모든 단계를 채울 필요는 없습니다. 당신의 속도로, 꾸준히.</p></div>'
       +'<div class="rp4-footband-sign">Know Yourself<br>Design Your Life</div>'
     +'</div>'
@@ -4039,6 +4122,20 @@ function rp4GoValueEdit(){
   .rp4-keep{display:flex;align-items:center;gap:7px;font-size:14.5px;color:#3a3f48;cursor:pointer}
   .rp4-keep input{width:17px;height:17px;accent-color:#2b8a55}
   .rp4-quote{margin-top:14px;text-align:right;font-size:14.5px;color:#2b8a55;font-style:italic}
+  .rp4-side-lens.on{background:linear-gradient(160deg,#faf8ff,#fff);border-color:#e7e0fa}
+  .rp4-lens-sentence{margin:2px 0 10px;font-size:17px;line-height:1.6;color:#20242c;font-weight:800;letter-spacing:-.02em}
+  .rp4-lensq{background:#f7f5fd;border-color:#e7e1f8}
+  .rp4-lensq .rp4-q-title i{background:#8B5CF6}
+  .rp4-lens-quote{margin:0 0 12px;padding:12px 14px;border-radius:11px;background:#fff;border:1px solid #e7e1f8;font-size:16px;line-height:1.6;color:#3a3f48;font-weight:700}
+  .rp4-lens-stat{display:grid;grid-template-columns:1fr 1fr;gap:10px;text-align:center;margin-bottom:10px}
+  .rp4-lens-stat b{display:block;font-size:24px;color:#8B5CF6;font-weight:800}
+  .rp4-lens-stat span{font-size:13.5px;color:#8b9099}
+  .rp4-lens-note{margin:8px 0 0;font-size:14.5px;line-height:1.7;color:#5f6470}
+  .rp4-lens-note.dim{color:#9aa0a8;font-size:13.8px}
+  .rp4-next{margin-top:16px;padding:16px;border-radius:14px;background:#f4fbf7;border:1px solid #dcefe4}
+  .rp4-next b{display:block;font-size:16px;color:#20242c;letter-spacing:-.02em}
+  .rp4-next p{margin:8px 0 12px;font-size:14.5px;color:#5f6470;line-height:1.7}
+  .rp4-next-btn{padding:11px 16px;border-radius:11px;border:1px solid #b9d8c6;background:#fff;color:#2b8a55;font-size:14.8px;font-weight:800;cursor:pointer}
   .rp4-linkbtn{margin-top:12px;padding:9px 14px;border-radius:10px;border:1px solid #e3ddf5;background:#faf9ff;color:#6d4fd0;font-size:14.5px;font-weight:700;cursor:pointer}
   .rp4-linkbtn:hover{background:#f3f0ff}
   .rp4-tl-more{margin-top:12px;width:100%;padding:11px;border-radius:11px;border:1px dashed #ddd8cf;background:#fff;color:#6b7280;font-size:14.5px;font-weight:700;cursor:pointer}
