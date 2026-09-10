@@ -1,12 +1,13 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="color-scheme" content="light only">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>나의 에너지는 어디로 흐를까? — 5러 경향성 진단 v2 | 나다움설계연구소</title>
+<title>나의 에너지는 어디로 향할까? — 5러 몰입 경향성 진단 | 나다움설계연구소</title>
 
-<meta property="og:title" content="나의 에너지는 어디로 흐를까?">
+<meta property="og:title" content="나의 에너지는 어디로 향할까?">
 <meta property="og:description" content="5러 경향성 진단 · 빅파이브 단축형 기반 · 15문항 · 약 5분 · 무료 — 나다움설계연구소">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nadaumlap.github.io/nadaumneed/5characters/">
@@ -16,7 +17,7 @@
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="나다움설계연구소">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="나의 에너지는 어디로 흐를까?">
+<meta name="twitter:title" content="나의 에너지는 어디로 향할까?">
 <meta name="twitter:description" content="5러 경향성 진단 · 15문항 · 약 5분 · 무료">
 <meta name="twitter:image" content="https://nadaumlap.github.io/nadaumneed/5characters/og-image.png">
 
@@ -395,8 +396,8 @@ h1, h2, h3, h4 { font-family:var(--font-title); }
   </div>
 
   <div class="cover">
-    <span class="cover-tag">N단계 — Need Scan · 에너지 경향성 읽기</span>
-    <h1 class="cover-title">나의 에너지는<br>어디로 흐를까?</h1>
+    <span class="cover-tag">④ 나에게 맞는 조건 찾기 — 5러 몰입 경향성</span>
+    <h1 class="cover-title">나의 에너지는<br>어디로 향할까?</h1>
 
   <button class="btn-primary" onclick="startQuiz()">진단 시작하기</button>
   <div style="text-align:center;padding:12px;color:#718096;font-size:13px;cursor:pointer;margin-top:8px" onclick="toggleDetail()" id="detailToggle">진단 구성이 궁금하신가요? ▾</div>
@@ -418,12 +419,12 @@ h1, h2, h3, h4 { font-family:var(--font-title); }
 
   <div class="intro-card">
     <div class="notice-box">
-      ⚡ 이 진단은 고정된 “유형”이 아닌 <strong>지금 시기의 에너지 흐름</strong>을 읽는 도구입니다.
+      ⚡ 이 진단은 고정된 “유형”이 아닌 <strong>지금의 에너지 경향성</strong>을 읽는 도구입니다.
       한 달 후 다시 진단하면 결과가 달라질 수 있어요.
     </div>
     <p>요즘 어떤 활동에서 에너지를 얻고 있나요?</p>
     <p>목표를 보면 가슴이 뛰는 시기인가요, 함께할 때 빛나는 시기인가요?</p>
-    <div class="quote">지금 나의 에너지가 어디로 흐르는지 알면,<br>더 자연스럽게 흐를 수 있습니다.</div>
+    <div class="quote">지금 나의 에너지가 어디로 움직이는지 알면,<br>더 자연스럽게 살아날 수 있습니다.</div>
     <p style="font-size:14px;color:var(--text-soft);">“요즘”, “지금”, “최근”을 기준으로 솔직하게 응답해 주세요.</p>
   </div>
   </div>
@@ -438,7 +439,7 @@ h1, h2, h3, h4 { font-family:var(--font-title); }
     <div class="logo-sep"></div>
     <div class="logo-right">
       <div class="top">에너지 경향성 진단</div>
-      <div class="bottom">나의 에너지는 어디로 흐를까?</div>
+      <div class="bottom">나의 에너지는 어디로 향할까?</div>
     </div>
   </div>
   <div class="progress-bar-wrap"><div class="progress-bar" id="progress-bar"></div></div>
@@ -463,7 +464,7 @@ h1, h2, h3, h4 { font-family:var(--font-title); }
     <div class="logo-sep"></div>
     <div class="logo-right">
       <div class="top">진단 결과 · 나다움설계연구소</div>
-      <div class="bottom">나의 에너지 흐름</div>
+      <div class="bottom">나의 에너지 경향성</div>
     </div>
   </div>
 
@@ -525,7 +526,7 @@ function toggleDetail(){
   }
 }
 /* ============================================
-   5러 경향성 진단 v2
+   5러 몰입 경향성 진단
    15문항, 5경향 × 3문항, 주·보조 경향 산출
    ============================================ */
 
@@ -617,11 +618,11 @@ const COMBO_MESSAGES = {
   // 열정러 주된
   "A_C":"지금은 결과를 향해 달리면서도 함께하는 사람들에게서 동력을 얻는 시기입니다. 혼자 하는 것보다 팀과 함께 목표를 설정할 때 가장 빛나는 조합입니다.",
   "A_S":"지금은 목표를 향해 달리되 흔들리지 않는 루틴이 받쳐줄 때 가장 강한 시기입니다. 목표와 리듬이 함께 있으면 번아웃 없이 오래 갑니다.",
-  "A_D":"지금은 도전적 목표와 깊이 있는 탐구가 함께 흐르는 시기입니다. 단순한 속도가 아니라 의미 있는 결과를 만들어낼 때 가장 살아납니다.",
+  "A_D":"지금은 도전적 목표와 깊이 있는 탐구가 함께 움직이는 시기입니다. 단순한 속도가 아니라 의미 있는 결과를 만들어낼 때 가장 살아납니다.",
   "A_E":"지금은 새로운 도전과 목표가 동시에 들어올 때 최고조가 되는 시기입니다. 다만 에너지가 너무 넓게 퍼지지 않도록 우선순위 하나를 정하는 게 좋습니다.",
   // 협력러 주된
   "C_A":"지금은 함께하되 명확한 목표가 있을 때 가장 빛나는 시기입니다. 팀의 결과를 이끌어내는 역할에서 에너지가 충전됩니다.",
-  "C_S":"지금은 안정된 관계 속에서 함께 천천히 나아가는 시기입니다. 신뢰가 쌓인 사람들과 리듬을 맞추는 것이 가장 자연스러운 흐름입니다.",
+  "C_S":"지금은 안정된 관계 속에서 함께 천천히 나아가는 시기입니다. 신뢰가 쌓인 사람들과 리듬을 맞추는 것이 가장 자연스러운 방식입니다.",
   "C_D":"지금은 의미 있는 일을 좋은 사람들과 함께할 때 가장 깊이 들어가는 시기입니다. \"우리가 왜 이것을 하는가\"가 분명할 때 폭발적인 에너지가 나옵니다.",
   "C_E":"지금은 새로운 사람들과 새로운 일을 함께 탐험하는 것에서 에너지를 얻는 시기입니다. 고정된 팀보다 다양한 연결이 자극이 되는 시기.",
   // 안정러 주된
@@ -638,15 +639,15 @@ const COMBO_MESSAGES = {
   "E_A":"지금은 새로운 도전 목표를 향해 달리는 것에서 에너지가 넘치는 시기입니다. 처음 해보는 일에 목표까지 더해지면 최고조가 됩니다.",
   "E_C":"지금은 새로운 사람들을 만나고 다양한 연결을 탐험하는 것에서 에너지를 얻는 시기입니다. 기존 관계보다 새로운 만남이 더 자극이 되는 시기.",
   "E_S":"지금은 자유롭게 탐험하면서도 돌아올 수 있는 안정적인 기반이 있는 시기입니다. 완전한 방랑보다 안전한 기반 위의 탐험이 더 오래갑니다.",
-  "E_D":"지금은 새로운 주제를 발견하면 깊이 파고들고 싶은 욕구가 동시에 있는 시기입니다. 탐험과 탐구가 같이 흐르는 가장 지적인 조합.",
+  "E_D":"지금은 새로운 주제를 발견하면 깊이 파고들고 싶은 욕구가 동시에 있는 시기입니다. 탐험과 탐구가 같이 움직이는 가장 지적인 조합.",
   // 균형형 5개
   "A_A":"지금은 열정러 에너지가 중심이면서 전반적으로 고르게 활성화된 시기입니다. 다양한 방향에서 에너지를 얻고 있으니, 한 가지 목표로 집중하면 더욱 강해집니다.",
-  "C_C":"지금은 협력러 에너지가 중심이면서 전반적으로 고르게 흐르는 시기입니다. 여러 관계에서 에너지를 얻고 있으니, 가장 신뢰하는 한 팀에 집중해 보세요.",
+  "C_C":"지금은 협력러 에너지가 중심이면서 전반적으로 고르게 움직이는 시기입니다. 여러 관계에서 에너지를 얻고 있으니, 가장 신뢰하는 한 팀에 집중해 보세요.",
   "S_S":"지금은 안정러 에너지가 중심이면서 전반적으로 균형 잡힌 시기입니다. 흔들려도 원래대로 돌아오는 힘이 지금 가장 잘 작동하고 있습니다.",
-  "D_D":"지금은 장인러 에너지가 중심이면서 전반적으로 고르게 흐르는 시기입니다. 한 가지 주제에 완전히 몰입하는 것이 지금 가장 잘 맞는 방식입니다.",
+  "D_D":"지금은 장인러 에너지가 중심이면서 전반적으로 고르게 움직이는 시기입니다. 한 가지 주제에 완전히 몰입하는 것이 지금 가장 잘 맞는 방식입니다.",
   "E_E":"지금은 모험러 에너지가 중심이면서 전반적으로 활성화된 시기입니다. 다양한 자극에서 에너지를 얻고 있으니, 하나의 탐험에 집중하면 더욱 빛납니다.",
   // 저활성
-  "LOW":"지금은 다섯 경향 모두 활성도가 낮은 시기입니다. 에너지가 어디로도 강하게 흐르지 않는다면, 잡음이 너무 많거나 회복이 먼저 필요한 단계일 수 있습니다. 잡음 진단을 먼저 권장합니다."
+  "LOW":"지금은 다섯 경향 모두 활성도가 낮은 시기입니다. 에너지가 어디로도 강하게 움직이지 않는다면, 잡음이 너무 많거나 회복이 먼저 필요한 단계일 수 있습니다. 잡음 진단을 먼저 권장합니다."
 };
 
 // ===== 작은 실천 5종 =====
@@ -764,7 +765,7 @@ function calculateScores() {
     if (diff12 < 0.34) caseType = "balance";
   }
 
-  // ④ v2.2 주된 흐름의 '절대 강도' 구간 — 상대 우위와 실제 강도를 구분해 해석
+  // ④ v2.2 주된 경향의 '절대 강도' 구간 — 상대 우위와 실제 강도를 구분해 해석
   const band = peak >= 4.0 ? "strong" : (peak >= 3.0 ? "mid" : "weak");
 
   return { avgs, z, overall, sorted, primary, secondary, peak, band, diff12, diffMax, caseType, softFlag };
@@ -804,7 +805,7 @@ function calculateAndShowResult() {
   renderResult(_result);
 }
 
-// ===== v2.2 주된 흐름 절대 강도 =====
+// ===== v2.2 주된 경향 절대 강도 =====
 const BAND_META = {
   strong: { label:"뚜렷한 편", pct: v => Math.min(100, v/5*100) },
   mid:    { label:"보통",     pct: v => Math.min(100, v/5*100) },
@@ -827,31 +828,31 @@ function strengthRowHTML(r) {
 function stageExplain(r){
   const p=CHARS[r.primary], s=CHARS[r.secondary];
   if(r.caseType==='low'){
-    return {tag:'지금은 이런 시기입니다', title:'다섯 흐름이 모두 조용한 시기',
+    return {tag:'지금은 이런 시기입니다', title:'다섯 경향이 모두 조용한 시기',
       body:`<p>다섯 가지 중 어느 하나도 뚜렷하게 켜져 있지 않습니다. 이건 성격이 밋밋하다는 뜻이 아니라, <strong>지금 에너지가 어디론가 새고 있다</strong>는 뜻에 가깝습니다.</p>
       <p>보통은 세 가지 중 하나입니다. 최근에 크게 지치는 일이 있었거나, 해야 할 일이 너무 많아 무엇도 고르지 못하고 있거나, 원하는 것과 하고 있는 것이 오래 어긋나 있는 경우입니다.</p>
       <p>이 시기에는 무엇을 더 하기보다 <strong>무엇이 빠져나가고 있는지</strong>를 먼저 보는 편이 빠릅니다.</p>`};
   }
   if(r.caseType==='balance'){
-    return {tag:'지금은 이런 시기입니다', title:`${p.name}와 ${s.name}가 함께 흐르는 시기`,
-      body:`<p>두 흐름의 점수가 거의 같습니다. 어느 한쪽으로 정해지지 않은 상태인데, <strong>이건 애매한 게 아니라 두 가지를 다 쓰고 있는 시기</strong>라는 뜻입니다.</p>
+    return {tag:'지금은 이런 시기입니다', title:`${p.name}와 ${s.name}가 함께 움직이는 시기`,
+      body:`<p>두 경향의 점수가 거의 같습니다. 어느 한쪽으로 정해지지 않은 상태인데, <strong>이건 애매한 게 아니라 두 가지를 다 쓰고 있는 시기</strong>라는 뜻입니다.</p>
       <p>${p.name}는 ${p.source}에서, ${s.name}는 ${s.source}에서 힘을 얻습니다. 둘 다 필요한 상황에 있거나, 한쪽에서 다른 쪽으로 옮겨 가는 중일 수 있습니다.</p>
-      <p>이럴 때는 억지로 하나를 고르지 않아도 됩니다. 다만 <strong>어떤 날에 어느 쪽이 켜지는지</strong>를 며칠만 적어 두시면, 두 흐름이 각각 어떤 상황에서 나오는지가 보입니다.</p>`};
+      <p>이럴 때는 억지로 하나를 고르지 않아도 됩니다. 다만 <strong>어떤 날에 어느 쪽이 켜지는지</strong>를 며칠만 적어 두시면, 두 경향이 각각 어떤 상황에서 나오는지가 보입니다.</p>`};
   }
   if(r.band==='weak'){
     return {tag:'지금은 이런 시기입니다', title:'방향은 있지만, 아직 약하게 켜져 있습니다',
       body:`<p>${p.name}가 다섯 중 가장 높게 나오기는 했지만, 점수 자체는 중간 아래입니다(5점 중 ${r.peak.toFixed(1)}점).</p>
-      <p>그래서 "지금 나는 ${p.flowKey}이다"보다 <strong>"지금은 어떤 흐름도 강하게 켜져 있지 않다"</strong>고 읽는 편이 정확합니다. 순위보다 전체 높이를 먼저 보셔야 합니다.</p>
+      <p>그래서 "지금 나는 ${p.flowKey}이다"보다 <strong>"지금은 어떤 경향도 강하게 켜져 있지 않다"</strong>고 읽는 편이 정확합니다. 순위보다 전체 높이를 먼저 보셔야 합니다.</p>
       <p>전체 평균이 5점 중 ${r.overall.toFixed(1)}점입니다. 에너지가 어디론가 새고 있을 가능성이 큽니다.</p>`};
   }
   if(r.band==='mid'){
     return {tag:'지금은 이런 시기입니다', title:`${p.name} 쪽으로 기울어 있지만, 확실히 몰려 있지는 않습니다`,
-      body:`<p>${p.name} 점수가 5점 중 ${r.peak.toFixed(1)}점입니다. 어느 쪽으로 흐르는지는 보이지만 한쪽으로 확실히 쏠린 정도는 아닙니다.</p>
+      body:`<p>${p.name} 점수가 5점 중 ${r.peak.toFixed(1)}점입니다. 어느 쪽으로 움직이는지는 보이지만 한쪽으로 확실히 쏠린 정도는 아닙니다.</p>
       <p>한두 달 뒤에 순서가 바뀔 수 있는 구간입니다. 지금 결과를 <strong>고정된 나</strong>로 읽지 마시고, 요즘의 기울기 정도로 보시면 됩니다.</p>
       <p>${p.name}는 ${p.source}에서 힘을 얻습니다. ${s.name}가 뒤를 받치고 있습니다.</p>`};
   }
-  return {tag:'지금은 이런 시기입니다', title:`${p.name} 흐름이 뚜렷한 시기`,
-    body:`<p>${p.name} 점수가 5점 중 ${r.peak.toFixed(1)}점입니다. 다른 흐름보다 높기만 한 것이 아니라 점수 자체가 높습니다. <strong>지금 이 방향으로 실제 에너지가 모여 있다</strong >고 보셔도 됩니다.</p>
+  return {tag:'지금은 이런 시기입니다', title:`${p.name} 경향이 뚜렷한 시기`,
+    body:`<p>${p.name} 점수가 5점 중 ${r.peak.toFixed(1)}점입니다. 다른 경향보다 높기만 한 것이 아니라 점수 자체가 높습니다. <strong>지금 이 방향으로 실제 에너지가 모여 있다</strong >고 보셔도 됩니다.</p>
     <p>${p.identity}입니다. ${p.flow}에 특히 힘이 납니다. 반대로 ${p.drain}에는 쉽게 가라앉습니다.</p>
     <p>${s.name}가 보조로 받치고 있어, ${s.source} 쪽 조건이 갖춰지면 더 오래 갑니다.</p>`.replace(' >','>')};
 }
@@ -867,10 +868,10 @@ function socialRead(r){
     E:'새로운 것을 시도하는 사람은 종종 산만하다는 말을 듣습니다. 모험러의 힘은 시작을 만드는 데 있지, 오래 붙어 있는 데 있지 않습니다. 끝맺음을 도와줄 조건을 옆에 두면 이 힘이 살아납니다.'
   };
   const base = r.caseType==='low'
-    ? '지금처럼 다섯 흐름이 모두 낮을 때는, 개인의 의지보다 환경을 먼저 봐야 합니다. 쉴 수 없게 만들어진 일정, 계속 비교하게 만드는 화면, 거절하기 어려운 관계 — 이런 조건이 에너지를 먼저 가져갑니다.'
+    ? '지금처럼 다섯 경향이 모두 낮을 때는, 개인의 의지보다 환경을 먼저 봐야 합니다. 쉴 수 없게 만들어진 일정, 계속 비교하게 만드는 화면, 거절하기 어려운 관계 — 이런 조건이 에너지를 먼저 가져갑니다.'
     : (MAP[r.primary]||'');
   return `<div class="msec">
-    <div class="msec-lab">이 흐름이 지금 사회에서 놓이는 자리</div>
+    <div class="msec-lab">이 경향이 지금 사회에서 놓이는 자리</div>
     <p>${base}</p>
     <p class="msec-dim">이 부분은 개인의 문제가 아니라 조건의 문제입니다. 무엇이 나를 흐리게 하는지는 <b>잡음 알아차리기</b> 진단에서 더 자세히 볼 수 있습니다.</p>
   </div>`;
@@ -930,22 +931,22 @@ function reflectTwo(r){
 function readingCardHTML(r) {
   if (r.caseType === 'low') return '';
   const v = r.peak.toFixed(1), o = r.overall.toFixed(1);
-  const W = r.caseType === 'balance' ? '가장 높은 흐름' : '주된 흐름';
+  const W = r.caseType === 'balance' ? '가장 높은 경향' : '주된 경향';
   let title, body;
   if (r.band === 'strong') {
     title = W + '이 뚜렷하게 나온 결과입니다';
-    body = `<p>${W} 점수가 5점 중 <strong>${v}점</strong>입니다. 다른 흐름보다 높기만 한 것이 아니라 점수 자체가 높습니다. 지금 이 방향으로 실제 에너지가 모여 있다고 보셔도 됩니다.</p>`;
+    body = `<p>${W} 점수가 5점 중 <strong>${v}점</strong>입니다. 다른 경향보다 높기만 한 것이 아니라 점수 자체가 높습니다. 지금 이 방향으로 실제 에너지가 모여 있다고 보셔도 됩니다.</p>`;
   } else if (r.band === 'mid') {
     title = '방향은 보이지만, 아주 강하지는 않습니다';
-    body = `<p>${W} 점수가 5점 중 <strong>${v}점</strong>입니다. 어느 쪽으로 흐르는지는 보이지만, 한쪽으로 확실히 몰려 있는 정도는 아닙니다. 한두 달 뒤에 순서가 바뀔 수 있는 구간입니다.</p>`;
+    body = `<p>${W} 점수가 5점 중 <strong>${v}점</strong>입니다. 어느 쪽으로 움직이는지는 보이지만, 한쪽으로 확실히 몰려 있는 정도는 아닙니다. 한두 달 뒤에 순서가 바뀔 수 있는 구간입니다.</p>`;
   } else {
     title = W + '이라기보다, 상대적으로 조금 높은 정도입니다';
-    body = `<p>${W} 점수가 5점 중 <strong>${v}점</strong>입니다. 다섯 흐름 중에서 가장 높게 나오기는 했지만, 점수 자체는 중간 아래입니다.</p>
-      <p>이럴 때는 "지금 나의 에너지는 ○○ 중심으로 흐르고 있다"보다, <strong>"지금은 어떤 흐름도 강하게 켜져 있지 않다"</strong>고 읽는 편이 정확합니다. 순위보다 전체 수준을 먼저 보셔야 합니다.</p>`;
+    body = `<p>${W} 점수가 5점 중 <strong>${v}점</strong>입니다. 다섯 경향 중에서 가장 높게 나오기는 했지만, 점수 자체는 중간 아래입니다.</p>
+      <p>이럴 때는 "지금 나의 에너지는 ○○ 중심으로 움직이고 있다"보다, <strong>"지금은 어떤 경향도 강하게 켜져 있지 않다"</strong>고 읽는 편이 정확합니다. 순위보다 전체 수준을 먼저 보셔야 합니다.</p>`;
   }
   let extra = '';
   if (r.softFlag || r.band === 'weak') {
-    extra = `<p>전체 평균은 5점 중 <strong>${o}점</strong>입니다. 다섯 흐름이 모두 선명하게 켜져 있는 시기는 아닙니다. 이건 의지가 약해서가 아니라, 에너지가 어디론가 새고 있다는 신호일 수 있습니다. 아래 잡음 진단을 함께 해보시면 무엇이 에너지를 가져가고 있는지 보입니다.</p>`;
+    extra = `<p>전체 평균은 5점 중 <strong>${o}점</strong>입니다. 다섯 경향이 모두 선명하게 켜져 있는 시기는 아닙니다. 이건 의지가 약해서가 아니라, 에너지가 어디론가 새고 있다는 신호일 수 있습니다. 아래 잡음 진단을 함께 해보시면 무엇이 에너지를 가져가고 있는지 보입니다.</p>`;
   }
   return `
     <div class="message-card">
@@ -965,7 +966,7 @@ function renderResult(r) {
   if (r.caseType === 'low') {
     heroHTML = `
       <div class="tendency-hero">
-        <div class="label">지금 시기의 에너지 흐름</div>
+        <div class="label">지금의 에너지 경향성</div>
         <span class="special-badge badge-low">전반적 저활성 — 회복 필요 시기</span>
         <div class="main-char">🌿</div>
         <div class="main-name">충전이 필요한 시기</div>
@@ -974,23 +975,23 @@ function renderResult(r) {
   } else if (r.caseType === 'balance') {
     heroHTML = `
       <div class="tendency-hero">
-        <div class="label">지금 시기의 에너지 흐름</div>
-        <span class="special-badge badge-balance">균형형 — 두 흐름이 비슷하게 작동 중</span>
+        <div class="label">지금의 에너지 경향성</div>
+        <span class="special-badge badge-balance">균형형 — 두 경향이 비슷하게 작동 중</span>
         <div class="main-char">${p.icon}${s.icon}</div>
         <div class="main-name">${p.flowKey} + ${s.flowKey}</div>
-        <div class="main-sub">지금 나의 에너지는 ${p.name}·${s.name} 두 패턴이 비슷한 강도로 흐르고 있어요</div>
+        <div class="main-sub">지금 나의 에너지는 ${p.name}·${s.name} 두 패턴이 비슷한 강도로 움직이고 있어요</div>
         ${strengthRowHTML(r)}
       </div>`;
   } else {
     heroHTML = `
       <div class="tendency-hero">
-        <div class="label">지금 시기의 주된 에너지 흐름</div>
+        <div class="label">지금 시기의 주된 에너지 경향성</div>
         <div class="main-char">${p.icon}</div>
-        <div class="main-name">${p.flowKey} 흐름</div>
-        <div class="main-sub">지금 나의 에너지는 <strong>${p.flowKey}</strong>으로 흐르고 있습니다<br><span style="font-size:13px;color:var(--text-mute)">${p.name} 패턴 · ${p.source}</span></div>
+        <div class="main-name">${p.flowKey} 경향</div>
+        <div class="main-sub">지금 나의 에너지는 <strong>${p.flowKey}</strong>으로 움직이고 있습니다<br><span style="font-size:13px;color:var(--text-mute)">${p.name} 패턴 · ${p.source}</span></div>
         <div class="divider-line"></div>
         <div class="sub-tendency">
-          <div class="sub-label">보조 흐름</div>
+          <div class="sub-label">보조 경향</div>
           <div class="sub-char">${s.icon}</div>
           <div class="sub-name">${s.flowKey} · ${s.name} 패턴</div>
         </div>
@@ -1009,7 +1010,7 @@ function renderResult(r) {
   body += socialRead(r);
   body += lifeScene(r);
   body += reflectTwo(r);
-  body += `<p class="rnote">이 결과는 <b>지금 시기의 흐름</b>입니다. 한 달 뒤에 다시 해보시면 달라질 수 있고, 달라지는 것이 정상입니다.</p>`;
+  body += `<p class="rnote">이 결과는 <b>지금의 경향</b>입니다. 한 달 뒤에 다시 해보시면 달라질 수 있고, 달라지는 것이 정상입니다.</p>`;
   document.getElementById('body-container').innerHTML = body;
 
   // 4. 종합 리포트로
@@ -1084,7 +1085,7 @@ function renderRadar(avgs) {
 
   return `<div class="radar-card">
     <h3>5가지 경향성 점수</h3>
-    <p class="caption">\"요즘/지금/최근\"을 기준으로 응답한 에너지 흐름입니다</p>
+    <p class="caption">\"요즘/지금/최근\"을 기준으로 응답한 에너지 경향성입니다</p>
     <div class="radar-svg-wrap">
       <svg viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
         ${gridSVG}${axesSVG}
@@ -1103,7 +1104,7 @@ function renderRadar(avgs) {
 // ===== 경향성 상세 카드 =====
 function renderDetailCard(char, isMain) {
   return `<div class="detail-card ${isMain?'':'secondary'}">
-    <span class="tag ${isMain?'main-tag':'sub-tag'}">${isMain?'주된 흐름':'보조 흐름'}</span>
+    <span class="tag ${isMain?'main-tag':'sub-tag'}">${isMain?'주된 경향':'보조 경향'}</span>
     <div class="char-row">
       <div class="char-icon">${char.icon}</div>
       <div class="char-info">
@@ -1136,7 +1137,7 @@ function renderDetailCard(char, isMain) {
 // ===== 공유 =====
 function shareLink() {
   const url = "https://nadaumlap.github.io/nadaumneed/5characters/";
-  const text = `"나의 에너지는 어디로 흐를까?" 5러 경향성 진단을 해봤어요. 약 5분이에요.\n\n${url}`;
+  const text = `"나의 에너지는 어디로 향할까?" 5러 경향성 진단을 해봤어요. 약 5분이에요.\n\n${url}`;
   if (navigator.share) navigator.share({title:"5러 경향성 진단",text}).catch(()=>copyToClipboard(text));
   else copyToClipboard(text);
 }
@@ -1212,7 +1213,7 @@ function generateCard5c(r, version){
   function strengthBar(cx, yLabel, yBar, yTag2, barW){
     const x = cx - barW/2;
     if (r.caseType === 'low') {
-      return tx(cx, yLabel + 6, '다섯 흐름 전체 평균 ' + r.overall.toFixed(1) + ' / 5.0', 26, 700, SUB, 'middle')
+      return tx(cx, yLabel + 6, '다섯 경향 전체 평균 ' + r.overall.toFixed(1) + ' / 5.0', 26, 700, SUB, 'middle')
            + tx(cx, yBar + 46, '지금은 순위를 읽기보다, 회복이 먼저인 시기입니다', 24, 500, TEXT, 'middle');
     }
     const pct = Math.min(1, r.peak/5);
@@ -1228,16 +1229,16 @@ function generateCard5c(r, version){
   // ---- 텍스트 내용 ----
   let mainTitle, subTitle, tagText;
   if (r.caseType === 'low') {
-    tagText = '지금 시기의 에너지 흐름';
+    tagText = '지금의 에너지 경향성';
     mainTitle = '충전이 필요한 시기';
-    subTitle = '다섯 흐름 모두 활성도가 낮습니다';
+    subTitle = '다섯 경향 모두 활성도가 낮습니다';
   } else if (r.caseType === 'balance') {
-    tagText = '지금 시기의 에너지 흐름';
+    tagText = '지금의 에너지 경향성';
     mainTitle = p.flowKey + ' + ' + s.flowKey;
-    subTitle = p.name + ' · ' + s.name + ' 두 패턴이 비슷하게 흐르는 시기';
+    subTitle = p.name + ' · ' + s.name + ' 두 패턴이 비슷하게 움직이는 시기';
   } else {
-    tagText = '지금 시기의 주된 에너지 흐름';
-    mainTitle = p.flowKey + ' 흐름';
+    tagText = '지금 시기의 주된 에너지 경향성';
+    mainTitle = p.flowKey + ' 경향';
     subTitle = '주된 ' + p.name + ' 패턴 · 보조 ' + s.name + ' 패턴';
   }
 
@@ -1296,9 +1297,9 @@ function shareText5c(){
   const p = CHARS[r.primary], s = CHARS[r.secondary];
   let head;
   if (r.caseType === 'low') head = '지금은 회복이 먼저인 시기로 나왔어요.';
-  else if (r.caseType === 'balance') head = '지금 나의 에너지는 ' + p.flowKey + ' + ' + s.flowKey + ' 두 흐름이 비슷하게 흐르고 있어요.';
-  else head = '지금 나의 에너지는 ' + p.flowKey + '으로 흐르고 있어요.\n(주된 ' + p.name + ' 패턴 / 보조 ' + s.name + ' 패턴)';
-  const lvl = r.caseType === 'low' ? '' : '\n주된 흐름의 강도 ' + r.peak.toFixed(1) + ' / 5.0';
+  else if (r.caseType === 'balance') head = '지금 나의 에너지는 ' + p.flowKey + ' + ' + s.flowKey + ' 두 경향이 비슷하게 움직이고 있어요.';
+  else head = '지금 나의 에너지는 ' + p.flowKey + '으로 움직이고 있어요.\n(주된 ' + p.name + ' 패턴 / 보조 ' + s.name + ' 패턴)';
+  const lvl = r.caseType === 'low' ? '' : '\n주된 경향의 강도 ' + r.peak.toFixed(1) + ' / 5.0';
   return '5러 경향성 진단 결과\n\n' + head + lvl +
     '\n\n에너지 경향성은 고정된 유형이 아니라 지금 시기의 에너지 패턴이에요.\n5분이면 해볼 수 있어요 👇\nhttps://nadaumlap.github.io/nadaumneed/5characters/';
 }
