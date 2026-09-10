@@ -195,7 +195,7 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
 
  <!-- 표지 -->
  <div class="screen on" id="s-cover">
-  <span class="cover-tag">D단계 — Daily Authorship · 자기저자성 실천</span>
+  <span class="cover-tag">⑤ 우선가치 정하기 — Daily Authorship</span>
   <h1 class="cover-h">이 선택은 나의<br>우선가치와 부합하는가?</h1>
   <div class="purpose"><div class="lab">이 진단이 재는 것</div><p>가치가 <b>얼마나 중요한지</b>는 묻지 않습니다. 그 질문은 거의 모두가 높게 답해서 아무것도 구분해 주지 못합니다(Valued Living Questionnaire 규준표본 중요도 평균 81/100). 대신 <b>지난 2주 동안 실제로 어떻게 살았는지</b>를 묻습니다. 의도를 크게 바꿔도 행동은 그 절반쯤만 따라오기 때문입니다(Webb &amp; Sheeran, 2006: 의도 d=0.66 → 행동 d=0.36).</p></div>
   <div class="axis-preview">
@@ -259,7 +259,7 @@ const IS_D=true;
 const MODKEY='authorship';
 const COLOR='#8B5CF6';
 const SLUG='need';
-const STAGE_KO='자기저자성 실천';
+const STAGE_KO='우선가치 정하기';
 const HEADER='나다움 설계 현황 진단';
 let answers=new Array(20).fill(null), cur=0, extra=null, vsel=[], vmain=null, vstage=1, R=null;
 
@@ -403,9 +403,9 @@ function computeAndShow(){ R=compute(); saveProfile(R); show('s-result'); render
 function ndDone(k){try{const p=JSON.parse(localStorage.getItem('nadaum.profile.v1')||'null');return !!(p&&p.modules&&p.modules[k])}catch(e){return false}}
 const NEXTS=[
  {k:'needscan',u:BASE+'/needscan/',t:'N · 욕구 출발점',h:'지금 나의 욕구는 어디서 시작되고 있을까?',d:'16문항 · 약 5분'},
- {k:'tendency',u:BASE+'/5characters/',t:'N · 에너지 경향성',h:'나의 에너지는 어디로 흐를까?',d:'15문항 · 약 5분'},
+ {k:'tendency',u:BASE+'/5characters/',t:'N · 에너지 경향성',h:'나의 에너지는 어디로 향할까?',d:'15문항 · 약 5분'},
  {k:'noise',u:BASE+'/newnoise/',t:'E1 · 잡음 인식',h:'나의 잡음 오염도는?',d:'18문항 · 약 5분'},
- {k:'alignment',u:BASE+'/alignment/',t:'E2 · 생명성 정렬',h:'이 활동은 나를 소모시키나, 충전시키나?',d:'20문항 · 약 6분'},
+ {k:'alignment',u:BASE+'/alignment/',t:'E2 · 에너지 살피기',h:'이 활동은 나를 소모시키나, 충전시키나?',d:'20문항 · 약 6분'},
  {k:'authorship',u:BASE+'/need/',t:'D · 나다움 설계 현황',h:'이 선택은 나의 우선가치와 부합하는가?',d:'20문항 · 약 7분'}
 ];
 function jong(w){const c=String(w||'').trim().slice(-1).charCodeAt(0);if(isNaN(c)||c<0xAC00||c>0xD7A3)return false;return (c-0xAC00)%28!==0}
