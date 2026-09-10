@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="color-scheme" content="light only">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>나의 에너지는 어디로 흐를까? — 5러 몰입 경향성 진단 | 나다움설계연구소</title>
+<title>나의 에너지는 어디로 흐를까? — 5러 경향성 진단 v2 | 나다움설계연구소</title>
 
 <meta property="og:title" content="나의 에너지는 어디로 흐를까?">
-<meta property="og:description" content="5러 몰입 경향성 진단 · 빅파이브 단축형 기반 · 15문항 · 약 5분 · 무료 — 나다움설계연구소">
+<meta property="og:description" content="5러 경향성 진단 · 빅파이브 단축형 기반 · 15문항 · 약 5분 · 무료 — 나다움설계연구소">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nadaumlap.github.io/nadaumneed/5characters/">
 <meta property="og:image" content="https://nadaumlap.github.io/nadaumneed/5characters/og-image.png">
@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="나다움설계연구소">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="나의 에너지는 어디로 흐를까?">
-<meta name="twitter:description" content="5러 몰입 경향성 진단 · 15문항 · 약 5분 · 무료">
+<meta name="twitter:description" content="5러 경향성 진단 · 15문항 · 약 5분 · 무료">
 <meta name="twitter:image" content="https://nadaumlap.github.io/nadaumneed/5characters/og-image.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -323,7 +323,7 @@ h1, h2, h3, h4 { font-family:var(--font-title); }
   padding: 8px 0 40px;
 }
 
-/* 통합 리포트 진입 카드 */
+/* 종합 리포트 진입 카드 */
 
 /* ===== 실행 기록 카드 (공통 · 네이비+골드) ===== */
 .rec-card{position:relative;overflow:hidden;background:#101736;border:1px solid #232C5C;border-radius:14px;padding:20px 19px;margin:16px 0 12px}
@@ -352,8 +352,30 @@ h1, h2, h3, h4 { font-family:var(--font-title); }
 .rep-cta .rc-d{font-size:13.5px;color:#C7CEE4;line-height:1.7;word-break:keep-all;margin-bottom:12px}
 .rep-cta .rc-go{font-size:14px;font-weight:700;color:#FFF}
 
-.one-line{background:#FDF6F8;border:1px solid #EED8DF;border-left:4px solid #B0576F;border-radius:12px;
-  padding:14px 16px;margin:14px 0 4px;font-size:15px;line-height:1.65;color:#16202B;text-align:left;}
+/* ===== 결과 화면 v3 — 섹션 2개 ===== */
+.rblock{background:var(--card);border-radius:18px;padding:26px 22px 28px;margin:0 0 20px;
+        box-shadow:0 1px 3px rgba(0,0,0,.05);border:1px solid #ECEAF3;}
+.rblock-head{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:800;
+        color:var(--navy);margin-bottom:20px;}
+.rblock-no{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;
+        border-radius:50%;background:var(--navy);color:#fff;font-size:12px;font-weight:800;}
+.msec{margin-top:26px;}
+.msec:first-child{margin-top:6px;}
+.msec-lab{font-size:13px;font-weight:800;color:#8B7BC0;letter-spacing:.02em;margin-bottom:9px;}
+.msec-h{font-size:19px;font-weight:800;color:var(--navy);line-height:1.45;margin:0 0 12px;}
+.msec p{font-size:15px;line-height:1.75;color:#3F4552;margin:0 0 11px;}
+.msec p:last-child{margin-bottom:0;}
+.msec-dim{font-size:13.5px !important;color:#8A90A0 !important;line-height:1.7 !important;}
+.scene-list{list-style:none;padding:0;margin:0;}
+.scene-list li{position:relative;padding-left:16px;font-size:15px;line-height:1.75;color:#3F4552;margin-bottom:7px;}
+.scene-list li:before{content:'';position:absolute;left:0;top:11px;width:5px;height:5px;border-radius:50%;background:#B9AEE0;}
+.scene-list.dim li{color:#7C8494;}
+.scene-list.dim li:before{background:#D6D2E2;}
+.ask-list{padding-left:20px;margin:0 0 11px;}
+.ask-list li{font-size:15.5px;line-height:1.7;color:#2C323E;font-weight:600;margin-bottom:9px;}
+.rnote{margin-top:24px;padding-top:16px;border-top:1px solid #EDEBF3;
+       font-size:13.5px;line-height:1.7;color:#8A90A0;}
+.next-line{font-size:15px;line-height:1.7;color:#3F4552;margin:0 0 16px;}
 </style>
 </head>
 <body>
@@ -445,18 +467,16 @@ h1, h2, h3, h4 { font-family:var(--font-title); }
     </div>
   </div>
 
-  <div id="tendency-hero-container"></div>
-  <div id="radar-container"></div>
-  <div id="main-detail-container"></div>
-  <div id="sub-detail-container"></div>
-  <div id="message-container"></div>
-  <div id="caution-container"></div>
-  <div id="practice-container"></div>
-  <div id="soft-container"></div>
-  <div id="variability-container"></div>
-  <div class="rec-card-slot" id="rec-card-slot"></div>
-  <div id="rep-cta-slot"></div>
-  <div id="next-container"></div>
+  <div class="rblock" id="rblock-result">
+    <div class="rblock-head"><span class="rblock-no">01</span>나의 결과</div>
+    <div id="tendency-hero-container"></div>
+    <div id="radar-container"></div>
+    <div id="body-container"></div>
+  </div>
+  <div class="rblock" id="rblock-next">
+    <div class="rblock-head"><span class="rblock-no">02</span>종합 기록으로 넘어가기</div>
+    <div id="rep-cta-slot"></div>
+  </div>
 
   <div class="share-section">
     <h3>이 진단을 친구와 나누어 보세요</h3>
@@ -505,7 +525,7 @@ function toggleDetail(){
   }
 }
 /* ============================================
-   5러 몰입 경향성 진단
+   5러 경향성 진단 v2
    15문항, 5경향 × 3문항, 주·보조 경향 산출
    ============================================ */
 
@@ -529,7 +549,7 @@ const CHARS = {
     flow:"\"우리\"라는 감각이 있을 때 동력이 생기는 시기",
     drain:"혼자 하는 작업이 많아 에너지가 빠지는 시기",
     best:"신뢰할 수 있는 사람들과 함께하는 환경",
-    cautions:["혼자 하는 작업이 많을 때 급격히 소진","타인의 기대를 먼저 충족하려다 자신의 욕구를 외면","갈등 상황에서 에너지 소모가 큼"]
+    cautions:["혼자 하는 작업이 많을 때 금방 지침","타인의 기대를 먼저 충족하려다 자신의 욕구를 외면","갈등 상황에서 에너지 소모가 큼"]
   },
   S: {
     key:"S", name:"안정러", en:"Solid Anchor", icon:"⚓",
@@ -566,20 +586,20 @@ const CHARS = {
 // ===== 문항 풀 (15개, 시기 표지어 포함) =====
 const QUESTIONS = [
   { id:1,  char:"A", text:"요즘 나는 도전적인 목표가 보이면 가슴이 먼저 뛴다." },
-  { id:2,  char:"A", text:"최근 나는 뚜렷한 목표나 성취할 것이 없는 시기에는 힘이 잘 나지 않는다." },
-  { id:3,  char:"A", text:"둘 중 고른다면, 지금 나는 편안한 유지보다 더 높은 목표에 도전하는 쪽을 고른다." },
+  { id:2,  char:"A", text:"지금 나는 \"결과를 만들어 내는 과정\" 자체에서 에너지를 얻는 편이다." },
+  { id:3,  char:"A", text:"최근 나는 마감과 도전이 있을 때 더 집중이 잘 된다고 느낀다." },
   { id:4,  char:"C", text:"요즘 나는 신뢰할 수 있는 사람들과 같이 일할 때 가장 빛난다고 느낀다." },
-  { id:5,  char:"C", text:"최근 나는 혼자 오래 일하면 의욕이 눈에 띄게 떨어진다." },
-  { id:6,  char:"C", text:"둘 중 고른다면, 지금 나는 혼자 빠르게 끝내기보다 함께 만들어 가는 쪽을 고른다." },
+  { id:5,  char:"C", text:"지금 나는 \"우리\"라는 감각이 있을 때 동력이 더 잘 생긴다." },
+  { id:6,  char:"C", text:"최근 나는 혼자 하는 작업보다 함께 만들어가는 작업에서 에너지를 더 얻는다." },
   { id:7,  char:"S", text:"요즘 나는 일정한 리듬과 루틴 안에 있을 때 가장 깊이 집중할 수 있다." },
-  { id:8,  char:"S", text:"최근 나는 예상하지 못한 변화가 잦으면 평소보다 빨리 지친다." },
-  { id:9,  char:"S", text:"둘 중 고른다면, 지금 나는 새로운 방식보다 익숙하고 검증된 방식을 고른다." },
+  { id:8,  char:"S", text:"지금 나는 익숙한 방식이 자리 잡혀 있을 때 마음이 가장 편안하다." },
+  { id:9,  char:"S", text:"최근 나는 큰 변화보다는 차분한 지속에서 에너지를 충전하는 편이다." },
   { id:10, char:"D", text:"요즘 나는 한 가지 주제를 깊이 파고들 때 가장 살아 있다고 느낀다." },
-  { id:11, char:"D", text:"최근 나는 어설프게 끝낸 일이 있으면 계속 마음에 걸린다." },
-  { id:12, char:"D", text:"둘 중 고른다면, 지금 나는 여러 가지를 두루 다루기보다 하나를 끝까지 파는 쪽을 고른다." },
-  { id:13, char:"E", text:"요즘 나는 처음 해보는 일에서 가장 큰 에너지를 얻는다." },
-  { id:14, char:"E", text:"최근 나는 같은 일이 반복되면 에너지가 빠르게 식어버린다." },
-  { id:15, char:"E", text:"둘 중 고른다면, 지금 나는 익숙한 길보다 가보지 않은 길을 고른다." }
+  { id:11, char:"D", text:"지금 나는 결과보다 \"왜 이걸 하는지의 본질적 의미\"가 더 중요하다." },
+  { id:12, char:"D", text:"최근 나는 어떤 일을 끝까지 완성하지 않으면 잘 넘어가지지 않는다." },
+  { id:13, char:"E", text:"요즘 나는 새로운 자극과 처음 해보는 일에서 가장 큰 에너지를 얻는다." },
+  { id:14, char:"E", text:"지금 나는 가보지 않은 길을 골랐을 때 마음이 더 살아난다." },
+  { id:15, char:"E", text:"최근 나는 같은 일이 반복되면 에너지가 빠르게 식어버린다." }
 ];
 
 const LIKERT_LABELS = [
@@ -622,7 +642,7 @@ const COMBO_MESSAGES = {
   // 균형형 5개
   "A_A":"지금은 열정러 에너지가 중심이면서 전반적으로 고르게 활성화된 시기입니다. 다양한 방향에서 에너지를 얻고 있으니, 한 가지 목표로 집중하면 더욱 강해집니다.",
   "C_C":"지금은 협력러 에너지가 중심이면서 전반적으로 고르게 흐르는 시기입니다. 여러 관계에서 에너지를 얻고 있으니, 가장 신뢰하는 한 팀에 집중해 보세요.",
-  "S_S":"지금은 안정러 에너지가 중심이면서 전반적으로 균형 잡힌 시기입니다. 흔들려도 제자리로 돌아오는 힘이 지금 가장 잘 작동하고 있습니다.",
+  "S_S":"지금은 안정러 에너지가 중심이면서 전반적으로 균형 잡힌 시기입니다. 흔들려도 원래대로 돌아오는 힘이 지금 가장 잘 작동하고 있습니다.",
   "D_D":"지금은 장인러 에너지가 중심이면서 전반적으로 고르게 흐르는 시기입니다. 한 가지 주제에 완전히 몰입하는 것이 지금 가장 잘 맞는 방식입니다.",
   "E_E":"지금은 모험러 에너지가 중심이면서 전반적으로 활성화된 시기입니다. 다양한 자극에서 에너지를 얻고 있으니, 하나의 탐험에 집중하면 더욱 빛납니다.",
   // 저활성
@@ -750,7 +770,7 @@ function calculateScores() {
   return { avgs, z, overall, sorted, primary, secondary, peak, band, diff12, diffMax, caseType, softFlag };
 }
 
-// ===== 통합 리포트용 프로필 저장 (nd_profile v1) =====
+// ===== 종합 리포트용 프로필 저장 (nd_profile v1) =====
 function saveProfile(r) {
   try {
     const KEY = "nadaum.profile.v1";
@@ -801,6 +821,112 @@ function strengthRowHTML(r) {
       <span class="strength-tag st-${r.band}">에너지 강도 · ${m.label}</span>
     </div>`;
 }
+/* ===== 결과 화면 v3 — 섹션 2개로 통합 ===== */
+
+/* 단계 설명 — 한 섹션 분량 */
+function stageExplain(r){
+  const p=CHARS[r.primary], s=CHARS[r.secondary];
+  if(r.caseType==='low'){
+    return {tag:'지금은 이런 시기입니다', title:'다섯 흐름이 모두 조용한 시기',
+      body:`<p>다섯 가지 중 어느 하나도 뚜렷하게 켜져 있지 않습니다. 이건 성격이 밋밋하다는 뜻이 아니라, <strong>지금 에너지가 어디론가 새고 있다</strong>는 뜻에 가깝습니다.</p>
+      <p>보통은 세 가지 중 하나입니다. 최근에 크게 지치는 일이 있었거나, 해야 할 일이 너무 많아 무엇도 고르지 못하고 있거나, 원하는 것과 하고 있는 것이 오래 어긋나 있는 경우입니다.</p>
+      <p>이 시기에는 무엇을 더 하기보다 <strong>무엇이 빠져나가고 있는지</strong>를 먼저 보는 편이 빠릅니다.</p>`};
+  }
+  if(r.caseType==='balance'){
+    return {tag:'지금은 이런 시기입니다', title:`${p.name}와 ${s.name}가 함께 흐르는 시기`,
+      body:`<p>두 흐름의 점수가 거의 같습니다. 어느 한쪽으로 정해지지 않은 상태인데, <strong>이건 애매한 게 아니라 두 가지를 다 쓰고 있는 시기</strong>라는 뜻입니다.</p>
+      <p>${p.name}는 ${p.source}에서, ${s.name}는 ${s.source}에서 힘을 얻습니다. 둘 다 필요한 상황에 있거나, 한쪽에서 다른 쪽으로 옮겨 가는 중일 수 있습니다.</p>
+      <p>이럴 때는 억지로 하나를 고르지 않아도 됩니다. 다만 <strong>어떤 날에 어느 쪽이 켜지는지</strong>를 며칠만 적어 두시면, 두 흐름이 각각 어떤 상황에서 나오는지가 보입니다.</p>`};
+  }
+  if(r.band==='weak'){
+    return {tag:'지금은 이런 시기입니다', title:'방향은 있지만, 아직 약하게 켜져 있습니다',
+      body:`<p>${p.name}가 다섯 중 가장 높게 나오기는 했지만, 점수 자체는 중간 아래입니다(5점 중 ${r.peak.toFixed(1)}점).</p>
+      <p>그래서 "지금 나는 ${p.flowKey}이다"보다 <strong>"지금은 어떤 흐름도 강하게 켜져 있지 않다"</strong>고 읽는 편이 정확합니다. 순위보다 전체 높이를 먼저 보셔야 합니다.</p>
+      <p>전체 평균이 5점 중 ${r.overall.toFixed(1)}점입니다. 에너지가 어디론가 새고 있을 가능성이 큽니다.</p>`};
+  }
+  if(r.band==='mid'){
+    return {tag:'지금은 이런 시기입니다', title:`${p.name} 쪽으로 기울어 있지만, 확실히 몰려 있지는 않습니다`,
+      body:`<p>${p.name} 점수가 5점 중 ${r.peak.toFixed(1)}점입니다. 어느 쪽으로 흐르는지는 보이지만 한쪽으로 확실히 쏠린 정도는 아닙니다.</p>
+      <p>한두 달 뒤에 순서가 바뀔 수 있는 구간입니다. 지금 결과를 <strong>고정된 나</strong>로 읽지 마시고, 요즘의 기울기 정도로 보시면 됩니다.</p>
+      <p>${p.name}는 ${p.source}에서 힘을 얻습니다. ${s.name}가 뒤를 받치고 있습니다.</p>`};
+  }
+  return {tag:'지금은 이런 시기입니다', title:`${p.name} 흐름이 뚜렷한 시기`,
+    body:`<p>${p.name} 점수가 5점 중 ${r.peak.toFixed(1)}점입니다. 다른 흐름보다 높기만 한 것이 아니라 점수 자체가 높습니다. <strong>지금 이 방향으로 실제 에너지가 모여 있다</strong >고 보셔도 됩니다.</p>
+    <p>${p.identity}입니다. ${p.flow}에 특히 힘이 납니다. 반대로 ${p.drain}에는 쉽게 가라앉습니다.</p>
+    <p>${s.name}가 보조로 받치고 있어, ${s.source} 쪽 조건이 갖춰지면 더 오래 갑니다.</p>`.replace(' >','>')};
+}
+
+/* 사회구조적 해석 */
+function socialRead(r){
+  const p=CHARS[r.primary];
+  const MAP={
+    A:'우리 사회는 성과로 사람을 설명하는 데 익숙합니다. 그래서 열정러의 힘은 쉽게 인정받지만, 목표가 없는 시기의 공허함은 잘 이해받지 못합니다. 쉬는 것도 실력이라는 말이 잘 통하지 않는 환경이라는 뜻입니다.',
+    C:'한국 사회에서 협력러의 감각은 자주 눈치와 섞입니다. 함께 잘 지내려는 마음과 남의 기대에 맞추는 일이 구분되지 않으면, 연결에서 얻던 힘이 오히려 소모로 바뀝니다.',
+    S:'변화가 빠른 사회일수록 안정러의 리듬은 뒤처짐으로 오해받기 쉽습니다. 하지만 오래 가는 일은 대체로 리듬에서 나옵니다. 문제는 속도가 아니라, 바꿔야 할 때를 알아차리는 신호를 스스로 갖고 있느냐입니다.',
+    D:'깊이 파는 사람에게 "그래서 언제 끝나요"라는 질문이 계속 들어오는 환경입니다. 장인러의 힘은 시간이 걸린다는 점 때문에 자주 저평가되지만, 의미가 분명할 때 가장 멀리 갑니다.',
+    E:'새로운 것을 시도하는 사람은 종종 산만하다는 말을 듣습니다. 모험러의 힘은 시작을 만드는 데 있지, 오래 붙어 있는 데 있지 않습니다. 끝맺음을 도와줄 조건을 옆에 두면 이 힘이 살아납니다.'
+  };
+  const base = r.caseType==='low'
+    ? '지금처럼 다섯 흐름이 모두 낮을 때는, 개인의 의지보다 환경을 먼저 봐야 합니다. 쉴 수 없게 만들어진 일정, 계속 비교하게 만드는 화면, 거절하기 어려운 관계 — 이런 조건이 에너지를 먼저 가져갑니다.'
+    : (MAP[r.primary]||'');
+  return `<div class="msec">
+    <div class="msec-lab">이 흐름이 지금 사회에서 놓이는 자리</div>
+    <p>${base}</p>
+    <p class="msec-dim">이 부분은 개인의 문제가 아니라 조건의 문제입니다. 무엇이 나를 흐리게 하는지는 <b>잡음 알아차리기</b> 진단에서 더 자세히 볼 수 있습니다.</p>
+  </div>`;
+}
+
+/* 생활 장면 */
+function lifeScene(r){
+  const p=CHARS[r.primary];
+  if(r.caseType==='low'){
+    return `<div class="msec">
+      <div class="msec-lab">이런 장면에서 드러납니다</div>
+      <ul class="scene-list">
+        <li>할 일은 많은데 무엇부터 할지 정하지 못하고 시간이 흐를 때</li>
+        <li>쉬어도 쉰 것 같지 않고, 자고 나도 개운하지 않을 때</li>
+        <li>예전에 재미있던 일이 지금은 아무 감흥이 없을 때</li>
+      </ul>
+      <p class="msec-dim">이런 날이 반복된다면 회복이 먼저입니다.</p>
+    </div>`;
+  }
+  const SCENE={
+    A:['마감이 정해지자 갑자기 집중이 잘 되던 날','끝내고 나서 "다음은 뭐지" 하고 곧바로 찾던 순간','목표가 없는 주말에 이상하게 무기력했던 때'],
+    C:['혼자 하던 일을 누군가와 나누자 속도가 붙던 날','좋은 팀에서 일할 때 시간이 빨리 가던 순간','혼자 오래 일한 주에 유독 지쳤던 때'],
+    S:['같은 시간에 같은 일을 시작할 때 마음이 편했던 날','일정이 갑자기 바뀌자 하루가 통째로 흔들리던 순간','준비할 시간이 충분했을 때 훨씬 잘 해낸 경험'],
+    D:['한 가지에 파고들다 시간 가는 줄 몰랐던 날','"왜 하는지" 설명되지 않는 일에 손이 안 가던 순간','대충 넘기지 못해 혼자 오래 붙들고 있던 때'],
+    E:['처음 가보는 길을 골랐을 때 기분이 좋아지던 날','같은 일이 반복되자 급격히 흥미가 식던 순간','새로운 사람을 만나고 나서 아이디어가 떠오르던 때']
+  };
+  const li=(SCENE[r.primary]||[]).map(x=>`<li>${x}</li>`).join('');
+  const ca=(p.cautions||[]).slice(0,2).map(x=>`<li>${x}</li>`).join('');
+  return `<div class="msec">
+    <div class="msec-lab">이런 장면에서 드러납니다</div>
+    <ul class="scene-list">${li}</ul>
+    <div class="msec-lab" style="margin-top:18px">반대로, 이럴 때 가라앉습니다</div>
+    <ul class="scene-list dim">${ca}</ul>
+  </div>`;
+}
+
+/* 자기 성찰 2개 */
+function reflectTwo(r){
+  const p=CHARS[r.primary];
+  const Q={
+    A:['최근에 가장 힘이 났던 순간, 그때 눈앞에 어떤 목표가 있었나요?','목표가 없던 시기에 나는 무엇으로 하루를 채웠나요?'],
+    C:['최근에 함께해서 좋았던 사람은 누구였고, 무엇이 좋았나요?','혼자 있는 시간이 필요할 때, 나는 그걸 어떻게 말하나요?'],
+    S:['지금 내 하루에서 반드시 지키고 싶은 리듬 하나는 무엇인가요?','그 리듬이 깨졌을 때, 나는 무엇부터 되돌리나요?'],
+    D:['요즘 가장 깊이 들여다보고 싶은 것은 무엇인가요?','완성도를 조금 낮춰도 괜찮은 일은 어떤 것인가요?'],
+    E:['최근에 처음 해본 것 중 가장 좋았던 건 무엇인가요?','시작한 뒤 끝까지 가려면 나에게 무엇이 필요한가요?']
+  };
+  const q = r.caseType==='low'
+    ? ['요즘 나를 가장 많이 가져가는 일은 무엇인가요?','오늘 하루 중 아무것도 하지 않아도 되는 시간은 언제인가요?']
+    : (Q[r.primary]||[]);
+  return `<div class="msec">
+    <div class="msec-lab">나에게 물어보기</div>
+    <ol class="ask-list">${q.map(x=>`<li>${x}</li>`).join('')}</ol>
+    <p class="msec-dim">지금 답하지 않으셔도 됩니다. 며칠 지내면서 떠오를 때 적어 두시면 충분합니다.</p>
+  </div>`;
+}
+
 function readingCardHTML(r) {
   if (r.caseType === 'low') return '';
   const v = r.peak.toFixed(1), o = r.overall.toFixed(1);
@@ -830,15 +956,6 @@ function readingCardHTML(r) {
 }
 
 // ===== 결과 렌더링 =====
-
-var ONE_LINE_5R={
- A:'지금의 당신은 목표가 보일 때 에너지가 빠르게 살아나는 편입니다. 그래서 목표가 흐릿한 구간에서는 힘이 떨어져 보일 수 있습니다. 이럴 땐 무엇을 향해 가는지 목표를 구체화할 필요가 있습니다.',
- C:'지금의 당신은 함께 만들고 주고받을 때 에너지가 크게 살아나는 편입니다. 혼자만의 시간이 길어질수록 느끼는 감정을 눈여겨보고, 사람과 연결되는 방식과 빈도를 자신에게 맞게 설계해 보세요.',
- S:'지금의 당신은 예측 가능한 리듬이 지켜질 때 깊이 들어가는 편입니다. 변화가 잦은 시기에는 불안감이 커지고 효율이 급격히 떨어질 수 있습니다. 다시 안정된 리듬을 세팅하는 데 시간을 쓰는 것이 먼저입니다.',
- D:'지금의 당신은 하나를 깊게 파고들어 완성해 갈 때 에너지가 살아나는 편입니다. 여러 일이 동시에 열릴 때 소모가 커진다면, 집중할 하나를 정하고 나머지는 분배하거나 과감히 내려놓는 것도 방법입니다.',
- E:'지금의 당신은 새로운 가능성을 만날 때 에너지가 살아나는 편입니다. 반복 구간에서 답답함이 커진다면, 같은 일 안에서도 실행 방법을 바꾸거나 적어도 공간이라도 바꾸는 식으로 작은 시도가 가능한 환경을 설계해 보세요.'
-};
-
 function renderResult(r) {
   const p = CHARS[r.primary];
   const s = CHARS[r.secondary];
@@ -881,94 +998,24 @@ function renderResult(r) {
       </div>`;
   }
   document.getElementById('tendency-hero-container').innerHTML = heroHTML;
-  try{var _k=(typeof primary!=='undefined')?primary:null; if(_k&&ONE_LINE_5R[_k]){document.getElementById('tendency-hero-container').insertAdjacentHTML('beforeend','<div class="one-line">'+ONE_LINE_5R[_k]+'</div>');}}catch(e){}
 
-  // 2. 레이더 차트 (SVG 펜타곤)
+  // 2. 표 — 5가지 경향성 한눈에
   document.getElementById('radar-container').innerHTML = renderRadar(r.avgs);
 
-  // 3. 주된 경향 상세
-  if (r.caseType !== 'low') {
-    document.getElementById('main-detail-container').innerHTML = renderDetailCard(p, true);
-    document.getElementById('sub-detail-container').innerHTML = renderDetailCard(s, false);
-  } else {
-    document.getElementById('main-detail-container').innerHTML = '';
-    document.getElementById('sub-detail-container').innerHTML = '';
-  }
+  // 3. 본문 — 하나의 문서처럼 이어 읽히게
+  const st = stageExplain(r);
+  let body = '';
+  body += `<div class="msec"><div class="msec-lab">${st.tag}</div><h3 class="msec-h">${st.title}</h3>${st.body}</div>`;
+  body += socialRead(r);
+  body += lifeScene(r);
+  body += reflectTwo(r);
+  body += `<p class="rnote">이 결과는 <b>지금 시기의 흐름</b>입니다. 한 달 뒤에 다시 해보시면 달라질 수 있고, 달라지는 것이 정상입니다.</p>`;
+  document.getElementById('body-container').innerHTML = body;
 
-  // 4. 지금 시기의 메시지
-  const msgKey = r.caseType === 'low' ? 'LOW' : (r.primary + '_' + (r.caseType === 'balance' ? r.primary : r.secondary));
-  const msg = COMBO_MESSAGES[msgKey] || COMBO_MESSAGES['LOW'];
-  const msgTitle = r.caseType === 'low' ? '지금은 회복이 먼저입니다'
-    : r.caseType === 'balance' ? `${p.name} + ${s.name} 균형 시기의 흐름`
-    : `${p.name} + ${s.name} 조합의 이 시기`;
-  document.getElementById('message-container').innerHTML = `
-    <div class="message-card">
-      <span class="tag">지금 시기의 메시지</span>
-      <h3>${msgTitle}</h3>
-      <p>${msg}</p>
-    </div>`;
-
-  // 5. 조심 신호
-  if (r.caseType !== 'low') {
-    const cautions = p.cautions.map(c=>`<li>${c}</li>`).join('');
-    document.getElementById('caution-container').innerHTML = `
-      <div class="caution-card">
-        <h3>⚠ ${p.name}의 조심 신호</h3>
-        <ul class="caution-list">${cautions}</ul>
-      </div>`;
-  } else {
-    document.getElementById('caution-container').innerHTML = '';
-  }
-
-  // 6. 작은 실천
-  const prac = r.caseType === 'low' ? {
-    title:"오늘의 작은 실천 — 회복 먼저",
-    body:"오늘 하루, 아무것도 하지 않아도 됩니다. 에너지가 어디로도 흐르지 않을 때는 회복이 먼저입니다. 잡음 진단 후 무엇이 소진시키고 있는지 살펴보는 것이 첫 번째 실천입니다."
-  } : PRACTICES[r.primary];
-  document.getElementById('practice-container').innerHTML = `
-    <div class="practice-card">
-      <span class="tag">오늘부터 1분</span>
-      <h3>${prac.title}</h3>
-      <p>${prac.body}</p>
-    </div>`;
-
-  // 6-1. 결과를 읽는 법 — 주된 흐름의 절대 강도 (v2.2)
-  document.getElementById('soft-container').innerHTML = readingCardHTML(r);
-
-  // 7. 변동성 안내
-  document.getElementById('variability-container').innerHTML = `
-    <div class="variability-card">
-      <h3>📌 이 결과에 대해 기억해 주세요</h3>
-      <p>이 결과는 <span class="highlight">\"지금 시기의 에너지 흐름\"</span>입니다.
-      한 달 후, 또는 큰 변화 시점에 다시 진단해 보면 결과가 달라질 수 있습니다.</p>
-      <p>에너지 경향성은 <span class="highlight">\"고정된 유형\"이 아니라 시기와 맥락에 따라 달라지는 에너지 패턴</span>입니다.
-      사람을 칸에 넣지 않습니다. 지금의 흐름을 읽는 도구일 뿐입니다.</p>
-      <p>이 결과는 정답이 아니라, 지금 여러분의 <span class="highlight">자기 신호</span>를 읽어 본 기록입니다.</p>
-    </div>`;
-
-  // 8. 다음 진단 연결
-  const nextHTML = r.caseType === 'low' ?
-    `<a href="https://nadaumlap.github.io/nadaumneed/newnoise/" class="next-card gold">
-      <span class="step-tag">강력 추천 — 잡음 점검 먼저</span>
-      <h3>지금 무엇이 잡음으로 들어와 있는지 살펴볼까요?</h3>
-      <p>잡음 오염도 진단 · 약 5분 · 회복의 첫걸음</p>
-      <span class="arrow">바로 가기 →</span>
-    </a>` :
-    `<a href="https://nadaumlap.github.io/nadaumneed/needscan/" class="next-card blue">
-      <span class="step-tag">함께 보면 좋은 — Need Scan 축 2</span>
-      <h3>지금 나의 욕구는 어디서 시작되고 있을까요?</h3>
-      <p>욕구 출발점 진단 · 약 5분 · 에너지 흐름과 함께 보는 진단</p>
-      <span class="arrow">바로 가기 →</span>
-    </a>
-    <a href="https://nadaumlap.github.io/nadaumneed/newnoise/" class="next-card gold" style="margin-top:12px">
-      <span class="step-tag">다음 단계 — Eliminate Noise</span>
-      <h3>지금 무엇이 잡음으로 들어와 있는지 살펴볼까요?</h3>
-      <p>잡음 오염도 진단 · 약 5분</p>
-      <span class="arrow">바로 가기 →</span>
-    </a>`;
-  document.getElementById('rec-card-slot').innerHTML = `<div class="rec-card">  <span class="rec-step">기록해 두세요</span>  <h3>실행한 내용을 한 줄로 남겨 두세요</h3>  <p>실행한 내용을 한 줄로 간단히 기록해 놓으면 작은 여러분의 실행 역사가 됩니다. 회원가입 없이 바로 사용 가능합니다.</p>  <a class="rec-go" href="https://nadaumlap.github.io/nadaumneed/report/#write">통합 리포트 안 &#39;기록하기&#39;로 바로 가기 →</a>  <div class="rec-note">아래 <b>통합 리포트 열기</b>와 같은 곳입니다. 이 링크는 리포트를 열면서 기록하는 자리까지 바로 내려갑니다.</div></div>`;
-  document.getElementById('rep-cta-slot').innerHTML = `<a class="rep-cta" href="https://nadaumlap.github.io/nadaumneed/report/"><div class="rc-tag">나다움 설계 통합 리포트</div><div class="rc-h">진단에서 멈추지 마세요</div><div class="rc-d">여러분의 나다움 설계 현황을 기록해 두시고, 나다움을 적극 설계하십시오.</div><div class="rc-go">통합 리포트 열기 →</div></a>`;
-  document.getElementById('next-container').innerHTML = nextHTML;
+  // 4. 종합 리포트로
+  document.getElementById('rep-cta-slot').innerHTML =
+    `<p class="next-line">이제 종합 리포트에서 오늘의 연습을 하나 골라보세요. 다른 진단 결과와 함께 모아서 볼 수 있습니다.</p>`
+    + `<a class="rep-cta" href="https://nadaumlap.github.io/nadaumneed/report/"><div class="rc-tag">나다움 설계 종합 리포트</div><div class="rc-h">진단에서 멈추지 마세요</div><div class="rc-go">종합 리포트 열기 →</div></a>`;
 }
 
 // ===== 레이더 차트 =====
@@ -1089,8 +1136,8 @@ function renderDetailCard(char, isMain) {
 // ===== 공유 =====
 function shareLink() {
   const url = "https://nadaumlap.github.io/nadaumneed/5characters/";
-  const text = `"나의 에너지는 어디로 흐를까?" 5러 몰입 경향성 진단을 해봤어요. 약 5분이에요.\n\n${url}`;
-  if (navigator.share) navigator.share({title:"5러 몰입 경향성 진단",text}).catch(()=>copyToClipboard(text));
+  const text = `"나의 에너지는 어디로 흐를까?" 5러 경향성 진단을 해봤어요. 약 5분이에요.\n\n${url}`;
+  if (navigator.share) navigator.share({title:"5러 경향성 진단",text}).catch(()=>copyToClipboard(text));
   else copyToClipboard(text);
 }
 
@@ -1252,7 +1299,7 @@ function shareText5c(){
   else if (r.caseType === 'balance') head = '지금 나의 에너지는 ' + p.flowKey + ' + ' + s.flowKey + ' 두 흐름이 비슷하게 흐르고 있어요.';
   else head = '지금 나의 에너지는 ' + p.flowKey + '으로 흐르고 있어요.\n(주된 ' + p.name + ' 패턴 / 보조 ' + s.name + ' 패턴)';
   const lvl = r.caseType === 'low' ? '' : '\n주된 흐름의 강도 ' + r.peak.toFixed(1) + ' / 5.0';
-  return '5러 몰입 경향성 진단 결과\n\n' + head + lvl +
+  return '5러 경향성 진단 결과\n\n' + head + lvl +
     '\n\n에너지 경향성은 고정된 유형이 아니라 지금 시기의 에너지 패턴이에요.\n5분이면 해볼 수 있어요 👇\nhttps://nadaumlap.github.io/nadaumneed/5characters/';
 }
 
@@ -1298,13 +1345,13 @@ async function shareResult() {
   if (isMobile5c() && navigator.canShare) {
     try {
       const file = new File([blob], fname, {type:'image/png'});
-      const data = { files:[file], text:text, title:'나의 5러 몰입 경향성' };
+      const data = { files:[file], text:text, title:'나의 5러 경향성' };
       if (navigator.canShare(data)) {
         try { await navigator.share(data); showToast('공유되었습니다'); return; }
         catch(se){ if (se.name === 'AbortError') return; }
       }
       if (navigator.canShare({files:[file]})) {
-        try { await navigator.share({files:[file], title:'나의 5러 몰입 경향성'});
+        try { await navigator.share({files:[file], title:'나의 5러 경향성'});
           copyToClipboard(text); showToast('카드 공유 후, 멘트는 복사되었어요'); return;
         } catch(se){ if (se.name === 'AbortError') return; }
       }
@@ -1345,9 +1392,9 @@ window.addEventListener('DOMContentLoaded',()=>{
   document.getElementById('cover-screen').style.display='block';
 });
 
-/* ═══════════ 통합 리포트 인계 링크 (handoff v1) ═══════════
+/* ═══════════ 종합 리포트 인계 링크 (handoff v1) ═══════════
    브라우저 저장(localStorage)이 막히거나 지워져도 결과가 리포트로 넘어가도록,
-   "통합 리포트 열기" 링크에 이 진단 결과를 실어 보낸다.
+   "종합 리포트 열기" 링크에 이 진단 결과를 실어 보낸다.
    인코딩 형식은 /report/의 pack()과 동일해야 한다. 표는 추가만 하고 기존 항목은 바꾸지 않는다. */
 var _ndProfile = null;
 var ND_RPT = 'https://nadaumlap.github.io/nadaumneed/report/';
