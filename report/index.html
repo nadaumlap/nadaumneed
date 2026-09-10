@@ -4,20 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="color-scheme" content="light only">
-<title>나의 나다움 설계 리포트 | 나다움설계연구소</title>
+<title>종합 결과 및 나다움 일기 쓰기 | 나다움설계연구소</title>
 <meta name="description" content="진단 결과를 하나로 모아 읽고, 오늘의 설계 한 문장을 남깁니다.">
-<meta property="og:title" content="나의 나다움 설계 리포트">
+<meta property="og:title" content="종합 결과 및 나다움 일기 쓰기">
 <meta property="og:description" content="왜 어떤 일은 나를 살리고, 어떤 일은 나를 지치게 할까 — 진단 결과를 하나로 모아 읽습니다.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nadaumlap.github.io/nadaumneed/report/">
-<meta property="og:image" content="https://nadaumlap.github.io/nadaumneed/report/og-image.jpg">
+<meta property="og:image" content="https://nadaumlap.github.io/nadaumneed/report/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="나다움 설계 종합 리포트">
+<meta property="og:image:alt" content="종합 결과 및 나다움 일기 쓰기">
 <meta property="og:site_name" content="나다움설계연구소">
 <meta property="og:locale" content="ko_KR">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://nadaumlap.github.io/nadaumneed/report/og-image.jpg">
+<meta name="twitter:image" content="https://nadaumlap.github.io/nadaumneed/report/og-image.png">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="나다움설계연구소">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1407,7 +1407,7 @@ function render(){
   let h='';
   if(_printing){
     nav.hidden=true;
-    h=mapView(A,bn,done)+readExtras(A,cr,done)+changeView()+practiceView()+recordView();
+    h=mapView(A,bn,done)+readExtras(A,cr,done)+journeySection(A,bn)+changeView()+practiceView()+recordView();
   }else{
     const tab=curTab(), tt=tabOf(tab);
     if(('#'+tab)!==(location.hash||'#map')&&location.hash&&location.hash!=='#write'&&location.hash.indexOf('#sec-')!==0){
@@ -1415,7 +1415,7 @@ function render(){
     }
     drawNav(tab);
     let inner='';
-    if(tab==='map')          inner=mapView(A,bn,done)+readExtras(A,cr,done);
+    if(tab==='map')          inner=mapView(A,bn,done)+readExtras(A,cr,done)+journeySection(A,bn);
     else if(tab==='change')  inner=changeView();
     else if(tab==='practice')inner=practiceView();
     else                     inner=recordView();
@@ -1768,12 +1768,15 @@ function mapView(A,bn,done){
      +'<button class="bn-go no-print" onclick="goRecord()">오늘의 설계 시작하기 \u2192</button>'
      +'<div class="bfoot">오늘의 설계는 1분이면 됩니다. 한 문장만 남기시면 됩니다.</div></div></div>';
   }
-  h+='<div class="sec">'+sn()+'<h2>나의 설계 여정</h2>'
-   +'<p class="sub">나다움 설계는 네 단계로 이어집니다. 지금 어디까지 열렸는지 한눈에 보십시오.</p>'
+  return h;
+}
+/* 여정 지도는 해석을 읽은 뒤에 본다 — 지금 상태를 먼저 읽고, 그 다음에 어디까지 왔는지를 본다. */
+function journeySection(A,bn){
+  return '<div class="sec">'+sn()+'<h2>나다움 설계 여정</h2>'
+   +'<p class="sub">나다움 설계는 다섯 단계로 이어집니다. 지금 어디까지 열렸는지 한눈에 보십시오.</p>'
    +journeyView(A,bn,true)
    +nextStepCard()
    +'</div>';
-  return h;
 }
 /* 다음 한 개만 제안한다. 선택지가 많을수록 시작 자체를 미룬다(Iyengar & Lepper, 2000). */
 function nextStepCard(){
@@ -2190,12 +2193,11 @@ function toggleToday(){
   if(last) toggleCheck(last.id);
 }
 
-function notesView(){
+function notesView(){ const b=notesBody(); return b?'<div class="sec">'+sn()+'<h2>쌓인 기록</h2>'+b+'</div>':''; }
+function notesBody(){
   const n=noteCount();
   if(!n) return '';
-  let h='<div class="sec">'+sn()+'<h2>쌓인 기록</h2>'
-   +'<p class="sub">지금까지 남기신 한 줄들입니다. 우선가치는 물어서 나오는 것이 아니라 여기에서 드러납니다. '
-   +''+n+'개가 모였습니다.</p>';
+  let h='<p class="sub">'+n+'개가 모였습니다.</p>';
   const days=Object.keys(P.notes).sort().reverse();
   const byId={}; P.designs.forEach(d=>byId[d.id]=d);
   days.forEach(day=>{
@@ -2207,8 +2209,7 @@ function notesView(){
     }
     h+='</div>';
   });
-  if(n<7)h+='<div class="note">일주일치가 모이면 여기에서 반복되는 결이 보이기 시작합니다.</div>';
-  h+='</div>';
+  if(n<7)h+='<div class="note">일주일치가 모이면 여기에서 반복되는 모습이 보이기 시작합니다.</div>';
   return h;
 }
 
@@ -2346,8 +2347,10 @@ function trendView(){
 function loopView(){
   return '<div class="sec">'+sn()+'<h2>다시 볼 날짜를 미리 정해 두세요</h2>'
    +'<p class="sub">기억에 맡기면 대부분 잊습니다. 다시 볼 날을 지금 캘린더에 넣어 두시면, '
-   +'그날 알림이 오고 위의 변화 기록에 점이 하나 더 찍힙니다.</p>'
-   +'<div class="card"><div style="font-size:14.5px;line-height:1.75;color:#2D3748;word-break:keep-all">'
+   +'그날 알림이 오고 위의 변화 기록에 점이 하나 더 찍힙니다.</p>'+loopBody()+'</div>';
+}
+function loopBody(){
+  return '<div class="card"><div style="font-size:14.5px;line-height:1.75;color:#2D3748;word-break:keep-all">'
    +'&quot;그 문장, 지켜졌나요?&quot; — 캘린더에 담으시면 <b>그날 오후 9시에 휴대폰이 알려줍니다.</b> '
    +'일정 안에 보관 링크도 같이 들어가니, 기기를 바꾸셔도 그 링크로 이어서 보실 수 있습니다.<br>'
    +(AUTH_USER?'회원이시니 4주 뒤 같은 안내를 메일로도 보내 드립니다. 캘린더는 겹쳐 두셔도 됩니다.':'저희가 이메일이나 문자를 보내지는 않습니다. 여러분의 캘린더에만 담깁니다.')+'</div>'
@@ -2356,7 +2359,7 @@ function loopView(){
    +'<button class="btn ghost" onclick="makeICS(&#39;month&#39;)">매달</button>'
    +'<button class="btn ghost" onclick="makeICS(&#39;quarter&#39;)">3개월마다</button>'
    +'</div><div class="ics-hint">매달은 1년치, 3개월마다는 2년치 반복 일정으로 담깁니다. 언제든 캘린더에서 지우실 수 있습니다.</div>'
-   +'</div></div>';
+   +'</div>';
 }
 
 function keepView(){
@@ -2479,7 +2482,7 @@ function legacy(t,cb){const a=document.createElement('textarea');a.value=t;a.sty
   document.body.appendChild(a);a.select();try{document.execCommand('copy');cb()}catch(e){toast('복사에 실패했습니다')}document.body.removeChild(a)}
 function shareKeep(){
   const u=keepUrl();
-  const t='나의 나다움 설계 리포트입니다. 이 링크를 열면 결과가 복원됩니다.\n\n'+u;
+  const t='종합 결과 및 나다움 일기 쓰기입니다. 이 링크를 열면 결과가 복원됩니다.\n\n'+u;
   if(navigator.share)navigator.share({title:'나다움 설계 리포트',text:t}).catch(()=>copyKeep());
   else copyKeep();
 }
@@ -3850,10 +3853,14 @@ function rp4NewOpen(seed){
   setTimeout(function(){
     if(typeof render === 'function') render();
     setTimeout(function(){
+      /* 패널 한가운데로 보내면 '어느 연습인가요?'가 화면 위로 밀려난다.
+         맨 위(제목·축 선택)가 먼저 보이도록 맞추고, 입력칸 자동 포커스는 두지 않는다.
+         포커스를 주면 모바일에서 키보드가 올라오며 화면이 다시 아래로 끌려간다. */
       var el = document.getElementById('rp4-new');
-      if(el) el.scrollIntoView({behavior:'smooth', block:'center'});
-      var t = document.getElementById('rp4-new-text');
-      if(t) t.focus();
+      if(el){
+        var y = el.getBoundingClientRect().top + (window.pageYOffset||0) - 72;
+        window.scrollTo({top: Math.max(0,y), behavior:'smooth'});
+      }
     },140);
   },160);
 }
@@ -4072,7 +4079,7 @@ function recordView(){
 
   /* 02 · 우선가치 — 오늘 쓰는 화면 바로 다음에 둔다. */
   h += '<div class="sec" id="sec-value-mirror">'+sn()
-    + rp4SecHead('02 · 나의 우선가치',
+    + rp4SecHead('02 · 나다움 설계 핵심 : 우선가치 수립하기',
         '내가 실제로 중요하게<br>여기는 것은 무엇일까요?',
         '우선가치는 물어서 나오는 것이 아니라, 실제로 지킨 것들에서 드러납니다.',
         '오늘의 기록에서 고른 가치는 여기에 쌓이기만 합니다. 기준을 바꾸는 것은 아래 재선정에서만 일어납니다.')
@@ -4084,8 +4091,7 @@ function recordView(){
   var tl = rp4Timeline();
   if(tl){
     back += '<div class="rp4-back-sec">'
-      + rp4SecHead('', '예전의 나는 무엇을 원했고,<br>어떻게 선택했을까요?',
-          '오늘 적는 것보다, 한 달 뒤 그 기록을 다시 읽는 경험이 더 많은 것을 알려줍니다.')
+      + rp4SecHead('', '날짜별로 남긴 기록', '오늘 적는 것보다, 한 달 뒤 그 기록을 다시 읽는 경험이 더 많은 것을 알려줍니다.')
       + tl + '</div>';
   }
   var pt = rp4Pattern();
@@ -4107,14 +4113,27 @@ function recordView(){
         '방금 적은 것 말고, 그 전에 남긴 기록입니다.')
     + rp4SideRecent() + '</div>';
 
+  /* 03 · 실천 약속 */
+  h += '<div class="sec">'+sn()
+    + rp4SecHead('03 · 나다움 설계 목표 : 우선가치 실천하기',
+        '다시 볼 날짜를<br>미리 정해 두세요.',
+        '기억에 맡기면 대부분 잊습니다. 다시 볼 날을 지금 캘린더에 넣어 두시면, 그날 알림이 오고 변화 기록에 점이 하나 더 찍힙니다.')
+    + loopBody() + '</div>';
+
+  /* 04 · 지난 기록 — 이미 쓴 것을 감추는 접기다(오늘 쓸 칸은 가리지 않는다). */
+  var nt = notesBody();
+  if(nt) back += '<div class="rp4-back-sec">'
+    + rp4SecHead('', '지금까지 남기신<br>한 줄들입니다.',
+        '우선가치는 물어서 나오는 것이 아니라, 여기에서 드러납니다.')
+    + nt + '</div>';
+
   h += '<div class="sec rp4-back">'+sn()
     + '<details id="rp4-back-fold"'+(RP4_BACK_OPEN?' open':'')+' ontoggle="rp4BackToggle(this)">'
-    + '<summary><b>03 · 예전 기록 돌아보기</b>'
-    + '<span>지난 기록, 반복해서 나타나는 나, 이번 주에 발견한 것</span></summary>'
+    + '<summary>' + rp4SecHead('04 · 나다움 설계 지난 기록',
+        '예전의 나는 무엇을 원했고,<br>어떻게 선택했을까요?',
+        '지난 기록, 반복해서 나타나는 나, 이번 주에 발견한 것, 지금까지 남긴 한 줄') + '</summary>'
     + '<div class="rp4-back-in">' + back + '</div></details></div>';
 
-  h += notesView();
-  h += loopView();
   h += keepView();
   return h;
 }
@@ -4486,12 +4505,11 @@ function rp4GoValueEdit(){
 
   /* ── 진행 표시 ───────────────────────────────────── */
   .rp4-back details{border:1px solid #ECE8E0;border-radius:18px;background:#FCFBF9;overflow:hidden}
-  .rp4-back summary{list-style:none;cursor:pointer;padding:18px 20px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .rp4-back summary{list-style:none;cursor:pointer;padding:18px 20px 4px;position:relative}
   .rp4-back summary::-webkit-details-marker{display:none}
-  .rp4-back summary::after{content:'\\25B8';margin-left:auto;color:#A9AEBC;font-size:13px;transition:transform .2s}
+  .rp4-back summary::after{content:'\\25B8';position:absolute;right:20px;top:22px;color:#A9AEBC;font-size:15px;transition:transform .2s}
   .rp4-back details[open] summary::after{transform:rotate(90deg)}
-  .rp4-back summary b{font-size:17.5px;font-weight:800;color:#20242C;letter-spacing:-.02em}
-  .rp4-back summary span{font-size:13.5px;color:#8A90A0;line-height:1.6}
+  .rp4-back summary .rp4-section-head{margin-bottom:10px;padding-right:24px}
   .rp4-back-in{padding:0 20px 18px}
   .rp4-back-sec{margin-top:18px}
   .rp4-back-sec .rp4-section-number{display:none}
@@ -4740,6 +4758,39 @@ function rp4GoValueEdit(){
   .rp4-footband p{margin:6px 0 0;font-size:14.5px;color:#6b6478;line-height:1.65}
   .rp4-footband-sign{margin-left:auto;text-align:right;font-size:15px;line-height:1.5;color:#8B5CF6;font-style:italic;white-space:nowrap}
   @media(max-width:640px){.rp4-footband{flex-wrap:wrap}.rp4-footband-sign{margin-left:0;text-align:left}}
+
+  /* ── 모바일 밀도 조정 ──────────────────────────────
+     좁은 화면에서 좌우 여백이 3중(wrap+panel+group)으로 겹쳐 본문 폭이 300px 아래로
+     떨어졌다. 여백을 한 겹씩 줄여 본문 폭을 넓히고, 제목·문단의 세로 간격을 줄여
+     한 화면에 들어가는 양을 늘린다. */
+  @media(max-width:560px){
+    .wrap{padding-left:10px;padding-right:10px}
+    .panel{padding:16px 11px 20px}
+    .sec{margin-bottom:22px}
+    .rp4-section-head{margin-bottom:14px;gap:8px}
+    .rp4-section-head h2{font-size:21px;line-height:1.34}
+    .rp4-section-number{font-size:12.5px;margin-bottom:7px}
+    .rp4-section-aside p{font-size:14.5px;line-height:1.62;margin-bottom:5px}
+    .rp4-section-aside p.dim{font-size:13px}
+    .rp4-group{padding:14px 10px 4px}
+    .rp4-group-head b{font-size:16px}
+    .rp4-q{margin-top:16px;padding-left:12px;padding-right:12px}
+    .rp4-q-head{gap:8px;margin-bottom:9px}
+    .rp4-q-title{font-size:16px;gap:8px}
+    .rp4-q-title i{width:23px;height:23px;font-size:12px}
+    .rp4-help{font-size:14px;line-height:1.6;margin-bottom:9px}
+    .rp4-opt{padding:11px 12px}
+    .rp4-opt b{font-size:15px}
+    .rp4-opt small{font-size:12.5px}
+    .rp4-chip{padding:9px 13px;font-size:14.5px}
+    .rp4-chips{gap:7px}
+    .card{padding:15px 13px;margin-bottom:11px}
+    .sec h2{font-size:20px}
+    .rp4-back-in{padding:0 10px 12px}
+    .rp4-back summary{padding:14px 11px 2px}
+    .rp4-back summary::after{right:11px}
+    .rp4-footband{padding:14px 12px}
+  }
 
   `;
   var s = document.createElement('style');
