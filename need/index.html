@@ -183,24 +183,6 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
  .opt-b:hover{border-color:#8B5CF6} .vcard:hover{border-color:#8B5CF6}
  .btn-primary:hover{background:#151C47} .rep-cta:hover{transform:translateY(-2px)}
 }
-
-.cover-more{margin:16px 0 0;text-align:left;}
-.cover-more>summary{cursor:pointer;list-style:none;text-align:center;font-size:13px;color:#7A8796;padding:8px 0;}
-.cover-more>summary::-webkit-details-marker{display:none;}
-.cover-more>summary::after{content:" ▾";}
-.cover-more[open]>summary::after{content:" ▴";}
-.cover-more>summary:hover{color:#3F4C5A;}
-
-.one-line{background:#FBFAFF;border:1px solid #DFD9F0;border-left:4px solid #5B4C99;border-radius:12px;
-  padding:14px 16px;margin:14px 0 4px;font-size:15px;line-height:1.65;color:#16202B;text-align:left;}
-.scene-card{background:#FFF;border:1px solid #E4E9F0;border-radius:14px;padding:18px 18px 16px;margin:14px 0;text-align:left;}
-.scene-tag{font-size:12px;font-weight:700;color:#8B93A5;margin-bottom:6px;}
-.scene-lead{font-size:14.5px;color:#3F4C5A;line-height:1.6;margin:0 0 10px;}
-.scene-list{list-style:none;padding:0;margin:0;}
-.scene-list li{position:relative;padding-left:16px;font-size:14.5px;line-height:1.65;color:#16202B;margin-bottom:7px;}
-.scene-list li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:#5B4C99;}
-.scene-exp{margin-top:12px;padding-top:11px;border-top:1px dashed #E4E9F0;font-size:14px;line-height:1.6;color:#3F4C5A;}
-.scene-exp b{color:#16202B;}
 </style>
 </head>
 <body>
@@ -215,19 +197,16 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
  <div class="screen on" id="s-cover">
   <span class="cover-tag">D단계 — Daily Authorship · 자기저자성 실천</span>
   <h1 class="cover-h">이 선택은 나의<br>우선가치와 부합하는가?</h1>
-  <div class="cover-meta"><span>⏱ 약 7분</span><span>📋 20문항+가치 워크</span><span>🆓 무료</span></div>
-  <button class="btn-primary" onclick="startQuiz()">진단 시작하기</button>
-<details class="cover-more"><summary>진단 구성이 궁금하신가요?</summary>
-<div class="purpose"><div class="lab">이 진단이 재는 것</div><p>가치가 <b>얼마나 중요한지</b>는 묻지 않습니다. 그 질문은 거의 모두가 높게 답해서 아무것도 구분해 주지 못합니다(Valued Living Questionnaire 규준표본 중요도 평균 81/100). 대신 <b>최근 한 달 동안 실제로 어떻게 살았는지</b>를 묻습니다. 의도를 크게 바꿔도 행동은 그 절반쯤만 따라오기 때문입니다(Webb &amp; Sheeran, 2006: 의도 d=0.66 → 행동 d=0.36).</p></div>
+  <div class="purpose"><div class="lab">이 진단이 재는 것</div><p>가치가 <b>얼마나 중요한지</b>는 묻지 않습니다. 그 질문은 거의 모두가 높게 답해서 아무것도 구분해 주지 못합니다(Valued Living Questionnaire 규준표본 중요도 평균 81/100). 대신 <b>지난 2주 동안 실제로 어떻게 살았는지</b>를 묻습니다. 의도를 크게 바꿔도 행동은 그 절반쯤만 따라오기 때문입니다(Webb &amp; Sheeran, 2006: 의도 d=0.66 → 행동 d=0.36).</p></div>
   <div class="axis-preview">
    <div class="ap"><span class="k">D1</span><span class="nm">기준 선명도</span><div class="ds">내가 무엇을 중요하게 여기는 사람인지 스스로 분명한가</div></div><div class="ap"><span class="k">D2</span><span class="nm">선택 정렬</span><div class="ds">오늘의 구체적 선택이 그 기준과 맞물렸는가</div></div><div class="ap"><span class="k">D3</span><span class="nm">경계 세우기</span><div class="ds">아닌 것에 아니라고 말할 수 있는가</div></div><div class="ap"><span class="k">D4</span><span class="nm">실행 지속</span><div class="ds">정한 것을 실제로 하고, 하고 있는지 스스로 확인하는가</div></div>
   </div>
-  </details>
-
+  <div class="cover-meta"><span>⏱ 약 7분</span><span>📋 20문항+가치 워크</span><span>🆓 무료</span></div>
+  <button class="btn-primary" onclick="startQuiz()">진단 시작하기</button>
   <div class="detail-toggle" onclick="toggleDetail()" id="dtog">어떤 근거로 만든 진단인가요? ▾</div>
   <div class="detail-sec" id="dsec">
-   <div class="basis"><span class="bk">D1 · 기준 선명도</span>자기개념 명료성 척도(Campbell et al., 1996 / 한국 번안 α=.81)의 구인을 참고했습니다. 원척도는 12문항 중 10문항이 역문항인데, 한국 표본에서 역문항이 요인구조를 깨뜨린다는 보고가 반복돼(PLOS ONE, 2013) <b>전 문항을 긍정 진술로 다시 썼습니다</b>.</div><div class="basis"><span class="bk">D2 · 선택 정렬</span>가치 실행 척도(Valuing Questionnaire, Smout et al., 2014, α=.79~.87)의 Progress/Obstruction 구조와 자기일치성 모형(Sheldon &amp; Elliot, 1999)을 반영했습니다. 자기일치성-안녕감 상관은 한국 표본에서도 확인되었습니다(Sheldon et al., 2004, 한양대 194명, r=.27).</div><div class="basis"><span class="bk">D3 · 경계 세우기</span>주장성 척도(Rathus, 1973)의 거절 관련 문항을 한국 맥락으로 다시 썼습니다. 이 축은 브랜드의 사회구조 진단 중 <b>눈치 문화</b>와 정확히 겹치는 자리입니다.</div><div class="basis"><span class="bk">D4 · 실행 지속</span>셀프리더십 척도(Houghton &amp; Neck, 2002)의 자기목표설정·자기관찰 하위척도를 참고했습니다. 한국 대학생 645명 대상 타당화에서 원 요인구조가 유지되었습니다(신윤정 외, 2009).</div>
-   <div class="basis"><span class="bk">공통 설계 원칙</span>모든 문항을 <b>긍정 진술</b>로 썼습니다. 역방향 문항이 한국어 표본에서 요인구조를 깨뜨린다는 보고가 반복되기 때문입니다(PLOS ONE, 2013 / 문항표현 IRT 분석, Frontiers in Psychology, 2024). 또 "얼마나 중요한가"가 아니라 <b>"최근 한 달 동안 실제로 얼마나 그랬는가"</b>를 물었습니다. 중요도 문항은 대부분의 응답이 상단에 몰려 구분이 되지 않기 때문입니다.</div>
+   <div class="basis"><span class="bk">D1 · 기준 선명도</span>자기개념 명료성 척도(Campbell et al., 1996 / 한국 번안 α=.81)의 구인을 참고했습니다. 원척도는 12문항 중 10문항이 역문항인데, 한국 표본에서 역문항이 요인구조를 깨뜨린다는 보고가 반복돼(PLOS ONE, 2013) <b>전 문항을 긍정 진술로 다시 썼습니다</b>.</div><div class="basis"><span class="bk">D2 · 선택 정렬</span>가치 실행 척도(Valuing Questionnaire, Smout et al., 2014, α=.79~.87)의 Progress/Obstruction 구조와 자기일치성 모형(Sheldon &amp; Elliot, 1999)을 반영했습니다. 자기일치성-안녕감 상관은 한국 표본에서도 확인되었습니다(Sheldon et al., 2004, 한양대 194명, r=.27).</div><div class="basis"><span class="bk">D3 · 경계 세우기</span>주장성 척도(Rathus, 1973)의 거절 관련 문항을 한국 맥락으로 다시 썼습니다. 이 항목은 브랜드의 사회구조 진단 중 <b>눈치 문화</b>와 정확히 겹치는 부분입니다.</div><div class="basis"><span class="bk">D4 · 실행 지속</span>셀프리더십 척도(Houghton &amp; Neck, 2002)의 자기목표설정·자기관찰 하위척도를 참고했습니다. 한국 대학생 645명 대상 타당화에서 원 요인구조가 유지되었습니다(신윤정 외, 2009).</div>
+   <div class="basis"><span class="bk">공통 설계 원칙</span>모든 문항을 <b>긍정 진술</b>로 썼습니다. 역방향 문항이 한국어 표본에서 요인구조를 깨뜨린다는 보고가 반복되기 때문입니다(PLOS ONE, 2013 / 문항표현 IRT 분석, Frontiers in Psychology, 2024). 또 "얼마나 중요한가"가 아니라 <b>"지난 2주 동안 실제로 얼마나 그랬는가"</b>를 물었습니다. 중요도 문항은 대부분의 응답이 상단에 몰려 구분이 되지 않기 때문입니다.</div>
   </div>
  </div>
 
@@ -238,7 +217,7 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
   <div class="q-card">
    <span class="q-pill" id="qPill"></span>
    <div class="q-text" id="qText"></div>
-   <div style="font-size:12.5px;color:#8B93A5;margin:-14px 0 14px">최근 한 달를 떠올려 보세요</div>
+   <div style="font-size:12.5px;color:#8B93A5;margin:-14px 0 14px">지난 2주를 떠올려 보세요</div>
    <div class="scale-labels"><span class="sl-neg">거의 없었다</span><span class="sl-mid">절반쯤</span><span class="sl-pos">거의 매번</span></div>
    <div class="scale-line" id="scRow"></div>
   </div>
@@ -267,13 +246,13 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
 
 <script>
 const BASE='https://nadaumlap.github.io/nadaumneed';
-const ITEMS=[{"a": "D1", "t": "무엇을 중요하게 여기는 사람인지 한 문장으로 말할 수 있었다"}, {"a": "D2", "t": "결정을 내리기 전에 내 기준에 맞는지 한 번 확인했다"}, {"a": "D3", "t": "내키지 않는 부탁에 시간을 먼저 말하고 조율했다"}, {"a": "D4", "t": "하기로 정한 것을 그날 안에 실제로 했다"}, {"a": "D1", "t": "여러 선택지 앞에서 무엇을 먼저 놓아야 할지 분명했다"}, {"a": "D2", "t": "특정 선택을 하고 나서 그 선택이 나답다고 느꼈다"}, {"a": "D3", "t": "분위기에 덜 맞아도 내 사정을 있는 그대로 말했다"}, {"a": "D4", "t": "오늘 무엇을 했는지 하루 끝에 짧게 돌아봤다"}, {"a": "D1", "t": "내가 추구하는 가치에 대한 생각이 최근 일관됐다"}, {"a": "D2", "t": "해야 할 것 같아서 하기보다 주로 내가 원해서 했다"}, {"a": "D3", "t": "설령 거절이 부담스러워도 내 결정을 그대로 유지했다"}, {"a": "D4", "t": "이번 주에 지키기로 한 것 하나를 실제로 지켰다"}, {"a": "D1", "t": "갑자기 누가 물어도 내가 지금 무엇을 향해 가는지 설명할 수 있었다"}, {"a": "D2", "t": "시간을 어디에 쓸지 정할 때 내 기준을 떠올리고 적용했다"}, {"a": "D3", "t": "가까운 사람의 기대와 내 판단이 다를 때 내 판단을 우선했다"}, {"a": "D4", "t": "계획이 어긋난 날에도 다음 날 다시 이어서 했다"}, {"a": "D1", "t": "남들이 좋다고 하는 것과 내가 좋다고 하는 것을 구분했다"}, {"a": "D2", "t": "습관적으로 하던 일 하나를 멈추고 다시 정했다"}, {"a": "D3", "t": "할 수 없는 일은 할 수 없다고 그 자리에서 말했다"}, {"a": "D4", "t": "스스로 정한 것을 지키고 있는지 중간중간 확인했다"}];
-const AX={"D1": {"name": "기준 선명도", "short": "선명", "desc": "내가 무엇을 중요하게 여기는 사람인지 스스로 분명한가", "basis": "자기개념 명료성 척도(Campbell et al., 1996 / 한국 번안 α=.81)의 구인을 참고했습니다. 원척도는 12문항 중 10문항이 역문항인데, 한국 표본에서 역문항이 요인구조를 깨뜨린다는 보고가 반복돼(PLOS ONE, 2013) <b>전 문항을 긍정 진술로 다시 썼습니다</b>."}, "D2": {"name": "선택 정렬", "short": "정렬", "desc": "오늘의 구체적 선택이 그 기준과 맞물렸는가", "basis": "가치 실행 척도(Valuing Questionnaire, Smout et al., 2014, α=.79~.87)의 Progress/Obstruction 구조와 자기일치성 모형(Sheldon &amp; Elliot, 1999)을 반영했습니다. 자기일치성-안녕감 상관은 한국 표본에서도 확인되었습니다(Sheldon et al., 2004, 한양대 194명, r=.27)."}, "D3": {"name": "경계 세우기", "short": "경계", "desc": "아닌 것에 아니라고 말할 수 있는가", "basis": "주장성 척도(Rathus, 1973)의 거절 관련 문항을 한국 맥락으로 다시 썼습니다. 이 축은 브랜드의 사회구조 진단 중 <b>눈치 문화</b>와 정확히 겹치는 자리입니다."}, "D4": {"name": "실행 지속", "short": "지속", "desc": "정한 것을 실제로 하고, 하고 있는지 스스로 확인하는가", "basis": "셀프리더십 척도(Houghton &amp; Neck, 2002)의 자기목표설정·자기관찰 하위척도를 참고했습니다. 한국 대학생 645명 대상 타당화에서 원 요인구조가 유지되었습니다(신윤정 외, 2009)."}};
+const ITEMS=[{"a": "D1", "t": "무엇을 중요하게 여기는 사람인지 한 문장으로 말할 수 있었다"}, {"a": "D2", "t": "결정을 내리기 전에 내 기준에 맞는지 한 번 확인했다"}, {"a": "D3", "t": "내키지 않는 부탁에 시간을 먼저 말하고 조율했다"}, {"a": "D4", "t": "하기로 정한 것을 그날 안에 실제로 했다"}, {"a": "D1", "t": "여러 선택지 앞에서 무엇을 먼저 놓아야 할지 분명했다"}, {"a": "D2", "t": "한 선택을 하고 나서 그 선택이 나답다고 느꼈다"}, {"a": "D3", "t": "분위기가 그렇더라도 내 사정을 그대로 말했다"}, {"a": "D4", "t": "오늘 무엇을 했는지 하루 끝에 짧게 돌아봤다"}, {"a": "D1", "t": "내가 어떤 사람인지에 대한 생각이 그 주 내내 일관됐다"}, {"a": "D2", "t": "해야 할 것 같아서가 아니라 내가 원해서 한 일이 있었다"}, {"a": "D3", "t": "거절한 뒤에도 그 결정을 그대로 유지했다"}, {"a": "D4", "t": "이번 주에 지키기로 한 것 하나를 실제로 지켰다"}, {"a": "D1", "t": "누가 물어도 내가 지금 무엇을 향해 가는지 설명할 수 있었다"}, {"a": "D2", "t": "시간을 어디에 쓸지 정할 때 내 기준이 실제로 작동했다"}, {"a": "D3", "t": "가까운 사람의 기대와 내 판단이 다를 때 내 판단을 말했다"}, {"a": "D4", "t": "계획이 어긋난 날에도 다음 날 다시 이어서 했다"}, {"a": "D1", "t": "남들이 좋다고 하는 것과 내가 좋다고 하는 것을 구분했다"}, {"a": "D2", "t": "자동으로 하던 일 하나를 멈추고 다시 정했다"}, {"a": "D3", "t": "할 수 없는 일을 할 수 없다고 그 자리에서 말했다"}, {"a": "D4", "t": "스스로 정한 것을 지키고 있는지 중간에 확인했다"}];
+const AX={"D1": {"name": "기준 선명도", "short": "선명", "desc": "내가 무엇을 중요하게 여기는 사람인지 스스로 분명한가", "basis": "자기개념 명료성 척도(Campbell et al., 1996 / 한국 번안 α=.81)의 구인을 참고했습니다. 원척도는 12문항 중 10문항이 역문항인데, 한국 표본에서 역문항이 요인구조를 깨뜨린다는 보고가 반복돼(PLOS ONE, 2013) <b>전 문항을 긍정 진술로 다시 썼습니다</b>."}, "D2": {"name": "선택 정렬", "short": "정렬", "desc": "오늘의 구체적 선택이 그 기준과 맞물렸는가", "basis": "가치 실행 척도(Valuing Questionnaire, Smout et al., 2014, α=.79~.87)의 Progress/Obstruction 구조와 자기일치성 모형(Sheldon &amp; Elliot, 1999)을 반영했습니다. 자기일치성-안녕감 상관은 한국 표본에서도 확인되었습니다(Sheldon et al., 2004, 한양대 194명, r=.27)."}, "D3": {"name": "경계 세우기", "short": "경계", "desc": "아닌 것에 아니라고 말할 수 있는가", "basis": "주장성 척도(Rathus, 1973)의 거절 관련 문항을 한국 맥락으로 다시 썼습니다. 이 항목은 브랜드의 사회구조 진단 중 <b>눈치 문화</b>와 정확히 겹치는 부분입니다."}, "D4": {"name": "실행 지속", "short": "지속", "desc": "정한 것을 실제로 하고, 하고 있는지 스스로 확인하는가", "basis": "셀프리더십 척도(Houghton &amp; Neck, 2002)의 자기목표설정·자기관찰 하위척도를 참고했습니다. 한국 대학생 645명 대상 타당화에서 원 요인구조가 유지되었습니다(신윤정 외, 2009)."}};
 const ORDER=["D1", "D2", "D3", "D4"];
-const READ={"D1": {"low": "내가 무엇을 중요하게 여기는 사람인지가 아직 문장으로 잡히지 않은 상태입니다. 이건 생각이 부족해서가 아니라, 기준이 원래 관찰에서 나오기 때문입니다. 먼저 쌓고 나서 이름을 붙이는 순서가 맞습니다.", "mid": "기준이 있기는 한데 상황마다 흔들립니다. 흔들리는 지점을 몇 번 적어 두면 그 안에서 반복되는 결이 보입니다.", "high": "자기 기준이 분명한 편입니다. 이제 그 기준이 실제 선택에서 작동하는지가 다음 질문입니다."}, "D2": {"low": "기준과 선택 사이가 벌어져 있습니다. 이 간격은 누구에게나 있습니다 — 의도를 바꿔도 행동은 절반쯤만 따라옵니다. 다만 그 간격을 줄이는 방법은 결심이 아니라 언제·어디서를 미리 정해 두는 쪽입니다.", "mid": "맞을 때도 있고 어긋날 때도 있습니다. 어긋난 날에 무엇이 끼어들었는지가 다음 설계의 재료입니다.", "high": "기준이 실제 선택에서 작동하고 있습니다. 이 상태를 만든 조건을 적어 두면 흔들릴 때 돌아올 수 있습니다."}, "D3": {"low": "아닌 것에 아니라고 말하기 어려운 상태입니다. 이건 성격의 약함이 아니라 눈치 문화의 작동 방식입니다 — 원한다는 느낌이 올라오는 순간 먼저 주변을 살피게 만듭니다. 거절보다 조율의 언어부터 시작하는 편이 현실적입니다.", "mid": "어떤 자리에서는 말하고 어떤 자리에서는 삼킵니다. 삼키게 되는 상대나 상황이 정해져 있는지 살펴볼 만합니다.", "high": "아닌 것에 아니라고 말할 수 있습니다. 이 축이 서 있으면 다른 축의 설계가 실제로 지켜집니다."}, "D4": {"low": "정하는 것과 하는 것 사이가 끊겨 있습니다. 정하는 능력이 없어서가 아니라, 정한 것을 확인할 자리가 없어서인 경우가 많습니다.", "mid": "시작은 하는데 중간에 끊깁니다. 계획이 어긋난 다음 날 다시 잇는 것이 지속의 핵심입니다.", "high": "정한 것을 하고, 하고 있는지 스스로 확인하고 계십니다. 이 습관이 우선가치를 실제 삶으로 옮깁니다."}};
+const READ={"D1": {"low": "내가 무엇을 중요하게 여기는 사람인지가 아직 문장으로 잡히지 않은 상태입니다. 이건 생각이 부족해서가 아니라, 기준이 원래 관찰에서 나오기 때문입니다. 먼저 쌓고 나서 이름을 붙이는 순서가 맞습니다.", "mid": "기준이 있기는 한데 상황마다 흔들립니다. 흔들리는 지점을 몇 번 적어 두면 그 안에서 반복되는 결이 보입니다.", "high": "자기 기준이 분명한 편입니다. 이제 그 기준이 실제 선택에서 작동하는지가 다음 질문입니다."}, "D2": {"low": "기준과 선택 사이가 벌어져 있습니다. 이 간격은 누구에게나 있습니다 — 의도를 바꿔도 행동은 절반쯤만 따라옵니다. 다만 그 간격을 줄이는 방법은 결심이 아니라 언제·어디서를 미리 정해 두는 쪽입니다.", "mid": "맞을 때도 있고 어긋날 때도 있습니다. 어긋난 날에 무엇이 끼어들었는지가 다음 설계의 재료입니다.", "high": "기준이 실제 선택에서 작동하고 있습니다. 이 상태를 만든 조건을 적어 두면 흔들릴 때 돌아올 수 있습니다."}, "D3": {"low": "아닌 것에 아니라고 말하기 어려운 상태입니다. 이건 성격의 약함이 아니라 눈치 문화의 작동 방식입니다 — 원한다는 느낌이 올라오는 순간 먼저 주변을 살피게 만듭니다. 거절보다 조율의 언어부터 시작하는 편이 현실적입니다.", "mid": "어떤 자리에서는 말하고 어떤 자리에서는 삼킵니다. 삼키게 되는 상대나 상황이 정해져 있는지 살펴볼 만합니다.", "high": "아닌 것에 아니라고 말할 수 있습니다. 이 항목이 서 있으면 다른 항목의 설계가 실제로 지켜집니다."}, "D4": {"low": "정하는 것과 하는 것 사이가 끊겨 있습니다. 정하는 능력이 없어서가 아니라, 정한 것을 확인할 방법이 없어서인 경우가 많습니다.", "mid": "시작은 하는데 중간에 끊깁니다. 계획이 어긋난 다음 날 다시 잇는 것이 지속의 핵심입니다.", "high": "정한 것을 하고, 하고 있는지 스스로 확인하고 계십니다. 이 습관이 우선가치를 실제 삶으로 옮깁니다."}};
 const ACT={"D1": ["오늘 한 선택 하나가 어떤 기준에서 나왔는지 한 줄로 적는다", "남들이 좋다고 한 것과 내가 좋다고 한 것을 나눠 적는다"], "D2": ["결정 직전에 \"이건 내가 원해서인가, 해야 할 것 같아서인가\"를 한 줄로 적는다", "자동으로 하던 일 하나를 멈추고 다시 정해 본다"], "D3": ["즉답 대신 \"확인하고 말씀드리겠습니다\"를 한 번 써 본다", "이번 주에 조율한 부탁 하나를 적어 둔다"], "D4": ["이번 주에 지킬 것 한 가지를 정하고 지킨 날에 표시한다", "하루 끝에 한 줄로 오늘을 돌아본다"]};
-const SEGH={"low": "아직 설계가 시작되기 전 자리입니다", "mid": "기준은 있는데 일상까지 내려오지 않았습니다", "high": "자기 기준으로 하루를 쓰고 계십니다"};
-const SEGB={"low": "네 축이 모두 낮게 나왔습니다. 여기서 필요한 것은 더 큰 결심이 아니라 아주 작은 기록 하나입니다. 관찰이 쌓여야 기준이 생깁니다.", "mid": "네 축은 함께 작동합니다. 지금 가장 낮은 축을 먼저 살펴보면 흐름을 이해하는 데 도움이 됩니다. 네 축을 고루 올리기보다 이 한 축을 먼저 손대는 편이 빠릅니다.", "high": "기준이 일상에서 작동하고 있습니다. 지금 상태를 문장으로 남겨 두시면 흔들릴 때 돌아올 자리가 됩니다."};
+const SEGH={"low": "아직 설계가 시작되기 전입니다", "mid": "기준은 있는데 일상까지 내려오지 않았습니다", "high": "자기 기준으로 하루를 쓰고 계십니다"};
+const SEGB={"low": "네 항목이 모두 낮게 나왔습니다. 여기서 필요한 것은 더 큰 결심이 아니라 아주 작은 기록 하나입니다. 관찰이 쌓여야 기준이 생깁니다.", "mid": "가장 낮은 항목 하나가 나머지를 끌어내리고 있습니다. 네 가지를 다 올리려 하기보다 이것 하나를 먼저 손보는 게 빠릅니다.", "high": "기준이 일상에서 작동하고 있습니다. 지금 상태를 문장으로 남겨 두시면 흔들릴 때 돌아올 기준이 됩니다."};
 const VALUES=[{"k": "자율", "d": "내 방식대로 정하는 것"}, {"k": "연결", "d": "사람과 이어져 있는 것"}, {"k": "몰입", "d": "한 가지에 깊이 들어가는 것"}, {"k": "회복", "d": "나를 지키고 되돌리는 것"}, {"k": "성장", "d": "어제보다 나아지는 것"}, {"k": "성취", "d": "목표를 이뤄내는 것"}, {"k": "안정", "d": "흔들리지 않는 리듬을 갖는 것"}, {"k": "기여", "d": "누군가에게 보탬이 되는 것"}, {"k": "정직", "d": "숨기지 않고 그대로 있는 것"}];
 const CHRONO=null;
 const IS_D=true;
@@ -433,24 +412,6 @@ function jong(w){const c=String(w||'').trim().slice(-1).charCodeAt(0);if(isNaN(c
 function jo(w,a,b){return w+(jong(w)?a:b)}
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 
-
-var ONE_LINE={
- '기준 선명도':'행동은 이미 하고 있습니다. 다만 그 행동을 고르는 기준이 아직 한 문장으로 선명하게 정리되지 않았습니다. 최근 \'잘했다\'고 느낀 선택 하나에서 여러분의 우선 가치를 찾아볼 수 있습니다.',
- '선택 정렬':'무엇이 중요한지는 알고 있습니다. 다만 실제 선택의 순간에는 익숙한 이유나 주변의 기대가 먼저 올라와서 정작 중요한 일을 못하고 있는지 살펴볼 필요가 있습니다.',
- '경계 세우기':'무엇이 중요한지 알고 있고, 그쪽으로 가려는 마음도 있습니다. 지금은 우선 가치를 실천하기 위해 무엇을 덜어내고 거절해야 하는지 살펴볼 시점입니다.',
- '실행 지속':'기준은 이미 꽤 분명합니다. 그리고 그 기준에 맞는 선택도 이미 하고 있습니다. 지금 필요한 것은 더 큰 목표가 아니라, 이미 하고 있는 것을 매일의 일상 속에서 하루하루 실천해 가는 것, 그 기간을 조금 더 늘리는 일입니다.'
-};
-var SCENE_HTML='<div class="scene-card">'
- +'<div class="scene-tag">생활 속 나다움 설계 실천 팁</div>'
- +'<p class="scene-lead">나다움 설계는 특별한 무엇이라기보다, 여러분의 우선 가치가 하루의 작은 선택에서 만들어져 갑니다. 일상 속에서 놓치고 있는 것은 없는지 확인해 보세요.</p>'
- +'<ul class="scene-list">'
- +'<li>중요하다고 말한 일이 일정표에는 없지 않나요?</li>'
- +'<li>거절하거나 경계를 세운 뒤에도 마음이 오래 불편할 때는, 우선 가치를 명확하게 떠올려 보세요.</li>'
- +'<li>하루가 끝났을 때 무엇을 중요하게 살았는지 떠오르지 않는다면, 휴대폰 배경화면이나 프로필에 우선 가치를 적어 두는 것도 방법입니다.</li>'
- +'</ul>'
- +'<div class="scene-exp"><b>한 줄 실험</b> 오늘 이미 내 기준에 맞게 선택했던 작은 행동 하나를 찾아보세요. 새로 만들기보다 이미 하고 있는 것을 발견하는 데서 시작합니다.</div>'
- +'</div>';
-
 function renderResult(r){
   const A=AX, w=r.weak;
   let h='<div class="rtabs"><button class="rtab on" data-go="1"><i>1</i>결과</button>'
@@ -464,22 +425,22 @@ function renderResult(r){
   h+='<p class="res-sub">'+SEGB[r.seg]+'</p>';
   if(IS_D&&vmain){
     const vd=VALUES.filter(x=>x.k===vmain)[0];
-    h+='<div class="vres"><div class="lab">지금의 우선가치</div><div class="one-line">'+esc(ONE_LINE[A[w].name]||'')+'</div><div class="main">'+esc(vmain)+'</div>'
+    h+='<div class="vres"><div class="lab">지금의 우선가치</div><div class="main">'+esc(vmain)+'</div>'
      +'<div class="md">'+esc(vd?vd.d:'')+'</div>'
      +'<div class="subs">보조가치 <b>'+vsel.filter(x=>x!==vmain).map(esc).join('</b> · <b>')+'</b></div></div>';
   }
   h+='<div class="gauge-card">';
   ORDER.forEach(k=>{
-    h+='<div class="g-item"><div class="g-lab"><span class="g-nm">'+A[k].name+(k===w?'<span class="wk">· 지금 가장 낮음</span>':'')+'</span>'
+    h+='<div class="g-item"><div class="g-lab"><span class="g-nm">'+A[k].name+(k===w?'<span class="wk">· 지금의 병목</span>':'')+'</span>'
      +'<span class="g-vl">'+r.raw[k].toFixed(1)+'</span></div>'
      +'<div class="g-tr"><div class="g-fl" style="width:'+r.sc[k]+'%"></div></div></div>';
   });
-  h+='<div class="g-note">네 축 모두 <b>높을수록 정렬된 상태</b>입니다. 단계는 평균이 아니라 <b>가장 낮은 축</b>으로 판정합니다 — 한 축이 무너져 있으면 나머지가 아무리 높아도 실제로는 그 축에서 새기 때문입니다.</div>';
+  h+='<div class="g-note">네 항목 모두 <b>높을수록 정렬된 상태</b>입니다. 단계는 평균이 아니라 <b>가장 낮은 항목</b>으로 판정합니다 — 하나가 크게 낮으면 나머지가 높아도 결국 거기서 새기 때문입니다.</div>';
   h+='</div>';
-  h+=''+SCENE_HTML+'<div class="bn-card"><div class="bn-tag">먼저 살펴볼 지점</div><div class="bn-h">'+A[w].name+'</div>'
+  h+='<div class="bn-card"><div class="bn-tag">우선적으로 개선할 포인트</div><div class="bn-h">'+A[w].name+'</div>'
    +'<div class="bn-def">'+jo(A[w].name,'은','는')+' '+A[w].desc+' — 이것을 봅니다.</div>'
    +'<div class="bn-b">현재 '+STAGE_KO+' 측면에서 <b>'+A[w].name+'</b>'+(jong(A[w].name)?'이':'가')+' 가장 낮게('+r.sc[w]+') 나왔습니다. '
-   +'네 축은 함께 작동합니다. 지금은 이 축이 상대적으로 낮아 먼저 살펴볼 지점으로 보입니다. '+jo(A[w].name,'을','를')+' 먼저 살펴보시면 현재 흐름을 이해하는 데 도움이 됩니다.</div>'
+   +'네 항목은 서로 맞물려 있어서, 낮은 것 하나가 나머지를 함께 끌어내립니다. 우선적으로 '+jo(A[w].name,'을','를')+' 개선할 필요가 있습니다.</div>'
    +'<button class="bn-go" data-go="3">'+A[w].name+' 개선, <b>이것</b>부터 해보십시오 →</button>'
    +'<div class="bn-foot">하루 1분 투자로 더 나다운 삶을 살 수 있습니다.</div></div>';
   if(!IS_D&&extra){
@@ -491,12 +452,12 @@ function renderResult(r){
 
   /* STEP 2 */
   h+='<div class="rstep" id="rstep2">';
-  h+='<div class="rstep-head"><span class="rs-num">02</span><h3>네 축을 하나씩 읽습니다</h3>'
-   +'<p>점수보다 중요한 건 각 축이 지금 어떤 상태인지입니다. 가장 낮은 축부터 읽으셔도 됩니다.</p></div>';
+  h+='<div class="rstep-head"><span class="rs-num">02</span><h3>네 항목을 하나씩 읽습니다</h3>'
+   +'<p>점수보다 중요한 건 각 항목이 지금 어떤 상태인지입니다. 병목 축부터 읽으셔도 됩니다.</p></div>';
   const sorted=ORDER.slice().sort((a,b)=>r.raw[a]-r.raw[b]);
   sorted.forEach(k=>{
     const lv=r.raw[k]>=3.5?'high':(r.raw[k]>=2.5?'mid':'low');
-    const lab=lv==='high'?'잘 서 있는 축':(lv==='mid'?'섞여 있는 축':'가장 약한 축');
+    const lab=lv==='high'?'잘 되고 있는 항목':(lv==='mid'?'섞여 있는 항목':'가장 약한 항목');
     h+='<div class="card"><span class="tag">'+A[k].name+' · '+lab+' · '+r.raw[k].toFixed(1)+'</span>'
      +'<h3>'+A[k].desc+'</h3><p>'+READ[k][lv]+'</p></div>';
   });
@@ -510,23 +471,12 @@ function renderResult(r){
 
   /* STEP 3 */
   h+='<div class="rstep" id="rstep3">';
-  h+='<div class="rstep-head"><span class="rs-num">03</span><h3>오늘 할 수 있는 것</h3>'
-   +'<p>큰 결심은 필요 없습니다. 아래 순서대로 하나씩만 보시면 됩니다.</p></div>';
-  h+='<div class="card"><span class="tag">실행 1 · '+A[w].name+'부터</span><h3>'+A[w].name+'에서 시작합니다</h3>'
-   +'<p>실천도 우선순위를 정하고 하시는 게 더 효과적입니다. 아래 둘 중 <b>일상에서 손쉽게 실천할 수 있는 한 가지만</b> 골라서 실천해 보십시오.</p>'
-   +'<ul class="act-list">'+ACT[w].map(a=>'<li>'+a+'</li>').join('')+'</ul></div>';
-  h+='<div class="rec-card"><span class="rec-step">실행 2 · 기록해 두세요</span>'
-   +'<h3>실행한 내용을 한 줄로 남겨 두세요</h3>'
-   +'<p>실행한 내용을 한 줄로 간단히 기록해 놓으면 작은 여러분의 실행 역사가 됩니다. 회원가입 없이 바로 사용 가능합니다.</p>'
-   +'<a class="rec-go" href="'+BASE+'/report/#write">통합 리포트 안 &#39;기록하기&#39;로 바로 가기 →</a></div>';
-  h+='<div class="card"><span class="tag">실행 3 · 통합 리포트 활용하기</span>'
-   +'<h3>나의 변화 역사를 확인하고 싶을 때 다시 진단해 보세요</h3>'
-   +'<p>이 결과는 <b>지금 시기의 상태</b>입니다. 환경·관계·잡음 누적에 따라 결과는 달라질 수 있습니다.</p>'
-   +'<p>일반적으로 한 달, 분기별로, 이벤트별로 기록을 쌓아가시면 통합 리포트가 그 변화를 추적해서 읽어 드립니다.</p></div>';
-  h+='<a class="rep-cta" href="'+BASE+'/report/"><div class="rc-tag">나다움 설계 통합 리포트</div>'
+  h+='<div class="rstep-head"><span class="rs-num">03</span><h3>다음 걸음</h3>'
+   +'<p>여기서 멈추지 않으려면, 기록으로 이어지는 것이 가장 확실합니다.</p></div>';
+  h+='<p class="next-line">이제 종합 리포트에서 오늘의 연습을 하나 골라보세요. 다른 진단 결과와 함께 모아서 볼 수 있습니다.</p>';
+  h+='<a class="rep-cta" href="'+BASE+'/report/"><div class="rc-tag">나다움 설계 종합 리포트</div>'
    +'<div class="rc-h">진단에서 멈추지 마세요</div>'
-   +'<div class="rc-d">여러분의 나다움 설계 현황을 기록해 두시고, 나다움을 적극 설계하십시오.</div>'
-   +'<div class="rc-go">통합 리포트 열기 →</div></a>';
+   +'<div class="rc-go">종합 리포트 열기 →</div></a>';
   const todo=NEXTS.filter(x=>x.k!==MODKEY&&!ndDone(x.k)), done=NEXTS.filter(x=>x.k!==MODKEY&&ndDone(x.k));
   h+='<div style="font-size:13px;color:#6B7393;margin:18px 0 9px;font-weight:600">— '+(todo.length?'다음으로 살펴볼 진단':'진단 현황')+' —</div>';
   todo.concat(done).forEach(x=>{
@@ -637,9 +587,9 @@ function shareLink(){const t='"'+HEADER+'"\n약 '+(IS_D?'7':'6')+'분 진단입�
   if(navigator.share)navigator.share({title:HEADER,text:t}).catch(()=>copyTxt(t));else copyTxt(t)}
 function copyTxt(t){if(navigator.clipboard)navigator.clipboard.writeText(t).then(()=>toast('복사되었습니다')).catch(()=>{});}
 
-/* ═══════════ 통합 리포트 인계 링크 (handoff v1) ═══════════
+/* ═══════════ 종합 리포트 인계 링크 (handoff v1) ═══════════
    브라우저 저장(localStorage)이 막히거나 지워져도 결과가 리포트로 넘어가도록,
-   "통합 리포트 열기" 링크에 이 진단 결과를 실어 보낸다.
+   "종합 리포트 열기" 링크에 이 진단 결과를 실어 보낸다.
    인코딩 형식은 /report/의 pack()과 동일해야 한다. 표는 추가만 하고 기존 항목은 바꾸지 않는다. */
 var _ndProfile = null;
 var ND_RPT = 'https://nadaumlap.github.io/nadaumneed/report/';
