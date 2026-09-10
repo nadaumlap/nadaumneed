@@ -70,6 +70,7 @@ h1, h2, h3, h4 { font-family:var(--font-title); }
 .cover-title { font-family:var(--font-title); font-size:24px; font-weight:800; color:var(--navy); line-height:1.3;
   margin-bottom:12px; word-break:keep-all; }
 .cover-subtitle { font-size:15px; color:var(--text-soft); margin-bottom:28px; word-break:keep-all; }
+#btn-next.ready{background:#1E2761;border-color:#1E2761;color:#fff;box-shadow:0 6px 18px rgba(30,39,97,.28)}
 .cover-meta { display:flex; justify-content:flex-start; gap:20px; flex-wrap:wrap;
   font-size:14px; color:var(--text-mute); margin-bottom:36px; }
 .cover-meta span { display:flex; align-items:center; gap:6px; }
@@ -673,7 +674,7 @@ function startQuiz() {
 }
 
 // ===== 문항 렌더링 =====
-function renderQuestion() {
+function renderQuestion(keepScroll) {
   const q = QUESTIONS[currentQ];
   document.getElementById('q-num').textContent = `Q${String(q.id).padStart(2,'0')}`;
   document.getElementById('q-text').textContent = q.text;
@@ -696,21 +697,33 @@ function renderQuestion() {
   document.getElementById('btn-prev').disabled = currentQ === 0;
   document.getElementById('btn-prev').style.opacity = currentQ===0 ? .4 : 1;
   document.getElementById('btn-next').disabled = answers[currentQ] === null;
-  document.getElementById('btn-next').textContent = currentQ===14 ? "결과 보기" : "다음";
+  var _nb = document.getElementById('btn-next');
+  _nb.textContent = currentQ===14 ? "결과 보기" : "다음";
+  _nb.classList.toggle('ready', currentQ===14 && answers[14]!==null);
 
-  window.scrollTo({top:0,behavior:'smooth'});
+  if (!keepScroll) window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function selectOption(value) {
   answers[currentQ]=value;
-  renderQuestion();
-  // 마지막 문항이 아니면 0.25초 후 자동으로 다음 문항으로 이동
-  if (currentQ < 14) {
-    setTimeout(() => {
-      currentQ++;
-      renderQuestion();
-    }, 300);
+  /* 마지막 문항에서 맨 위로 튀어 오르면 '결과 보기' 버튼이 화면 밖으로 밀린다.
+     고른 뒤 아무 일도 일어나지 않은 것처럼 보여, 결과를 못 본다는 신고가 있었다.
+     마지막 문항에서는 화면을 그대로 두고 버튼을 보이게 한다. */
+  var last = (currentQ === 14);
+  renderQuestion(last);
+  if (last) {
+    var btn = document.getElementById('btn-next');
+    if (btn) {
+      btn.classList.add('ready');
+      setTimeout(function(){ btn.scrollIntoView({behavior:'smooth', block:'center'}); }, 120);
+    }
+    return;
   }
+  // 마지막 문항이 아니면 0.3초 후 자동으로 다음 문항으로 이동
+  setTimeout(() => {
+    currentQ++;
+    renderQuestion();
+  }, 300);
 }
 function prevQuestion() { if(currentQ>0){currentQ--;renderQuestion();} }
 function nextQuestion() {
