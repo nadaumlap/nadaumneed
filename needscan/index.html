@@ -314,7 +314,7 @@ const resultMessages={
 'mid_D3':{title:'몸의 신호를 잘 못 느끼는 상태',msg:'몸이 보내는 신호를 잘 못 느끼는 상태예요. 의사결정 직전 30초 신체 스캔이 회복의 시작입니다.'},
 'mid_D4':{title:'잡음이 신호를 가리고 있어요',msg:'눈치와 비교가 나의 진짜 욕구를 방해하고 있습니다. 잡음을 식별하고 거리두기를 시작할 시점입니다.'},
 'low_D1':{title:'출발점이 외부에 있습니다',msg:'현재 많은 결정이 타인의 기대에서 시작되고 있습니다. 비난이 아니라 발견입니다. 오늘 딱 한 가지만이라도 내가 정말 원하는 것을 선택해 보세요.'},
-'low_D2':{title:'에너지 자각이 끊어진 상태',msg:'활동 후 에너지 흐름의 자각이 거의 끊어진 상태예요. 하루 한 활동만 "충전 vs 소모"로 기록하는 것부터 시작해 보세요.'},
+'low_D2':{title:'에너지 자각이 끊어진 상태',msg:'활동 후 에너지 경향성의 자각이 거의 끊어진 상태예요. 하루 한 활동만 "충전 vs 소모"로 기록하는 것부터 시작해 보세요.'},
 'low_D3':{title:'몸의 신호가 닿지 않는 상태',msg:'머리만 너무 많이 일하고 있고 몸의 신호가 닿지 않는 상태예요. 신체 자각 명상부터 시작해 보세요.'},
 'low_D4':{title:'잡음에 압도된 상태입니다',msg:'사회적 기준과 알고리즘이 욕구의 주도권을 가져갔습니다. 환경 설계를 통해 나만의 공간과 시간을 확보하는 것이 시급합니다.'},
 };
@@ -325,7 +325,7 @@ low:{title:'잠시 외부 시스템에 외주를 준 상태',body:'우리는 어
 };
 const sceneCards={
 D1:{q:'결정을 내릴 때, 내 생각보다 주변 반응이 먼저 떠올라 망설인 적이 있나요?',accept:'그건 소심함이 아니라, 우리 사회에서 살아남기 위해 발달한 고도의 생존 기술이었습니다. 이제 그 에너지를 나를 위해 쓸 때입니다.'},
-D2:{q:'무언가를 끝내고도 충전된 느낌보다 허무함이 먼저 찾아오나요?',accept:'에너지가 어디로 흐르는지 자각하는 감각은 연습으로 충분히 회복될 수 있습니다.'},
+D2:{q:'무언가를 끝내고도 충전된 느낌보다 허무함이 먼저 찾아오나요?',accept:'에너지가 어디로 움직이는지 자각하는 감각은 연습으로 충분히 회복될 수 있습니다.'},
 D3:{q:'머리로는 좋다고 생각했는데, 정작 하고 나면 몸이 무거웠던 적이 있나요?',accept:'몸은 정답을 알고 있었습니다. 다만 그 채널이 잠시 꺼져 있었을 뿐입니다.'},
 D4:{q:'무심코 쇼츠를 열었다가 1시간이 지나 허무함을 느끼시나요?',accept:'알고리즘은 인간의 뇌과학을 역이용하도록 설계되어 있습니다. 작은 환경 설계만으로 되찾을 수 있습니다.'},
 };
@@ -461,7 +461,7 @@ const circ=2*Math.PI*70;const off=circ-(s.NCI/100)*circ;
 const arcC={high:'#3DAA6B',mid:'#C9983A',low:'#E53935'}[s.seg];
 const dn={D1:'욕구가 어디서 비롯됐는지 인지하는 정도',D2:'무엇이 충전·소모를 일으키는지 자각하는 정도',D3:'결정을 내릴 때 몸의 신호를 읽는 정도',D4:'SNS·미디어·타인 시선에서 거리를 두는 정도'};
 const dc={D1:'d1',D2:'d2',D3:'d3',D4:'d4'};
-let h=`<div class="archie-stage"><div class="archie-stage-img"><img src="archie_n_needscan.png" alt="아키 — N · 욕구 탐색"></div><div class="archie-stage-body"><div class="archie-stage-tag">N · Need Scan</div><div class="archie-stage-title">욕구 탐색 진단</div><div class="archie-stage-desc">아키와 함께, 지금 나의 욕구가 어디서 시작되고 있는지 살펴봅니다.</div></div></div>
+let h=`<div class="archie-stage"><div class="archie-stage-img"><img src="archie_n_needscan.png" alt="아키 — N · 욕구 탐색"></div><div class="archie-stage-body"><div class="archie-stage-tag">① 나를 읽기 · Need Scan</div><div class="archie-stage-title">나를 읽기 진단</div><div class="archie-stage-desc">아키와 함께, 지금 나의 욕구가 어디서 시작되고 있는지 살펴봅니다.</div></div></div>
 <div class="seg-badge seg-${s.seg}"><span>${segLabel} 단계</span></div>`;
 // 4항목 프로파일을 결과의 주인공으로 둔다 (2026.08.25 결정 ②)
 h+=`<div class="gauge-section"><h3>4항목 프로파일</h3>`;
@@ -496,10 +496,10 @@ const NSCARDS = {
           mid:'내면의 소리와 외부 잡음이 섞여 있는 상태. 무엇이 헷갈리게 만드는지 먼저 살펴보세요.',
           low:'무엇이 내 마음을 대신 채우고 있는지부터 살펴보는 게 가장 빠릅니다.'}},
   tendency:{k:'tendency', url:'https://nadaumlap.github.io/nadaumneed/5characters/', img:'archie_e2_energyflow.png', cls:'next-5c',
-    tag:'N · 에너지 경향성', title:'나의 에너지는 어디로 흐를까?',
-    desc:{high:'욕구의 출발점이 선명하시군요. 이제 그 에너지가 어디로 흐르는지 살펴볼 차례입니다.',
-          mid:'잡음 점검과 함께, 지금 나의 에너지가 어떤 패턴으로 흐르는지도 확인해 보세요.',
-          low:'잡음을 걷어낸 뒤, 지금 나의 에너지가 어떤 패턴으로 흐르는지 확인해 보세요.'}}
+    tag:'N · 에너지 경향성', title:'나의 에너지는 어디로 향할까?',
+    desc:{high:'욕구의 출발점이 선명하시군요. 이제 그 에너지가 어디로 움직이는지 살펴볼 차례입니다.',
+          mid:'잡음 점검과 함께, 지금 나의 에너지가 어떤 패턴으로 움직이는지도 확인해 보세요.',
+          low:'잡음을 걷어낸 뒤, 지금 나의 에너지가 어떤 패턴으로 움직이는지 확인해 보세요.'}}
 };
 function nsDone(k){ try{ const p=JSON.parse(localStorage.getItem('nadaum.profile.v1')||'null'); return !!(p&&p.modules&&p.modules[k]); }catch(e){ return false; } }
 function nsCard(c, seg){
