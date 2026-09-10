@@ -4,22 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="color-scheme" content="light only">
-<title>나다움 설계 리포트 &amp; 기록지 | 나다움설계연구소</title>
+<title>나의 나다움 설계 리포트 | 나다움설계연구소</title>
 <meta name="description" content="진단 결과를 하나로 모아 읽고, 오늘의 설계 한 문장을 남깁니다.">
-<meta property="og:title" content="나다움 설계 리포트 &amp; 기록지">
+<meta property="og:title" content="나의 나다움 설계 리포트">
 <meta property="og:description" content="왜 어떤 일은 나를 살리고, 어떤 일은 나를 지치게 할까 — 진단 결과를 하나로 모아 읽습니다.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nadaumlap.github.io/nadaumneed/report/">
-<meta property="og:image" content="https://nadaumlap.github.io/nadaumneed/report/og-image.png">
+<meta property="og:image" content="https://nadaumlap.github.io/nadaumneed/report/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:type" content="image/png">
-<meta property="og:image:alt" content="나다움 설계 리포트 &amp; 기록지">
-<meta name="twitter:title" content="나다움 설계 리포트 &amp; 기록지">
+<meta property="og:image:alt" content="나다움 설계 종합 리포트">
 <meta property="og:site_name" content="나다움설계연구소">
 <meta property="og:locale" content="ko_KR">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://nadaumlap.github.io/nadaumneed/report/og-image.png">
+<meta name="twitter:image" content="https://nadaumlap.github.io/nadaumneed/report/og-image.jpg">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="나다움설계연구소">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -710,7 +708,7 @@ const BASE='https://nadaumlap.github.io/nadaumneed';
    지금의 모든 경계(40/65, 34/67, 55 등)는 이론적·임시 경계다.
    아래 주소를 채우기 전까지 아무것도 보내지 않고 화면에도 뜨지 않는다.
    Google Apps Script 웹앱이나 폼 엔드포인트 주소를 넣으면 활성화된다.
-   보내는 것: 리포트 ID(개인 식별 불가), 네 축 점수, 세그먼트, 문항판 번호, 날짜.
+   보내는 것: 리포트 ID(개인 식별 불가), 네 항목 점수, 세그먼트, 문항판 번호, 날짜.
    보내지 않는 것: 문항별 응답, 설계 문장, 기록, 이름·이메일. */
 const COLLECT_URL='';
 /* ───────── 회원가입(선택) ─────────
@@ -860,7 +858,7 @@ const DIAGS=[
   /* core:true 다섯 개가 지도의 칸을 하나씩 연다(89문항·약 28분).
      5러·기질은 칸을 열지 않고 방향과 해석을 더하는 심화 진단이다. */
   {k:'needscan',   n:'욕구 출발점 진단',   d:'16문항 · 약 5분', url:BASE+'/needscan/',    c:'#2979C8', s:'N', g:'① 나를 읽다 · N', o:'', core:true, ax:'N',  q:'내가 진짜 원하는 것은 무엇일까?'},
-  {k:'noise',      n:'잡음 오염도 진단',   d:'18문항 · 약 5분', url:BASE+'/newnoise/',    c:'#3DAA6B', s:'E', g:'② 흐리게 하는 것을 덜다 · E1', o:'', core:true, ax:'E1', q:'무엇이 나를 흐리게 하고 있을까?'},
+  {k:'noise',      n:'잡음 오염도 진단',   d:'18문항 · 약 5분', url:BASE+'/newnoise/',    c:'#3DAA6B', s:'E', g:'② 헷갈리게 하는 것을 덜다 · E1', o:'', core:true, ax:'E1', q:'무엇이 내 판단을 헷갈리게 할까?'},
   {k:'alignment',  n:'생명성 정렬 진단',    d:'20문항 · 약 6분', url:BASE+'/alignment/',   c:'#C9983A', s:'E', g:'③ 에너지를 정렬하다 · E2', o:'', core:true, ax:'E2', q:'내 하루는 나를 살리고 있을까?'},
   {k:'authorship', n:'나다움 설계 현황 진단',d:'20문항 · 약 7분', url:BASE+'/need/',        c:'#8B5CF6', s:'D', g:'④ 내 기준으로 오늘을 쓰다 · D', o:'', core:true, ax:'D', q:'지금 나는 얼마나 내 기준으로 살고 있을까?'},
   {k:'tendency',   n:'에너지 경향성 진단',  d:'15문항 · 약 5분', url:BASE+'/5characters/', c:'#B0576F', s:'F', g:'④ 내 에너지는 어디로 흐르는가 · 5러', o:'', core:true, q:'나는 지금 어디에 에너지를 쓰고 있을까?'},
@@ -873,7 +871,7 @@ const TEMPN={ns:'새로움에 끌리는 힘',ha:'위험을 살피는 힘',rd:'�
 const DIMN={D1:'욕구의 출발점',D2:'에너지의 방향',D3:'몸의 신호',D4:'욕구의 출처 구분'};
 
 /* ───────── 4축 산출 ───────── */
-/* 한 축 = 한 진단.
+/* 한 항목 = 한 진단.
    종전에는 N축이 needscan·tendency·why 세 값의 평균이었다. 두 가지 문제가 있었다.
    ① tendency.overall은 5러 진단이 '척도 사용 습관 보정용'으로 계산한 응답 편향 지표라
       선명도 점수로 합산할 수 없다.
@@ -890,7 +888,7 @@ function axes(p){
   let e1=null;
   if(m.noise) e1=Math.max(0,100-m.noise.total);
   else if(m.noiseInner&&typeof m.noiseInner.pct==='number') e1=Math.max(0,100-m.noiseInner.pct);
-  A.E1={v:e1,name:'신호 보존도',stage:'E1 · Eliminate Noise 단계',desc:'내 신호가 얼마나 덜 흐려져 있는가 · 잡음 오염도를 뒤집은 값',c:'#3DAA6B',
+  A.E1={v:e1,name:'신호 보존도',stage:'E1 · Eliminate Noise 단계',desc:'내 생각이 얼마나 덜 헷갈리는가 · 잡음 오염도를 뒤집은 값',c:'#3DAA6B',
         feeds:['noise'],
         need:'잡음 오염도 진단',url:BASE+'/newnoise/'};
   // E2 — 정렬도 (미개발)
@@ -916,7 +914,7 @@ function sigOf(p){
       .map(function(x){return x==null?'':x}).join(',');
   }).join('|');
 }
-/* 각 축을 어느 진단이 만들었는지도 함께 남긴다.
+/* 각 항목을 어느 진단이 만들었는지도 함께 남긴다.
    구성이 바뀐 구간(예: E1이 why 대체값 → 잡음 진단 본값)은
    재진단으로 생긴 변화가 아니므로 델타 계산에서 뺀다. */
 /* 문항이 개정되면 같은 진단이라도 같은 자로 잰 것이 아니다.
@@ -951,7 +949,7 @@ function snapshot(p,A){
   if(isNew && typeof sendAnon==='function') sendAnon();
 }
 /* 병목 결정.
-   종전에는 네 축 점수의 단순 최저값이었다. 네 축은 응답 프레임이 다르다 —
+   종전에는 네 항목 점수의 단순 최저값이었다. 네 축은 응답 프레임이 다르다 —
    N·E1은 일반적 성향(특성) 자기보고, E2·D는 지난 2주 실제 행동(상태) 빈도다.
    행동 빈도는 특성 동의보다 체계적으로 낮게 나오므로(의도–행동 간극,
    Webb & Sheeran 2006), 최저값을 고르면 E2 또는 D가 구조적으로 선정된다.
@@ -1030,7 +1028,7 @@ const AUTOxNOISE=[
   {a:1,n:0,t:'지금은 방향과 에너지가 같은 쪽을 보고 있습니다. 새 설계보다 이 상태를 유지하는 리듬이 필요한 시점입니다.'},
   {a:1,n:1,t:'방향은 맞는데 소음 속에서 달리고 있습니다. 성과는 나지만 이 에너지는 회복형이 아닙니다.'},
   {a:0,n:1,t:'지금 에너지는 생존형으로 가동 중입니다. 오래 외부 기준을 내면화한 결과이지 의지의 문제가 아닙니다.'},
-  {a:0,n:0,t:'지금은 방향을 찾는 구간입니다. 낭비처럼 느껴질 수 있지만 설계 전에 반드시 지나는 자리입니다.'}
+  {a:0,n:0,t:'지금은 방향을 찾는 구간입니다. 낭비처럼 느껴질 수 있지만 설계 전에 누구나 지나는 구간입니다.'}
 ];
 /* 5러는 캐릭터당 3문항이라 1·2위 차이가 문항 한 칸(0.33) 안쪽인 경우가 흔하다.
    강제선택 블록이 들어가기 전까지는 해석의 과신만 줄인다. */
@@ -1054,10 +1052,10 @@ function crossRules(p){
         txt:'가장 두드러진 기질이 '+TEMPN[k]+'입니다. '+TEMPxNOISE[k][top]});
   }
   if(m.motivation&&typeof m.motivation.introj==='number'&&m.motivation.introj>=60&&m.motivation.sdtScore>=60){
-    out.push({pri:6.7,ax:'N',src:'동기의 두 겹',
-      txt:'의미로 움직이는 힘이 이미 상당한데, 동시에 <b>인정에 기대는 부분</b>도 함께 높게 나왔습니다. 둘은 반대가 아니라 겹쳐 있을 수 있습니다. '
-       +'문제는 인정을 바라는 마음 자체가 아니라, 그것이 방향을 정하는 자리까지 올라올 때입니다. '
-       +'어떤 일을 시작할 때 \u0027이걸 하면 어떻게 보일까\u0027가 먼저 떠오르는지 한 번만 확인해 보시면 됩니다.'});
+    out.push({pri:6.7,ax:'N',src:'의미와 인정, 두 가지 동기',
+      txt:'스스로 의미를 찾아 움직이는 힘이 이미 큽니다. 그런데 <b>인정받고 싶은 마음</b>도 함께 높게 나왔습니다. 이 둘은 반대가 아니라 같이 있을 수 있습니다. '
+       +'인정받고 싶은 마음 자체는 문제가 아닙니다. 그 마음이 <b>무엇을 할지까지 정하기 시작할 때</b>가 문제입니다. '
+       +'무언가 시작할 때 \u0027이걸 하면 어떻게 보일까\u0027가 먼저 떠오르는지, 한 번만 살펴보시면 됩니다.'});
   }
   if(m.motivation&&m.noise){
     /* 임시 경계 — 규준 없음.
@@ -1070,22 +1068,22 @@ function crossRules(p){
   }
   if(m.needscan&&m.noise){
     const w=m.needscan.weak;
-    if(w==='D4') out.push({pri:7,ax:'N',src:'욕구 출발점 × 잡음 지도',
-      txt:'욕구 진단에서 가장 낮은 축은 <b>욕구의 출처를 되짚는 힘</b>이었고, 잡음은 '+NOISEAX[top]+'에서 가장 강하게 들어옵니다. 밖에서 들어오는 양이 많은데 되짚을 자리가 없으면, 들어온 것이 그대로 내 욕구 자리에 앉습니다. 여기가 지금 가장 확실한 출발점입니다.'});
-    else out.push({pri:6,ax:'N',src:'욕구 출발점 × 잡음 지도',
-      txt:'잡음은 '+NOISEAX[top]+'에서 가장 강하게 들어오는데, 정작 가장 낮은 축은 '+DIMN[w]+'입니다. 밖에서 오는 것과 안에서 흐린 것이 서로 다른 자리에 있습니다. 둘을 같은 문제로 묶지 않는 편이 낫습니다.'});
+    if(w==='D4') out.push({pri:7,ax:'N',src:'욕구 진단 × 잡음 진단',
+      txt:'욕구 진단에서 가장 낮은 항목은 <b>욕구의 출처를 되짚는 힘</b>이었고, 잡음은 '+NOISEAX[top]+'에서 가장 강하게 들어옵니다. 밖에서 들어오는 건 많은데 되짚어 볼 시간이 없으면, 들어온 것이 그대로 내가 원하는 것이 됩니다. 여기서 시작하는 게 가장 확실합니다.'});
+    else out.push({pri:6,ax:'N',src:'욕구 진단 × 잡음 진단',
+      txt:'잡음은 '+NOISEAX[top]+'에서 가장 강하게 들어오는데, 정작 가장 낮은 항목은 '+DIMN[w]+'입니다. 밖에서 오는 것과 안에서 흐린 것이 서로 다른 문제입니다. 둘을 같이 묶지 않는 편이 낫습니다.'});
   }
   if(m.needscan&&m.tendency){
     out.push({pri:5,ax:'N',src:'5러 경향성 × 욕구 출발점',
       txt:'지금 에너지는 '+FLOWKEY[m.tendency.main]+' 중심으로 흐르고 있는데, 욕구 진단의 병목은 '+DIMN[m.needscan.weak]+'입니다. '+
       (m.needscan.weak==='D2'?'무엇에서 힘을 얻는지는 알지만, 그 일을 하고 난 뒤 실제로 채워졌는지를 읽는 감각이 아직 흐립니다.'
        :m.needscan.weak==='D3'?'머리로는 방향이 분명한데, 몸이 보내는 신호는 아직 잘 들리지 않습니다.'
-       :m.needscan.weak==='D1'?'에너지의 방향은 있는데, 그 방향을 누가 정했는지가 아직 흐립니다.'
-       :'에너지의 방향은 뚜렷한데, 그 방향이 어디서 왔는지 되짚어 볼 자리가 아직 없습니다.')});
+       :m.needscan.weak==='D1'?'에너지의 방향은 있는데, 그 방향을 누가 정했는지가 아직 분명하지 않습니다.'
+       :'에너지의 방향은 뚜렷한데, 그 방향이 어디서 왔는지 되짚어 볼 시간이 아직 없습니다.')});
   }
   if(m.needscan&&m.needscan.aware>=4){
-    out.push({pri:4,ax:'N',src:'메타인지 지표',
-      txt:'"무언가 원하게 됐을 때, 그것이 광고나 피드에서 온 것인지 알아차린 적이 있다" — 이 문항에 강하게 동의하셨습니다. 알아차린 적이 있다는 것은 되짚는 자리가 이미 있다는 뜻입니다. 잡음을 걷어내는 일은 여기서 시작됩니다.'});
+    out.push({pri:4,ax:'N',src:'이미 알아차리고 계신 것',
+      txt:'"무언가 원하게 됐을 때, 그것이 광고나 피드에서 온 것인지 알아차린 적이 있다" — 이 문항에 강하게 동의하셨습니다. 알아차린 적이 있다는 건, 되짚어 보는 힘이 이미 있다는 뜻입니다. 잡음을 덜어내는 일은 여기서 시작됩니다.'});
   }
   /* ───── E2·D 교차 규칙 ─────
      종전 여섯 규칙은 모두 needscan·tendency·noise·temperament·motivation 조합이라,
@@ -1095,7 +1093,7 @@ function crossRules(p){
     const t={A1:'무엇이 나를 채우는지 읽는 감각',A2:'하루의 시간 배치',A3:'일하는 환경의 여지',A4:'회복을 넣는 설계'}[al.weak];
     const add={A1:'힘이 어디서 오는지는 아는데, 그날그날 무엇이 채웠는지는 아직 흐립니다.',
                A2:'힘이 나는 방향은 분명한데, 하루의 배치가 그 방향을 받쳐 주지 못하고 있습니다.',
-               A3:'방향은 있는데, 그 방향대로 할 수 있는 여지가 지금 자리에 적습니다.',
+               A3:'방향은 있는데, 그 방향대로 할 수 있는 여지가 지금 상황에 적습니다.',
                A4:'쓰는 쪽은 분명한데, 채우는 쪽이 설계에 들어가 있지 않습니다.'}[al.weak];
     out.push({pri:7.5,ax:'E2',src:'생명성 정렬 × 에너지 경향성',
       txt:'지금 에너지는 '+FLOWKEY[m.tendency.main]+' 중심으로 흐르고 있는데, 생명성 정렬에서 가장 낮은 곳은 '+t+'입니다. '+add});
@@ -1114,17 +1112,17 @@ function crossRules(p){
     const t3={D1:'기준 선명도',D2:'선택 정렬',D3:'경계 세우기',D4:'실행 지속'}[au.weak];
     let add3='';
     if(au.weak==='D3'&&top===1) add3='두 진단이 같은 곳을 가리키고 있습니다. 눈치가 경계를 세우기 어렵게 만들고, 경계가 없으니 눈치가 더 세게 들어옵니다. 여기가 지금 가장 확실한 출발점입니다.';
-    else if(au.weak==='D1'&&top===2) add3='기준이 흐릴수록 비교가 기준 자리를 대신합니다. 내 기준 한 문장을 적어 두는 것부터가 잡음을 막는 일입니다.';
-    else if(au.weak==='D4'&&top===3) add3='지키기로 한 것이 화면에 먹히는 구간이 있는지 보시면 좋습니다. 의지의 문제가 아니라 시간이 새는 자리의 문제입니다.';
-    else add3='밖에서 들어오는 것과 안에서 흐린 것이 서로 다른 자리에 있습니다. 둘을 같은 문제로 묶지 않는 편이 낫습니다.';
-    out.push({pri:7.1,ax:'D',src:'설계 현황 × 잡음 지도',
+    else if(au.weak==='D1'&&top===2) add3='기준이 분명하지 않을수록 비교가 내 기준을 대신합니다. 내 기준 한 문장을 적어 두는 것부터가 잡음을 막는 일입니다.';
+    else if(au.weak==='D4'&&top===3) add3='지키기로 한 것이 화면에 먹히는 구간이 있는지 보시면 좋습니다. 의지의 문제가 아니라 시간이 어디서 새는지의 문제입니다.';
+    else add3='밖에서 들어오는 것과 안에서 분명하지 않은 것이 서로 다른 문제입니다. 둘을 같이 묶지 않는 편이 낫습니다.';
+    out.push({pri:7.1,ax:'D',src:'설계 진단 × 잡음 진단',
       txt:'설계 현황에서 가장 낮은 곳은 '+t3+'이고, 잡음은 '+NOISEAX[top]+'에서 가장 강합니다. '+add3});
   }
   if(au&&au.values&&au.values.length&&m.tendency&&m.tendency.flag!=='low'&&FLOWKEY[m.tendency.main]){
     const VF={자율:'E',연결:'C',몰입:'D',회복:'S',성장:'E',성취:'A',안정:'S',기여:'C',정직:null};
     const v=au.values[0], want=VF[v];
     const same=(want&&want===m.tendency.main);
-    out.push({pri:6.5,ax:'D',src:'우선가치 × 에너지 경향성',
+    out.push({pri:6.5,ax:'D',src:'우선가치 × 에너지 방향',
       txt:'직접 고르신 우선가치는 <b>'+esc(v)+'</b>이고, 지금 에너지는 '+FLOWKEY[m.tendency.main]+' 중심으로 흐르고 있습니다. '
        +(same?'가치와 에너지가 같은 방향입니다. 지금은 새로 무엇을 더하기보다, 이미 흐르는 쪽을 조금 더 크게 만드는 편이 낫습니다.'
              :'가치와 지금의 에너지가 서로 다른 쪽을 보고 있습니다. 둘 중 하나가 틀린 것이 아니라, 가치는 오래 가는 방향이고 에너지는 지금 시기의 흐름입니다. 이번 달은 어느 쪽을 따를지만 정하시면 됩니다.')});
@@ -1134,30 +1132,30 @@ function crossRules(p){
   if(m.needscan&&al&&al.weak){
     const nw=m.needscan.weak;
     let t='';
-    if(nw==='D2'&&al.weak==='A1') t='무엇이 나를 채우고 무엇이 나를 비우는지 읽는 감각이 두 진단에서 모두 낮게 나왔습니다. 같은 것을 두 각도에서 재고 있으니, 여기가 지금 가장 분명한 자리입니다.';
+    if(nw==='D2'&&al.weak==='A1') t='무엇이 나를 채우고 무엇이 나를 비우는지 읽는 감각이 두 진단에서 모두 낮게 나왔습니다. 같은 것을 두 각도에서 재고 있으니, 여기가 지금 가장 분명한 부분입니다.';
     else if(nw==='D3'&&al.weak==='A4') t='몸의 신호를 읽는 감각도, 지치기 전에 멈추는 설계도 함께 낮습니다. 신호가 안 들리니 멈출 시점을 놓치고, 멈추지 못하니 신호가 더 묻힙니다.';
-    else if(nw==='D1'&&al.weak==='A2') t='무엇을 원하는지가 흐린 상태에서 하루를 배치하면, 급한 일이 중요한 일의 자리를 대신 차지합니다. 순서상 욕구 쪽을 먼저 보시는 편이 낫습니다.';
+    else if(nw==='D1'&&al.weak==='A2') t='무엇을 원하는지 잘 모르는 상태에서 하루를 배치하면, 급한 일이 중요한 일을 밀어냅니다. 순서상 욕구 쪽을 먼저 보시는 편이 낫습니다.';
     else t='욕구 진단의 '+DIMN[nw]+'과 생명성 정렬의 '+({A1:'에너지 자각',A2:'시간 배치',A3:'환경 적합',A4:'회복 설계'}[al.weak])+'이 각각 가장 낮습니다. 하나는 읽는 힘, 하나는 배치의 문제라 서로 다른 손질이 필요합니다.';
     out.push({pri:6.9,ax:'E2',src:'욕구 출발점 × 생명성 정렬',txt:t});
   }
   if(al&&al.weak&&au&&au.weak){
     let t='';
-    if(al.weak==='A2'&&au.weak==='D4') t='지키기로 한 것이 하루 어디에도 자리를 잡지 못하고 있습니다. 의지의 문제가 아니라 시간표의 문제입니다. 무엇을 더 할지보다 어디에 넣을지를 먼저 정하시면 됩니다.';
+    if(al.weak==='A2'&&au.weak==='D4') t='지키기로 한 것이 하루 어디에도 들어가 있지 않습니다. 의지의 문제가 아니라 시간표의 문제입니다. 무엇을 더 할지보다 어디에 넣을지를 먼저 정하시면 됩니다.';
     else if(al.weak==='A4'&&au.weak==='D3') t='회복이 설계에 없고 경계도 세워지지 않았습니다. 이 둘은 대개 같이 움직입니다 — 거절하지 못하면 쉴 시간이 남지 않고, 쉬지 못하면 거절할 힘이 줄어듭니다.';
     else t='생명성 정렬의 '+({A1:'에너지 자각',A2:'시간 배치',A3:'환경 적합',A4:'회복 설계'}[al.weak])+'과 설계 현황의 '+({D1:'기준 선명도',D2:'선택 정렬',D3:'경계 세우기',D4:'실행 지속'}[au.weak])+'이 각각 가장 낮습니다. 하루의 조건과 하루의 선택은 서로를 밀고 당기니, 한쪽만 손대면 되돌아오기 쉽습니다.';
-    out.push({pri:6.8,ax:'D',src:'생명성 정렬 × 설계 현황',txt:t});
+    out.push({pri:6.8,ax:'D',src:'에너지 진단 × 설계 진단',txt:t});
   }
   // 5러를 하지 않으신 분도 우선가치 문장을 받을 수 있게
   if(au&&au.values&&au.values.length&&!(m.tendency&&m.tendency.flag!=='low')){
     out.push({pri:5.5,ax:'D',src:'우선가치',
       txt:'직접 고르신 우선가치는 <b>'+esc(au.values[0])+'</b>입니다. '
        +'설계 현황에서 가장 낮은 곳은 '+({D1:'기준 선명도',D2:'선택 정렬',D3:'경계 세우기',D4:'실행 지속'}[au.weak]||'')+'입니다. '
-       +'가치를 고르는 것과 그 가치대로 하루를 쓰는 것은 다른 일입니다. 아래 설계는 고르신 것과 사는 것 사이를 좁히는 자리입니다.'});
+       +'가치를 고르는 것과 그 가치대로 하루를 쓰는 것은 다른 일입니다. 아래 설계는 고르신 것과 사는 것 사이를 좁히는 과정입니다.'});
   }
 
   /* 노출 규칙 — 종전에는 우선순위 상위 4개만 보여, 새로 넣은 E2·D 규칙이
      여섯 진단을 모두 마친 사용자에게 한 번도 나오지 않았다.
-     축별로 가장 높은 것을 하나씩 뽑고, 남는 자리를 전체 최고로 채운다. */
+     축별로 가장 높은 것을 하나씩 뽑고, 남는 칸을 전체 최고로 채운다. */
   const picked=[], used=new Set();
   ['N','E1','E2','D'].forEach(function(ax){
     const c=out.filter(r=>r.ax===ax&&!used.has(r)).sort((a,b)=>b.pri-a.pri)[0];
@@ -1176,7 +1174,7 @@ function jong(w){const c=String(w||'').trim().slice(-1).charCodeAt(0);
 function jo(w,a,b){return w+(jong(w)?a:b)}
 const AXIS_DEF={
   N:'욕구 선명도는 <b>내가 무엇으로 움직이는 사람인지 스스로 얼마나 분명한가</b>입니다.',
-  E1:'신호 보존도는 <b>내 신호가 바깥 잡음에 얼마나 덜 흐려져 있는가</b>입니다.',
+  E1:'신호 보존도는 <b>내 생각이 바깥 잡음에 얼마나 덜 흔들리는가</b>입니다.',
   E2:'생명성 정렬은 <b>내 하루가 에너지가 흐를 수 있게 배치되어 있는가</b>입니다.',
   D:'자기 저자성은 <b>내 기준으로 오늘의 선택을 쓰고 있는가</b>입니다.'
 };
@@ -1255,8 +1253,8 @@ const OPTS={
         ph:'예) 보고 순서를 내가 정함',
         ex:['보고 순서를 내가 정함','작업 시간을 오전으로 옮김']},
        {t:'일하는 자리에서 바꿀 수 있는 것 하나를 적는다',
-        ph:'예) 알림 끄기 / 자리 옮기기',
-        ex:['오전에는 알림 전부 끄기','창가 자리로 옮겨 앉기']}],
+        ph:'예) 알림 끄기 / 앉는 곳 바꾸기',
+        ex:['오전에는 알림 전부 끄기','창가로 옮겨 앉기']}],
     A4:[{t:'지치기 전에 멈춘 순간이 있었는지 적는다',
         ph:'예) 50분 뒤 10분 일어나 걷기',
         ex:['50분 일하고 10분 자리에서 일어남','점심 후 15분은 아무것도 안 함']},
@@ -1293,8 +1291,8 @@ const OPTS={
 };
 /* 축 안에서 어느 세부 병목을 쓸지 고른다. 해당 진단이 없으면 첫 번째 묶음. */
 /* 5러 경향성만 마친 사용자를 위한 설계.
-   5characters는 네 축 어디에도 점수를 주지 않으므로 지도가 비어 있다.
-   이때는 '지금 흐르는 결 위에 하루를 얹는' 설계를 대신 제안한다. */
+   5characters는 네 항목 어디에도 점수를 주지 않으므로 지도가 비어 있다.
+   이때는 '요즘 힘이 나는 방식에 하루를 맞추는' 설계를 대신 제안한다. */
 OPTS.F={
   A:[{t:'오늘 끝낸 것 하나를 적는다',ph:'예) 기획안 1차 마감',
       ex:['기획안 1차 마감','밀린 정산 정리 끝']},
@@ -1317,7 +1315,7 @@ OPTS.F={
      {t:'오늘 하던 방식을 바꿔 본 것 하나를 적는다',ph:'예) 회의 순서를 뒤집어 봄',
       ex:['회의 순서를 뒤집어 봄','메모를 손으로 써 봄']}]
 };
-AXIS_COPY.F={h:'지금 흐르는 결 위에 하루를 얹습니다', w:'흐름'};
+AXIS_COPY.F={h:'요즘 힘이 나는 방식에 하루를 맞춰 봅니다', w:'흐름'};
 AXIS_DEF.F='지금 여러분의 에너지가 어느 쪽으로 흐르는지는 읽으셨습니다. <b>네 칸은 아직 열리지 않았습니다.</b>';
 function flowDesign(){
   const t=P.modules&&P.modules.tendency;
@@ -1415,7 +1413,7 @@ const TABS=[
  {k:'map',     no:'01',n:'나의 지도',c:'#3E6FD1',b:'#EAF1FC',d:'#CDDFF6'},
  {k:'change',  no:'02',n:'나의 변화',c:'#E0A03A',b:'#FDF4E2',d:'#F3E0BB'},
  {k:'practice',no:'03',n:'오늘의 연습',c:'#8B5CF6',b:'#F3F0FD',d:'#DDD3F7'},
- {k:'record',  no:'04',n:'나의 기록',c:'#3FAE93',b:'#E7F5F1',d:'#C6E7DE'}];
+ {k:'record',  no:'04',n:'나다움 설계하기',c:'#3FAE93',b:'#E7F5F1',d:'#C6E7DE'}];
 const TABK=TABS.map(t=>t.k);
 let _printing=false;
 /* 네 탭 중 하나가 첫 방문에 비어 있으면 리포트가 미완성으로 보인다.
@@ -1484,7 +1482,7 @@ function scrollToHash(){
 function emptyView(){
   let t='<div class="empty-hero"><div class="em">🧭</div>'
    +'<h2>아직 읽을 결과가 없습니다</h2>'
-   +'<p>질문 하나에 답하시면 이 자리에 지도가 그려집니다.<br>다섯 개를 다 하실 필요는 없습니다. <b>하나만 해도 설계는 시작됩니다.</b></p></div>';
+   +'<p>질문 하나에 답하시면 여기에 지도가 그려집니다.<br>다섯 개를 다 하실 필요는 없습니다. <b>하나만 해도 설계는 시작됩니다.</b></p></div>';
   const core=DIAGS.filter(d=>d.core), ext=DIAGS.filter(d=>!d.core);
   t+='<div class="sec"><h2>여기서 시작하시면 됩니다</h2>'
    +'<p class="sub">지도의 칸을 하나씩 여는 질문이 다섯 개 있습니다. 첫 칸은 5분입니다. '
@@ -1520,7 +1518,7 @@ function todoRow(d,st){
    레이더는 균형을 보는 보조 도구로 내리고, 순서를 보여주는 그림을 앞에 둔다. */
 const JOURNEY={
   N :{no:'①',t:'내가 원하는 것을 읽다',           en:'N · Need Scan',        open:'욕구 출발점 진단',   ourl:BASE+'/needscan/'},
-  E1:{no:'②',t:'나를 흐리게 하는 것을 덜어내다',   en:'E · Eliminate Noise',  open:'잡음 오염도 진단',   ourl:BASE+'/newnoise/'},
+  E1:{no:'②',t:'나를 헷갈리게 하는 것을 덜어내다',   en:'E · Eliminate Noise',  open:'잡음 오염도 진단',   ourl:BASE+'/newnoise/'},
   E2:{no:'③',t:'에너지를 중요한 곳에 정렬하다',     en:'E · Energy Alignment', open:'생명성 정렬 진단',   ourl:BASE+'/alignment/'},
   D :{no:'④',t:'내 기준으로 오늘을 쓰다',          en:'D · Daily Authorship', open:'나다움 설계 현황 진단', ourl:BASE+'/need/'}
 };
@@ -1533,7 +1531,7 @@ function journeyView(A,bn,nocap){
   const T=P.modules&&P.modules.tendency;
   const STEPS=[
     {k:'N', no:'01', t:'나를 읽다',                     v:A.N.v,  c:'#2979C8', url:BASE+'/needscan/'},
-    {k:'E1',no:'02', t:'나를 흐리게 하는 것을 덜어내다', v:A.E1.v, c:'#3DAA6B', url:BASE+'/newnoise/'},
+    {k:'E1',no:'02', t:'나를 헷갈리게 하는 것을 덜어내다', v:A.E1.v, c:'#3DAA6B', url:BASE+'/newnoise/'},
     {k:'E2',no:'03', t:'에너지를 중요한 곳에 정렬하다',  v:A.E2.v, c:'#C9983A', url:BASE+'/alignment/'},
     {k:'F', no:'04', t:'내 에너지는 지금 어디로 흐르는가', v:(T&&T.main)?((typeof CHARS!=='undefined'&&CHARS[T.main])||'확인함'):null, c:'#B0576F', url:BASE+'/5characters/'},
     {k:'D', no:'05', t:'내 기준으로 오늘을 쓰다',        v:A.D.v,  c:'#8B5CF6', url:BASE+'/need/'}
@@ -1597,7 +1595,7 @@ function coverView(done){
   let h='<div class="cover">'
    +'<span class="badge">나다움 설계 리포트</span>'
    +'<h1 class="cv-h">왜 어떤 일은 나를 살리고,<br>어떤 일은 <span class="cv-em">나를 지치게 할까?</span></h1>'
-   +'<p class="lead">지금까지의 진단을 한자리에 모아, 지금의 나를 살펴봅니다.<br>오늘의 결과가 바로, 나다운 삶을 설계하는 시작점입니다.</p>'
+   +'<p class="lead">지금까지의 진단을 한곳에 모아, 지금의 나를 살펴봅니다.<br>오늘의 결과가 바로, 나다운 삶을 설계하는 시작점입니다.</p>'
    +valueHero()
    +'</div>';
   return h;
@@ -1659,14 +1657,14 @@ function strengthCard(A,bn){
       D:'내 기준으로 오늘을 쓰는 힘이 이미 있습니다.'}[hi], c:A[hi].c});
   // 흐름 설계(F)일 때는 아래 카드가 이미 흐름을 제목으로 쓰므로 여기서는 뺀다
   if(m.tendency&&m.tendency.flag!=='low'&&FLOWKEY[m.tendency.main]&&!(bn&&bn.key==='F'))
-    bits.push({h:FLOWKEY[m.tendency.main]+' 중심의 흐름', p:'지금 시기에 힘이 나는 방향입니다. 새 습관을 만들 때 이 결에 얹으면 덜 애씁니다.', c:'#2979C8'});
+    bits.push({h:FLOWKEY[m.tendency.main]+' 중심의 흐름', p:'요즘 힘이 나는 방향입니다. 새로 뭘 시작할 때 이 방식에 맞추면 덜 힘듭니다.', c:'#2979C8'});
   if(m.temperament){
     const t=m.temperament,ord=[['ns',t.ns],['ha',t.ha],['rd',t.rd],['ps',t.ps]].sort((a,b)=>b[1]-a[1]);
     bits.push({h:TEMPN[ord[0][0]], p:'기질에서 가장 두드러진 힘입니다. 오래 버텨 온 방식이니 바꾸기보다 쓰는 편이 낫습니다.', c:'#8B5CF6'});
   }
   if(!bits.length)return '';
   return '<div class="sec sec-gap">'+sn()+'<h2>지금 가장 잘 작동하는 것</h2>'
-   +'<p class="sub">설계는 부족한 것을 메우는 일이 아니라, 이미 있는 것 위에 얹는 일입니다. 먼저 가진 것을 봅니다.</p>'
+   +'<p class="sub">부족한 걸 채우는 게 아니라, 이미 잘 되고 있는 것에서 시작하는 일입니다. 가진 것부터 봅니다.</p>'
    +'<div class="str-wrap">'+bits.slice(0,3).map(function(b){
       return '<div class="str" style="--sc:'+b.c+'"><div class="sh">'+b.h+'</div><div class="sp">'+b.p+'</div></div>';
    }).join('')+'</div></div>';
@@ -1714,9 +1712,9 @@ function mapView(A,bn,done){
      +'<div class="h">'+bn.name+'</div>'
      +'<div class="bdef">'+AXIS_DEF.F+'</div>'
      +'<div class="b">아직 어느 칸도 열리지 않아 <b>어디부터 손대면 좋을지</b>는 말씀드릴 수 없습니다. '
-     +'대신 지금 힘이 나는 결이 어느 쪽인지는 알고 있으니, <b>그 결 위에 오늘 하루를 얹는 설계</b>부터 시작하시면 됩니다. '
+     +'대신 요즘 어느 쪽에서 힘이 나는지는 알고 있으니, <b>그 방식에 오늘 하루를 맞추는 설계</b>부터 시작하시면 됩니다. '
      +'첫 칸을 여시면 그때부터는 여러분의 지도에 맞춘 설계가 나옵니다.'
-     +'<br><span class="bwhy">에너지 경향성은 나침반이고, 네 칸은 지도입니다. 나침반만으로도 오늘 한 걸음은 뗄 수 있습니다.</span></div>'
+     +'<br><span class="bwhy">지금 어떤 방식일 때 힘이 나는지만 알아도 오늘 한 걸음은 뗄 수 있습니다.</span></div>'
      +'<button class="bn-go no-print" onclick="goRecord()">오늘의 설계 시작하기 \u2192</button>'
      +'<div class="bfoot">오늘의 설계는 1분이면 됩니다. 한 문장만 남기시면 됩니다.</div></div></div>';
   }
@@ -1724,19 +1722,18 @@ function mapView(A,bn,done){
     const seq=AXIS_SEQ.join(' \u2192 '), t=TINT[bn.key]||TINT.N;
     const sk=subKeyOf(bn.key), sname=(SUBNAME[bn.key]||{})[sk]||'';
     const lead = bn.why==='low'
-      ? '네 단계 가운데 <b>'+bn.name+'</b>'+(jong(bn.name)?'이':'가')+' 아직 낮은 구간이고, 앞 단계 중 가장 먼저 나오는 자리입니다.'
+      ? '네 단계 가운데 <b>'+bn.name+'</b>'+(jong(bn.name)?'이':'가')+' 아직 낮은 구간이고, 앞 단계 중 가장 먼저 나오는 항목입니다.'
       : (bn.why==='mid'
-      ? '낮게 나온 축은 없습니다. 앞 단계 중 아직 더 볼 여지가 있는 <b>'+bn.name+'</b>부터 보시면 좋습니다.'
-      : '네 축 모두 안정적인 구간입니다. 무엇을 고치기보다 <b>'+bn.name+'</b>에서 지금 되고 있는 것을 유지하는 설계를 권합니다.');
+      ? '낮게 나온 항목은 없습니다. 앞 단계 중 아직 더 볼 여지가 있는 <b>'+bn.name+'</b>부터 보시면 좋습니다.'
+      : '네 항목 모두 안정적인 구간입니다. 무엇을 고치기보다 <b>'+bn.name+'</b>에서 지금 되고 있는 것을 유지하는 설계를 권합니다.');
     h+='<div class="sec">'+sn()+'<h2>지금 내가 먼저 살펴볼 곳</h2>'
      +'<div class="bottleneck" style="--ac:'+bn.c+';--bnbg:'+t.bg+';--bnbd:'+t.bd+'">'
      +'<div class="t">'+((JOURNEY[bn.key]||{}).en||'')+'</div>'
      +'<div class="h">'+bn.name+' '+bn.v+'</div>'
      +'<div class="bdef">'+(AXIS_DEF[bn.key]||'')+'</div>'
-     +'<div class="b">'+lead+' 이 숫자는 <b>잘하고 있지 못하다</b>는 뜻이 아니라, '
-     +'지금의 나를 조금 더 이해하면 <b>삶의 방향이 가장 크게 달라질 수 있는 곳</b>이라는 뜻입니다.'
-     +(sname?' 그 안에서도 지금 가장 낮은 것은 <b>'+sname+'</b>입니다. 아래 설계는 그 자리에 맞춰 제안됩니다.':'')
-     +'<br><span class="bwhy">네 단계는 순서대로(<b>'+seq+'</b>) 이어질 때 힘이 붙기 때문에, 점수가 가장 낮은 축이 아니라 <b>앞 단계 중 아직 낮은 축</b>을 먼저 봅니다. 네 진단은 묻는 방식이 서로 달라 점수를 나란히 놓고 비교할 수 없습니다.</span></div>'
+     +'<div class="b">'+lead+' 지금의 나를 조금 더 이해하면 <b>삶의 방향이 가장 크게 달라질 수 있는 곳</b>입니다.'
+     +(sname?' 그 안에서도 지금 가장 낮은 것은 <b>'+sname+'</b>입니다. 아래 설계는 거기에 맞춰 제안됩니다.':'')
+     +'<br><span class="bwhy">나다움설계는 어느 한 곳만 유독 낮은 경우가 아니면, 대체로 순서대로 하는 것이 더 효과적입니다. <b>나를 읽기 → 잡음 알아차리기 → 에너지 살피기 → 나에게 맞는 조건 찾기 → 우선가치 정하기</b>. 나를 읽는 욕구 탐색부터 시작해 보세요.</span></div>'
      +'<button class="bn-go no-print" onclick="goRecord()">오늘의 설계 시작하기 \u2192</button>'
      +'<div class="bfoot">오늘의 설계는 1분이면 됩니다. 한 문장만 남기시면 됩니다.</div></div></div>';
   }
@@ -1752,7 +1749,7 @@ function nextStepCard(){
   const core=DIAGS.filter(d=>d.core), todo=core.filter(d=>!P.modules[d.k]);
   if(!todo.length){
     const ext=DIAGS.filter(d=>!d.core&&!P.modules[d.k]);
-    if(!ext.length) return '<div class="nextcard done">여섯 질문에 모두 답하셨습니다. 이제는 <a href="#record">오늘의 실천</a>을 쌓는 자리입니다.</div>';
+    if(!ext.length) return '<div class="nextcard done">여섯 질문에 모두 답하셨습니다. 이제는 <a href="#record">오늘의 실천</a>을 쌓을 차례입니다.</div>';
     return '<div class="nextcard"><div class="nl">네 칸이 모두 열렸습니다</div>'
       +'<div class="nq">더 또렷하게 보고 싶으시면 심화 질문이 남아 있습니다.</div>'
       +'<a class="nb" href="#map">심화 질문 보기 \u2192</a></div>';
@@ -1858,7 +1855,7 @@ function changeView(){
    +'<p class="sub">기록을 할수록, 조금씩 변화하고 있는 나를 확인할 수 있습니다.</p>'
    +'<div class="chg-tip">\uD83C\uDF31 작은 기록이 모여, 더 나다운 나를 만들어갑니다.</div>';
   if(!H.length){
-    h+='<div class="empty-tab">아직 기록이 없습니다.<br>진단을 하나 마치시면 이 자리에 첫 점이 찍힙니다.</div></div>';
+    h+='<div class="empty-tab">아직 기록이 없습니다.<br>진단을 하나 마치시면 여기에 첫 점이 찍힙니다.</div></div>';
     return h;
   }
   const dt=function(t){return String(t||'').replace(/-/g,'.').slice(2)};
@@ -1942,7 +1939,7 @@ function designPage(bn){
      +'<h1 class="dp-h">'+ac.h+'</h1>'
      +'<p class="dp-p">아직 지도의 네 칸이 열리지 않아, 어디부터 손대면 좋을지는 말씀드릴 수 없습니다. '
      +'다만 지금 에너지가 <b>'+FLOWKEY[bn.flow]+'</b> 쪽으로 흐르고 있다는 것은 읽었습니다. '
-     +'그 결에 맞는 기록부터 시작하시면 됩니다. '
+     +'그 방향에 맞는 기록부터 시작하시면 됩니다. '
      +'<a href="'+BASE+'/needscan/" style="color:#FFD98A;font-weight:700">첫 칸(욕구 출발점 진단)</a>을 여시면 그때부터는 여러분의 지도에 맞춘 설계가 나옵니다.</p></div>';
     h+=designView(bn,true);
     h+=sentencesView(true);
@@ -1951,13 +1948,13 @@ function designPage(bn){
   }
   const _why=bn&&bn.why==='low'?'앞 단계 중 아직 낮은 축':(bn&&bn.why==='mid'?'앞 단계 중 아직 더 볼 여지가 있는 축':'지금 보는 축');
   const _fl=(P.modules&&P.modules.tendency&&P.modules.tendency.flag!=='low'&&FLOWKEY[P.modules.tendency.main])?
-      ' 지금 에너지는 <b>'+FLOWKEY[P.modules.tendency.main]+'</b> 중심으로 흐르고 있으니, 그 결에 맞게 적으셔도 됩니다.':'';
+      ' 지금 에너지는 <b>'+FLOWKEY[P.modules.tendency.main]+'</b> 중심으로 흐르고 있으니, 그 방향에 맞게 적으셔도 됩니다.':'';
   h+='<div class="dp-hero" style="--ac:'+col+'">'
    +'<div class="dp-tag">지금 이 설계를 제안하는 이유</div>'
    +'<h1 class="dp-h">'+ac.h+'</h1>'
    +'<p class="dp-p">'+_why+'이 <b>'+(bn?bn.name:'욕구 선명도')+'</b>입니다. '
    +(_sn?'그 안에서도 지금 가장 낮은 것은 <b>'+_sn+'</b>'+(jong(_sn)?'이라':'라')+'서 이 설계를 제안합니다. ':'그래서 이 설계를 제안합니다. ')
-   +'다른 축이 낮게 나온 분에게는 다른 설계가 나옵니다 — 설계는 사람마다 다릅니다.'+_fl+'</p></div>';
+   +'다른 항목이 낮게 나온 분에게는 다른 설계가 나옵니다 — 설계는 사람마다 다릅니다.'+_fl+'</p></div>';
   h+=designView(bn,true);
   h+=sentencesView(true);
   h+='<div class="dp-top no-print" style="margin-top:18px"><button class="dp-back" onclick="closeDesign()">← 리포트로 돌아가기</button></div>';
@@ -1974,7 +1971,7 @@ function designView(bn,solo){
   const ICO={N:'🧭',E1:'🌿',E2:'⚡',D:'✍️',F:'🧭'}[k]||'🧭';
   h+='<div class="design-box" style="--ac:'+AC+';--acs:'+ACS+';--acl:'+ACL+'">'
    +(solo?'':'<div class="db-head"><div class="db-ico">'+ICO+'</div><h3>'+ac.h+'</h3></div>')
-   +'<div class="why">하루에 한 번, 주말에 한 번 나의 '+ac.w+'을 짧게 적어 두는 자리입니다. '
+   +'<div class="why">하루에 한 번, 주말에 한 번 나의 '+ac.w+'을 짧게 적어 두는 곳입니다. '
    +'막연한 다짐보다 <b>언제·어디서·무엇을</b>이 정해진 문장이 실제로 훨씬 잘 지켜집니다'
    +'<span style="color:#6B7393">(Gollwitzer &amp; Sheeran, 2006)</span>. '
    +'적은 것이 쌓이면, 그 안에서 우선가치가 드러납니다.</div>';
@@ -2003,7 +2000,7 @@ function designView(bn,solo){
 
   h+='<div class="prev-line" id="prevLine"></div>';
   h+='<button class="btn" id="saveDesign">이 문장을 내 연습으로 남기기</button>';
-  h+='<div class="design-foot">남기신 뒤에는 <b>나의 기록</b>의 달력에서 실천한 날을 표시하게 됩니다. 그 기록이 이 리포트의 결과물입니다.<button type="button" class="dp-torecord" onclick="rp4GoRecord()">나의 기록으로 가기 →</button></div>';
+  h+='<div class="design-foot">남기신 뒤에는 <b>나다움 설계하기</b>의 달력에서 실천한 날을 표시하게 됩니다. 그 기록이 이 리포트의 결과물입니다.<button type="button" class="dp-torecord" onclick="rp4GoRecord()">나다움 설계하기로 가기 →</button></div>';
   h+='</div></div>';
   return h;
 }
@@ -2240,7 +2237,7 @@ function trendView(){
     +'<h2>나의 변화 기록</h2>'
     +'<div class="tr-count">\uD83D\uDCD6 지금까지 '+ALL.length+'회의 기록이 있습니다.</div>';
   if(!n){
-    h+='<div class="trend-empty">아직 기록이 없습니다. 진단을 마치시면 이 자리에 첫 점이 찍힙니다.</div></div>';
+    h+='<div class="trend-empty">아직 기록이 없습니다. 진단을 마치시면 여기에 첫 점이 찍힙니다.</div></div>';
     return h;
   }
   h+='<div class="tr-key">'+TRAX.map(function(a){
@@ -2655,7 +2652,7 @@ function nudgeAccount(){
 var RP4_DAY  = null;
 var RP4_CAL_Y = new Date().getFullYear();
 var RP4_CAL_M = new Date().getMonth();
-var RP4_OPEN = false;   /* 조금 더 적어보기 펼침 */
+var RP4_OPEN = true;    /* A안 — 항상 펼침 */
 var RP4_EDIT = null;    /* 수정 중인 기록 id (null이면 새 기록) */
 var RP4_CTX  = '';
 var RP4_SRC  = '';
@@ -2892,7 +2889,8 @@ function rp4Form(){
 
   h += rp4StepBar();
 
-  /* ── 01 · 자동행동 알아차리기 (필수) ── */
+  /* ── 덩어리 1 · 멈춘 순간 ── */
+  h += '<div class="rp4-group g1"><div class="rp4-group-head"><b>멈춘 순간</b><span class="req">이것만 골라도 오늘 기록은 끝납니다</span></div>';
   h += '<div class="rp4-q rp4-s1">'
     +'<div class="rp4-q-head">'
       +'<div class="rp4-q-title"><i>01</i>오늘, 익숙한 행동을 하다가 잠깐 멈추어 생각이 스친 순간은 언제였나요?</div>'
@@ -2913,13 +2911,10 @@ function rp4Form(){
     +'<div class="rp4-badge green solo">이 항목만 선택해도 기록이 완료됩니다</div>'
   +'</div>';
 
-  /* ── 02~06 · 접힘 ── */
-  h += '<button type="button" class="rp4-more-btn" id="rp4-more-btn" onclick="rp4ToggleMore()">'
-    +(RP4_OPEN ? '접기 ▴' : '조금 더 나의 욕구 들여다보기 <span>(선택)</span> ▾')
-  +'</button>';
-
-  h += '<div class="rp4-more'+(RP4_OPEN?' open':'')+'" id="rp4-more">';
-  h += '<p class="rp4-more-note">여기서부터는 선택입니다. 오늘 여유가 있는 만큼만 적으세요.</p>';
+  /* ── 덩어리 2 · 그때 내 마음 ── */
+  h += '</div>';
+  h += '<div class="rp4-group g2"><div class="rp4-group-head"><b>그때 내 마음</b>'
+    + '<span>여기서부터는 선택입니다. 오늘 여유가 있는 만큼만 적으세요.</span></div>';
 
   /* 02 */
   h += '<div class="rp4-q rp4-s2">'
@@ -2980,7 +2975,9 @@ function rp4Form(){
     +'<p class="rp4-help dim">오늘의 기록은 나의 지도와 <b>별도로</b> 남습니다. 오늘 다른 가치가 더 중요하게 느껴졌다면 그것도 좋은 발견입니다. 기록이 쌓이면 06에서 다시 살펴볼 수 있습니다.</p>'
   +'</div>';
 
-  /* 05 */
+  /* ── 덩어리 3 · 그래서 어떻게 했나 ── */
+  h += '</div>';
+  h += '<div class="rp4-group g3"><div class="rp4-group-head"><b>그래서 어떻게 했고, 어땠나요</b></div>';
   h += '<div class="rp4-q rp4-s5">'
     +'<div class="rp4-q-head">'
       +'<div class="rp4-q-title"><i>05</i>그래서 나는 무엇을 선택했나요?</div>'
@@ -3019,7 +3016,6 @@ function rp4Form(){
     +'<input type="hidden" id="rp4-eng" value="'+rp4Esc(RP4_ENG)+'">'
   +'</div>';
 
-  h += '</div>';  /* /more */
 
   /* ── 렌즈 확인 · 성공/실패가 아니다 ── */
   var lensD = rp4TodayLens();
@@ -3047,7 +3043,10 @@ function rp4Form(){
     +'</div>';
   }
 
-  /* ── 07 · 사후 회고 (항상 보임) ── */
+  h += '</div>';
+
+  /* ── 덩어리 4 · 오늘의 한 줄 ── */
+  h += '<div class="rp4-group g4"><div class="rp4-group-head"><b>오늘의 한 줄</b><span>비워두셔도 됩니다</span></div>';
   h += '<div class="rp4-q rp4-s7">'
     +'<div class="rp4-q-head">'
       +'<div class="rp4-q-title"><i>07</i>오늘의 나다움 한 줄</div>'
@@ -3066,6 +3065,8 @@ function rp4Form(){
     +'</div>'
     +'<div class="rp4-quote">“작은 선택이 모여, 나다운 방향이 됩니다.”</div>'
   +'</div>';
+
+  h += '</div>';
 
   /* 저장 */
   h += '<div class="rp4-save-row">'
@@ -3555,7 +3556,7 @@ function rp4Pattern(){
         +'<div><b>'+miss.length+'</b><span>떠오르지 않았다</span></div>'
       +'</div>'
       +(top.length ? '<p class="rp4-lens-note">연습이 떠오른 순간은 주로 <b>'+top.map(rp4Esc).join(' · ')+'</b>에서였습니다.</p>' : '')
-      +'<p class="rp4-lens-note dim">떠오르지 않은 날은 실패가 아니라, 아직 그 문장이 닿지 않은 자리입니다.</p>'
+      +'<p class="rp4-lens-note dim">떠오르지 않은 날은 실패가 아니라, 아직 그 문장이 닿지 않은 날일 뿐입니다.</p>'
     +'</div>';
   }
 
@@ -3776,6 +3777,33 @@ function rp4GoRecord(){
 
 /* ── 9. 연습 문장 목록 (기존 sentencesView 대체) ─────── */
 /* ── 연습 문장 만들기 · 연습 탭 안에서 끝난다 ─────────── */
+/* 축별 연습 예시 — 무엇을 연습할지 모를 때 고르기만 하면 된다 */
+var RP4_EX = {
+  N :['무언가 하고 싶어질 때, 지금 내가 뭘 원하는지 한 번 물어본다',
+      '사기 전에 "이거 정말 내가 원한 건가" 한 번 생각한다',
+      '하루에 한 번, 지금 기분을 한 단어로 적어본다'],
+  E1:['휴대폰을 열기 전에 한 번 멈춘다',
+      '답을 하기 전에 셋을 센다',
+      '남과 비교되는 글은 그냥 넘긴다',
+      '자기 전 30분은 화면을 보지 않는다'],
+  E2:['자기 전에 오늘 한 일 하나에 +(채워짐) 또는 −(빠져나감)를 붙인다',
+      '가장 집중 잘 되는 시간에 제일 중요한 일을 놓는다',
+      '지치기 전에 10분 쉰다',
+      '점심시간에는 일 이야기를 하지 않는다'],
+  D :['바로 답하지 않고, 내 사정을 먼저 말한다',
+      '오늘 하나는 내가 정한 대로 한다',
+      '하기로 한 것 하나를 그날 안에 끝낸다'],
+  F :['하루에 한 번, 지금 내 상태를 그대로 적는다',
+      '잘한 일 하나를 매일 적는다',
+      '오늘 고마웠던 것 하나를 떠올린다']
+};
+function rp4UseEx(t){
+  var el=document.getElementById('rp4-new-text');
+  if(el){ el.value=t; el.focus(); }
+  document.querySelectorAll('[data-ex]').forEach(function(b){
+    b.classList.toggle('on', b.getAttribute('data-ex')===t);
+  });
+}
 var RP4_NEW = false;
 var RP4_NEW_AX = 'E1';
 var RP4_SEED = '';
@@ -3799,6 +3827,20 @@ function rp4NewAxis(a){
   document.querySelectorAll('[data-newax]').forEach(function(b){
     b.classList.toggle('on', b.getAttribute('data-newax') === a);
   });
+  var box=document.getElementById('rp4-ex-box');
+  if(box) box.innerHTML = rp4ExHTML(a);
+  var t=document.getElementById('rp4-new-text');
+  if(t) t.placeholder = (RP4_EX[a]||RP4_EX.E1)[0];
+}
+function rp4ExHTML(a){
+  var list = RP4_EX[a] || RP4_EX.E1;
+  return '<div class="rp4-ex-lab">이런 것을 고르면 됩니다 — 눌러서 그대로 쓰거나 고쳐 쓰세요</div>'
+    + '<div class="rp4-ex-list">'
+    + list.map(function(t){
+        return '<button type="button" class="rp4-ex" data-ex="'+rp4Esc(t)+'" '
+          + 'onclick="rp4UseEx(\''+rp4Esc(t).replace(/'/g,"\\'")+'\')">'+rp4Esc(t)+'</button>';
+      }).join('')
+    + '</div>';
 }
 function rp4NewSave(){
   var t = document.getElementById('rp4-new-text');
@@ -3848,6 +3890,7 @@ function rp4NewPanel(){
       }).join('')
     +'</div>'
     +'<div class="rp4-new-lab">오늘 어떤 문장을 연습해볼까요?</div>'
+    +'<div id="rp4-ex-box">'+rp4ExHTML(RP4_NEW_AX)+'</div>'
     +'<input type="text" id="rp4-new-text" class="rp4-line" maxlength="60" '
     +'value="'+rp4Esc(RP4_SEED)+'" placeholder="'+rp4Esc(ex[RP4_NEW_AX]||ex.E1)+'">'
     +'<p class="rp4-new-hint">짧을수록 좋습니다. 한 문장이면 충분합니다.</p>'
@@ -3887,7 +3930,7 @@ function rp4Strip(){
         : '<p>이 날은 연습 문장을 고르지 않았습니다. 괜찮습니다.</p>')
     +'</div>'
     +'<p class="rp4-side-dim">칸 아래 점은 그날 연습 문장을 골랐다는 표시입니다.<br>'
-    +'한 달 전체는 <b>나의 기록</b>의 달력에서 보실 수 있습니다.</p>'
+    +'한 달 전체는 <b>나다움 설계하기</b>의 달력에서 보실 수 있습니다.</p>'
   +'</div>';
   return h;
 }
@@ -3947,7 +3990,7 @@ function practiceView(){
     +'<div class="rp4-footband-mark">🔎</div>'
     +'<div><b>연습은 해내야 할 과제가 아니라, 오늘 나를 바라보는 렌즈입니다.</b>'
     +'<p>문장을 고르셨다면, 이제 나의 기록에서 오늘의 잠깐 멈춤을 남겨보세요.</p></div>'
-    +'<button type="button" class="rp4-next-btn" onclick="rp4GoRecord()">나의 기록으로 가기 →</button>'
+    +'<button type="button" class="rp4-next-btn" onclick="rp4GoRecord()">나다움 설계하기로 가기 →</button>'
   +'</div>';
 
   return h+'</div>';
@@ -3977,20 +4020,10 @@ function recordView(){
   var h = '';
 
   h += '<div class="sec rp4-main-section" id="sec-daily">'+sn()
-    + rp4SecHead('01 · 오늘의 잠깐 멈춤',
-        '오늘 나를 알아차린 순간을<br>하나 남겨보세요.',
-        '오늘 하루, 습관처럼 하던 행동을 잠깐 멈추고 생각이 스친 순간이 있었나요?',
-        '지금은 해석하지 않아도 괜찮습니다. 남기는 것만으로 충분합니다.')
-    +'<div class="rp4-introrow">'
-      +'<div class="rp4-card rp4-quick-intro-card">'
-        +'<div class="rp4-card-eyebrow">오늘의 잠깐 멈춤 기록</div>'
-        +'<h3>오늘 나의 ‘잠깐 멈춤’은 언제였나요?</h3>'
-        +'<p>멈추어 바라보는 순간, 나는 반복하던 선택을 다시 고를 수 있습니다.<br>'
-        +'이 기록은 잘하는 날을 모으는 것이 아니라, 나를 이해하고 더 나다운 선택을 연습하는 과정입니다.</p>'
-        +'<div class="rp4-ten inline"><b>10초</b><span>짧게 기록해도 괜찮습니다.</span></div>'
-      +'</div>'
-      + rp4SideRecent()
-    +'</div>'
+    + rp4SecHead('01 · 나다움 설계 시작 : 멈춤 기록하기',
+        '오늘 잠깐 멈춘 순간을<br>하나만 적어보세요.',
+        '습관처럼 하던 행동을 멈추고 생각이 스친 순간이 있었나요? 아래 1번만 고르면 오늘 기록은 끝납니다.',
+        '10초면 됩니다. 지금은 해석하지 않아도 괜찮습니다.')
     + rp4Form()
     + rp4DayRecords()
     +'<div class="rp4-footband">'
@@ -4031,6 +4064,11 @@ function recordView(){
         '우선가치는 물어서 나오는 것이 아니라, 실제로 지킨 것들에서 드러납니다.',
         '오늘의 기록에서 고른 가치는 여기에 쌓이기만 합니다. 기준을 바꾸는 것은 아래 재선정에서만 일어납니다.')
     + rp4ValueMirror() + '</div>';
+
+  h += '<div class="sec">'+sn()
+    + rp4SecHead('06 · 가장 최근의 기록', '지난번에는<br>무엇을 남기셨나요?',
+        '방금 적은 것 말고, 그 전에 남긴 기록입니다.')
+    + rp4SideRecent() + '</div>';
 
   h += notesView();
   h += loopView();
@@ -4612,6 +4650,28 @@ function rp4GoValueEdit(){
   .rp4-new-hint{margin:8px 0 0;font-size:13.8px;color:#9aa0a8;line-height:1.65}
   .rp4-new-btns{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;margin-top:18px}
   @media(max-width:560px){.rp4-new-btns{justify-content:stretch}.rp4-new-btns button{flex:1 1 auto}}
+
+  /* ── A안 · 네 덩어리 ─────────────────────────────── */
+  .rp4-group{margin-top:26px;padding:20px 18px 6px;border-radius:18px;border:1px solid #ECE8E0;background:#FCFBF9}
+  .rp4-group.g1{background:#F6F9FF;border-color:#E2ECFA}
+  .rp4-group.g2{background:#F7FBF8;border-color:#DFEFE5}
+  .rp4-group.g3{background:#F8F7FE;border-color:#E7E2F7}
+  .rp4-group.g4{background:#FBF8F5;border-color:#F0E6DC}
+  .rp4-group-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+  .rp4-group-head b{font-size:17.5px;font-weight:800;color:#20242C;letter-spacing:-.02em}
+  .rp4-group-head span{font-size:13.5px;color:#8A90A0;line-height:1.6}
+  .rp4-group-head span.req{color:#2F9E5E;font-weight:700}
+  .rp4-group .rp4-q{background:#fff !important;border-color:#EDEAE4 !important}
+  .rp4-group .rp4-q:first-of-type{margin-top:12px}
+  @media(max-width:560px){.rp4-group{padding:16px 13px 4px}}
+
+  /* 연습 예시 */
+  .rp4-ex-lab{font-size:13.5px;color:#8A90A0;margin:2px 0 10px;line-height:1.6}
+  .rp4-ex-list{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+  .rp4-ex{text-align:left;padding:11px 14px;border-radius:11px;border:1px solid #E4E0D8;
+          background:#fff;color:#3A3F48;font-family:inherit;font-size:14.8px;line-height:1.55;cursor:pointer}
+  .rp4-ex:hover{background:#FAF9FF;border-color:#DDD4F7}
+  .rp4-ex.on{background:#F4F0FF;border-color:#8B5CF6;color:#4C3A8F;font-weight:700}
   .rp4-linkbtn{margin-top:12px;padding:9px 14px;border-radius:10px;border:1px solid #e3ddf5;background:#faf9ff;color:#6d4fd0;font-size:14.5px;font-weight:700;cursor:pointer}
   .rp4-linkbtn:hover{background:#f3f0ff}
   .rp4-tl-more{margin-top:12px;width:100%;padding:11px;border-radius:11px;border:1px dashed #ddd8cf;background:#fff;color:#6b7280;font-size:14.5px;font-weight:700;cursor:pointer}
