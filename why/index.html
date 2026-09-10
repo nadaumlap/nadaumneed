@@ -430,7 +430,7 @@ body {
 .fade-up { animation:fadeUp 0.4s ease forwards; }
 @media(max-width:380px){.intro-card h1{font-size:21px;}.q-text{font-size:15px;}.share-row{flex-direction:column;}.phase-row{gap:5px;}}
 
-/* 통합 리포트 진입 카드 */
+/* 종합 리포트 진입 카드 */
 
 /* ===== 실행 기록 카드 (공통 · 네이비+골드) ===== */
 .rec-card{position:relative;overflow:hidden;background:#101736;border:1px solid #232C5C;border-radius:14px;padding:20px 19px;margin:16px 0 12px}
@@ -448,13 +448,6 @@ body {
 .rep-cta .rc-h{font-size:18px;font-weight:800;color:#FFF;margin-bottom:8px;line-height:1.45;word-break:keep-all;font-family:-apple-system,'SF Pro Display','Apple SD 산돌고딕 Neo','Pretendard',sans-serif}
 .rep-cta .rc-d{font-size:13.5px;color:#C7CEE4;line-height:1.7;word-break:keep-all;margin-bottom:12px}
 .rep-cta .rc-go{font-size:14px;font-weight:700;color:#FFF}
-
-.cover-more{margin:14px 0 0;text-align:left;}
-.cover-more>summary{cursor:pointer;list-style:none;text-align:center;font-size:13px;color:#7A8796;padding:10px 0;}
-.cover-more>summary::-webkit-details-marker{display:none;}
-.cover-more>summary::after{content:" ▾";}
-.cover-more[open]>summary::after{content:" ▴";}
-.cover-more>summary:hover{color:#3F4C5A;}
 </style>
 </head>
 <body>
@@ -485,8 +478,7 @@ body {
     </div>
     <button class="btn-start" onclick="startQuiz()">진단 시작하기 →</button>
 
-    <details class="cover-more"><summary>진단 구성이 궁금하신가요?</summary>
-<div class="phase-row">
+    <div class="phase-row">
       <div class="phase-item p1">
         <div class="pi-icon">○</div>
         <div class="pi-label">기질 토대</div>
@@ -510,7 +502,6 @@ body {
       이 세 층이 어떻게 연결되어 있는지 볼 때,<br>
       "왜 열심히 해도 지치는가"의 구조적 원인이 보입니다.
     </div>
-</details>
   </div>
 </section>
 
@@ -548,12 +539,12 @@ body {
 <!-- ══ 전환 브리지 (Phase2→3) ══ -->
 <section id="bridge2-section" style="display:none">
   <div class="bridge-card fade-up">
-    <div class="br-icon">🧭</div>
+    <div class="br-icon">🔇</div>
     <h3>동기 패턴 확인 완료</h3>
     <p>지금 행동의 출처를 읽었습니다.<br>마지막 단계입니다.</p>
     <div class="br-highlight">
       <strong>내 자율성을 빼앗는 잡음은 무엇인가?</strong><br>
-      다음 6문항은 에너지를 소진시키는 <strong>심리적 압박 패턴</strong>을 구체적으로 봅니다.
+      다음 6문항은 에너지를 지치게 하는 <strong>심리적 압박 패턴</strong>을 구체적으로 봅니다.
     </div>
     <button class="btn-bridge gold" onclick="continueToPh3()">잡음 패턴 진단하기 →</button>
   </div>
@@ -817,7 +808,7 @@ function prevQ() {
 // ═══════════════════════════════════════════
 // 채점
 // ═══════════════════════════════════════════
-// ===== 통합 리포트용 프로필 저장 (nd_profile v1) =====
+// ===== 종합 리포트용 프로필 저장 (nd_profile v1) =====
 function saveWhyProfile(res) {
   try {
     const KEY = 'nadaum.profile.v1';
@@ -933,10 +924,10 @@ function showResult() {
     overheat: {
       cssClass:'overheat', eyebrow:'불일치 · 과열 상태',
       state:'강력한 엔진에 가짜 연료가 들어간 상태',
-      metaphor:'"열심히 하지만, 소진이 빠릅니다."',
+      metaphor:'"열심히 하지만, 금방 지칩니다."',
       desc:'기질적 토대는 활성화되어 있지만, 행동의 출처가 주로 불안·비교·인정욕구에서 오고 있습니다. 성과는 낼 수 있지만, 이 에너지는 회복형이 아닌 생존형입니다. 오래 지속되면 번아웃으로 이어지기 쉽습니다.',
       dotStates:['on gold','on gold','',''],
-      note:'기질 토대와 동기 출처의 어긋남이 지금 소진의 구조적 원인입니다. 가장 강한 잡음 하나를 먼저 줄이는 것이 시작입니다.'
+      note:'기질 토대와 동기 출처의 어긋남이 지금 지치는 근본 원인입니다. 가장 강한 잡음 하나를 먼저 줄이는 것이 시작입니다.'
     },
     suppress: {
       cssClass:'suppress', eyebrow:'억제 · 잠식 상태',
@@ -962,7 +953,7 @@ function showResult() {
     'NS+PS': {
       combo:'새로운 것에 끌리면서도, 의미 있는 방향에서는 깊어지는 토대',
       title:'탐색하면서 깊어지는 사람',
-      insight:'"새로운 가능성을 찾아 움직이면서도, 진짜 의미를 느끼는 방향에서는 예상보다 오래 자리를 지킵니다."',
+      insight:'"새로운 가능성을 찾아 움직이면서도, 진짜 의미를 느끼는 방향에서는 예상보다 오래 그 방향을 지킵니다."',
       detail:'새로움에 끌리는 힘과 한 방향을 깊이 지속하는 힘이 함께 작동합니다. 의미 없는 반복에서는 빠르게 에너지가 꺼지지만, <strong>의미 있는 방향을 발견한 순간 깊게 뿌리내리는 것</strong>이 이 구조의 특징입니다.',
       qna:[
         {q:'산만하고 끈기가 없는 건 아닐까?', a:'변덕이 아닙니다. 의미 없는 반복에 에너지가 꺼지는 것은 구조적인 반응입니다. 지금 흥미를 잃었다면, 그 방향이 충분히 의미 있는지 먼저 물어보세요.'},
@@ -999,14 +990,14 @@ function showResult() {
       detail:'위험을 먼저 살피는 힘과 타인의 감정에 민감하게 반응하는 힘이 함께 작동합니다. <strong>갈등을 사전에 조율하고 관계의 안전감을 지키는 것</strong>이 자연스럽게 작동합니다.',
       qna:[
         {q:'왜 이렇게 눈치를 보는 걸까?', a:'눈치가 아니라 관계 감지 능력입니다. 문제가 생기기 전에 분위기를 읽는 이 능력은 신뢰를 만드는 강점으로 작동합니다.'},
-        {q:'내 감정보다 남 감정이 먼저인가?', a:'균형이 필요합니다. 타인을 먼저 배려하는 것은 강점이지만, 내 에너지가 소진되기 전에 자신의 필요도 인식하는 연습이 함께 필요합니다.'},
+        {q:'내 감정보다 남 감정이 먼저인가?', a:'균형이 필요합니다. 타인을 먼저 배려하는 것은 강점이지만, 내 에너지가 지치기 전에 자신의 필요도 인식하는 연습이 함께 필요합니다.'},
         {q:'소심한 건 아닐까?', a:'소심함이 아닙니다. 관계의 평화를 지키기 위해 작동하는 정밀한 감지 시스템입니다. 이 능력은 협력이 필요한 환경에서 특히 빛납니다.'}
       ]
     },
     'HA+PS': {
       combo:'충분히 살핀 뒤에 시작하고, 한 번 시작하면 깊이 지속하는 토대',
       title:'준비된 방향에서 깊이 지속하는 사람',
-      insight:'"빠르게 시작하지 않지만, 방향이 잡히면 예상보다 훨씬 오래 그 자리를 지킵니다."',
+      insight:'"빠르게 시작하지 않지만, 방향이 잡히면 예상보다 훨씬 오래 그 방향을 지킵니다."',
       detail:'먼저 충분히 살피는 힘과 한 방향을 깊이 지속하는 힘이 함께 작동합니다. <strong>시작이 늦어 보여도, 한 번 확신이 생기면 흔들리지 않습니다</strong>.',
       qna:[
         {q:'왜 이렇게 결정이 느리지?', a:'준비가 끝나지 않은 것입니다. 충분히 살폈다는 내적 신호가 올 때 움직이는 것이 이 구조의 방식입니다. 속도보다 방향의 확실함이 먼저입니다.'},
@@ -1234,7 +1225,7 @@ function showResult() {
     <h4>"이게 원래 내 성격 아닌가요?"</h4>
     <p>잡음이 오래되면 기질처럼 느껴집니다. 하지만 기질은 평생 상대적으로 안정적이고, 잡음은 환경과 경험이 만든 것입니다.<br><br>
     지금 나타나는 불안·비교·인정욕구가 <strong>타고난 것인지, 학습된 것인지</strong> 구분해보는 것이 자기설계의 첫 질문입니다.</p>
-    <p class="social-note">→ 기질 × 잡음 불일치가 클수록, 에너지 소진의 구조적 원인이 됩니다.</p>
+    <p class="social-note">→ 기질 × 잡음 불일치가 클수록, 쉽게 지치는 원인이 됩니다.</p>
   </div>
 
   <!-- 에너지 회복 방식 -->
@@ -1296,10 +1287,10 @@ function showResult() {
   <span class="rec-step">기록해 두세요</span>
   <h3>실행한 내용을 한 줄로 남겨 두세요</h3>
   <p>실행한 내용을 한 줄로 간단히 기록해 놓으면 작은 여러분의 실행 역사가 됩니다. 회원가입 없이 바로 사용 가능합니다.</p>
-  <a class="rec-go" href="https://nadaumlap.github.io/nadaumneed/report/#write">통합 리포트 안 &#39;기록하기&#39;로 바로 가기 →</a>
-  <div class="rec-note">아래 <b>통합 리포트 열기</b>와 같은 곳입니다. 이 링크는 리포트를 열면서 기록하는 자리까지 바로 내려갑니다.</div>
+  <a class="rec-go" href="https://nadaumlap.github.io/nadaumneed/report/#write">종합 리포트 안 &#39;기록하기&#39;로 바로 가기 →</a>
+  <div class="rec-note"></div>
 </div>
-<a class="rep-cta" href="https://nadaumlap.github.io/nadaumneed/report/"><div class="rc-tag">나다움 설계 통합 리포트</div><div class="rc-h">진단에서 멈추지 마세요</div><div class="rc-d">여러분의 나다움 설계 현황을 기록해 두시고, 나다움을 적극 설계하십시오.</div><div class="rc-go">통합 리포트 열기 →</div></a>
+<a class="rep-cta" href="https://nadaumlap.github.io/nadaumneed/report/"><div class="rc-tag">나다움 설계 종합 리포트</div><div class="rc-h">진단에서 멈추지 마세요</div><div class="rc-d">여러분의 나다움 설계 현황을 기록해 두시고, 나다움을 적극 설계하십시오.</div><div class="rc-go">종합 리포트 열기 →</div></a>
     <a class="btn-next-explore" href="https://nadaumlap.github.io/nadaumneed/5characters/" target="_blank">5러 몰입 경향성 탐색하기 →</a>
   </div>
 
@@ -1364,7 +1355,7 @@ function getIntegrationMsg(topDim, topLv, engineState) {
     },
     overheat: {
       title:'기질은 활성화되어 있지만 동기 출처가 어긋나 있습니다',
-      body:`${dl} 기질인데, 지금 행동의 상당 부분이 불안·비교·인정욕구에서 출발하고 있습니다. 성과는 낼 수 있지만 이건 회복형이 아닌 생존형 에너지입니다. 기질-동기 불일치가 지금 소진의 구조적 원인입니다.`,
+      body:`${dl} 기질인데, 지금 행동의 상당 부분이 불안·비교·인정욕구에서 출발하고 있습니다. 성과는 낼 수 있지만 이건 회복형이 아닌 생존형 에너지입니다. 기질-동기 불일치가 지금 지치는 근본 원인입니다.`,
       note:'이건 약함이 아닙니다. 오랜 시간 외부 기준을 내면화한 결과일 수 있습니다. 지금 가장 강한 잡음을 하나 인식하는 것이 첫 번째 설계 행동입니다.'
     },
     suppress: {
@@ -1454,9 +1445,9 @@ function doRetry() {
   window.scrollTo(0,0);
 }
 
-/* ═══════════ 통합 리포트 인계 링크 (handoff v1) ═══════════
+/* ═══════════ 종합 리포트 인계 링크 (handoff v1) ═══════════
    브라우저 저장(localStorage)이 막히거나 지워져도 결과가 리포트로 넘어가도록,
-   "통합 리포트 열기" 링크에 이 진단 결과를 실어 보낸다.
+   "종합 리포트 열기" 링크에 이 진단 결과를 실어 보낸다.
    인코딩 형식은 /report/의 pack()과 동일해야 한다. 표는 추가만 하고 기존 항목은 바꾸지 않는다. */
 var _ndProfile = null;
 var ND_RPT = 'https://nadaumlap.github.io/nadaumneed/report/';
