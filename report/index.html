@@ -2784,6 +2784,12 @@ function rp4Pick(kind, v){
   if(kind === 'lens') RP4_LENS = v;
   var el = document.getElementById('rp4-'+kind);
   if(el) el.value = v;
+  if(kind === 'ctx'){
+    var qs = document.getElementById('rp4-quicksave');
+    var hint = document.getElementById('rp4-solohint');
+    if(qs) qs.hidden = false;
+    if(hint) hint.hidden = true;
+  }
   /* render()를 부르지 않는다 — 적던 글이 지워지면 안 된다 */
   document.querySelectorAll('[data-chip="'+kind+'"]').forEach(function(b){
     b.classList.toggle('on', b.getAttribute('data-value') === v);
@@ -2947,7 +2953,14 @@ function rp4Form(){
     +'<input type="hidden" id="rp4-ctx" value="'+rp4Esc(RP4_CTX)+'">'
     +'<textarea id="rp4-ctxnote" maxlength="120" class="rp4-eg" '
     +'placeholder="예) 출근길 지하철에서 무심코 SNS를 열려다 멈췄다.">'+rp4Esc(g('ctxnote'))+'</textarea>'
-    +'<div class="rp4-badge green solo">이 항목만 선택해도 기록이 완료됩니다</div>'
+    +'<div class="rp4-badge green solo" id="rp4-solohint"'+(RP4_CTX||g('context')?' hidden':'')+'>이 항목만 선택해도 기록이 완료됩니다</div>'
+    /* 저장 버튼은 폼 맨 아래에만 있어서, 하나만 골라도 끝난다는 안내와 어긋났다.
+       하나를 고르면 이 자리에서 바로 저장할 수 있게 한다. */
+    +'<div class="rp4-quicksave" id="rp4-quicksave"'+(RP4_CTX||g('context')?'':' hidden')+'>'
+      +'<div class="rp4-qs-t">이것만으로 오늘 기록이 됩니다.</div>'
+      +'<button type="button" class="rp4-main-btn" onclick="rp4SaveForm()">오늘 기록 저장하기 →</button>'
+      +'<div class="rp4-qs-d">더 적고 싶으시면 저장하지 마시고 아래로 이어가세요.</div>'
+    +'</div>'
   +'</div>';
 
   /* ── 덩어리 2 · 그때 내 마음 ── */
@@ -4320,6 +4333,11 @@ function rp4GoValueEdit(){
   .rp4-q textarea.big{min-height:112px}
   .rp4-q textarea:focus,.rp4-week-reflection textarea:focus{border-color:#8B5CF6;box-shadow:0 0 0 3px rgba(139,92,246,.09)}
 
+  .rp4-quicksave{margin-top:14px;padding:14px 16px;border-radius:14px;background:#F2FAF5;border:1px solid #CFE9DA}
+  .rp4-quicksave[hidden]{display:none}
+  .rp4-qs-t{font-size:15px;font-weight:800;color:#2F7A4C;margin-bottom:10px}
+  .rp4-qs-d{margin-top:9px;font-size:13px;color:#7C8894;line-height:1.6}
+  .rp4-quicksave .rp4-main-btn{width:100%}
   .rp4-save-row{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-top:26px;flex-wrap:wrap}
   .rp4-date{display:flex;flex-direction:column;gap:6px;color:#8d919a;font-size:13px}
   .rp4-date input{border:1px solid #dcd7ce;border-radius:11px;padding:12px;color:#4c505a;font-family:inherit;font-size:15.5px}
