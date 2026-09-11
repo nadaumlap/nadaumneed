@@ -3009,7 +3009,7 @@ function rp4Form(){
       +'<div class="rp4-q-title"><i>04</i>그 순간, 내가 중요하게 여긴 것은 무엇이었나요?</div>'
       +'<span class="rp4-tagline s4">나다운 기준 확인하기</span>'
     +'</div>'
-    +(mapVal ? '<div class="rp4-valnow">지금 나다움 지도에서 선택한 우선가치는 <b>'+rp4Esc(mapVal)+'</b>입니다.<br>'
+    +(mapVal ? '<div class="rp4-valnow">현재 선택한 우선가치는 <b>'+rp4Esc(mapVal)+'</b>입니다.<br>'
         +'오늘 이 순간에도 그 가치가 중요했는지, 또는 다른 것이 더 중요했는지 살펴보세요.</div>' : '')
     +'<div class="rp4-chips wrap val">'
     +RP4_VALUES.map(function(v){
@@ -4300,6 +4300,7 @@ function rp4GoValueEdit(){
   .rp4-help{margin:0 0 12px;color:#6b7078;font-size:15px;line-height:1.7}
 
   .rp4-chips{display:flex;flex-wrap:wrap;gap:9px}
+  .rp4-chips.wrap{max-width:none;margin:0;padding:0}   /* 바깥틀 .wrap 상속 차단 */
   .rp4-chip{border:1px solid #dcd7ce;background:#fff;border-radius:999px;padding:11px 17px;color:#4c505a;font-family:inherit;font-size:15.5px;cursor:pointer}
   .rp4-chip.soft{border-radius:12px;font-size:15px;text-align:left}
   .rp4-chip.on{border-color:#8B5CF6;background:rgba(139,92,246,.09);color:#6c3fd0;font-weight:800}
