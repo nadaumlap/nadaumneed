@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>나다움 설계 지도 | 나다움설계연구소</title>
 <meta name="description" content="나는 무엇을 원하고, 무엇에 흔들리며, 무엇으로 살아가는가. 5개의 무료 진단을 하나의 지도로 모아 읽습니다.">
-<meta property="og:title" content="나다움 설계 지도">
-<meta property="og:description" content="5개의 무료 진단을 하나씩 완료하면 나다움 설계 리포트를 받을 수 있습니다. 이름 없이 참여 가능.">
+<meta property="og:title" content="나를 알면, 선택이 달라집니다.">
+<meta property="og:description" content="">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nadaumlap.github.io/nadaumneed/">
 <meta property="og:image" content="https://nadaumlap.github.io/nadaumneed/og-image.png">
@@ -17,8 +17,8 @@
 <meta property="og:site_name" content="나다움설계연구소">
 <meta property="og:locale" content="ko_KR">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="나다움 설계 지도">
-<meta name="twitter:description" content="5개의 무료 진단을 하나씩 완료하면 나다움 설계 리포트를 받을 수 있습니다. 이름 없이 참여 가능.">
+<meta name="twitter:title" content="나를 알면, 선택이 달라집니다.">
+<meta name="twitter:description" content="">
 <meta name="twitter:image" content="https://nadaumlap.github.io/nadaumneed/og-image.png">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <style>
@@ -56,9 +56,8 @@ a{text-decoration:none;color:inherit;}
 .flow .f1 a{background:#F3F7FC;} .flow .f1 .fnum{background:var(--n);}
 .flow .f2 a{background:#F2F8F4;} .flow .f2 .fnum{background:var(--e1);}
 .flow .f3 a{background:#FBF7EF;} .flow .f3 .fnum{background:var(--e2);}
-.flow .f4 a{background:#F6F5FB;} .flow .f4 .fnum{background:var(--d);}
-.flow .f5 a{background:#FBF5F6;} .flow .f5 .fnum{background:var(--p);}
-.flow .f6 a{background:#FBF5F6;} .flow .f6 .fnum{background:var(--p);}
+.flow .f4 a{background:#FBF5F6;} .flow .f4 .fnum{background:var(--p);}
+.flow .f5 a{background:#F6F5FB;} .flow .f5 .fnum{background:var(--d);}
 .flow .fr a{background:#EDF3FB;border-color:#C9DAF0;}
 .flow .fr .flab{color:var(--n);font-weight:700;}
 .flow .fr .fnum{background:var(--n);font-size:15px;}
@@ -81,16 +80,16 @@ section{padding:40px 0 0;}
 .card.n{border-top-color:var(--n);background:#F3F7FC;}
 .card.e1{border-top-color:var(--e1);background:#F2F8F4;}
 .card.e2{border-top-color:var(--e2);background:#FBF7EF;}
+.card.p{border-top-color:var(--p);background:#FBF5F6;}
 .card.d{border-top-color:var(--d);background:#F6F5FB;}
-.card.p{border-top-color:var(--p);background:#FBF5F6;margin-top:14px;}
-.card.wide{display:block;}
-.p .num{background:var(--p);} .p .tag{color:var(--p);} .p .go{color:var(--p);}
+.card.wide{grid-column:1 / -1;}
 .tag{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:700;}
 .num{width:22px;height:22px;border-radius:50%;color:#fff;font-size:13px;font-weight:700;
      display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
 .n .num{background:var(--n);} .n .tag{color:var(--n);} .n .go{color:var(--n);}
 .e1 .num{background:var(--e1);} .e1 .tag{color:var(--e1);} .e1 .go{color:var(--e1);}
 .e2 .num{background:var(--e2);} .e2 .tag{color:var(--e2);} .e2 .go{color:var(--e2);}
+.p .num{background:var(--p);} .p .tag{color:var(--p);} .p .go{color:var(--p);}
 .d .num{background:var(--d);} .d .tag{color:var(--d);} .d .go{color:var(--d);}
 .q{font-size:22px;font-weight:800;margin-top:12px;line-height:1.3;}
 .desc{font-size:15px;margin-top:9px;}
@@ -103,36 +102,12 @@ section{padding:40px 0 0;}
 .funnel svg{display:block;width:100%;height:92px;}
 .funnel .fcap{text-align:center;font-size:13px;color:var(--mute);margin-top:6px;}
 
-.report{background:linear-gradient(180deg,#F6FAFF 0%,#FFFFFF 60%);border:1px solid #C9DAF0;
-        border-top:5px solid var(--n);border-radius:14px;padding:24px;margin-top:4px;}
-.report h3{font-size:20px;font-weight:800;}
-.report p{font-size:15px;margin-top:8px;}
-.report ul{list-style:none;margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.report li{font-size:15px;padding-left:16px;position:relative;color:var(--ink);}
-.report li::before{content:"";position:absolute;left:0;top:9px;width:7px;height:7px;border-radius:50%;background:var(--n);}
-.report .badge{display:inline-block;margin-top:18px;background:var(--n);color:#fff;font-size:15px;
-               font-weight:700;padding:13px 22px;border-radius:9px;}
-.report .badge:hover{background:#1C4276;}
-
-
-.steps{background:linear-gradient(180deg,#F7F8FC 0%,#FFFFFF 70%);border:1px solid var(--line);
-       border-radius:16px;padding:30px 24px 28px;margin-top:20px;text-align:center;}
-.steps h3{font-size:23px;font-weight:800;}
-.steps .ssub{font-size:15px;color:var(--mute);margin-top:6px;}
-.road{position:relative;display:flex;gap:14px;margin-top:38px;}
-.road::before{content:"";position:absolute;top:26px;left:12%;right:12%;height:2px;
-              background:repeating-linear-gradient(90deg,#C6CFE0 0 8px,transparent 8px 16px);}
-.stp{position:relative;flex:1 1 0;padding-top:30px;}
-.stp .bd{position:absolute;top:0;left:50%;transform:translateX(-50%);
-         width:52px;height:52px;border-radius:50%;color:#fff;font-size:18px;font-weight:800;
-         display:flex;align-items:center;justify-content:center;border:4px solid #fff;
-         font-family:-apple-system,'SF Pro Display','Pretendard',sans-serif;}
-.stp.s1 .bd{background:var(--n);} .stp.s2 .bd{background:var(--e1);} .stp.s3 .bd{background:var(--d);}
-.stp .box{background:var(--paper);border:1px solid var(--line);border-radius:14px;
-          padding:38px 16px 20px;height:100%;}
-.stp .box b{display:block;font-size:16px;font-weight:800;color:var(--ink);
-            font-family:-apple-system,'SF Pro Display','Apple SD 산돌고딕 Neo','Pretendard',sans-serif;}
-.stp .box p{font-size:14px;color:var(--body);margin-top:8px;line-height:1.55;}
+/* 리포트 안내 — 설명 블록과 3단계 도표를 걷어내고 버튼 하나만 둔다 */
+.reportcta{text-align:center;margin-top:26px;}
+.reportcta a{display:inline-block;background:var(--n);color:#fff;font-size:18px;font-weight:800;
+             padding:18px 40px;border-radius:12px;
+             font-family:-apple-system,'SF Pro Display','Apple SD 산돌고딕 Neo','Pretendard',sans-serif;}
+.reportcta a:hover{background:#1C4276;}
 
 footer{margin-top:44px;border-top:1px solid var(--line);background:var(--paper);padding:26px 0 40px;}
 footer p{font-size:14px;color:var(--mute);}
@@ -140,13 +115,12 @@ footer .brand{color:var(--ink);font-weight:700;margin-bottom:8px;}
 
 @media (max-width:640px){
   .hero{padding:40px 0 34px;} .hero h1{font-size:34px;} .hero .lede{font-size:18px;}
-  .grid{grid-template-columns:1fr;} .report ul{grid-template-columns:1fr;}
+  .grid{grid-template-columns:1fr;}
   .flow{flex-wrap:wrap;gap:8px;} .flow li{flex:0 0 calc(33.33% - 6px);max-width:none;}
   .flow li+li{padding-left:0;} .flow li+li::before{content:none;}
   .cta{font-size:17px;padding:16px 30px;}
+  .reportcta a{font-size:16px;padding:16px 28px;}
   .q{font-size:21px;} .funnel svg{height:66px;}
-  .road{flex-direction:column;gap:26px;} .road::before{content:none;}
-  .steps{padding:26px 18px 24px;} .steps h3{font-size:21px;}
 }
 </style>
 </head>
@@ -161,11 +135,11 @@ footer .brand{color:var(--ink);font-weight:700;margin-bottom:8px;}
     「나다움 설계 리포트」를 받을 수 있습니다.</p>
 
     <ol class="flow">
-      <li class="f1"><a href="./needscan/"><span class="fnum">1</span><span class="flab">나를<br>알아보기</span></a></li>
-      <li class="f2"><a href="./newnoise/"><span class="fnum">2</span><span class="flab">나를 흔드는<br>요인 보기</span></a></li>
-      <li class="f5"><a href="./5characters/"><span class="fnum">4</span><span class="flab">내 에너지<br>흐름 보기</span></a></li>
-      <li class="f4"><a href="./need/"><span class="fnum">5</span><span class="flab">내 기준으로<br>오늘을 쓰다</span></a></li>
-      <li class="f5"><a href="./5characters/"><span class="fnum">5</span><span class="flab">내 에너지<br>흐름 보기</span></a></li>
+      <li class="f1"><a href="./needscan/"><span class="fnum">1</span><span class="flab">나를<br>읽기</span></a></li>
+      <li class="f2"><a href="./newnoise/"><span class="fnum">2</span><span class="flab">잡음<br>알아차리기</span></a></li>
+      <li class="f3"><a href="./alignment/"><span class="fnum">3</span><span class="flab">에너지를<br>살피기</span></a></li>
+      <li class="f4"><a href="./5characters/"><span class="fnum">4</span><span class="flab">나에게 맞는<br>조건 찾기</span></a></li>
+      <li class="f5"><a href="./need/"><span class="fnum">5</span><span class="flab">우선가치<br>정하기</span></a></li>
       <li class="fr"><a href="./report/"><span class="fnum">★</span><span class="flab">나다움 설계<br>리포트</span></a></li>
     </ol>
 
@@ -184,40 +158,40 @@ footer .brand{color:var(--ink);font-weight:700;margin-bottom:8px;}
 
     <div class="grid">
       <a class="card n" href="./needscan/">
-        <div class="tag"><span class="num">1</span>N · Need Scan</div>
-        <p class="q">나는 무엇을<br>진짜 원하는가?</p>
+        <div class="tag"><span class="num">1</span>나를 읽기 · Need Scan</div>
+        <p class="q">나는 무엇을<br>원하는가?</p>
         <p class="desc">내가 원하는 것을 얼마나 분명히 알고 있는지 살펴봅니다.</p>
-        <div class="foot"><span class="name">나를 읽다 · 16문항 · 약 5분</span><span class="go">진단 시작</span></div>
+        <div class="foot"><span class="name">16문항 · 약 5분</span><span class="go">진단 시작</span></div>
       </a>
 
       <a class="card e1" href="./newnoise/">
-        <div class="tag"><span class="num">2</span>E · Eliminate Noise</div>
-        <p class="q">무엇이 내 판단을<br>흐리게 하는가?</p>
+        <div class="tag"><span class="num">2</span>잡음 알아차리기 · Eliminate Noise</div>
+        <p class="q">무엇이 나를<br>흐리게 하는가?</p>
         <p class="desc">타인의 기대와 정보, 불안이 내 선택에 얼마나 섞여 있는지 봅니다.</p>
-        <div class="foot"><span class="name">흐리게 하는 것을 덜다 · 18문항 · 약 5분</span><span class="go">진단 시작</span></div>
+        <div class="foot"><span class="name">18문항 · 약 5분</span><span class="go">진단 시작</span></div>
       </a>
 
       <a class="card e2" href="./alignment/">
-        <div class="tag"><span class="num">3</span>E · Energy Alignment</div>
-        <p class="q">무엇이 나를 살리고<br>무엇이 나를 지치게 하는가?</p>
-        <p class="desc">지금의 일상과 관계가 나에게 에너지를 주는지, 소진시키는지 살펴봅니다.</p>
-        <div class="foot"><span class="name">에너지를 정렬하다 · 20문항 · 약 6분</span><span class="go">진단 시작</span></div>
+        <div class="tag"><span class="num">3</span>에너지를 살피기 · Energy Alignment</div>
+        <p class="q">무엇이 나를 살리고<br>무엇이 나를 소모시키는가?</p>
+        <p class="desc">지금의 일상과 관계가 나에게 에너지를 주는지, 소모시키는지 살펴봅니다.</p>
+        <div class="foot"><span class="name">20문항 · 약 6분</span><span class="go">진단 시작</span></div>
       </a>
 
-    <a class="card p" href="./5characters/">
-      <div class="tag"><span class="num">4</span>5러 몰입 경향성</div>
-      <p class="q">내 에너지는 지금 어디로 흐르는가?</p>
-      <p class="desc">내가 어떤 방식으로 몰입하고 에너지를 얻는지 살펴봅니다. 열정러 · 협력러 · 안정러 · 장인러 · 모험러 다섯 방향으로 읽습니다.</p>
-      <div class="foot"><span class="name">에너지 경향성 진단 · 15문항 · 약 5분</span><span class="go">진단 시작</span></div>
-    </a>
-    </div>
+      <a class="card p" href="./5characters/">
+        <div class="tag"><span class="num">4</span>나에게 맞는 조건 찾기 · 5러 몰입 경향성</div>
+        <p class="q">어떤 조건에서<br>나는 잘 살아나는가?</p>
+        <p class="desc">내가 어떤 방식으로 몰입하고 에너지를 얻는지 살펴봅니다. 열정러 · 협력러 · 안정러 · 장인러 · 모험러 다섯 방향으로 읽습니다.</p>
+        <div class="foot"><span class="name">15문항 · 약 5분</span><span class="go">진단 시작</span></div>
+      </a>
 
       <a class="card d wide" href="./need/">
-        <div class="tag"><span class="num">5</span>D · Daily Authorship</div>
-        <p class="q">나는 내 기준으로<br>살고 있는가?</p>
+        <div class="tag"><span class="num">5</span>우선가치 정하기 · Daily Authorship</div>
+        <p class="q">그래서 무엇을<br>우선할 것인가?</p>
         <p class="desc">나의 가치와 우선순위에 따라 하루를 선택하고 있는지 살펴봅니다.</p>
-        <div class="foot"><span class="name">내 기준으로 오늘을 쓰다 · 20문항 · 약 7분</span><span class="go">진단 시작</span></div>
+        <div class="foot"><span class="name">20문항 + 우선가치 워크 · 약 7분</span><span class="go">진단 시작</span></div>
       </a>
+    </div>
 
     <div class="funnel" aria-hidden="true">
       <svg viewBox="0 0 760 76" preserveAspectRatio="none">
@@ -234,42 +208,9 @@ footer .brand{color:var(--ink);font-weight:700;margin-bottom:8px;}
       </svg>
       <p class="fcap">다섯 진단의 결과가 하나의 리포트로 모입니다</p>
     </div>
-  </section>
 
-  <section>
-    <div class="shead">
-      <h2>진단을 마치면 무엇을 받나요?</h2>
-      <p>진단 하나를 마칠 때마다 해당 영역의 결과가 열립니다. 다섯 가지를 모두 마치면 전체 지도가 완성됩니다.</p>
-    </div>
-    <div class="report">
-      <h3>나의 나다움 설계 리포트</h3>
-      <p>다섯 진단의 결과를 하나의 지도로 모아 읽습니다.</p>
-      <ul>
-        <li>네 축과 에너지 방향을 한눈에 보는 나의 지도</li>
-        <li>각 영역에서 현재 두드러지는 경향</li>
-        <li>나를 돕는 요인과 방해하는 요인</li>
-        <li>지금 점검해볼 다음 질문</li>
-      </ul>
-      <a class="badge" href="./report/">내 리포트 보기</a>
-    </div>
-  </section>
-
-
-  <section>
-    <div class="steps">
-      <h3>진단은 이렇게 진행됩니다</h3>
-      <p class="ssub">간단한 3단계로 나다움 설계 리포트를 받아보세요</p>
-      <div class="road">
-        <div class="stp s1"><span class="bd">01</span>
-          <div class="box"><b>원하는 진단 선택</b><p>5가지 진단 중 필요한 진단을 선택하세요.</p></div>
-        </div>
-        <div class="stp s2"><span class="bd">02</span>
-          <div class="box"><b>최대한 솔직하게 응답</b><p>지금의 나를 떠올리며 솔직하게 답변해주세요.</p></div>
-        </div>
-        <div class="stp s3"><span class="bd">03</span>
-          <div class="box"><b>결과 확인 후 보관</b><p>결과를 확인하고 이메일로 받아 보관하세요.</p></div>
-        </div>
-      </div>
+    <div class="reportcta">
+      <a href="./report/">종합 결과 리포트 보러가기 →</a>
     </div>
   </section>
 
