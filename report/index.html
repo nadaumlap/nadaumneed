@@ -2810,6 +2810,7 @@ function rp4ToggleMore(){
   if(btn) btn.innerHTML = RP4_OPEN ? '접기 ▴' : '조금 더 나의 욕구 들여다보기 <span>(선택)</span> ▾';
 }
 function rp4EditRecord(id){
+  RP4_JUSTSAVED = false;
   var r = rp4Find(id);
   if(!r) return;
   RP4_EDIT = id;
@@ -2827,6 +2828,7 @@ function rp4EditRecord(id){
   },80);
 }
 function rp4CancelEdit(){
+  RP4_JUSTSAVED = false;
   RP4_EDIT = null; RP4_OPEN = false;
   RP4_CTX = ''; RP4_SRC = ''; RP4_ENG = ''; RP4_CHO = ''; RP4_VAL = ''; RP4_LENS = '';
   render();
@@ -2898,6 +2900,7 @@ var RP4_ENERGIES = [
 ];
 
 /* ── 진행 표시 ───────────────────────────────────────── */
+var RP4_JUSTSAVED = false;   /* 01에서 저장한 직후인가 */
 var RP4_BACK_OPEN = false;
 try{ RP4_BACK_OPEN = localStorage.getItem('nadaum.backfold')==='1'; }catch(e){}
 function rp4BackToggle(el){
@@ -2932,7 +2935,7 @@ function rp4Form(){
 
   var h = '<div class="rp4-card rp4-quick" id="rp4-form">';
 
-  if(rec) h += '<div class="rp4-editbar">기록 이어서 적기 — '+rp4Esc(rp4Date(day))+'</div>';
+  if(rec && !RP4_JUSTSAVED) h += '<div class="rp4-editbar">기록 이어서 적기 — '+rp4Esc(rp4Date(day))+'</div>';
 
   /* ── 덩어리 1 · 멈춘 순간 ── */
   h += '<div class="rp4-group g1"><div class="rp4-group-head"><b>멈춘 순간</b><span class="req">이것만 골라도 오늘 기록은 끝납니다</span></div>';
@@ -2955,10 +2958,14 @@ function rp4Form(){
     +'<div class="rp4-badge green solo" id="rp4-solohint"'+(RP4_CTX||g('context')?' hidden':'')+'>이 항목만 선택해도 기록이 완료됩니다</div>'
     /* 저장 버튼은 폼 맨 아래에만 있어서, 하나만 골라도 끝난다는 안내와 어긋났다.
        하나를 고르면 이 자리에서 바로 저장할 수 있게 한다. */
-    +'<div class="rp4-quicksave" id="rp4-quicksave"'+(RP4_CTX||g('context')?'':' hidden')+'>'
-      +'<div class="rp4-qs-t">이것만으로 오늘 기록이 됩니다.</div>'
-      +'<button type="button" class="rp4-main-btn" onclick="rp4SaveForm()">오늘 기록 저장하기 →</button>'
-      +'<div class="rp4-qs-d">더 적고 싶으시면 저장하지 마시고 아래로 이어가세요.</div>'
+    +'<div class="rp4-quicksave'+(RP4_JUSTSAVED?' done':'')+'" id="rp4-quicksave"'+(RP4_CTX||g('context')?'':' hidden')+'>'
+      +(RP4_JUSTSAVED
+        ? '<div class="rp4-qs-t">\u2713 오늘 기록이 저장되었습니다.</div>'
+          +'<div class="rp4-qs-d">여기서 마치셔도 됩니다. 더 적고 싶으시면 아래 02부터 이어가세요 — 같은 기록에 이어서 저장됩니다.</div>'
+          +'<button type="button" class="rp4-ghost rp4-qs-next" onclick="rp4GoQ2()">02부터 이어서 적기 \u2193</button>'
+        : '<div class="rp4-qs-t">이것만으로 오늘 기록이 됩니다.</div>'
+          +'<button type="button" class="rp4-main-btn" onclick="rp4SaveForm(true)">오늘 기록 저장하기 →</button>'
+          +'<div class="rp4-qs-d">더 적고 싶으시면 저장하지 마시고 아래로 이어가세요.</div>')
     +'</div>'
   +'</div>';
 
@@ -3115,9 +3122,9 @@ function rp4Form(){
     +'<label class="rp4-date"><span>기록 날짜</span>'
     +'<input id="rp4-date" type="date" value="'+rp4Esc(day)+'"></label>'
     +'<div class="rp4-save-btns">'
-    +(rec ? '<button type="button" class="rp4-ghost" onclick="rp4CancelEdit()">취소</button>' : '')
+    +(rec && !RP4_JUSTSAVED ? '<button type="button" class="rp4-ghost" onclick="rp4CancelEdit()">취소</button>' : '')
     +'<button type="button" class="rp4-main-btn" onclick="rp4SaveForm()">'
-    +(rec ? '수정 내용 저장하기 →' : '지금까지 작성한 내용 저장하기 →')+'</button>'
+    +((rec && !RP4_JUSTSAVED) ? '수정 내용 저장하기 →' : '지금까지 작성한 내용 저장하기 →')+'</button>'
     +'</div>'
   +'</div>';
 
@@ -3278,7 +3285,13 @@ function rp4SideStats(){
   +'</div>';
 }
 
-function rp4SaveForm(){
+function rp4GoQ2(){
+  var el = document.querySelector('.rp4-s2');
+  if(!el) return;
+  var y = el.getBoundingClientRect().top + (window.pageYOffset||0) - 72;
+  window.scrollTo({top:Math.max(0,y), behavior:'smooth'});
+}
+function rp4SaveForm(quick){
   rp4Ensure();
   var ctx = rp4Val('rp4-ctx') || RP4_CTX;
   if(!ctx){ rp4Toast('어디에서 멈추셨는지 하나만 골라 주세요'); return; }
@@ -3325,7 +3338,21 @@ function rp4SaveForm(){
 
   var id = rec.id;
   RP4_DAY = day;
-  RP4_EDIT = null; RP4_OPEN = false;
+
+  /* 01에서 저장한 경우 — 달력으로 끌고 내려가지 않는다.
+     화면을 그대로 두고 저장됨만 알린 뒤, 원하면 02부터 이어 쓰게 한다.
+     같은 기록을 계속 고쳐 쓰므로 빈 기록이 여러 건 쌓이지 않는다. */
+  if(quick){
+    RP4_EDIT = id;
+    RP4_JUSTSAVED = true;
+    var keepY = window.pageYOffset || 0;
+    rp4Toast('오늘 기록이 저장되었습니다');
+    render();
+    window.scrollTo(0, keepY);
+    return;
+  }
+
+  RP4_EDIT = null; RP4_OPEN = false; RP4_JUSTSAVED = false;
   RP4_CTX = ''; RP4_SRC = ''; RP4_ENG = ''; RP4_CHO = ''; RP4_VAL = ''; RP4_LENS = '';
 
   rp4Toast(isNew ? '잠깐 멈춘 순간이 기록되었습니다' : '기록을 수정했습니다');
@@ -3338,6 +3365,7 @@ function rp4SaveForm(){
 
 /* ── 5. 달력 ─────────────────────────────────────────── */
 function rp4PickDay(day){
+  RP4_JUSTSAVED = false;
   var next = (RP4_DAY === day) ? null : day;
   RP4_DAY = next;
   try{ SELDAY = next; }catch(e){}
@@ -3503,6 +3531,7 @@ function rp4GoPractice(){
   setTimeout(function(){ window.scrollTo(0,0); },120);
 }
 function rp4Delete(id){
+  RP4_JUSTSAVED = false;
   if(!rp4Find(id)) return;
   if(!confirm('이 기록을 지울까요?\n지운 기록은 되돌릴 수 없습니다.')) return;
   P.pauses = P.pauses.filter(function(x){ return String(x.id) !== String(id); });
@@ -4350,6 +4379,9 @@ function rp4GoValueEdit(){
   .rp4-quicksave{margin-top:14px;padding:14px 16px;border-radius:14px;background:#F2FAF5;border:1px solid #CFE9DA}
   .rp4-quicksave[hidden]{display:none}
   .rp4-qs-t{font-size:15px;font-weight:800;color:#2F7A4C;margin-bottom:10px}
+  .rp4-quicksave.done{background:#F4F8FF;border-color:#D8E5F8}
+  .rp4-quicksave.done .rp4-qs-t{color:#2F6BC4}
+  .rp4-qs-next{margin-top:11px;width:100%}
   .rp4-qs-d{margin-top:9px;font-size:13px;color:#7C8894;line-height:1.6}
   .rp4-quicksave .rp4-main-btn{width:100%}
   .rp4-save-row{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-top:26px;flex-wrap:wrap}
