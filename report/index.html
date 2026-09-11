@@ -2950,6 +2950,7 @@ function rp4Form(){
       +'<div class="rp4-q-title"><i>01</i>언제 멈췄나요?</div>'
       +'<span class="rp4-tagline s1">자동행동 알아차리기</span>'
     +'</div>'
+    +'<p class="rp4-help">습관처럼 하던 행동을 멈춘 순간을 하나 골라보세요.</p>'
     +'<div class="rp4-opts grid4">'
     +RP4_CONTEXTS.map(function(v){
         return '<button type="button" class="rp4-opt'+(RP4_CTX===v[0]?' on':'')+'" '
@@ -2966,12 +2967,20 @@ function rp4Form(){
        하나를 고르면 이 자리에서 바로 저장할 수 있게 한다. */
     +'<div class="rp4-quicksave'+(RP4_JUSTSAVED?' done':'')+'" id="rp4-quicksave"'+(RP4_CTX||g('context')?'':' hidden')+'>'
       +(RP4_JUSTSAVED
-        ? '<div class="rp4-qs-t">\u2713 오늘 기록이 저장되었습니다.</div>'
+        ? '<div class="rp4-qs-saved"><div class="rp4-qs-t">\u2713 오늘 기록이 저장되었습니다.</div>'
           +'<div class="rp4-qs-d">여기서 마치셔도 됩니다. 더 적고 싶으시면 아래 02부터 이어가세요 — 같은 기록에 이어서 저장됩니다.</div>'
-          +'<button type="button" class="rp4-ghost rp4-qs-next" onclick="rp4GoQ2()">02부터 이어서 적기 \u2193</button>'
-        : '<div class="rp4-qs-t">이것만으로 오늘 기록이 됩니다.</div>'
-          +'<button type="button" class="rp4-main-btn" onclick="rp4SaveForm(true)">오늘 기록 저장하기 →</button>'
-          +'<div class="rp4-qs-d">더 적고 싶으시면 저장하지 마시고 아래로 이어가세요.</div>')
+          +'<button type="button" class="rp4-ghost rp4-qs-next" onclick="rp4GoQ2()">02부터 이어서 적기 \u2193</button></div>'
+        /* 저장 버튼 하나만 크게 두면 '여기서 끝내라'로 읽힌다. 이어 쓰기와 저장을 나란히 둔다. */
+        : '<div class="rp4-qs-split">'
+          +'<div class="rp4-qs-col">'
+            +'<button type="button" class="rp4-qs-more" onclick="rp4GoQ2()">좀 더 적어보기 →</button>'
+            +'<p class="rp4-qs-cap">내 마음을 조금 더 알아봅니다</p>'
+          +'</div>'
+          +'<div class="rp4-qs-col">'
+            +'<button type="button" class="rp4-qs-save" onclick="rp4SaveForm(true)">오늘 기록 저장하기 →</button>'
+            +'<p class="rp4-qs-cap">1번만 답해도 오늘 기록이 됩니다</p>'
+          +'</div>'
+        +'</div>')
     +'</div>'
   +'</div>';
 
@@ -4118,9 +4127,7 @@ function recordView(){
 
   h += '<div class="sec rp4-main-section" id="sec-daily">'+sn()
     + rp4SecHead('01 · 나다움 설계 시작 : 멈춤 기록하기',
-        '오늘 잠깐 멈춘 순간을<br>하나만 적어보세요.',
-        '습관처럼 하던 행동을 멈추고 생각이 스친 순간이 있었나요? 아래 1번만 고르면 오늘 기록은 끝납니다.',
-        '10초면 됩니다. 지금은 해석하지 않아도 괜찮습니다.')
+        '오늘 잠깐 멈춘 순간을<br>하나만 적어보세요.')
     + rp4Form()
     + rp4DayRecords()
     +'<div class="rp4-footband">'
@@ -4383,6 +4390,19 @@ function rp4GoValueEdit(){
   .rp4-bare-more{background:none;border:0;padding:0;font-family:inherit;font-size:13.5px;font-weight:800;color:#6C3FD0;cursor:pointer}
   @media(max-width:560px){.rp4-bare{padding:11px 12px}.rp4-bare-row>span{font-size:13.5px}}
   .rp4-quicksave{margin-top:14px;padding:14px 16px;border-radius:14px;background:#F2FAF5;border:1px solid #CFE9DA}
+  .rp4-qs-split{display:grid;grid-template-columns:1fr 1px 1fr;gap:0 18px;align-items:start}
+  .rp4-qs-split::before{content:'';grid-column:2;align-self:stretch;background:#DCEBE2}
+  .rp4-qs-col{min-width:0;text-align:center}
+  .rp4-qs-more,.rp4-qs-save{width:100%;padding:16px 14px;border-radius:12px;font-family:inherit;
+      font-size:15.5px;font-weight:800;line-height:1.45;cursor:pointer;word-break:keep-all}
+  .rp4-qs-more{background:#fff;border:1.5px solid #2F7A4C;color:#2F7A4C}
+  .rp4-qs-save{background:#8B5CF6;border:1.5px solid #8B5CF6;color:#fff}
+  .rp4-qs-cap{margin-top:9px;font-size:13px;color:#7C8894;line-height:1.55;word-break:keep-all}
+  @media(max-width:560px){
+    .rp4-qs-split{grid-template-columns:1fr;gap:14px}
+    .rp4-qs-split::before{display:none}
+    .rp4-qs-more,.rp4-qs-save{font-size:14.5px;padding:14px 12px}
+  }
   .rp4-quicksave[hidden]{display:none}
   .rp4-qs-t{font-size:15px;font-weight:800;color:#2F7A4C;margin-bottom:10px}
   .rp4-quicksave.done{background:#F4F8FF;border-color:#D8E5F8}
