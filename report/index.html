@@ -63,8 +63,8 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
 .tabnav a.on{margin-top:0;padding-bottom:19px;z-index:2;box-shadow:0 -3px 10px rgba(30,39,97,.06)}
 .tabnav a.on .tnm{color:#1A2138}
 .tabnav a.on .tni{opacity:1}
-@media (max-width:459px){.tabnav a .tni{display:none}.tabnav a{padding:9px 7px 13px}.tabnav a .tnm{font-size:12px}}
-@media (max-width:339px){.tabnav a .tnm{font-size:11px}}
+@media (max-width:459px){.tabnav a .tni{display:none}.tabnav a{padding:9px 4px 13px}.tabnav a .tnm{font-size:11.5px;letter-spacing:-.04em;white-space:nowrap}}
+@media (max-width:379px){.tabnav a{padding:9px 3px 13px}.tabnav a .tnm{font-size:10.5px}}
 .panel{background:#FFF;border:1px solid var(--tbd);border-top:2px solid var(--tc);border-radius:0 0 18px 18px;padding:22px 18px 26px;box-shadow:0 6px 22px rgba(30,39,97,.05);margin-bottom:22px}
 @media (min-width:900px){.panel{padding:30px 30px 34px;border-radius:0 0 20px 20px}}
 .panel>.sec:first-child{margin-top:0}
@@ -1407,7 +1407,7 @@ function render(){
   let h='';
   if(_printing){
     nav.hidden=true;
-    h=mapView(A,bn,done)+readExtras(A,cr,done)+journeySection(A,bn)+changeView()+practiceView()+recordView();
+    h=mapView(A,bn,done)+readExtras(A,cr,done)+journeySection(A,bn)+changeView()+practiceView()+recordView()+backView();
   }else{
     const tab=curTab(), tt=tabOf(tab);
     if(('#'+tab)!==(location.hash||'#map')&&location.hash&&location.hash!=='#write'&&location.hash.indexOf('#sec-')!==0){
@@ -1417,6 +1417,7 @@ function render(){
     let inner='';
     if(tab==='map')          inner=mapView(A,bn,done)+readExtras(A,cr,done)+journeySection(A,bn);
     else if(tab==='change')  inner=changeView();
+    else if(tab==='back')    inner=backView();
     else if(tab==='practice')inner=practiceView();
     else                     inner=recordView();
     h='<div class="panel" style="--tc:'+tt.c+';--tbd:'+tt.d+'">'+inner+'</div>'+stepNav(tab);
@@ -1432,12 +1433,16 @@ const IC={
  read:'<circle cx="8.5" cy="5.5" r="3.2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 15c0-3.2 2.7-5 6-5s6 1.8 6 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
  change:'<path d="M2 13.5 6 8.5l3 2.6L14.5 3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.6 3h4v4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>',
  practice:'<circle cx="7.4" cy="7.4" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="m10.9 10.9 3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
+ back:'<path d="M3.2 3.4h9.6a1.4 1.4 0 0 1 1.4 1.4v7.4a1.4 1.4 0 0 1-1.4 1.4H3.2Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M6 3.4v10.2M8.6 6.6h3.2M8.6 9.2h3.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
  record:'<rect x="3" y="1.8" width="10.5" height="12.6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5.8 5.6h5M5.8 8.3h5M5.8 11h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>'};
+/* 탭 이름은 짧게 — 390px에서 다섯 개가 잘리지 않아야 한다.
+   정식 명칭(나다움 지도 · 나다움 설계일기 …)은 각 탭 안쪽 제목에서 그대로 쓴다. */
 const TABS=[
- {k:'map',     no:'01',n:'나다움 지도',c:'#3E6FD1',b:'#EAF1FC',d:'#CDDFF6'},
- {k:'record',  no:'02',n:'나다움 설계일기',c:'#3FAE93',b:'#E7F5F1',d:'#C6E7DE'},
- {k:'practice',no:'03',n:'나다움 연습',c:'#8B5CF6',b:'#F3F0FD',d:'#DDD3F7'},
- {k:'change',  no:'04',n:'진단결과 변화',c:'#E0A03A',b:'#FDF4E2',d:'#F3E0BB'}];
+ {k:'map',     no:'01',n:'지도',c:'#3E6FD1',b:'#EAF1FC',d:'#CDDFF6'},
+ {k:'record',  no:'02',n:'나다움일기',c:'#3FAE93',b:'#E7F5F1',d:'#C6E7DE'},
+ {k:'practice',no:'03',n:'연습',c:'#8B5CF6',b:'#F3F0FD',d:'#DDD3F7'},
+ {k:'back',    no:'04',n:'기록',c:'#5B7C99',b:'#EDF2F7',d:'#D3DFE9'},
+ {k:'change',  no:'05',n:'변화',c:'#E0A03A',b:'#FDF4E2',d:'#F3E0BB'}];
 const TABK=TABS.map(t=>t.k);
 let _printing=false;
 /* 네 탭 중 하나가 첫 방문에 비어 있으면 리포트가 미완성으로 보인다.
@@ -1451,6 +1456,7 @@ function curTab(){
   const vk=visTabs().map(t=>t.k);
   if(vk.indexOf(hh)>=0)return hh;
   if(hh==='change')return 'record';
+  if(hh==='back')return 'record';
   if(hh==='write')return 'record';
   if(hh==='design')return 'practice';
   return 'map';
@@ -4133,34 +4139,6 @@ function recordView(){
         '오늘의 기록에서 고른 가치는 여기에 쌓이기만 합니다. 기준을 바꾸는 것은 아래 재선정에서만 일어납니다.')
     + rp4ValueMirror() + '</div>';
 
-  /* 지난 기록을 되짚는 화면들은 기본으로 접어 둔다.
-     오늘 써야 할 칸을 가리는 접기가 아니라, 이미 쓴 것을 감추는 접기다. */
-  var back = '';
-  var tl = rp4Timeline();
-  if(tl){
-    back += '<div class="rp4-back-sec">'
-      + rp4SecHead('', '날짜별로 남긴 기록', '오늘 적는 것보다, 한 달 뒤 그 기록을 다시 읽는 경험이 더 많은 것을 알려줍니다.')
-      + tl + '</div>';
-  }
-  var pt = rp4Pattern();
-  if(pt){
-    back += '<div class="rp4-back-sec">'
-      + rp4SecHead('', '여러 기록에서 반복되는<br>모습이 보이기 시작합니다.',
-          '정답을 대신 찾아드리기보다, 실제 기록에서 반복해서 나타난 장면을 다시 바라봅니다.')
-      + pt + '</div>';
-  }
-  var wk = rp4Weekly();
-  if(wk){
-    back += '<div class="rp4-back-sec">'
-      + rp4SecHead('', '반복해서 보이는 나에게<br>한 문장으로 이름을 붙여보세요.',
-          '이 한 문장이 다음 연습이 됩니다.')
-      + wk + '</div>';
-  }
-  back += '<div class="rp4-back-sec">'
-    + rp4SecHead('', '지난번에는<br>무엇을 남기셨나요?',
-        '방금 적은 것 말고, 그 전에 남긴 기록입니다.')
-    + rp4SideRecent() + '</div>';
-
   /* 03 · 실천 약속 */
   h += '<div class="sec">'+sn()
     + rp4SecHead('03 · 나다움 설계 목표 : 우선가치 실천하기',
@@ -4168,22 +4146,50 @@ function recordView(){
         '기억에 맡기면 대부분 잊습니다. 다시 볼 날을 지금 캘린더에 넣어 두시면, 그날 알림이 오고 변화 기록에 점이 하나 더 찍힙니다.')
     + loopBody() + '</div>';
 
-  /* 04 · 지난 기록 — 이미 쓴 것을 감추는 접기다(오늘 쓸 칸은 가리지 않는다). */
+  h += keepView();
+  return h;
+}
+
+/* ── 10-2. 지난 기록 탭 ──────────────────────────────
+   쓰는 화면(설계일기) 안에 접어 두었더니, 오늘 쓰는 일과 지난 것을 읽는 일이
+   한 화면에 섞였다. 읽는 화면을 탭으로 분리한다. */
+function backView(){
+  rp4Ensure();
+  var h = '<div class="sec">'+sn()
+    + rp4SecHead('나다움 설계 지난 기록',
+        '예전의 나는 무엇을 원했고,<br>어떻게 선택했을까요?',
+        '오늘 적는 것보다, 한 달 뒤 그 기록을 다시 읽는 경험이 더 많은 것을 알려줍니다.');
+
+  var body = '';
+  var tl = rp4Timeline();
+  if(tl) body += '<div class="rp4-back-sec">'
+    + rp4SecHead('', '날짜별로 남긴 기록', '')
+    + tl + '</div>';
+
+  var pt = rp4Pattern();
+  if(pt) body += '<div class="rp4-back-sec">'
+    + rp4SecHead('', '여러 기록에서 반복되는<br>모습이 보이기 시작합니다.',
+        '정답을 대신 찾아드리기보다, 실제 기록에서 반복해서 나타난 장면을 다시 바라봅니다.')
+    + pt + '</div>';
+
+  var wk = rp4Weekly();
+  if(wk) body += '<div class="rp4-back-sec">'
+    + rp4SecHead('', '반복해서 보이는 나에게<br>한 문장으로 이름을 붙여보세요.',
+        '이 한 문장이 다음 연습이 됩니다.')
+    + wk + '</div>';
+
   var nt = notesBody();
-  if(nt) back += '<div class="rp4-back-sec">'
+  if(nt) body += '<div class="rp4-back-sec">'
     + rp4SecHead('', '지금까지 남기신<br>한 줄들입니다.',
         '우선가치는 물어서 나오는 것이 아니라, 여기에서 드러납니다.')
     + nt + '</div>';
 
-  h += '<div class="sec rp4-back">'+sn()
-    + '<details id="rp4-back-fold"'+(RP4_BACK_OPEN?' open':'')+' ontoggle="rp4BackToggle(this)">'
-    + '<summary>' + rp4SecHead('04 · 나다움 설계 지난 기록',
-        '예전의 나는 무엇을 원했고,<br>어떻게 선택했을까요?',
-        '지난 기록, 반복해서 나타나는 나, 이번 주에 발견한 것, 지금까지 남긴 한 줄') + '</summary>'
-    + '<div class="rp4-back-in">' + back + '</div></details></div>';
+  if(!body) body = '<div class="rp4-empty-day"><div class="rp4-empty-symbol">\u25CB</div>'
+    +'<b>아직 돌아볼 기록이 없습니다</b>'
+    +'<p>나다움 설계일기에서 오늘의 멈춤을 하나 남겨보세요.</p>'
+    +'<button type="button" class="rp4-main-btn" style="margin-top:14px" onclick="rp4GoRecord()">나다움 설계일기로 가기 →</button></div>';
 
-  h += keepView();
-  return h;
+  return h + body + '</div>';
 }
 
 /* ── 11. 계정 동기화 병합 ────────────────────────────── */
