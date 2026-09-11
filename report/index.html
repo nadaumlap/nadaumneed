@@ -2938,10 +2938,9 @@ function rp4Form(){
   h += '<div class="rp4-group g1"><div class="rp4-group-head"><b>멈춘 순간</b><span class="req">이것만 골라도 오늘 기록은 끝납니다</span></div>';
   h += '<div class="rp4-q rp4-s1">'
     +'<div class="rp4-q-head">'
-      +'<div class="rp4-q-title"><i>01</i>오늘, 익숙한 행동을 하다가 잠깐 멈추어 생각이 스친 순간은 언제였나요?</div>'
+      +'<div class="rp4-q-title"><i>01</i>언제 멈췄나요?</div>'
       +'<span class="rp4-tagline s1">자동행동 알아차리기</span>'
     +'</div>'
-    +'<p class="rp4-help">오늘 하루, 습관처럼 하던 행동을 하다가 문득 멈추거나 다른 생각이 스친 순간을 떠올려 보세요.</p>'
     +'<div class="rp4-opts grid4">'
     +RP4_CONTEXTS.map(function(v){
         return '<button type="button" class="rp4-opt'+(RP4_CTX===v[0]?' on':'')+'" '
@@ -2971,10 +2970,9 @@ function rp4Form(){
   /* 02 */
   h += '<div class="rp4-q rp4-s2">'
     +'<div class="rp4-q-head">'
-      +'<div class="rp4-q-title"><i>02</i>그 순간, 나는 무엇을 원했거나 느끼고 있었나요?</div>'
+      +'<div class="rp4-q-title"><i>02</i>그때 무엇이 스쳤나요?</div>'
       +'<span class="rp4-tagline s2">내 마음 들여다보기</span>'
     +'</div>'
-    +'<p class="rp4-help"><b>나를 움직인 것</b>입니다. 그 행동을 하려던 순간, 내 마음에 있던 욕구나 감정을 골라보세요.</p>'
     +'<div class="rp4-chips wrap">'
     +RP4_DESIRES.map(function(v){
         return '<button type="button" class="rp4-chip soft'+((g('desire')===v)?' on':'')+'" '
@@ -2989,10 +2987,9 @@ function rp4Form(){
   /* 03 */
   h += '<div class="rp4-q rp4-s3">'
     +'<div class="rp4-q-head">'
-      +'<div class="rp4-q-title"><i>03</i>그 욕구는 어디에서 온 것 같나요?</div>'
+      +'<div class="rp4-q-title"><i>03</i>그 마음은 어디에서 온 것 같나요?</div>'
       +'<span class="rp4-tagline s3">욕구의 출처 구분하기</span>'
     +'</div>'
-    +'<p class="rp4-help">그 욕구는 나에게서 온 것인가요, 아니면 외부의 영향(사람, 미디어, 상황)에서 온 것인가요?</p>'
     +'<div class="rp4-opts grid3">'
     +RP4_SOURCES.map(function(v){
         return '<button type="button" class="rp4-opt'+(RP4_SRC===v[0]?' on':'')+'" '
@@ -3009,10 +3006,9 @@ function rp4Form(){
   var mapVal = rp4MapValue();
   h += '<div class="rp4-q rp4-s4">'
     +'<div class="rp4-q-head">'
-      +'<div class="rp4-q-title"><i>04</i>이 순간, 내가 지키고 싶은 것은 무엇이었나요?</div>'
+      +'<div class="rp4-q-title"><i>04</i>그 순간, 내가 중요하게 여긴 것은 무엇이었나요?</div>'
       +'<span class="rp4-tagline s4">나다운 기준 확인하기</span>'
     +'</div>'
-    +'<p class="rp4-help">02가 <b>나를 움직인 것</b>이라면, 여기는 <b>그럼에도 지키려던 것</b>입니다.</p>'
     +(mapVal ? '<div class="rp4-valnow">지금 나다움 지도에서 선택한 우선가치는 <b>'+rp4Esc(mapVal)+'</b>입니다.<br>'
         +'오늘 이 순간에도 그 가치가 중요했는지, 또는 다른 것이 더 중요했는지 살펴보세요.</div>' : '')
     +'<div class="rp4-chips wrap val">'
@@ -3024,7 +3020,6 @@ function rp4Form(){
     +'</div>'
     +'<input type="text" id="rp4-value" maxlength="30" class="rp4-line" '
     +'placeholder="기타 — 직접 적어보기" value="'+rp4Esc(curVal)+'" oninput="rp4SyncValChips()">'
-    +'<p class="rp4-help dim">오늘의 기록은 나다움 지도와 <b>별도로</b> 남습니다. 오늘 다른 가치가 더 중요하게 느껴졌다면 그것도 좋은 발견입니다. 기록이 쌓이면 06에서 다시 살펴볼 수 있습니다.</p>'
   +'</div>';
 
   /* ── 덩어리 3 · 그래서 어떻게 했나 ── */
@@ -3032,10 +3027,9 @@ function rp4Form(){
   h += '<div class="rp4-group g3"><div class="rp4-group-head"><b>그래서 어떻게 했고, 어땠나요</b></div>';
   h += '<div class="rp4-q rp4-s5">'
     +'<div class="rp4-q-head">'
-      +'<div class="rp4-q-title"><i>05</i>그래서 나는 무엇을 선택했나요?</div>'
+      +'<div class="rp4-q-title"><i>05</i>그래서 나는 어떻게 했나요?</div>'
       +'<span class="rp4-tagline s5">실제 선택 기록하기</span>'
     +'</div>'
-    +'<p class="rp4-help">완벽한 선택이 아니어도 괜찮습니다. 하던 대로 했더라도 그것 역시 기록입니다.</p>'
     +'<div class="rp4-opts grid3">'
     +RP4_CHOICES.map(function(v){
         return '<button type="button" class="rp4-opt'+(RP4_CHO===v[0]?' on':'')+'" '
@@ -3053,10 +3047,9 @@ function rp4Form(){
   /* 06 */
   h += '<div class="rp4-q rp4-s6">'
     +'<div class="rp4-q-head">'
-      +'<div class="rp4-q-title"><i>06</i>그 선택은 나에게 어떤 영향을 주었나요?</div>'
+      +'<div class="rp4-q-title"><i>06</i>그렇게 하고 나니, 나는 어땠나요?</div>'
       +'<span class="rp4-tagline s6">선택의 영향 느끼기</span>'
     +'</div>'
-    +'<p class="rp4-help">그 선택이 나에게 어떤 힘이나 부담을 주었는지 살펴보세요.</p>'
     +'<div class="rp4-opts grid4">'
     +RP4_ENERGIES.map(function(v){
         return '<button type="button" class="rp4-opt'+(RP4_ENG===v[0]?' on':'')+'" '
@@ -3079,7 +3072,6 @@ function rp4Form(){
         +'<span class="rp4-tagline s7">연습과 잇기</span>'
       +'</div>'
       +'<div class="rp4-lens-quote">“'+rp4Esc(lensD.text)+'”</div>'
-      +'<p class="rp4-help">잘 지켰는지를 묻는 것이 아닙니다. 그 문장이 마음에 스쳤는지만 표시해 주세요.</p>'
       +'<div class="rp4-opts grid3">'
       +[['떠올랐다','그 순간 이 문장이 스쳤다'],
         ['떠오르지 않았다','지나고 나서 알았다'],
@@ -3091,7 +3083,6 @@ function rp4Form(){
         }).join('')
       +'</div>'
       +'<input type="hidden" id="rp4-lens" value="'+rp4Esc(lv)+'">'
-      +'<p class="rp4-help dim">떠오르지 않은 날도 기록입니다. 그런 날이 어떤 날이었는지가 오히려 더 많은 것을 알려줍니다.</p>'
     +'</div>';
   }
 
@@ -3104,7 +3095,6 @@ function rp4Form(){
       +'<div class="rp4-q-title"><i>07</i>오늘의 나다움 한 줄</div>'
       +'<span class="rp4-tagline s7">우선가치 찾아가기</span>'
     +'</div>'
-    +'<p class="rp4-help">오늘의 기록을 바탕으로, 나를 한 문장으로 표현해 보세요. <span class="dim">비워두셔도 됩니다.</span></p>'
     +'<div class="rp4-fill"><span>오늘 나는</span>'
     +'<input type="text" id="rp4-l1" maxlength="60" value="'+rp4Esc(g('line1'))+'" placeholder="무엇을">'
     +'<span>을(를) 선택했다.</span></div>'
