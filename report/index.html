@@ -3102,7 +3102,7 @@ function rp4Form(){
     +'<input type="text" id="rp4-l2" maxlength="60" value="'+rp4Esc(g('line2'))+'" placeholder="예) 조금 더 힘이 나는">'
     +'<span>나를 발견했다.</span></div>'
     +'<div class="rp4-fill-btns">'
-      +'<button type="button" class="rp4-ghost" onclick="rp4SuggestLine()">위 기록으로 채워보기</button>'
+      +'<button type="button" class="rp4-ghost" onclick="rp4SuggestLine()">05번, 06번 답으로 빈칸 채우기</button>'
       +'<label class="rp4-keep"><input type="checkbox" id="rp4-topractice"> 이 문장을 오늘의 연습으로 남기기</label>'
     +'</div>'
     +'<div class="rp4-quote">“작은 선택이 모여, 나다운 방향이 됩니다.”</div>'
@@ -3456,16 +3456,32 @@ function rp4DayRecords(){
       +'</div><aside class="rp4-dayside">'+rp4Calendar('day')+'</aside></div></div>';
   }
 
-  list.forEach(function(r){
+  /* 1번만 고른 기록은 카드로 길게 펼치지 않는다.
+     달력에 표시가 남고 날짜에 마우스를 올리면 무엇을 골랐는지 보이므로,
+     아래 목록에는 한 줄로만 모아 두고 이어서 적을 길만 남긴다. */
+  var isBare = function(r){
+    return !r.desire && !r.choice && !r.choiceOpt && !r.value && !r.reflection && !r.ctxnote
+        && !r.energy && !r.line1 && !r.line2;
+  };
+  var bare = list.filter(isBare), full = list.filter(function(r){ return !isBare(r); });
+
+  if(bare.length){
+    h += '<div class="rp4-bare"><div class="rp4-bare-lab">항목만 고른 기록 '+bare.length+'건</div>'
+      + bare.map(function(r){
+          return '<div class="rp4-bare-row"><span>'+rp4Esc(rp4CtxLabel(r.context))+'</span>'
+            +'<button type="button" class="rp4-bare-more" onclick="rp4EditRecord(\''+rp4Esc(r.id)+'\')">이어서 적기 →</button>'
+            +'<button type="button" class="rp4-delete" onclick="rp4Delete(\''+rp4Esc(r.id)+'\')">삭제</button></div>';
+        }).join('')
+      +'</div>';
+  }
+
+  full.forEach(function(r){
     h += '<div class="rp4-record-card" id="rp4-record-'+rp4Esc(r.id)+'">'
       +'<div class="rp4-record-head">'
         +'<span class="rp4-record-context">'+rp4Esc(rp4CtxLabel(r.context))+'</span>'
         +'<button type="button" class="rp4-delete" onclick="rp4Delete(\''+rp4Esc(r.id)+'\')">삭제</button></div>';
 
-    if(!r.desire && !r.choice && !r.choiceOpt && !r.value && !r.reflection && !r.ctxnote){
-      h += '<div class="rp4-not-aware"><p>여기서 기록을 마쳐도 괜찮습니다.</p>'
-        +'<button type="button" onclick="rp4EditRecord(\''+rp4Esc(r.id)+'\')">이 순간을 조금 더 적어보기 →</button></div>';
-    }else{
+    {
       h += '<div class="rp4-aware-result">';
       if(r.ctxnote) h += '<div><span>그 순간</span><p>'+rp4Esc(r.ctxnote)+'</p></div>';
       if(r.desire) h += '<div><span>나를 움직인 것</span><p>“'+rp4Esc(r.desire)+'”</p></div>';
@@ -4324,6 +4340,13 @@ function rp4GoValueEdit(){
   .rp4-q textarea.big{min-height:112px}
   .rp4-q textarea:focus,.rp4-week-reflection textarea:focus{border-color:#8B5CF6;box-shadow:0 0 0 3px rgba(139,92,246,.09)}
 
+  .rp4-bare{margin-top:14px;padding:13px 15px;border-radius:14px;background:#FAFAF8;border:1px solid #EDEAE4}
+  .rp4-bare-lab{font-size:12.5px;font-weight:800;color:#8A90A0;letter-spacing:.02em;margin-bottom:9px}
+  .rp4-bare-row{display:flex;align-items:center;gap:10px;padding:7px 0;border-top:1px solid #F0EDE7}
+  .rp4-bare-row:first-of-type{border-top:0}
+  .rp4-bare-row>span{flex:1;min-width:0;font-size:14.5px;font-weight:700;color:#4C505A}
+  .rp4-bare-more{background:none;border:0;padding:0;font-family:inherit;font-size:13.5px;font-weight:800;color:#6C3FD0;cursor:pointer}
+  @media(max-width:560px){.rp4-bare{padding:11px 12px}.rp4-bare-row>span{font-size:13.5px}}
   .rp4-quicksave{margin-top:14px;padding:14px 16px;border-radius:14px;background:#F2FAF5;border:1px solid #CFE9DA}
   .rp4-quicksave[hidden]{display:none}
   .rp4-qs-t{font-size:15px;font-weight:800;color:#2F7A4C;margin-bottom:10px}
