@@ -647,5 +647,46 @@ document.addEventListener('click', function(e){
 }, true);
 
 </script>
+<!-- ═══ 유튜브 재생목록 카드 v1.0 (2026-09-19 · 추가 전용, 기존 로직 미변경) ═══ -->
+<style>.ndyt{margin:28px 0 8px;padding:0;text-align:left}
+.ndyt *{box-sizing:border-box}
+.ndyt-h{font-family:-apple-system,'SF Pro Display','Apple SD 산돌고딕 Neo','Pretendard',sans-serif;font-size:13px;font-weight:700;letter-spacing:.02em;color:#6B7393;text-align:center;margin:0 0 14px}
+.ndyt-c{display:block;width:100%;padding:16px 18px;margin:0 0 10px;background:#FFF;border:1px solid #E8E8F0;border-left:4px solid #FF0000;border-radius:14px;text-decoration:none;color:#1E2761;line-height:1.5;transition:box-shadow .15s ease,transform .15s ease}
+.ndyt-c:hover{box-shadow:0 4px 14px rgba(30,39,97,.10);transform:translateY(-1px)}
+.ndyt-c:visited{color:#1E2761}
+.ndyt-tag{display:block;font-size:10.5px;font-weight:800;letter-spacing:.09em;color:#FF0000;margin-bottom:6px}
+.ndyt-t{display:block;font-family:-apple-system,'SF Pro Display','Apple SD 산돌고딕 Neo','Pretendard',sans-serif;font-size:14.5px;font-weight:700;color:#1E2761;letter-spacing:-.01em}
+.ndyt-t .ndyt-no{display:inline-block;min-width:22px;margin-right:6px;font-size:11px;font-weight:800;color:#FFF;background:#1E2761;border-radius:5px;padding:1px 5px;vertical-align:2px;letter-spacing:.04em}
+.ndyt-d{display:block;margin-top:5px;font-size:12.5px;font-weight:500;color:#6B7393}
+.ndyt-ch{display:block;width:100%;margin-top:4px;padding:12px;text-align:center;font-size:12.5px;font-weight:600;color:#6B7393;background:#F2F3F7;border:1px solid #E8E8F0;border-radius:10px;text-decoration:none}
+.ndyt-ch:hover{color:#1E2761}
+.ndyt-ch:visited{color:#6B7393}
+@media print{.ndyt{display:none}}</style>
+<script>
+(function(){
+  if(window.__ndytLoaded)return; window.__ndytLoaded=1;
+  var HTML="<div class=\"ndyt-h\">— 이어서 보면 좋은 영상 —</div><a class=\"ndyt-c\" href=\"https://www.youtube.com/playlist?list=PLwcKc-MRqyaXl84WGk4XpFqDfI1RIg8Kz\" target=\"_blank\" rel=\"noopener\"><span class=\"ndyt-tag\">YOUTUBE · 이 단계</span><span class=\"ndyt-t\"><span class=\"ndyt-no\" style=\"background:#C9983A\">03</span>에너지를 살피기 — 무엇이 나를 살리고 소모시키는가?</span><span class=\"ndyt-d\">Energy Alignment 시리즈 · 나를 살리는 흐름을 찾는 영상</span></a><a class=\"ndyt-c\" href=\"https://www.youtube.com/playlist?list=PLwcKc-MRqyaUNxl7pW7l3FAIUASGxz6sP\" target=\"_blank\" rel=\"noopener\"><span class=\"ndyt-tag\">YOUTUBE · 이어서</span><span class=\"ndyt-t\"><span class=\"ndyt-no\" style=\"background:#8B5CF6\">04</span>우선가치 정하기 — 그래서 무엇을 우선할 것인가?</span><span class=\"ndyt-d\">Daily Authorship 시리즈 · 우선가치로 하루를 설계하는 영상</span></a><a class=\"ndyt-ch\" href=\"https://www.youtube.com/@nadaumlab\" target=\"_blank\" rel=\"noopener\">나다움설계연구소 채널 전체 보기 →</a>";
+  var SEL=['#resultPage','#screen-result','#s-result','#result-screen','#result-section'];
+  function make(){var s=document.createElement('section');s.className='ndyt';s.innerHTML=HTML;return s}
+  function vis(el){
+    if(!el)return false;
+    try{ if(el.offsetParent===null&&getComputedStyle(el).position!=='fixed')return false;
+         return el.getBoundingClientRect().height>80; }catch(e){return false}
+  }
+  function tick(){
+    for(var i=0;i<SEL.length;i++){
+      var el=document.querySelector(SEL[i]);
+      if(vis(el)&&!el.querySelector('.ndyt')){ try{el.appendChild(make())}catch(e){} }
+    }
+  }
+  function boot(){
+    tick();
+    try{new MutationObserver(tick).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class','style']})}catch(e){}
+    setInterval(tick,800);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
+})();
+</script>
+<!-- ═══ /유튜브 재생목록 카드 ═══ -->
 </body>
 </html>
