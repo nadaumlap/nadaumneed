@@ -36,6 +36,7 @@ h1,h2,h3,h4{font-family:-apple-system,'SF Pro Display','SF Pro Text','Apple SD �
 /* 헤더 */
 .logo-bar{padding:20px 0 12px;display:flex;align-items:center;gap:12px;border-bottom:1px solid #E8E8F0;margin-bottom:18px}
 .logo-actions{margin-left:auto;display:flex;gap:7px}
+.logo-actions[hidden]{display:none}
 .hbtn{display:inline-flex;align-items:center;gap:5px;padding:8px 13px;border:1px solid #DCE2ED;border-radius:9px;background:#FFF;color:#4A5568;font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer;white-space:nowrap;transition:border-color .15s,color .15s}
 .hbtn:hover{border-color:#1E2761;color:#1E2761}
 .hbtn svg{width:13px;height:13px;flex:0 0 13px}
@@ -1396,13 +1397,16 @@ function render(){
   P.designs.forEach((d,i)=>{if(typeof d.id!=='number')d.id=i+1});
   const done=DIAGS.filter(d=>P.modules[d.k]);
   const app=document.getElementById('app');
-  if(!done.length){const _ha=document.getElementById('hact');if(_ha)_ha.hidden=true;app.innerHTML=emptyView();return}
+  /* 진단 기록이 없어도 다섯 탭은 모두 보여준다(2026-09-27).
+     지도 탭만 '아직 결과 없음'으로 두고, 나다움일기·연습·기록·변화는 각자의 빈 화면으로 정상 작동한다.
+     상단 다운로드/공유 버튼은 읽을 결과가 생긴 뒤에만 노출한다. */
+  const _noData=!done.length;
   const A=axes(P), bn=bottleneck(A,P)||flowDesign(), cr=crossRules(P);
   P.history=P.history||[];
   snapshot(P,A);
   SN=0;
   const nav=document.getElementById('tabnav'), hact=document.getElementById('hact');
-  if(hact)hact.hidden=false;
+  if(hact)hact.hidden=_noData;
   renderHello();
   if((location.hash||'')==='#design'){
     nav.hidden=true; if(hact)hact.hidden=true;
@@ -1414,7 +1418,7 @@ function render(){
   let h='';
   if(_printing){
     nav.hidden=true;
-    h=mapView(A,bn,done)+readExtras(A,cr,done)+journeySection(A,bn)+changeView()+practiceView()+recordView()+backView();
+    h=(_noData?emptyView():(mapView(A,bn,done)+readExtras(A,cr,done)+journeySection(A,bn)))+changeView()+practiceView()+recordView()+backView();
   }else{
     const tab=curTab(), tt=tabOf(tab);
     if(('#'+tab)!==(location.hash||'#map')&&location.hash&&location.hash!=='#write'&&location.hash.indexOf('#sec-')!==0){
@@ -1422,7 +1426,7 @@ function render(){
     }
     drawNav(tab);
     let inner='';
-    if(tab==='map')          inner=mapView(A,bn,done)+readExtras(A,cr,done)+journeySection(A,bn);
+    if(tab==='map')          inner=_noData?emptyView():(mapView(A,bn,done)+readExtras(A,cr,done)+journeySection(A,bn));
     else if(tab==='change')  inner=changeView();
     else if(tab==='back')    inner=backView();
     else if(tab==='practice')inner=practiceView();
@@ -1455,8 +1459,10 @@ let _printing=false;
 /* 네 탭 중 하나가 첫 방문에 비어 있으면 리포트가 미완성으로 보인다.
    기록이 두 개 이상 쌓이기 전까지는 변화 탭을 감춘다. */
 function visTabs(){
-  const has=((P&&P.history)||[]).length>=2;
-  return TABS.filter(t=>t.k!=='change'||has);
+  /* 2026-09-27 — 다섯 탭을 항상 보여준다.
+     종전에는 기록이 2개 미만이면 변화 탭을 감췄으나, 그러면 리포트가 무엇을 주는지
+     처음 온 사람에게 보이지 않는다. 각 탭은 자체 빈 화면을 가지고 있다. */
+  return TABS.slice();
 }
 function curTab(){
   const hh=(location.hash||'').replace('#','');
