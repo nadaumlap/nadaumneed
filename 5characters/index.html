@@ -411,8 +411,8 @@ h1, h2, h3, h4 { font-family:var(--font-title); }
     </div>
 
     <div class="cover-meta">
-      <span>⏱ 약 5분</span>
-      <span>📋 15문항</span>
+      <span>⏱ 약 6분</span>
+      <span>📋 20문항</span>
       <span>🆓 무료</span>
     </div>
   </div>
@@ -443,9 +443,10 @@ h1, h2, h3, h4 { font-family:var(--font-title); }
     </div>
   </div>
   <div class="progress-bar-wrap"><div class="progress-bar" id="progress-bar"></div></div>
-  <div class="progress-text" id="progress-text">1 / 15</div>
+  <div class="progress-text" id="progress-text">1 / 20</div>
   <div class="question-card">
     <span class="question-num" id="q-num">Q01</span>
+    <p class="q-hint" id="q-hint" style="display:none;font-size:13px;color:var(--text-mute);margin:0 0 6px">이번에는 “언제 충분하다고 느끼는지”를 묻습니다</p>
     <p class="question-text" id="q-text"></p>
     <div class="likert-options" id="likert-options"></div>
   </div>
@@ -527,13 +528,16 @@ function toggleDetail(){
 }
 /* ============================================
    5러 몰입 경향성 진단
-   15문항, 5경향 × 3문항, 주·보조 경향 산출
+   v2.3: 20문항 = 에너지 15문항(5경향 × 3, 주·보조 경향 판정) + 만족의 기준 5문항(해석용)
    ============================================ */
 
 // ===== 경향성 데이터 =====
 const CHARS = {
   A: {
     key:"A", name:"열정러", en:"Achiever", icon:"🔥",
+    ask:"이루었는가?",
+    energy:"도전적인 목표를 향해 결과를 만들어 가는 과정에서",
+    satisfy:"목표를 이루었거나 진전이 눈에 보일 때",
     source:"목표 · 도전 · 결과",
     flowKey:"성취 중심",
     identity:"목표를 보면 가슴이 뛰는 패턴",
@@ -543,8 +547,11 @@ const CHARS = {
     cautions:["목표가 없을 때 무기력·공허감 급격히 상승","번아웃 후 회복이 느릴 수 있음","결과만 보다 과정의 의미를 놓치는 경우"]
   },
   C: {
-    key:"C", name:"협력러", en:"Harmonious Connector", icon:"🤝",
-    source:"연결 · 협업 · 관계",
+    key:"C", name:"협력러", en:"Collaborator", icon:"🤝",
+    ask:"함께 잘 이루었는가?",
+    energy:"신뢰하는 사람들과 \"우리\"라는 감각으로 함께 만들어 가는 과정에서",
+    satisfy:"신뢰하는 사람들과 함께 만들어 냈다고 느낄 때",
+    source:"신뢰 · 우리 · 함께 만들기",
     flowKey:"연결 중심",
     identity:"함께할 때 더 빛나는 패턴",
     flow:"\"우리\"라는 감각이 있을 때 동력이 생기는 시기",
@@ -553,27 +560,37 @@ const CHARS = {
     cautions:["혼자 하는 작업이 많을 때 금방 지침","타인의 기대를 먼저 충족하려다 자신의 욕구를 외면","갈등 상황에서 에너지 소모가 큼"]
   },
   S: {
-    key:"S", name:"안정러", en:"Solid Anchor", icon:"⚓",
+    key:"S", name:"안정러", en:"Steady Anchor", icon:"⚓",
+    ask:"내 리듬을 지키고 있는가?",
+    energy:"자기 리듬을 유지하는 과정에서",
+    satisfy:"내 리듬이 흐트러지지 않고 꾸준히 이어질 때",
     source:"리듬 · 안정 · 지속",
     flowKey:"안정 중심",
-    identity:"흔들려도 자기 리듬으로 돌아오는 패턴",
+    identity:"자기 리듬을 지킬 때 힘이 나는 패턴",
     flow:"익숙한 방식이 자리 잡혀 마음이 편안한 시기",
     drain:"루틴이 깨져 리듬을 못 찾는 시기",
     best:"예측 가능한 환경, 충분한 준비 시간",
-    cautions:["잘 흔들리지 않는 만큼, 바꿔야 할 때를 늦게 알아차릴 수 있습니다","리듬이 한 번 깨지면 돌아오는 데 생각보다 오래 걸립니다","주변이 흔들릴 때 그 마음을 가볍게 볼 수 있습니다"]
+    cautions:["익숙한 리듬을 지키다 보면, 바꿔야 할 때를 늦게 알아차릴 수 있습니다","리듬이 한 번 깨지면 돌아오는 데 생각보다 오래 걸립니다","다른 사람과 리듬이 맞지 않을 때 답답함을 크게 느낄 수 있습니다"]
   },
   D: {
-    key:"D", name:"장인러", en:"Deep Specialist", icon:"🛠",
-    source:"탐구 · 완성 · 의미",
+    key:"D", name:"장인러", en:"Inner Crafter", icon:"🛠",
+    ask:"스스로 만족할 만큼 다듬었는가?",
+    energy:"한 가지를 깊이 파고들며 의미를 찾고 다듬는 과정에서",
+    satisfy:"남의 평가와 상관없이 스스로 만족스러울 때",
+    note:"만족의 기준이 내 안에 있는 사람",
+    source:"탐구 · 의미 · 자기 만족",
     flowKey:"탐구 중심",
-    identity:"한 가지를 깊이 파는 패턴",
+    identity:"스스로 만족할 때까지 깊이 파고 다듬는 패턴",
     flow:"\"왜 하는지의 본질적 의미\"가 분명한 시기",
     drain:"기준에 안 맞아 넘어가지 못하는 시기",
-    best:"완성도를 인정받는 환경, 충분한 탐구 시간",
-    cautions:["완벽주의로 인한 작업 속도 저하","의미 없다고 느껴지면 전혀 동력이 안 생김","팀 작업보다 독립적 작업 선호"]
+    best:"스스로 기준을 세우고 다듬을 시간이 보장되는 환경",
+    cautions:["스스로 만족할 때까지 손보느라 마무리가 늦어질 수 있음","의미 없다고 느껴지면 전혀 동력이 안 생김","팀 작업보다 독립적 작업 선호"]
   },
   E: {
-    key:"E", name:"모험러", en:"Bold Explorer", icon:"🚀",
+    key:"E", name:"모험러", en:"Explorer", icon:"🚀",
+    ask:"새로운 가능성을 발견했는가?",
+    energy:"처음 해 보는 일과 가보지 않은 길을 고르는 과정에서",
+    satisfy:"처음 해 보는 일을 해 보고 가능성이 넓어졌다고 느낄 때",
     source:"새로움 · 자극 · 변화",
     flowKey:"모험 중심",
     identity:"새로운 자극과 모험에서 에너지를 얻는 패턴",
@@ -584,7 +601,7 @@ const CHARS = {
   }
 };
 
-// ===== 문항 풀 (15개, 시기 표지어 포함) =====
+// ===== 문항 풀 (에너지 15개 + 만족의 기준 5개, 시기 표지어 포함) =====
 const QUESTIONS = [
   { id:1,  char:"A", text:"요즘 나는 도전적인 목표가 보이면 가슴이 먼저 뛴다." },
   { id:2,  char:"A", text:"지금 나는 \"결과를 만들어 내는 과정\" 자체에서 에너지를 얻는 편이다." },
@@ -600,8 +617,16 @@ const QUESTIONS = [
   { id:12, char:"D", text:"최근 나는 어떤 일을 끝까지 완성하지 않으면 잘 넘어가지지 않는다." },
   { id:13, char:"E", text:"요즘 나는 새로운 자극과 처음 해보는 일에서 가장 큰 에너지를 얻는다." },
   { id:14, char:"E", text:"지금 나는 가보지 않은 길을 골랐을 때 마음이 더 살아난다." },
-  { id:15, char:"E", text:"최근 나는 같은 일이 반복되면 에너지가 빠르게 식어버린다." }
+  { id:15, char:"E", text:"최근 나는 같은 일이 반복되면 에너지가 빠르게 식어버린다." },
+  // ===== v2.3 만족의 기준 문항 (판정에는 쓰지 않고 해석에만 사용) =====
+  { id:16, char:"A", kind:"sat", text:"요즘 나는 목표를 이루었거나 진전이 눈에 보일 때 비로소 \"됐다\"는 만족감이 든다." },
+  { id:17, char:"C", kind:"sat", text:"지금 나는 혼자 해낸 일보다 함께 만들어 낸 일에서 더 큰 만족을 느낀다." },
+  { id:18, char:"S", kind:"sat", text:"최근 나는 내 리듬이 흐트러지지 않고 이어질 때 가장 만족스럽다." },
+  { id:19, char:"D", kind:"sat", text:"요즘 나는 남이 괜찮다고 해도 스스로 만족스럽지 않으면 끝난 것 같지 않다." },
+  { id:20, char:"E", kind:"sat", text:"지금 나는 처음 해 보는 일을 해 봤다는 것만으로도 충분히 만족스럽다." }
 ];
+const TOTAL_Q = QUESTIONS.length;
+const LAST_Q = TOTAL_Q - 1;
 
 const LIKERT_LABELS = [
   {value:1,label:"전혀 그렇지 않다"},
@@ -643,7 +668,7 @@ const COMBO_MESSAGES = {
   // 균형형 5개
   "A_A":"지금은 열정러 에너지가 중심이면서 전반적으로 고르게 활성화된 시기입니다. 다양한 방향에서 에너지를 얻고 있으니, 한 가지 목표로 집중하면 더욱 강해집니다.",
   "C_C":"지금은 협력러 에너지가 중심이면서 전반적으로 고르게 움직이는 시기입니다. 여러 관계에서 에너지를 얻고 있으니, 가장 신뢰하는 한 팀에 집중해 보세요.",
-  "S_S":"지금은 안정러 에너지가 중심이면서 전반적으로 균형 잡힌 시기입니다. 흔들려도 원래대로 돌아오는 힘이 지금 가장 잘 작동하고 있습니다.",
+  "S_S":"지금은 안정러 에너지가 중심이면서 전반적으로 균형 잡힌 시기입니다. 자기 리듬을 지키는 힘이 지금 가장 잘 작동하고 있습니다.",
   "D_D":"지금은 장인러 에너지가 중심이면서 전반적으로 고르게 움직이는 시기입니다. 한 가지 주제에 완전히 몰입하는 것이 지금 가장 잘 맞는 방식입니다.",
   "E_E":"지금은 모험러 에너지가 중심이면서 전반적으로 활성화된 시기입니다. 다양한 자극에서 에너지를 얻고 있으니, 하나의 탐험에 집중하면 더욱 빛납니다.",
   // 저활성
@@ -661,7 +686,7 @@ const PRACTICES = {
 
 // ===== 상태 =====
 let currentQ = 0;
-let answers = new Array(15).fill(null);
+let answers = new Array(TOTAL_Q).fill(null);
 let _result = null;
 
 // ===== 시작 =====
@@ -678,10 +703,11 @@ function renderQuestion(keepScroll) {
   const q = QUESTIONS[currentQ];
   document.getElementById('q-num').textContent = `Q${String(q.id).padStart(2,'0')}`;
   document.getElementById('q-text').textContent = q.text;
+  document.getElementById('q-hint').style.display = (q.kind === 'sat') ? 'block' : 'none';
 
-  const pct = ((currentQ+1)/15)*100;
+  const pct = ((currentQ+1)/TOTAL_Q)*100;
   document.getElementById('progress-bar').style.width = pct+'%';
-  document.getElementById('progress-text').textContent = `${currentQ+1} / 15`;
+  document.getElementById('progress-text').textContent = `${currentQ+1} / ${TOTAL_Q}`;
 
   const opts = document.getElementById('likert-options');
   opts.innerHTML = '';
@@ -698,8 +724,8 @@ function renderQuestion(keepScroll) {
   document.getElementById('btn-prev').style.opacity = currentQ===0 ? .4 : 1;
   document.getElementById('btn-next').disabled = answers[currentQ] === null;
   var _nb = document.getElementById('btn-next');
-  _nb.textContent = currentQ===14 ? "결과 보기" : "다음";
-  _nb.classList.toggle('ready', currentQ===14 && answers[14]!==null);
+  _nb.textContent = currentQ===LAST_Q ? "결과 보기" : "다음";
+  _nb.classList.toggle('ready', currentQ===LAST_Q && answers[LAST_Q]!==null);
 
   if (!keepScroll) window.scrollTo({top:0,behavior:'smooth'});
 }
@@ -709,7 +735,7 @@ function selectOption(value) {
   /* 마지막 문항에서 맨 위로 튀어 오르면 '결과 보기' 버튼이 화면 밖으로 밀린다.
      고른 뒤 아무 일도 일어나지 않은 것처럼 보여, 결과를 못 본다는 신고가 있었다.
      마지막 문항에서는 화면을 그대로 두고 버튼을 보이게 한다. */
-  var last = (currentQ === 14);
+  var last = (currentQ === LAST_Q);
   renderQuestion(last);
   if (last) {
     var btn = document.getElementById('btn-next');
@@ -728,7 +754,7 @@ function selectOption(value) {
 function prevQuestion() { if(currentQ>0){currentQ--;renderQuestion();} }
 function nextQuestion() {
   if(answers[currentQ]===null) return;
-  if(currentQ===14) calculateAndShowResult();
+  if(currentQ===LAST_Q) calculateAndShowResult();
   else { currentQ++; renderQuestion(); }
 }
 
@@ -736,7 +762,9 @@ function nextQuestion() {
 function calculateScores() {
   const scores = {A:0,C:0,S:0,D:0,E:0};
   const counts = {A:0,C:0,S:0,D:0,E:0};
+  const sat = {};
   QUESTIONS.forEach((q,i) => {
+    if (q.kind === 'sat') { sat[q.char] = answers[i]; return; }
     scores[q.char] += answers[i];
     counts[q.char]++;
   });
@@ -780,7 +808,9 @@ function calculateScores() {
   // ④ v2.2 주된 경향의 '절대 강도' 구간 — 상대 우위와 실제 강도를 구분해 해석
   const band = peak >= 4.0 ? "strong" : (peak >= 3.0 ? "mid" : "weak");
 
-  return { avgs, z, overall, sorted, primary, secondary, peak, band, diff12, diffMax, caseType, softFlag };
+  const satMax = Math.max.apply(null, CHAR_KEYS.map(k => sat[k] || 0));
+  const satTop = CHAR_KEYS.filter(k => (sat[k] || 0) === satMax);
+  return { avgs, z, overall, sorted, primary, secondary, peak, band, diff12, diffMax, caseType, softFlag, sat, satTop, satMax };
 }
 
 // ===== 종합 리포트용 프로필 저장 (nd_profile v1) =====
@@ -800,6 +830,7 @@ function saveProfile(r) {
       main: r.primary, sub: r.secondary,
       avgs: r.avgs, z: r.z, overall: Math.round(r.overall*100)/100,
       peak: Math.round(r.peak*100)/100, band: r.band,
+      sat: r.sat, satTop: r.satTop, qv: "2.3",
       flag: r.caseType === "normal" ? (r.softFlag ? "soft" : null) : r.caseType
     };
     p.updated = p.modules.tendency.ts;
@@ -869,6 +900,31 @@ function stageExplain(r){
     <p>${s.name}가 보조로 받치고 있어, ${s.source} 쪽 조건이 갖춰지면 더 오래 갑니다.</p>`.replace(' >','>')};
 }
 
+/* v2.3 만족의 기준 — 에너지를 얻는 곳과 구분해 해석 */
+function satisfySection(r){
+  if (r.caseType === 'low' || !r.sat) return '';
+  const p = CHARS[r.primary];
+  const mine = r.sat[r.primary] || 0;
+  const tops = r.satTop.map(k => CHARS[k]);
+  const topNames = tops.map(c => c.name).join(' · ');
+  let match;
+  if (r.satMax < 3) {
+    match = `<p>만족의 기준 문항에서 크게 동의한 항목이 없었습니다. 요즘은 무엇을 해도 "충분하다"는 느낌이 잘 들지 않는 시기일 수 있습니다.</p>`;
+  } else if (r.satTop.indexOf(r.primary) >= 0) {
+    match = `<p>에너지를 얻는 곳과 만족의 기준이 <strong>같은 방향</strong>입니다. 힘이 나는 일과 "됐다"고 느끼는 기준이 일치하는 시기입니다.</p>`;
+  } else {
+    match = `<p>에너지는 <strong>${p.name}</strong> 쪽에서 얻지만, "충분하다"고 느끼는 기준은 <strong>${topNames}</strong> 쪽에 더 가깝게 나왔습니다. 힘이 나는 일과 만족하는 지점이 다를 때는, 일을 끝내고도 개운하지 않거나 반대로 힘들게 해 놓고도 만족스러울 수 있습니다. 어느 쪽이 맞고 틀린 것이 아니라, 두 기준을 함께 알고 있으면 일을 나누고 마무리하는 방법을 정하기 쉬워집니다.</p>`;
+  }
+  return `<div class="msec">
+    <div class="msec-lab">만족의 기준 — 언제 "충분하다"고 느끼는가</div>
+    <h3 class="msec-h">${p.name} · ${p.en} — ${p.ask}</h3>
+    <p>${p.name}는 ${p.energy} 에너지를 얻고, <strong>${p.satisfy}</strong> 만족을 느끼는 경향입니다.${p.note ? ` 한마디로 <strong>${p.note}</strong>입니다.` : ''}</p>
+    <p>이 문항에 대한 내 응답: 5점 중 <strong>${mine}점</strong></p>
+    ${match}
+    <p class="msec-dim">에너지를 얻는 곳은 "무엇을 할 때 힘이 나는가", 만족의 기준은 "언제 됐다고 느끼는가"입니다. 만족의 기준 문항은 시험 운영 중이며, 경향 판정에는 사용하지 않습니다.</p>
+  </div>`;
+}
+
 /* 사회구조적 해석 */
 function socialRead(r){
   const p=CHARS[r.primary];
@@ -927,7 +983,7 @@ function reflectTwo(r){
     A:['최근에 가장 힘이 났던 순간, 그때 눈앞에 어떤 목표가 있었나요?','목표가 없던 시기에 나는 무엇으로 하루를 채웠나요?'],
     C:['최근에 함께해서 좋았던 사람은 누구였고, 무엇이 좋았나요?','혼자 있는 시간이 필요할 때, 나는 그걸 어떻게 말하나요?'],
     S:['지금 내 하루에서 반드시 지키고 싶은 리듬 하나는 무엇인가요?','그 리듬이 깨졌을 때, 나는 무엇부터 되돌리나요?'],
-    D:['요즘 가장 깊이 들여다보고 싶은 것은 무엇인가요?','완성도를 조금 낮춰도 괜찮은 일은 어떤 것인가요?'],
+    D:['요즘 가장 깊이 들여다보고 싶은 것은 무엇인가요?','내 만족 기준을 조금 낮춰도 괜찮은 일은 어떤 것인가요?'],
     E:['최근에 처음 해본 것 중 가장 좋았던 건 무엇인가요?','시작한 뒤 끝까지 가려면 나에게 무엇이 필요한가요?']
   };
   const q = r.caseType==='low'
@@ -1019,6 +1075,7 @@ function renderResult(r) {
   const st = stageExplain(r);
   let body = '';
   body += `<div class="msec"><div class="msec-lab">${st.tag}</div><h3 class="msec-h">${st.title}</h3>${st.body}</div>`;
+  body += satisfySection(r);
   body += socialRead(r);
   body += lifeScene(r);
   body += reflectTwo(r);
@@ -1395,7 +1452,7 @@ function showToast(msg) {
 }
 function closeModal() { document.getElementById('modal').classList.remove('active'); }
 function restart() {
-  currentQ=0; answers=new Array(15).fill(null); _result=null;
+  currentQ=0; answers=new Array(TOTAL_Q).fill(null); _result=null;
   document.getElementById('result-screen').classList.remove('active');
   document.getElementById('cover-screen').style.display='block';
   window.scrollTo(0,0);
