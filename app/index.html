@@ -688,6 +688,51 @@ main{padding:8px 24px 32px}
 .jline{display:flex;flex-direction:column;gap:12px}
 .jrow{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:15px}
 .r3{display:flex;flex-direction:column;gap:4px}
+.dgm{padding:18px 16px 16px;max-height:calc(100vh - 24px);overflow:auto}
+.dgt{display:flex;gap:10px;align-items:flex-start;justify-content:space-between;margin-bottom:10px}
+.dgm .dgh3{display:inline-block;font-size:28px!important;font-weight:800;letter-spacing:-.5px;padding:0 4px 2px;background:linear-gradient(transparent 68%,#EBD9B4 68%,#EBD9B4 92%,transparent 92%)}
+.dgt p{margin-top:8px}
+.dgclip{flex:none;display:flex;align-items:center;justify-content:center;width:62px;height:62px;border-radius:50%;background:#EEF1F7}
+.dgl{display:flex;flex-direction:column;gap:8px}
+.dgr{display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:18px;background:var(--t);text-decoration:none;color:inherit;box-shadow:0 2px 6px rgba(60,50,30,.07)}
+.dgr .dgi{flex:none;display:flex;align-items:center;justify-content:center;width:44px;padding-right:10px;border-right:1px solid rgba(0,0,0,.09);color:var(--k)}
+.dgr span{flex:1;min-width:0}
+.dgm .dgr b{display:block;font-size:17px!important;font-weight:700}
+.dgm .dgr small{display:block;font-size:13.5px!important;color:#59665D;margin-top:2px}
+.dgr .dgv{flex:none;font-style:normal;width:30px;height:30px;border-radius:50%;background:var(--k);color:#fff!important;display:flex;align-items:center;justify-content:center;font-size:22px!important;font-weight:700;line-height:1;padding-bottom:3px}
+.why1{flex:1;display:flex;flex-direction:column;justify-content:center;gap:28px}
+.why1h{display:flex;align-items:center;gap:8px}
+.why1h>div{flex:1;min-width:0}
+.why1t{display:inline;font-size:30px;font-weight:800;line-height:1.45;letter-spacing:-.5px;color:#2F4A2C;background:linear-gradient(transparent 55%,#EDE7A8 55%,#DDEBC0 95%,transparent 95%);box-decoration-break:clone;-webkit-box-decoration-break:clone;padding:0 4px}
+.why1p{font-size:16.5px;line-height:1.7;margin-top:-8px}
+.why1h img,.why1h .bird{flex:none}
+.why1b{position:relative;border:1.5px solid #DDE2C4;border-radius:22px;background:#FCFBF7;padding:30px 10px 18px}
+.why1l{position:absolute;top:-15px;left:50%;transform:translateX(-50%);white-space:nowrap;background:#6B8E55;color:#fff;font-size:14px;font-weight:700;border-radius:999px;padding:5px 18px}
+.why1s{display:flex;align-items:center;justify-content:space-between;gap:2px}
+.why1s>div{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;gap:3px}
+.why1s small{font-size:13px;color:#59665D;margin-top:4px}
+.why1s b{font-size:15px}
+.why1s>i{font-style:normal;color:#8A9482;font-size:20px}
+.fnd{display:flex;flex-direction:column;gap:12px}
+.fnd>small{font-size:13px;font-weight:700;color:#556B4E}
+.fnb{display:flex;flex-direction:column;gap:4px;padding-top:12px;border-top:1px solid #E6DFCF}
+.fnb>b{font-size:14px;color:#556B4E}
+.fnb p{font-size:16px;line-height:1.6}
+.fnb.act{background:#F1F0E4;border:0;border-radius:16px;padding:14px 16px}
+.kind{display:inline-block;font-size:12px;font-weight:700;color:#556B4E;border:1px solid #BFC7AE;border-radius:999px;padding:1px 8px;margin-right:2px}
+.whyl{font-size:14px;line-height:1.6;color:#59665D}
+.whyl b{color:#24302B}
+.whyb{align-self:stretch;text-align:left;display:flex;flex-direction:column;gap:8px}
+.whyb p{font-size:14px;line-height:1.6;color:#59665D}
+.whyb b{display:block;color:#24302B}
+.tql{font-size:14px;line-height:1.6;color:#59665D;margin-bottom:6px}
+.dgc{display:flex;flex-direction:column;gap:12px;margin-top:16px}
+.act .go{white-space:nowrap;flex-shrink:0}
+.dgh{display:flex;gap:12px;align-items:center}
+.dgh b{font-size:17px}
+.dgh p{font-size:14px;color:#59665D;margin-top:4px;line-height:1.55}
+a.rowl,a.btn{text-decoration:none;color:inherit}
+a.btn{display:flex;align-items:center;justify-content:center}
 .whyp{font-size:16px;line-height:1.7;color:#24302B;background:#FCFBF7;border-radius:18px;padding:16px 18px}
 .found{display:flex;flex-direction:column;gap:6px}
 .found>small{font-size:13px;font-weight:700;color:#556B4E}
@@ -779,17 +824,17 @@ var STAGES = [
  {name:'알', t:'깨어나는 중', desc:'알 속에서 깨어날 준비를 하고 있어요.', sub:'깨어나기 전', c:'#8C7A55', cs:'#6B5C3E', sky:'var(--bg0)',
   story:'알 속에 있었어요. 밖이 궁금했어요.', need:'처음 모습'},
  {name:'하얀 다움이', q:'나는 지금 어떤 상태인가?', t:'깨어나기', desc:'지금은, 나를 알아가기 위한 첫걸음에 있어요.', sub:'막 깨어난 모습', c:'#7C839B', cs:'#5C6278', sky:'var(--bg1)',
-  story:'알을 깨고 세상에 나왔어요. 아직 나만의 색은 정해지지 않았지만, 이제부터 함께 찾아가면 돼요.', need:'첫 걸음을 마치고 연습 문장을 하나 고르면'},
+  story:'알을 깨고 세상에 나왔어요. 아직 나만의 색은 정해지지 않았지만, 이제부터 함께 찾아가면 돼요.', need:'첫 걸음을 마치고 실천 문장을 하나 고르면'},
  {name:'노란 다움이', q:'나는 무엇을 원하고, 어떤 조건에서 힘이 나는가?', t:'나를 이해하기', desc:'나를 더 깊이 알고, 내 안의 진짜 욕구를 발견해요.', sub:'나를 알아가는 단계', c:'#D99A00', cs:'#A87700', sky:'var(--bg2)',
-  story:'수첩과 펜을 들었어요. 내가 무엇을 원하고 어떤 때 힘이 나는지 알게 됐어요.', need:'나를 읽기 · 나에게 맞는 조건 찾기를 마치고 연습을 한 번 고르면'},
+  story:'수첩과 펜을 들었어요. 내가 무엇을 원하고 어떤 때 힘이 나는지 알게 됐어요.', need:'가벼운 질문 두 가지에 답하고, 겪은 일로 연습을 한 번 하면'},
  {name:'빨간 다움이', q:'무엇이 나를 지치게 하고 흐리게 하는가?', t:'잡음 덜고 에너지 살피기', desc:'내 안의 잡음을 알아차리고, 에너지 상태를 회복해요.', sub:'잡음을 줄이고 에너지를 모으는 단계', c:'#E8554E', cs:'#B83C36', sky:'var(--bg3)',
-  story:'헤드폰을 썼어요. 밖에서 오는 소리를 줄이고 내 에너지가 어디로 가는지 살폈어요.', need:'잡음 알아차리기 · 에너지를 살피기를 마치고 연습을 한 번 고르면'},
+  story:'헤드폰을 썼어요. 밖에서 오는 소리를 줄이고 내 에너지가 어디로 가는지 살폈어요.', need:'나·남·자극을 세 번 가려 보고, 에너지를 3일 기록하면'},
  {name:'연두 다움이', q:'나는 무엇을 가장 중요하게 여기는가?', t:'우선가치 수립하기', desc:'나를 지지하는 가치와 방향을 정하고, 일상에서 변화를 시작해요.', sub:'하루를 설계하는 단계', c:'#5FAE1E', cs:'#458214', sky:'var(--bg4)',
-  story:'물병과 매트를 챙겼어요. 무엇을 먼저 지킬지 정하고 하루를 내 기준으로 쓰기 시작했어요.', need:'우선가치를 정하고 연습을 한 번 고르면'},
+  story:'물병과 매트를 챙겼어요. 무엇을 먼저 지킬지 정하고 하루를 내 기준으로 쓰기 시작했어요.', need:'우선가치를 정하고, 실천 하나를 해 본 뒤 알려 주면'},
  {name:'변화의 순간', q:'내가 정한 기준을 하루에서 지키고 있는가?', t:'나답게 살아보기', desc:'진단을 모두 마치고, 일상의 실천으로 변화를 만들어가요.', sub:'하나로 이어지는 단계', c:'#0FA39C', cs:'#0B7A75', sky:'var(--bg5)',
-  story:'지도와 나침반이 생겼어요. 알게 된 것과 매일의 기록이 하나로 이어지고 있어요.', need:'기록을 7일 남기면'},
+  story:'지도와 나침반이 생겼어요. 알게 된 것과 매일의 기록이 하나로 이어지고 있어요.', need:'기록을 7일 남기고, 그중 3일은 우선가치를 먼저 생각하면'},
  {name:'무지개 다움이', q:'앞으로 어떤 삶을 만들어 갈 것인가?', t:'나다운 삶 설계하기', desc:'기록을 꾸준히 이어가며 나만의 색깔로 빛나는 삶을 완성해요.', sub:'나다움으로 날아오르는 단계', c:'#7A4FE0', cs:'#5A37B0', sky:'var(--bg6)',
-  story:'제 색을 모두 찾았어요. 이제 제 색으로 날아요.', need:'기록을 21일 남기면'}
+  story:'제 색을 모두 찾았어요. 이제 제 색으로 날아요.', need:'기록을 21일 남기고, 그중 7일은 우선가치를 먼저 생각하면'}
 ];
 var DAYS5 = 7, DAYS6 = 21;
 
@@ -962,12 +1007,172 @@ LESSONS.push(L('nz3','noise','노출','자주 본 것을 내가 원하는 것으
   LESSONS.push(L('nd'+(k+1),'authorship',ND_AX[p[0]][0],p[1],FREQ,pickIdx(ND_ITEMS,p[0]).map(function(i){return {t:ND_ITEMS[i][1],g:i};}),'지난 2주 동안 실제로 얼마나 그랬는지 골라 주세요.'));
 });
 LESSONS.push({id:'nd5',sec:'authorship',title:'우선가치 고르기',tip:'지금 시기에 가장 지키고 싶은 것을 골라요.',values:true,qs:[]});
+/* ============ v8: 앱에는 가벼운 질문만 두고, 전체 문항은 진단지로 연결 ============ */
+var OLD_L=LESSONS.filter(function(l){ return !l.values; });
+function LQ(i,t){ return {t:t,g:i}; }
+var LEAD2='지난 2주 동안 실제로 얼마나 그랬는지 골라 주세요.';
+LESSONS=[
+ L('ns0','needscan','나를 읽는 질문','내가 원하는 것을 얼마나 잘 알아차리는지 살펴봐요.',AGREE,[
+  LQ(2,'최근 한 달 동안 한 결정 중에 "이건 정말 내가 원해서 한 거야"라고 말할 수 있는 것이 있다.'),
+  LQ(4,'"하고 싶다"는 마음과 "해야 한다"는 마음이 섞여서 구별하기 어려울 때가 많다.'),
+  LQ(5,'어떤 일을 마친 뒤, 그 일이 나에게 힘을 주었는지 빼앗아 갔는지 분명히 느낀다.'),
+  LQ(9,'"머리로는 좋다고 생각하는데 몸이 내키지 않는" 신호를 알아차리는 편이다.'),
+  LQ(11,'여럿이 있는 자리에서 하고 싶은 말이 있어도 분위기를 살피다가 말하지 않게 된다.')]),
+ L('ch0','tendency','힘이 나는 조건 찾기','요즘 어떤 조건에서 힘이 나는지 살펴봐요. 정답은 없어요.',AGREE,[
+  LQ(0,'요즘 나는 해 보고 싶은 목표가 보이면 마음이 먼저 움직인다.'),
+  LQ(5,'요즘 나는 혼자 하는 것보다 함께 만들어 가는 일에서 힘을 더 얻는다.'),
+  LQ(6,'요즘 나는 일정한 리듬과 순서 안에 있을 때 가장 깊이 집중할 수 있다.'),
+  LQ(9,'요즘 나는 한 가지를 깊이 파고들 때 가장 살아 있다고 느낀다.'),
+  LQ(12,'요즘 나는 새로운 자극과 처음 해 보는 일에서 가장 큰 힘을 얻는다.')]),
+ L('nz0','noise','잡음 알아차리기','눈치, 비교, 자주 보는 화면이 얼마나 들어오는지 살펴봐요.',AGREE,[
+  LQ(4,'내 의견과 다른 분위기가 느껴지면, 내 의견을 접게 된다.'),
+  LQ(2,'내가 정말 원하는 것을 말하기 전에, 어떻게 받아들여질지 먼저 떠올린다.'),
+  LQ(7,'"남들만큼은 해야 한다"는 압박을 자주 느낀다.'),
+  LQ(9,'나보다 잘 지내는 것 같은 사람의 소식을 들으면 마음이 흔들린다.'),
+  LQ(12,'별일 없는 시간에 나도 모르게 SNS나 카카오톡을 켜고 있다.'),
+  LQ(16,'짧은 영상이나 유튜브를 보다가 시간이 어디로 갔는지 모를 때가 있다.')]),
+ L('al0','alignment','에너지 살피기','무엇이 나를 채우고 무엇이 지치게 하는지 살펴봐요.',FREQ,[
+  LQ(0,'어떤 일을 끝낸 뒤 그 일이 나를 채웠는지 지치게 했는지 구분이 되었다'),
+  LQ(1,'가장 집중이 잘 되는 시간대에 가장 중요한 일을 했다'),
+  LQ(6,'지금 지내는 곳이 내가 원하는 것을 어느 정도 채워 준다고 느꼈다'),
+  LQ(11,'해야 할 일과 상관없이 순전히 쉬기 위한 시간을 가졌다')],LEAD2),
+ L('nd0','authorship','선택과 실천 돌아보기','내 기준으로 고르고 지키고 있는지 살펴봐요.',FREQ,[
+  LQ(4,'여러 선택지 앞에서 무엇을 먼저 놓아야 할지 분명했다'),
+  LQ(9,'해야 할 것 같아서가 아니라 내가 원해서 한 일이 있었다'),
+  LQ(18,'할 수 없는 일을 할 수 없다고 그 자리에서 말했다'),
+  LQ(11,'이번 주에 지키기로 한 것 하나를 실제로 지켰다')],LEAD2),
+ {id:'nd5',sec:'authorship',title:'우선가치 고르기',tip:'지금 시기에 가장 지키고 싶은 것을 골라요.',values:true,qs:[]}
+];
+/* 문항별: [좋게 답했을 때, 낮게 답했을 때, 거꾸로 묻는 문항인지, 이어지는 행동(축,문장), 왜] */
+var ACT_SPLIT='오늘 한 선택 하나를 "내가 원해서"인지 "해야 할 것 같아서"인지 나눠 본다';
+var FD={
+ ns0:[
+  ['내가 원해서 한 선택이 있었어요.','요즘은 "내가 원해서 했다"고 말할 만한 선택이 잘 떠오르지 않아요.',0,'N',ACT_SPLIT,'내가 원해서 한 선택이 잘 떠오르지 않을 때는, 작은 선택 하나부터 살펴보면 내 마음이 보이기 시작해요.'],
+  ['하고 싶은 것과 해야 하는 것을 구별하는 편이에요.','하고 싶은 마음과 해야 한다는 마음이 섞일 때가 많아요.',1,'N',ACT_SPLIT,'하고 싶은 것과 해야 하는 것이 섞이면 내가 원하는 것을 놓치기 쉬워요. 하루에 선택 하나만 나눠 보면 구별하는 힘이 생겨요.'],
+  ['일을 마친 뒤 힘이 났는지 빠졌는지 알아차려요.','일을 마친 뒤 힘이 났는지 빠졌는지는 잘 느껴지지 않아요.',0,'E2','오늘 한 일 하나가 나를 채웠는지 지치게 했는지 적는다','무엇이 힘을 주고 빼앗는지 알아야 나에게 맞는 쪽을 고를 수 있어요.'],
+  ['몸이 내키지 않는 신호를 알아차리는 편이에요.','몸이 내키지 않는 신호는 지나칠 때가 있어요.',0,'N','결정하기 전에 몸이 편했는지 굳었는지 한 단어로 적는다','몸은 머리보다 먼저 답을 알 때가 있어요. 결정하는 순간의 몸 느낌을 한 단어로 적으면 그 신호가 보여요.'],
+  ['여럿이 있는 자리에서도 하고 싶은 말을 하는 편이에요.','여럿이 있는 자리에서는 분위기를 살피다 말을 삼킬 때가 있어요.',1,'E1','하고 싶은 말이 있었는데 하지 않은 순간 하나를 적는다','말을 삼킨 순간을 알아차리는 것이, 내 마음과 분위기를 구분하는 첫걸음이에요.']],
+ nz0:[
+  ['분위기가 달라도 내 의견을 지키는 편이에요.','분위기가 다르면 내 의견을 접을 때가 있어요.',1,'E1','답을 하기 전에 셋을 센다','바로 답하면 분위기에 맞춘 대답이 먼저 나와요. 잠깐 멈추면 내 생각을 떠올릴 틈이 생겨요.'],
+  ['원하는 것을 말할 때 반응을 크게 걱정하지 않아요.','원하는 것을 말하기 전에 어떻게 받아들여질지부터 떠올려요.',1,'E1','답을 하기 전에 셋을 센다','바로 답하면 분위기에 맞춘 대답이 먼저 나와요. 잠깐 멈추면 내 생각을 떠올릴 틈이 생겨요.'],
+  ['"남들만큼은 해야 한다"는 압박을 덜 느껴요.','"남들만큼은 해야 한다"는 압박을 자주 느껴요.',1,'E1','남과 견준 순간 하나를 적고, 그때 내가 정말 원한 것을 옆에 적는다','비교는 남의 기준을 내 것처럼 느끼게 해요. 그 순간 내가 원한 것을 적어 보면 둘이 구분돼요.'],
+  ['다른 사람의 소식에 크게 흔들리지 않아요.','잘 지내는 사람의 소식을 들으면 마음이 흔들려요.',1,'E1','남과 견준 순간 하나를 적고, 그때 내가 정말 원한 것을 옆에 적는다','비교는 남의 기준을 내 것처럼 느끼게 해요. 그 순간 내가 원한 것을 적어 보면 둘이 구분돼요.'],
+  ['별일 없는 시간에 화면을 덜 켜요.','별일 없는 시간에 나도 모르게 화면을 켜요.',1,'E1','휴대폰을 열기 전에 "지금 뭘 하려고 여는지" 한 번 묻는다','자주 본 것은 내가 원하는 것처럼 느껴지기 쉬워요. 여는 이유를 한 번 물으면 습관과 필요가 구분돼요.'],
+  ['영상을 봐도 시간을 놓치지 않는 편이에요.','영상을 보다가 시간이 간 줄 모를 때가 있어요.',1,'E1','휴대폰을 열기 전에 "지금 뭘 하려고 여는지" 한 번 묻는다','자주 본 것은 내가 원하는 것처럼 느껴지기 쉬워요. 여는 이유를 한 번 물으면 습관과 필요가 구분돼요.']],
+ al0:[
+  ['무엇이 나를 채우고 지치게 하는지 구분했어요.','무엇이 나를 채우고 지치게 하는지 구분하기 어려웠어요.',0,'E2','오늘 나를 채운 것과 지치게 한 것을 하나씩 적는다','무엇이 나를 채우는지 알아야 그것을 하루에 더 넣을 수 있어요.'],
+  ['집중이 잘 되는 시간에 중요한 일을 했어요.','집중이 잘 되는 시간을 중요한 일에 쓰지 못했어요.',0,'E2','내일 가장 맑은 시간에 할 일 하나를 미리 정한다','집중이 잘 되는 시간은 하루에 길지 않아요. 그 시간에 중요한 일 하나만 놓아도 하루가 달라져요.'],
+  ['지금 지내는 곳이 내가 원하는 것을 채워 준다고 느꼈어요.','지금 지내는 곳이 내가 원하는 것과 잘 맞지 않는다고 느꼈어요.',0,'E2','지금 지내는 곳에서 마음이 편해지는 자리나 시간을 하나 찾는다','환경을 통째로 바꾸기는 어려워도, 그 안에서 나에게 맞는 자리 하나는 찾을 수 있어요.'],
+  ['순전히 쉬기 위한 시간을 가졌어요.','순전히 쉬기 위한 시간을 거의 갖지 못했어요.',0,'E2','지치기 전에 10분 쉰다','지친 뒤에 쉬면 회복이 오래 걸려요. 지치기 전에 짧게 쉬는 것이 나를 아끼는 방법이에요.']],
+ nd0:[
+  ['무엇을 먼저 놓아야 할지 분명했어요.','여러 선택지 앞에서 무엇을 먼저 놓을지 정하기 어려웠어요.',0,'D','오늘 결정 하나에서 무엇을 먼저 볼지 한 문장으로 적는다','무엇을 먼저 볼지 정해 두면, 선택지가 많아도 덜 흔들려요.'],
+  ['내가 원해서 한 일이 있었어요.','내가 원해서 한 일을 찾기 어려웠어요.',0,'N',ACT_SPLIT,'내가 원해서 한 일을 하나라도 찾아보면, 내 기준이 어디에 있는지 보여요.'],
+  ['할 수 없는 일은 할 수 없다고 말했어요.','할 수 없는 일을 할 수 없다고 말하기 어려웠어요.',0,'D','바로 답하지 않고, 내 사정을 먼저 말한다','할 수 없다고 말하는 것은 상대를 밀어내는 것이 아니라 내 상황을 알려 주는 일이에요.'],
+  ['지키기로 한 것을 지켰어요.','지키기로 한 것을 지키기 어려웠어요.',0,'D','오늘 지킬 것 하나를 아주 작게 정한다','크게 정하면 지키기 어려워요. 작게 정해서 지켜 보면 정한 것을 지킨 경험이 쌓여요.']]
+};
+var FD_CH=['해 보고 싶은 목표가 보일 때','누군가와 함께 만들어 갈 때','일정한 리듬과 순서가 지켜질 때','한 가지를 깊이 파고들 때','새로운 것을 처음 해 볼 때'];
+var AXWHY={N:'내가 원하는 것을 알아차리는 연습이에요. 원하는 것이 보여야 내 기준으로 고를 수 있어요.',E1:'눈치, 비교, 화면에서 오는 영향을 알아차리는 연습이에요. 알아차리면 덜 흔들려요.',E2:'무엇이 나를 채우고 지치게 하는지 살피는 연습이에요. 알면 나에게 맞는 쪽을 고를 수 있어요.',D:'내가 정한 기준을 실제 선택에 써 보는 연습이에요.',F:'힘이 나는 조건을 하루에서 실제로 확인해 보는 연습이에요.'};
+function kindOf(t){ return /적는다|나눠 본다/.test(t)?'적어 보기':'해 보기'; }
+function watchOf(t){ return kindOf(t)==='적어 보기'?'잘 적는 것이 목적이 아니에요. 적으면서 내 마음이 어땠는지만 알아차리면 돼요.':'잘해내는 것이 목적이 아니에요. 해 보는 순간 내 마음이 어땠는지만 알아차리면 돼요.'; }
+function whyOf(d){ return (S.whys||{})[d.text]||AXWHY[d.axis]||''; }
+function setWhy(text,why,ex){ S.whys=S.whys||{}; if(why) S.whys[text]=why; if(ex) S.lastFound={d:ymd(),ex:ex,text:text}; }
+/* 가벼운 질문의 답에서: 이미 갖고 있는 것 / 더 살펴보면 좋을 것 / 그래서 오늘은 */
+function foundOf(l){
+  var a=S.ans[l.id]||[], o={has:[],ex:'',act:null,why:''};
+  if(l.id==='ch0'){
+    var ix=[0,1,2,3,4].sort(function(x,y){ return (a[y]||0)-(a[x]||0) || x-y; }), top=ix.filter(function(i){ return (a[i]||0)>=4; }).slice(0,2);
+    if(!top.length&&(a[ix[0]]||0)>(a[ix[4]]||0)) top=[ix[0]];
+    o.has=top.map(function(i){ return FD_CH[i]+' 힘이 나요.'; });
+    var low=ix[4]; if((a[low]||3)<=2) o.ex=FD_CH[low]+'는 힘이 덜 나요. 그런 때는 조금 더 지칠 수 있어요.';
+    o.act={axis:'E2',text:'오늘 힘이 났던 순간 하나와 그때의 조건을 적는다',ph:''}; o.why='힘이 나는 조건을 알면 같은 일도 나에게 맞는 방식으로 할 수 있어요. 오늘 실제로 그랬는지 확인해 봐요.';
+    return o;
+  }
+  var T=FD[l.id]; if(!T) return null;
+  var g=T.map(function(t,i){ var v=a[i]||3; return t[2]?6-v:v; });
+  var idx=g.map(function(v,i){return i;});
+  o.has=idx.filter(function(i){return g[i]>=4;}).sort(function(x,y){return g[y]-g[x]||x-y;}).slice(0,2).map(function(i){return T[i][0];});
+  var w=idx.slice().sort(function(x,y){return g[x]-g[y]||x-y;})[0];
+  try{ var SUB={ns0:['D1','D1','D2','D3','-'],nz0:[0,0,1,1,2,2],al0:['A1','A2','A3','A4'],nd0:['D1','D2','D3','D4']}[l.id], rr=calc(l.sec), wk=l.sec==='noise'?rr.top:rr.weak;
+    var tie=idx.filter(function(i){return g[i]===g[w]&&SUB[i]===wk;}); if(tie.length) w=tie[0]; }catch(e){}
+  if(g[w]<=3){ o.ex=g[w]<=2?T[w][1]:T[w][1].replace(/어려웠어요\.$/,'어려울 때가 있었어요.'); o.act={axis:T[w][3],text:T[w][4],ph:''}; o.why=T[w][5]; }
+  else { o.act={axis:T[0][3],text:T[0][4],ph:''}; o.why='지금의 감각이 실제 하루에서도 이어지는지 확인해 봐요.'; }
+  return o;
+}
+function foundCard(l){
+  var f=foundOf(l); if(!f) return {h:ansCard(l),f:null};
+  var h='<div class="card fnd"><small>지금 발견한 나</small><p class="muted">질문 '+l.qs.length+'개에 답한 것에서 보이는 모습이에요. 정해진 답이 아니라 지금의 모습이에요.</p>'
+    +'<div class="fnb"><b>이미 갖고 있는 것</b>'+(f.has.length?f.has.map(function(t){return '<p>'+t+'</p>';}).join(''):'<p>아직 뚜렷하게 편한 곳은 보이지 않아요. 괜찮아요. 지금부터 알아가면 돼요.</p>')+'</div>'
+    +'<div class="fnb"><b>더 살펴보면 좋을 것</b><p>'+(f.ex||'지금은 크게 걸리는 곳이 보이지 않아요.')+'</p></div>'
+    +'<div class="fnb act"><b>그래서 오늘은</b><p class="rbig">'+esc(f.act.text)+'</p><p><span class="kind">'+kindOf(f.act.text)+'</span> '+f.why+'</p></div></div>';
+  var a=S.ans[l.id]||[];
+  h+='<details class="more"><summary>내가 고른 답 다시 보기</summary><div class="card anc">'+l.qs.map(function(q,i){ var o2=q.o||l.scale; return '<div class="anr"><p>'+esc(q.t)+'</p><b>'+esc(o2[(a[i]||1)-1])+'</b></div>'; }).join('')+'</div></details>';
+  return {h:h,f:f};
+}
+var LIGHT={needscan:'ns0',tendency:'ch0',noise:'nz0',alignment:'al0',authorship:'nd0'};
+function svgI(d,c){ return '<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="'+c+'" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+d+'</svg>'; }
+var IC={target:'<circle cx="11" cy="13" r="8"/><circle cx="11" cy="13" r="4.2"/><circle cx="11" cy="13" r="1" fill="currentColor"/><path d="M11 13 20 4M17 4h3v3"/>',
+ sprout:'<path d="M12 21v-9"/><path d="M12 12c0-4-3-6-7-6 0 4 3 6 7 6Z"/><path d="M12 14c0-4 3-6 7-6 0 4-3 6-7 6Z"/>',
+ wave:'<path d="M4 10v4M7.5 7v10M11 4v16M14.5 8v8M18 6v12M21 10v4"/>',
+ bolt:'<path d="M13 2 5 13.5h6L10 22l9-12h-6.5L13 2Z"/>',
+ layers:'<path d="m12 3 9 4.5-9 4.5-9-4.5L12 3Z"/><path d="m3 12 9 4.5 9-4.5"/><path d="m3 16.5 9 4.5 9-4.5"/>',
+ bars:'<path d="M5 21v-6M11 21V11M17 21V7"/><path d="m4 9 6-4 3 2 7-5"/>',
+ mag:'<circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/>',
+ clip:'<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4.5h6V3H9v1.5ZM8.5 10l1.5 1.5L12.5 9M8.5 15l1.5 1.5 2.5-2.5M14.5 10.5h2M14.5 15.5h2"/>'};
+var DGC={needscan:['target','#EAF0F6','#4E7CA6'],tendency:['sprout','#EAF2E8','#5E8C5A'],noise:['wave','#F8ECE8','#C97F6B'],alignment:['bolt','#F8F1E1','#C29436'],authorship:['layers','#EEEAF5','#7E6BA8'],report:['bars','#F6E9EC','#B5677C']};
+function dgRow(key,href,title,sub,done){ var c=DGC[key]; return '<a class="dgr" style="--t:'+c[1]+';--k:'+c[2]+'" href="'+href+'"'+DG_T+'><i class="dgi">'+svgI(IC[c[0]],c[2])+'</i><span><b>'+title+(done?' · 결과 있음':'')+'</b><small>'+sub+'</small></span><i class="dgv">›</i></a>'; }
+var DG_BASE='https://nadaumlap.github.io/nadaumneed/';
+var DG_SAME=location.hostname==='nadaumlap.github.io' && !((window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone);
+var DG_T=DG_SAME?'':' target="_blank" rel="noopener"';
+var DG=[['needscan','needscan','욕구 출발점 진단','내가 원하는 것이 어디서 시작되는지'],['tendency','5characters','5러 몰입 경향성 진단','어떤 조건에서 힘이 나는지'],['noise','newnoise','잡음 진단','눈치·비교·화면이 얼마나 들어오는지'],['alignment','alignment','에너지 살피기 진단','무엇이 나를 채우고 지치게 하는지'],['authorship','need','나다움 설계 현황 진단','내 기준으로 고르고 지키고 있는지']];
+function dgOf(sec){ return DG.filter(function(x){return x[0]===sec;})[0]; }
+function prof(){ try{ return JSON.parse(localStorage.getItem('nadaum.profile.v1')||'null'); }catch(e){ return null; } }
+/* 진단지에서 한 결과가 있으면 앱으로 가져온다 (같은 주소에 있을 때) */
+function syncWeb(){
+  var p=prof(), m=p&&p.modules, ch=false; if(!m) return false; S.web=S.web||{};
+  DG.forEach(function(x){ var k=x[0], w=m[k]; if(!w||!w.ts) return;
+    if(S.web[k]!==w.ts){ if(S.web[k]||!S.done[LIGHT[k]]||OLD_L.every(function(l){return l.sec!==k||!S.done[l.id];})) S.seen[k]=false; S.web[k]=w.ts; ch=true; }
+    if(!S.done[LIGHT[k]]){ S.done[LIGHT[k]]=true; ch=true; }
+    if(k==='authorship'&&w.values&&w.values.length&&!S.values){ S.values={sel:w.values.slice(0,3),main:w.values[0],less:''}; S.done.nd5=true; ch=true; }
+  });
+  if(ch){ S.intro=true; save(); } return ch;
+}
+function webR(sec){
+  if(!(S.web||{})[sec]) return null; var p=prof(), m=p&&p.modules&&p.modules[sec]; if(!m) return null; var r=null;
+  try{
+  if(sec==='needscan'){ var ax={D1:m.d1,D2:m.d2,D3:m.d3,D4:m.d4}, ord=Object.keys(ax).sort(function(x,y){return ax[x]-ax[y];});
+    r={ax:ax,weak:ord[0],second:ord[1],weakVal:ax[ord[0]],seg:segOf(ax[ord[0]]),inf:m.influence,aware:m.aware,nci:m.nci}; }
+  if(sec==='noise'){ var sum=[m.nunchi,m.compare,m.exposure], sc=sum.map(function(v){return Math.round((v-6)/24*100);}), top=sum.indexOf(Math.max.apply(null,sum)), tied=[];
+    sum.forEach(function(v,i){ if(v===sum[top]) tied.push(i+1); });
+    r={sum:sum,sc:sc,total:m.total,seg:m.seg,totalSeg:m.totalSeg||m.seg,top:top,tied:tied}; }
+  if(sec==='alignment'||sec==='authorship'){ var keys=sec==='alignment'?['A1','A2','A3','A4']:['D1','D2','D3','D4'], raw={}, pc={};
+    keys.forEach(function(k,i){ raw[k]=m['a'+(i+1)]; pc[k]=Math.round((raw[k]-1)/4*100); });
+    var weak=keys.slice().sort(function(x,y){return raw[x]-raw[y];})[0], ci=m.chrono?CHRONO.k.indexOf(m.chrono)+1:0;
+    r={raw:raw,pc:pc,keys:keys,weak:weak,weakVal:raw[weak],seg:segOf(raw[weak]),total:m.score,chrono:ci||undefined}; }
+  if(sec==='tendency'){ var K=['A','C','S','D','E'], avg=m.avgs, sat=m.sat||{};
+    var sorted=K.slice().sort(function(x,y){ return (avg[y]-avg[x]) || ((sat[y]||0)-(sat[x]||0)); });
+    r={avg:avg,z:m.z||{},overall:m.overall,sorted:sorted,main:sorted[0],sub:sorted[1],peak:avg[sorted[0]],type:(m.flag==='low'||m.flag==='balance')?m.flag:'normal',soft:m.flag==='soft',band:m.band||'mid',sat:sat,satTop:m.satTop||[]}; }
+  }catch(e){ return null; }
+  if(!r) return null; for(var k2 in r){ if(typeof r[k2]==='number'&&isNaN(r[k2])) return null; }
+  r.web=m.ts; return r;
+}
+/* 답하지 않은 문항은 같은 묶음에서 답한 문항의 평균으로 채운다 (가벼운 질문용) */
+function impute(sec,a){
+  var G=[], miss=false;
+  if(sec==='needscan') G=[[[1,2,3],[0,4]],[[5,6],[7]],[[8,9],[10]],[[11,12,13,14],[]]];
+  if(sec==='noise') G=[[[0,1,2,3,4,5],[]],[[6,7,8,9,10,11],[]],[[12,13,14,15,16,17],[]]];
+  if(sec==='alignment'||sec==='authorship'){ var it=sec==='alignment'?AL_ITEMS:ND_ITEMS; (sec==='alignment'?['A1','A2','A3','A4']:['D1','D2','D3','D4']).forEach(function(k){ G.push([pickIdx(it,k),[]]); }); }
+  if(sec==='tendency') ['A','C','S','D','E'].forEach(function(k){ var ix=[]; CH_Q.forEach(function(q,i){ if(q[0]===k&&!q[2]) ix.push(i); }); G.push([ix,[]]); });
+  G.forEach(function(g){ var t=0,c=0; g[0].forEach(function(i){ if(a[i]!=null){t+=a[i];c++;} }); g[1].forEach(function(i){ if(a[i]!=null){t+=6-a[i];c++;} });
+    var m=c?t/c:3; g[0].forEach(function(i){ if(a[i]==null){a[i]=m;miss=true;} }); g[1].forEach(function(i){ if(a[i]==null){a[i]=6-m;miss=true;} }); });
+  return miss;
+}
 
 /* ============ 저장 ============ */
 var KEY = 'nadaum.app.v1';
 function fresh(){ return {v:1, name:'', ans:{}, done:{}, seen:{}, honey:0, streak:0, last:null, log:[], events:[], picks:{}, values:null, intro:false, stage:0, hatched:false, gate:{}, designs:[], checks:{}, hit:{}, pnotes:{}, early:{}, tagHelp:false, sitlog:[], did:{}}; }
 var S = (function(){ try{ var r=JSON.parse(localStorage.getItem(KEY)||'null'); if(r&&r.v===1){ var o=Object.assign(fresh(), r); if(r.hatched===undefined&&r.intro){ o.hatched=true; o.stage=Math.max(1,r.stage||1); for(var k=2;k<=o.stage;k++) o.gate[k]=true; } return o; } }catch(e){} return fresh(); })();
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+function migrateV8(){ if(S.v8) return; Object.keys(LIGHT).forEach(function(k){ var ls=OLD_L.filter(function(l){return l.sec===k;}); if(ls.every(function(l){return S.done[l.id];})) S.done[LIGHT[k]]=true; }); if(S.stage>=4&&S.values) S.vdid=true; S.v8=true; save(); }
 function ymd(d){ d=d||new Date(); return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2); }
 function touchStreak(){
   var t=ymd(); if(S.last===t) return;
@@ -978,10 +1183,11 @@ function shownStreak(){ var y=new Date(); y.setDate(y.getDate()-1); return (S.la
 function nm(){ return S.name ? esc(S.name)+'님' : '여러분'; }
 
 /* ============ 채점 (공개 진단과 같은 식) ============ */
-function gather(sec){ var a={}; LESSONS.forEach(function(l){ if(l.sec!==sec||!S.ans[l.id]) return; l.qs.forEach(function(q,i){ a[q.g]=S.ans[l.id][i]; }); }); return a; }
+function gather(sec){ var a={}; OLD_L.concat(LESSONS).forEach(function(l){ if(l.sec!==sec||!S.ans[l.id]) return; l.qs.forEach(function(q,i){ a[q.g]=S.ans[l.id][i]; }); }); return a; }
 function segOf(v){ return v>=3.5?'high':(v>=2.5?'mid':'low'); }
 function calc(sec){
-  var a=gather(sec), r={};
+  var w=webR(sec); if(w) return w;
+  var a=gather(sec), light=impute(sec,a), r={};
   if(sec==='needscan'){
     var rv=function(i){return 6-a[i];};
     var D1=(rv(0)+a[1]+a[2]+a[3]+rv(4))/5, D2=(a[5]+a[6]+rv(7))/3, D3=(a[8]+a[9]+rv(10))/3;
@@ -1021,7 +1227,7 @@ function calc(sec){
     r={avg:avg, z:z, overall:overall, sorted:sorted, main:sorted[0], sub:sorted[1], peak:peak, type:type, soft:soft,
        band:peak>=4?'strong':(peak>=3?'mid':'weak'), sat:sat, satTop:K.filter(function(k){return (sat[k]||0)===satMax;})};
   }
-  return r;
+  r.light=light; return r;
 }
 /* 연구소 통합 리포트와 같은 형식으로도 저장 (같은 주소에 올렸을 때 리포트가 읽을 수 있게) */
 function saveProfile(sec, r){
@@ -1050,13 +1256,32 @@ function secOf(id){ return SECS.filter(function(s){return s.id===id;})[0]; }
 function lessonsOf(sec){ return LESSONS.filter(function(l){return l.sec===sec;}); }
 function secDone(sec){ return lessonsOf(sec).every(function(l){return S.done[l.id];}); }
 function nextLesson(){ for(var i=0;i<LESSONS.length;i++) if(!S.done[LESSONS[i].id]) return LESSONS[i]; return null; }
-function unlocked(l){ var i=LESSONS.indexOf(l); if(i===0||S.done[LESSONS[i-1].id]) return true; if(!(S.early||{})[secOf(l.sec).st]) return false; var ls=lessonsOf(l.sec), j=ls.indexOf(l); return j===0||!!S.done[ls[j-1].id]; }
+function unlocked(l){ return true; }
 function diaryDays(){ var o={}; S.log.forEach(function(x){o[x.d]=1;}); return Object.keys(o).length; }
 function wroteToday(){ var t=ymd(); return S.log.some(function(x){return x.d===t;}); }
-function chapDone(n){ return SECS.filter(function(s){return s.st===n;}).every(function(s){return secDone(s.id);}); }
-function gatePending(){ var n=S.stage+1; return S.stage>=1 && n<=4 && chapDone(n) && !S.gate[n]; }
+function tagCount(){ var c=0; S.log.forEach(function(x){ if(x.tags&&x.tags.length) c++; }); return c+(S.sitlog||[]).length+(S.sortlog||[]).length; }
+function enDays(){ var o={}; S.log.forEach(function(x){ if(x.en) o[x.d]=1; }); return Object.keys(o).length; }
+function LR(id,t){ var l=LESSONS.filter(function(x){return x.id===id;})[0]; return {ok:!!S.done[id], t:t, m:(l.values?'고르기':'질문 '+l.qs.length+'개')+' · 1분', a:'data-lesson="'+id+'"'}; }
+function reqs(n){
+  var v=S.values?S.values.main:'';
+  if(n===1) return [ ((S.sitlog||[]).length&&!S.done.ns0) ? {ok:true,t:'겪은 일로 연습하기',m:'했어요',a:'data-act="sitList"'} : LR('ns0','첫 걸음 · 나를 읽는 질문'), {ok:!!S.hatched,t:'첫 실천 · 문장 하나 고르기',m:'고르면 알이 깨어나요',a:'data-act="prac"'} ];
+  if(n===2) return [LR('ns0','나를 읽는 질문'), LR('ch0','힘이 나는 조건 찾기'), {ok:(S.sitlog||[]).length>=1,t:'겪은 일로 연습 한 번',m:'거절, 비교, 역할 같은 일에서 골라요 · 2분',a:'data-act="sitList"'}];
+  if(n===3){ var tc=tagCount(), ed=enDays(); return [LR('nz0','잡음 알아차리기'), LR('al0','에너지 살피기'),
+    {ok:tc>=3,t:'나·남·자극 가려 보기 3번',m:'지금까지 '+Math.min(tc,3)+'번 · 카드 연습이나 기록에서 해요',a:'data-act="actSort"'},
+    {ok:ed>=3,t:'에너지 기록 3일',m:'지금까지 '+Math.min(ed,3)+'일 · 30초 기록에서 남겨요',a:'data-act="quick"'}]; }
+  if(n===4) return [LR('nd0','선택과 실천 돌아보기'), LR('nd5','우선가치 고르기'), {ok:!!S.vdid,t:'실천하고 돌아오기',m:'우선가치를 정한 뒤, 실천 하나를 해 보고 홈에서 알려 주세요',a:todayPrac()?'data-tab="home"':'data-act="prac"'}];
+  var need=n===5?DAYS5:DAYS6, vn=n===5?3:7, dd=diaryDays(), vd=valDays();
+  return [{ok:dd>=need,t:'기록한 날 '+Math.min(dd,need)+' / '+need+'일',m:'30초 기록도 하루로 세요',a:'data-act="quick"'},
+    {ok:vd>=vn,t:(v?'"'+v+'"'+eul(v):'우선가치를')+' 먼저 생각한 날 '+Math.min(vd,vn)+' / '+vn+'일',m:'30초 기록에서 "있었어요"를 고른 날이에요',a:'data-act="quick"'}];
+}
+function allReq(n){ return reqs(n).every(function(x){return x.ok;}); }
+function nextReq(){ var n=S.stage+1; if(n>6) return null; var op=S.hatched?openSec():null;
+  if(op) return {t:'결과 보기',m:'쉬운 풀이와 해 볼 행동 하나',a:'data-result="'+op.id+'"'};
+  return reqs(n).filter(function(x){return !x.ok;})[0]||null; }
+function chapDone(n){ return n>=2?allReq(n):true; }
+function gatePending(){ var n=S.stage+1; return S.stage>=1 && n<=6 && allReq(n) && !S.gate[n]; }
 function grewToday(){ var t=ymd(); return S.events.some(function(e){ return e.type==='stage'&&e.d===t; }); }
-function tryGate(){ if(gatePending()&&!grewToday()&&S.did[ymd()]){ S.gate[S.stage+1]=true; save(); return true; } return false; }
+function tryGate(){ if(gatePending()&&!grewToday()){ S.gate[S.stage+1]=true; save(); return true; } return false; }
 function eul(w){ var c=w.charCodeAt(w.length-1); return (c>=0xAC00&&c<=0xD7A3&&(c-0xAC00)%28)?'을':'를'; }
 function mySentence(){
   if(!S.values) return '';
@@ -1065,30 +1290,26 @@ function mySentence(){
 }
 function valDays(){ var d={}; S.log.forEach(function(x){ if(x.val==='y') d[x.d]=1; }); return Object.keys(d).length; }
 function stageNow(){
-  var st=S.hatched?1:0, dd=diaryDays();
-  for(var n=2;n<=4;n++){ if(st===n-1&&chapDone(n)&&S.gate[n]) st=n; }
-  if(st===4&&dd>=DAYS5) st=5;
-  if(st===5&&dd>=DAYS6) st=6;
+  var st=Math.max(S.hatched?1:0, S.stage||0), n=st+1;
+  if(n>=2&&n<=6&&allReq(n)&&S.gate[n]) st=n;
   return st;
 }
 function cnt(secs){ var d=0,t=0; secs.forEach(function(s){ lessonsOf(s).forEach(function(l){ t++; if(S.done[l.id]) d++; }); }); return [d,t]; }
 function toNext(){ // [비율, 남은 일 설명]
-  var st=S.stage, dd=diaryDays(), c;
-  if(st===0) return S.done.ns1 ? [0.7,'연습 문장을 하나 고르면 알이 깨어나요'] : [0,'첫 걸음과 첫 연습이 남았어요'];
-  if(st<=3){
-    c=cnt(SECS.filter(function(s){return s.st===st+1;}).map(function(s){return s.id;}));
-    return c[0]<c[1] ? [c[0]/c[1]*0.9, (c[1]-c[0])+'걸음과 실천 한 번이 남았어요'] : [0.95,(grewToday()?'내일 실천을 해 보고 알려 주면 껍질이 깨져요':'오늘의 실천을 해 보고 알려 주면 껍질이 깨져요')];
-  }
-  if(st===4) return [Math.min(1,dd/DAYS5), '기록 '+Math.max(0,DAYS5-dd)+'일이 남았어요'];
-  if(st===5) return [Math.min(1,dd/DAYS6), '기록 '+Math.max(0,DAYS6-dd)+'일이 남았어요'];
-  return [1,''];
+  var n=S.stage+1; if(n>6) return [1,''];
+  var R=reqs(n), d=R.filter(function(x){return x.ok;}).length;
+  if(d>=R.length) return [0.97, grewToday()?'다움이는 하루에 한 번 자라요. 내일 다시 열면 다음 모습이 돼요':'곧 다음 모습이 돼요'];
+  return [d/R.length, '다음 · '+R.filter(function(x){return !x.ok;})[0].t];
 }
 var $ = function(id){ return document.getElementById(id); };
+document.addEventListener('keydown',function(e){ if((e.key==='Enter'||e.key===' ')&&e.target&&e.target.getAttribute&&e.target.getAttribute('role')==='button'){ e.preventDefault(); e.target.click(); } });
+window.addEventListener('focus',function(){ try{ if(syncWeb()){ tryGate(); renderAll(); checkStage(); } }catch(e){} });
+window.addEventListener('pageshow',function(e){ if(e.persisted){ try{ if(syncWeb()){ tryGate(); renderAll(); checkStage(); } }catch(x){} } });
 function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
 function eggLevel(){
   if(S.hatched) return 3;
-  if(S.done.ns1) return 2;
-  if(cur&&cur.l&&cur.l.id==='ns1'&&cur.a) return Math.min(2, Math.floor(cur.a.filter(Boolean).length/2));
+  if(S.done.ns0) return 2;
+  if(cur&&cur.l&&cur.l.id==='ns0'&&cur.a) return Math.min(2, Math.floor(cur.a.filter(Boolean).length/2));
   return 0;
 }
 function egg(level, size, cls, tint){
@@ -1145,7 +1366,7 @@ function dayNo(){ var d=new Date(); return Math.floor((d-new Date(d.getFullYear(
 function todayRec(){ var r=recs(); return r[dayNo()%r.length]; }
 /* 결과 카드의 '일상에서 나타나는 모습': 먼저 살펴볼 항목(5러는 주된 흐름) 기준 */
 var DAILY={needscan:{D1:'부탁을 받으면 하고 싶은지 생각하기 전에 "네"가 먼저 나올 때가 있어요.',D2:'하루가 끝나면 지쳐 있는데, 무엇 때문에 지쳤는지 짚기 어려울 때가 있어요.',D3:'결정한 뒤에야 몸이 무겁거나 답답했다는 것을 알아챌 때가 있어요.',D4:'남들이 하는 것을 보면 나도 해야 할 것 같은 마음이 들 때가 있어요.'},
- noise:['모임이나 회의에서 하고 싶은 말이 있어도 분위기를 보다가 넘어갈 때가 있어요.','다른 사람의 소식을 들으면 내 상황과 견주게 되고 기분이 가라앉을 때가 있어요.','화면에서 여러 번 본 것이 어느새 갖고 싶거나 하고 싶은 것이 되어 있을 때가 있어요.'],
+ noise:['여럿이 있는 자리에서 하고 싶은 말이 있어도 분위기를 보다가 넘어갈 때가 있어요.','다른 사람의 소식을 들으면 내 상황과 견주게 되고 기분이 가라앉을 때가 있어요.','화면에서 여러 번 본 것이 어느새 갖고 싶거나 하고 싶은 것이 되어 있을 때가 있어요.'],
  alignment:{A1:'쉬는 날에도 무엇을 하면 좋을지 몰라 그냥 시간을 보낼 때가 있어요.',A2:'머리가 맑은 시간을 연락과 급한 일에 쓰고, 중요한 일은 뒤로 밀릴 때가 있어요.',A3:'해야 하는 일은 하고 있지만, 이 자리가 나와 맞는지 자주 생각하게 돼요.',A4:'쉬어야겠다는 생각이 들 때는 이미 많이 지쳐 있을 때가 많아요.'},
  authorship:{D1:'무엇이 중요한지 물으면 바로 답하기 어렵고, 그때그때 급한 일을 먼저 하게 돼요.',D2:'중요하다고 생각하는 것과 실제로 시간을 쓰는 곳이 다를 때가 있어요.',D3:'내키지 않는 부탁도 거절하지 못하고 맡을 때가 있어요.',D4:'하기로 한 일을 며칠 하다가 흐지부지될 때가 있어요.'},
  tendency:{A:'해야 할 일이 분명하고 끝이 보일 때 집중이 잘 돼요.',C:'혼자 할 때보다 누군가와 함께 할 때 일이 잘 풀려요.',S:'정해진 순서와 시간이 지켜질 때 마음이 편하고 일이 잘 돼요.',D:'한 가지를 방해받지 않고 오래 붙들 때 만족이 커요.',E:'새로운 일이나 방식을 시도할 때 힘이 나요.'}};
@@ -1168,10 +1389,9 @@ var SV={
 function openSec(){ return SECS.filter(function(s){return secDone(s.id)&&!S.seen[s.id];})[0]; }
 /* 지금 할 일 하나 */
 function mainCta(nx){
-  var op=openSec();
-  if(op) return ['결과 보기','data-result="'+op.id+'"','결과가 준비됐어요.'];
-  if(nx) return ['여정 이어가기','data-act="start"','다음 · '+esc(nx.title)];
-  return null;
+  var r=nextReq(); if(!r) return null;
+  if(r.a.indexOf('data-tab="home"')===0) return ['', '', '다음 · 오늘의 실천을 해 보고 위에서 알려 주기'];
+  return [r.a.indexOf('data-result')===0?'결과 보기':'여정 이어가기', r.a, r.a.indexOf('data-result')===0?'결과가 준비됐어요.':'다음 · '+r.t];
 }
 function greet(){
   var st=S.stage, T=STAGES[st], y=dayKey(1), days={}, last=null;
@@ -1201,6 +1421,7 @@ function renderHome(){
     +'<button class="hero-bird" data-act="tapbird" aria-label="다움이 누르기">'+bird(st,st?168:150)+'</button></div>';
   if(first){
     h+='<div class="sec-h"><h3>지금 할 일</h3></div><div class="card now1"><p>첫 걸음은 질문 다섯 개예요. 1분이면 돼요. 그다음은 내 속도에 맞춰 이어가면 돼요.</p><button class="btn" data-act="begin">첫 걸음 시작하기</button><button class="btn ghost" data-act="sitList">요즘 겪은 일에서 시작하기</button><button class="linkb" data-act="story">처음이신가요? <b>앱 소개 보기 ›</b></button></div>';
+    h+='<div class="card dgc"><div class="dgh">'+bird(2,72,'')+'<div><b>진단지로 더 자세히 알아보기</b><p>앱에는 가벼운 질문만 있어요. 진단지에서는 질문에 차근차근 답하고 자세한 결과지를 받아요.</p></div></div><button class="btn ghost" data-act="dgList">진단지 보기</button></div>';
     h+='<div class="sec-h"><h3>이 앱에서 하는 일</h3></div><div class="rows">'
       +rowL('data-tab="path"','여정 · 나를 발견하기','짧은 질문에 답하면서 나를 알아봐요')
       +rowL('data-tab="diary"','기록 · 나를 돌아보기','오늘의 기분과 선택을 30초로 남겨요')
@@ -1209,12 +1430,13 @@ function renderHome(){
     // 2. 오늘의 질문과 실천 (한 카드)
     var rc=tp||todayRec(), dd=S.did[t];
     h+='<div class="sec-h"><h3>오늘의 질문</h3>'+(tp&&!dd?'<button data-act="prac">바꾸기</button>':'')+'</div><div class="card tq">'
-      +'<p class="tqq">'+((st>=4&&S.values)?TQV[dayNo()%3].replace(/V/g,S.values.main).replace(/J/g,eul(S.values.main)):TQ[rc.axis][dayNo()%3])+'</p><div class="tqp"><small>'+(tp?'오늘의 실천':'오늘 해 볼 것')+'</small>'+esc(rc.text)+'</div>';
-    var gp=gatePending();
+      +((S.lastFound&&S.lastFound.ex&&tp&&S.lastFound.text===tp.text)?'<p class="tql">앞에서 "'+S.lastFound.ex.replace(/\.$/,'')+'"는 모습을 봤어요.</p>':'')
+      +'<p class="tqq">'+((S.lastFound&&S.lastFound.ex&&tp&&S.lastFound.text===tp.text&&!(st>=4&&S.values))?'오늘은 그런 순간이 언제 있었나요?':(st>=4&&S.values)?TQV[dayNo()%3].replace(/V/g,S.values.main).replace(/J/g,eul(S.values.main)):TQ[rc.axis][dayNo()%3])+'</p><div class="tqp"><small>'+(tp?'오늘의 실천':'오늘 해 볼 것')+' · '+kindOf(rc.text)+'</small>'+esc(rc.text)+'</div>';
+    var gp=false;
     if(!tp) h+=((!S.hatched)?'<p class="muted">하나를 정하면 알이 깨어나요.</p>':(gp?'<p class="muted">이 단계의 질문을 모두 마쳤어요. 실천 하나를 정해서 해 보세요.</p>':''))+'<button class="btn" data-pax="'+rc.axis+'" data-ptext="'+esc(rc.text)+'" data-pph="'+esc(rc.ph||'')+'">오늘의 실천으로 하기</button><button class="linkb" data-act="prac"><b>다른 문장 고르기 ›</b></button>';
     else if(!dd) h+=(gp?'<p class="muted">'+(grewToday()?'다움이는 하루에 한 번 자라요. 내일 해 보고 알려 주면 다음 모습이 돼요.':'해 본 뒤에 알려 주면 다움이의 껍질이 깨져요.')+'</p>':'')+'<div class="two2"><button class="btn" data-did="did">실천했어요</button><button class="btn ghost" data-did="thought">생각해 봤어요</button></div>';
     else h+='<p class="tqd">'+ICON.check+'<span><b>'+(dd.k==='did'?'실천했어요':'생각해 봤어요')+'</b>'+(dd.note?' · '+esc(dd.note):'')+'</span></p>';
-    h+='</div>';
+    h+=(st<=1?'<p class="muted" style="margin-top:4px">질문은 나를 알아보려는 것이고, 실천은 알아본 것을 하루에서 한 번 해 보는 것이에요.</p>':'')+'</div>';
     // 3. 기록과 여정: 단추 하나씩
     var lx=tl.length?tl[tl.length-1]:null, pr=toNext();
     h+='<div class="rows hrows">'+(lx?rowL('data-act="diary"','오늘 기록했어요 · '+(lx.mood?MOODS[lx.mood]:'기록함'),'더 적고 싶으면 깊이 기록하기')
@@ -1222,8 +1444,9 @@ function renderHome(){
     h+='<div class="card jline"><div class="jrow"><span><small>나의 여정</small><b>'+(st?st+'단계 · '+T.t:'시작 · 깨어나는 중')+'</b></span></div>'
       +'<div class="pbar" style="--c:#556B4E"><i style="width:'+Math.round((st<6?pr[0]:1)*100)+'%"></i></div>'
       +'<p class="muted">'+(m?m[2]:(st<6?pr[1]:'여섯 단계를 모두 마쳤어요'))+'</p>'
-      +(m?'<button class="btn ghost mini2" '+m[1]+'>'+m[0]+'</button>':'<button class="btn ghost mini2" data-tab="path">여정 보기</button>')+'</div>';
+      +((m&&m[0])?'<button class="btn ghost mini2" '+m[1]+'>'+m[0]+'</button>':(m?'':'<button class="btn ghost mini2" data-tab="path">여정 보기</button>'))+'</div>';
   }
+  if(S.intro) h+='<div class="card dgc"><div class="dgh">'+bird(2,72,'')+'<div><b>진단지로 더 자세히 알아보기</b><p>앱에는 가벼운 질문만 있어요. 진단지에서는 질문에 차근차근 답하고 자세한 결과지를 받아요.</p></div></div><button class="btn ghost" data-act="dgList">진단지 보기</button></div>';
   h+='<p class="promise">결정이 갈릴 때, 내 기준으로 고르게 됩니다</p>';
   $('v-home').innerHTML=h;
 }
@@ -1241,7 +1464,7 @@ function drawQuick(){
 }
 function saveQuick(){
   S.log.push({d:ymd(), mood:Q.mood, en:Q.en, val:Q.val||'', text:'', tag:'-', tags:[], quick:true}); if(Q.mood<=1) S.low=ymd(); save(); Q=null;
-  $('modal').innerHTML='<div class="card"><h3>오늘 기록을 남겼어요</h3><p class="muted">기록한 날이 '+diaryDays()+'일이 됐어요. 시간이 있으면 다움이와 조금 더 적어 볼 수 있어요.</p><button class="btn" data-act="qDeep" style="margin-top:8px">깊이 기록하기 · 3분</button><button class="btn ghost" data-act="qEnd">이만 할게요</button></div>';
+  $('modal').innerHTML='<div class="card"><h3>오늘 기록을 남겼어요</h3><p class="muted">기록한 날이 '+diaryDays()+'일이 됐어요. 시간이 있으면 다움이와 조금 더 적어 볼 수 있어요.</p>'+(S.log.length===1?'<p class="muted">기록은 이 기기에만 저장돼요. 오른쪽 위 ⓘ 단추에서 파일로 보관해 둘 수 있어요.</p>':'')+'<button class="btn" data-act="qDeep" style="margin-top:8px">깊이 기록하기 · 3분</button><button class="btn ghost" data-act="qEnd">이만 할게요</button></div>';
 }
 function openDid(k){
   cur=cur||{}; var tp=todayPrac();
@@ -1258,56 +1481,24 @@ function renderJourney(){
   var h='<div><h2 class="big" style="margin-bottom:14px">나의 성장 여정</h2>'+seg6()+'</div>';
   for(var n=1;n<=6;n++){
     var T=STAGES[n], done=st>=n, isCur=st===n-1, ev=S.events.filter(function(e){return e.type==='stage'&&e.v===n;})[0];
-    var secs=SECS.filter(function(s){return s.st===n;}), eOn=!done&&!isCur&&n<=4&&!!(S.early||{})[n], ec=secs.length?cnt(secs.map(function(s){return s.id;})):[0,0];
-    var eLab=(!done&&!isCur&&ec[0]>0)?(ec[0]>=ec[1]?'먼저 해 둠':'먼저 하는 중 '+ec[0]+'/'+ec[1]):'';
+    var secs=SECS.filter(function(s){return s.st===n;}), eOn=!done&&!isCur&&!!(S.early||{})[n];
+    var eLab='';
     h+='<div class="st-card '+(done?'done':isCur?'cur':(eOn?'todo early':'todo'))+'" style="--c:'+T.c+'"'+((!done&&!isCur&&!eOn)?' data-early="'+n+'" role="button" tabindex="0"':(done?' data-stg="'+n+'" role="button" tabindex="0"':''))+'><div class="st-head">'+bird(n,88,(done||isCur)?'':'ghost')
       +'<div><span class="chipn" style="--c:'+((done||isCur)?T.c:'#BDB7A6')+'">'+n+'단계</span><h3>'+T.t+'</h3>'+((isCur||eOn)?'<p>'+T.q+'</p>':'')+'</div>'
-      +'<span class="st-state">'+(done?'완료'+(ev?' · '+fmtDay(ev.d):'')+' ›':isCur?'':(eLab||(n<=4&&secs.length&&!eOn?'먼저 해 보기 ›':'')))+'</span></div>';
+      +'<span class="st-state">'+(done?'완료'+(ev?' · '+fmtDay(ev.d):'')+' ›':isCur?'':(!eOn?'먼저 해 보기 ›':''))+'</span></div>';
     if(isCur) h+='<div class="pbar"><i style="width:'+Math.round(p[0]*100)+'%"></i></div>';
-    if(!done&&!isCur){
-      if(n>4||!secs.length){ h+='<p class="muted" id="ex'+n+'" hidden>'+T.need+' 만날 수 있어요. 이 단계는 진단이 아니라 기록으로 열려요. 기록 탭에서 30초 기록을 남기면 하루씩 채워져요.</p></div>'; continue; }
-      if(!eOn){ h+='</div>'; continue; }
-      h+='<p class="enote">'+(ec[0]>=ec[1]?'진단을 먼저 해 뒀어요. 앞 단계를 마치면 실천 한 번으로 '+T.name+'를 만나요.':'순서대로 하면 더 정확하지만, 먼저 해 볼 수 있어요. 다움이의 모습은 앞 단계를 마친 뒤에 바뀌어요.')+'</p>';
-      secs.forEach(function(sec){
-        h+='<span class="act-label">'+sec.name+'</span>';
-        lessonsOf(sec.id).forEach(function(l){ h+=actRow(S.done[l.id]?'done':(unlocked(l)?'open':'lock'), esc(l.title), l.values?'고르기 · 1분':l.qs.length+'문항 · 1분', 'data-lesson="'+l.id+'"', false); });
-        var sd0=secDone(sec.id);
-        h+=actRow(sd0?(S.seen[sec.id]?'done':'open'):'lock', sec.name+' 결과 보기', '쉬운 풀이와 맞춤 연습', 'data-result="'+sec.id+'"', sd0&&!S.seen[sec.id]);
-      });
-      h+='</div>'; continue;
-    }
     if(done){ h+='</div>'; continue; }
-    // 지금 단계의 활동
+    var RQ=reqs(n), rowsH=RQ.map(function(x){ return actRow(x.ok?'done':'open', x.t, x.m, x.a, false); }).join('');
+    secs.forEach(function(sec){ if(secDone(sec.id)) rowsH+=actRow(S.seen[sec.id]?'done':'open', sec.name+' 결과 보기', '쉬운 풀이와 해 볼 행동 하나', 'data-result="'+sec.id+'"', false); });
+    if(!isCur){
+      if(!eOn){ h+='</div>'; continue; }
+      h+='<p class="enote">먼저 해 볼 수 있어요. 다움이의 모습은 앞 단계를 마친 뒤에 바뀌어요.</p>'+rowsH+'</div>'; continue;
+    }
     if(n<=4){
-      var rows=[], nextRow='';
-      if(n===1){
-        var d1=!!S.done.ns1;
-        rows.push(actRow(d1?'done':'open','첫 걸음 · 욕구의 출발점','5문항 · 1분','data-lesson="ns1"',false));
-        rows.push(actRow(d1?'open':'lock','첫 연습 · 문장 하나 고르기','고르면 알이 깨어나요','data-act="prac"',false));
-        nextRow=d1?actRow('open','첫 연습 · 문장 하나 고르기','고르면 알이 깨어나요','data-act="prac"',true):actRow('open','첫 걸음 · 욕구의 출발점','5문항 · 1분','data-lesson="ns1"',true);
-      } else {
-        var allDone=chapDone(n);
-        secs.forEach(function(sec){
-          rows.push('<span class="act-label">'+sec.name+'</span>');
-          lessonsOf(sec.id).forEach(function(l){
-            var k=S.done[l.id]?'done':(unlocked(l)?'open':'lock'), meta=l.values?'고르기 · 1분':l.qs.length+'문항 · 1분';
-            rows.push(actRow(k, esc(l.title), meta, 'data-lesson="'+l.id+'"', false));
-            if(!nextRow&&k==='open'&&(!nx||nx.id===l.id)) nextRow=actRow('open', esc(l.title), meta, 'data-lesson="'+l.id+'"', true);
-          });
-          var sd=secDone(sec.id), seen=S.seen[sec.id];
-          rows.push(actRow(sd?(seen?'done':'open'):'lock', sec.name+' 결과 보기', '쉬운 풀이와 맞춤 연습', 'data-result="'+sec.id+'"', false));
-          if(sd&&!seen) nextRow=actRow('open','결과 보기','쉬운 풀이와 해 볼 행동 하나','data-result="'+sec.id+'"',true);
-        });
-        var gAttr=todayPrac()?'data-tab="home"':'data-act="prac"', gMeta=grewToday()?'내일 해 보고 알려 주면 자라요':'해 보고 홈에서 알려 주면 자라요';
-        rows.push('<span class="act-label">실천</span>'+actRow(allDone?'open':'lock','실천하고 돌아오기',gMeta,gAttr,false));
-        if(!nextRow&&allDone) nextRow=actRow('open','실천하고 돌아오기',gMeta,gAttr,true);
-        if(!nextRow){ secs.forEach(function(sec){ lessonsOf(sec.id).forEach(function(l){ if(!nextRow&&!S.done[l.id]&&unlocked(l)) nextRow=actRow('open', esc(l.title), l.values?'고르기 · 1분':l.qs.length+'문항 · 1분', 'data-lesson="'+l.id+'"', true); }); }); }
-      }
-      h+='<span class="act-label">다음 할 일</span>'+nextRow+'<details class="allp"><summary>이 단계의 전체 과정 보기</summary>'+rows.join('')+'</details>';
+      var nr=nextReq();
+      h+='<span class="act-label">다음 할 일</span>'+(nr?actRow('open',nr.t,nr.m,nr.a,true):'<p class="muted">오늘 할 일을 다 했어요. 다움이는 하루에 한 번 자라요. 내일 다시 열면 다음 모습이 돼요.</p>')+'<details class="allp"><summary>이 단계의 전체 과정 보기</summary>'+rowsH+'</details>';
     } else {
-      var need=n===5?DAYS5:DAYS6, dots='';
-      for(var k2=0;k2<need;k2++) dots+='<i class="'+(k2<dd?'on':'')+'"></i>';
-      h+=(S.values?'<p class="mysen">'+mySentence()+'</p><p class="muted">기록할 때마다 오늘 "'+S.values.main+'"'+eul(S.values.main)+' 먼저 생각한 순간이 있었는지 물어볼게요. 지금까지 '+valDays()+'일 있었어요.</p>':'')+'<p class="muted">기록한 날 '+Math.min(dd,need)+' / '+need+'일</p><div class="days">'+dots+'</div>'+actRow(wroteToday()?'done':'open','오늘 기록하기','30초면 돼요','data-act="quick"',!wroteToday());
+      h+=(S.values?'<p class="mysen">'+mySentence()+'</p>':'')+rowsH;
     }
     h+='</div>';
   }
@@ -1349,7 +1540,7 @@ function drawStory(i){
 function openLesson(id){
   var l=LESSONS.filter(function(x){return x.id===id;})[0]; if(!l) return;
   var sec=secOf(l.sec), first=lessonsOf(l.sec)[0].id===l.id && !S.done[l.id];
-  cur={l:l, i:(S.stage===0&&l.id==='ns1'&&!S.done.ns1)?0:(first?-2:-1), a:[], sec:sec, sel:(S.values?S.values.sel.slice():[]), main:(S.values?S.values.main:null), stage:1, fed:0};
+  cur={l:l, i:(S.stage===0&&l.id==='ns0'&&!S.done.ns0)?0:(first?-2:-1), a:[], sec:sec, sel:(S.values?S.values.sel.slice():[]), main:(S.values?S.values.main:null), stage:1, fed:0};
   if(S.partial&&S.partial.id===id&&!l.values&&!S.done[id]){ cur.a=S.partial.a.slice(); cur.i=Math.min(S.partial.i,l.qs.length-1); }
   drawLesson(); $('over').classList.add('on');
 }
@@ -1419,14 +1610,20 @@ function finishLesson(){
   if(l.values){ S.values={sel:cur.sel.slice(), main:cur.main, less:cur.less||''}; if(first) S.events.push({d:ymd(),type:'values',v:cur.main}); } else S.ans[l.id]=cur.a.slice();
   S.done[l.id]=true; S.honey+=gain; S.intro=true; S.partial=null;
   var all=secDone(sec.id);
-  if(all){ saveProfile(sec.id, calc(sec.id)); if(first) S.events.push({d:ymd(),type:'sec',v:sec.id}); }
+  if(all){ if(first) S.events.push({d:ymd(),type:'sec',v:sec.id}); }
   save(); syncTop();
-  var left=lessonsOf(sec.id).filter(function(x){return !S.done[x.id];}).length, egg0=S.stage===0&&l.id==='ns1';
-  var nxl=nextLesson(), line = all ? '결과가 준비됐어요. 같이 봐요.' : (nxl?'다음에는 <b>'+esc(nxl.title)+'</b>'+'에 대해 알아봐요.':'');
-  var h='<div class="fin-h">'+(egg0?egg(2,96,'jelly'):bird(S.stage,96,'','smile'))+'<div><h2 class="big" style="font-size:22px">'+(egg0?'알에 금이 갔어요':esc(l.title)+' 완료')+'</h2><p>'+(egg0?'첫 걸음을 마쳤어요. 오늘의 실천 하나만 정하면 알이 깨어나요.':line)+'</p></div></div>'
-    +(l.values&&mySentence()?'<div class="card found"><small>지금의 나를 한 문장으로</small><p class="mysen">'+mySentence()+'</p><p class="muted">중요한 선택 앞에서 이 문장을 떠올려 보세요.</p></div>':'')+ansCard(l)+(egg0&&line?'<p class="muted">'+line.replace(/<\/?b>/g,'')+'</p>':'');
-  $('over').innerHTML=shell(100,h, egg0?'<button class="btn" data-act="prac">오늘의 실천 정하기</button><button class="btn ghost" data-act="close">나중에 하기</button>'
-    :(all?'<button class="btn" data-result="'+sec.id+'">결과 보기</button>':'<button class="btn" data-act="close">계속</button>'), OLV);
+  var egg0=S.stage===0&&l.id==='ns0', tp=todayPrac();
+  var h='<div class="fin-h">'+(egg0?egg(2,96,'jelly'):bird(S.stage,96,'','smile'))+'<div><h2 class="big" style="font-size:22px">'+(egg0?'알에 금이 갔어요':esc(l.title)+' 완료')+'</h2><p>'+(l.values?'결정이 갈릴 때 먼저 볼 기준을 정했어요.':'답한 것에서 보이는 모습을 정리했어요.')+'</p></div></div>';
+  if(l.values){
+    h+=(mySentence()?'<div class="card found"><small>지금의 나를 한 문장으로</small><p class="mysen">'+mySentence()+'</p><p class="muted">중요한 선택 앞에서 이 문장을 떠올려 보세요.</p></div>':'')+ansCard(l);
+    $('over').innerHTML=shell(100,h,(all?'<button class="btn" data-result="'+sec.id+'">결과 보기</button>':'<button class="btn" data-act="close">계속</button>'),OLV); return;
+  }
+  var fc=foundCard(l), f=fc.f; h+=fc.h;
+  if(f){ S.seen[sec.id]=true; save(); }
+  var pick=f?'<button class="btn" data-pax="'+f.act.axis+'" data-ptext="'+esc(f.act.text)+'" data-pph="" data-pwhy="'+esc(f.why)+'" data-pex="'+esc(f.ex)+'">이 발견을 일상에서 확인하기</button>':'';
+  var foot = (!tp&&f) ? pick+(egg0?'<p class="muted" style="text-align:center">누르면 이 행동이 오늘의 실천이 되고, 알이 깨어나요.</p><button class="btn ghost" data-act="close">다음에 이어서 하기</button>':'<button class="btn ghost" data-result="'+sec.id+'">결과 자세히 보기</button>')
+    : '<p class="muted" style="text-align:center">오늘의 실천은 이미 정해져 있어요. 이 행동은 다음에 해 볼 수 있어요.</p><button class="btn" data-result="'+sec.id+'">결과 자세히 보기</button><button class="btn ghost" data-act="close">닫기</button>';
+  $('over').innerHTML=shell(100,h,foot,OLV);
 }
 
 /* ============ 구간 결과: 쉬운 풀이 + 자세한 설명 ============ */
@@ -1498,23 +1695,27 @@ function openResult(secId){
   var sec=secOf(secId), first=!S.seen[secId], e=easy(secId), rc=recsFor(secId), tp=todayPrac(), dl=dailyOf(secId,e.r);
   if(first){ S.seen[secId]=true; S.honey+=20; save(); syncTop(); }
   cur={sec:sec, result:secId};
+  if(e.r.light){ var fl=foundOf(LESSONS.filter(function(x){return x.id===LIGHT[secId];})[0]); if(fl&&fl.act){ rc=rc.filter(function(x){return x.text!==fl.act.text;}); rc.unshift(fl.act); setWhy(fl.act.text, fl.why, ''); save(); } }
   var h='<span class="eyebrow">결과 · '+sec.ask+'</span>'
     +'<div class="card r3"><small>1 · 내가 발견한 나의 특징</small><p>'+e.one+'</p></div>'
     +'<div class="card r3"><small>2 · 일상에서 나타나는 모습</small><p>'+(dl||'지금은 이 부분이 일상에서 크게 걸리지 않는 것으로 보여요.')+'</p></div>'
     +'<div class="card r3"><small>3 · 해 볼 작은 행동 하나</small>';
   var mi=0; rc.forEach(function(r,i){ if(tp&&tp.text===r.text) mi=i; });
   if(rc.length){ var picked=tp&&tp.text===rc[mi].text;
-    h+='<p class="rbig">'+esc(rc[mi].text)+'</p>'+(picked?'<p class="tqd">'+ICON.check+'<span><b>오늘의 실천으로 정했어요</b></span></p>':'<button class="btn" data-rec="'+secId+'" data-i="'+mi+'">이 행동을 오늘 실천하기</button>');
+    h+='<p class="rbig">'+esc(rc[mi].text)+'</p><p class="muted"><span class="kind">'+kindOf(rc[mi].text)+'</span> '+whyOf(rc[mi])+'</p>'+(picked?'<p class="tqd">'+ICON.check+'<span><b>오늘의 실천으로 정했어요</b></span></p>':'<button class="btn" data-rec="'+secId+'" data-i="'+mi+'">이 행동을 오늘 실천하기</button>');
     if(rc.length>1){ h+='<details class="more"><summary>다른 행동 보기</summary><div class="opts">';
       rc.forEach(function(r,i){ if(i!==mi) h+='<button class="pick" style="--pc:'+PC[r.axis]+'" data-rec="'+secId+'" data-i="'+i+'">'+esc(r.text)+'</button>'; });
       h+='</div></details>'; } }
-  h+='</div><details><summary>점수와 자세한 설명 보기</summary>'+e.body+detail(secId)+'</details><p class="muted">'+NOTE_SELF+'</p>'+(SECS.every(function(s){return secDone(s.id);})?'<button class="btn ghost" data-act="allRes">통합 결과지 보기</button>':'');
+  var dg=dgOf(secId), nq=LESSONS.filter(function(l){return l.id===LIGHT[secId];})[0].qs.length;
+  h+='</div>'+(e.r.web?'<p class="muted">진단지에서 한 결과('+fmtDay(e.r.web)+')를 반영했어요.</p>'
+    :(e.r.light?'<div class="card dgc"><p>가벼운 질문 '+nq+'개로 본 결과예요. 더 자세히 알고 싶다면 진단지에서 전체 질문에 답해 볼 수 있어요.</p><a class="btn ghost" href="'+DG_BASE+dg[1]+'/"'+DG_T+'>'+dg[2]+' 열기</a></div>':''))
+    +'<details><summary>점수와 자세한 설명 보기</summary>'+(e.r.light?'<p class="muted">가벼운 질문으로 어림한 값이에요.</p>':'')+e.body+detail(secId)+'</details><p class="muted">'+NOTE_SELF+'</p>'+(SECS.every(function(s){return secDone(s.id);})?'<button class="btn ghost" data-act="allRes">지금까지의 결과 모아 보기</button>':'');
   openOver(shell(null,h,'<button class="btn ghost" data-act="close">닫기</button>',OLV));
 }
 /* 통합 결과지: 다섯 결과를 한 화면에 */
 function openAllRes(){
   cur={allres:true};
-  var h='<h2 class="big">통합 결과지</h2>'+(mySentence()?'<div class="card found"><small>지금의 나를 한 문장으로</small><p class="mysen">'+mySentence()+'</p></div>':'')+'<p class="muted">'+NOTE_SELF+'</p>';
+  var h='<h2 class="big">지금까지 발견한 나</h2>'+(mySentence()?'<div class="card found"><small>지금의 나를 한 문장으로</small><p class="mysen">'+mySentence()+'</p></div>':'')+'<p class="muted">'+NOTE_SELF+'</p>';
   SECS.forEach(function(s){ if(!secDone(s.id)){ h+='<div class="card r3" style="opacity:.6"><small>'+s.name+'</small><p class="muted">아직 마치지 않았어요.</p></div>'; return; }
     var e=easy(s.id), dl=dailyOf(s.id,e.r), rc=recsFor(s.id)[0];
     h+='<div class="card r3"><small>'+s.name+' · '+s.ask+'</small><p>'+e.one+'</p>'+(dl?'<p class="muted" style="margin-top:6px">일상에서: '+dl+'</p>':'')+(rc?'<p style="margin-top:6px"><b>해 볼 행동</b> · '+esc(rc.text)+'</p>':'')+'<button class="linkb" data-result="'+s.id+'" style="margin-top:6px"><b>자세히 보기 ›</b></button></div>'; });
@@ -1584,13 +1785,14 @@ function pickPractice(axis, text, ph, hit){
   save(); mirrorPractice(d,t); syncTop(); return d;
 }
 var PAX='N';
-function pracBtn(x){ return '<button class="pick" style="--pc:'+PC[x.axis]+'" data-pax="'+x.axis+'" data-ptext="'+esc(x.text)+'" data-pph="'+esc(x.ph||'')+'"><small>'+PN[x.axis]+'</small>'+esc(x.text)+'</button>'; }
+function pracBtn(x){ return '<button class="pick" style="--pc:'+PC[x.axis]+'" data-pax="'+x.axis+'" data-ptext="'+esc(x.text)+'" data-pph="'+esc(x.ph||'')+'"><small>'+PN[x.axis]+' · '+kindOf(x.text)+'</small>'+esc(x.text)+'</button>'; }
 function openPractice(){
   stopTimer(); cur={prac:true};
   var line = S.stage===0&&!S.hatched ? '문장 하나를 골라 보세요. 고르면 알이 깨어나기 시작해요.'
            : gatePending() ? '문장 하나를 골라 보세요. 해 본 뒤에 알려 주면 껍질이 깨져요.'
            : '오늘 하루, 이 한 문장을 마음에 두고 지내보세요. 잘해내는 것이 목적은 아니에요. 한 번 떠올리는 것만으로 충분해요.';
-  var h=say(line,116)+'<h3>다움이가 권하는 문장</h3><div class="opts">'+recs().map(pracBtn).join('')+'</div>';
+  var lf=S.lastFound, rs=recs(); if(lf&&lf.text&&!rs.some(function(x){return x.text===lf.text;})){ var ld=S.designs.filter(function(x){return x.text===lf.text;})[0]; if(ld) rs.unshift(ld); }
+  var h=say(line,116)+'<h3>다움이가 권하는 문장</h3><p class="whyl"><b>왜 이 문장들일까요?</b> '+((lf&&lf.ex)?'앞에서 "'+lf.ex.replace(/\.$/,'')+'"는 모습을 봤어요. 그 부분을 하루에서 살펴보는 문장들이에요.':'지금까지 답한 것과 이어지는 문장들이에요. 아는 것을 하루에서 한 번 해 보려는 거예요.')+'</p><div class="opts">'+rs.map(pracBtn).join('')+'</div>';
   h+='<h3>다움이와 지금 해 보기</h3><div class="opts">'
     +'<button class="pick" style="--pc:'+PC.N+'" data-act="actBody"><small>'+PN.N+' · 30초</small>30초 동안 몸의 느낌 살피기</button>'
     +'<button class="pick" style="--pc:'+PC.E1+'" data-act="actSort"><small>'+PN.E1+' · 1분</small>상황 카드로 선택의 동기 발견하기</button></div>';
@@ -1607,7 +1809,8 @@ function showPicked(d, doneNow){
   var up=stageNow()>S.stage, t=ymd();
   var msg = up ? (S.stage===0?'알이 깨어나고 있어요!':'껍질에 금이 가고 있어요!') : (doneNow?'방금 한 것이 오늘의 연습으로 남았어요.':'오늘 하루 이 문장을 마음에 두고 지내보세요.');
   var h='<div class="mid center">'+bird(S.stage,200,'jelly','smile')+'<h2 class="big">'+(doneNow?'오늘의 연습을 했어요':'오늘의 연습으로 두었어요')+'</h2><p>'+msg+'</p>'
-    +'<div class="card" style="align-self:stretch;text-align:left;--c:'+PC[d.axis]+'"><span class="pill">'+PN[d.axis]+'</span><p style="font-weight:700;font-size:17px;margin-top:8px">'+esc(d.text)+'</p></div>'
+    +'<div class="card" style="align-self:stretch;text-align:left;--c:'+PC[d.axis]+'"><span class="pill">'+PN[d.axis]+' · '+kindOf(d.text)+'</span><p style="font-weight:700;font-size:17px;margin-top:8px">'+esc(d.text)+'</p></div>'
+    +'<div class="whyb"><p><b>왜 이 연습일까요?</b>'+whyOf(d)+'</p><p><b>오늘 살펴볼 것</b>'+watchOf(d.text)+'</p></div>'
     +(d.ph&&!doneNow?'<div style="align-self:stretch;text-align:left"><p class="muted" style="margin-bottom:6px">지금 떠오르는 것이 있으면 한 줄 적어 두세요. 나중에 적어도 돼요.</p><div class="send"><textarea id="pNote" maxlength="120" placeholder="'+esc(d.ph)+'">'+esc(S.pnotes[t]||'')+'</textarea></div></div>':'')
     +'</div>';
   openOver(shell(null,h,'<button class="btn" data-act="pdone">확인</button>',STAGES[S.stage]));
@@ -1638,7 +1841,7 @@ var SORT=[
  ['친구들이 다 간다고 해서 나도 여행을 예약했다','남','다들 간다는 것이 이유였으니까요.','다들 가니까 빠지기 싫었던 걸까요? 아니면 정말 내가 가고 싶었던 걸까요?'],
  ['광고에서 계속 보던 운동화를 샀다','자극','자주 본 것이 갖고 싶어진 경우예요.','광고에서 자주 봐서 갖고 싶어진 걸까요? 아니면 전부터 필요했던 걸까요?'],
  ['아무도 모르지만 아침마다 10분씩 걷는다','나','누가 몰라도 하고 있으니까요.','아무도 모르는데도 계속하고 있어요. 누구를 위해서 하는 걸까요?'],
- ['회의에서 다들 찬성해서 나도 찬성했다','남','분위기를 따라간 선택이에요.','혼자 반대하기 어려워서였을까요? 아니면 내 생각도 찬성이었을까요?'],
+ ['모임에서 다들 찬성해서 나도 찬성했다','남','분위기를 따라간 선택이에요.','혼자 반대하기 어려워서였을까요? 아니면 내 생각도 찬성이었을까요?'],
  ['짧은 영상에서 자주 본 카페에 가 보고 싶어졌다','자극','여러 번 본 것이 마음에 들어온 경우예요.','짧은 영상에서 자주 봐서 끌리는 걸까요? 아니면 정말 내가 가고 싶은 걸까요?'],
  ['쉬고 싶어서 주말 약속을 미뤘다','나','내 상태를 보고 정한 선택이에요.','누가 뭐라고 할까 봐 미룬 걸까요? 아니면 내가 쉬고 싶어서였을까요?']
 ];
@@ -1679,7 +1882,8 @@ var SITS=[
  {t:'남과 비교돼 기분이 가라앉을 때', s:'나만의 가치와 기준 찾기', q:'나는 어떤 가치를 중요하게 생각할까?', needs:['인정받고 싶어서','뒤처지고 싶지 않아서','잘 해내고 싶어서','나도 그렇게 살고 싶어서'], acts:[['E1','비교가 올라왔을 때 내 기준이 무엇이었는지 한 줄 적는다'],['E1','남과 비교되는 글은 그냥 넘긴다']]},
  {t:'자꾸 폰만 보게 될 때', s:'내가 진짜 원하는 것 알아차리기', q:'지금 내게 충족되지 않은 욕구는 무엇일까?', needs:['쉬고 싶어서','심심해서','할 일을 미루고 싶어서','누군가와 이어져 있고 싶어서'], acts:[['E1','휴대폰을 열기 전에 한 번 멈춘다'],['E1','생각 없이 폰을 켠 순간 하나와 그때 하던 일을 적는다']]},
  {t:'갑자기 사고 싶은 게 생겼을 때', s:'욕구와 충동 구분하기', q:'나는 물건을 원하는 걸까, 그 물건이 줄 감정을 원하는 걸까?', needs:['기분을 바꾸고 싶어서','나에게 보상을 주고 싶어서','남들도 가지고 있어서','실제로 필요해서'], acts:[['N','사기 전에 "이거 정말 내가 원한 건가" 한 번 생각한다'],['N','오늘 갖고 싶어진 것 하나가 어디서 왔는지 되짚어 적는다']]},
- {t:'이유 없이 지칠 때', s:'내 마음과 에너지 돌아보기', q:'지금 내 삶에서 충족되지 않은 욕구는 무엇일까?', needs:['쉬는 시간이 부족해서','내 뜻대로 하는 일이 적어서','해낸 느낌이 없어서','마음 나눌 사람이 없어서'], acts:[['E2','지치기 전에 10분 쉰다'],['E2','오늘 나를 채운 것과 비운 것을 하나씩 적는다']]}
+ {t:'이유 없이 지칠 때', s:'내 마음과 에너지 돌아보기', q:'지금 내 삶에서 충족되지 않은 욕구는 무엇일까?', needs:['쉬는 시간이 부족해서','내 뜻대로 하는 일이 적어서','해낸 느낌이 없어서','마음 나눌 사람이 없어서'], acts:[['E2','지치기 전에 10분 쉰다'],['E2','오늘 나를 채운 것과 비운 것을 하나씩 적는다']]},
+ {t:'역할 때문에 내 마음을 미뤘을 때', s:'맡은 역할과 내가 원하는 것 나눠 보기', q:'이것은 내 역할이 해야 하는 일일까, 내가 원하는 일일까?', needs:['내가 안 하면 할 사람이 없어서','좋은 부모·자식·동료이고 싶어서','늘 그렇게 해 왔어서','내가 원하는 것이 뭔지 잘 몰라서'], acts:[['N','오늘 한 일 하나에 "역할이라서 한 것"인지 "내가 원해서 한 것"인지 적는다'],['D','역할과 상관없이 나만을 위한 10분을 정한다']]}
 ];
 var SITSTEP=['상황 알아차리기','감정과 욕구 발견하기','나의 선택 돌아보기','새로운 행동 고르기'];
 function openSit(i){ stopTimer(); cur={sit:i, step:0, text:'', feel:[], need:[], tags:[], act:-1}; drawSit(); }
@@ -1693,7 +1897,12 @@ function drawSit(){
   if(c.step===2){ ok=c.tags.length;
     h+='<div class="qblock"><h3>그때의 선택은 어디에서 시작됐을까요?</h3><p class="muted">헷갈린다면 이렇게 생각해 보세요.</p></div><blockquote class="hintq">'+QASK+'</blockquote>'+tagCards(c.tags,'data-stag')+'<p class="muted">하나만 골라도, 여러 개를 골라도 돼요.</p>'; }
   if(c.step===3){ ok=c.act>-1;
-    h+='<div class="qblock"><h3>다음에는 무엇을 해 볼까요?</h3><p class="muted">하나를 고르면 오늘의 연습이 돼요. 잘해내는 것이 목적은 아니에요.</p></div><div class="opts">';
+    var TG={'나':'내가 원해서','남':'남의 시선 때문에','자극':'자주 접해서'}, sm='';
+    if(c.feel.length) sm+='그때 기분은 <b>"'+c.feel.join('", "')+'"</b>였어요. ';
+    if(c.need.length) sm+='그 밑에는 <b>"'+c.need.join('", "')+'"</b>라는 마음이 있었어요. ';
+    if(c.tags.length) sm+='이 선택은 <b>'+c.tags.map(function(t){return TG[t]||t;}).join(', ')+'</b> 시작된 부분이 있어 보여요.';
+    h+='<div class="card fnd"><small>내 마음을 살펴봤어요</small><p>'+sm+'</p><p class="muted">옳고 그른 것은 없어요. 어디에서 시작됐는지 알면 다음에는 다르게 고를 수 있어요.</p></div>'
+      +'<div class="qblock"><h3>그래서 다음에는 무엇을 해 볼까요?</h3><p class="muted">하나를 고르면 오늘의 연습이 돼요. 잘해내는 것이 목적은 아니에요.</p></div><div class="opts">';
     X.acts.forEach(function(a,i){ h+='<button class="pick'+(c.act===i?' sel':'')+'" style="--pc:'+PC[a[0]]+'" data-sact="'+i+'"><small>'+PN[a[0]]+'</small>'+esc(a[1])+'</button>'; });
     h+='</div>'; }
   if(c.step>0) h+='<button class="back" data-act="sitBack">← 이전</button>';
@@ -1703,6 +1912,7 @@ function sitKeep(){ var t=$('sitText'); if(t) cur.text=t.value.trim(); }
 function sitDone(){
   var c=cur, X=SITS[c.sit], a=X.acts[c.act];
   S.sitlog.push({d:ymd(), sit:c.sit, text:c.text, feel:c.feel.slice(), need:c.need.slice(), tags:c.tags.slice(), act:a[1]}); if(S.sitlog.length>300) S.sitlog.shift();
+  setWhy(a[1], '"'+X.t+'" 같은 일이 다시 올 때, 내 마음을 먼저 살피고 고르려는 연습이에요.', '');
   showPicked(pickPractice(a[0], a[1], ''));
 }
 
@@ -1881,7 +2091,7 @@ function weekData(){
   lg.forEach(function(x){ days[x.d]=1; var tg=tagsOf(x); if(tg.length){ ch++; tg.forEach(function(k){cn[k]++;}); } if(x.en==='+') up[x.d]=1; if(x.en==='-') dn[x.d]=1; });
   Object.keys(S.checks).forEach(function(k){ if(k>=from) days[k]=1; });
   var did=Object.keys(S.did).filter(function(k){return k>=from&&S.did[k].k==='did';}).length, txt=lg.filter(function(x){return !x.quick&&x.text;});
-  return {n:Object.keys(days).length, ch:ch, cn:cn, up:Object.keys(up).length, dn:Object.keys(dn).length, did:did, line:txt.length?txt[txt.length-1].text:''};
+  return {n:Object.keys(days).length, ch:ch, cn:cn, up:Object.keys(up).length, dn:Object.keys(dn).length, did:did, th:Object.keys(S.did).filter(function(k){return k>=from&&S.did[k].k==='thought';}).length, line:txt.length?txt[txt.length-1].text:''};
 }
 function openLetter(){
   var w=weekData(), r=todayRec(), P=[];
@@ -1889,6 +2099,7 @@ function openLetter(){
   if(w.ch) P.push('선택을 '+w.ch+'개 적었어요. 내가 원해서 '+w.cn['나']+'번, 남의 시선 때문에 '+w.cn['남']+'번, 자주 접해서 '+w.cn['자극']+'번이에요. 어느 쪽이 더 좋거나 나쁜 것은 아니에요.');
   if(w.up||w.dn) P.push('에너지가 채워졌다고 적은 날이 '+w.up+'일, 빠졌다고 적은 날이 '+w.dn+'일이었어요.');
   if(w.did) P.push('정한 실천을 실제로 해 본 날이 '+w.did+'일 있었어요.');
+  if(w.th) P.push('해 보지는 못했지만 생각해 본 날이 '+w.th+'일 있었어요. 그것도 나를 살핀 날이에요.');
   if(w.line) P.push('이번 주에 적은 한 줄이에요.<br><b>"'+esc(w.line)+'"</b>');
   $('modal').innerHTML='<div class="card letter" style="background-image:url('+FIN.paper+')"><div class="lt-h">'+bird(S.stage,64,'','smile')+'<div><small>'+fmtDay(dayKey(6))+' ~ '+fmtDay(ymd())+'</small><h3>이번 주 다움이의 편지</h3></div></div>'
     +'<p>'+nm()+'께,</p>'+P.map(function(t){return '<p>'+t+'</p>';}).join('')+'<p><b>다음 주에 해 볼 한 가지</b><br>'+esc(r.text)+'</p><p>다음 주에도 함께 해요.<br>다움이 드림</p><button class="btn ghost" data-act="noReset">닫기</button></div>';
@@ -1985,7 +2196,7 @@ function renderMap(){
   if(mapTab==='path'){
     if(st===6) h+='<div class="finbox"><img src="'+FIN.rest+'" alt="꽃밭에서 쉬는 무지개 다움이"><div><b>여섯 단계를 모두 마쳤어요</b><p>'+nm()+'의 색으로 여기까지 왔어요.</p></div></div>';
     var nd5=SECS.filter(function(s){return secDone(s.id);}).length;
-    if(nd5) h+='<div class="card wkc"><div><b>'+(nd5>=5?'통합 결과지':'지금까지 발견한 나')+'</b><small>진단 결과를 한 화면에 모아 봐요</small></div><button class="mini" data-act="allRes">보기</button></div>';
+    if(nd5) h+='<div class="card wkc"><div><b>지금까지 발견한 나</b><small>진단 결과를 한 화면에 모아 봐요</small></div><button class="mini" data-act="allRes">보기</button></div>';
     h+='<div class="tline">';
     for(var i=1;i<=6;i++){
       var T=STAGES[i], got=i<=st, nxt=i===st+1;
@@ -2004,11 +2215,13 @@ function renderMap(){
     S.log.forEach(function(x){ var tg=tagsOf(x); if(x.d>=since){ dset[x.d]=1; recs30++; } if(x.d<since) return; if(tg.length){ ch++; if(tg.indexOf('나')>-1) me++; if(tg.indexOf('남')>-1||tg.indexOf('자극')>-1) nz++; } if(x.en==='+') enD[x.d]=1; if(x.val==='y') valD[x.d]=1; });
     S.sitlog.forEach(function(x){ if(x.d>=since){ recs30++; nz++; } }); recs30+=pd;
     h+='<div class="card sumc">'+bird(st,84,'','smile')+'<div style="flex:1"><div class="sumh"><b>요약</b><span>최근 30일</span></div><div class="sum3"><div><small><i class="dot" style="background:#71845C"></i>연습한 날</small><b>'+pd+'<i>일</i></b></div><div><small><i class="dot" style="background:#A98D65"></i>기록한 날</small><b>'+Object.keys(dset).length+'<i>일</i></b></div><div><small><i class="dot" style="background:#8E79C9"></i>남긴 기록</small><b>'+recs30+'<i>개</i></b></div></div></div></div>';
+    var f30=dayKey(29), dA=0, dT=0; Object.keys(S.did).forEach(function(k){ if(k>=f30){ if(S.did[k].k==='did') dA++; else dT++; } });
+    if(dA+dT) h+='<p class="muted" style="margin-top:8px">정한 실천을 실제로 해 본 날 '+dA+'일 · 생각해 본 날 '+dT+'일</p>';
     var fb=feedback(), wk=weekData();
     h+='<div class="sec-h"><h3>기록으로 본 나의 변화</h3><span>전체 누적</span></div><div class="card fbk">'+(fb.ok?fb.lines.map(function(t){return '<p>'+t+'</p>';}).join('')+'<p class="fbn"><b>다음에 해 볼 한 가지</b><br>'+fb.next+'</p>'
       :'<p>아직 비교하기엔 기록이 적어요.</p><p class="muted">선택 기록이 8개 이상이고 2주 이상 쌓이면, 앞쪽 기록과 최근 기록을 견줘서 달라진 점을 알려 드려요. 지금은 선택 기록 '+fb.n+'개, '+fb.span+'일째예요.</p>')+'</div>';
     h+='<div class="card wkc">'+bird(st,56,'','smile')+'<div><b>이번 주 다움이의 편지</b><small>'+(wk.n>=3?'이번 주 기록 '+wk.n+'일을 바탕으로 썼어요':'한 주에 3일 이상 기록하면 편지가 와요 · 지금 '+wk.n+'일')+'</small></div>'+(wk.n>=3?'<button class="mini" data-act="letter">읽기</button>':'')+'</div>';
-    h+='<div class="card wkc"><div><b>나다움 카드</b><small>'+(S.values?'우선가치와 지금의 에너지 흐름을 한 장에 담아요':'여정에서 우선가치를 정하면 만들 수 있어요')+'</small></div>'+(S.values?'<button class="mini" data-act="card">만들기</button>':'')+'</div>';
+    h+='<div class="card wkc"><div><b>나다움 카드</b><small>'+(S.values?'우선가치와 지금의 에너지 흐름을 한 장에 담아요':'우선가치를 먼저 정하면 만들 수 있어요. 1분이면 돼요')+'</small></div>'+(S.values?'<button class="mini" data-act="card">만들기</button>':'<button class="mini" data-lesson="nd5">우선가치 정하기</button>')+'</div>';
     h+='<button class="btn ghost bigb" data-act="noteTog">'+DI.pen+'<span>달라진 점 직접 적기'+((S.notes||[]).length?' · '+S.notes.length+'개':'')+'</span><i>'+(noteOpen?'⌃':'›')+'</i></button>';
     if(noteOpen) h+='<div class="card" style="display:flex;flex-direction:column;gap:10px"><div class="send"><textarea id="chgNote" maxlength="100" placeholder="예: 예전보다 거절하는 것이 편해졌다"></textarea></div><button class="btn ghost" data-act="chgSave">적어 두기</button>'
       +(S.notes||[]).slice().reverse().slice(0,10).map(function(x){ return '<div class="anr"><b style="font-weight:600">'+esc(x.text)+'</b><p>'+fmtDay(x.d)+'</p></div>'; }).join('')+'</div>';
@@ -2160,6 +2373,10 @@ document.addEventListener('click', function(e){
   if(d.qv&&Q){ Q.val=Q.val===d.qv?'':d.qv; drawQuick(); return; }
   if(act==='sitList'){ var sh='<div class="card"><h3>요즘 이런 일이 있었나요?</h3><p class="muted">겪은 일 하나를 골라 보세요. 그때의 마음을 네 걸음으로 살펴봐요. 2분이면 돼요.</p><div class="rows" style="margin-top:8px">'; SITS.forEach(function(x,i){ sh+=rowL('data-sit="'+i+'"',x.t,x.s); }); $('modal').innerHTML=sh+'</div><button class="btn ghost" data-act="noReset" style="margin-top:10px">닫기</button></div>'; $('modal').classList.add('on'); return; }
   if(act==='whyNext'){ drawStory(STORY.length); return; }
+  if(act==='dgList'){ S.web=S.web||{}; var gh='<div class="card dgm"><div class="dgt"><div><h3 class="dgh3">진단지</h3><p class="muted">'+(DG_SAME?'누르면 진단지가 바로 열려요. 마친 뒤 뒤로 가기로 돌아오면 결과가 앱에도 반영돼요.':'연구소의 진단지가 열려요. 마친 뒤 이 앱으로 돌아오면 결과가 앱에도 반영돼요.')+'</p></div><i class="dgclip">'+svgI(IC.clip,'#6D7FA3').replace('width="30" height="30"','width="54" height="54"')+'</i></div><div class="dgl">';
+    DG.forEach(function(x){ gh+=dgRow(x[0], DG_BASE+x[1]+'/', x[2], x[3], S.web[x[0]]); });
+    gh+=dgRow('report', DG_BASE+'report/', '통합 리포트', '진단지 결과를 한 번에 모아 봐요', false);
+    $('modal').innerHTML=gh+'</div><button class="btn" data-act="noReset" style="margin-top:14px">닫기</button></div>'; $('modal').classList.add('on'); return; }
   if(d.qe&&Q){ Q.en=Q.en===d.qe?'':d.qe; drawQuick(); return; }
   if(act==='quick'){ openQuick(0); return; }
   if(act==='qSave'&&Q&&Q.mood){ saveQuick(); renderAll(); return; }
@@ -2167,7 +2384,7 @@ document.addEventListener('click', function(e){
   if(act==='qDeep'){ $('modal').classList.remove('on'); openDiary(); return; }
   if(act==='tqGo'){ var tr=todayRec(); showPicked(pickPractice(tr.axis, tr.text, tr.ph)); return; }
   if(d.did){ openDid(d.did); return; }
-  if(d.didsave){ var dn=($('didNote').value||'').trim(); S.did[ymd()]={k:d.didsave, note:dn}; S.hit[ymd()]=true; save(); tryGate(); $('modal').classList.remove('on'); renderAll(); checkStage(); return; }
+  if(d.didsave){ var dn=($('didNote').value||'').trim(); S.did[ymd()]={k:d.didsave, note:dn}; S.hit[ymd()]=true; if(S.values) S.vdid=true; save(); tryGate(); $('modal').classList.remove('on'); renderAll(); checkStage(); return; }
   if(act==='letter'){ openLetter(); return; }
   if(act==='card'){ openCard(); return; }
   if(act==='chgSave'){ var cn2=($('chgNote').value||'').trim(); if(cn2){ S.notes=S.notes||[]; S.notes.push({d:ymd(), text:cn2}); save(); renderMap(); } return; }
@@ -2199,7 +2416,7 @@ document.addEventListener('click', function(e){
   if(d.val&&cur){ var ix=cur.sel.indexOf(d.val); if(ix>-1) cur.sel.splice(ix,1); else if(cur.sel.length<3) cur.sel.push(d.val); if(cur.sel.indexOf(cur.main)<0) cur.main=null; drawValues(); return; }
   if(d.main&&cur){ cur.main=d.main; drawValues(); return; }
   if(d.rec){ var rr=recsFor(d.rec)[+d.i]; showPicked(pickPractice(rr.axis, rr.text, rr.ph)); return; }
-  if(d.ptext){ showPicked(pickPractice(d.pax, d.ptext, d.pph)); return; }
+  if(d.ptext){ if(d.pwhy) setWhy(d.ptext, d.pwhy, d.pex||''); showPicked(pickPractice(d.pax, d.ptext, d.pph)); return; }
   if(d.ax){ PAX=d.ax; b.parentNode.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b);}); return; }
   if(d.body){ var bd2=pickPractice('N', ACT_BODY, '', true); S.pnotes[ymd()]='몸: '+d.body; save(); showPicked(bd2, true); return; }
   if(d.sort&&cur&&cur.act==='sort'){ var sa=cur.ans[cur.i], sx=sa.indexOf(d.sort); if(sx>-1) sa.splice(sx,1); else sa.push(d.sort); drawSort(); return; }
@@ -2217,7 +2434,8 @@ document.addEventListener('click', function(e){
   if(act==='tapbird'){ replay(b.querySelector('.bird'),'jelly'); var tl=S.stage===0?EGGTAPS:TAPS; $('heroSay').innerHTML=tl[tapN++%tl.length]; return; }
   if(act==='feed'){ var fb=b.parentNode.querySelector('.bird'); replay(fb,'hop'); if(cur&&cur.fed<5){ cur.fed++; S.honey+=1; save(); syncTop(); var s=document.createElement('span'); s.className='drop'; s.textContent='냠'; s.style.left='50%'; s.style.top='0'; b.parentNode.appendChild(s); setTimeout(function(){ s.remove(); },800); $('feedMsg').textContent=cur.fed<5?'냠!':'배불러요. 고마워요!'; } return; }
   if(act==='story'){ drawStory(0); return; }
-  if(act==='begin'){ cur={why:1}; openOver(shell(50,'<div class="mid">'+bird(6,150,'')+'<h2 class="big" style="font-size:22px;text-align:center">결정할 때마다 망설여진 적 있나요?</h2><p>주변의 눈치를 보고, 남과 비교하고, 자주 접한 것을 따라가다 보면 내가 원하는 것이 흐려질 수 있어요. 내가 약해서가 아니라, 주변의 기준과 정보가 내 선택에 자주 끼어들기 때문이에요.</p><p>이 앱에서는 짧은 질문과 하루 한 가지 실천으로 나를 알아보고, <b>결정이 갈릴 때 먼저 볼 기준 하나</b>를 정해요.</p></div>','<button class="btn" data-act="whyNext">다음</button>',{c:'#24302B',cs:'#000'})); return; }
+  if(act==='begin'){ cur={why:1}; openOver(shell(40,'<div class="why1"><div class="why1h">'+bird(6,150,'')+'<div><h2 class="why1t">결정할 때<br>망설이게<br>되나요?</h2></div></div><p class="why1p">주변의 기준과 정보가 많아 내가 원하는 것이 흐려질 때가 있어요. 내가 약해서가 아니에요.</p>'
+    +'<div class="why1b"><span class="why1l">이 여정에서 할 일</span><div class="why1s"><div>'+svgI(IC.mag,'#59665D')+'<small>짧은 질문으로</small><b>나를 알아보기</b></div><i>›</i><div>'+svgI(IC.target,'#556B4E')+'<small>결정이 갈릴 때</small><b>내 기준 찾기</b></div><i>›</i><div>'+svgI(IC.sprout,'#5E8C5A')+'<small>하루 한 가지</small><b>실천해 보기</b></div></div></div></div>','<button class="btn" data-act="whyNext">다음 ›</button>',{c:'#24302B',cs:'#000'})); return; }
   if(act==='info'){ openInfo(); return; }
   if(act==='storyNext'){ drawStory(cur.story+1); return; }
   if(act==='storyDone'){ S.name=($('nameIn').value||'').trim(); S.intro=true; save(); var f=nextLesson(); cur=null; if(f) openLesson(f.id); else closeOver(); return; }
@@ -2242,6 +2460,7 @@ document.addEventListener('click', function(e){
 document.addEventListener('change', function(e){ if(e.target.id==='bkFile'&&e.target.files[0]){ var fr=new FileReader(); fr.onload=function(){ $('bkText').value=fr.result; $('bkMsg').textContent='파일을 읽었어요. "가져오기"를 눌러 주세요.'; }; fr.readAsText(e.target.files[0]); } });
 S.log.forEach(function(x){ if(x.tag==='봄') x.tag='자극'; if(!x.tags) x.tags=TAGS[x.tag]?[x.tag]:[]; }); S.sitlog=S.sitlog||[]; S.did=S.did||{};
 if(S.stage>stageNow()) S.stage=stageNow();
+migrateV8(); try{ syncWeb(); }catch(e){}
 tryGate(); renderAll(); checkStage();
 </script>
 </body>
