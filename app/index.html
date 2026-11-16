@@ -581,6 +581,13 @@ main{padding:8px 24px 32px}
 .stx b{font-size:19px;font-weight:700;color:var(--ink)}
 .stx small{font-size:14px;color:var(--muted);line-height:1.45}
 .scard .chev{font-style:normal;color:var(--gold);font-size:20px}
+.preview-hint{color:#526D8B!important;font-weight:700;font-size:12px!important;margin-top:3px}
+.stage-preview-copy{display:flex;flex-direction:column;gap:12px;width:100%;margin-top:4px}
+.stage-preview-question{background:#F2EFE6;border-radius:16px;padding:12px 14px}
+.stage-preview-question b{font-size:13px;color:#71845C}
+.stage-preview-question p{margin-top:4px}
+.stage-preview-lock{font-size:13px;color:#647168;background:#F6F4ED;border-radius:12px;padding:10px 12px}
+
 .finbox{display:flex;gap:12px;align-items:center;background:#F5F3DF;border:1px solid #E6E0C4;border-radius:22px;padding:12px}
 .finbox img{width:112px;border-radius:16px;flex:none}
 .finbox b{font-size:18px}
@@ -727,6 +734,16 @@ main{padding:8px 24px 32px}
 .whyb b{display:block;color:#24302B}
 .tql{font-size:14px;line-height:1.6;color:#59665D;margin-bottom:6px}
 .dgc{display:flex;flex-direction:column;gap:12px;margin-top:16px}
+/* 진단지 전체 문항 링크: 일반 보조 버튼과 구분되는 핵심 행동 */
+.diag-link{display:flex;align-items:center;justify-content:center;gap:10px;
+  min-height:56px;padding:14px 18px;border:0!important;border-radius:999px!important;
+  color:#fff!important;background:linear-gradient(135deg,#607D9B,#3F5877)!important;
+  box-shadow:0 6px 14px rgba(63,88,119,.24)!important;font-weight:750!important;
+  text-decoration:none!important;text-align:center}
+.diag-link span{font-size:22px;line-height:1;color:#fff}
+a.diag-link{width:100%;box-sizing:border-box}
+.diag-link:active{transform:translateY(2px)}
+
 .act .go{white-space:nowrap;flex-shrink:0}
 .dgh{display:flex;gap:12px;align-items:center}
 .dgh b{font-size:17px}
@@ -779,6 +796,15 @@ details.allp[open]>*{margin-bottom:8px}
 .lt-h{display:flex;align-items:center;gap:10px}
 .lt-h small{font-size:12.5px;color:var(--muted)}
 .lt-h .bird{animation:none}
+/* 재방문 홈 */
+.return-card{display:flex;flex-direction:column;gap:12px}
+.return-practice{padding:14px 16px;background:#EFEBDF;border-radius:16px;line-height:1.6}
+.return-question{font-weight:700;font-size:17px}
+.return-options{display:grid;gap:8px}
+.return-options button{padding:13px 14px;text-align:left;border:1px solid #D6C3A6;border-radius:14px;background:#FCFBF7;font-weight:600}
+.return-options button:active{background:#E7EADB}
+.return-done{display:flex;align-items:center;gap:7px;color:#556B4E}
+.return-done svg{width:20px;height:20px}
 </style>
 </head>
 <body>
@@ -1169,7 +1195,7 @@ function impute(sec,a){
 
 /* ============ 저장 ============ */
 var KEY = 'nadaum.app.v1';
-function fresh(){ return {v:1, name:'', ans:{}, done:{}, seen:{}, honey:0, streak:0, last:null, log:[], events:[], picks:{}, values:null, intro:false, stage:0, hatched:false, gate:{}, designs:[], checks:{}, hit:{}, pnotes:{}, early:{}, tagHelp:false, sitlog:[], did:{}}; }
+function fresh(){ return {v:1, name:'', ans:{}, done:{}, seen:{}, honey:0, streak:0, last:null, log:[], events:[], picks:{}, values:null, intro:false, stage:0, hatched:false, gate:{}, designs:[], checks:{}, hit:{}, pnotes:{}, early:{}, tagHelp:false, sitlog:[], did:{}, practiceReviews:{}}; }
 var S = (function(){ try{ var r=JSON.parse(localStorage.getItem(KEY)||'null'); if(r&&r.v===1){ var o=Object.assign(fresh(), r); if(r.hatched===undefined&&r.intro){ o.hatched=true; o.stage=Math.max(1,r.stage||1); for(var k=2;k<=o.stage;k++) o.gate[k]=true; } return o; } }catch(e){} return fresh(); })();
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
 function migrateV8(){ if(S.v8) return; Object.keys(LIGHT).forEach(function(k){ var ls=OLD_L.filter(function(l){return l.sec===k;}); if(ls.every(function(l){return S.done[l.id];})) S.done[LIGHT[k]]=true; }); if(S.stage>=4&&S.values) S.vdid=true; S.v8=true; save(); }
@@ -1414,6 +1440,35 @@ function strip7(){
 function seg6(){ var h='<div class="seg6">'; for(var i=1;i<=6;i++) h+='<i class="'+(i<=S.stage?'on':'')+'"></i>'; return h+'</div>'; }
 var sitAll=false;
 function rowL(attr,title,sub,num){ return '<button class="rowl" '+attr+'>'+(num?'<i class="num">'+num+'</i>':'')+'<span><b>'+title+'</b><small>'+sub+'</small></span><i class="chev">›</i></button>'; }
+/* 재방문 홈: 전날 실천과 오늘 활동을 별도 날짜로 보존 */
+function previousPractice(){
+  var yesterday=dayKey(1), keys=Object.keys(S.checks||{}).filter(function(k){return k<ymd();}).sort().reverse();
+  if(!keys.length) return null;
+  var key=keys[0], d=designOf(S.checks[key][0]);
+  if(!d) return null;
+  var a=key.split('-').map(Number), b=ymd().split('-').map(Number);
+  var gap=Math.round((Date.UTC(b[0],b[1]-1,b[2])-Date.UTC(a[0],a[1]-1,a[2]))/86400000);
+  return {date:key,practice:d,gap:gap};
+}
+function homeReturnCard(){
+  var prev=previousPractice(); if(!prev) return '';
+  var reviews=S.practiceReviews||{}, today=ymd(), record=reviews[today], gap=prev.gap;
+  if(gap===1){
+    var h='<div class="sec-h"><h3>어제의 발견, 오늘의 돌아보기</h3></div><div class="card return-card">'
+      +'<p class="muted">어제 정한 작은 연습</p><p class="return-practice">'+esc(prev.practice.text)+'</p>';
+    if(record&&record.practiceDate===prev.date){
+      var labels={did:'실제로 해 봤어요',thought:'떠올렸지만 실천하지는 못했어요',none:'그런 상황이 없었어요',forgot:'잘 기억나지 않아요'};
+      h+='<p class="return-done">'+ICON.check+' <b>오늘 돌아보기를 마쳤어요</b></p><p class="muted">'+(labels[record.answer]||'돌아봤어요')+'</p>';
+    } else {
+      h+='<p class="return-question">오늘 그 연습을 떠올리거나 시도해 본 순간이 있었나요?</p><div class="return-options">';
+      [['did','실제로 해 봤어요'],['thought','떠올렸지만 실천하지는 못했어요'],['none','그런 상황이 없었어요'],['forgot','잘 기억나지 않아요']].forEach(function(x){h+='<button data-review="'+x[0]+'" data-reviewdate="'+prev.date+'">'+x[1]+'</button>';});
+      h+='</div><p class="muted">어떤 답이든 괜찮아요. 실천 여부는 성장 단계에 영향을 주지 않아요.</p>';
+    }
+    return h+'</div>';
+  }
+  if(gap>=2){return '<div class="card return-card"><h3>다시 만나 반가워요.</h3><p class="muted">오늘의 마음부터 가볍게 살펴볼까요? 지난번에 정한 실천도 언제든 이어갈 수 있어요.</p><p class="return-practice">'+esc(prev.practice.text)+'</p><button class="btn ghost" data-act="prac">이 실천 이어가기 · 새로 고르기</button></div>';}
+  return '';
+}
 function renderHome(){
   var nx=nextLesson(), st=S.stage, T=STAGES[st], h='', m=mainCta(nx), tp=todayPrac(), t=ymd(), first=!S.intro, tl=todayLogs();
   // 1. 다움이와 인사
@@ -1421,12 +1476,13 @@ function renderHome(){
     +'<button class="hero-bird" data-act="tapbird" aria-label="다움이 누르기">'+bird(st,st?168:150)+'</button></div>';
   if(first){
     h+='<div class="sec-h"><h3>지금 할 일</h3></div><div class="card now1"><p>첫 걸음은 질문 다섯 개예요. 1분이면 돼요. 그다음은 내 속도에 맞춰 이어가면 돼요.</p><button class="btn" data-act="begin">첫 걸음 시작하기</button><button class="btn ghost" data-act="sitList">요즘 겪은 일에서 시작하기</button><button class="linkb" data-act="story">처음이신가요? <b>앱 소개 보기 ›</b></button></div>';
-    h+='<div class="card dgc"><div class="dgh">'+bird(2,72,'')+'<div><b>진단지로 더 자세히 알아보기</b><p>앱에는 가벼운 질문만 있어요. 진단지에서는 질문에 차근차근 답하고 자세한 결과지를 받아요.</p></div></div><button class="btn ghost" data-act="dgList">진단지 보기</button></div>';
+    h+='<div class="card dgc"><div class="dgh">'+bird(2,72,'')+'<div><b>진단지로 더 자세히 알아보기</b><p>앱에는 가벼운 질문만 있어요. 진단지에서는 질문에 차근차근 답하고 자세한 결과지를 받아요.</p></div></div><button class="btn diag-link" data-act="dgList">진단지 전체 문항 보기 <span aria-hidden="true">›</span></button></div>';
     h+='<div class="sec-h"><h3>이 앱에서 하는 일</h3></div><div class="rows">'
       +rowL('data-tab="path"','여정 · 나를 발견하기','짧은 질문에 답하면서 나를 알아봐요')
       +rowL('data-tab="diary"','기록 · 나를 돌아보기','오늘의 기분과 선택을 30초로 남겨요')
       +rowL('data-tab="map"','나의 변화 · 달라진 점 확인하기','쌓인 기록으로 달라진 점을 봐요')+'</div>';
   } else {
+    h+=homeReturnCard();
     // 2. 오늘의 질문과 실천 (한 카드)
     var rc=tp||todayRec(), dd=S.did[t];
     h+='<div class="sec-h"><h3>오늘의 질문</h3>'+(tp&&!dd?'<button data-act="prac">바꾸기</button>':'')+'</div><div class="card tq">'
@@ -1446,7 +1502,7 @@ function renderHome(){
       +'<p class="muted">'+(m?m[2]:(st<6?pr[1]:'여섯 단계를 모두 마쳤어요'))+'</p>'
       +((m&&m[0])?'<button class="btn ghost mini2" '+m[1]+'>'+m[0]+'</button>':(m?'':'<button class="btn ghost mini2" data-tab="path">여정 보기</button>'))+'</div>';
   }
-  if(S.intro) h+='<div class="card dgc"><div class="dgh">'+bird(2,72,'')+'<div><b>진단지로 더 자세히 알아보기</b><p>앱에는 가벼운 질문만 있어요. 진단지에서는 질문에 차근차근 답하고 자세한 결과지를 받아요.</p></div></div><button class="btn ghost" data-act="dgList">진단지 보기</button></div>';
+  if(S.intro) h+='<div class="card dgc"><div class="dgh">'+bird(2,72,'')+'<div><b>진단지로 더 자세히 알아보기</b><p>앱에는 가벼운 질문만 있어요. 진단지에서는 질문에 차근차근 답하고 자세한 결과지를 받아요.</p></div></div><button class="btn diag-link" data-act="dgList">진단지 전체 문항 보기 <span aria-hidden="true">›</span></button></div>';
   h+='<p class="promise">결정이 갈릴 때, 내 기준으로 고르게 됩니다</p>';
   $('v-home').innerHTML=h;
 }
@@ -1708,7 +1764,7 @@ function openResult(secId){
       h+='</div></details>'; } }
   var dg=dgOf(secId), nq=LESSONS.filter(function(l){return l.id===LIGHT[secId];})[0].qs.length;
   h+='</div>'+(e.r.web?'<p class="muted">진단지에서 한 결과('+fmtDay(e.r.web)+')를 반영했어요.</p>'
-    :(e.r.light?'<div class="card dgc"><p>가벼운 질문 '+nq+'개로 본 결과예요. 더 자세히 알고 싶다면 진단지에서 전체 질문에 답해 볼 수 있어요.</p><a class="btn ghost" href="'+DG_BASE+dg[1]+'/"'+DG_T+'>'+dg[2]+' 열기</a></div>':''))
+    :(e.r.light?'<div class="card dgc"><p>가벼운 질문 '+nq+'개로 본 결과예요. 더 자세히 알고 싶다면 진단지에서 전체 질문에 답해 볼 수 있어요.</p><a class="btn diag-link" href="'+DG_BASE+dg[1]+'/"'+DG_T+'>'+dg[2]+' 전체 진단지 열기 <span aria-hidden="true">›</span></a></div>':''))
     +'<details><summary>점수와 자세한 설명 보기</summary>'+(e.r.light?'<p class="muted">가벼운 질문으로 어림한 값이에요.</p>':'')+e.body+detail(secId)+'</details><p class="muted">'+NOTE_SELF+'</p>'+(SECS.every(function(s){return secDone(s.id);})?'<button class="btn ghost" data-act="allRes">지금까지의 결과 모아 보기</button>':'');
   openOver(shell(null,h,'<button class="btn ghost" data-act="close">닫기</button>',OLV));
 }
@@ -1918,20 +1974,41 @@ function sitDone(){
 
 /* ============ 일기: 다움이와 대화 ============ */
 var D=null;
-function dSteps(){ var s=['mood','text','tag','en']; if(S.values) s.push('val'); if(todayPrac()) s.push('lens'); return s; }
+function dateOffset(day, offset){ var a=day.split('-').map(Number), d=new Date(a[0],a[1]-1,a[2]); d.setDate(d.getDate()+offset); return ymd(d); }
+function practiceForDay(day){ var ids=S.checks[day]||[], d=ids.length?designOf(ids[0]):null; return d?{date:day,id:d.id,axis:d.axis,text:d.text}:null; }
+function pendingYesterdayPractice(){
+  var day=dateOffset(ymd(),-1), p=practiceForDay(day);
+  if(!p) return null;
+  S.practiceReviews=S.practiceReviews||{};
+  return S.practiceReviews[day]?null:p;
+}
+function dSteps(reviewPractice){ var s=['mood','text','tag','en']; if(S.values) s.push('val'); if(reviewPractice) s.push('review'); s.push('reflect'); return s; }
 function dAsk(step){
   if(step==='mood') return nm()+', 오늘 하루 기분은 어땠어요?';
   if(step==='text') return '오늘 기억에 남는 일 하나만 적어 주세요. 스스로 선택해서 한 일도, 그냥 있었던 일이라도 좋아요.';
   if(step==='tag') return '이건 내가 고른 일이었어요, 그냥 있었던 일이었어요?<br>고른 일이라면 그 마음이 어디에서 시작됐는지 골라 주세요. 여러 개를 골라도 돼요.'+(S.tagHelp?'':'<br><b>나</b>는 내가 원해서, <b>남</b>은 남의 시선 때문에, <b>자극</b>은 자주 접해서 고른 거예요.');
   if(step==='en') return (D&&D.e.tag==='-'?'그 일이 있고 나서':'하고 나서')+' 에너지는 어땠어요?';
   if(step==='val') return '오늘 <b>'+S.values.main+'</b>'+({'성취':'를','기여':'를'}[S.values.main]||'을')+' 지킨 순간이 있었어요?';
-  if(step==='lens') return '오늘의 연습 "'+esc(todayPrac().text)+'" 이 문장이 떠오른 순간이 있었어요?';
+  if(step==='review') return '어제 우리가 정한 작은 연습 기억나요?<br><b>"'+esc(D.reviewPractice.text)+'"</b><br>오늘 그 연습을 떠올리거나 시도해 본 순간이 있었나요?';
+  if(step==='reflect') return '오늘 하루, 내 마음을 조금 더 잘 이해하게 된 순간이 있었나요?';
+  /* 이전 버전에서 작성 중이던 기록을 이어 쓰는 경우를 위한 호환 */
+  if(step==='lens') return '오늘 하루, 내 마음을 조금 더 잘 이해하게 된 순간이 있었나요?';
 }
 function openDiary(){
   stopTimer(); cur={diary:true};
   var dr=S.draft;
-  if(dr&&dr.e&&dr.e.d===ymd()&&dr.i>0&&dr.i<dr.steps.length){ D={steps:dr.steps, i:dr.i, msgs:dr.msgs.slice(), e:dr.e, sel:[]}; D.msgs.push(['d','아까 적던 기록이 남아 있어요. 이어서 적을게요.<br>'+dAsk(D.steps[D.i])]); }
-  else { S.draft=null; D={steps:dSteps(), i:0, msgs:[], e:{d:ymd()}}; D.msgs.push(['d',dAsk('mood')]); }
+  if(dr&&dr.e&&dr.e.d===ymd()&&dr.i>0&&dr.i<dr.steps.length){
+    D={steps:dr.steps, i:dr.i, msgs:dr.msgs.slice(), e:dr.e, sel:[], reviewPractice:dr.reviewPractice||null};
+    if(!D.reviewPractice&&D.e.reviewPracticeDate) D.reviewPractice={date:D.e.reviewPracticeDate,id:D.e.reviewPracticeId,text:D.e.reviewPracticeText};
+    D.msgs.push(['d','아까 적던 기록이 남아 있어요. 이어서 적을게요.<br>'+dAsk(D.steps[D.i])]);
+  }
+  else {
+    S.draft=null;
+    var rp=pendingYesterdayPractice();
+    D={steps:dSteps(rp), i:0, msgs:[], e:{d:ymd()}, reviewPractice:rp};
+    if(rp){ D.e.reviewPracticeDate=rp.date; D.e.reviewPracticeId=rp.id; D.e.reviewPracticeText=rp.text; }
+    D.msgs.push(['d',dAsk('mood')]);
+  }
   drawDiary(); $('over').classList.add('on');
 }
 function drawDiary(){
@@ -1943,7 +2020,8 @@ function drawDiary(){
   else if(st==='tag'){ D.sel=D.sel||[]; foot=tagCards(D.sel,'data-dtag')+'<button class="btn" data-act="dtagOk" '+(D.sel.length?'':'disabled')+'>다음</button><button class="btn ghost" data-dans="-">고른 일이 아니에요 · 그냥 있었던 일</button><button class="helpb" data-act="tagHelp" style="margin-top:0">나·남·자극이란?</button>'; }
   else if(st==='en') foot='<div class="ans"><button data-dans="+">에너지가 채워졌어요</button><button data-dans="-">에너지가 빠졌어요</button><button data-dans="?" style="flex:1 1 100%">잘 모르겠어요</button></div>';
   else if(st==='val') foot='<div class="ans"><button data-dans="y">있었어요</button><button data-dans="n">없었어요</button><button data-dans="?">잘 모르겠어요</button></div>';
-  else if(st==='lens') foot='<div class="ans"><button data-dans="y">떠올랐어요<small>그 순간 스쳤어요</small></button><button data-dans="n">떠오르지 않았어요<small>지나고 알았어요</small></button><button data-dans="?">잘 모르겠어요</button></div>';
+  else if(st==='review') foot='<div class="ans"><button data-dans="did">실제로 해 봤어요</button><button data-dans="remembered">떠올렸지만 실천하지는 못했어요</button><button data-dans="no_opportunity">그런 상황이 없었어요</button><button data-dans="unknown">잘 기억나지 않아요</button></div>';
+  else if(st==='reflect'||st==='lens') foot='<div class="ans"><button data-dans="new">있었어요. 나를 새롭게 발견했어요.</button><button data-dans="some">있었지만 아직 잘 모르겠어요.</button><button data-dans="none">특별히 없었어요.</button><button data-dans="unknown">잘 모르겠어요.</button></div>';
   else foot=(todayPrac()?'':'<button class="btn" data-act="prac">오늘의 실천 정하기</button>')+'<button class="btn'+(todayPrac()?'':' ghost')+'" data-act="dcal">기록에서 보기</button>'+(todayPrac()?'':'<p class="muted" style="text-align:center">실천은 나중에 홈이나 기록 탭에서도 정할 수 있어요.</p>');
   $('over').innerHTML=shell(Math.round(D.i/D.steps.length*100),h,foot,{c:STAGES[S.stage].c,cs:STAGES[S.stage].cs});
   var b=$('obody'); b.scrollTop=b.scrollHeight;
@@ -1961,11 +2039,25 @@ function dAnswer(v){
   }
   if(st==='en'){ e.en=v==='?'?null:v; D.msgs.push(['u',{'+':'에너지가 채워졌어요','-':'에너지가 빠졌어요','?':'잘 모르겠어요'}[v]]); re={'+':(e.tag==='-'?'에너지가 채워지는 일이었네요. ':'에너지가 채워지는 선택이었네요. '),'-':'에너지가 빠졌군요. 기억해 둘게요. ','?':'모를 수 있어요. '}[v]; }
   if(st==='val'){ e.val=v; D.msgs.push(['u',{'y':'있었어요','n':'없었어요','?':'잘 모르겠어요'}[v]]); re=v==='y'?'그 순간을 기억해 둘게요. ':'괜찮아요. 내일 또 물어볼게요. '; }
-  if(st==='lens'){ e.lens=v; D.msgs.push(['u',{'y':'떠올랐어요','n':'떠오르지 않았어요','?':'잘 모르겠어요'}[v]]); if(v==='y') S.hit[e.d]=true; re=v==='y'?'떠오른 것만으로 충분해요. ':'괜찮아요. 문장은 내일도 여기 있어요. '; }
+  if(st==='review'){
+    var reviewLabels={did:'실제로 해 봤어요',remembered:'떠올렸지만 실천하지는 못했어요',no_opportunity:'그런 상황이 없었어요',unknown:'잘 기억나지 않아요'};
+    e.practiceReview=v; e.reviewPracticeDate=D.reviewPractice.date; e.reviewPracticeId=D.reviewPractice.id; e.reviewPracticeText=D.reviewPractice.text;
+    D.msgs.push(['u',reviewLabels[v]]);
+    re={did:'해 봤군요. 결과보다 시도해 본 경험을 기억해 둘게요. ',remembered:'떠올린 것도 의미 있는 알아차림이에요. 다음 기회에 다시 선택해 봐요. ',no_opportunity:'그런 상황이 없었다면 괜찮아요. 억지로 만들 필요는 없어요. ',unknown:'괜찮아요. 기억나지 않는 날도 있는 그대로 남겨 둘게요. '}[v];
+  }
+  if(st==='reflect'||st==='lens'){
+    var reflectionLabels={new:'있었어요. 나를 새롭게 발견했어요.',some:'있었지만 아직 잘 모르겠어요.',none:'특별히 없었어요.',unknown:'잘 모르겠어요.'};
+    e.reflection=v; D.msgs.push(['u',reflectionLabels[v]||'잘 모르겠어요.']);
+    re={new:'오늘 나에 대해 새롭게 발견한 점이 있었군요. 그 발견을 소중히 남겨 둘게요. ',some:'아직 분명하지 않아도 괜찮아요. 알아가는 중이니까요. ',none:'특별한 발견이 없는 날도 괜찮아요. 오늘의 경험 자체가 기록이에요. ',unknown:'지금은 잘 모르겠어도 괜찮아요. 천천히 알아가요. '}[v];
+  }
   D.i++; D.sel=[];
-  if(D.i<D.steps.length){ S.draft={steps:D.steps, i:D.i, msgs:D.msgs.slice(), e:e}; save(); D.msgs.push(['d',re+dAsk(D.steps[D.i])]); }
+  if(D.i<D.steps.length){ S.draft={steps:D.steps, i:D.i, msgs:D.msgs.slice(), e:e, reviewPractice:D.reviewPractice||null}; save(); D.msgs.push(['d',re+dAsk(D.steps[D.i])]); }
   else {
     S.draft=null;
+    if(e.practiceReview&&e.reviewPracticeDate){
+      S.practiceReviews=S.practiceReviews||{};
+      S.practiceReviews[e.reviewPracticeDate]={practiceDate:e.reviewPracticeDate,checkedDate:e.d,practiceId:e.reviewPracticeId,practiceText:e.reviewPracticeText,result:e.practiceReview};
+    }
     var firstToday=!wroteToday();
     S.log.push(e); if(S.log.length>600) S.log.shift();
     if(firstToday) S.honey+=5; save(); syncTop();
@@ -2008,7 +2100,13 @@ function renderDiary(){
   var es2=by[selDay], pd=S.checks[selDay]?designOf(S.checks[selDay][0]):null;
   h+='<div class="page"><h3>'+fmtDay(selDay)+(selDay===t?' · 오늘':'')+'</h3>';
   if(pd) h+='<p><b>오늘의 연습</b> '+esc(pd.text)+'</p><p class="meta">'+PN[pd.axis]+(S.hit[selDay]?' · 떠올랐어요':'')+(S.pnotes[selDay]?' · '+esc(S.pnotes[selDay]):'')+'</p>';
-  if(es2) es2.forEach(function(x){ h+='<p>'+(x.quick?'30초 기록':esc(x.text))+'</p><p class="meta">'+(x.mood?MOODS[x.mood]+(x.quick?'':' · '):'')+(x.quick?'':tagTxt(x))+enTxt(x)+(x.val==='y'&&S.values?' · '+S.values.main+' 지킴':'')+'</p>'; });
+  if(es2) es2.forEach(function(x){
+    h+='<p>'+(x.quick?'30초 기록':esc(x.text))+'</p><p class="meta">'+(x.mood?MOODS[x.mood]+(x.quick?'':' · '):'')+(x.quick?'':tagTxt(x))+enTxt(x)+(x.val==='y'&&S.values?' · '+S.values.main+' 지킴':'')+'</p>';
+    if(x.practiceReview){
+      var reviewText={did:'실제로 해 봤어요',remembered:'떠올렸지만 실천하지는 못했어요',no_opportunity:'그런 상황이 없었어요',unknown:'잘 기억나지 않아요'}[x.practiceReview]||'돌아봤어요';
+      h+='<div class="card" style="margin-top:8px;padding:12px"><small class="eyebrow">전날의 연습 돌아보기</small><p style="margin-top:4px">'+esc(x.reviewPracticeText||'')+'</p><p class="meta">연습한 날 '+esc(x.reviewPracticeDate||'')+' · 돌아본 날 '+esc(x.d||'')+' · '+reviewText+'</p></div>';
+    }
+  });
   if(!es2&&!pd) h+='<p class="muted" style="line-height:32px">'+(selDay===t?'아직 오늘 기록이 없어요.':'이날은 기록이 없어요.')+'</p>';
   h+='</div>';
   var hc=h; h=h0;
@@ -2165,10 +2263,19 @@ var LEAF='<svg viewBox="0 0 24 24" fill="#71845C"><path d="M12 21c0-5 0-7-1-9C8 
 function dayKey(n){ var d=new Date(); d.setDate(d.getDate()-n); return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2); }
 function openStage(i){
   var T=STAGES[i], got=i<=S.stage, ev=S.events.filter(function(e){return e.type==='stage'&&e.v===i;})[0], p=toNext();
-  var h='<div class="card" style="align-items:flex-start"><div style="display:flex;gap:12px;align-items:center">'+bird(i,84,got?'':'ghost')+'<div><span class="eyebrow">'+i+'단계'+(ev?' · '+fmtDay(ev.d):'')+'</span><h3>'+T.t+'</h3><p class="muted">'+T.name+'</p></div></div>';
-  if(got){ h+='<p>'+T.story+'</p>'; mine(i).forEach(function(x){ h+='<p style="font-weight:700;font-size:15px">· '+x+'</p>'; });
-    SECS.filter(function(s){return s.st===i&&secDone(s.id);}).forEach(function(s){ h+='<button class="btn ghost" data-result="'+s.id+'" data-mclose="1">'+s.name+' 결과 보기</button>'; }); }
-  else h+='<p>'+T.need+' 만날 수 있어요.</p>'+(i===S.stage+1?'<p class="muted">'+p[1]+'</p>':'');
+  var h='<div class="card stage-preview" style="align-items:flex-start">'
+    +'<div style="display:flex;gap:12px;align-items:center;width:100%">'+bird(i,84,got?'':'ghost')+'<div><span class="eyebrow">'+i+'단계'+(ev?' · '+fmtDay(ev.d):'')+(got?' · 완료':' · 미리 보기')+'</span><h3>'+T.t+'</h3><p class="muted">'+T.name+'</p></div></div>';
+  if(got){
+    h+='<p>'+T.story+'</p>';
+    mine(i).forEach(function(x){ h+='<p style="font-weight:700;font-size:15px">· '+x+'</p>'; });
+    SECS.filter(function(s){return s.st===i&&secDone(s.id);}).forEach(function(s){ h+='<button class="btn ghost" data-result="'+s.id+'" data-mclose="1">'+s.name+' 결과 보기</button>'; });
+  } else {
+    h+='<div class="stage-preview-copy"><span class="eyebrow">이 단계에서 발견할 것</span><p>'+T.desc+'</p>'
+      +'<div class="stage-preview-question"><b>생각해 볼 질문</b><p>'+T.q+'</p></div>'
+      +'<div class="stage-preview-question"><b>이 단계를 지나면</b><p>'+T.story+'</p></div>'
+      +'<p class="muted">실제 활동: '+T.need+' 할 수 있어요.</p></div>'
+      +'<p class="stage-preview-lock">미리 보기에서는 내용을 살펴볼 수 있지만, 진단과 성장 단계는 변경되지 않아요. '+(i===S.stage+1?'현재 단계를 마치면 이 활동을 시작할 수 있어요.':'앞 단계들을 차례로 마치면 열려요.')+'</p>';
+  }
   h+='<button class="btn ghost" data-act="noReset">닫기</button></div>';
   $('modal').innerHTML=h; $('modal').classList.add('on');
 }
@@ -2200,8 +2307,9 @@ function renderMap(){
     h+='<div class="tline">';
     for(var i=1;i<=6;i++){
       var T=STAGES[i], got=i<=st, nxt=i===st+1;
-      h+='<div class="trow2'+(got?' got':'')+'"><i class="tmark">'+(got?ICON.check:ICON.lock)+'</i><button class="scard'+(got?' got':'')+'" style="--cb:var(--bgc'+i+')" data-stg="'+i+'">'+bird(i,78,got?'':'ghost')
+      h+='<div class="trow2'+(got?' got':'')+'"><i class="tmark">'+(got?ICON.check:ICON.lock)+'</i><button class="scard'+(got?' got':'')+'" style="--cb:var(--bgc'+i+')" data-stg="'+i+'" aria-label="'+i+'단계 '+T.t+(got?' 결과 보기':' 미리 보기')+'">'+bird(i,78,got?'':'ghost')
         +'<span class="stx"><span class="sline"><em>'+i+'단계</em>'+T.name+'</span><b>'+T.t+'</b><small>'+ONE[i]+'</small>'
+        +(!got?'<small class="preview-hint">미리 보기 · 단계 내용 살펴보기</small>':'')
         +(nxt?'<span class="pbar" style="--c:#71845C;display:block"><i style="width:'+Math.round(p[0]*100)+'%"></i></span>':'')+'</span><i class="chev">›</i></button></div>';
     }
     h+='</div>';
@@ -2301,7 +2409,7 @@ function askRestore(txt){
 }
 function applyState(st, pf){
   var f=fresh(); Object.keys(st).forEach(function(k){ f[k]=st[k]; });
-  ['ans','done','seen','checks','hit','pnotes','gate','did'].forEach(function(k){ if(!f[k]||typeof f[k]!=='object') f[k]={}; });
+  ['ans','done','seen','checks','hit','pnotes','gate','did','practiceReviews'].forEach(function(k){ if(!f[k]||typeof f[k]!=='object') f[k]={}; });
   ['events','designs','sitlog'].forEach(function(k){ if(!Array.isArray(f[k])) f[k]=[]; });
   f.log.forEach(function(x){ if(x.tag==='봄') x.tag='자극'; if(!Array.isArray(x.tags)) x.tags=TAGS[x.tag]?[x.tag]:[]; });
   var old=S; S=f;
@@ -2361,10 +2469,10 @@ document.addEventListener('click', function(e){
   if(act==='sitAll'){ sitAll=!sitAll; renderHome(); return; }
   if(act==='sitNext'){ sitKeep(); if(cur.step<3){ cur.step++; drawSit(); } else sitDone(); return; }
   if(act==='sitBack'){ sitKeep(); cur.step--; drawSit(); return; }
-  if(d.feel&&cur&&cur.sit!==undefined){ sitKeep(); var fv=FEELS[+d.feel], fi=cur.feel.indexOf(fv); if(fi>-1) cur.feel.splice(fi,1); else cur.feel.push(fv); drawSit(); return; }
-  if(d.need&&cur&&cur.sit!==undefined){ var nv=SITS[cur.sit].needs[+d.need], ni=cur.need.indexOf(nv); if(ni>-1) cur.need.splice(ni,1); else cur.need.push(nv); drawSit(); return; }
+  if(d.feel!==undefined&&cur&&cur.sit!==undefined){ sitKeep(); var fv=FEELS[+d.feel], fi=cur.feel.indexOf(fv); if(fi>-1) cur.feel.splice(fi,1); else cur.feel.push(fv); drawSit(); return; }
+  if(d.need!==undefined&&cur&&cur.sit!==undefined){ var nv=SITS[cur.sit].needs[+d.need], ni=cur.need.indexOf(nv); if(ni>-1) cur.need.splice(ni,1); else cur.need.push(nv); drawSit(); return; }
   if(d.stag&&cur&&cur.sit!==undefined){ var si=cur.tags.indexOf(d.stag); if(si>-1) cur.tags.splice(si,1); else cur.tags.push(d.stag); drawSit(); return; }
-  if(d.sact&&cur&&cur.sit!==undefined){ cur.act=+d.sact; drawSit(); return; }
+  if(d.sact!==undefined&&cur&&cur.sit!==undefined){ cur.act=+d.sact; drawSit(); return; }
   if(d.dtag&&D){ D.sel=D.sel||[]; var di=D.sel.indexOf(d.dtag); if(di>-1) D.sel.splice(di,1); else D.sel.push(d.dtag); drawDiary(); return; }
   if(act==='dtagOk'&&D&&D.sel&&D.sel.length){ dAnswer(D.sel.join(',')); return; }
   if(act==='sortSee'){ cur.shown[cur.i]=true; drawSort(); return; }
@@ -2384,6 +2492,15 @@ document.addEventListener('click', function(e){
   if(act==='qDeep'){ $('modal').classList.remove('on'); openDiary(); return; }
   if(act==='tqGo'){ var tr=todayRec(); showPicked(pickPractice(tr.axis, tr.text, tr.ph)); return; }
   if(d.did){ openDid(d.did); return; }
+  if(d.review){
+    var src=d.reviewdate, pp=previousPractice();
+    if(pp&&pp.date===src&&pp.gap===1&&['did','thought','none','forgot'].indexOf(d.review)>=0){
+      S.practiceReviews=S.practiceReviews||{};
+      S.practiceReviews[ymd()]={practiceDate:src,reviewDate:ymd(),practiceId:pp.practice.id,practiceText:pp.practice.text,answer:d.review};
+      save(); renderAll();
+    }
+    return;
+  }
   if(d.didsave){ var dn=($('didNote').value||'').trim(); S.did[ymd()]={k:d.didsave, note:dn}; S.hit[ymd()]=true; if(S.values) S.vdid=true; save(); tryGate(); $('modal').classList.remove('on'); renderAll(); checkStage(); return; }
   if(act==='letter'){ openLetter(); return; }
   if(act==='card'){ openCard(); return; }
